@@ -128,6 +128,7 @@ public class FightManager : NetworkBehaviour
         if (logic.IsGameOver(players))
         {
             NetworkManager.singleton.ServerChangeScene("GameOverScene");
+            yield break;
         }
         else
         {
@@ -137,8 +138,19 @@ public class FightManager : NetworkBehaviour
 
                 if (players[0].cardHand.Count == 0 && players[1].cardHand.Count == 0)
                 {
-                    players[0].NewRound();
-                    players[1].NewRound();
+                    players[logic.playerTurn].NewRound();
+                    if (logic.IsGameOver(players))
+                    {
+                        NetworkManager.singleton.ServerChangeScene("GameOverScene");
+                        yield break;
+                    }
+
+                    players[1 - logic.playerTurn].NewRound();
+                    if (logic.IsGameOver(players))
+                    {
+                        NetworkManager.singleton.ServerChangeScene("GameOverScene");
+                        yield break;
+                    }
                 }
             }
 

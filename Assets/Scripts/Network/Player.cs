@@ -24,7 +24,7 @@ public class Player : NetworkBehaviour
     public Action<int> onTurnChange;
     public Action onPlayerChanged;
 
-    private bool gaveUp;
+    public bool gaveUp;
 
     public override void OnStartClient()
     {
@@ -90,6 +90,23 @@ public class Player : NetworkBehaviour
         while (i < effects.Count)
         {
             effects[i].duration -= 1; //does not trigger change
+
+            switch (effects[i].name)
+            {
+                case "Bleed":
+                    currHealth = Math.Clamp(currHealth - 40, 0, fullHealth);
+                    break;
+                case "Bomb":
+                    if (effects[i].duration == 1)
+                        currHealth = Math.Clamp(currHealth - 20, 0, fullHealth);
+
+                    break;
+                case "Heal":
+                    currHealth = Math.Clamp(currHealth + 2, 0, fullHealth);
+                    break;
+                default:
+                    break;
+            }
 
             //triggers change
             if (effects[i].duration <= 0)

@@ -28,7 +28,18 @@ public class FightLogic
 
     public bool IsGameOver(Player[] players)
     {
-        return players[0].currHealth == 0 || players[01].currHealth == 0;
+        if (players[0].currHealth == 0)
+        {
+            players[0].gaveUp = true;
+            return true;
+        }
+        if (players[1].currHealth == 0)
+        {
+            players[1].gaveUp = true;
+            return true;
+        }
+
+        return false;
     }
 }
 
