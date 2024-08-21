@@ -126,7 +126,8 @@ public class FightManager : NetworkBehaviour
                     }
                 }
 
-                bool cardPlayed = logic.PlayCard(card, players);
+                bool cardPlayed = logic.PlayCard(card, players); //playing new card
+                message.cardPlayed = card.moveType != MoveType.Combo;
                 logic.lastCard = new PlayedCard(logic.playerTurn, card, cardPlayed);
 
                 slot.RpcUpdateCard(logic.playerTurn, card);
@@ -147,38 +148,36 @@ public class FightManager : NetworkBehaviour
             NetworkManager.singleton.ServerChangeScene("GameOverScene");
             yield break;
         }
-        else
+
+        if ((message.cardPlayed && players[1 - logic.playerTurn].cardHand.Count > 0) || players[logic.playerTurn].cardHand.Count == 0)
         {
-            if ((message.cardPlayed && players[1 - logic.playerTurn].cardHand.Count > 0) || players[logic.playerTurn].cardHand.Count == 0)
+            logic.playerTurn = 1 - logic.playerTurn;
+
+            if (players[0].cardHand.Count == 0 && players[1].cardHand.Count == 0)
             {
-                logic.playerTurn = 1 - logic.playerTurn;
-
-                if (players[0].cardHand.Count == 0 && players[1].cardHand.Count == 0)
+                players[logic.playerTurn].NewRound();
+                if (logic.IsGameOver(players))
                 {
-                    players[logic.playerTurn].NewRound();
-                    if (logic.IsGameOver(players))
-                    {
-                        NetworkManager.singleton.ServerChangeScene("GameOverScene");
-                        yield break;
-                    }
+                    NetworkManager.singleton.ServerChangeScene("GameOverScene");
+                    yield break;
+                }
 
-                    players[1 - logic.playerTurn].NewRound();
-                    if (logic.IsGameOver(players))
-                    {
-                        NetworkManager.singleton.ServerChangeScene("GameOverScene");
-                        yield break;
-                    }
+                players[1 - logic.playerTurn].NewRound();
+                if (logic.IsGameOver(players))
+                {
+                    NetworkManager.singleton.ServerChangeScene("GameOverScene");
+                    yield break;
                 }
             }
-
-            TurnMessage msg = new TurnMessage
-            {
-                turn = logic.playerTurn
-            };
-
-            NetworkServer.SendToAll(msg);
-            acceptMessage = true;
         }
+
+        TurnMessage msg = new TurnMessage
+        {
+            turn = logic.playerTurn
+        };
+
+        NetworkServer.SendToAll(msg);
+        acceptMessage = true;
     }
 
     [TargetRpc]

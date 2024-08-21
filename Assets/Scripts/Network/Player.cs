@@ -157,7 +157,7 @@ public class Player : NetworkBehaviour
 
         for (int i = 0; i < cardHand.Count; i++)
         {
-            if (GlobalManager.singleton.fighters[cardHand[i].fighterID].moves[cardHand[i].moveID].moveType == MoveType.Response)
+            if (cardHand[i].moveType == MoveType.Response)
             {
                 return true;
             }
