@@ -148,6 +148,24 @@ public class Player : NetworkBehaviour
         }
     }
 
+    public bool HasResponse(Move move)
+    {
+        if (cardHand.Count == 0)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < cardHand.Count; i++)
+        {
+            if (GlobalManager.singleton.fighters[cardHand[i].fighterID].moves[cardHand[i].moveID].moveType == MoveType.Response)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void OnReceiveMessage(TurnMessage message)
     {
         Debug.Log("RECEIVED TURN MESSAGE");

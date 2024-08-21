@@ -114,9 +114,26 @@ public class FightManager : NetworkBehaviour
 
             if (message.cardPlayed)
             {
-                logic.PlayCard(card, players);
-                logic.lastCard = new PlayedCard(logic.playerTurn, card);
+                if (!logic.lastCard.played && !logic.IsResponse(card))
+                {
+                    logic.PlayLastCard(players);
+                    yield return new WaitForSeconds(0.3f);
+
+                    if (logic.IsGameOver(players))
+                    {
+                        NetworkManager.singleton.ServerChangeScene("GameOverScene");
+                        yield break;
+                    }
+                }
+
+                bool cardPlayed = logic.PlayCard(card, players);
+                logic.lastCard = new PlayedCard(logic.playerTurn, card, cardPlayed);
+
                 slot.RpcUpdateCard(logic.playerTurn, card);
+            }
+            else if (!logic.lastCard.played && players[logic.playerTurn].cardHand.Count == 0)
+            {
+                logic.PlayLastCard(players);
             }
         }
         else
