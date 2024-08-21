@@ -16,4 +16,5 @@ MonoBehaviour:
   moveType: 0
   cost: 2
   health: 0000000000000000
+  energy: 0000000000000000
   statusEffects: 0000000002000000

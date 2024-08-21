@@ -94,7 +94,7 @@ public class Player : NetworkBehaviour
             switch (effects[i].name)
             {
                 case "Bleed":
-                    currHealth = Math.Clamp(currHealth - 40, 0, fullHealth);
+                    currHealth = Math.Clamp(currHealth - 5, 0, fullHealth);
                     break;
                 case "Bomb":
                     if (effects[i].duration == 1)
@@ -102,7 +102,7 @@ public class Player : NetworkBehaviour
 
                     break;
                 case "Heal":
-                    currHealth = Math.Clamp(currHealth + 2, 0, fullHealth);
+                    currHealth = Math.Clamp(currHealth + 5, 0, fullHealth);
                     break;
                 default:
                     break;

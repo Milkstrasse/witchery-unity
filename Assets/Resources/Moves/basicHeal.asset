@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6616f73a413e48d8b472e1364a83f0b, type: 3}
   m_Name: basicHeal
   m_EditorClassIdentifier: 
+  moveID: 0
   moveType: 0
   cost: 0
   health: 0500000000000000
+  energy: 0000000000000000
   statusEffects: 0000000000000000
