@@ -45,7 +45,7 @@ public class CardUI : MonoBehaviour
         gradient.color = neutral;
 
         info.text = card.cost.ToString();
-        infoText.text = fighter.moves[card.moveID].name;
+        infoText.text = fighter.moves[card.moveIndex].name;
 
         isHighlighted = false;
         isSelected = false;

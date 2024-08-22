@@ -56,7 +56,6 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (toRemove || cardUI.isHighlighted)
         {
             gameObject.SetActive(false);
-
             Player.localPlayer.MakeMove(cardIndex, !toRemove && cardUI.isHighlighted, true);
         }
     }

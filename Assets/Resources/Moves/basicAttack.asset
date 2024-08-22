@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6616f73a413e48d8b472e1364a83f0b, type: 3}
   m_Name: basicAttack
   m_EditorClassIdentifier: 
-  moveID: 0
+  moveID: 1
   moveType: 0
-  cost: 3
-  health: 00000000f6ffffff
+  cost: 1
+  health: 00000000fbffffff
   energy: 0000000000000000
   statusEffects: 0000000000000000

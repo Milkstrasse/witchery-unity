@@ -94,15 +94,15 @@ public class Player : NetworkBehaviour
             switch (effects[i].name)
             {
                 case "Bleed":
-                    currHealth = Math.Clamp(currHealth - 5, 0, fullHealth);
+                    currHealth = Math.Clamp(currHealth - 2, 0, fullHealth);
                     break;
                 case "Bomb":
                     if (effects[i].duration == 1)
-                        currHealth = Math.Clamp(currHealth - 20, 0, fullHealth);
+                        currHealth = Math.Clamp(currHealth - 10, 0, fullHealth);
 
                     break;
                 case "Heal":
-                    currHealth = Math.Clamp(currHealth + 5, 0, fullHealth);
+                    currHealth = Math.Clamp(currHealth + 2, 0, fullHealth);
                     break;
                 default:
                     break;
@@ -125,7 +125,7 @@ public class Player : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void SetEnergy(int energy)
+    public void SetEnergy(int energy)
     {
         this.energy = energy;
     }
@@ -159,7 +159,12 @@ public class Player : NetworkBehaviour
         {
             if (cardHand[i].moveType == MoveType.Response)
             {
-                return true;
+                Move handMove = GlobalManager.singleton.fighters[cardHand[i].fighterID].moves[cardHand[i].moveIndex];
+                
+                if (move.moveID == handMove.moveID || move.moveID == handMove.moveID - 10)
+                {
+                    return true;
+                }
             }
         }
 

@@ -4,16 +4,16 @@ using System;
 public struct Card
 {
     public int fighterID;
-    public int moveID;
+    public int moveIndex;
     public int cost;
     public MoveType moveType;
 
-    public Card(Fighter fighter, int moveID)
+    public Card(Fighter fighter, int moveIndex)
     {
         fighterID = fighter.fighterID;
-        this.moveID = moveID;
+        this.moveIndex = moveIndex;
 
-        Move move = GlobalManager.singleton.fighters[fighterID].moves[moveID];
+        Move move = GlobalManager.singleton.fighters[fighterID].moves[moveIndex];
         cost = move.cost;
         moveType = move.moveType;
     }

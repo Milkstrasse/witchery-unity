@@ -165,6 +165,7 @@ public class PlayerFightUI : MonoBehaviour
     {
         int cardIndex = (int)param;
         cards[cardIndex].GetComponent<DragDrop>().ResetDrag(cardIndex);
+        cards[cardIndex].gameObject.SetActive(false);
     }
 
     public void GiveUp()

@@ -13,7 +13,7 @@ public class FightLogic
 
     public bool PlayCard(Card card, Player[] players)
     {
-        Move move = GlobalManager.singleton.fighters[card.fighterID].moves[card.moveID];
+        Move move = GlobalManager.singleton.fighters[card.fighterID].moves[card.moveIndex];
 
         int[] indices = new int[]{playerTurn, 1 - playerTurn};
 
@@ -33,10 +33,6 @@ public class FightLogic
 
                 for (int i = 0; i < 2; i++)
                 {
-                    Debug.Log($"player {indices[i]} BEFORE:");
-                    Debug.Log(players[indices[i]].currHealth.ToString());
-                    Debug.Log(players[indices[i]].energy.ToString());
-
                     int health = move.health[i];
                     players[indices[i]].currHealth = Math.Clamp(players[indices[i]].currHealth + health, 0, players[indices[i]].fullHealth);
 
@@ -48,10 +44,10 @@ public class FightLogic
 
                     int energy = move.energy[i];
                     players[indices[i]].energy += energy;
-
-                    Debug.Log($"player {indices[i]} AFTER:");
-                    Debug.Log(players[indices[i]].currHealth.ToString());
-                    Debug.Log(players[indices[i]].energy.ToString());
+                    if (energy != 0)
+                    {
+                        players[indices[i]].SetEnergy(players[indices[i]].energy);
+                    }
                 }
 
                 break;
@@ -62,7 +58,7 @@ public class FightLogic
 
     public void PlayLastCard(Player[] players)
     {
-        Move move = GlobalManager.singleton.fighters[lastCard.card.fighterID].moves[lastCard.card.moveID];
+        Move move = GlobalManager.singleton.fighters[lastCard.card.fighterID].moves[lastCard.card.moveIndex];
 
         int[] indices = new int[]{lastCard.playerIndex, 1 - lastCard.playerIndex};
         for (int i = 0; i < 2; i++)
@@ -83,8 +79,15 @@ public class FightLogic
 
     public bool IsResponse(Card card)
     {
-        Move move = GlobalManager.singleton.fighters[card.fighterID].moves[card.moveID];
-        return move.moveType == MoveType.Response;
+        if (card.moveType != MoveType.Response)
+        {
+            return false;
+        }
+
+        Move move = GlobalManager.singleton.fighters[card.fighterID].moves[card.moveIndex];
+        Move lastMove = GlobalManager.singleton.fighters[lastCard.card.fighterID].moves[lastCard.card.moveIndex];
+
+        return move.moveID == lastMove.moveID || move.moveID == lastMove.moveID - 10;
     }
 
     public bool IsGameOver(Player[] players)
