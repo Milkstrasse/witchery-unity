@@ -65,7 +65,7 @@ namespace Utp
 		/// </summary>
 		private void Awake()
 		{
-			SetupDefaultCallbacks();
+			//SetupDefaultCallbacks();
 
 			//Logging delegates
 			if (LoggerLevel < LogLevel.Verbose) UtpLog.Verbose = _ => { };
@@ -75,16 +75,16 @@ namespace Utp
 
 			//Instantiate new UTP server
 			server = new UtpServer(
-				(connectionId) => OnServerConnected.Invoke(connectionId),
-				(connectionId, message) => OnServerDataReceived.Invoke(connectionId, message, Channels.Reliable),
-				(connectionId) => OnServerDisconnected.Invoke(connectionId),
+				(connectionId) => OnServerConnected?.Invoke(connectionId),
+				(connectionId, message) => OnServerDataReceived?.Invoke(connectionId, message, Channels.Reliable),
+				(connectionId) => OnServerDisconnected?.Invoke(connectionId),
 				TimeoutMS);
 
 			//Instantiate new UTP client
 			client = new UtpClient(
-				() => OnClientConnected.Invoke(),
-				(message) => OnClientDataReceived.Invoke(message, Channels.Reliable),
-				() => OnClientDisconnected.Invoke(),
+				() => OnClientConnected?.Invoke(),
+				(message) => OnClientDataReceived?.Invoke(message, Channels.Reliable),
+				() => OnClientDisconnected?.Invoke(),
 				TimeoutMS);
 
 			if (!TryGetComponent<IRelayManager>(out relayManager))
@@ -96,7 +96,7 @@ namespace Utp
 			UtpLog.Info("UTPTransport initialized!");
 		}
 
-		private void SetupDefaultCallbacks()
+		/*private void SetupDefaultCallbacks()
 		{
 			if (OnServerConnected == null)
 			{
@@ -122,7 +122,7 @@ namespace Utp
 			{
 				OnClientDataReceived = (data, channel) => UtpLog.Warning("OnClientDataReceived called with no handler");
 			}
-		}
+		}*/
 
 		/// <summary>
 		/// Checks to see if UTP is available on this platform. 

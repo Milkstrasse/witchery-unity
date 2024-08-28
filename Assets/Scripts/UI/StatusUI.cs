@@ -1,13 +1,18 @@
-using TMPro;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StatusUI : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI icon;
-
-    public void SetupEffect(StatusEffect effect)
+    // Start is called before the first frame update
+    void Start()
     {
-        icon.text = effect.duration.ToString();
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }

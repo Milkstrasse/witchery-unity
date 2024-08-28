@@ -16,10 +16,10 @@ EditorBuildSettings:
     guid: 704295354c32d4c049380c027ce97a27
   - enabled: 1
     path: Assets/Scenes/FightScene.unity
-    guid: a28a1ed6efcf8494480532b60770df91
+    guid: 3b3098d5998d34bf7b7507274da2e3bd
   - enabled: 1
     path: Assets/Scenes/GameOverScene.unity
-    guid: c3328013e23bc4888b0421d92d098c2c
+    guid: 6a1ccfddd3728416380b4eac9a6a8b07
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 13dd23b9f038d4cfda1298992ac86aa4, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 56259042c327f4b718fb3793c5091492, type: 2}

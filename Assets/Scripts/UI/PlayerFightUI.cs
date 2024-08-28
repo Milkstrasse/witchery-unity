@@ -1,98 +1,93 @@
 using System.Collections;
+using System.Collections.Generic;
+using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerFightUI : MonoBehaviour
 {
-    [SerializeField]
-    private RectTransform cardParent;
-    [SerializeField]
-    private Transform statusParent;
+    public Player player;
 
-    [SerializeField]
-    private TextMeshProUGUI teamName;
-    [SerializeField]
-    private TextMeshProUGUI energyAmount;
-    [SerializeField]
-    private TextMeshProUGUI health;
-    [SerializeField]
-    private Slider healthSlider;
-    [SerializeField]
-    private Slider timeSlider;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private TextMeshProUGUI energyText;
 
-    private Player player;
-    private CardUI[] cards;
+    [SerializeField] private Transform statusParent;
     private StatusUI[] effects;
-    //public Vector3[] cardPositions;
-    //public float cardSpacer;
-    private bool canPlay;
+    [SerializeField] private Transform cardParent;
+    private CanvasGroup cardGroup;
+    private Canvas canvas;
+
+    private CardUI[] cards;
 
     private void Start()
     {
-        if (transform.position.y < 100)
-        {
-            teamName.text = GlobalManager.teamName;
-        }
+        cardGroup = cardParent.GetComponent<CanvasGroup>();
     }
 
-    public void SetupUI(Player player, Canvas canvas)
+    public void SetupUI(Canvas canvas, Player player)
     {
         this.player = player;
+        player.OnPlayerChanged += UpdateUI;
 
-        teamName.text = player.teamName;
-        energyAmount.text = player.energy.ToString() + " MP";
-        health.text = player.currHealth.ToString() + "/" + player.fullHealth.ToString() + " HP";
+        this.canvas = canvas;
 
-        GetComponent<CanvasGroup>().blocksRaycasts = false;
+        nameText.text = player.playerName;
+        healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
+        energyText.text = player.energy.ToString();
+
         cards = new CardUI[5];
         effects = new StatusUI[5];
-        //cardPositions = new Vector3[5];
 
         float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 230 - 40)/4 * -1;
 
         for (int i = 0; i < 5; i++)
         {
             CardUI card = cardParent.transform.GetChild(i).GetComponent<CardUI>();
-            card.transform.localPosition = new Vector3(115 + i * (230 - cardSpacer), -160f, 0);
-            //cardPositions[i] = card.transform.localPosition;
+            card.transform.localPosition = new Vector3(i * (230 - cardSpacer), -160f, 0);
+            card.GetComponent<DragDrop>().SetInit(i, this);
 
-            //card.GetComponent<DragDrop>().SetClone();
-            //dragDrop.playerFightUI = this;
+            cards[i] = card;
 
             if (i < player.cardHand.Count)
             {
-                Fighter fighter = GlobalManager.singleton.fighters[player.cardHand[i].fighterID];
-                card.SetupCard(fighter, player.cardHand[i]);
+                cards[i].SetupCard(player.cardHand[i]);
+                cards[i].gameObject.SetActive(true);
             }
             else
             {
-                card.gameObject.SetActive(false);
+                cards[i].gameObject.SetActive(false);
             }
 
-            cards[i] = card;
             effects[i] = statusParent.GetChild(i).GetComponent<StatusUI>();
+
+            if (i < player.effects.Count)
+            {
+                effects[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                effects[i].gameObject.SetActive(false);
+            }
         }
 
-        cardParent.sizeDelta = new Vector2(Screen.width/canvas.scaleFactor - 40, cardParent.sizeDelta.y);
+        cardGroup.interactable = true;
     }
 
-    public void UpdateUI()
+    private void UpdateUI()
     {
-        Debug.Log("UPDATING");
+        healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
+        LeanTween.value(healthBar.gameObject, healthBar.value, player.currHealth/(float)player.fullHealth, 0.3f).setOnUpdate( (float val) => { healthBar.value = val; } );
 
-        energyAmount.text = player.energy.ToString() + " MP";
-        health.text = player.currHealth.ToString() + "/" + player.fullHealth.ToString() + " HP";
-
-        LeanTween.value(healthSlider.gameObject, healthSlider.value, player.currHealth/(float)player.fullHealth, 0.3f).setOnUpdate( (float val) => { healthSlider.value = val; } );
+        energyText.text = player.energy.ToString();
 
         for (int i = 0; i < 5; i++)
         {
             if (i < player.cardHand.Count)
             {
-                Fighter fighter = GlobalManager.singleton.fighters[player.cardHand[i].fighterID];
-                cards[i].SetupCard(fighter, player.cardHand[i]);
-
+                cards[i].SetupCard(player.cardHand[i]);
                 cards[i].gameObject.SetActive(true);
             }
             else
@@ -102,7 +97,6 @@ public class PlayerFightUI : MonoBehaviour
 
             if (i < player.effects.Count)
             {
-                effects[i].SetupEffect(player.effects[i]);
                 effects[i].gameObject.SetActive(true);
             }
             else
@@ -112,64 +106,31 @@ public class PlayerFightUI : MonoBehaviour
         }
     }
 
-    public void StartTurn(bool canPlay, bool isOwned)
+    public void MakeMove(MoveMessage message, CardSlot cardSlot)
     {
-        Debug.Log("STARTED TURN");
+        StartCoroutine(MoveCard(message.cardIndex, cardSlot));
+    }
 
-        this.canPlay = canPlay;
+    IEnumerator MoveCard(int cardIndex, CardSlot cardSlot)
+    {
+        cards[cardIndex].transform.SetParent(canvas.transform);
+        LeanTween.move(cards[cardIndex].gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.8f);
+        
+        yield return new WaitForSeconds(0.8f);
 
-        GetComponent<CanvasGroup>().blocksRaycasts = canPlay && isOwned;
-        energyAmount.text = player.energy.ToString() + " MP";
-    
-        RectTransform rectTransform = GetComponent<RectTransform>();
-        LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, canPlay ? 520 : 120), 0.3f).setDelay(0.3f);
+        cards[cardIndex].GetComponent<DragDrop>().ResetDrag();
+        cardSlot.SetupCard(player.cardHand[cardIndex], true);
 
-        if (canPlay)
+        player.cardHand.RemoveAt(cardIndex);
+
+        UpdateUI();
+    }
+
+    private void OnDestroy()
+    {
+        if (player != null)
         {
-            StartCoroutine(StartTimer(isOwned));
+            player.OnPlayerChanged -= UpdateUI;
         }
-    }
-
-    IEnumerator StartTimer(bool isOwned)
-    {
-        int time = GlobalManager.playTime;
-
-        while (time >= 0 && canPlay)
-        {
-            time -= 1;
-            float newValue = time/(float)GlobalManager.playTime;
-
-            if (newValue < timeSlider.value)
-            {
-                LeanTween.value(timeSlider.gameObject, timeSlider.value, time/(float)GlobalManager.playTime, 1f ).setOnUpdate( (float val) => { timeSlider.value = val; } );
-            }
-
-            yield return new WaitForSeconds(1);
-        }
-
-        timeSlider.value = 1;
-
-        if (isOwned && time <= 0)
-            GiveUp();
-    }
-
-    public void MakeMove(int cardIndex, Vector3 position)
-    {
-        Debug.Log("MAKING A MOVE");
-
-        cards[cardIndex].transform.SetParent(transform.parent.parent);
-        LeanTween.move(cards[cardIndex].gameObject, position, 0.3f).setOnComplete(ResetCard, cardIndex);
-    }
-
-    private void ResetCard(object param)
-    {
-        int cardIndex = (int)param;
-        cards[cardIndex].GetComponent<DragDrop>().ResetDrag(cardIndex);
-        cards[cardIndex].gameObject.SetActive(false);
-    }
-
-    public void GiveUp()
-    {
-        player.GiveUp();
     }
 }

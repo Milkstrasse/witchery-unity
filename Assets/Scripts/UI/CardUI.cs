@@ -4,18 +4,14 @@ using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour
 {
-    public int cardIndex;
-
     [SerializeField]
     private GameObject cardBack;
     [SerializeField]
     private Image portrait;
     [SerializeField]
-    private TextMeshProUGUI info;
+    private TextMeshProUGUI icon;
     [SerializeField]
     private RawImage background;
-    [SerializeField]
-    private RawImage gradient;
     [SerializeField]
     private TextMeshProUGUI infoText;
 
@@ -28,45 +24,41 @@ public class CardUI : MonoBehaviour
     public bool isSelected;
     public bool isHighlighted;
 
+    public Card card;
+
     public void SetupCard(Fighter fighter)
     {
         portrait.sprite = Resources.Load<Sprite>(fighter.name + "-standard-neutral");
         background.color = neutral;
-        gradient.color = neutral;
 
-        info.text = fighter.fighterID.ToString();
+        icon.text = fighter.fighterID.ToString();
         infoText.text = fighter.name;
     }
 
-    public void SetupCard(Fighter fighter, Card card, bool isFlipped = false)
+    public void SetupCard(Card card)
     {
-        portrait.sprite = Resources.Load<Sprite>(fighter.name + "-standard-neutral");
+        this.card = card;
+
+        portrait.sprite = Resources.Load<Sprite>(card.fighter.name + "-standard-neutral");
         background.color = neutral;
-        gradient.color = neutral;
 
-        info.text = card.cost.ToString();
-        infoText.text = fighter.moves[card.moveIndex].name;
-
-        isHighlighted = false;
-        isSelected = false;
-
-        cardBack.SetActive(isFlipped);
-
-        if (TryGetComponent(out DragDrop dragDrop))
-        {
-            dragDrop.SetInit();
-        }
+        icon.text = card.move.cost.ToString();
+        infoText.text = card.fighter.name;
     }
 
-    public void HighlightCard(bool _isHighlighted)
+    public void HighlightCard(bool isHighlighted)
     {
-        isHighlighted = _isHighlighted;
+        this.isHighlighted = isHighlighted;
         background.color = isHighlighted ? highlighted : isSelected ? selected : neutral;
-        gradient.color = background.color;
     }
 
-    public void SelectCard(bool selected)
+    public void SelectCard(bool isSelected)
     {
-        isSelected = selected;
+        this.isSelected = isSelected;
+    }
+
+    public void FlipCard(bool isFlipped)
+    {
+        cardBack.SetActive(isFlipped);
     }
 }

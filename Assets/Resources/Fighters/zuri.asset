@@ -9,16 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a75d30882c866482087f202c5c52cf43, type: 3}
+  m_Script: {fileID: 11500000, guid: c0a895a7e95554706af00b395749ee36, type: 3}
   m_Name: zuri
   m_EditorClassIdentifier: 
-  fighterID: 5
+  fighterID: 1
   moves:
-  - {fileID: 11400000, guid: 3de12914481994b10a66ce9aa27a61ee, type: 2}
-  - {fileID: 11400000, guid: 3de12914481994b10a66ce9aa27a61ee, type: 2}
-  - {fileID: 11400000, guid: 232bab52695af4ec88163f70144fa71f, type: 2}
-  - {fileID: 11400000, guid: 2e3b1d2b4d8d14faf8eba3922ce33951, type: 2}
-  - {fileID: 11400000, guid: 5656664d1035f4015825d4bf857aedfa, type: 2}
-  - {fileID: 11400000, guid: ceb23ddd19860441abed47839d5d8037, type: 2}
-  - {fileID: 11400000, guid: dd75635d712b043aeb6fc64882596d81, type: 2}
-  - {fileID: 11400000, guid: 8410f19067392487fbe9231f19df8c42, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}

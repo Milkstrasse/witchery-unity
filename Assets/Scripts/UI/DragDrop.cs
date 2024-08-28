@@ -1,27 +1,32 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(CanvasGroup))]
 public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    public int cardIndex;
+
     [SerializeField]
     private Canvas canvas;
     
+    public PlayerFightUI playerFightUI;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
     private Vector2 initPosition;
     private Transform initParent;
-    private CardUI cardUI;
 
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-        cardUI = transform.GetComponent<CardUI>();
     }
 
-    public void SetInit()
+    public void SetInit(int cardIndex, PlayerFightUI playerFightUI)
     {
+        this.cardIndex = cardIndex;
+        this.playerFightUI = playerFightUI;
+
         initParent = transform.parent;
         initPosition = rectTransform.anchoredPosition;
     }
@@ -35,38 +40,19 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;
-
-        /*if (rectTransform.position.y < 100 || rectTransform.position.y > Screen.height - 100)
-        {
-            cardUI.HighlightCard(true);
-        }
-        else
-        {
-            cardUI.HighlightCard(false);
-        }*/
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        bool toRemove = rectTransform.position.y < 100 || rectTransform.position.y > Screen.height - 100;
-        int cardIndex = cardUI.cardIndex;
-
-        ResetDrag(cardIndex);
-
-        if (toRemove || cardUI.isHighlighted)
-        {
-            gameObject.SetActive(false);
-            Player.localPlayer.MakeMove(cardIndex, !toRemove && cardUI.isHighlighted, true);
-        }
+        ResetDrag();
     }
 
-    public void ResetDrag(int cardIndex)
+    public void ResetDrag()
     {
-        canvasGroup.blocksRaycasts = true;
-
         transform.SetParent(initParent);
-        transform.SetSiblingIndex(cardIndex);
-        
         rectTransform.anchoredPosition = initPosition;
+        transform.SetSiblingIndex(cardIndex);
+
+        canvasGroup.blocksRaycasts = true;
     }
 }

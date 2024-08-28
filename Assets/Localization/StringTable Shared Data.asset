@@ -23,8 +23,12 @@ MonoBehaviour:
     m_Key: join
     m_Metadata:
       m_Items: []
-  - m_Id: 5523586932736
-    m_Key: currLanguage
+  - m_Id: 2538625827856384
+    m_Key: ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2538677614927872
+    m_Key: cancel
     m_Metadata:
       m_Items: []
   m_Metadata:

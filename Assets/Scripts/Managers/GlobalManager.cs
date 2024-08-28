@@ -1,4 +1,5 @@
 using System;
+using Mirror;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
@@ -10,10 +11,11 @@ public class GlobalManager : MonoBehaviour
     public Fighter[] fighters;
     public string joincode;
 
-    public static string teamName;
-    public static int connectionTime = 120;
-    public static int playTime = 60;
+    public static int waitTime = 60;
+    public static int turnTime = 60;
 
+    public bool relayEnabled;
+    
     private async void Awake()
     {
         DontDestroyOnLoad(this);
@@ -30,8 +32,11 @@ public class GlobalManager : MonoBehaviour
         LoadScene("MenuScene");
     }
 
-    public void LoadScene(string scene)
+    public void LoadScene(string scene) => SceneManager.LoadScene(scene);
+
+    public static void QuitAnyConnection()
     {
-        SceneManager.LoadScene(scene);
+        NetworkClient.Shutdown();
+        NetworkServer.Shutdown();
     }
 }

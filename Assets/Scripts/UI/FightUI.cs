@@ -1,95 +1,51 @@
-using System.Collections;
 using Mirror;
 using UnityEngine;
 
+[RequireComponent(typeof(Canvas))]
 public class FightUI : MonoBehaviour
 {
-    [SerializeField]
-    private FightManager manager;
+    [SerializeField] private FightManager manager;
 
-    [SerializeField]
-    private PlayerFightUI playerTop;
-    [SerializeField]
-    private PlayerFightUI playerBottom;
-    private CardSlot slot;
+    [SerializeField] private PlayerFightUI playerTop;
+    [SerializeField] private PlayerFightUI playerBottom;
+    [SerializeField] private CardSlot cardSlot;
 
-    private int ownedPosition;
-
-    public void Setup(FightManager manager)
+    private void Start()
     {
-        this.manager = manager;
-
-        manager.players[0].onTurnChange += ChangeTurn;
-        manager.players[1].onTurnChange += ChangeTurn;
-        manager.players[0].onPlayerChanged += ChangeCards;
-        manager.players[1].onPlayerChanged += ChangeCards;
-
-        StartCoroutine(SetupPlayers());
+        manager.OnSetupComplete += SetupPlayers;
+        manager.OnMoveReceive += MakeMove;
     }
 
-    IEnumerator SetupPlayers()
+    private void SetupPlayers()
     {
         Canvas canvas = GetComponent<Canvas>();
-        while (manager.players[0].teamName == "" || manager.players[1].teamName == "") //wait on server sync
+
+        if (NetworkClient.activeHost)
         {
-            yield return null;
-        }
-        
-        if (manager.players[0].GetComponent<NetworkIdentity>().isOwned)
-        {
-            playerTop.SetupUI(manager.players[1], canvas);
-            playerBottom.SetupUI(manager.players[0], canvas);
-
-            ownedPosition = 0;
-        }
-        else if (manager.players[1].GetComponent<NetworkIdentity>().isOwned)
-        {
-            playerTop.SetupUI(manager.players[0], canvas);
-            playerBottom.SetupUI(manager.players[1], canvas);
-
-            ownedPosition = 1;
-        }
-
-        slot = transform.GetChild(transform.childCount - 1).GetComponent<CardSlot>();
-    }
-
-    private void ChangeTurn(int turn)
-    {
-        Debug.Log($"Turn changed to {turn}");
-
-        if (ownedPosition == 0)
-        {
-            playerTop.StartTurn(turn == 1, false);
-            playerBottom.StartTurn(turn == 0, true);
-
-            LeanTween.moveLocalY(slot.gameObject, turn == 0 ? 200f : -200f, 0.3f).setDelay(0.3f);
+            playerTop.SetupUI(canvas, manager.players[1]);
+            playerBottom.SetupUI(canvas, manager.players[0]);
         }
         else
         {
-            playerTop.StartTurn(turn == 0, false);
-            playerBottom.StartTurn(turn == 1, true);
-
-            LeanTween.moveLocalY(slot.gameObject, turn == 0 ? -200f : 200f, 0.3f).setDelay(0.3f);
+            playerTop.SetupUI(canvas, manager.players[0]);
+            playerBottom.SetupUI(canvas, manager.players[1]);
         }
     }
 
-    private void ChangeCards()
+    private void MakeMove(MoveMessage message)
     {
-        Debug.Log("CARDS CHANGED");
-
-        playerTop.UpdateUI();
-        playerBottom.UpdateUI();
+        if (NetworkClient.activeHost && message.playerIndex == 1)
+        {
+            playerTop.MakeMove(message, cardSlot);
+        }
+        else if (!NetworkClient.activeHost && message.playerIndex == 0)
+        {
+            playerTop.MakeMove(message, cardSlot);
+        }
     }
 
-    public void MakeMove(int playerIndex, int cardIndex)
+    public void StopFight()
     {
-        if (playerIndex == ownedPosition)
-        {
-            playerBottom.MakeMove(cardIndex, slot.transform.position);
-        }
-        else
-        {
-            playerTop.MakeMove(cardIndex, slot.transform.position);
-        }
+        manager.EndFight();
     }
 }

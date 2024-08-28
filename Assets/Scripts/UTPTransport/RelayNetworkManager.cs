@@ -100,7 +100,7 @@ namespace Utp
 			(string joinCode) =>
 			{
 				relayJoinCode = joinCode;
-				Debug.LogError(joinCode);
+				Debug.LogError(relayJoinCode);
 				StartHost();
 			},
 			() =>

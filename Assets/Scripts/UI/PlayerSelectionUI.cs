@@ -1,208 +1,97 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public class PlayerSelectionUI : MonoBehaviour
 {
-    public List<int> fighterIDs;
-    
-    [SerializeField]
-    private TextMeshProUGUI playerName;
-    [SerializeField]
-    private GameObject cardPrefab;
-    [SerializeField]
-    private RectTransform fighterParent;
-    [SerializeField]
-    private RectTransform playerArea;
-    [SerializeField]
-    private CanvasGroup interactGroup;
-    [SerializeField]
-    private Button teamButton;
+    [SerializeField] private Transform cardParent;
+    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private LocalizeStringEvent stringEvent;
+    [SerializeField] private Slider timer;
+    [SerializeField] private Button editTeam;
+    private TextMeshProUGUI editTeamText;
 
-   private int selectIndex;
     private CardUI[] cards;
-    //private float cardSpacer;
-    //private float initWidth;
+    private int selectIndex;
 
-    public bool ready;
-
-    public void SetupUI(Canvas canvas)
+    private void Start()
     {
         selectIndex = -1;
-        ready = false;
 
-        cards = new CardUI[GlobalManager.singleton.fighters.Length];
+        editTeamText = editTeam.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
-        //cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 230 - 40)/4 * -1 - 15;
+        int fighterAmount = GlobalManager.singleton.fighters.Length;
+        cards = new CardUI[fighterAmount];
 
-        //initWidth = GlobalManager.singleton.fighters.Length * (230 - cardSpacer - 10) + 110;
-        //fighterParent.sizeDelta = new Vector2(initWidth, fighterParent.sizeDelta.y);
-
-        for (int i = 0; i < GlobalManager.singleton.fighters.Length; i++)
+        for (int i = 0; i < fighterAmount; i++)
         {
-            GameObject card = Instantiate(cardPrefab, fighterParent.transform);
-            //card.transform.localPosition = new Vector3(-initWidth + 115 + i * (230 - cardSpacer - 10), 0, 0);
+            CardUI card = Instantiate(cardPrefab, cardParent).GetComponent<CardUI>();
+            card.SetupCard(GlobalManager.singleton.fighters[i]);
 
             int iCopy = i;
-            card.GetComponent<Button>().onClick.AddListener( () => SelectCard(iCopy) );
+            card.GetComponent<Button>().onClick.AddListener(() => SelectCard(iCopy));
 
-            cards[i] = card.GetComponent<CardUI>();
-            cards[i].SetupCard(GlobalManager.singleton.fighters[i]);
+            cards[i] = card;
         }
     }
 
-    public void ToggleSelection(bool minimize)
+    private void SelectCard(int cardIndex)
     {
-        if (minimize)
+        if (selectIndex == cardIndex)
         {
-            SelectCard(selectIndex);
-            interactGroup.interactable = false;
-
-            LeanTween.size(playerArea, new Vector2(playerArea.sizeDelta.x, 120), 0.3f);
-        }
-        else
-        {
-            interactGroup.interactable = true;
-            LeanTween.size(playerArea, new Vector2(playerArea.sizeDelta.x, 520), 0.3f);
-        }
-    }
-
-    public void SelectCard(int index)
-    {
-        //ToggleCardHand();
-
-        if (selectIndex != index)
-        {
-            /*if (index < GlobalManager.singleton.fighters.Length - 1)
-            {
-                LeanTween.size(fighterParent, new Vector2(initWidth + cardSpacer, fighterParent.sizeDelta.y), 0.3f).setOnComplete(ToggleCardHand);
-            }
-            else
-            {
-                LeanTween.size(fighterParent, new Vector2(initWidth, fighterParent.sizeDelta.y), 0.3f).setOnComplete(ToggleCardHand);
-            }*/
-
-            if (selectIndex >= 0)
-            {
-                /*if (index > selectIndex)
-                {
-                    if (index == GlobalManager.singleton.fighters.Length - 1)
-                    {
-                        for (int i = selectIndex + 1; i <= index; i++)
-                        {
-                            LeanTween.moveLocalX(cards[i].gameObject, cards[i].gameObject.transform.localPosition.x - cardSpacer + 95, 0.3f);
-                        }
-                    }
-                    else
-                    {
-                        for (int i = selectIndex + 1; i <= index; i++)
-                        {
-                            LeanTween.moveLocalX(cards[i].gameObject, cards[i].gameObject.transform.localPosition.x - cardSpacer, 0.3f);
-                        }
-                    }
-                }
-                else
-                {
-                    if (selectIndex == GlobalManager.singleton.fighters.Length - 1)
-                    {
-                        for (int i = index + 1; i <= selectIndex; i++)
-                        {
-                            LeanTween.moveLocalX(cards[i].gameObject, cards[i].gameObject.transform.localPosition.x + cardSpacer - 95, 0.3f);
-                        }
-                    }
-                    else
-                    {
-                        for (int i = index + 1; i <= selectIndex; i++)
-                        {
-                            LeanTween.moveLocalX(cards[i].gameObject, cards[i].gameObject.transform.localPosition.x + cardSpacer, 0.3f);
-                        }
-                    }
-                }*/
-
-                cards[selectIndex].HighlightCard(false);
-                selectIndex = index;
-
-                teamButton.interactable = true;
-            }
-            else
-            {   
-                selectIndex = index;
-
-                /*for (int i = selectIndex + 1; i < GlobalManager.singleton.fighters.Length; i++)
-                {
-                    LeanTween.moveLocalX(cards[i].gameObject, cards[i].gameObject.transform.localPosition.x + cardSpacer - 95, 0.3f);
-                }*/
-
-                teamButton.interactable = true;
-            }
-
-            if (cards[selectIndex].isSelected)
-            {
-                teamButton.GetComponentInChildren<TextMeshProUGUI>().text = "-";
-            }
-            else
-            {
-                teamButton.GetComponentInChildren<TextMeshProUGUI>().text = "+";
-            }
-        }
-        else
-        {
-            /*LeanTween.size(fighterParent, new Vector2(initWidth, fighterParent.sizeDelta.y), 0.3f).setOnComplete(ToggleCardHand);
-
-            if (selectIndex >= 0)
-            {
-                for (int i = selectIndex + 1; i < GlobalManager.singleton.fighters.Length; i++)
-                {
-                    LeanTween.moveLocalX(cards[i].gameObject, cards[i].gameObject.transform.localPosition.x - cardSpacer + 95, 0.3f);
-                }
-            }*/
-            
+            cards[selectIndex].HighlightCard(false);
             selectIndex = -1;
 
-            teamButton.interactable = false;
-            teamButton.GetComponentInChildren<TextMeshProUGUI>().text = "+";
+            editTeam.interactable = false;
+            editTeamText.text = "+";
+
+            return;
         }
 
-        if (index >= 0)
-            cards[index].HighlightCard(index == selectIndex);
-    }
-
-    private void ToggleCardHand()
-    {
-        CanvasGroup group = fighterParent.GetComponent<CanvasGroup>();
-        group.blocksRaycasts = !group.blocksRaycasts;
-    }
-
-    public void EditTeam()
-    {
-        if (selectIndex < 0)
-            return;
-        
-        playerName.text = "Player " + Random.Range(0, 10);
-
-        GlobalManager.teamName = playerName.text;
-
-        int removeIndex = fighterIDs.IndexOf(selectIndex);
-
-        if (removeIndex >= 0)
+        if (selectIndex >= 0)
         {
-            fighterIDs.RemoveAt(removeIndex);
-            cards[selectIndex].SelectCard(false);
+            cards[selectIndex].HighlightCard(false);
+        }
 
-            teamButton.GetComponentInChildren<TextMeshProUGUI>().text = "+";
+        selectIndex = cardIndex;
+        cards[selectIndex].HighlightCard(true);
+
+        editTeam.interactable = true;
+        editTeamText.text = cards[selectIndex].isSelected ? "-" : "+";
+    }
+
+    public void EditTeam(SelectionUI selectionUI)
+    {
+        bool cardAdded = selectionUI.EditTeam(selectIndex);
+        editTeamText.text = cardAdded ? "-" : "+";
+
+        cards[selectIndex].SelectCard(cardAdded);
+    }
+
+    public void ToggleUI(bool isActive)
+    {
+        canvasGroup.interactable = isActive;
+
+        if (isActive)
+        {
+            stringEvent.StringReference.SetReference("StringTable", "ready");
         }
         else
         {
-            fighterIDs.Add(selectIndex);
-            cards[selectIndex].SelectCard(true);
-
-            teamButton.GetComponentInChildren<TextMeshProUGUI>().text = "-";
+            stringEvent.StringReference.SetReference("StringTable", "cancel");
         }
     }
 
-    public void StartFight()
+    public void MinimizeUI(bool minimize)
     {
-        LeanTween.size(playerArea, new Vector2(playerArea.sizeDelta.x, 120), 0.3f);
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, minimize ? 120f :  520f), 0.3f);
+    }
+
+    public void SetTimer(int time)
+    {
+        LeanTween.value(timer.gameObject, timer.value, time/(float)GlobalManager.waitTime, 1f ).setOnUpdate( (float val) => { timer.value = val; } );
     }
 }

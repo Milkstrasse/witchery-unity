@@ -26,8 +26,12 @@ MonoBehaviour:
     m_Localized: Join
     m_Metadata:
       m_Items: []
-  - m_Id: 5523586932736
-    m_Localized: English
+  - m_Id: 2538625827856384
+    m_Localized: Ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2538677614927872
+    m_Localized: Cancel
     m_Metadata:
       m_Items: []
   references:

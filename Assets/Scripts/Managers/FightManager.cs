@@ -1,188 +1,117 @@
-using System.Collections;
+using System;
+using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
-public class FightManager : NetworkBehaviour
+public class FightManager : MonoBehaviour
 {
+    public static FightManager singleton;
+
     public Player[] players;
-
-    private GameObject canvas;
-    private CardSlot slot;
-    private FightUI fightUI;
-    private bool acceptMessage;
-
     private FightLogic logic;
+
+    [SerializeField] private FightUI fightUI;
+    public event Action OnSetupComplete;
+    public event Action<MoveMessage> OnMoveReceive;
 
     private void Start()
     {
+        singleton = this;
+
+        players = new Player[2];
         logic = new FightLogic();
 
-        canvas = GameObject.Find("Canvas");
-        fightUI = canvas.GetComponent<FightUI>();
-
-        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
-        players = new Player[2]{playerObjects[0].GetComponent<Player>(), playerObjects[1].GetComponent<Player>()};
-
-        SpawnSlot();
-
-        fightUI.enabled = true;
-        fightUI.Setup(this);
-
-        acceptMessage = true;
-
-        Invoke("StartFight", 0.3f); //give clients time to subscribe to callbacks
+        NetworkClient.ReplaceHandler<TurnMessage>(OnTurnStart);
+        NetworkClient.ReplaceHandler<MoveMessage>(OnMoveReceived);
+        NetworkServer.ReplaceHandler<MoveMessage>(OnMoveMade);
     }
 
-    [ServerCallback]
-    private void SpawnSlot()
+    [Server]
+    public PlayerMessage SetupPlayer(PlayerMessage message)
     {
-        GameObject cardSlot = Instantiate(NetworkManager.singleton.spawnPrefabs[1]);
-        slot = cardSlot.GetComponent<CardSlot>();
+        List<int> cards = new List<int>();
 
-        NetworkServer.Spawn(cardSlot);
-    }
-
-    [ServerCallback]
-    private void StartFight()
-    {
-        NetworkServer.RegisterHandler<MoveMessage>(OnReceiveMessage);
-
-        logic.playerTurn = Random.Range(0, 2);
-
-        TurnMessage msg = new TurnMessage {
-            turn = logic.playerTurn
-        };
-        
-        NetworkServer.SendToAll(msg);
-    }
-
-
-    private void OnReceiveMessage(NetworkConnectionToClient connection, MoveMessage message)
-    {
-        if (!acceptMessage)
-            return;
-        
-        Debug.Log("Made Move");
-
-        acceptMessage = false;
-
-        if (message.cardPlayed)
+        PlayerMessage msg = new PlayerMessage(message.name, message.fighterIDs);
+        for (int i = 0; i < message.fighterIDs.Length; i++)
         {
-            if (players[logic.playerTurn].energy >= players[logic.playerTurn].cardHand[message.cardIndex].cost)
+            Fighter fighter = GlobalManager.singleton.fighters[message.fighterIDs[i]];
+            for (int j = 0; j < fighter.moves.Length; j++)
             {
-                foreach (NetworkConnectionToClient conn in NetworkServer.connections.Values)
-                {
-                    if (conn != connection)
-                    {
-                        RpcMakeMove(conn, logic.playerTurn, message.cardIndex);
-                    }
-                }
+                cards.Add(i * fighter.moves.Length + j);
             }
         }
 
-        StartCoroutine(MakeMove(message));
+        PlayerData playerData = new PlayerData(message.name, cards);
+        logic.players.Add(playerData);
+
+        msg.cardHand = playerData.cardHand.ToArray();
+
+        return msg;
     }
 
-    IEnumerator MakeMove(MoveMessage message)
+    [Client]
+    private void OnTurnStart(TurnMessage message)
     {
-        Card card = players[logic.playerTurn].cardHand[message.cardIndex];
-
-        if (message.cardPlayed)
+        if (logic.playerTurn < 0)
         {
-            if (players[logic.playerTurn].energy >= card.cost)
-            {
-                players[logic.playerTurn].energy -= card.cost;
-                yield return new WaitForSeconds(0.3f);
-            }
-            else
-            {
-                yield return null;
-                
-                message.cardPlayed = false;
-                message.toRemove = false;
-            }
+            NetworkClient.ReplaceHandler<PlayerMessage>(OnReceivePlayer);
+
+            logic.playerTurn = message.playerTurn;
+
+            GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+            players[0] = playerObjects[0].GetComponent<Player>();
+            players[1] = playerObjects[1].GetComponent<Player>();
+
+            OnSetupComplete?.Invoke();
         }
         else
         {
-            yield return null;
+            logic.playerTurn = message.playerTurn;
         }
 
-        if (message.toRemove)
-        {
-            players[logic.playerTurn].playedCards.Add(card);
-            players[logic.playerTurn].cardHand.RemoveAt(message.cardIndex);
-
-            if (message.cardPlayed)
-            {
-                if (!logic.lastCard.played && !logic.IsResponse(card))
-                {
-                    logic.PlayLastCard(players);
-                    yield return new WaitForSeconds(0.3f);
-
-                    if (logic.IsGameOver(players))
-                    {
-                        NetworkManager.singleton.ServerChangeScene("GameOverScene");
-                        yield break;
-                    }
-                }
-
-                bool cardPlayed = logic.PlayCard(card, players); //playing new card
-                message.cardPlayed = card.moveType != MoveType.Combo;
-                logic.lastCard = new PlayedCard(logic.playerTurn, card, cardPlayed);
-
-                slot.RpcUpdateCard(logic.playerTurn, card);
-            }
-            else if (!logic.lastCard.played && players[logic.playerTurn].cardHand.Count == 0)
-            {
-                logic.PlayLastCard(players);
-            }
-        }
-        else
-        {
-            slot.RpcUpdateCard(logic.lastCard.playerIndex, logic.lastCard.card);
-            players[logic.playerTurn].RpcOnCardsUpdated();
-        }
-
-        if (logic.IsGameOver(players))
-        {
-            NetworkManager.singleton.ServerChangeScene("GameOverScene");
-            yield break;
-        }
-
-        if ((message.cardPlayed && players[1 - logic.playerTurn].cardHand.Count > 0) || players[logic.playerTurn].cardHand.Count == 0)
-        {
-            logic.playerTurn = 1 - logic.playerTurn;
-
-            if (players[0].cardHand.Count == 0 && players[1].cardHand.Count == 0)
-            {
-                players[logic.playerTurn].NewRound();
-                if (logic.IsGameOver(players))
-                {
-                    NetworkManager.singleton.ServerChangeScene("GameOverScene");
-                    yield break;
-                }
-
-                players[1 - logic.playerTurn].NewRound();
-                if (logic.IsGameOver(players))
-                {
-                    NetworkManager.singleton.ServerChangeScene("GameOverScene");
-                    yield break;
-                }
-            }
-        }
-
-        TurnMessage msg = new TurnMessage
-        {
-            turn = logic.playerTurn
-        };
-
-        NetworkServer.SendToAll(msg);
-        acceptMessage = true;
+        Debug.Log(logic.playerTurn);
     }
 
-    [TargetRpc]
-    private void RpcMakeMove(NetworkConnectionToClient target, int playerIndex, int cardIndex)
+    [Server]
+    private void OnMoveMade(MoveMessage message)
     {
-        fightUI.MakeMove(playerIndex, cardIndex);
+        logic.MakeMove(message);
+
+        NetworkServer.SendToAll(message);
+        NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
+        NetworkServer.SendToAll(new PlayerMessage(logic.players[1 - logic.playerTurn]));
+        NetworkServer.SendToAll(new TurnMessage(1 - logic.playerTurn));
+    }
+
+    [Client]
+    public void SendMove(int cardIndex, bool playCard)
+    {
+        players[logic.playerTurn].cardHand.RemoveAt(cardIndex);
+        players[logic.playerTurn].OnPlayerChanged?.Invoke();
+        NetworkClient.Send(new MoveMessage(logic.playerTurn, cardIndex, playCard));
+    }
+
+    [Client]
+    private void OnMoveReceived(MoveMessage message)
+    {
+        OnMoveReceive?.Invoke(message);
+    }
+
+    [Client]
+    private void OnReceivePlayer(PlayerMessage message)
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (message.name == players[i].playerName)
+            {
+                bool updateCards = (NetworkClient.activeHost && i == 0) || (!NetworkClient.activeHost && i == 1);
+                players[i].UpdatePlayer(message, updateCards);
+            }
+        }
+    }
+
+    public void EndFight()
+    {
+        GlobalManager.singleton.LoadScene("GameOverScene");
     }
 }

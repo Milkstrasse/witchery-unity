@@ -1,124 +1,109 @@
-using Mirror;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using Utp;
 
 public class SelectionManager : MonoBehaviour
 {
-    [SerializeField]
-    private SelectionUI selectionUI;
-    
-    public Action<bool> onStartedClient;
-    public Action<int> onTimerChanged;
+   private RelayNetworkManager networkManager;
+   private bool isReady;
 
-    private RelayNetworkManager networkManager;
+   public event Action<int> onTimerChanged;
+   private List<int> fighterIDs;
+   private string playerName;
 
-    private void Awake()
-    {
-        networkManager = GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>();
-    }
+   private void Start()
+   {
+      networkManager = GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>();
+      fighterIDs = new List<int>();
 
-    public bool SetReady(bool ready, PlayerSelectionUI player)
-    {
-        if (player.fighterIDs.Count == 0)
-            return false;
+      playerName = "Player";
+   }
 
-        if (ready && GlobalManager.singleton.joincode != null && GlobalManager.singleton.joincode.Length > 0)
-        {
-            Debug.Log("started client");
+   public bool SetReady()
+   {
+      if (fighterIDs.Count == 0)
+         return false;
+
+      isReady = !isReady;
+
+      if (!isReady)
+      {
+         StopAllCoroutines();
+         GlobalManager.QuitAnyConnection();
+
+         return false;
+      }
+
+      StartCoroutine(StartConnection());
+
+      return isReady;
+   }
+
+   IEnumerator StartConnection()
+   {
+      if (GlobalManager.singleton.joincode == "") //start host
+      {
+         if (GlobalManager.singleton.relayEnabled)
+         {
+            networkManager.StartRelayHost(networkManager.maxConnections);
+         }
+         else
+         {
+            networkManager.StartStandardHost();
+         }
+      }
+      else //start client
+      {
+         if (GlobalManager.singleton.relayEnabled)
+         {
             networkManager.relayJoinCode = GlobalManager.singleton.joincode;
-            if (Application.isEditor)
-            {
-                networkManager.JoinStandardServer();
-            }
-            else
-            {
-                networkManager.JoinRelayServer();
-            }
-            //NetworkManager.singleton.StartClient();
+            networkManager.JoinRelayServer();
+         }
+         else
+         {
+            networkManager.JoinStandardServer();
+         }
+      }
 
-            onStartedClient?.Invoke(false);
+      int time = GlobalManager.waitTime;
+      bool sentMessage = false;
 
-            StartCoroutine(WaitForConnection());
+      while (time >= 0)
+      {
+         time--;
+         onTimerChanged?.Invoke(time);
 
-            return true;
-        }
-        else if (ready)
-        {
-            Debug.Log("started host");
-            if (Application.isEditor)
-            {
-                networkManager.StartStandardHost();
-            }
-            else
-            {
-                networkManager.StartRelayHost(2);
-            }
-            //NetworkManager.singleton.StartHost();
-            onStartedClient?.Invoke(true);
+         if (NetworkClient.isConnected && !sentMessage)
+         {
+            NetworkClient.Send(new PlayerMessage(playerName, fighterIDs.ToArray()));
+            sentMessage = true;
+         }
+         
+         yield return new WaitForSeconds(1f);
+      }
 
-            StartCoroutine(WaitForConnection());
+      GlobalManager.QuitAnyConnection();
+      ReturnToMenu();
+   }
 
-            return true;
-        }
-        else
-        {
-            StopAllCoroutines();
+   public bool EditTeam(int fighterID)
+   {
+      int index = fighterIDs.IndexOf(fighterID);
 
-            onTimerChanged?.Invoke(GlobalManager.connectionTime);
+      if (index >= 0)
+      {
+         fighterIDs.RemoveAt(index);
+         return false;
+      }
+      else
+      {
+         fighterIDs.Add(fighterID);
+         return true;
+      }
+   }
 
-            NetworkClient.Shutdown();
-            NetworkServer.Shutdown();
-
-            return false;
-        }
-    }
-
-    IEnumerator WaitForConnection()
-    {
-        bool isClient = true;
-
-        int time = GlobalManager.connectionTime;
-
-        while (time >= 0 && ((NetworkClient.activeHost && NetworkServer.connections.Count == 1) || !NetworkClient.isConnected))
-        {
-            time -= 1;
-            onTimerChanged?.Invoke(time);
-
-            if (isClient && !NetworkClient.active)
-            {
-                Debug.Log("stopped being a client");
-                NetworkManager.singleton.StopClient(); //necessary?
-                isClient = false;
-            }
-
-            yield return new WaitForSeconds(1);
-        }
-
-        if ((NetworkServer.active && NetworkServer.connections.Count == 2) || (!NetworkClient.activeHost && NetworkClient.isConnected))
-        {
-            StartFight(); 
-        }
-        else
-        {
-            StopSelection();
-        }
-    }
-
-    public void StopSelection()
-    {
-        GlobalManager.singleton.LoadScene("MenuScene");
-    }
-
-    public void StartFight()
-    {
-        selectionUI.playerBottom.StartFight();
-        TeamMessage msg = new TeamMessage {
-            name = GlobalManager.teamName,
-            fighterIDs = selectionUI.playerBottom.fighterIDs.ToArray()
-        };
-
-        NetworkClient.Send(msg);
-    }
+   public void ReturnToMenu() => GlobalManager.singleton.LoadScene("MenuScene");
 }
