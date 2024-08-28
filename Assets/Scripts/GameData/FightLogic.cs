@@ -11,12 +11,22 @@ public class FightLogic
         players = new List<PlayerData>();
     }
 
-    public void MakeMove(MoveMessage message)
+    public bool MakeMove(MoveMessage message)
     {
-        players[playerTurn].playedCards.Add(players[playerTurn].cardHand[message.cardIndex]);
+        int cardIndex = players[playerTurn].cardHand[message.cardIndex];
+        Card card = FightManager.singleton.players[playerTurn].cards[cardIndex];
+
+        if (card.move.cost > players[playerTurn].energy)
+        {
+            return false;
+        }
+
+        players[playerTurn].playedCards.Add(cardIndex);
         players[playerTurn].cardHand.RemoveAt(message.cardIndex);
 
         players[1 - playerTurn].health -= 10;
-        players[playerTurn].energy -= 2;
+        players[playerTurn].energy -= card.move.cost;
+
+        return true;
     }
 }

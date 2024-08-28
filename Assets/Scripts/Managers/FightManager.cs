@@ -10,14 +10,17 @@ public class FightManager : MonoBehaviour
     public Player[] players;
     private FightLogic logic;
 
-    [SerializeField] private FightUI fightUI;
     public event Action OnSetupComplete;
     public event Action<MoveMessage> OnMoveReceive;
+    public event Action OnMoveFailed;
+
+    private void Awake()
+    {
+        singleton = this;
+    }
 
     private void Start()
     {
-        singleton = this;
-
         players = new Player[2];
         logic = new FightLogic();
 
@@ -67,6 +70,12 @@ public class FightManager : MonoBehaviour
         else
         {
             logic.playerTurn = message.playerTurn;
+
+            bool isActivePlayer = (NetworkClient.activeHost && message.playerTurn == 0) || (!NetworkClient.activeHost && message.playerTurn == 1);
+            if (message.failed && isActivePlayer)
+            {
+                OnMoveFailed?.Invoke();
+            }
         }
 
         Debug.Log(logic.playerTurn);
@@ -75,12 +84,18 @@ public class FightManager : MonoBehaviour
     [Server]
     private void OnMoveMade(MoveMessage message)
     {
-        logic.MakeMove(message);
-
-        NetworkServer.SendToAll(message);
-        NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
-        NetworkServer.SendToAll(new PlayerMessage(logic.players[1 - logic.playerTurn]));
-        NetworkServer.SendToAll(new TurnMessage(1 - logic.playerTurn));
+        if (logic.MakeMove(message))
+        {
+            NetworkServer.SendToAll(message);
+            NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
+            NetworkServer.SendToAll(new PlayerMessage(logic.players[1 - logic.playerTurn]));
+            NetworkServer.SendToAll(new TurnMessage(1 - logic.playerTurn));
+        }
+        else
+        {
+            NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
+            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, true));
+        }
     }
 
     [Client]

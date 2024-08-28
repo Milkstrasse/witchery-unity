@@ -48,4 +48,10 @@ public class FightUI : MonoBehaviour
     {
         manager.EndFight();
     }
+
+    private void OnDestroy()
+    {
+        manager.OnSetupComplete -= SetupPlayers;
+        manager.OnMoveReceive -= MakeMove;
+    }
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: basicMove
   m_EditorClassIdentifier: 
   moveID: 0
-  cost: 2
+  cost: 5
   health: 00000000fbffffff
   energy: 0000000000000000
+  cardType: 0

@@ -4,6 +4,12 @@ using UnityEngine.EventSystems;
 public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private CardUI cardUI;
+    private Card lastCard;
+
+    private void Start()
+    {
+        FightManager.singleton.OnMoveFailed += ResetCard;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -27,16 +33,36 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;
             SetupCard(eventData.pointerDrag.GetComponent<CardUI>().card, false);
-            
+
             FightManager.singleton.SendMove(cardIndex, true);
         }
     }
 
     public void SetupCard(Card card, bool isFlipped)
     {
+        lastCard = cardUI.card;
         transform.eulerAngles = new Vector3(0, 0, isFlipped ? 180 : 0);
 
         cardUI.SetupCard(card);
         cardUI.FlipCard(false);
+    }
+
+    public void ResetCard()
+    {
+        transform.eulerAngles = new Vector3(0, 0, 180);
+        
+        if (lastCard.isCard)
+        {
+            cardUI.SetupCard(lastCard);
+        }
+        else
+        {
+            cardUI.FlipCard(true);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        FightManager.singleton.OnMoveFailed -= ResetCard;
     }
 }

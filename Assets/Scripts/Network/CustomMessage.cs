@@ -15,9 +15,9 @@ public struct PlayerMessage : NetworkMessage
     public PlayerMessage(string name, int[] fighterIDs)
     {
         this.name = name;
+        this.fighterIDs = fighterIDs;
         health = 0;
         energy = 0;
-        this.fighterIDs = fighterIDs;
         cardHand = new int[0];
         effects = new StatusEffect[0];
     }
@@ -38,10 +38,10 @@ public struct TurnMessage : NetworkMessage
     public int playerTurn;
     public bool failed;
 
-    public TurnMessage(int playerTurn)
+    public TurnMessage(int playerTurn, bool failed = false)
     {
         this.playerTurn = playerTurn;
-        failed = false;
+        this.failed = failed;
     }
 }
 
