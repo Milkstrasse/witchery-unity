@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,6 +63,7 @@ public class PlayerFightUI : MonoBehaviour
 
             if (i < player.effects.Count)
             {
+                effects[i].SetupEffect(player.effects[i]);
                 effects[i].gameObject.SetActive(true);
             }
             else
@@ -97,6 +96,7 @@ public class PlayerFightUI : MonoBehaviour
 
             if (i < player.effects.Count)
             {
+                effects[i].SetupEffect(player.effects[i]);
                 effects[i].gameObject.SetActive(true);
             }
             else

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public class FightLogic
@@ -26,7 +27,7 @@ public class FightLogic
         int[] targets = new int[]{playerTurn, 1 - playerTurn};
         for (int i = 0; i < targets.Length; i++)
         {
-            players[targets[i]].health += card.move.health[i];
+            players[targets[i]].health = Math.Clamp(players[targets[i]].health + card.move.health[i], 0, 50);
             players[targets[i]].energy += card.move.energy[i];
 
             if (card.move.effects[i].duration > 0 && players[targets[i]].effects.Count < 5)

@@ -15,7 +15,7 @@ MonoBehaviour:
   moveID: 0
   cost: 1
   health: 0000000000000000
-  energy: 
+  energy: 0000000000000000
   effects:
   - effectID: 0
     duration: 0
