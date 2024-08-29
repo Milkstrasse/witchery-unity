@@ -10,6 +10,19 @@ public class PlayerData
     public List<int> cardHand;
     public List<StatusEffect> effects;
 
+    public PlayerData()
+    {
+        name = "";
+        
+        health = 0;
+        energy = 0;
+
+        cardStack = new List<int>();
+        playedCards = new List<int>();
+        cardHand = new List<int>();
+        effects = new List<StatusEffect>();
+    }
+
     public PlayerData(string name, List<int> cards)
     {
         this.name = name;

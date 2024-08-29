@@ -51,18 +51,18 @@ public class Player : MonoBehaviour
         }      
     }
 
-    public void UpdatePlayer(PlayerMessage message, bool updateCards)
+    public void UpdatePlayer(PlayerData playerData, bool updateCards)
     {
-        currHealth = message.health;
-        energy = message.energy;
-        effects = message.effects.ToList();
+        currHealth = playerData.health;
+        energy = playerData.energy;
+        effects = playerData.effects;
 
         if (updateCards)
         {
             cardHand = new List<Card>();
-            for (int i = 0; i < message.cardHand.Length; i++)
+            for (int i = 0; i < playerData.cardHand.Count; i++)
             {
-                cardHand.Add(cards[message.cardHand[i]]);
+                cardHand.Add(cards[playerData.cardHand[i]]);
             }
         }
 

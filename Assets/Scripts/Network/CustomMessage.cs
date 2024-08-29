@@ -18,27 +18,19 @@ public struct PlayerMessage : NetworkMessage
         cardHand = new int[0];
         effects = new StatusEffect[0];
     }
-
-    public PlayerMessage(PlayerData playerData)
-    {
-        name = playerData.name;
-        health = playerData.health;
-        energy = playerData.energy;
-        fighterIDs = new int[0];
-        cardHand = playerData.cardHand.ToArray();
-        effects = playerData.effects.ToArray();
-    }
 }
 
 public struct TurnMessage : NetworkMessage
 {
     public int playerTurn;
     public bool failed;
+    public PlayerData[] players; 
 
-    public TurnMessage(int playerTurn, bool failed = false)
+    public TurnMessage(int playerTurn, PlayerData[] players, bool failed = false)
     {
         this.playerTurn = playerTurn;
         this.failed = failed;
+        this.players = players;
     }
 }
 

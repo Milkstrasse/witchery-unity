@@ -62,7 +62,7 @@ public class CustomNetwork : RelayNetworkManager
         {
             playersReady = 0;
 
-            NetworkServer.SendToAll(new TurnMessage(UnityEngine.Random.Range(0, 2)));
+            NetworkServer.SendToAll(new TurnMessage(UnityEngine.Random.Range(0, 2), new PlayerData[0]));
         }
     }
 

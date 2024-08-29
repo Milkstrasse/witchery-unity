@@ -10,7 +10,8 @@ public class FightManager : MonoBehaviour
     public Player[] players;
     private FightLogic logic;
 
-    public event Action OnSetupComplete;
+    public event Action<int> OnSetupComplete;
+    public event Action<int> OnTurnChanged;
     public event Action<MoveMessage> OnMoveReceive;
     public event Action OnMoveFailed;
 
@@ -64,27 +65,16 @@ public class FightManager : MonoBehaviour
             logic.RemoveCard(message);
 
             NetworkServer.SendToAll(message);
-
-            NetworkServer.SendToAll(new PlayerMessage(logic.players[1 - logic.playerTurn]));
-            NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
-
-            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn));
-
-            return;
+            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, logic.players.ToArray()));
         }
-
-        if (logic.MakeMove(message))
+        else if (logic.MakeMove(message))
         {
             NetworkServer.SendToAll(message);
-            NetworkServer.SendToAll(new PlayerMessage(logic.players[1 - logic.playerTurn]));
-            NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
-
-            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn));
+            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, logic.players.ToArray()));
         }
         else
         {
-            NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
-            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, true));
+            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, new PlayerData[]{logic.players[logic.playerTurn]}, true));
         }
     }
 
@@ -95,25 +85,36 @@ public class FightManager : MonoBehaviour
 
         if (logic.playerTurn < 0)
         {
-            NetworkClient.ReplaceHandler<PlayerMessage>(OnReceivePlayer);
-
             logic.playerTurn = message.playerTurn;
 
             GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
             players[0] = playerObjects[0].GetComponent<Player>();
             players[1] = playerObjects[1].GetComponent<Player>();
 
-            OnSetupComplete?.Invoke();
+            OnSetupComplete?.Invoke(logic.playerTurn);
         }
         else
         {
             logic.playerTurn = message.playerTurn;
+
+            for (int i = 0; i < message.players.Length; i++)
+            {
+                PlayerData player = message.players[i];
+                if (player.name == players[i].playerName)
+                {
+                    bool updateCards = (NetworkClient.activeHost && i == 0) || (!NetworkClient.activeHost && i == 1);
+                    updateCards = updateCards || player.cardHand.Count >= players[i].cardHand.Count;
+                    players[i].UpdatePlayer(player, updateCards);
+                }
+            }
 
             bool isActivePlayer = (NetworkClient.activeHost && message.playerTurn == 0) || (!NetworkClient.activeHost && message.playerTurn == 1);
             if (message.failed && isActivePlayer)
             {
                 OnMoveFailed?.Invoke();
             }
+
+            OnTurnChanged?.Invoke(logic.playerTurn);
         }
 
         Debug.Log(logic.playerTurn);
@@ -134,20 +135,6 @@ public class FightManager : MonoBehaviour
     private void OnMoveReceived(MoveMessage message)
     {
         OnMoveReceive?.Invoke(message);
-    }
-
-    [Client]
-    private void OnReceivePlayer(PlayerMessage message)
-    {
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (message.name == players[i].playerName)
-            {
-                bool updateCards = (NetworkClient.activeHost && i == 0) || (!NetworkClient.activeHost && i == 1);
-                updateCards = updateCards || message.cardHand.Length >= players[i].cardHand.Count;
-                players[i].UpdatePlayer(message, updateCards);
-            }
-        }
     }
 
     public bool IsAbleToMessage()

@@ -13,22 +13,37 @@ public class FightUI : MonoBehaviour
     private void Start()
     {
         manager.OnSetupComplete += SetupPlayers;
+        manager.OnTurnChanged += ChangePlayers;
         manager.OnMoveReceive += MakeMove;
     }
 
-    private void SetupPlayers()
+    private void SetupPlayers(int playerTurn)
     {
         Canvas canvas = GetComponent<Canvas>();
 
         if (NetworkClient.activeHost)
         {
-            playerTop.SetupUI(canvas, manager.players[1]);
-            playerBottom.SetupUI(canvas, manager.players[0]);
+            playerTop.SetupUI(canvas, manager.players[1], playerTurn == 1);
+            playerBottom.SetupUI(canvas, manager.players[0], playerTurn == 0);
         }
         else
         {
-            playerTop.SetupUI(canvas, manager.players[0]);
-            playerBottom.SetupUI(canvas, manager.players[1]);
+            playerTop.SetupUI(canvas, manager.players[0], playerTurn == 0);
+            playerBottom.SetupUI(canvas, manager.players[1], playerTurn == 1);
+        }
+    }
+
+    private void ChangePlayers(int playerTurn)
+    {
+        if (NetworkClient.activeHost)
+        {
+            playerTop.MakeInteractable(playerTurn == 1);
+            playerBottom.MakeInteractable(playerTurn == 0);
+        }
+        else
+        {
+            playerTop.MakeInteractable(playerTurn == 0);
+            playerBottom.MakeInteractable(playerTurn == 1);
         }
     }
 
@@ -52,6 +67,7 @@ public class FightUI : MonoBehaviour
     private void OnDestroy()
     {
         manager.OnSetupComplete -= SetupPlayers;
+        manager.OnTurnChanged -= ChangePlayers;
         manager.OnMoveReceive -= MakeMove;
     }
 }

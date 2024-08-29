@@ -25,7 +25,7 @@ public class PlayerFightUI : MonoBehaviour
         cardGroup = cardParent.GetComponent<CanvasGroup>();
     }
 
-    public void SetupUI(Canvas canvas, Player player)
+    public void SetupUI(Canvas canvas, Player player, bool isInteractable)
     {
         this.player = player;
         player.OnPlayerChanged += UpdateUI;
@@ -72,7 +72,8 @@ public class PlayerFightUI : MonoBehaviour
             }
         }
 
-        cardGroup.interactable = true;
+        cardGroup.interactable = isInteractable;
+        cardGroup.blocksRaycasts = isInteractable;
     }
 
     private void UpdateUI()
@@ -142,6 +143,12 @@ public class PlayerFightUI : MonoBehaviour
         player.cardHand.RemoveAt(cardIndex);
 
         UpdateUI();
+    }
+
+    public void MakeInteractable(bool isInteractable)
+    {
+        cardGroup.interactable = isInteractable;
+        cardGroup.blocksRaycasts = isInteractable;
     }
 
     private void OnDestroy()
