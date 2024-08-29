@@ -20,14 +20,33 @@ public class PlayerData
         playedCards = new List<int>();
         cardHand = new List<int>();
 
-        int cardsToRemove = 5;
+        FillHand(5);
+    }
+
+    public void FillHand(int cardAmount)
+    {
+        int cardsToRemove = cardAmount;
         while (cardsToRemove > 0)
         {
+            if (cardStack.Count == 0)
+            {
+                cardStack = playedCards;
+                playedCards = new List<int>();
+            }
+
             int randomIndex = UnityEngine.Random.Range(0, cardStack.Count);
             cardHand.Add(cardStack[randomIndex]);
             cardStack.RemoveAt(randomIndex);
-            
+
             cardsToRemove--;
         }
+    }
+
+    public void RemoveCard(int cardIndex)
+    {
+        int card = cardHand[cardIndex];
+
+        playedCards.Add(card);
+        cardHand.RemoveAt(cardIndex);
     }
 }

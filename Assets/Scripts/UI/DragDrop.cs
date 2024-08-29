@@ -40,11 +40,18 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;
+        Debug.Log(rectTransform.localPosition.y);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        bool toRemove = rectTransform.position.y < 200 || rectTransform.position.y > Screen.height - 200;
         ResetDrag();
+
+        if (toRemove && !FightManager.singleton.IsAbleToMessage())
+        {
+            FightManager.singleton.SendMove(cardIndex, false);
+        }
     }
 
     public void ResetDrag()

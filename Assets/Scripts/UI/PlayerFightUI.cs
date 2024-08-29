@@ -108,19 +108,37 @@ public class PlayerFightUI : MonoBehaviour
 
     public void MakeMove(MoveMessage message, CardSlot cardSlot)
     {
-        StartCoroutine(MoveCard(message.cardIndex, cardSlot));
+        if (message.playCard)
+        {
+            StartCoroutine(MoveCard(message.cardIndex, cardSlot));
+        }
+        else
+        {
+            StartCoroutine(RemoveCard(message.cardIndex));
+        }
     }
 
     IEnumerator MoveCard(int cardIndex, CardSlot cardSlot)
     {
         cards[cardIndex].transform.SetParent(canvas.transform);
-        LeanTween.move(cards[cardIndex].gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.8f);
         
-        yield return new WaitForSeconds(0.8f);
+        LeanTween.move(cards[cardIndex].gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
+        
+        yield return new WaitForSeconds(0.5f);
 
         cards[cardIndex].GetComponent<DragDrop>().ResetDrag();
         cardSlot.SetupCard(player.cardHand[cardIndex], true);
 
+        player.cardHand.RemoveAt(cardIndex);
+
+        UpdateUI();
+    }
+
+    IEnumerator RemoveCard(int cardIndex)
+    {
+        yield return null;
+
+        cards[cardIndex].GetComponent<DragDrop>().ResetDrag();
         player.cardHand.RemoveAt(cardIndex);
 
         UpdateUI();

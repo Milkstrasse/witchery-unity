@@ -29,7 +29,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null)
+        if (eventData.pointerDrag != null && FightManager.singleton.IsAbleToMessage())
         {
             int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;
             SetupCard(eventData.pointerDrag.GetComponent<CardUI>().card, false);

@@ -14,6 +14,8 @@ public class FightManager : MonoBehaviour
     public event Action<MoveMessage> OnMoveReceive;
     public event Action OnMoveFailed;
 
+    private bool sendingMessage;
+
     private void Awake()
     {
         singleton = this;
@@ -52,9 +54,43 @@ public class FightManager : MonoBehaviour
         return msg;
     }
 
+    [Server]
+    private void OnMoveMade(MoveMessage message)
+    {
+        if (!message.playCard)
+        {
+            logic.RemoveCard(message);
+
+            NetworkServer.SendToAll(message);
+
+            NetworkServer.SendToAll(new PlayerMessage(logic.players[1 - logic.playerTurn]));
+            NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
+
+            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn));
+
+            return;
+        }
+
+        if (logic.MakeMove(message))
+        {
+            NetworkServer.SendToAll(message);
+            NetworkServer.SendToAll(new PlayerMessage(logic.players[1 - logic.playerTurn]));
+            NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
+
+            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn));
+        }
+        else
+        {
+            NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
+            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, true));
+        }
+    }
+
     [Client]
     private void OnTurnStart(TurnMessage message)
     {
+        sendingMessage = false;
+
         if (logic.playerTurn < 0)
         {
             NetworkClient.ReplaceHandler<PlayerMessage>(OnReceivePlayer);
@@ -81,26 +117,11 @@ public class FightManager : MonoBehaviour
         Debug.Log(logic.playerTurn);
     }
 
-    [Server]
-    private void OnMoveMade(MoveMessage message)
-    {
-        if (logic.MakeMove(message))
-        {
-            NetworkServer.SendToAll(message);
-            NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
-            NetworkServer.SendToAll(new PlayerMessage(logic.players[1 - logic.playerTurn]));
-            NetworkServer.SendToAll(new TurnMessage(1 - logic.playerTurn));
-        }
-        else
-        {
-            NetworkServer.SendToAll(new PlayerMessage(logic.players[logic.playerTurn]));
-            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, true));
-        }
-    }
-
     [Client]
     public void SendMove(int cardIndex, bool playCard)
     {
+        sendingMessage = true;
+
         players[logic.playerTurn].cardHand.RemoveAt(cardIndex);
         players[logic.playerTurn].OnPlayerChanged?.Invoke();
         NetworkClient.Send(new MoveMessage(logic.playerTurn, cardIndex, playCard));
@@ -120,9 +141,15 @@ public class FightManager : MonoBehaviour
             if (message.name == players[i].playerName)
             {
                 bool updateCards = (NetworkClient.activeHost && i == 0) || (!NetworkClient.activeHost && i == 1);
+                updateCards = updateCards || message.cardHand.Length >= players[i].cardHand.Count;
                 players[i].UpdatePlayer(message, updateCards);
             }
         }
+    }
+
+    public bool IsAbleToMessage()
+    {
+        return !sendingMessage;
     }
 
     public void EndFight()
