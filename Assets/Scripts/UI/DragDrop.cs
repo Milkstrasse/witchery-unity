@@ -48,7 +48,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         bool toRemove = rectTransform.position.y < 200 || rectTransform.position.y > Screen.height - 200;
         ResetDrag();
 
-        if (toRemove && !FightManager.singleton.IsAbleToMessage())
+        if (toRemove && FightManager.singleton.IsAbleToMessage())
         {
             FightManager.singleton.SendMove(cardIndex, false);
         }

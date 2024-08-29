@@ -21,8 +21,19 @@ public class FightLogic
             return false;
         }
 
-        players[1 - playerTurn].health -= 10;
         players[playerTurn].energy -= card.move.cost;
+
+        int[] targets = new int[]{playerTurn, 1 - playerTurn};
+        for (int i = 0; i < targets.Length; i++)
+        {
+            players[targets[i]].health += card.move.health[i];
+            players[targets[i]].energy += card.move.energy[i];
+
+            if (card.move.effects[i].duration > 0 && players[targets[i]].effects.Count < 5)
+            {
+                players[targets[i]].effects.Add(card.move.effects[i]);
+            }
+        }
 
         RemoveCard(message);
 

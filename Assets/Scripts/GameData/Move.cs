@@ -8,7 +8,8 @@ public class Move : ScriptableObject
     public int cost;
     public int[] health;
     public int[] energy;
-    public MoveType cardType;
+    public StatusEffect[] effects;
+    public MoveType moveType;
 
     public enum MoveType
     {

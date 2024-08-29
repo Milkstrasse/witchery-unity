@@ -29,7 +29,7 @@ public struct PlayerMessage : NetworkMessage
         energy = playerData.energy;
         fighterIDs = new int[0];
         cardHand = playerData.cardHand.ToArray();
-        effects = new StatusEffect[0];
+        effects = playerData.effects.ToArray();
     }
 }
 

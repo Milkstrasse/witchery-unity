@@ -8,6 +8,7 @@ public class PlayerData
     public List<int> cardStack;
     public List<int> playedCards;
     public List<int> cardHand;
+    public List<StatusEffect> effects;
 
     public PlayerData(string name, List<int> cards)
     {
@@ -19,6 +20,7 @@ public class PlayerData
         cardStack = cards;
         playedCards = new List<int>();
         cardHand = new List<int>();
+        effects = new List<StatusEffect>();
 
         FillHand(5);
     }

@@ -54,11 +54,11 @@ public class PlayerFightUI : MonoBehaviour
             if (i < player.cardHand.Count)
             {
                 cards[i].SetupCard(player.cardHand[i]);
-                cards[i].gameObject.SetActive(true);
+                cards[i].ShowCard(true);
             }
             else
             {
-                cards[i].gameObject.SetActive(false);
+                cards[i].ShowCard(false);
             }
 
             effects[i] = statusParent.GetChild(i).GetComponent<StatusUI>();
@@ -88,11 +88,11 @@ public class PlayerFightUI : MonoBehaviour
             if (i < player.cardHand.Count)
             {
                 cards[i].SetupCard(player.cardHand[i]);
-                cards[i].gameObject.SetActive(true);
+                cards[i].ShowCard(true);
             }
             else
             {
-                cards[i].gameObject.SetActive(false);
+                cards[i].ShowCard(false);
             }
 
             if (i < player.effects.Count)

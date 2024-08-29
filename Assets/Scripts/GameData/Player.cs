@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     {
         currHealth = message.health;
         energy = message.energy;
+        effects = message.effects.ToList();
 
         if (updateCards)
         {

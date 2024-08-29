@@ -9,6 +9,7 @@ public class GlobalManager : MonoBehaviour
 {
     public static GlobalManager singleton;
     public Fighter[] fighters;
+    public StatusEffect[] effects;
     public string joincode;
 
     public static int waitTime = 60;

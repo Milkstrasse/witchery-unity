@@ -32,7 +32,10 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         if (eventData.pointerDrag != null && FightManager.singleton.IsAbleToMessage())
         {
             int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;
-            SetupCard(eventData.pointerDrag.GetComponent<CardUI>().card, false);
+            CardUI cardUI = eventData.pointerDrag.GetComponent<CardUI>();
+            cardUI.HighlightCard(false);
+            
+            SetupCard(cardUI.card, false);
 
             FightManager.singleton.SendMove(cardIndex, true);
         }

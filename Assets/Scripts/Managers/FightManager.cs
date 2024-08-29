@@ -26,6 +26,8 @@ public class FightManager : MonoBehaviour
         players = new Player[2];
         logic = new FightLogic();
 
+        sendingMessage = true;
+
         NetworkClient.ReplaceHandler<TurnMessage>(OnTurnStart);
         NetworkClient.ReplaceHandler<MoveMessage>(OnMoveReceived);
         NetworkServer.ReplaceHandler<MoveMessage>(OnMoveMade);
@@ -124,6 +126,7 @@ public class FightManager : MonoBehaviour
 
         players[logic.playerTurn].cardHand.RemoveAt(cardIndex);
         players[logic.playerTurn].OnPlayerChanged?.Invoke();
+        
         NetworkClient.Send(new MoveMessage(logic.playerTurn, cardIndex, playCard));
     }
 

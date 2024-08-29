@@ -43,7 +43,7 @@ public class CardUI : MonoBehaviour
         background.color = neutral;
 
         icon.text = card.move.cost.ToString();
-        infoText.text = card.fighter.name;
+        infoText.text = card.move.name;
     }
 
     public void HighlightCard(bool isHighlighted)
@@ -60,5 +60,12 @@ public class CardUI : MonoBehaviour
     public void FlipCard(bool isFlipped)
     {
         cardBack.SetActive(isFlipped);
+    }
+
+    public void ShowCard(bool showCard)
+    {
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = showCard ? 1f: 0;
+        canvasGroup.blocksRaycasts = showCard;
     }
 }
