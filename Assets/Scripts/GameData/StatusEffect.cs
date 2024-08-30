@@ -3,7 +3,6 @@ using System;
 [Serializable]
 public class StatusEffect
 {
-    public int effectID;
     public int duration;
     public int value;
     public StatusType statusType;
@@ -12,6 +11,22 @@ public class StatusEffect
     public enum StatusType
     {
         Health, Energy, Power
+    }
+
+    public StatusEffect()
+    {
+        duration = 0;
+        value = 0;
+        statusType = StatusType.Health;
+        isDelayed = false;
+    }
+
+    public StatusEffect(StatusEffect initEffect)
+    {
+        duration = initEffect.duration;
+        value = initEffect.value;
+        statusType = initEffect.statusType;
+        isDelayed = initEffect.isDelayed;
     }
 
     public void TriggerEffect(PlayerData player)

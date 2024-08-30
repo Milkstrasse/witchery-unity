@@ -54,6 +54,7 @@ public class SelectionManager : MonoBehaviour
          }
 
          NetworkClient.Send(new PlayerMessage(playerNames[index], fighterIDs.ToArray()));
+         fighterIDs = new List<int>();
       }
 
       return isReady[index];
