@@ -100,12 +100,9 @@ public class FightManager : MonoBehaviour
             for (int i = 0; i < message.players.Length; i++)
             {
                 PlayerData player = message.players[i];
-                if (player.name == players[i].playerName)
-                {
-                    bool updateCards = (NetworkClient.activeHost && i == 0) || (!NetworkClient.activeHost && i == 1);
-                    updateCards = updateCards || player.cardHand.Count >= players[i].cardHand.Count;
-                    players[i].UpdatePlayer(player, updateCards);
-                }
+                bool updateCards = (NetworkClient.activeHost && i == 0) || (!NetworkClient.activeHost && i == 1);
+                updateCards = updateCards || player.cardHand.Count >= players[i].cardHand.Count;
+                players[i].UpdatePlayer(player, updateCards);
             }
 
             bool isActivePlayer = (NetworkClient.activeHost && message.playerTurn == 0) || (!NetworkClient.activeHost && message.playerTurn == 1);

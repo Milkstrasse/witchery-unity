@@ -59,11 +59,6 @@ public class FightUI : MonoBehaviour
         }
     }
 
-    public void StopFight()
-    {
-        manager.EndFight();
-    }
-
     private void OnDestroy()
     {
         manager.OnSetupComplete -= SetupPlayers;

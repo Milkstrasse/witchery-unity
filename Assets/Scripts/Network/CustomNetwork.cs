@@ -41,11 +41,11 @@ public class CustomNetwork : RelayNetworkManager
 
     private void OnClientReceivePlayer(PlayerMessage message)
     {
-        playersReady++;
-
         GameObject playerObject = Instantiate(playerPrefab);
         Player player = playerObject.GetComponent<Player>();
-        player.SetupPlayer(message);
+        player.SetupPlayer(message, playersReady);
+
+        playersReady++;
 
         if (maxConnections == playersReady)
         {

@@ -14,9 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveID: 0
   cost: 5
-  health: 00000000fbffffff
+  health: 00000000e2ffffff
   energy: 0000000000000000
   effects:
-  - {fileID: 0}
-  - {fileID: 0}
+  - effectID: 0
+    duration: 0
+    value: 0
+    statusType: 0
+    isDelayed: 0
+  - effectID: 0
+    duration: 0
+    value: 0
+    statusType: 0
+    isDelayed: 0
   moveType: 0

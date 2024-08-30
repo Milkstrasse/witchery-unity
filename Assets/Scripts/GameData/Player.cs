@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public int playerID;
+
     public string playerName;
     public int fullHealth;
     public int currHealth;
@@ -23,8 +25,10 @@ public class Player : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void SetupPlayer(PlayerMessage message)
+    public void SetupPlayer(PlayerMessage message, int playerID)
     {
+        this.playerID = playerID;
+        
         playerName = message.name;
         fullHealth = 50;
         currHealth = fullHealth;
