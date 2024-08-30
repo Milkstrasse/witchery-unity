@@ -10,19 +10,18 @@ public class GlobalManager : MonoBehaviour
     public static GlobalManager singleton;
     public Fighter[] fighters;
     public StatusEffect[] effects;
+
     public string joincode;
+    public bool relayEnabled;
+    public int maxPlayers;
 
     public static int waitTime = 60;
     public static int turnTime = 60;
-
-    public bool relayEnabled;
     
     private async void Awake()
     {
         DontDestroyOnLoad(this);
         singleton = this;
-
-        //Load some data (e.g. language)
 
         fighters = Resources.LoadAll<Fighter>("Fighters/");
         Array.Sort(fighters, (a,b) => { return a.fighterID.CompareTo(b.fighterID); });

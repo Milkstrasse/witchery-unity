@@ -28,11 +28,12 @@ public class CustomNetwork : RelayNetworkManager
 
     private void OnServerReceivePlayer(NetworkConnectionToClient conn, PlayerMessage message)
     {
-        playersReady++;
         message.name = $"Player {playersReady}";
         players.Add(message);
 
-        if (maxConnections == playersReady)
+        playersReady++;
+
+        if (playersReady == 2)
         {
             playersReady = 0;
             ServerChangeScene("FightScene");
@@ -47,7 +48,7 @@ public class CustomNetwork : RelayNetworkManager
 
         playersReady++;
 
-        if (maxConnections == playersReady)
+        if (playersReady == 2)
         {
             playersReady = 0;
             NetworkClient.Send(new TurnMessage());
@@ -58,7 +59,7 @@ public class CustomNetwork : RelayNetworkManager
     {
         playersReady++;
         
-        if (maxConnections == playersReady)
+        if (playersReady == maxConnections)
         {
             playersReady = 0;
 
@@ -72,7 +73,7 @@ public class CustomNetwork : RelayNetworkManager
 
         if (sceneName == "FightScene")
         {
-            for (int i = 0; i < maxConnections; i++)
+            for (int i = 0; i < 2; i++)
             {
                 players[i] = FightManager.singleton.SetupPlayer(players[i]);
                 NetworkServer.SendToAll(players[i]);

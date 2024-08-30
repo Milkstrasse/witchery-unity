@@ -105,11 +105,11 @@ RectTransform:
   m_Children:
   - {fileID: 4416854702594253889}
   - {fileID: 7603301845430227004}
-  m_Father: {fileID: 5505538991135196058}
+  m_Father: {fileID: 5083028722574108915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -390}
   m_SizeDelta: {x: 0, y: 70}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1193927316131538740
@@ -233,56 +233,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1435776924801185856
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5505538991135196058}
-  - component: {fileID: 5447530199806788914}
-  m_Layer: 5
-  m_Name: PlayerArea
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5505538991135196058
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1435776924801185856}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6944069100826912639}
-  - {fileID: 8720980327065443391}
-  m_Father: {fileID: 93725771923911985}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -130}
-  m_SizeDelta: {x: 0, y: 390}
-  m_Pivot: {x: 0.5, y: 1}
---- !u!225 &5447530199806788914
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1435776924801185856}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1865058808570006495
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +387,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5083028722574108915}
-  - {fileID: 5505538991135196058}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -507,9 +456,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardParent: {fileID: 7559675231801517841}
   cardPrefab: {fileID: 751564629866992320, guid: befab4e5540754660a53c9426286eb04, type: 3}
-  canvasGroup: {fileID: 5447530199806788914}
   stringEvent: {fileID: 2375438514970021797}
   timer: {fileID: 5873012171336263515}
+  readyButton: {fileID: 344378691534329731}
   editTeam: {fileID: 3732674284664413458}
 --- !u!1 &3188106083505978152
 GameObject:
@@ -1808,6 +1757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6944069100826912639}
   - component: {fileID: 3281332625453066886}
+  - component: {fileID: 3366734844641591817}
   m_Layer: 5
   m_Name: ScrollArea
   m_TagString: Untagged
@@ -1828,11 +1778,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7559675231801517841}
-  m_Father: {fileID: 5505538991135196058}
+  m_Father: {fileID: 5083028722574108915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -130}
   m_SizeDelta: {x: 20, y: 320}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &3281332625453066886
@@ -1865,6 +1815,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &3366734844641591817
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8373951076993894595}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8470517339905319099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1898,6 +1860,8 @@ RectTransform:
   - {fileID: 690722919700260398}
   - {fileID: 7603282594173707516}
   - {fileID: 2993783666581842154}
+  - {fileID: 6944069100826912639}
+  - {fileID: 8720980327065443391}
   m_Father: {fileID: 93725771923911985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}

@@ -7,9 +7,10 @@ public class PlayerSelectionUI : MonoBehaviour
 {
     [SerializeField] private Transform cardParent;
     [SerializeField] private GameObject cardPrefab;
-    [SerializeField] private CanvasGroup canvasGroup;
+    private CanvasGroup canvasGroup;
     [SerializeField] private LocalizeStringEvent stringEvent;
     [SerializeField] private Slider timer;
+    [SerializeField] private Button readyButton;
     [SerializeField] private Button editTeam;
     private TextMeshProUGUI editTeamText;
 
@@ -20,6 +21,7 @@ public class PlayerSelectionUI : MonoBehaviour
     {
         selectIndex = -1;
 
+        canvasGroup = cardParent.parent.GetComponent<CanvasGroup>();
         editTeamText = editTeam.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
         int fighterAmount = GlobalManager.singleton.fighters.Length;
@@ -73,6 +75,7 @@ public class PlayerSelectionUI : MonoBehaviour
     public void ToggleUI(bool isActive)
     {
         canvasGroup.interactable = isActive;
+        editTeam.interactable = isActive;
 
         if (isActive)
         {
@@ -81,6 +84,11 @@ public class PlayerSelectionUI : MonoBehaviour
         else
         {
             stringEvent.StringReference.SetReference("StringTable", "cancel");
+        }
+
+        if (GlobalManager.singleton.maxPlayers < 2)
+        {
+            readyButton.interactable = isActive;
         }
     }
 

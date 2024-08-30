@@ -27,5 +27,9 @@ public class MenuManager : MonoBehaviour
 
     public void EnableRelay(bool relayEnabled) => GlobalManager.singleton.relayEnabled = relayEnabled;
 
-    public void StartSelection() => GlobalManager.singleton.LoadScene("SelectionScene");
+    public void StartSelection(int max)
+    {
+        GlobalManager.singleton.maxPlayers = max;
+        GlobalManager.singleton.LoadScene("SelectionScene");
+    }
 }

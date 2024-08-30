@@ -66,12 +66,20 @@ public class FightManager : MonoBehaviour
         {
             logic.RemoveCard(message);
 
-            NetworkServer.SendToAll(message);
+            if (GlobalManager.singleton.maxPlayers > 1)
+            {
+                NetworkServer.SendToAll(message);
+            }
+
             NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, logic.players.ToArray()));
         }
         else if (logic.MakeMove(message))
         {
-            NetworkServer.SendToAll(message);
+           if (GlobalManager.singleton.maxPlayers > 1)
+            {
+                NetworkServer.SendToAll(message);
+            }
+            
             NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, logic.players.ToArray()));
         }
         else

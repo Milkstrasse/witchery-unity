@@ -12,10 +12,15 @@ public class SelectionUI : MonoBehaviour
         manager.onTimerChanged += playerBottom.SetTimer;
     }
 
-    public void SetReady()
+    public void SetReady(int index)
     {
-        bool isReady = manager.SetReady();
-
+        bool isReady = manager.SetReady(index);
+        
+        if (GlobalManager.singleton.maxPlayers < 2)
+        {
+            playerTop.ToggleUI(isReady);
+        }
+        
         playerBottom.ToggleUI(!isReady);
     }
 

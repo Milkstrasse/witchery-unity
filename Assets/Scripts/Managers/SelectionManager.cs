@@ -8,45 +8,62 @@ using Utp;
 public class SelectionManager : MonoBehaviour
 {
    private RelayNetworkManager networkManager;
-   private bool isReady;
+   private bool[] isReady;
 
    public event Action<int> onTimerChanged;
    private List<int> fighterIDs;
-   private string playerName;
+   private string[] playerNames;
 
    private void Start()
    {
       networkManager = GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>();
-      fighterIDs = new List<int>();
+      networkManager.maxConnections = GlobalManager.singleton.maxPlayers;
 
-      playerName = "Player";
+      fighterIDs = new List<int>();
+      playerNames = new string[]{"Player", "Player"};
+      isReady = new bool[2];
    }
 
-   public bool SetReady()
+   public bool SetReady(int index)
    {
       if (fighterIDs.Count == 0)
          return false;
 
-      isReady = !isReady;
+      isReady[index] = !isReady[index];
 
-      if (!isReady)
+      if (!isReady[index])
       {
-         StopAllCoroutines();
-         GlobalManager.QuitAnyConnection();
+         if (GlobalManager.singleton.maxPlayers > 1)
+         {
+            StopAllCoroutines();
+            GlobalManager.QuitAnyConnection();
+         }
 
          return false;
       }
 
-      StartCoroutine(StartConnection());
+      if (GlobalManager.singleton.maxPlayers > 1)
+      {
+         StartCoroutine(StartConnection());
+      }
+      else
+      {
+         if (!NetworkServer.active)
+         {
+            networkManager.StartStandardHost();
+         }
 
-      return isReady;
+         NetworkClient.Send(new PlayerMessage(playerNames[index], fighterIDs.ToArray()));
+      }
+
+      return isReady[index];
    }
 
    IEnumerator StartConnection()
    {
-      if (GlobalManager.singleton.joincode == "") //start host
+      if (GlobalManager.singleton.joincode == "" || networkManager.maxConnections < 2) //start host
       {
-         if (GlobalManager.singleton.relayEnabled)
+         if (GlobalManager.singleton.relayEnabled && networkManager.maxConnections == 2)
          {
             networkManager.StartRelayHost(networkManager.maxConnections);
          }
@@ -78,7 +95,7 @@ public class SelectionManager : MonoBehaviour
 
          if (NetworkClient.isConnected && !sentMessage)
          {
-            NetworkClient.Send(new PlayerMessage(playerName, fighterIDs.ToArray()));
+            NetworkClient.Send(new PlayerMessage(playerNames[1], fighterIDs.ToArray()));
             sentMessage = true;
          }
          
