@@ -70,6 +70,22 @@ public class FightLogic
         {
             players[i].energy += 7;
             players[i].FillHand(5);
+
+            int j = 0;
+            while (j < players[i].effects.Count)
+            {
+                players[i].effects[j].TriggerEffect(players[i]);
+
+                players[i].effects[j].duration--;
+                if (players[i].effects[j].duration <= 0)
+                {
+                    players[i].effects.RemoveAt(j);
+                }
+                else
+                {
+                    j++;
+                }
+            }
         }
     }
 }
