@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class FightManager : MonoBehaviour
     public event Action OnMoveFailed;
 
     private bool sendingMessage;
+    public bool makingAMove;
 
     private void Awake()
     {
@@ -83,19 +85,44 @@ public class FightManager : MonoBehaviour
     {
         sendingMessage = false;
 
-        if (logic.playerTurn < 0)
+        if (message.playerTurn >= 0)
         {
-            logic.playerTurn = message.playerTurn;
+            if (logic.playerTurn < 0)
+            {
+                logic.playerTurn = message.playerTurn;
 
-            GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
-            players[0] = playerObjects[0].GetComponent<Player>();
-            players[1] = playerObjects[1].GetComponent<Player>();
+                GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+                players[0] = playerObjects[0].GetComponent<Player>();
+                players[1] = playerObjects[1].GetComponent<Player>();
 
-            OnSetupComplete?.Invoke(logic.playerTurn);
+                OnSetupComplete?.Invoke(logic.playerTurn);
+            }
+            else
+            {
+                logic.playerTurn = message.playerTurn;
+
+                for (int i = 0; i < message.players.Length; i++)
+                {
+                    PlayerData player = message.players[i];
+                    bool updateCards = (NetworkClient.activeHost && i == 0) || (!NetworkClient.activeHost && i == 1);
+                    updateCards = updateCards || player.cardHand.Count >= players[i].cardHand.Count;
+                    players[i].UpdatePlayer(player, updateCards);
+                }
+
+                bool isActivePlayer = (NetworkClient.activeHost && message.playerTurn == 0) || (!NetworkClient.activeHost && message.playerTurn == 1);
+                if (message.failed && isActivePlayer)
+                {
+                    OnMoveFailed?.Invoke();
+                }
+
+                OnTurnChanged?.Invoke(logic.playerTurn);
+            }
+
+            Debug.Log(logic.playerTurn);
         }
-        else
+        else //Game Over
         {
-            logic.playerTurn = message.playerTurn;
+            OnTurnChanged?.Invoke(-1);
 
             for (int i = 0; i < message.players.Length; i++)
             {
@@ -105,16 +132,21 @@ public class FightManager : MonoBehaviour
                 players[i].UpdatePlayer(player, updateCards);
             }
 
-            bool isActivePlayer = (NetworkClient.activeHost && message.playerTurn == 0) || (!NetworkClient.activeHost && message.playerTurn == 1);
-            if (message.failed && isActivePlayer)
-            {
-                OnMoveFailed?.Invoke();
-            }
+            StartCoroutine(EndFight(message.playerTurn + 2));
+        }
+    }
 
-            OnTurnChanged?.Invoke(logic.playerTurn);
+    IEnumerator EndFight(int winner)
+    {
+        while (makingAMove)
+        {
+            yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log(logic.playerTurn);
+        yield return new WaitForSeconds(0.5f);
+
+        players[winner].hasWon = true;
+        GlobalManager.singleton.LoadScene("GameOverScene");
     }
 
     [Client]
@@ -131,6 +163,7 @@ public class FightManager : MonoBehaviour
     [Client]
     private void OnMoveReceived(MoveMessage message)
     {
+        makingAMove = true;
         OnMoveReceive?.Invoke(message);
     }
 

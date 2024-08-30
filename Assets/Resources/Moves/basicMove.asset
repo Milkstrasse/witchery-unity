@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: basicMove
   m_EditorClassIdentifier: 
   moveID: 0
-  cost: 5
+  cost: 3
   health: 00000000e2ffffff
   energy: 0000000000000000
   effects:

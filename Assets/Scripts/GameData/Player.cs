@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -17,6 +16,8 @@ public class Player : MonoBehaviour
     public List<Card> cardHand;
 
     public List<StatusEffect> effects;
+
+    public bool hasWon;
 
     public Action OnPlayerChanged;
 

@@ -133,6 +133,8 @@ public class PlayerFightUI : MonoBehaviour
         player.cardHand.RemoveAt(cardIndex);
 
         UpdateUI();
+
+        FightManager.singleton.makingAMove = false;
     }
 
     IEnumerator RemoveCard(int cardIndex)

@@ -57,6 +57,10 @@ public class FightUI : MonoBehaviour
         {
             playerTop.MakeMove(message, cardSlot);
         }
+        else
+        {
+            manager.makingAMove = false;
+        }
     }
 
     private void OnDestroy()

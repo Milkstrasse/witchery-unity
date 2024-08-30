@@ -5,10 +5,12 @@ public class FightLogic
 {
     public int playerTurn;
     public List<PlayerData> players;
+    public int winner;
 
     public FightLogic()
     {
         playerTurn = -1;
+        winner = -1;
         players = new List<PlayerData>();
     }
 
@@ -34,6 +36,11 @@ public class FightLogic
             {
                 players[targets[i]].effects.Add(card.move.effects[i]);
             }
+
+            if (winner < 0 && players[targets[i]].health == 0)
+            {
+                winner = targets[1 - i];
+            }
         }
 
         RemoveCard(message);
@@ -49,6 +56,12 @@ public class FightLogic
 
     private void NextTurn(bool cardPlayed)
     {
+        if (winner >= 0)
+        {
+            playerTurn = winner - 2;
+            return;
+        }
+
         if (cardPlayed && players[1 - playerTurn].cardHand.Count > 0)
         {
             playerTurn = 1 - playerTurn;
@@ -60,6 +73,12 @@ public class FightLogic
             if (players[playerTurn].cardHand.Count == 0)
             {
                 NewRound();
+
+                if (winner >= 0)
+                {
+                    playerTurn = winner - 2;
+                    return;
+                }
             }
         }
     }
@@ -84,6 +103,11 @@ public class FightLogic
                 else
                 {
                     j++;
+                }
+
+                if (winner < 0 && players[i].health == 0)
+                {
+                    winner = 1 - i;
                 }
             }
         }
