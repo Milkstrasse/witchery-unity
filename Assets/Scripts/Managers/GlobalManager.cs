@@ -32,6 +32,8 @@ public class GlobalManager : MonoBehaviour
         LoadScene("MenuScene");
     }
 
+    public string GetCurrentScene() => SceneManager.GetActiveScene().name;
+
     public void LoadScene(string scene) => SceneManager.LoadScene(scene);
 
     public static void QuitAnyConnection()

@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         GlobalManager.QuitAnyConnection();
+        GlobalManager.singleton.relayEnabled = false;
         GlobalManager.singleton.joincode = "";
     }
 

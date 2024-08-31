@@ -13,6 +13,7 @@ public class CustomNetwork : RelayNetworkManager
     {
         base.OnStartServer();
 
+        playersReady = 0;
         players = new List<PlayerMessage>();
 
         NetworkServer.RegisterHandler<PlayerMessage>(OnServerReceivePlayer);
@@ -62,7 +63,6 @@ public class CustomNetwork : RelayNetworkManager
         if (playersReady == maxConnections)
         {
             playersReady = 0;
-
             NetworkServer.SendToAll(new TurnMessage(UnityEngine.Random.Range(0, 2), new PlayerData[0]));
         }
     }
@@ -78,20 +78,32 @@ public class CustomNetwork : RelayNetworkManager
                 players[i] = FightManager.singleton.SetupPlayer(players[i]);
                 NetworkServer.SendToAll(players[i]);
             }
+
+            networkSceneName = ""; //reset scene so new server can start correctly
         }
     }
 
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
-        playersReady = Math.Max(playersReady - 1, 0);
-
         base.OnServerDisconnect(conn);
+
+        if (GlobalManager.singleton.GetCurrentScene() == "FightScene")
+        {
+            StopServer();
+            GlobalManager.singleton.LoadScene("MenuScene");
+        } else
+        {
+            playersReady = Math.Max(playersReady - 1, 0);
+        }
     }
 
-    public override void OnStopServer()
+    public override void OnClientDisconnect()
     {
-        playersReady = 0;
+        base.OnClientDisconnect();
 
-        base.OnStopServer();
+        if (GlobalManager.singleton.GetCurrentScene() == "FightScene")
+        {
+            GlobalManager.singleton.LoadScene("MenuScene");
+        }
     }
 }

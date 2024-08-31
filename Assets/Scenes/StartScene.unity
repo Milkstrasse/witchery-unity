@@ -205,7 +205,6 @@ GameObject:
   - component: {fileID: 422988052}
   - component: {fileID: 422988053}
   - component: {fileID: 422988055}
-  - component: {fileID: 422988056}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -265,7 +264,7 @@ MonoBehaviour:
   autoConnectClientBuild: 0
   offlineScene: 
   onlineScene: 
-  transport: {fileID: 422988056}
+  transport: {fileID: 422988053}
   networkAddress: localhost
   maxConnections: 2
   disconnectInactiveConnections: 0
@@ -291,24 +290,6 @@ MonoBehaviour:
   evaluationInterval: 3
   timeInterpolationGui: 0
   relayJoinCode: 
---- !u!114 &422988056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422988049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96b149f511061407fb54895c057b7736, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wrap: {fileID: 422988053}
-  latency: 2000
-  jitter: 0.02
-  jitterSpeed: 1
-  unreliableLoss: 2
-  unreliableScramble: 2
 --- !u!1 &842673026
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,8 +597,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fighters: []
+  effects: []
   joincode: 
   relayEnabled: 0
+  maxPlayers: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
