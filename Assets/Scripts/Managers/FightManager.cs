@@ -62,6 +62,12 @@ public class FightManager : MonoBehaviour
     [Server]
     private void OnMoveMade(MoveMessage message)
     {
+        if (message.cardIndex < 0) //player gave up, winner - 2
+        {
+            NetworkServer.SendToAll(new TurnMessage(-1 - message.playerIndex, new PlayerData[]{logic.players[message.playerIndex]}));
+            return;
+        }
+
         if (!message.playCard)
         {
             logic.RemoveCard(message);
@@ -166,6 +172,14 @@ public class FightManager : MonoBehaviour
         players[logic.playerTurn].OnPlayerChanged?.Invoke();
         
         NetworkClient.Send(new MoveMessage(logic.playerTurn, cardIndex, playCard));
+    }
+
+    [Client]
+    public void SendMove(int playerIndex)
+    {
+        sendingMessage = true;
+        
+        NetworkClient.Send(new MoveMessage(playerIndex, -1, false));
     }
 
     [Client]

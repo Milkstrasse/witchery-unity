@@ -35,25 +35,13 @@ public class FightUI : MonoBehaviour
 
     private void ChangePlayers(int playerTurn)
     {
-        if (NetworkClient.activeHost)
-        {
-            playerTop.MakeInteractable(playerTurn == 1);
-            playerBottom.MakeInteractable(playerTurn == 0);
-        }
-        else
-        {
-            playerTop.MakeInteractable(playerTurn == 0);
-            playerBottom.MakeInteractable(playerTurn == 1);
-        }
+        playerTop.MakeInteractable(playerTurn == playerTop.player.playerID);
+        playerBottom.MakeInteractable(playerTurn == playerBottom.player.playerID);
     }
 
     private void MakeMove(MoveMessage message)
     {
-        if (NetworkClient.activeHost && message.playerIndex == 1)
-        {
-            playerTop.MakeMove(message, cardSlot);
-        }
-        else if (!NetworkClient.activeHost && message.playerIndex == 0)
+        if (message.playerIndex == playerTop.player.playerID)
         {
             playerTop.MakeMove(message, cardSlot);
         }
@@ -61,6 +49,11 @@ public class FightUI : MonoBehaviour
         {
             manager.makingAMove = false;
         }
+    }
+
+    public void GiveUp(PlayerFightUI playerUI)
+    {
+        manager.SendMove(playerUI.player.playerID);
     }
 
     private void OnDestroy()

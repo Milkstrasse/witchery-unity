@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
-  fightUI: {fileID: 0}
+  makingAMove: 0
 --- !u!4 &1210486607
 Transform:
   m_ObjectHideFlags: 0
@@ -721,7 +721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -733,15 +733,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StopFight
+      value: GiveUp
       objectReference: {fileID: 0}
     - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FightUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1380463266}
+    - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: PlayerFightUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4747071453488059430, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1113,7 +1117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1125,15 +1129,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StopFight
+      value: GiveUp
       objectReference: {fileID: 0}
     - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FightUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 4661144982924234324}
+    - target: {fileID: 4376961096478150116, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: PlayerFightUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4747071453488059430, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: m_AnchorMax.x

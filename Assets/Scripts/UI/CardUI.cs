@@ -28,7 +28,7 @@ public class CardUI : MonoBehaviour
 
     public void SetupCard(Fighter fighter)
     {
-        portrait.sprite = Resources.Load<Sprite>(fighter.name + "-standard-neutral");
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-standard-neutral");
         background.color = neutral;
 
         icon.text = fighter.fighterID.ToString();
@@ -39,7 +39,7 @@ public class CardUI : MonoBehaviour
     {
         this.card = card;
 
-        portrait.sprite = Resources.Load<Sprite>(card.fighter.name + "-standard-neutral");
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name + "-standard-neutral");
         background.color = neutral;
 
         icon.text = card.move.cost.ToString();
