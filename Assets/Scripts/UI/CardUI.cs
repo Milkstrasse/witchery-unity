@@ -44,6 +44,8 @@ public class CardUI : MonoBehaviour
 
         icon.text = card.move.cost.ToString();
         infoText.text = card.move.name;
+
+        cardBack.SetActive(false);
     }
 
     public void HighlightCard(bool isHighlighted)

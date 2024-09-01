@@ -815,6 +815,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8334773474370538663, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1356084576}
     - target: {fileID: 8378307207967053194, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: canvas
       value: 
@@ -1211,6 +1215,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8334773474370538663, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1356084576}
     - target: {fileID: 8378307207967053194, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
       propertyPath: canvas
       value: 

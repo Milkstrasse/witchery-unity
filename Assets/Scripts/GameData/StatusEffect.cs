@@ -1,8 +1,10 @@
 using System;
+using static Unity.Collections.Unicode;
 
 [Serializable]
 public class StatusEffect
 {
+    public string icon;
     public int duration;
     public int value;
     public StatusType statusType;
@@ -15,6 +17,7 @@ public class StatusEffect
 
     public StatusEffect()
     {
+        icon = "";
         duration = 0;
         value = 0;
         statusType = StatusType.Health;
@@ -23,6 +26,7 @@ public class StatusEffect
 
     public StatusEffect(StatusEffect initEffect)
     {
+        icon = initEffect.icon;
         duration = initEffect.duration;
         value = initEffect.value;
         statusType = initEffect.statusType;

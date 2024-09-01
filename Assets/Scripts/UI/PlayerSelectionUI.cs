@@ -47,7 +47,7 @@ public class PlayerSelectionUI : MonoBehaviour
             selectIndex = -1;
 
             editTeam.interactable = false;
-            editTeamText.text = "+";
+            editTeamText.text = "\uf067";
 
             return;
         }
@@ -61,13 +61,13 @@ public class PlayerSelectionUI : MonoBehaviour
         cards[selectIndex].HighlightCard(true);
 
         editTeam.interactable = true;
-        editTeamText.text = cards[selectIndex].isSelected ? "-" : "+";
+        editTeamText.text = cards[selectIndex].isSelected ? "\uf068" : "\uf067";
     }
 
     public void EditTeam(SelectionUI selectionUI)
     {
         bool cardAdded = selectionUI.EditTeam(selectIndex);
-        editTeamText.text = cardAdded ? "-" : "+";
+        editTeamText.text = cardAdded ? "\uf068" : "\uf067";
 
         cards[selectIndex].SelectCard(cardAdded);
     }

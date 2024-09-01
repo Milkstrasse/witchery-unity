@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class StatusUI : MonoBehaviour
 
     public void SetupEffect(StatusEffect effect)
     {
-        icon.text = effect.duration.ToString();
+        uint i = Convert.ToUInt32(effect.icon, 16);
+        icon.text = Convert.ToChar(i).ToString();
     }
 }

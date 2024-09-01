@@ -19,17 +19,15 @@ public class FightUI : MonoBehaviour
 
     private void SetupPlayers(int playerTurn)
     {
-        Canvas canvas = GetComponent<Canvas>();
-
         if (NetworkClient.activeHost)
         {
-            playerTop.SetupUI(canvas, manager.players[1], playerTurn == 1);
-            playerBottom.SetupUI(canvas, manager.players[0], playerTurn == 0);
+            playerTop.SetupUI(manager.players[1], playerTurn == 1);
+            playerBottom.SetupUI(manager.players[0], playerTurn == 0);
         }
         else
         {
-            playerTop.SetupUI(canvas, manager.players[0], playerTurn == 0);
-            playerBottom.SetupUI(canvas, manager.players[1], playerTurn == 1);
+            playerTop.SetupUI(manager.players[0], playerTurn == 0);
+            playerBottom.SetupUI(manager.players[1], playerTurn == 1);
         }
     }
 

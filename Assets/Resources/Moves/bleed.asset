@@ -17,11 +17,13 @@ MonoBehaviour:
   health: 0000000000000000
   energy: 0000000000000000
   effects:
-  - duration: 0
+  - icon: 
+    duration: 0
     value: 0
     statusType: 0
     isDelayed: 0
-  - duration: 3
+  - icon: F043
+    duration: 3
     value: -2
     statusType: 0
     isDelayed: 0

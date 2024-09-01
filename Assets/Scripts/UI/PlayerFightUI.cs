@@ -16,29 +16,22 @@ public class PlayerFightUI : MonoBehaviour
     private StatusUI[] effects;
     [SerializeField] private Transform cardParent;
     private CanvasGroup cardGroup;
-    private Canvas canvas;
+    [SerializeField] private Canvas canvas;
 
     private CardUI[] cards;
 
     private void Start()
     {
         cardGroup = cardParent.GetComponent<CanvasGroup>();
-    }
-
-    public void SetupUI(Canvas canvas, Player player, bool isInteractable)
-    {
-        this.player = player;
-        player.OnPlayerChanged += UpdateUI;
-
-        this.canvas = canvas;
-
-        nameText.text = player.playerName;
-        healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
-        energyText.text = player.energy.ToString();
 
         cards = new CardUI[5];
         effects = new StatusUI[5];
 
+        InitUI();
+    }
+
+    private void InitUI()
+    {
         float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 230 - 40)/4 * -1;
 
         for (int i = 0; i < 5; i++)
@@ -48,7 +41,21 @@ public class PlayerFightUI : MonoBehaviour
             card.GetComponent<DragDrop>().SetInit(i, this);
 
             cards[i] = card;
+            effects[i] = statusParent.GetChild(i).GetComponent<StatusUI>();
+        }
+    }
 
+    public void SetupUI(Player player, bool isInteractable)
+    {
+        this.player = player;
+        player.OnPlayerChanged += UpdateUI;
+
+        nameText.text = player.playerName;
+        healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
+        energyText.text = player.energy.ToString();
+
+        for (int i = 0; i < 5; i++)
+        {
             if (i < player.cardHand.Count)
             {
                 cards[i].SetupCard(player.cardHand[i]);
@@ -58,8 +65,6 @@ public class PlayerFightUI : MonoBehaviour
             {
                 cards[i].ShowCard(false);
             }
-
-            effects[i] = statusParent.GetChild(i).GetComponent<StatusUI>();
 
             if (i < player.effects.Count)
             {
