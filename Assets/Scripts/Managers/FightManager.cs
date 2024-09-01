@@ -115,16 +115,25 @@ public class FightManager : MonoBehaviour
             {
                 logic.playerTurn = message.playerTurn;
 
-                for (int i = 0; i < message.players.Length; i++)
+                if (message.players.Length > 1)
                 {
-                    PlayerData player = message.players[i];
-                    bool updateCards = (NetworkClient.activeHost && i == 0) || (!NetworkClient.activeHost && i == 1);
-                    updateCards = updateCards || player.cardHand.Count >= players[i].cardHand.Count;
-                    players[i].UpdatePlayer(player, updateCards);
+                    for (int i = 0; i < message.players.Length; i++)
+                    {
+                        PlayerData player = message.players[i];
+                        bool updateCards = (NetworkClient.activeHost && i == 0) || (!NetworkClient.activeHost && i == 1);
+                        updateCards = updateCards || player.cardHand.Count >= players[i].cardHand.Count;
+                        players[i].UpdatePlayer(player, updateCards);
+                    }
+                }
+                else
+                {
+                    PlayerData player = message.players[0];
+                    bool updateCards = player.cardHand.Count >= players[message.playerTurn].cardHand.Count || GlobalManager.singleton.maxPlayers < 2;
+                    players[message.playerTurn].UpdatePlayer(player, updateCards);
                 }
 
                 bool isActivePlayer = (NetworkClient.activeHost && message.playerTurn == 0) || (!NetworkClient.activeHost && message.playerTurn == 1);
-                if (message.failed && isActivePlayer)
+                if (message.failed && (isActivePlayer || GlobalManager.singleton.maxPlayers < 2))
                 {
                     OnMoveFailed?.Invoke();
                 }
