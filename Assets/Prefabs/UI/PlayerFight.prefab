@@ -450,7 +450,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: \uf050
+  m_text: \uf70c
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
   m_sharedMaterial: {fileID: -5817211780755487786, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
