@@ -126,6 +126,8 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator MoveCard(int cardIndex, CardSlot cardSlot)
     {
+        FightManager.singleton.timeToMakeMove = 0.5f;
+
         cards[cardIndex].transform.SetParent(canvas.transform);
         
         LeanTween.move(cards[cardIndex].gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
@@ -139,17 +141,25 @@ public class PlayerFightUI : MonoBehaviour
 
         UpdateUI();
 
-        FightManager.singleton.makingAMove = false;
+        FightManager.singleton.timeToMakeMove = 0f;
     }
 
     IEnumerator RemoveCard(int cardIndex)
     {
-        yield return null;
+        FightManager.singleton.timeToMakeMove = 0.2f;
+
+        Vector3 targetPositon = new Vector3(cards[cardIndex].transform.position.x, cards[cardIndex].transform.position.y + 100f, cards[cardIndex].transform.position.z);
+        cards[cardIndex].transform.SetParent(canvas.transform);
+        LeanTween.move(cards[cardIndex].gameObject, targetPositon, 0.2f);
+
+        yield return new WaitForSeconds(0.2f);
 
         cards[cardIndex].GetComponent<DragDrop>().ResetDrag();
         player.cardHand.RemoveAt(cardIndex);
 
         UpdateUI();
+
+        FightManager.singleton.timeToMakeMove = 0f;
     }
 
     public void MakeInteractable(bool isInteractable)

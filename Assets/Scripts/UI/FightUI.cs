@@ -45,7 +45,7 @@ public class FightUI : MonoBehaviour
         }
         else
         {
-            manager.makingAMove = false;
+            manager.timeToMakeMove = 0f;
         }
     }
 
