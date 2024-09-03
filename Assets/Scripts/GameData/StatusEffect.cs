@@ -1,5 +1,4 @@
 using System;
-using static Unity.Collections.Unicode;
 
 [Serializable]
 public class StatusEffect

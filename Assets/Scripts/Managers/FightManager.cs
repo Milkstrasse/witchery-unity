@@ -72,10 +72,28 @@ public class FightManager : MonoBehaviour
             return;
         }
 
-        if (!message.playCard)
+        float sendDelay = 0f;
+        if (logic.PlayLastCard(message))
         {
-            logic.RemoveCard(message);
+            if (GlobalManager.singleton.maxPlayers > 1)
+            {
+                NetworkServer.SendToAll(new MoveMessage(-1, 0, false));
+            }
 
+            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn - 5, logic.players.ToArray()));
+            
+            sendDelay = 1.5f;
+        }
+
+        StartCoroutine(MakeMove(message, sendDelay));
+    }
+
+    IEnumerator MakeMove(MoveMessage message, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (logic.MakeMove(message))
+        {
             if (GlobalManager.singleton.maxPlayers > 1)
             {
                 NetworkServer.SendToAll(message);
@@ -83,29 +101,20 @@ public class FightManager : MonoBehaviour
 
             NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, logic.players.ToArray()));
         }
-        else if (logic.MakeMove(message))
+        else //no card was played or removed
         {
-           if (GlobalManager.singleton.maxPlayers > 1)
-            {
-                NetworkServer.SendToAll(message);
-            }
-            
-            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, logic.players.ToArray()));
-        }
-        else
-        {
-            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, new PlayerData[]{logic.players[logic.playerTurn]}, true));
+            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, new PlayerData[] { logic.players[logic.playerTurn] }, true));
         }
     }
 
     [Client]
     private void OnTurnStart(TurnMessage message)
     {
-        sendingMessage = false;
-
         if (message.playerTurn >= 0)
         {
-            if (logic.playerTurn < 0) //signal to start fight
+            sendingMessage = false;
+
+            if (logic.playerTurn == -1) //start fight
             {
                 logic.playerTurn = message.playerTurn;
 
@@ -121,6 +130,13 @@ public class FightManager : MonoBehaviour
                 {
                     StartCoroutine(InvokeQueue());
                 }
+            }
+        }
+        else if (message.playerTurn < -2) //last card is being played
+        {
+            if (messages.AddToQueue(message, false))
+            {
+                StartCoroutine(InvokeQueue());
             }
         }
         else //Game Over
@@ -187,6 +203,10 @@ public class FightManager : MonoBehaviour
             if (queueMessage is TurnMessage message)
             {
                 logic.playerTurn = message.playerTurn;
+                if (logic.playerTurn < 0)
+                {
+                    logic.playerTurn += 5;
+                }
 
                 if (message.players.Length > 1)
                 {
@@ -199,20 +219,22 @@ public class FightManager : MonoBehaviour
                 else
                 {
                     PlayerData player = message.players[0];
-                    players[message.playerTurn].UpdatePlayer(player);
+                    players[logic.playerTurn].UpdatePlayer(player);
                 }
 
-                bool isActivePlayer = (NetworkClient.activeHost && message.playerTurn == 0) || (!NetworkClient.activeHost && message.playerTurn == 1);
+                bool isActivePlayer = (NetworkClient.activeHost && logic.playerTurn == 0) || (!NetworkClient.activeHost && logic.playerTurn == 1);
                 if (message.failed && (isActivePlayer || GlobalManager.singleton.maxPlayers < 2))
                 {
                     OnMoveFailed?.Invoke();
                 }
 
-                OnTurnChanged?.Invoke(logic.playerTurn);
+                OnTurnChanged?.Invoke(message.playerTurn);
             }
             else
             {
-                OnMoveReceive?.Invoke((MoveMessage)queueMessage);
+                MoveMessage moveMessage = (MoveMessage)queueMessage;
+
+                OnMoveReceive?.Invoke(moveMessage);
             }
 
             yield return new WaitForSeconds(0.1f);

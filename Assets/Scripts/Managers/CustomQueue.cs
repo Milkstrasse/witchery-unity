@@ -4,9 +4,11 @@ using Mirror;
 public class CustomQueue
 {
     private List<NetworkMessage> messages;
+    private int priorityIndex;
 
     public CustomQueue()
     {
+        priorityIndex = 0;
         messages = new List<NetworkMessage>();
     }
 
@@ -14,12 +16,14 @@ public class CustomQueue
     {
         if (isPriority)
         {
-            messages.Insert(0, message);
+            messages.Insert(priorityIndex, message);
         }
         else
         {
             messages.Add(message);
         }
+
+        priorityIndex = messages.Count;
 
         return messages.Count == GlobalManager.singleton.maxPlayers;
     }
@@ -28,6 +32,15 @@ public class CustomQueue
     {
         NetworkMessage message = messages[0];
         messages.RemoveAt(0);
+
+        if (messages.Count < GlobalManager.singleton.maxPlayers)
+        {
+            priorityIndex = 0;
+        }
+        else
+        {
+            priorityIndex = messages.Count;
+        }
 
         return message;
     }

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0a895a7e95554706af00b395749ee36, type: 3}
-  m_Name: zuri
+  m_Name: lucille
   m_EditorClassIdentifier: 
-  fighterID: 1
+  fighterID: 2
   moves:
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
-  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: d0d4e7ea06f80453abaaefca61b36a38, type: 2}
   - {fileID: 11400000, guid: 120ad528ec64d4bf29959be3f4bb8fec, type: 2}
   - {fileID: 11400000, guid: 010c3021a6fc64e65a0f70533488067e, type: 2}
   - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}

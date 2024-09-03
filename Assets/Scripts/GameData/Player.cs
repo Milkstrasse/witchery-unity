@@ -70,4 +70,17 @@ public class Player : MonoBehaviour
 
         OnPlayerChanged?.Invoke();
     }
+
+    public bool HasResponse(Move move)
+    {
+        for (int i = 0; i < cardHand.Count; i++)
+        {
+            if (cardHand[i].move.moveType == Move.MoveType.Response && cardHand[i].move.cost <= energy)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

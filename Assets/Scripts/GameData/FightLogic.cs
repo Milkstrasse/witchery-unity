@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class FightLogic
 {
     public int playerTurn;
     public List<PlayerData> players;
+    public PlayedCard lastCard;
     public int winner;
 
     public FightLogic()
@@ -16,6 +18,12 @@ public class FightLogic
 
     public bool MakeMove(MoveMessage message)
     {
+        if (!message.playCard)
+        {
+            RemoveCard(message);
+            return true;
+        }
+
         int cardIndex = players[playerTurn].cardHand[message.cardIndex];
         Card card = FightManager.singleton.players[playerTurn].cards[cardIndex];
 
@@ -26,23 +34,8 @@ public class FightLogic
 
         players[playerTurn].energy -= card.move.cost;
 
-        int[] targets = new int[]{playerTurn, 1 - playerTurn};
-        for (int i = 0; i < targets.Length; i++)
-        {
-            players[targets[i]].health = Math.Clamp(players[targets[i]].health + card.move.health[i], 0, 50);
-            players[targets[i]].energy += card.move.energy[i];
-
-            if (card.move.effects[i].duration > 0 && players[targets[i]].effects.Count < 5)
-            {
-                StatusEffect effect = new StatusEffect(card.move.effects[i]);
-                players[targets[i]].effects.Add(effect);
-            }
-
-            if (winner < 0 && players[targets[i]].health == 0)
-            {
-                winner = targets[1 - i];
-            }
-        }
+        bool wasPlayed = PlayCard(card, playerTurn, true);
+        lastCard = new PlayedCard(card, playerTurn, wasPlayed);
 
         RemoveCard(message);
 
@@ -53,6 +46,62 @@ public class FightLogic
     {
         players[playerTurn].RemoveCard(message.cardIndex);
         NextTurn(message.playCard);
+    }
+
+    private bool PlayCard(Card card, int turn, bool blockable)
+    {
+        switch (card.move.moveType)
+        {
+            case Move.MoveType.Standard:
+                if (blockable && FightManager.singleton.players[1 - turn].HasResponse(card.move))
+                {
+                    return false;
+                }
+
+                int[] targets = new int[] { turn, 1 - turn };
+                for (int i = 0; i < targets.Length; i++)
+                {
+                    players[targets[i]].health = Math.Clamp(players[targets[i]].health + card.move.health[i], 0, 50);
+                    players[targets[i]].energy += card.move.energy[i];
+
+                    if (card.move.effects[i].duration > 0 && players[targets[i]].effects.Count < 5)
+                    {
+                        StatusEffect effect = new StatusEffect(card.move.effects[i]);
+                        players[targets[i]].effects.Add(effect);
+                    }
+
+                    if (winner < 0 && players[targets[i]].health == 0)
+                    {
+                        winner = targets[1 - i];
+                    }
+                }
+
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
+    public bool PlayLastCard(MoveMessage message)
+    {
+        if (lastCard == null || lastCard.played)
+            return false;
+
+        int cardIndex = players[message.playerIndex].cardHand[message.cardIndex];
+        Card card = FightManager.singleton.players[message.playerIndex].cards[cardIndex];
+
+        if (card.move.moveType == Move.MoveType.Response)
+        {
+            lastCard.played = true;
+            return false;
+        }
+
+        PlayCard(lastCard.card, lastCard.player, false);
+        lastCard.played = true;
+
+        return true;
     }
 
     private void NextTurn(bool cardPlayed)
