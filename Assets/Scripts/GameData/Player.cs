@@ -56,16 +56,19 @@ public class Player : MonoBehaviour
         }      
     }
 
-    public void UpdatePlayer(PlayerData playerData)
+    public void UpdatePlayer(PlayerData playerData, bool updateCards)
     {
         currHealth = playerData.health;
         energy = playerData.energy;
         effects = playerData.effects;
 
-        cardHand = new List<Card>();
-        for (int i = 0; i < playerData.cardHand.Count; i++)
+        if (updateCards)
         {
-            cardHand.Add(cards[playerData.cardHand[i]]);
+            cardHand = new List<Card>();
+            for (int i = 0; i < playerData.cardHand.Count; i++)
+            {
+                cardHand.Add(cards[playerData.cardHand[i]]);
+            }
         }
 
         OnPlayerChanged?.Invoke();

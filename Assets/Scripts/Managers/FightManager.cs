@@ -146,7 +146,7 @@ public class FightManager : MonoBehaviour
             for (int i = 0; i < message.players.Length; i++)
             {
                 PlayerData player = message.players[i];
-                players[i].UpdatePlayer(player);
+                players[i].UpdatePlayer(player, true);
             }
 
             StartCoroutine(EndFight(message.playerTurn + 2));
@@ -213,13 +213,13 @@ public class FightManager : MonoBehaviour
                     for (int i = 0; i < message.players.Length; i++)
                     {
                         PlayerData player = message.players[i];
-                        players[i].UpdatePlayer(player);
+                        players[i].UpdatePlayer(player, message.playerTurn >= 0);
                     }
                 }
                 else
                 {
                     PlayerData player = message.players[0];
-                    players[logic.playerTurn].UpdatePlayer(player);
+                    players[logic.playerTurn].UpdatePlayer(player, true);
                 }
 
                 bool isActivePlayer = (NetworkClient.activeHost && logic.playerTurn == 0) || (!NetworkClient.activeHost && logic.playerTurn == 1);
