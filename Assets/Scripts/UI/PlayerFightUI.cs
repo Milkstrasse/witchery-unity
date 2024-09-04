@@ -55,6 +55,11 @@ public class PlayerFightUI : MonoBehaviour
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
         energyText.text = player.energy.ToString();
 
+        if (cards[0] == null)
+        {
+            InitUI();
+        }
+
         for (int i = 0; i < 5; i++)
         {
             if (i < player.cardHand.Count)
