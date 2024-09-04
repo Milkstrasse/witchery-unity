@@ -61,7 +61,17 @@ public class FightLogic
                 int[] targets = new int[] { turn, 1 - turn };
                 for (int i = 0; i < targets.Length; i++)
                 {
-                    players[targets[i]].health = Math.Clamp(players[targets[i]].health + card.move.health[i], 0, 50);
+                    int health = card.move.health[i];
+                    if (health < 0)
+                    {
+                        health = Math.Min(health - players[turn].GetPowerBonus(), -1);
+                    }
+                    else if (health > 0)
+                    {
+                        health = Math.Max(health + players[turn].GetPowerBonus(), 0);
+                    }
+                    
+                    players[targets[i]].health = Math.Clamp(players[targets[i]].health + health, 0, 50);
                     players[targets[i]].energy += card.move.energy[i];
 
                     if (card.move.effects[i].duration > 0 && players[targets[i]].effects.Count < 5)

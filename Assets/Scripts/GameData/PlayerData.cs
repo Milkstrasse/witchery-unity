@@ -64,4 +64,19 @@ public class PlayerData
         playedCards.Add(card);
         cardHand.RemoveAt(cardIndex);
     }
+
+    public int GetPowerBonus()
+    {
+        int power = 0;
+
+        for (int i = 0; i < effects.Count; i++)
+        {
+            if (effects[i].statusType == StatusEffect.StatusType.Power)
+            {
+                power += effects[i].value;
+            }
+        }
+
+        return power;
+    }
 }
