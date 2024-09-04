@@ -17,6 +17,8 @@ public class GlobalManager : MonoBehaviour
 
     public static int waitTime = 60;
     public static int turnTime = 60;
+
+    public event Action<string> OnCodeCreated;
     
     private async void Awake()
     {
@@ -30,6 +32,11 @@ public class GlobalManager : MonoBehaviour
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
         LoadScene("MenuScene");
+    }
+
+    public void StoreRelayCode(string code)
+    {
+        OnCodeCreated?.Invoke(code);
     }
 
     public string GetCurrentScene() => SceneManager.GetActiveScene().name;

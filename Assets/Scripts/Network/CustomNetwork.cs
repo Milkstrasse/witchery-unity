@@ -18,6 +18,8 @@ public class CustomNetwork : RelayNetworkManager
 
         NetworkServer.RegisterHandler<PlayerMessage>(OnServerReceivePlayer);
         NetworkServer.RegisterHandler<TurnMessage>(OnClientIsReady);
+
+        GlobalManager.singleton.StoreRelayCode(relayJoinCode);
     }
 
     public override void OnClientConnect()
