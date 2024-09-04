@@ -66,6 +66,18 @@ public class FightManager : MonoBehaviour
     [Server]
     private void OnMoveMade(NetworkConnectionToClient conn, MoveMessage message)
     {
+        if (conn.connectionId != NetworkClient.connection.connectionId && message.playerIndex != 1)
+        {
+            if (GlobalManager.singleton.maxPlayers > 1)
+            {
+                conn.Send(new MoveMessage(-1, 0, false));
+            }
+
+            conn.Send(new TurnMessage(message.playerIndex, new PlayerData[] { logic.players[message.playerIndex] }, true));
+            
+            return;
+        }
+
         if (message.cardIndex < 0) //player gave up, winner - 2
         {
             NetworkServer.SendToAll(new TurnMessage(-1 - message.playerIndex, new PlayerData[]{logic.players[message.playerIndex]}));
@@ -85,10 +97,10 @@ public class FightManager : MonoBehaviour
             sendDelay = 1.5f;
         }
 
-        StartCoroutine(MakeMove(message, sendDelay));
+        StartCoroutine(MakeMove(conn, message, sendDelay));
     }
 
-    IEnumerator MakeMove(MoveMessage message, float delay)
+    IEnumerator MakeMove(NetworkConnectionToClient conn, MoveMessage message, float delay)
     {
         yield return new WaitForSeconds(delay);
 
@@ -103,7 +115,12 @@ public class FightManager : MonoBehaviour
         }
         else //no card was played or removed
         {
-            NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, new PlayerData[] { logic.players[logic.playerTurn] }, true));
+            if (GlobalManager.singleton.maxPlayers > 1)
+            {
+                conn.Send(new MoveMessage(-1, 0, false));
+            }
+
+            conn.Send(new TurnMessage(logic.playerTurn, new PlayerData[] { logic.players[logic.playerTurn] }, true));
         }
     }
 
@@ -222,8 +239,7 @@ public class FightManager : MonoBehaviour
                     players[logic.playerTurn].UpdatePlayer(player, true);
                 }
 
-                bool isActivePlayer = (NetworkClient.activeHost && logic.playerTurn == 0) || (!NetworkClient.activeHost && logic.playerTurn == 1);
-                if (message.failed && (isActivePlayer || GlobalManager.singleton.maxPlayers < 2))
+                if (message.failed)
                 {
                     OnMoveFailed?.Invoke();
                 }
