@@ -9,7 +9,7 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private GameObject cardPrefab;
     private CanvasGroup canvasGroup;
     [SerializeField] private LocalizeStringEvent stringEvent;
-    [SerializeField] private Slider timer;
+    [SerializeField] private Image timer;
     [SerializeField] private Button readyButton;
     [SerializeField] private Button editTeam;
     private TextMeshProUGUI editTeamText;
@@ -79,6 +79,9 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (isActive)
         {
+            LeanTween.cancel(timer.gameObject);
+            timer.fillAmount = 1.0f;
+            
             stringEvent.StringReference.SetReference("StringTable", "ready");
         }
         else
@@ -92,21 +95,15 @@ public class PlayerSelectionUI : MonoBehaviour
         }
     }
 
-    public void MinimizeUI(bool minimize)
-    {
-        RectTransform rectTransform = GetComponent<RectTransform>();
-        LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, minimize ? 120f :  520f), 0.3f);
-    }
-
     public void SetTimer(int time)
     {
-        if (timer.value > time/(float)GlobalManager.waitTime)
+        if (timer.fillAmount > time/(float)GlobalManager.waitTime)
         {
-            LeanTween.value(timer.gameObject, timer.value, time/(float)GlobalManager.waitTime, 1f ).setOnUpdate( (float val) => { timer.value = val; } );
+            LeanTween.value(timer.gameObject, timer.fillAmount, time/(float)GlobalManager.waitTime, 1f ).setOnUpdate( (float val) => { timer.fillAmount = val; } );
         }
         else
         {
-            timer.value = time/(float)GlobalManager.waitTime;
+            timer.fillAmount = time/(float)GlobalManager.waitTime;
         }
     }
 }

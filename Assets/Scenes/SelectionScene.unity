@@ -699,14 +699,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBottom
       objectReference: {fileID: 0}
-    - target: {fileID: 3270765005476029487, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270765005476029487, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3732674284664413458, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1003,14 +995,6 @@ PrefabInstance:
     - target: {fileID: 2913371108934280962, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
       propertyPath: m_Name
       value: PlayerTop
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270765005476029487, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270765005476029487, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3366734844641591817, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
       propertyPath: m_Interactable

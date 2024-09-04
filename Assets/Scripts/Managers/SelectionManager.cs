@@ -100,7 +100,7 @@ public class SelectionManager : MonoBehaviour
             sentMessage = true;
          }
          
-         yield return new WaitForSeconds(1f);
+         yield return new WaitForSeconds(1.0f);
       }
 
       GlobalManager.QuitAnyConnection();

@@ -64,7 +64,7 @@ public class FightManager : MonoBehaviour
     }
 
     [Server]
-    private void OnMoveMade(MoveMessage message)
+    private void OnMoveMade(NetworkConnectionToClient conn, MoveMessage message)
     {
         if (message.cardIndex < 0) //player gave up, winner - 2
         {

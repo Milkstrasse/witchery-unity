@@ -9,8 +9,9 @@ public class PlayerFightUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI healthText;
-    [SerializeField] private Slider healthBar;
+    [SerializeField] private Image healthBar;
     [SerializeField] private TextMeshProUGUI energyText;
+    [SerializeField] private Image timer;
 
     [SerializeField] private Transform statusParent;
     private StatusUI[] effects;
@@ -79,12 +80,15 @@ public class PlayerFightUI : MonoBehaviour
 
         cardGroup.interactable = isInteractable;
         cardGroup.blocksRaycasts = isInteractable;
+
+        if (isInteractable)
+            StartCoroutine("UpdateTimer");
     }
 
     private void UpdateUI()
     {
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
-        LeanTween.value(healthBar.gameObject, healthBar.value, player.currHealth/(float)player.fullHealth, 0.3f).setOnUpdate( (float val) => { healthBar.value = val; } );
+        LeanTween.value(healthBar.gameObject, healthBar.fillAmount, player.currHealth/(float)player.fullHealth, 0.3f).setOnUpdate( (float val) => { healthBar.fillAmount = val; } );
 
         energyText.text = player.energy.ToString();
 
@@ -164,8 +168,40 @@ public class PlayerFightUI : MonoBehaviour
 
     public void MakeInteractable(bool isInteractable)
     {
+        if (isInteractable && !cardGroup.interactable)
+        {
+            StartCoroutine("UpdateTimer");
+        }
+        else if (!isInteractable)
+        {
+            StopCoroutine("UpdateTimer");
+            LeanTween.cancel(timer.gameObject);
+            timer.fillAmount = 1.0f;
+        }
+
         cardGroup.interactable = isInteractable;
         cardGroup.blocksRaycasts = isInteractable;
+    }
+
+    IEnumerator UpdateTimer()
+    {
+        int time = GlobalManager.turnTime;
+        while (time >= 0)
+        {
+            time--;
+            if (timer.fillAmount > time / (float)GlobalManager.turnTime)
+            {
+                LeanTween.value(timer.gameObject, timer.fillAmount, time / (float)GlobalManager.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
+            }
+            else
+            {
+                timer.fillAmount = time / (float)GlobalManager.turnTime;
+            }
+
+            yield return new WaitForSeconds(1.0f);
+        }
+
+        FightManager.singleton.SendMove(player.playerID);
     }
 
     private void OnDestroy()
