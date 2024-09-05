@@ -73,10 +73,10 @@ public class FightLogic
                     players[targets[i]].health = Math.Clamp(players[targets[i]].health + health, 0, 50);
                     players[targets[i]].energy += card.move.energy[i];
 
-                    if (card.move.effects[i].duration > 0 && players[targets[i]].effects.Count < 5)
+                    if (card.move.effects[i].duration > 0)
                     {
                         StatusEffect effect = new StatusEffect(card.move.effects[i]);
-                        players[targets[i]].effects.Add(effect);
+                        players[targets[i]].AddEffect(effect);
                     }
 
                     if (winner < 0 && players[targets[i]].health == 0)

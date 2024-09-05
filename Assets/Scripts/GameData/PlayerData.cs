@@ -38,6 +38,28 @@ public class PlayerData
         FillHand(5);
     }
 
+    public void AddEffect(StatusEffect effect)
+    {
+        int index = -1;
+        for (int i = 0; i < effects.Count; i++)
+        {
+            if (effects[i].icon == effect.icon)
+            {
+                index = i;
+                break;
+            }
+        }
+
+        if (index >= 0)
+        {
+            effects[index].duration += effect.duration;
+        }
+        else if (effects.Count < 5)
+        {
+            effects.Add(effect);
+        }
+    }
+
     public void FillHand(int cardAmount)
     {
         int cardsToRemove = cardAmount;
