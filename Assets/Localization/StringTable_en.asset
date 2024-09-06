@@ -34,6 +34,42 @@ MonoBehaviour:
     m_Localized: Cancel
     m_Metadata:
       m_Items: []
+  - m_Id: 7209985523048448
+    m_Localized: Do 10 damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210015948529664
+    m_Localized: Apply bleed status effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210127370215424
+    m_Localized: Apply bomb status effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210153374900224
+    m_Localized: Gain energise status effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210184622465024
+    m_Localized: Gain 1 energy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210210211913728
+    m_Localized: Gain 5 HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210230206160896
+    m_Localized: Gain healing status effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210293263327232
+    m_Localized: Gain power status effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210099683614720
+    m_Localized: Block effects of previous card
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -34,6 +34,42 @@ MonoBehaviour:
     m_Localized: Abbrechen
     m_Metadata:
       m_Items: []
+  - m_Id: 7209985523048448
+    m_Localized: Erteile 10 Schaden
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210210211913728
+    m_Localized: Erhalte 5 HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210015948529664
+    m_Localized: Erteile Bleed-Effekt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210127370215424
+    m_Localized: Erteile Bomb-Effekt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210099683614720
+    m_Localized: Blockiere Effekte der vorherigen Karte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210153374900224
+    m_Localized: Erhalte Energise-Effekt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210184622465024
+    m_Localized: Erhalte 1 Energie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210230206160896
+    m_Localized: Erhalte Healing-Effekt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210293263327232
+    m_Localized: Erhalte Power-Effekt
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

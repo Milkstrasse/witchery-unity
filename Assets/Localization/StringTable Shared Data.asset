@@ -31,6 +31,42 @@ MonoBehaviour:
     m_Key: cancel
     m_Metadata:
       m_Items: []
+  - m_Id: 7209985523048448
+    m_Key: attackDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210015948529664
+    m_Key: bleedDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210099683614720
+    m_Key: blockAllDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210127370215424
+    m_Key: bombDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210153374900224
+    m_Key: energiseDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210184622465024
+    m_Key: energyDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210210211913728
+    m_Key: healDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210230206160896
+    m_Key: healingDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210293263327232
+    m_Key: powerDescr
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

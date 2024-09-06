@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour
@@ -24,7 +25,14 @@ public class CardUI : MonoBehaviour
     public bool isSelected;
     public bool isHighlighted;
 
+    private LocalizeStringEvent stringEvent;
+
     public Card card;
+
+    private void Start()
+    {
+        stringEvent = infoText.GetComponent<LocalizeStringEvent>();
+    }
 
     public void SetupCard(Fighter fighter)
     {
@@ -44,6 +52,9 @@ public class CardUI : MonoBehaviour
 
         icon.text = card.move.cost.ToString();
         infoText.text = card.move.name;
+
+        stringEvent.StringReference.SetReference("StringTable", card.move.name + "Descr");
+        stringEvent.RefreshString();
 
         cardBack.SetActive(false);
     }
