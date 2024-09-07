@@ -40,7 +40,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210099683614720
-    m_Key: blockAllDescr
+    m_Key: blockAttackDescr
     m_Metadata:
       m_Items: []
   - m_Id: 7210127370215424
@@ -73,6 +73,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 7553544101027840
     m_Key: addPowerDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7622866769010688
+    m_Key: swapEffectsDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7622870518718464
+    m_Key: clearEffectsDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7658928543358976
+    m_Key: replayCardDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7672341843664896
+    m_Key: snatchHPDescr
     m_Metadata:
       m_Items: []
   m_Metadata:

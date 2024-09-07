@@ -67,7 +67,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210099683614720
-    m_Localized: Block effects of previous card
+    m_Localized: Block attack
     m_Metadata:
       m_Items: []
   - m_Id: 7541205104582656
@@ -76,6 +76,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 7553544101027840
     m_Localized: add power to next card
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7622866769010688
+    m_Localized: swap effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7622870518718464
+    m_Localized: clear all effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7658928543358976
+    m_Localized: Play last card again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7672341843664896
+    m_Localized: Take HP for yourself
     m_Metadata:
       m_Items: []
   references:

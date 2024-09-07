@@ -51,7 +51,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210099683614720
-    m_Localized: Blockiere Effekte der vorherigen Karte
+    m_Localized: Blockiere Angriff
     m_Metadata:
       m_Items: []
   - m_Id: 7210153374900224
@@ -76,6 +76,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 7553544101027840
     m_Localized: "N\xE4chste Karte ist st\xE4rker"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7622866769010688
+    m_Localized: Effekte tauschen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7622870518718464
+    m_Localized: Alle Effekte entfernen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7658928543358976
+    m_Localized: Spiele letzte Karte nochmals
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7672341843664896
+    m_Localized: "Nehme  HP f\xFCr dich"
     m_Metadata:
       m_Items: []
   references:

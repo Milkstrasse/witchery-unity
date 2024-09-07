@@ -78,7 +78,12 @@ public class Player : MonoBehaviour
     {
         for (int i = 0; i < cardHand.Count; i++)
         {
-            if (cardHand[i].move.moveType == Move.MoveType.Response && cardHand[i].move.cost <= energy)
+            if (cardHand[i].move.moveType != Move.MoveType.Response || cardHand[i].move.cost > energy)
+            {
+                continue;
+            }
+
+            if (cardHand[i].move.moveID == move.moveID % 10)
             {
                 return true;
             }

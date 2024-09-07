@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class FightLogic
 {
@@ -68,45 +69,76 @@ public class FightLogic
 
     private bool PlayCard(Card card, int turn, bool blockable)
     {
-        switch (card.move.moveType)
+        Move move = card.move;
+        if (move.moveID == 17 && lastCard != null) //replay last card
         {
-            case Move.MoveType.Standard:
-                if (blockable && FightManager.singleton.players[1 - turn].HasResponse(card.move))
+            move = lastCard.card.move;
+        }
+
+        if (move.moveType == Move.MoveType.Standard)
+        {
+            if (blockable && FightManager.singleton.players[1 - turn].HasResponse(move))
+            {
+                return false;
+            }
+
+            switch (move.moveID)
+            {
+                case 8: //swap effects
+                    List<StatusEffect> temp = players[0].effects;
+                    players[0].effects = players[1].effects;
+                    players[1].effects = temp;
+
+                    break;
+                case 9: //clear effects
+                    players[0].effects = new List<StatusEffect>();
+                    players[1].effects = new List<StatusEffect>();
+
+                    break;
+                case 17: //replay last card
+                    break;
+                default:
+                    int[] targets = new int[] { turn, 1 - turn };
+                    for (int i = 0; i < targets.Length; i++)
+                    {
+                        int health = move.health[i];
+                        if (health < 0)
+                        {
+                            health = Math.Min(health - players[turn].GetPowerBonus() - powerBonus, -1);
+                        }
+                        else if (health > 0)
+                        {
+                            health = Math.Max(health + players[turn].GetPowerBonus() + powerBonus, 0);
+                        }
+
+                        players[targets[i]].health = Math.Clamp(players[targets[i]].health + health, 0, 50);
+                        players[targets[i]].energy += move.energy[i];
+
+                        if (move.effects[i].duration > 0)
+                        {
+                            StatusEffect effect = new StatusEffect(move.effects[i]);
+                            players[targets[i]].AddEffect(effect);
+                        }
+
+                        if (winner < 0 && players[targets[i]].health == 0)
+                        {
+                            winner = targets[1 - i];
+                        }
+                    }
+
+                    break;
+            }
+        }
+        else if (move.moveType == Move.MoveType.Response)
+        {
+            if (lastCard != null && !lastCard.played)
+            {
+                if (move.moveID == 1)
                 {
-                    return false;
+                    int health = Math.Max(lastCard.card.move.health[0] + players[turn].GetPowerBonus(), 0);
+                    players[turn].health = Math.Clamp(players[turn].health + health, 0, 50);
                 }
-
-                int[] targets = new int[] { turn, 1 - turn };
-                for (int i = 0; i < targets.Length; i++)
-                {
-                    int health = card.move.health[i];
-                    if (health < 0)
-                    {
-                        health = Math.Min(health - players[turn].GetPowerBonus() - powerBonus, -1);
-                    }
-                    else if (health > 0)
-                    {
-                        health = Math.Max(health + players[turn].GetPowerBonus() + powerBonus, 0);
-                    }
-                    
-                    players[targets[i]].health = Math.Clamp(players[targets[i]].health + health, 0, 50);
-                    players[targets[i]].energy += card.move.energy[i];
-
-                    if (card.move.effects[i].duration > 0)
-                    {
-                        StatusEffect effect = new StatusEffect(card.move.effects[i]);
-                        players[targets[i]].AddEffect(effect);
-                    }
-
-                    if (winner < 0 && players[targets[i]].health == 0)
-                    {
-                        winner = targets[1 - i];
-                    }
-                }
-
-                break;
-            default:
-                break;
+            }
         }
 
         return true;
@@ -122,7 +154,6 @@ public class FightLogic
 
         if (card.move.moveType == Move.MoveType.Response)
         {
-            lastCard.played = true;
             return false;
         }
 
