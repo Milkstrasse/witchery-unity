@@ -70,6 +70,14 @@ MonoBehaviour:
     m_Localized: Block effects of previous card
     m_Metadata:
       m_Items: []
+  - m_Id: 7541205104582656
+    m_Localized: reduce cost of next card
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7553544101027840
+    m_Localized: add power to next card
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

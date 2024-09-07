@@ -8,6 +8,9 @@ public class FightLogic
     public PlayedCard lastCard;
     public int winner;
 
+    private int costBonus;
+    private int powerBonus;
+
     public FightLogic()
     {
         playerTurn = -1;
@@ -26,15 +29,31 @@ public class FightLogic
         int cardIndex = players[playerTurn].cardHand[message.cardIndex];
         Card card = FightManager.singleton.players[playerTurn].cards[cardIndex];
 
-        if (card.move.cost > players[playerTurn].energy)
+        if (lastCard != null && lastCard.card.move.moveType == Move.MoveType.Combo)
+        {
+            costBonus = lastCard.card.move.energy[0];
+            powerBonus = lastCard.card.move.health[0];
+        }
+        else
+        {
+            costBonus = 0;
+            powerBonus = 0;
+        }
+
+        if (card.move.cost - costBonus > players[playerTurn].energy)
         {
             return false;
         }
 
-        players[playerTurn].energy -= card.move.cost;
+        players[playerTurn].energy = players[playerTurn].energy - Math.Max(card.move.cost - costBonus, 0);
 
         bool wasPlayed = PlayCard(card, playerTurn, true);
         lastCard = new PlayedCard(card, playerTurn, wasPlayed);
+
+        if (card.move.moveType == Move.MoveType.Combo)
+        {
+            message.playCard = false;
+        }
 
         RemoveCard(message);
 
@@ -63,11 +82,11 @@ public class FightLogic
                     int health = card.move.health[i];
                     if (health < 0)
                     {
-                        health = Math.Min(health - players[turn].GetPowerBonus(), -1);
+                        health = Math.Min(health - players[turn].GetPowerBonus() - powerBonus, -1);
                     }
                     else if (health > 0)
                     {
-                        health = Math.Max(health + players[turn].GetPowerBonus(), 0);
+                        health = Math.Max(health + players[turn].GetPowerBonus() + powerBonus, 0);
                     }
                     
                     players[targets[i]].health = Math.Clamp(players[targets[i]].health + health, 0, 50);

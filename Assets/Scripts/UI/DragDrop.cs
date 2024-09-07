@@ -44,13 +44,13 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (eventData.pointerDrag != null)
         {
             CardUI cardUI = eventData.pointerDrag.GetComponent<CardUI>();
-            cardUI.SelectCard(rectTransform.position.y < 250 || rectTransform.position.y > Screen.height - 250);
+            cardUI.SelectCard(rectTransform.position.y < 100f || rectTransform.position.y > Screen.height - 100f);
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        bool toRemove = rectTransform.position.y < 250 || rectTransform.position.y > Screen.height - 250;
+        bool toRemove = rectTransform.position.y < 100f || rectTransform.position.y > Screen.height - 100f;
         ResetDrag();
 
         if (toRemove && FightManager.singleton.IsAbleToMessage())

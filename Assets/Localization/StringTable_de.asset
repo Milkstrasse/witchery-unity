@@ -70,6 +70,14 @@ MonoBehaviour:
     m_Localized: Erhalte Power-Effekt
     m_Metadata:
       m_Items: []
+  - m_Id: 7541205104582656
+    m_Localized: "N\xE4chste Karte kostet weniger"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7553544101027840
+    m_Localized: "N\xE4chste Karte ist st\xE4rker"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
