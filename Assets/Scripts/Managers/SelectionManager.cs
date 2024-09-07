@@ -27,7 +27,7 @@ public class SelectionManager : MonoBehaviour
    public bool SetReady(int index)
    {
       if (fighterIDs.Count == 0)
-         return false;
+         return index == 0;
 
       isReady[index] = !isReady[index];
 
@@ -107,19 +107,19 @@ public class SelectionManager : MonoBehaviour
       ReturnToMenu();
    }
 
-   public bool EditTeam(int fighterID)
+   public (bool, bool) EditTeam(int fighterID)
    {
       int index = fighterIDs.IndexOf(fighterID);
 
       if (index >= 0)
       {
          fighterIDs.RemoveAt(index);
-         return false;
+         return (false, fighterIDs.Count > 0);
       }
       else
       {
          fighterIDs.Add(fighterID);
-         return true;
+         return (true, fighterIDs.Count > 0);
       }
    }
 

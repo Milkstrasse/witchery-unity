@@ -68,6 +68,7 @@ public class CardUI : MonoBehaviour
     public void SelectCard(bool isSelected)
     {
         this.isSelected = isSelected;
+        background.color = isHighlighted ? highlighted : isSelected ? selected : neutral;
     }
 
     public void FlipCard(bool isFlipped)

@@ -157,7 +157,7 @@ public class PlayerFightUI : MonoBehaviour
     {
         FightManager.singleton.timeToMakeMove = 0.2f;
 
-        Vector3 targetPositon = new Vector3(cards[cardIndex].transform.position.x, cards[cardIndex].transform.position.y + 100f, cards[cardIndex].transform.position.z);
+        Vector3 targetPositon = new Vector3(cards[cardIndex].transform.position.x, cards[cardIndex].transform.position.y + 250f, cards[cardIndex].transform.position.z);
         cards[cardIndex].transform.SetParent(canvas.transform);
         LeanTween.move(cards[cardIndex].gameObject, targetPositon, 0.2f);
 

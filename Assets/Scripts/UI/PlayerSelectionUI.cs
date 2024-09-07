@@ -1,28 +1,22 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public class PlayerSelectionUI : MonoBehaviour
 {
+    [SerializeField] private SelectionUI selectionUI;
     [SerializeField] private Transform cardParent;
     [SerializeField] private GameObject cardPrefab;
     private CanvasGroup canvasGroup;
     [SerializeField] private LocalizeStringEvent stringEvent;
     [SerializeField] private Image timer;
     [SerializeField] private Button readyButton;
-    [SerializeField] private Button editTeam;
-    private TextMeshProUGUI editTeamText;
 
     private CardUI[] cards;
-    private int selectIndex;
 
     private void Start()
     {
-        selectIndex = -1;
-
         canvasGroup = cardParent.parent.GetComponent<CanvasGroup>();
-        editTeamText = editTeam.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
         int fighterAmount = GlobalManager.singleton.fighters.Length;
         cards = new CardUI[fighterAmount];
@@ -41,41 +35,15 @@ public class PlayerSelectionUI : MonoBehaviour
 
     private void SelectCard(int cardIndex)
     {
-        if (selectIndex == cardIndex)
-        {
-            cards[selectIndex].HighlightCard(false);
-            selectIndex = -1;
+        (bool, bool) result = selectionUI.EditTeam(cardIndex);
+        cards[cardIndex].HighlightCard(result.Item1);
 
-            editTeam.interactable = false;
-            editTeamText.text = "\uf067";
-
-            return;
-        }
-
-        if (selectIndex >= 0)
-        {
-            cards[selectIndex].HighlightCard(false);
-        }
-
-        selectIndex = cardIndex;
-        cards[selectIndex].HighlightCard(true);
-
-        editTeam.interactable = true;
-        editTeamText.text = cards[selectIndex].isSelected ? "\uf068" : "\uf067";
-    }
-
-    public void EditTeam(SelectionUI selectionUI)
-    {
-        bool cardAdded = selectionUI.EditTeam(selectIndex);
-        editTeamText.text = cardAdded ? "\uf068" : "\uf067";
-
-        cards[selectIndex].SelectCard(cardAdded);
+        readyButton.interactable = result.Item2;
     }
 
     public void ToggleUI(bool isActive)
     {
         canvasGroup.interactable = isActive;
-        editTeam.interactable = isActive;
 
         if (isActive)
         {

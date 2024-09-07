@@ -14,17 +14,21 @@ public class SelectionUI : MonoBehaviour
 
     public void SetReady(int index)
     {
+        Debug.Log(index);
+
         bool isReady = manager.SetReady(index);
+
+        Debug.Log(isReady);
         
         if (GlobalManager.singleton.maxPlayers < 2)
         {
             playerTop.ToggleUI(isReady);
         }
-        
+
         playerBottom.ToggleUI(!isReady);
     }
 
-    public bool EditTeam(int fighterID)
+    public (bool, bool) EditTeam(int fighterID)
     {
         return manager.EditTeam(fighterID);
     }

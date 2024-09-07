@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a895a7e95554706af00b395749ee36, type: 3}
   m_Name: supporter
   m_EditorClassIdentifier: 
-  fighterID: 3
+  fighterID: 2
   moves:
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}

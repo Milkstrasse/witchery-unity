@@ -40,11 +40,17 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;
+
+        if (eventData.pointerDrag != null)
+        {
+            CardUI cardUI = eventData.pointerDrag.GetComponent<CardUI>();
+            cardUI.SelectCard(rectTransform.position.y < 250 || rectTransform.position.y > Screen.height - 250);
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        bool toRemove = rectTransform.position.y < 200 || rectTransform.position.y > Screen.height - 200;
+        bool toRemove = rectTransform.position.y < 250 || rectTransform.position.y > Screen.height - 250;
         ResetDrag();
 
         if (toRemove && FightManager.singleton.IsAbleToMessage())
