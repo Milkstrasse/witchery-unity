@@ -47,14 +47,21 @@ public class CardUI : MonoBehaviour
     {
         this.card = card;
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name);
-        background.color = neutral;
+        if (card.hasMove)
+        {
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name);
+            background.color = neutral;
 
-        icon.text = card.move.cost.ToString();
-        infoText.text = card.move.name;
+            icon.text = card.move.cost.ToString();
+            infoText.text = card.move.name;
 
-        stringEvent.StringReference.SetReference("StringTable", card.move.name + "Descr");
-        stringEvent.RefreshString();
+            stringEvent.StringReference.SetReference("StringTable", card.move.name + "Descr");
+            stringEvent.RefreshString();
+        }
+        else
+        {
+            FlipCard(false);
+        }
     }
 
     public void HighlightCard(bool isHighlighted)
@@ -71,7 +78,14 @@ public class CardUI : MonoBehaviour
 
     public void FlipCard(bool isFlipped)
     {
-        cardBack.SetActive(isFlipped);
+        if (card.hasMove && !isFlipped)
+        {
+            cardBack.SetActive(false);
+        }
+        else
+        {
+            cardBack.SetActive(true);
+        }
     }
 
     public void ShowCard(bool showCard)

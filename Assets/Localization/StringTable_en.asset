@@ -134,6 +134,14 @@ MonoBehaviour:
     m_Localized: Gain weak status effect
     m_Metadata:
       m_Items: []
+  - m_Id: 8024858918117376
+    m_Localized: Add blank card to stack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8024861875101696
+    m_Localized: Remove all blank cards
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

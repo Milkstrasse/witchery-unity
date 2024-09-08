@@ -41,6 +41,11 @@ public class Player : MonoBehaviour
 
         fighterIDs = message.fighterIDs;
 
+        for (int i = 0; i < 5; i++)
+        {
+            cards.Add(new Card());
+        }
+
         for (int i = 0; i < fighterIDs.Length; i++)
         {
             Fighter fighter = GlobalManager.singleton.fighters[fighterIDs[i]];
@@ -78,6 +83,11 @@ public class Player : MonoBehaviour
     {
         for (int i = 0; i < cardHand.Count; i++)
         {
+            if (!cardHand[i].hasMove)
+            {
+                continue;
+            }
+
             if (cardHand[i].move.moveType != Move.MoveType.Response || cardHand[i].move.cost > energy)
             {
                 continue;

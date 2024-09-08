@@ -134,6 +134,14 @@ MonoBehaviour:
     m_Localized: Erhalte Weak-Effekt
     m_Metadata:
       m_Items: []
+  - m_Id: 8024861875101696
+    m_Localized: Entferne alle leere Karten
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8024858918117376
+    m_Localized: "F\xFCge leere Karte dem Stapel hinzu"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

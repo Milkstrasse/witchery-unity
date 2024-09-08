@@ -43,19 +43,9 @@ public class FightManager : MonoBehaviour
     [Server]
     public PlayerMessage SetupPlayer(PlayerMessage message)
     {
-        List<int> cards = new List<int>();
-
         PlayerMessage msg = new PlayerMessage(message.name, message.fighterIDs);
-        for (int i = 0; i < message.fighterIDs.Length; i++)
-        {
-            Fighter fighter = GlobalManager.singleton.fighters[message.fighterIDs[i]];
-            for (int j = 0; j < fighter.moves.Length; j++)
-            {
-                cards.Add(i * fighter.moves.Length + j);
-            }
-        }
 
-        PlayerData playerData = new PlayerData(message.name, cards);
+        PlayerData playerData = new PlayerData(message);
         logic.players.Add(playerData);
 
         msg.cardHand = playerData.cardHand.ToArray();

@@ -10,6 +10,8 @@ public class PlayerData
     public List<int> cardHand;
     public List<StatusEffect> effects;
 
+    public int startIndex;
+
     public PlayerData()
     {
         name = "";
@@ -21,19 +23,32 @@ public class PlayerData
         playedCards = new List<int>();
         cardHand = new List<int>();
         effects = new List<StatusEffect>();
+
+        startIndex = 0;
     }
 
-    public PlayerData(string name, List<int> cards)
+    public PlayerData(PlayerMessage message)
     {
-        this.name = name;
+        name = message.name;
         
         health = 50;
         energy = 7;
 
-        cardStack = cards;
+        cardStack = new List<int> { 0, 1, 2, 3, 4 };
+        for (int i = 0; i < message.fighterIDs.Length; i++)
+        {
+            Fighter fighter = GlobalManager.singleton.fighters[message.fighterIDs[i]];
+            for (int j = 0; j < fighter.moves.Length; j++)
+            {
+                cardStack.Add(i * fighter.moves.Length + j + 5);
+            }
+        }
+
         playedCards = new List<int>();
         cardHand = new List<int>();
         effects = new List<StatusEffect>();
+
+        startIndex = 5;
 
         FillHand(5);
     }
@@ -65,13 +80,13 @@ public class PlayerData
         int cardsToRemove = cardAmount;
         while (cardsToRemove > 0)
         {
-            if (cardStack.Count == 0)
+            if (cardStack.Count <= startIndex)
             {
-                cardStack = playedCards;
+                cardStack.AddRange(playedCards);
                 playedCards = new List<int>();
             }
 
-            int randomIndex = UnityEngine.Random.Range(0, cardStack.Count);
+            int randomIndex = UnityEngine.Random.Range(startIndex, cardStack.Count);
             cardHand.Add(cardStack[randomIndex]);
             cardStack.RemoveAt(randomIndex);
 

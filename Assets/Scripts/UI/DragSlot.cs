@@ -54,7 +54,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     {
         transform.eulerAngles = new Vector3(0, 0, 180);
         
-        if (lastCard.isCard)
+        if (lastCard.hasMove)
         {
             cardUI.SetupCard(lastCard);
         }

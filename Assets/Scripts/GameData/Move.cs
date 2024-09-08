@@ -13,6 +13,6 @@ public class Move : ScriptableObject
 
     public enum MoveType
     {
-        Standard, Empty, Combo, Response
+        Standard, Combo, Response
     }
 }

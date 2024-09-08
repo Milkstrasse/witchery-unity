@@ -17,6 +17,8 @@ public class FightLogic
         playerTurn = -1;
         winner = -1;
         players = new List<PlayerData>();
+
+        lastCard = new PlayedCard();
     }
 
     public bool MakeMove(MoveMessage message)
@@ -30,7 +32,7 @@ public class FightLogic
         int cardIndex = players[playerTurn].cardHand[message.cardIndex];
         Card card = FightManager.singleton.players[playerTurn].cards[cardIndex];
 
-        if (lastCard != null && lastCard.card.move.moveType == Move.MoveType.Combo)
+        if (lastCard.card.hasMove && lastCard.card.move.moveType == Move.MoveType.Combo)
         {
             costBonus = lastCard.card.move.energy[0];
             powerBonus = lastCard.card.move.health[0];
@@ -41,20 +43,23 @@ public class FightLogic
             powerBonus = 0;
         }
 
-        if (card.move.cost - costBonus > players[playerTurn].energy)
+        if (card.hasMove)
         {
-            return false;
-        }
+            if (card.move.cost - costBonus > players[playerTurn].energy)
+            {
+                return false;
+            }
 
-        players[playerTurn].energy = players[playerTurn].energy - Math.Max(card.move.cost - costBonus, 0);
+            players[playerTurn].energy = players[playerTurn].energy - Math.Max(card.move.cost - costBonus, 0);
+
+            if (card.move.moveType == Move.MoveType.Combo)
+            {
+                message.playCard = false;
+            }
+        }
 
         bool wasPlayed = PlayCard(card, playerTurn, true);
         lastCard = new PlayedCard(card, playerTurn, wasPlayed);
-
-        if (card.move.moveType == Move.MoveType.Combo)
-        {
-            message.playCard = false;
-        }
 
         RemoveCard(message);
 
@@ -65,7 +70,7 @@ public class FightLogic
     {
         players[playerTurn].RemoveCard(message.cardIndex);
 
-        if (lastCard != null && lastCard.card.move.moveID == 18)
+        if (lastCard.card.hasMove && lastCard.card.move.moveID == 17)
         {
             players[playerTurn].FillHand(5 - players[playerTurn].cardHand.Count);
         }
@@ -75,9 +80,19 @@ public class FightLogic
 
     private bool PlayCard(Card card, int turn, bool blockable)
     {
-        Move move = card.move;
-        if (move.moveID == 17 && lastCard != null) //replay last card
+        if (!card.hasMove)
         {
+            return true;
+        }
+        
+        Move move = card.move;
+        if (move.moveID == 16 && lastCard != null) //replay last card
+        {
+            if (!lastCard.card.hasMove)
+            {
+                return true;
+            }
+
             move = lastCard.card.move;
         }
 
@@ -121,6 +136,12 @@ public class FightLogic
                     players[1].health = allHealth / 2;
 
                     break;
+                case 14: //add blank
+                    players[1 - turn].startIndex = Math.Max(players[1 - turn].startIndex - 1, 0);
+                    break;
+                case 15: //clear blank
+                    players[turn].startIndex = 5;
+                    break;
                 case 16: //replay last card
                     break;
                 case 17: //fill hand
@@ -131,9 +152,9 @@ public class FightLogic
                     {
                         int health = move.health[i];
 
-                        if (lastCard != null && (move.moveID == 10 || move.moveID == 11))
+                        if (move.moveID == 10 || move.moveID == 11)
                         {
-                            health *= lastCard.card.move.cost;
+                            health *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
                         }
 
                         if (health < 0)
@@ -149,9 +170,9 @@ public class FightLogic
 
                         int energy = move.energy[i];
 
-                        if (lastCard != null && move.moveID == 12)
+                        if (move.moveID == 12)
                         {
-                            energy *= lastCard.card.move.cost;
+                            energy *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
                         }
 
                         if (energy < 0)
@@ -203,7 +224,7 @@ public class FightLogic
         int cardIndex = players[message.playerIndex].cardHand[message.cardIndex];
         Card card = FightManager.singleton.players[message.playerIndex].cards[cardIndex];
 
-        if (card.move.moveType == Move.MoveType.Response)
+        if (card.hasMove && card.move.moveType == Move.MoveType.Response)
         {
             return false;
         }
