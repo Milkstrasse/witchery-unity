@@ -90,16 +90,18 @@ public class FightLogic
 
             switch (move.moveID)
             {
-                case 5: //steal energy
-                    int allEnergy = players[1 - turn].energy;
+                case 6: //steal energy
+                    int tempEnergy = players[1 - turn].energy;
                     players[1 - turn].energy = Math.Max(players[1 - turn].energy + move.energy[1] - players[turn].GetPowerBonus() - powerBonus, 0);
-                    allEnergy -= players[1 - turn].energy;
-                    players[turn].energy += allEnergy;
+                    tempEnergy -= players[1 - turn].energy;
+                    players[turn].energy += tempEnergy;
+
                     break;
-                case 7:
-                    int allHealth = players[0].health + players[1].health;
-                    players[0].health = allHealth/2;
-                    players[1].health = allHealth/2;
+                case 7: //steal health
+                    int tempHealth = players[1 - turn].health;
+                    players[1 - turn].health = Math.Max(players[1 - turn].health + move.health[1] - players[turn].GetPowerBonus() - powerBonus, 0);
+                    tempHealth -= players[1 - turn].energy;
+                    players[turn].energy += tempHealth;
 
                     break;
                 case 8: //swap effects
@@ -113,9 +115,15 @@ public class FightLogic
                     players[1].effects = new List<StatusEffect>();
 
                     break;
-                case 17: //replay last card
+                case 13: //redistribute HP
+                    int allHealth = players[0].health + players[1].health;
+                    players[0].health = allHealth / 2;
+                    players[1].health = allHealth / 2;
+
                     break;
-                case 18: //fill hand
+                case 16: //replay last card
+                    break;
+                case 17: //fill hand
                     break;
                 default:
                     int[] targets = new int[] { turn, 1 - turn };

@@ -118,6 +118,22 @@ MonoBehaviour:
     m_Localized: Stehle 2 Energie
     m_Metadata:
       m_Items: []
+  - m_Id: 7940532016766976
+    m_Localized: "Erteile Doom-Effekt f\xFCr alle"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7947713579573248
+    m_Localized: Erhalte Blessing-Effekt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7992895737946112
+    m_Localized: Stehle 5 HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7996141407821824
+    m_Localized: Erhalte Weak-Effekt
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

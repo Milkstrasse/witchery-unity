@@ -115,6 +115,22 @@ MonoBehaviour:
     m_Key: stealEnergyDescr
     m_Metadata:
       m_Items: []
+  - m_Id: 7940532016766976
+    m_Key: doomDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7947713579573248
+    m_Key: blessingDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7992895737946112
+    m_Key: stealHPDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7996141407821824
+    m_Key: weakenDescr
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -118,6 +118,22 @@ MonoBehaviour:
     m_Localized: Steal 2 energy
     m_Metadata:
       m_Items: []
+  - m_Id: 7940532016766976
+    m_Localized: apply doom effect to all
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7947713579573248
+    m_Localized: Gain blessing status effect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7992895737946112
+    m_Localized: Steal 5 HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7996141407821824
+    m_Localized: Gain weak status effect
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0c3f2616e0734b19bc2feecd7d70d51, type: 3}
-  m_Name: stealEnergy
+  m_Name: stealHP
   m_EditorClassIdentifier: 
-  moveID: 6
+  moveID: 7
   cost: 3
-  health: 0000000000000000
-  energy: 02000000feffffff
+  health: 05000000fbffffff
+  energy: 0000000000000000
   effects:
   - icon: 
     duration: 0
