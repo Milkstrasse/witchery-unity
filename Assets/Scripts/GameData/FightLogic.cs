@@ -92,13 +92,9 @@ public class FightLogic
             {
                 case 5: //steal energy
                     int allEnergy = players[1 - turn].energy;
-                    Debug.Log(allEnergy);
                     players[1 - turn].energy = Math.Max(players[1 - turn].energy + move.energy[1] - players[turn].GetPowerBonus() - powerBonus, 0);
-                    Debug.Log(players[1 - turn].energy);
                     allEnergy -= players[1 - turn].energy;
-                    Debug.Log(allEnergy);
                     players[turn].energy += allEnergy;
-                    Debug.Log(players[turn].energy);
                     break;
                 case 7:
                     int allHealth = players[0].health + players[1].health;

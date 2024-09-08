@@ -15,8 +15,8 @@ public class GlobalManager : MonoBehaviour
     public bool relayEnabled;
     public int maxPlayers;
 
-    public static int waitTime = 60;
-    public static int turnTime = 60;
+    public static int waitTime = 120;
+    public static int turnTime = 180;
 
     public event Action<string> OnCodeCreated;
     

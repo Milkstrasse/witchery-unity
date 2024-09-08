@@ -72,6 +72,8 @@ public class PlayerFightUI : MonoBehaviour
                 cards[i].ShowCard(false);
             }
 
+            cards[i].FlipCard(!isInteractable);
+
             if (i < player.effects.Count)
             {
                 effects[i].SetupEffect(player.effects[i]);
@@ -186,6 +188,11 @@ public class PlayerFightUI : MonoBehaviour
 
         cardGroup.interactable = isInteractable;
         cardGroup.blocksRaycasts = isInteractable;
+
+        for (int i = 0; i < cards.Length; i++)
+        {
+            cards[i].FlipCard(!isInteractable);
+        }
     }
 
     IEnumerator UpdateTimer()

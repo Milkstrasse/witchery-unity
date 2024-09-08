@@ -55,8 +55,6 @@ public class CardUI : MonoBehaviour
 
         stringEvent.StringReference.SetReference("StringTable", card.move.name + "Descr");
         stringEvent.RefreshString();
-
-        cardBack.SetActive(false);
     }
 
     public void HighlightCard(bool isHighlighted)
