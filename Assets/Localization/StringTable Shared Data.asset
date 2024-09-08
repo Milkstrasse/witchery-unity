@@ -91,6 +91,30 @@ MonoBehaviour:
     m_Key: snatchHPDescr
     m_Metadata:
       m_Items: []
+  - m_Id: 7829019750817792
+    m_Key: redistributeDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7837084361416704
+    m_Key: specialAttackDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7837112253538304
+    m_Key: specialHealDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7842569093373952
+    m_Key: specialEnergyDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7880276955881472
+    m_Key: fillHandDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7920018510569472
+    m_Key: stealEnergyDescr
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

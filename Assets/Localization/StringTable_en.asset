@@ -71,19 +71,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7541205104582656
-    m_Localized: reduce cost of next card
+    m_Localized: Reduce cost of next card
     m_Metadata:
       m_Items: []
   - m_Id: 7553544101027840
-    m_Localized: add power to next card
+    m_Localized: Add power to next card
     m_Metadata:
       m_Items: []
   - m_Id: 7622866769010688
-    m_Localized: swap effects
+    m_Localized: Swap effects
     m_Metadata:
       m_Items: []
   - m_Id: 7622870518718464
-    m_Localized: clear all effects
+    m_Localized: Clear all effects
     m_Metadata:
       m_Items: []
   - m_Id: 7658928543358976
@@ -92,6 +92,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 7672341843664896
     m_Localized: Take HP for yourself
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7829019750817792
+    m_Localized: Redistribute HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7837084361416704
+    m_Localized: Do 4 * cost of last card damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7837112253538304
+    m_Localized: Gain 4 * cost of last card HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7842569093373952
+    m_Localized: Gain 2 * cost of last card energy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7880276955881472
+    m_Localized: Fill hand up to 5 cards
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7920018510569472
+    m_Localized: Steal 2 energy
     m_Metadata:
       m_Items: []
   references:

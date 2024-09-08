@@ -14,11 +14,7 @@ public class SelectionUI : MonoBehaviour
 
     public void SetReady(int index)
     {
-        Debug.Log(index);
-
         bool isReady = manager.SetReady(index);
-
-        Debug.Log(isReady);
         
         if (GlobalManager.singleton.maxPlayers < 2)
         {

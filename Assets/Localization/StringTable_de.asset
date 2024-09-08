@@ -94,6 +94,30 @@ MonoBehaviour:
     m_Localized: "Nehme  HP f\xFCr dich"
     m_Metadata:
       m_Items: []
+  - m_Id: 7829019750817792
+    m_Localized: Verteile HP um
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7837084361416704
+    m_Localized: Erteile 4 * vorherige Energiekosten Schaden
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7837112253538304
+    m_Localized: Erhalte 4 * vorherige Energiekosten HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7842569093373952
+    m_Localized: Erhalte 2 * vorherige Energiekosten Energie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7880276955881472
+    m_Localized: Ziehe Karten bis du 5 hast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7920018510569472
+    m_Localized: Stehle 2 Energie
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
