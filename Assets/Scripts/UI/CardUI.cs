@@ -9,11 +9,13 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Image portrait;
     [SerializeField] private TextMeshProUGUI icon;
     [SerializeField] private RawImage background;
+    private RawImage cardBackground;
     [SerializeField] private TextMeshProUGUI infoText;
 
-    [SerializeField] private Color neutral;
+    [SerializeField] private Color neutralFront;
     [SerializeField] private Color highlighted;
     [SerializeField] private Color selected;
+    [SerializeField] private Color neutralBack;
     public bool isSelected;
     public bool isHighlighted;
 
@@ -24,12 +26,13 @@ public class CardUI : MonoBehaviour
     private void Start()
     {
         stringEvent = infoText.GetComponent<LocalizeStringEvent>();
+        cardBackground = cardBack.transform.GetChild(0).GetComponent<RawImage>();
     }
 
     public void SetupCard(Fighter fighter)
     {
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name);
-        background.color = neutral;
+        background.color = neutralFront;
 
         icon.text = fighter.fighterID.ToString();
         infoText.text = fighter.name;
@@ -42,10 +45,8 @@ public class CardUI : MonoBehaviour
         if (card.hasMove)
         {
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name);
-            background.color = neutral;
 
             icon.text = card.move.cost.ToString();
-
             stringEvent.StringReference.SetReference("StringTable", card.move.name + "Descr");
             stringEvent.RefreshString();
         }
@@ -58,13 +59,15 @@ public class CardUI : MonoBehaviour
     public void HighlightCard(bool isHighlighted)
     {
         this.isHighlighted = isHighlighted;
-        background.color = isHighlighted ? highlighted : isSelected ? selected : neutral;
+        background.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        cardBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
     }
 
     public void SelectCard(bool isSelected)
     {
         this.isSelected = isSelected;
-        background.color = isHighlighted ? highlighted : isSelected ? selected : neutral;
+        background.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        cardBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
     }
 
     public void FlipCard(bool isFlipped)
@@ -75,6 +78,12 @@ public class CardUI : MonoBehaviour
         }
         else
         {
+            isSelected = false;
+            isHighlighted = false;
+
+            background.color = neutralFront;
+            cardBackground.color = neutralBack;
+
             cardBack.SetActive(true);
         }
     }
