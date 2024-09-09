@@ -80,13 +80,21 @@ public class PlayerData
         int cardsToRemove = cardAmount;
         while (cardsToRemove > 0)
         {
-            if (cardStack.Count <= startIndex)
+            if (cardStack.Count == 0)
             {
-                cardStack.AddRange(playedCards);
+                cardStack = playedCards;
                 playedCards = new List<int>();
             }
 
-            int randomIndex = UnityEngine.Random.Range(startIndex, cardStack.Count);
+            int randomIndex = UnityEngine.Random.Range(0, cardStack.Count);
+            
+            if (cardStack[randomIndex] < startIndex)
+            {
+                playedCards.Add(cardStack[randomIndex]);
+                cardStack.RemoveAt(randomIndex);
+                continue;
+            }
+
             cardHand.Add(cardStack[randomIndex]);
             cardStack.RemoveAt(randomIndex);
 
