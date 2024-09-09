@@ -3,6 +3,7 @@ using System;
 [Serializable]
 public class StatusEffect
 {
+    public string name;
     public string icon;
     public int duration;
     public int value;
@@ -25,6 +26,7 @@ public class StatusEffect
 
     public StatusEffect(StatusEffect initEffect)
     {
+        name = initEffect.name;
         icon = initEffect.icon;
         duration = initEffect.duration;
         value = initEffect.value;

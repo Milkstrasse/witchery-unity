@@ -36,7 +36,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210015948529664
-    m_Key: bleedDescr
+    m_Key: addBleedDescr
     m_Metadata:
       m_Items: []
   - m_Id: 7210099683614720
@@ -44,11 +44,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210127370215424
-    m_Key: bombDescr
+    m_Key: addBombDescr
     m_Metadata:
       m_Items: []
   - m_Id: 7210153374900224
-    m_Key: energiseDescr
+    m_Key: gainEnergiseDescr
     m_Metadata:
       m_Items: []
   - m_Id: 7210184622465024
@@ -60,11 +60,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210230206160896
-    m_Key: healingDescr
+    m_Key: gainHealingDescr
     m_Metadata:
       m_Items: []
   - m_Id: 7210293263327232
-    m_Key: powerDescr
+    m_Key: gainPowerDescr
     m_Metadata:
       m_Items: []
   - m_Id: 7541205104582656
@@ -116,11 +116,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7940532016766976
-    m_Key: doomDescr
+    m_Key: addDoomDescr
     m_Metadata:
       m_Items: []
   - m_Id: 7947713579573248
-    m_Key: blessingDescr
+    m_Key: gainBlessingDescr
     m_Metadata:
       m_Items: []
   - m_Id: 7992895737946112
@@ -128,7 +128,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7996141407821824
-    m_Key: weakenDescr
+    m_Key: addWeakenDescr
     m_Metadata:
       m_Items: []
   - m_Id: 8024858918117376
@@ -137,6 +137,42 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8024861875101696
     m_Key: clearBlanksDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223596102017024
+    m_Key: bleedDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223760501956608
+    m_Key: healingDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223787123204096
+    m_Key: powerDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223807327166464
+    m_Key: weakenDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223827040395264
+    m_Key: doomDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223843544981504
+    m_Key: blessingDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8229724533809152
+    m_Key: bombDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8229765759623168
+    m_Key: energiseDescr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8258911885844480
+    m_Key: turnAmount
     m_Metadata:
       m_Items: []
   m_Metadata:

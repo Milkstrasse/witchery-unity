@@ -10,19 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0c3f2616e0734b19bc2feecd7d70d51, type: 3}
-  m_Name: power
+  m_Name: gainPower
   m_EditorClassIdentifier: 
   moveID: 3
   cost: 2
   health: 0000000000000000
   energy: 0000000000000000
   effects:
-  - icon: F102
+  - name: power
+    icon: F102
     duration: 3
     value: 10
     statusType: 2
     isDelayed: 0
-  - icon: 
+  - name: 
+    icon: 
     duration: 0
     value: 0
     statusType: 0

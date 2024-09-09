@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 4d5f43fceb1874d3fb84d5259516bec7, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 296817732614357011
   m_TableData:
   - m_Id: 58463346688
     m_Localized: Host
@@ -131,7 +132,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7996141407821824
-    m_Localized: Gain weak status effect
+    m_Localized: Apply weak status effect
     m_Metadata:
       m_Items: []
   - m_Id: 8024858918117376
@@ -142,6 +143,49 @@ MonoBehaviour:
     m_Localized: Remove all blank cards
     m_Metadata:
       m_Items: []
+  - m_Id: 8223596102017024
+    m_Localized: does damage for
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223760501956608
+    m_Localized: heals for
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223787123204096
+    m_Localized: strengthens cards for
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223807327166464
+    m_Localized: weakens cards for
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223827040395264
+    m_Localized: loses game in
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223843544981504
+    m_Localized: regains all health in
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8229724533809152
+    m_Localized: explodes in
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8229765759623168
+    m_Localized: generates energy for
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8258911885844480
+    m_Localized: '{duration} round(s)'
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 296817732614357011
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 8258911885844480

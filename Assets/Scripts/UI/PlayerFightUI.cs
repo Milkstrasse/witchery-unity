@@ -216,14 +216,6 @@ public class PlayerFightUI : MonoBehaviour
         FightManager.singleton.SendMove(player.playerID);
     }
 
-    public void ShowInfo(bool showInfo)
-    {
-        for (int i = 0; i < effects.Length; i++)
-        {
-            effects[i].ShowDuration(showInfo);
-        }
-    }
-
     private void OnDestroy()
     {
         if (player != null)

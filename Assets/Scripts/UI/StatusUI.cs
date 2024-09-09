@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StatusUI : MonoBehaviour
 {
+    [SerializeField] private StatusInfoUI info;
+
     [SerializeField] private TextMeshProUGUI icon;
     private StatusEffect effect;
     private string iconString;
@@ -33,5 +35,21 @@ public class StatusUI : MonoBehaviour
         {
             icon.text = iconString;
         }
+    }
+
+    public void HideInfo()
+    {
+        info.gameObject.SetActive(false);
+    }
+
+    public void ShowInfo(int index)
+    {
+        if (effect == null)
+        {
+            return;
+        }
+
+        info.gameObject.SetActive(true);
+        info.SetupInfo(effect, index);
     }
 }

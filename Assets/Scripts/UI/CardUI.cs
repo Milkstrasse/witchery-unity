@@ -5,23 +5,15 @@ using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject cardBack;
-    [SerializeField]
-    private Image portrait;
-    [SerializeField]
-    private TextMeshProUGUI icon;
-    [SerializeField]
-    private RawImage background;
-    [SerializeField]
-    private TextMeshProUGUI infoText;
+    [SerializeField] private GameObject cardBack;
+    [SerializeField] private Image portrait;
+    [SerializeField] private TextMeshProUGUI icon;
+    [SerializeField] private RawImage background;
+    [SerializeField] private TextMeshProUGUI infoText;
 
-    [SerializeField]
-    private Color neutral;
-    [SerializeField]
-    private Color highlighted;
-    [SerializeField]
-    private Color selected;
+    [SerializeField] private Color neutral;
+    [SerializeField] private Color highlighted;
+    [SerializeField] private Color selected;
     public bool isSelected;
     public bool isHighlighted;
 
@@ -53,7 +45,6 @@ public class CardUI : MonoBehaviour
             background.color = neutral;
 
             icon.text = card.move.cost.ToString();
-            infoText.text = card.move.name;
 
             stringEvent.StringReference.SetReference("StringTable", card.move.name + "Descr");
             stringEvent.RefreshString();

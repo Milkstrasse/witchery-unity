@@ -17,4 +17,4 @@ MonoBehaviour:
   health: 05000000
   energy: 00000000
   effects: []
-  moveType: 2
+  moveType: 1

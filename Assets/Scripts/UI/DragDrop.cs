@@ -6,8 +6,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 {
     public int cardIndex;
 
-    [SerializeField]
-    private Canvas canvas;
+    [SerializeField] private Canvas canvas;
     
     public PlayerFightUI playerFightUI;
     private RectTransform rectTransform;

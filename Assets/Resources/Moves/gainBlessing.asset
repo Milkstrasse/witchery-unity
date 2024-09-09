@@ -10,21 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0c3f2616e0734b19bc2feecd7d70d51, type: 3}
-  m_Name: bleed
+  m_Name: gainBlessing
   m_EditorClassIdentifier: 
-  moveID: 4
-  cost: 1
+  moveID: 3
+  cost: 4
   health: 0000000000000000
   energy: 0000000000000000
   effects:
-  - icon: 
+  - name: blessing
+    icon: F5BB
+    duration: 3
+    value: 100
+    statusType: 0
+    isDelayed: 1
+  - name: 
+    icon: 
     duration: 0
     value: 0
-    statusType: 0
-    isDelayed: 0
-  - icon: F043
-    duration: 3
-    value: -2
     statusType: 0
     isDelayed: 0
   moveType: 0
