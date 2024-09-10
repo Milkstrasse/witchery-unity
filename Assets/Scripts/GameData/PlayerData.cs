@@ -77,11 +77,11 @@ public class PlayerData
         }
     }
 
-    public void UnmarkLastEffect()
+    public void UnmarkEffects()
     {
-        if (effects.Count > 0)
+        for (int i = 0; i < effects.Count; i++)
         {
-            effects[effects.Count - 1].isNew = false;
+            effects[i].isNew = false;
         }
     }
 
@@ -129,6 +129,7 @@ public class PlayerData
             if (effects[i].statusType == StatusEffect.StatusType.Power)
             {
                 power += effects[i].value;
+                effects[i].isNew = true;
             }
         }
 

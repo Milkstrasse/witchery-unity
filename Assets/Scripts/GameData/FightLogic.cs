@@ -179,7 +179,7 @@ public class FightLogic
                         {
                             energy = Math.Min(energy - players[turn].GetPowerBonus() - powerBonus, 0);
                         }
-                        else if (health > 0)
+                        else if (energy > 0)
                         {
                             energy = Math.Max(energy + players[turn].GetPowerBonus() + powerBonus, 0);
                         }

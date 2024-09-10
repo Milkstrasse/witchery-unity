@@ -56,8 +56,9 @@ public class FightManager : MonoBehaviour
     [Server]
     private void OnMoveMade(NetworkConnectionToClient conn, MoveMessage message)
     {
-        logic.players[0].UnmarkLastEffect();
-        logic.players[1].UnmarkLastEffect();
+        //Set effects as not new
+        logic.players[0].UnmarkEffects();
+        logic.players[1].UnmarkEffects();
 
         if (conn.connectionId != NetworkClient.connection.connectionId && message.playerIndex != 1)
         {

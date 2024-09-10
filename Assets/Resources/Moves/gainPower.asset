@@ -20,13 +20,15 @@ MonoBehaviour:
   - name: power
     icon: F102
     duration: 3
-    value: 10
+    value: 2
     statusType: 2
     isDelayed: 0
+    isNew: 0
   - name: 
     icon: 
     duration: 0
     value: 0
     statusType: 0
     isDelayed: 0
+    isNew: 0
   moveType: 0

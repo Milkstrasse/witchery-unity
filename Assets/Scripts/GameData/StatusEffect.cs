@@ -44,6 +44,8 @@ public class StatusEffect
         {
             case StatusType.Energy:
                 player.energy += value;
+                isNew = true;
+                
                 break;
             case StatusType.Power:
                 break;
@@ -51,6 +53,7 @@ public class StatusEffect
                 if (!isDelayed || (isDelayed && duration == 1))
                 {
                     player.health = Math.Clamp(player.health + value, 0, 50);
+                    isNew = true;
                 }
 
                 break;
