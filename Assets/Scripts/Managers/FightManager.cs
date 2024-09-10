@@ -56,6 +56,9 @@ public class FightManager : MonoBehaviour
     [Server]
     private void OnMoveMade(NetworkConnectionToClient conn, MoveMessage message)
     {
+        logic.players[0].UnmarkLastEffect();
+        logic.players[1].UnmarkLastEffect();
+
         if (conn.connectionId != NetworkClient.connection.connectionId && message.playerIndex != 1)
         {
             if (GlobalManager.singleton.maxPlayers > 1)

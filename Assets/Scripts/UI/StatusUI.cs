@@ -7,8 +7,15 @@ public class StatusUI : MonoBehaviour
     [SerializeField] private StatusInfoUI info;
 
     [SerializeField] private TextMeshProUGUI icon;
+    private GameObject background;
+
     private StatusEffect effect;
     private string iconString;
+
+    private void Start()
+    {
+        background = transform.GetChild(0).gameObject;
+    }
 
     public void SetupEffect(StatusEffect effect)
     {
@@ -18,6 +25,14 @@ public class StatusUI : MonoBehaviour
         icon.text = Convert.ToChar(i).ToString();
 
         iconString = icon.text;
+
+        if (effect.isNew)
+        {
+            LeanTween.scale(background, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
+            LeanTween.scale(icon.gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
+
+            effect.isNew = false;
+        }
     }
 
     public void ShowDuration(bool showDuration)

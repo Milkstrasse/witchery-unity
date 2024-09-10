@@ -10,6 +10,8 @@ public class StatusEffect
     public StatusType statusType;
     public bool isDelayed;
 
+    public bool isNew;
+
     public enum StatusType
     {
         Health, Energy, Power
@@ -32,6 +34,8 @@ public class StatusEffect
         value = initEffect.value;
         statusType = initEffect.statusType;
         isDelayed = initEffect.isDelayed;
+
+        isNew = true;
     }
 
     public void TriggerEffect(PlayerData player)

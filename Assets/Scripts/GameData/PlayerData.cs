@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerData
 {
@@ -58,7 +59,7 @@ public class PlayerData
         int index = -1;
         for (int i = 0; i < effects.Count; i++)
         {
-            if (effects[i].icon == effect.icon)
+            if (effects[i].name == effect.name)
             {
                 index = i;
                 break;
@@ -68,10 +69,19 @@ public class PlayerData
         if (index >= 0)
         {
             effects[index].duration += effect.duration;
+            effects[index].isNew = true;
         }
         else if (effects.Count < 5)
         {
             effects.Add(effect);
+        }
+    }
+
+    public void UnmarkLastEffect()
+    {
+        if (effects.Count > 0)
+        {
+            effects[effects.Count - 1].isNew = false;
         }
     }
 
