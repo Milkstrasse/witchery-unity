@@ -51,7 +51,87 @@ public class PlayerData
 
         startIndex = 5;
 
+        ShuffleStack();
+
         FillHand(5);
+    }
+
+    private void ShuffleStack()
+    {
+        int n = cardStack.Count - 1;
+        while (n > 0)
+        {
+            int j = Random.Range(0, n);
+            int tmp = cardStack[n];
+            cardStack[n] = cardStack[j];
+            cardStack[j] = tmp;
+
+            n--;
+        }
+    }
+
+    public void FillHand(int cardAmount)
+    {
+        int i = 0;
+        while (i < cardAmount)
+        {
+            if (cardStack.Count == 0)
+            {
+                cardStack = playedCards;
+                playedCards = new List<int>();
+
+                ShuffleStack();
+            }
+
+            if (cardStack[0] < startIndex)
+            {
+                playedCards.Add(cardStack[0]);
+                cardStack.RemoveAt(0);
+                continue;
+            }
+
+            cardHand.Add(cardStack[0]);
+            cardStack.RemoveAt(0);
+
+            i++;
+        }
+    }
+
+    public void DrawSpecificCard(Player player, int moveID)
+    {
+        for (int i = 0; i < cardStack.Count; i++)
+        {
+            Card card = player.cards[cardStack[i]];
+            if (card.hasMove && card.move.moveType == Move.MoveType.Standard && card.move.moveID % 10 == moveID)
+            {
+                cardHand.Add(cardStack[i]);
+                cardStack.RemoveAt(i);
+
+                ShuffleStack();
+
+                return;
+            }
+        }
+        
+        for (int k = 0; k < playedCards.Count; k++)
+        {
+            Card card = player.cards[playedCards[k]];
+            if (card.hasMove && card.move.moveType == Move.MoveType.Standard && card.move.moveID % 10 == moveID)
+            {
+                cardHand.Add(playedCards[k]);
+                playedCards.RemoveAt(k);
+
+                return;
+            }
+        }
+    }
+
+    public void RemoveCard(int cardIndex)
+    {
+        int card = cardHand[cardIndex];
+
+        playedCards.Add(card);
+        cardHand.RemoveAt(cardIndex);
     }
 
     public void AddEffect(StatusEffect effect)
@@ -83,41 +163,6 @@ public class PlayerData
         {
             effects[i].isNew = false;
         }
-    }
-
-    public void FillHand(int cardAmount)
-    {
-        int cardsToRemove = cardAmount;
-        while (cardsToRemove > 0)
-        {
-            if (cardStack.Count == 0)
-            {
-                cardStack = playedCards;
-                playedCards = new List<int>();
-            }
-
-            int randomIndex = UnityEngine.Random.Range(0, cardStack.Count);
-            
-            if (cardStack[randomIndex] < startIndex)
-            {
-                playedCards.Add(cardStack[randomIndex]);
-                cardStack.RemoveAt(randomIndex);
-                continue;
-            }
-
-            cardHand.Add(cardStack[randomIndex]);
-            cardStack.RemoveAt(randomIndex);
-
-            cardsToRemove--;
-        }
-    }
-
-    public void RemoveCard(int cardIndex)
-    {
-        int card = cardHand[cardIndex];
-
-        playedCards.Add(card);
-        cardHand.RemoveAt(cardIndex);
     }
 
     public int GetPowerBonus()

@@ -17,4 +17,4 @@ MonoBehaviour:
   health: 
   energy: 
   effects: []
-  moveType: 3
+  moveType: 2

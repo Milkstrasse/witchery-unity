@@ -70,9 +70,22 @@ public class FightLogic
     {
         players[playerTurn].RemoveCard(message.cardIndex);
 
-        if (lastCard.card.hasMove && lastCard.card.move.moveID == 17)
+        if (lastCard.card.hasMove && message.playCard)
         {
-            players[playerTurn].FillHand(5 - players[playerTurn].cardHand.Count);
+            switch (lastCard.card.move.moveID)
+            {
+                case 19: //fill hand
+                    players[playerTurn].FillHand(5 - players[playerTurn].cardHand.Count);
+                    break;
+                case 25: //draw attack card
+                    players[playerTurn].DrawSpecificCard(FightManager.singleton.players[playerTurn], 0);
+                    break;
+                case 26: //draw heal card
+                    players[playerTurn].DrawSpecificCard(FightManager.singleton.players[playerTurn], 1);
+                    break;
+                default:
+                    break;
+            }
         }
         
         NextTurn(message.playCard);
@@ -86,7 +99,7 @@ public class FightLogic
         }
         
         Move move = card.move;
-        if (move.moveID == 16 && lastCard != null) //replay last card
+        if (move.moveID == 18 && lastCard != null) //replay last card
         {
             if (!lastCard.card.hasMove)
             {
@@ -130,21 +143,25 @@ public class FightLogic
                     players[1].effects = new List<StatusEffect>();
 
                     break;
-                case 13: //redistribute HP
+                case 15: //redistribute HP
                     int allHealth = players[0].health + players[1].health;
                     players[0].health = allHealth / 2;
                     players[1].health = allHealth / 2;
 
                     break;
-                case 14: //add blank
+                case 16: //add blank
                     players[1 - turn].startIndex = Math.Max(players[1 - turn].startIndex - 1, 0);
                     break;
-                case 15: //clear blank
+                case 17: //clear blank
                     players[turn].startIndex = 5;
                     break;
-                case 16: //replay last card
+                case 18: //replay last card
                     break;
-                case 17: //fill hand
+                case 19: //fill hand
+                    break;
+                case 25: //draw attack card
+                    break;
+                case 26: //draw attack card
                     break;
                 default:
                     int[] targets = new int[] { turn, 1 - turn };

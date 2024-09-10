@@ -180,6 +180,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
+  - m_Id: 8661223867408384
+    m_Localized: Draw next attack card
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8661230519574528
+    m_Localized: Draw next heal card
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
