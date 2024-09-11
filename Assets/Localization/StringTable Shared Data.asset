@@ -67,14 +67,6 @@ MonoBehaviour:
     m_Key: gainPowerDescr
     m_Metadata:
       m_Items: []
-  - m_Id: 7541205104582656
-    m_Key: reduceCostDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7553544101027840
-    m_Key: addPowerDescr
-    m_Metadata:
-      m_Items: []
   - m_Id: 7622866769010688
     m_Key: swapEffectsDescr
     m_Metadata:
@@ -189,10 +181,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8964874955644928
     m_Key: reflectHexDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 9032632103854080
-    m_Key: addDurationDescr
     m_Metadata:
       m_Items: []
   m_Metadata:

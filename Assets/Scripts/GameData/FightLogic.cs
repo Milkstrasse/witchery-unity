@@ -9,10 +9,6 @@ public class FightLogic
     public PlayedCard lastCard;
     public int winner;
 
-    private int costBonus;
-    private int powerBonus;
-    private int durationBonus;
-
     public FightLogic()
     {
         playerTurn = -1;
@@ -33,32 +29,14 @@ public class FightLogic
         int cardIndex = players[playerTurn].cardHand[message.cardIndex];
         Card card = FightManager.singleton.players[playerTurn].cards[cardIndex];
 
-        if (lastCard.card.hasMove && lastCard.card.move.moveType == Move.MoveType.Combo)
-        {
-            costBonus = lastCard.card.move.energy[0];
-            powerBonus = lastCard.card.move.health[0];
-            durationBonus = lastCard.card.move.effects[0].duration;
-        }
-        else
-        {
-            costBonus = 0;
-            powerBonus = 0;
-            durationBonus = 0;
-        }
-
         if (card.hasMove)
         {
-            if (card.move.cost - costBonus > players[playerTurn].energy)
+            if (card.move.cost > players[playerTurn].energy)
             {
                 return false;
             }
 
-            players[playerTurn].energy = players[playerTurn].energy - Math.Max(card.move.cost - costBonus, 0);
-
-            if (card.move.moveType == Move.MoveType.Combo)
-            {
-                message.playCard = false;
-            }
+            players[playerTurn].energy = players[playerTurn].energy - Math.Max(card.move.cost, 0);
         }
 
         bool wasPlayed = PlayCard(card, playerTurn, true);
@@ -123,7 +101,7 @@ public class FightLogic
             {
                 case 6: //steal energy
                     int tempEnergy = players[1 - turn].energy;
-                    players[1 - turn].energy = Math.Max(players[1 - turn].energy + move.energy[1] - players[turn].GetPowerBonus() - powerBonus, 0);
+                    players[1 - turn].energy = Math.Max(players[1 - turn].energy + move.energy[1] - players[turn].GetPowerBonus(), 0);
                     tempEnergy -= players[1 - turn].energy;
                     players[turn].energy += tempEnergy;
 
@@ -157,7 +135,7 @@ public class FightLogic
                     break;
                 case 20: //steal health
                     int tempHealth = players[1 - turn].health;
-                    players[1 - turn].health = Math.Max(players[1 - turn].health + move.health[1] - players[turn].GetPowerBonus() - powerBonus, 0);
+                    players[1 - turn].health = Math.Max(players[1 - turn].health + move.health[1] - players[turn].GetPowerBonus(), 0);
                     tempHealth -= players[1 - turn].energy;
                     players[turn].energy += tempHealth;
 
@@ -179,11 +157,11 @@ public class FightLogic
 
                         if (health < 0)
                         {
-                            health = Math.Min(health - players[turn].GetPowerBonus() - powerBonus, 0);
+                            health = Math.Min(health - players[turn].GetPowerBonus(), 0);
                         }
                         else if (health > 0)
                         {
-                            health = Math.Max(health + players[turn].GetPowerBonus() + powerBonus, 0);
+                            health = Math.Max(health + players[turn].GetPowerBonus(), 0);
                         }
 
                         players[targets[i]].health = Math.Clamp(players[targets[i]].health + health, 0, 50);
@@ -197,18 +175,18 @@ public class FightLogic
 
                         if (energy < 0)
                         {
-                            energy = Math.Min(energy - players[turn].GetPowerBonus() - powerBonus, 0);
+                            energy = Math.Min(energy - players[turn].GetPowerBonus(), 0);
                         }
                         else if (energy > 0)
                         {
-                            energy = Math.Max(energy + players[turn].GetPowerBonus() + powerBonus, 0);
+                            energy = Math.Max(energy + players[turn].GetPowerBonus(), 0);
                         }
 
                         players[targets[i]].energy += energy;
 
                         if (move.effects[i].duration > 0)
                         {
-                            StatusEffect effect = new StatusEffect(move.effects[i], durationBonus);
+                            StatusEffect effect = new StatusEffect(move.effects[i]);
                             players[targets[i]].AddEffect(effect);
                         }
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   fighterID: 0
   moves:
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
-  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 4cdc2d9cf3e834b64b1d364c026149a8, type: 2}
   - {fileID: 11400000, guid: 62685afb6290948738ae8f884794c7f7, type: 2}
   - {fileID: 11400000, guid: e428eab7482d24a74b7708919b33fae8, type: 2}
   - {fileID: 11400000, guid: 120ad528ec64d4bf29959be3f4bb8fec, type: 2}

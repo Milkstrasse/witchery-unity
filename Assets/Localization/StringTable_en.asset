@@ -71,14 +71,6 @@ MonoBehaviour:
     m_Localized: Block attack
     m_Metadata:
       m_Items: []
-  - m_Id: 7541205104582656
-    m_Localized: Reduce cost of next card
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7553544101027840
-    m_Localized: Add power to next card
-    m_Metadata:
-      m_Items: []
   - m_Id: 7622866769010688
     m_Localized: Swap effects
     m_Metadata:
@@ -194,10 +186,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8964874955644928
     m_Localized: Reflect effect back
-    m_Metadata:
-      m_Items: []
-  - m_Id: 9032632103854080
-    m_Localized: Make effect last longer on next card
     m_Metadata:
       m_Items: []
   references:
