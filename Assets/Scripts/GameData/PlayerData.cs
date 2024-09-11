@@ -137,12 +137,15 @@ public class PlayerData
     public void AddEffect(StatusEffect effect)
     {
         int index = -1;
-        for (int i = 0; i < effects.Count; i++)
+        if (!effect.isDelayed)
         {
-            if (effects[i].name == effect.name)
+            for (int i = 0; i < effects.Count; i++)
             {
-                index = i;
-                break;
+                if (effects[i].name == effect.name)
+                {
+                    index = i;
+                    break;
+                }
             }
         }
 
