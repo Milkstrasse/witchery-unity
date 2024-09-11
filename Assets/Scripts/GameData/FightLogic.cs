@@ -159,7 +159,7 @@ public class FightLogic
                     int tempHealth = players[1 - turn].health;
                     players[1 - turn].health = Math.Max(players[1 - turn].health + move.health[1] - players[turn].GetPowerBonus() - powerBonus, 0);
                     tempHealth -= players[1 - turn].energy;
-                    players[turn].energy += tempHealth;
+                    players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, 50);
 
                     break;
                 case 25: //draw attack card
