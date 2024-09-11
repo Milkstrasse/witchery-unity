@@ -196,6 +196,10 @@ MonoBehaviour:
     m_Localized: Reflect effect back
     m_Metadata:
       m_Items: []
+  - m_Id: 9032632103854080
+    m_Localized: Make effect last longer on next card
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

@@ -16,5 +16,12 @@ MonoBehaviour:
   cost: 0
   health: 05000000
   energy: 00000000
-  effects: []
+  effects:
+  - name: 
+    icon: 
+    duration: 0
+    value: 0
+    statusType: 0
+    isDelayed: 0
+    isNew: 0
   moveType: 1

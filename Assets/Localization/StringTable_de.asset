@@ -196,6 +196,10 @@ MonoBehaviour:
     m_Localized: "Reflektiere Effekt zur\xFCck"
     m_Metadata:
       m_Items: []
+  - m_Id: 9032632103854080
+    m_Localized: "Verl\xE4ngere den Effekt der n\xE4chsten Karte"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

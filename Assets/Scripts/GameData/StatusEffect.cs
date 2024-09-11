@@ -26,11 +26,11 @@ public class StatusEffect
         isDelayed = false;
     }
 
-    public StatusEffect(StatusEffect initEffect)
+    public StatusEffect(StatusEffect initEffect, int durationBonus)
     {
         name = initEffect.name;
         icon = initEffect.icon;
-        duration = initEffect.duration;
+        duration = initEffect.duration + durationBonus;
         value = initEffect.value;
         statusType = initEffect.statusType;
         isDelayed = initEffect.isDelayed;

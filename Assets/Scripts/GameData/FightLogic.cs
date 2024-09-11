@@ -11,6 +11,7 @@ public class FightLogic
 
     private int costBonus;
     private int powerBonus;
+    private int durationBonus;
 
     public FightLogic()
     {
@@ -36,11 +37,13 @@ public class FightLogic
         {
             costBonus = lastCard.card.move.energy[0];
             powerBonus = lastCard.card.move.health[0];
+            durationBonus = lastCard.card.move.effects[0].duration;
         }
         else
         {
             costBonus = 0;
             powerBonus = 0;
+            durationBonus = 0;
         }
 
         if (card.hasMove)
@@ -125,13 +128,6 @@ public class FightLogic
                     players[turn].energy += tempEnergy;
 
                     break;
-                case 7: //steal health
-                    int tempHealth = players[1 - turn].health;
-                    players[1 - turn].health = Math.Max(players[1 - turn].health + move.health[1] - players[turn].GetPowerBonus() - powerBonus, 0);
-                    tempHealth -= players[1 - turn].energy;
-                    players[turn].energy += tempHealth;
-
-                    break;
                 case 8: //swap effects
                     List<StatusEffect> temp = players[0].effects;
                     players[0].effects = players[1].effects;
@@ -158,6 +154,13 @@ public class FightLogic
                 case 18: //replay last card
                     break;
                 case 19: //fill hand
+                    break;
+                case 20: //steal health
+                    int tempHealth = players[1 - turn].health;
+                    players[1 - turn].health = Math.Max(players[1 - turn].health + move.health[1] - players[turn].GetPowerBonus() - powerBonus, 0);
+                    tempHealth -= players[1 - turn].energy;
+                    players[turn].energy += tempHealth;
+
                     break;
                 case 25: //draw attack card
                     break;
@@ -205,7 +208,7 @@ public class FightLogic
 
                         if (move.effects[i].duration > 0)
                         {
-                            StatusEffect effect = new StatusEffect(move.effects[i]);
+                            StatusEffect effect = new StatusEffect(move.effects[i], durationBonus);
                             players[targets[i]].AddEffect(effect);
                         }
 
