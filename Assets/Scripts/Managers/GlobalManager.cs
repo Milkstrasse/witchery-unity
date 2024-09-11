@@ -48,9 +48,4 @@ public class GlobalManager : MonoBehaviour
         NetworkClient.Shutdown();
         NetworkServer.Shutdown();
     }
-
-    private void OnApplicationQuit()
-    {
-        QuitAnyConnection();
-    }
 }
