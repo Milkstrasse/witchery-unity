@@ -188,6 +188,14 @@ MonoBehaviour:
     m_Localized: "Ziehe n\xE4chste Heilkarte"
     m_Metadata:
       m_Items: []
+  - m_Id: 8910918694985728
+    m_Localized: "Nehme Effekt f\xFCr dich"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8964874955644928
+    m_Localized: "Reflektiere Effekt zur\xFCck"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

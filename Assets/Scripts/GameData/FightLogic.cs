@@ -220,12 +220,22 @@ public class FightLogic
         }
         else if (move.moveType == Move.MoveType.Response)
         {
-            if (lastCard != null && !lastCard.played)
+            if (lastCard.card.hasMove && !lastCard.played)
             {
-                if (move.moveID == 1)
+                switch (move.moveID)
                 {
-                    int health = Math.Max(lastCard.card.move.health[0] + players[turn].GetPowerBonus(), 0);
-                    players[turn].health = Math.Clamp(players[turn].health + health, 0, 50);
+                    case 1: //snatch hp
+                        int health = Math.Max(lastCard.card.move.health[0] + players[turn].GetPowerBonus(), 0);
+                        players[turn].health = Math.Clamp(players[turn].health + health, 0, 50);
+                        break;
+                    case 3: //snatch effect
+                        players[turn].AddEffect(lastCard.card.move.effects[0]);
+                        break;
+                    case 4: //reflect effect
+                        players[1 - turn].AddEffect(lastCard.card.move.effects[1]);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -235,7 +245,7 @@ public class FightLogic
 
     public bool PlayLastCard(MoveMessage message)
     {
-        if (lastCard == null || lastCard.played)
+        if (!lastCard.card.hasMove || lastCard.played)
             return false;
 
         int cardIndex = players[message.playerIndex].cardHand[message.cardIndex];
@@ -243,7 +253,10 @@ public class FightLogic
 
         if (card.hasMove && card.move.moveType == Move.MoveType.Response)
         {
-            return false;
+            if (card.move.moveID == lastCard.card.move.moveID % 10)
+            {
+                return false;
+            }
         }
 
         PlayCard(lastCard.card, lastCard.player, false);
