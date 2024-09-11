@@ -39,13 +39,18 @@ public class FightUI : MonoBehaviour
 
     private void MakeMove(MoveMessage message)
     {
-        if (message.playerIndex == playerTop.player.playerID)
+        if (message.playerIndex == playerTop.player.playerID && GlobalManager.singleton.maxPlayers > 1)
         {
             playerTop.MakeMove(message, cardSlot);
         }
         else
         {
             manager.timeToMakeMove = 0f;
+
+            if (message.cardPlayed && message.playCard)
+            {
+                cardSlot.PlayAnimation();
+            }
         }
     }
 

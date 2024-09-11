@@ -76,8 +76,8 @@ public class PlayerFightUI : MonoBehaviour
 
             if (i < player.effects.Count)
             {
-                effects[i].SetupEffect(player.effects[i]);
                 effects[i].gameObject.SetActive(true);
+                effects[i].SetupEffect(player.effects[i]);
             }
             else
             {
@@ -117,8 +117,8 @@ public class PlayerFightUI : MonoBehaviour
 
             if (i < player.effects.Count)
             {
-                effects[i].SetupEffect(player.effects[i]);
                 effects[i].gameObject.SetActive(true);
+                effects[i].SetupEffect(player.effects[i]);
             }
             else
             {
@@ -131,7 +131,7 @@ public class PlayerFightUI : MonoBehaviour
     {
         if (message.playCard)
         {
-            StartCoroutine(MoveCard(message.cardIndex, cardSlot));
+            StartCoroutine(MoveCard(message, cardSlot));
         }
         else
         {
@@ -139,20 +139,25 @@ public class PlayerFightUI : MonoBehaviour
         }
     }
 
-    IEnumerator MoveCard(int cardIndex, CardSlot cardSlot)
+    IEnumerator MoveCard(MoveMessage message, CardSlot cardSlot)
     {
         FightManager.singleton.timeToMakeMove = 0.5f;
 
-        cards[cardIndex].transform.SetParent(canvas.transform);
+        cards[message.cardIndex].transform.SetParent(canvas.transform);
         
-        LeanTween.move(cards[cardIndex].gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
+        LeanTween.move(cards[message.cardIndex].gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
         
         yield return new WaitForSeconds(0.5f);
 
-        cards[cardIndex].GetComponent<DragDrop>().ResetDrag();
-        cardSlot.SetupCard(player.cardHand[cardIndex], true);
+        cards[message.cardIndex].GetComponent<DragDrop>().ResetDrag();
+        cardSlot.SetupCard(player.cardHand[message.cardIndex], true);
 
-        player.cardHand.RemoveAt(cardIndex);
+        if (message.cardPlayed)
+        {
+            cardSlot.PlayAnimation();
+        }
+
+        player.cardHand.RemoveAt(message.cardIndex);
 
         UpdateUI();
 

@@ -12,11 +12,6 @@ public class StatusUI : MonoBehaviour
     private StatusEffect effect;
     private string iconString;
 
-    private void Start()
-    {
-        background = transform.GetChild(0).gameObject;
-    }
-
     public void SetupEffect(StatusEffect effect)
     {
         this.effect = effect;
@@ -28,7 +23,7 @@ public class StatusUI : MonoBehaviour
 
         if (effect.isNew)
         {
-            LeanTween.scale(background, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
+            LeanTween.scale(transform.GetChild(0).gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
             LeanTween.scale(icon.gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
 
             effect.isNew = false;

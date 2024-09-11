@@ -871,8 +871,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: \uf70c
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
-  m_sharedMaterial: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0596f0677f9544564b01a504441c01da, type: 2}
+  m_sharedMaterial: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2468,6 +2468,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StatusEffect (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1339945793873216120, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5960661524405078024, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2555,7 +2559,7 @@ PrefabInstance:
     - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2578,6 +2582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StatusEffect (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1339945793873216120, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5960661524405078024, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2665,7 +2673,7 @@ PrefabInstance:
     - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2688,6 +2696,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StatusEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 1339945793873216120, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5960661524405078024, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2775,7 +2787,7 @@ PrefabInstance:
     - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2881,11 +2893,11 @@ PrefabInstance:
     - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 2221191615035132587, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2893,7 +2905,7 @@ PrefabInstance:
     - target: {fileID: 7291915728765631342, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3037,11 +3049,11 @@ PrefabInstance:
     - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 2221191615035132587, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3049,7 +3061,7 @@ PrefabInstance:
     - target: {fileID: 7291915728765631342, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3193,11 +3205,11 @@ PrefabInstance:
     - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 2221191615035132587, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3205,7 +3217,7 @@ PrefabInstance:
     - target: {fileID: 7291915728765631342, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3349,11 +3361,11 @@ PrefabInstance:
     - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 2221191615035132587, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3361,7 +3373,7 @@ PrefabInstance:
     - target: {fileID: 7291915728765631342, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3422,6 +3434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StatusEffect (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1339945793873216120, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5960661524405078024, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3509,7 +3525,7 @@ PrefabInstance:
     - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3532,6 +3548,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StatusEffect (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1339945793873216120, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5960661524405078024, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3619,7 +3639,7 @@ PrefabInstance:
     - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3725,11 +3745,11 @@ PrefabInstance:
     - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 2221191615035132587, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3737,7 +3757,7 @@ PrefabInstance:
     - target: {fileID: 7291915728765631342, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
+      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

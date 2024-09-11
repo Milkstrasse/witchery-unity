@@ -6,6 +6,11 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     [SerializeField] private CardUI cardUI;
     private Card lastCard;
 
+    private float[] startX = new float[] {0, 29, 41, 29, 0, -29, -41, -29};
+    private float[] startY = new float[] {41, 29, 0, -29, -41, -29, 0, 29};
+    private float[] endX = new float[] {0, 152, 215, 152, 0, -152, -215, -152};
+    private float[] endY = new float[] {215, 152, 0, -152, -215, -152, 0, 152};
+
     private void Start()
     {
         FightManager.singleton.OnMoveFailed += ResetCard;
@@ -35,7 +40,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             CardUI cardUI = eventData.pointerDrag.GetComponent<CardUI>();
             cardUI.HighlightCard(false);
             
-            SetupCard(cardUI.card, false);
+            SetupCard(cardUI.card, cardUI.transform.eulerAngles.z == 180f);
 
             FightManager.singleton.SendMove(cardIndex, true);
         }
@@ -61,6 +66,22 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         else
         {
             cardUI.FlipCard(true);
+        }
+    }
+
+    public void PlayAnimation()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(endX[i], endY[i], 0), 0.3f).setOnComplete(ResetAnimation);
+        }
+    }
+
+    private void ResetAnimation()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(startX[i], startY[i], 0), 0.1f).setDelay(0.3f);
         }
     }
 

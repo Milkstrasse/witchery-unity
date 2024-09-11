@@ -62,11 +62,7 @@ public class FightManager : MonoBehaviour
 
         if (conn.connectionId != NetworkClient.connection.connectionId && message.playerIndex != 1)
         {
-            if (GlobalManager.singleton.maxPlayers > 1)
-            {
-                conn.Send(new MoveMessage(-1, 0, false));
-            }
-
+            conn.Send(new MoveMessage(-1, 0, false));
             conn.Send(new TurnMessage(message.playerIndex, new PlayerData[] { logic.players[message.playerIndex] }, true));
             
             return;
@@ -81,11 +77,7 @@ public class FightManager : MonoBehaviour
         float sendDelay = 0f;
         if (logic.PlayLastCard(message))
         {
-            if (GlobalManager.singleton.maxPlayers > 1)
-            {
-                NetworkServer.SendToAll(new MoveMessage(-1, 0, false));
-            }
-
+            NetworkServer.SendToAll(new MoveMessage(-1, 0, false));
             NetworkServer.SendToAll(new TurnMessage(logic.playerTurn - 5, logic.players.ToArray()));
             
             sendDelay = 1.5f;
@@ -100,20 +92,13 @@ public class FightManager : MonoBehaviour
 
         if (logic.MakeMove(message))
         {
-            if (GlobalManager.singleton.maxPlayers > 1)
-            {
-                NetworkServer.SendToAll(message);
-            }
-
+            message.cardPlayed = logic.lastCard.played;
+            NetworkServer.SendToAll(message);
             NetworkServer.SendToAll(new TurnMessage(logic.playerTurn, logic.players.ToArray()));
         }
         else //no card was played or removed
         {
-            if (GlobalManager.singleton.maxPlayers > 1)
-            {
-                conn.Send(new MoveMessage(-1, 0, false));
-            }
-
+            conn.Send(new MoveMessage(-1, 0, false));
             conn.Send(new TurnMessage(logic.playerTurn, new PlayerData[] { logic.players[logic.playerTurn] }, true));
         }
     }

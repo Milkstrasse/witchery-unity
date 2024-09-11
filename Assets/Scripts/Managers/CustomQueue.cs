@@ -25,7 +25,7 @@ public class CustomQueue
 
         priorityIndex = messages.Count;
 
-        return messages.Count == GlobalManager.singleton.maxPlayers;
+        return messages.Count == 2;
     }
 
     public NetworkMessage PopFromQueue()
@@ -33,7 +33,7 @@ public class CustomQueue
         NetworkMessage message = messages[0];
         messages.RemoveAt(0);
 
-        if (messages.Count < GlobalManager.singleton.maxPlayers)
+        if (messages.Count < 2)
         {
             priorityIndex = 0;
         }

@@ -39,11 +39,14 @@ public struct MoveMessage : NetworkMessage
     public int playerIndex;
     public int cardIndex;
     public bool playCard;
+    public bool cardPlayed;
 
-    public MoveMessage(int playerIndex, int cardIndex, bool playCard)
+    public MoveMessage(int playerIndex, int cardIndex, bool playCard, bool cardPlayed = false)
     {
         this.playerIndex = playerIndex;
         this.cardIndex = cardIndex;
         this.playCard = playCard;
+
+        this.cardPlayed = cardPlayed;
     }
 }
