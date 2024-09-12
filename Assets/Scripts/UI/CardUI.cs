@@ -1,6 +1,8 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour
@@ -47,7 +49,12 @@ public class CardUI : MonoBehaviour
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name);
 
             icon.text = card.move.cost.ToString();
-            stringEvent.StringReference.SetReference("StringTable", card.move.name + "Descr");
+
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Abs(card.move.health);
+            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Abs(card.move.energy);
+            (stringEvent.StringReference["effect"] as StringVariable).Value = card.move.effect.name;
+            stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription());
+
             stringEvent.RefreshString();
         }
         else
@@ -93,5 +100,17 @@ public class CardUI : MonoBehaviour
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = showCard ? 1f: 0;
         canvasGroup.blocksRaycasts = showCard;
+    }
+
+    public void UpdateMoveText(bool update, int cardCost)
+    {
+        if (card.hasMove && card.move.moveID >= 10 && card.move.moveID <= 12)
+        {
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Abs(card.move.health * cardCost);
+            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Abs(card.move.energy * cardCost);
+            stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription(update ? 10 : 0));
+
+            stringEvent.RefreshString();
+        }
     }
 }

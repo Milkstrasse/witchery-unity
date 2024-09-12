@@ -428,7 +428,16 @@ MonoBehaviour:
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
-    m_LocalVariables: []
+    m_LocalVariables:
+    - name: health
+      variable:
+        rid: 296817841402019846
+    - name: energy
+      variable:
+        rid: 296817841402019847
+    - name: effect
+      variable:
+        rid: 296817841402019848
   m_FormatArguments: []
   m_UpdateString:
     m_PersistentCalls:
@@ -447,7 +456,19 @@ MonoBehaviour:
         m_CallState: 2
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 296817841402019846
+      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 0
+    - rid: 296817841402019847
+      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 0
+    - rid: 296817841402019848
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 
 --- !u!1 &7305473029632758587
 GameObject:
   m_ObjectHideFlags: 0

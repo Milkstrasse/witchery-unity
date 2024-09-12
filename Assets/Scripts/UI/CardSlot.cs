@@ -22,6 +22,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             eventCardUI.HighlightCard(true);
+            eventCardUI.UpdateMoveText(true, cardUI.card.hasMove ? cardUI.card.move.cost : 0);
         }
     }
 
@@ -31,6 +32,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             eventCardUI.HighlightCard(false);
+            eventCardUI.UpdateMoveText(false, 1);
         }
     }
 

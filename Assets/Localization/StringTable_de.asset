@@ -36,41 +36,34 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7209985523048448
-    m_Localized: Erteile 10 Schaden
+    m_Localized: Erteile {health} Schaden
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357012
   - m_Id: 7210210211913728
-    m_Localized: Erhalte 5 HP
+    m_Localized: Erhalte {health} HP
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357012
   - m_Id: 7210015948529664
-    m_Localized: Erteile Bleed-Effekt
+    m_Localized: Erteile {effect}-Effekt
     m_Metadata:
-      m_Items: []
-  - m_Id: 7210127370215424
-    m_Localized: Erteile Bomb-Effekt
-    m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357012
   - m_Id: 7210099683614720
     m_Localized: Blockiere Angriff
     m_Metadata:
       m_Items: []
   - m_Id: 7210153374900224
-    m_Localized: Erhalte Energise-Effekt
+    m_Localized: Erhalte {effect}-Effekt
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357012
   - m_Id: 7210184622465024
-    m_Localized: Erhalte 1 Energie
+    m_Localized: Erhalte {energy} Energie
     m_Metadata:
-      m_Items: []
-  - m_Id: 7210230206160896
-    m_Localized: Erhalte Healing-Effekt
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210293263327232
-    m_Localized: Erhalte Power-Effekt
-    m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357012
   - m_Id: 7622866769010688
     m_Localized: Effekte tauschen
     m_Metadata:
@@ -92,41 +85,34 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7837084361416704
-    m_Localized: Erteile 4 * vorherige Energiekosten Schaden
+    m_Localized: Erteile {health} * vorherige Energiekosten Schaden
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357012
   - m_Id: 7837112253538304
-    m_Localized: Erhalte 4 * vorherige Energiekosten HP
+    m_Localized: Erhalte {health}  * vorherige Energiekosten HP
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357012
   - m_Id: 7842569093373952
-    m_Localized: Erhalte 2 * vorherige Energiekosten Energie
+    m_Localized: Erhalte {energy} * vorherige Energiekosten Energie
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357012
   - m_Id: 7880276955881472
     m_Localized: Ziehe Karten bis du 5 hast
     m_Metadata:
       m_Items: []
   - m_Id: 7920018510569472
-    m_Localized: Stehle 2 Energie
+    m_Localized: Stehle {energy} Energie
     m_Metadata:
-      m_Items: []
-  - m_Id: 7940532016766976
-    m_Localized: "Erteile Doom-Effekt f\xFCr alle"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7947713579573248
-    m_Localized: Erhalte Blessing-Effekt
-    m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357012
   - m_Id: 7992895737946112
-    m_Localized: Stehle 5 HP
+    m_Localized: Stehle {health} HP
     m_Metadata:
-      m_Items: []
-  - m_Id: 7996141407821824
-    m_Localized: Erteile Weak-Effekt
-    m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357012
   - m_Id: 8024861875101696
     m_Localized: Entferne alle leere Karten
     m_Metadata:
@@ -201,3 +187,13 @@ MonoBehaviour:
         m_Entries: 
         m_SharedEntries:
         - id: 8258911885844480
+        - id: 7209985523048448
+        - id: 7210015948529664
+        - id: 7210153374900224
+        - id: 7210184622465024
+        - id: 7837084361416704
+        - id: 7842569093373952
+        - id: 7837112253538304
+        - id: 7920018510569472
+        - id: 7992895737946112
+        - id: 7210210211913728

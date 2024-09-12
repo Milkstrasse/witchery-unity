@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0c3f2616e0734b19bc2feecd7d70d51, type: 3}
-  m_Name: gainBlessing
+  m_Name: energise
   m_EditorClassIdentifier: 
   moveID: 3
-  cost: 4
+  cost: 2
   health: 0
   energy: 0
   effect:
-    name: blessing
-    icon: f5bb
-    duration: 5
-    value: 100
-    statusType: 0
-    isDelayed: 1
+    name: energise
+    icon: f7e4
+    duration: 3
+    value: 2
+    statusType: 2
+    isDelayed: 0
     isNew: 0
   moveType: 0
