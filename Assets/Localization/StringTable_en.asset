@@ -85,7 +85,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7837084361416704
-    m_Localized: Do {health} * cost of last card damage
+    m_Localized: Do {health} * cost damage
     m_Metadata:
       m_Items:
       - rid: 296817732614357011

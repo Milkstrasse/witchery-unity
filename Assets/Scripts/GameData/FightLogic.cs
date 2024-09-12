@@ -153,51 +153,51 @@ public class FightLogic
                     break;
                 default:
                     int health = move.health;
+                    if (move.moveID == 10 || move.moveID == 11)
+                    {
+                        health *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
+                    }
 
-                        if (move.moveID == 10 || move.moveID == 11)
-                        {
-                            health *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
-                        }
+                    if (health < 0)
+                    {
+                        health = Math.Min(health - players[turn].GetPowerBonus(), 0);
+                    }
+                    else if (health > 0)
+                    {
+                        health = Math.Max(health + players[turn].GetPowerBonus(), 0);
+                    }
 
-                        if (health < 0)
-                        {
-                            health = Math.Min(health - players[turn].GetPowerBonus(), 0);
-                        }
-                        else if (health > 0)
-                        {
-                            health = Math.Max(health + players[turn].GetPowerBonus(), 0);
-                        }
+                    card.move.health = health;
+                    players[(move.target + turn) % 2].health = Math.Clamp(players[(move.target + turn) % 2].health + health, 0, 50);
 
-                        players[(move.target + turn)%2].health = Math.Clamp(players[(move.target + turn)%2].health + health, 0, 50);
+                    int energy = move.energy;
+                    if (move.moveID == 12)
+                    {
+                        energy *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
+                    }
 
-                        int energy = move.energy;
+                    if (energy < 0)
+                    {
+                        energy = Math.Min(energy - players[turn].GetPowerBonus(), 0);
+                    }
+                    else if (energy > 0)
+                    {
+                        energy = Math.Max(energy + players[turn].GetPowerBonus(), 0);
+                    }
 
-                        if (move.moveID == 12)
-                        {
-                            energy *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
-                        }
+                    card.move.energy = energy;
+                    players[(move.target + turn) % 2].energy += energy;
 
-                        if (energy < 0)
-                        {
-                            energy = Math.Min(energy - players[turn].GetPowerBonus(), 0);
-                        }
-                        else if (energy > 0)
-                        {
-                            energy = Math.Max(energy + players[turn].GetPowerBonus(), 0);
-                        }
+                    if (move.effect.duration > 0)
+                    {
+                        StatusEffect effect = new StatusEffect(move.effect);
+                        players[(move.target + turn) % 2].AddEffect(effect);
+                    }
 
-                        players[(move.target + turn)%2].energy += energy;
-
-                        if (move.effect.duration > 0)
-                        {
-                            StatusEffect effect = new StatusEffect(move.effect);
-                            players[(move.target + turn)%2].AddEffect(effect);
-                        }
-
-                        if (winner < 0 && players[(move.target + turn)%2].health == 0)
-                        {
-                            winner = 1 - (move.target + turn)%2;
-                        }
+                    if (winner < 0 && players[(move.target + turn) % 2].health == 0)
+                    {
+                        winner = 1 - (move.target + turn) % 2;
+                    }
 
                     break;
             }
@@ -209,8 +209,7 @@ public class FightLogic
                 switch (move.moveID)
                 {
                     case 1: //snatch hp
-                        int health = Math.Max(lastCard.card.move.health + players[turn].GetPowerBonus(), 0);
-                        players[turn].health = Math.Clamp(players[turn].health + health, 0, 50);
+                        players[turn].health = Math.Clamp(players[turn].health + lastCard.card.move.health, 0, 50);
                         break;
                     case 3: //snatch effect
                         players[turn].AddEffect(lastCard.card.move.effect);

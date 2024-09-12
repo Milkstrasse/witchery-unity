@@ -634,6 +634,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1349281736941416210, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349281736941416210, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial
       value: 
@@ -762,6 +770,14 @@ PrefabInstance:
     - target: {fileID: 1209622583104829782, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349281736941416210, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349281736941416210, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_Interactable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_sharedMaterial

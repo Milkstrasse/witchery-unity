@@ -1,7 +1,6 @@
 using Mirror;
 using UnityEngine;
 
-[RequireComponent(typeof(Canvas))]
 public class FightUI : MonoBehaviour
 {
     [SerializeField] private FightManager manager;

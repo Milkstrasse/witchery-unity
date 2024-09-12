@@ -19,6 +19,11 @@ public class Move : ScriptableObject
 
     public string GetDescription(int offset = 0)
     {
+        if (moveType == MoveType.Response)
+        {
+            return name;
+        }
+        
         switch (moveID - offset)
         {
             case 0:

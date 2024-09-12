@@ -85,7 +85,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7837084361416704
-    m_Localized: Erteile {health} * vorherige Energiekosten Schaden
+    m_Localized: Erteile {health} * Kosten Schaden
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
