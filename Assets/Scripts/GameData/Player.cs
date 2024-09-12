@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
 
         fighterIDs = message.fighterIDs;
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++) //blank cards
         {
             cards.Add(new Card());
         }

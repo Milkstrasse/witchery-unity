@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private CardUI cardUI;
-    private Card lastCard;
+    [SerializeField] private CardUI lastCardUI;
 
     private float[] startX = new float[] {0, 29, 41, 29, 0, -29, -41, -29};
     private float[] startY = new float[] {41, 29, 0, -29, -41, -29, 0, 29};
@@ -48,8 +48,14 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void SetupCard(Card card, bool isFlipped)
     {
-        lastCard = cardUI.card;
-        transform.eulerAngles = new Vector3(0, 0, isFlipped ? 180 : 0);
+        if (cardUI.card.hasMove)
+        {
+            lastCardUI.SetupCard(cardUI.card);
+            lastCardUI.transform.eulerAngles = cardUI.transform.eulerAngles;
+            lastCardUI.FlipCard(false);
+        }
+
+        cardUI.transform.eulerAngles = new Vector3(0, 0, isFlipped ? 180 : 0);
 
         cardUI.SetupCard(card);
         cardUI.FlipCard(false);
@@ -57,11 +63,11 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void ResetCard()
     {
-        transform.eulerAngles = new Vector3(0, 0, 180);
+        cardUI.transform.eulerAngles = lastCardUI.transform.eulerAngles;
         
-        if (lastCard.hasMove)
+        if (lastCardUI.card.hasMove)
         {
-            cardUI.SetupCard(lastCard);
+            cardUI.SetupCard(lastCardUI.card);
         }
         else
         {
@@ -69,8 +75,13 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         }
     }
 
-    public void PlayAnimation()
+    public void PlayAnimation(bool switchCards)
     {
+        if (switchCards || !cardUI.gameObject.activeSelf)
+        {
+            cardUI.gameObject.SetActive(!cardUI.gameObject.activeSelf);
+        }
+
         for (int i = 0; i < 8; i++)
         {
             LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(endX[i], endY[i], 0), 0.3f).setOnComplete(ResetAnimation);

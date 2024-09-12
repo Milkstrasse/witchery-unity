@@ -155,7 +155,7 @@ public class PlayerFightUI : MonoBehaviour
 
         if (message.cardPlayed)
         {
-            cardSlot.PlayAnimation();
+            cardSlot.PlayAnimation(false);
         }
 
         player.cardHand.RemoveAt(message.cardIndex);
