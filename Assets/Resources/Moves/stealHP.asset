@@ -14,17 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveID: 20
   cost: 3
-  health: 05000000fbffffff
-  energy: 0000000000000000
-  effects:
-  - name: 
-    icon: 
-    duration: 0
-    value: 0
-    statusType: 0
-    isDelayed: 0
-    isNew: 0
-  - name: 
+  target: 2
+  health: -5
+  energy: 0
+  effect:
+    name: 
     icon: 
     duration: 0
     value: 0

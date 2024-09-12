@@ -14,19 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveID: 5
   cost: 2
-  health: 0000000000000000
-  energy: 0000000000000000
-  effects:
-  - name: doom
-    icon: F54C
-    duration: 3
+  target: 1
+  health: 0
+  energy: 0
+  effect:
+    name: doom
+    icon: f54c
+    duration: 5
     value: -100
     statusType: 0
     isDelayed: 1
-  - name: doom
-    icon: F54C
-    duration: 3
-    value: -100
-    statusType: 0
-    isDelayed: 1
+    isNew: 0
   moveType: 0

@@ -188,6 +188,10 @@ MonoBehaviour:
     m_Localized: Reflect effect back
     m_Metadata:
       m_Items: []
+  - m_Id: 9396931322175488
+    m_Localized: Clear own effects
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

@@ -20,7 +20,8 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     {
         if (eventData.pointerDrag != null)
         {
-            eventData.pointerDrag.GetComponent<CardUI>().HighlightCard(true);
+            CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
+            eventCardUI.HighlightCard(true);
         }
     }
 
@@ -28,7 +29,8 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     {
         if (eventData.pointerDrag != null)
         {
-            eventData.pointerDrag.GetComponent<CardUI>().HighlightCard(false);
+            CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
+            eventCardUI.HighlightCard(false);
         }
     }
 
@@ -37,10 +39,10 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         if (eventData.pointerDrag != null && FightManager.singleton.IsAbleToMessage())
         {
             int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;
-            CardUI cardUI = eventData.pointerDrag.GetComponent<CardUI>();
-            cardUI.HighlightCard(false);
+            CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
+            eventCardUI.HighlightCard(false);
             
-            SetupCard(cardUI.card, cardUI.transform.eulerAngles.z == 180f);
+            SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
 
             FightManager.singleton.SendMove(cardIndex, true);
         }

@@ -183,6 +183,10 @@ MonoBehaviour:
     m_Key: reflectHexDescr
     m_Metadata:
       m_Items: []
+  - m_Id: 9396931322175488
+    m_Key: clearMyEffectsDescr
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
