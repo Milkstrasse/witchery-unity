@@ -24,6 +24,7 @@ public class CardUI : MonoBehaviour
     private LocalizeStringEvent stringEvent;
 
     public Card card;
+    private Player player;
 
     private void Start()
     {
@@ -40,9 +41,10 @@ public class CardUI : MonoBehaviour
         infoText.text = fighter.name;
     }
 
-    public void SetupCard(Card card)
+    public void SetupCard(Card card, Player player = null)
     {
         this.card = card;
+        this.player = player;
 
         if (card.hasMove)
         {
@@ -50,8 +52,8 @@ public class CardUI : MonoBehaviour
 
             icon.text = card.move.cost.ToString();
 
-            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Abs(card.move.health);
-            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Abs(card.move.energy);
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12);
+            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12);
             (stringEvent.StringReference["effect"] as StringVariable).Value = card.move.effect.name;
             stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription());
 
@@ -106,11 +108,23 @@ public class CardUI : MonoBehaviour
     {
         if (card.hasMove && card.move.moveID >= 10 && card.move.moveID <= 12)
         {
-            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Abs(card.move.health * cardCost);
-            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Abs(card.move.energy * cardCost);
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Abs(card.move.health * cardCost) + GetPowerBonus(false);
+            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Abs(card.move.energy * cardCost) + GetPowerBonus(false);
             stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription(update ? 10 : 0));
 
             stringEvent.RefreshString();
+        }
+    }
+
+    private int GetPowerBonus(bool ignoreCost)
+    {
+        if (player == null || ignoreCost)
+        {
+            return 0;
+        }
+        else
+        {
+            return player.GetPowerBonus();
         }
     }
 }
