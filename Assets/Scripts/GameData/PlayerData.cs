@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerData
 {
@@ -61,7 +61,7 @@ public class PlayerData
         int n = cardStack.Count - 1;
         while (n > 0)
         {
-            int j = Random.Range(0, n);
+            int j = UnityEngine.Random.Range(0, n);
             int tmp = cardStack[n];
             cardStack[n] = cardStack[j];
             cardStack[j] = tmp;
@@ -72,8 +72,10 @@ public class PlayerData
 
     public void FillHand(int cardAmount)
     {
+        int amount = Math.Min(cardAmount, playedCards.Count + cardStack.Count - startIndex);
+
         int i = 0;
-        while (i < cardAmount)
+        while (i < amount)
         {
             if (cardStack.Count == 0)
             {

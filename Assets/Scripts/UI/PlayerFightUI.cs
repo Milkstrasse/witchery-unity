@@ -64,7 +64,7 @@ public class PlayerFightUI : MonoBehaviour
         {
             if (i < player.cardHand.Count)
             {
-                cards[i].SetupCard(player.cardHand[i]);
+                cards[i].SetupCard(player.cardHand[i], player);
                 cards[i].ShowCard(true);
             }
             else
@@ -107,7 +107,7 @@ public class PlayerFightUI : MonoBehaviour
         {
             if (i < player.cardHand.Count)
             {
-                cards[i].SetupCard(player.cardHand[i]);
+                cards[i].SetupCard(player.cardHand[i], player);
                 cards[i].ShowCard(true);
             }
             else
@@ -155,7 +155,7 @@ public class PlayerFightUI : MonoBehaviour
 
         if (message.cardPlayed)
         {
-            cardSlot.PlayAnimation();
+            cardSlot.PlayAnimation(false);
         }
 
         player.cardHand.RemoveAt(message.cardIndex);

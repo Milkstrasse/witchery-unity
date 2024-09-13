@@ -1,6 +1,8 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour
@@ -22,6 +24,7 @@ public class CardUI : MonoBehaviour
     private LocalizeStringEvent stringEvent;
 
     public Card card;
+    private Player player;
 
     private void Start()
     {
@@ -38,16 +41,22 @@ public class CardUI : MonoBehaviour
         infoText.text = fighter.name;
     }
 
-    public void SetupCard(Card card)
+    public void SetupCard(Card card, Player player = null)
     {
         this.card = card;
+        this.player = player;
 
         if (card.hasMove)
         {
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name);
 
             icon.text = card.move.cost.ToString();
-            stringEvent.StringReference.SetReference("StringTable", card.move.name + "Descr");
+
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
+            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
+            (stringEvent.StringReference["effect"] as StringVariable).Value = card.move.effect.name;
+            stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription());
+
             stringEvent.RefreshString();
         }
         else
@@ -93,5 +102,29 @@ public class CardUI : MonoBehaviour
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = showCard ? 1f: 0;
         canvasGroup.blocksRaycasts = showCard;
+    }
+
+    public void UpdateMoveText(bool update, int cardCost)
+    {
+        if (card.hasMove && card.move.moveID >= 10 && card.move.moveID <= 12)
+        {
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(update ? false : card.move.moveID >= 10 && card.move.moveID <= 12), 0);
+            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy * cardCost) + GetPowerBonus(update ? false : card.move.moveID >= 10 && card.move.moveID <= 12), 0);
+            stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription(update ? 10 : 0));
+
+            stringEvent.RefreshString();
+        }
+    }
+
+    private int GetPowerBonus(bool ignoreCost)
+    {
+        if (player == null || ignoreCost)
+        {
+            return 0;
+        }
+        else
+        {
+            return player.GetPowerBonus();
+        }
     }
 }

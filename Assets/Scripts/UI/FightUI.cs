@@ -1,7 +1,6 @@
 using Mirror;
 using UnityEngine;
 
-[RequireComponent(typeof(Canvas))]
 public class FightUI : MonoBehaviour
 {
     [SerializeField] private FightManager manager;
@@ -47,9 +46,9 @@ public class FightUI : MonoBehaviour
         {
             manager.timeToMakeMove = 0f;
 
-            if (message.cardPlayed && message.playCard)
+            if ((message.playCard || message.playerIndex < 0) && message.cardPlayed)
             {
-                cardSlot.PlayAnimation();
+                cardSlot.PlayAnimation(message.playerIndex < 0);
             }
         }
     }

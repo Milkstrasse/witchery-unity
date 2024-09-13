@@ -32,143 +32,111 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7209985523048448
-    m_Key: attackDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210015948529664
-    m_Key: addBleedDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210099683614720
-    m_Key: blockAttackDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210127370215424
-    m_Key: addBombDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210153374900224
-    m_Key: gainEnergiseDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210184622465024
-    m_Key: energyDescr
+    m_Key: doDamage
     m_Metadata:
       m_Items: []
   - m_Id: 7210210211913728
-    m_Key: healDescr
+    m_Key: recoverHP
     m_Metadata:
       m_Items: []
-  - m_Id: 7210230206160896
-    m_Key: gainHealingDescr
+  - m_Id: 7210184622465024
+    m_Key: gainEnergy
     m_Metadata:
       m_Items: []
-  - m_Id: 7210293263327232
-    m_Key: gainPowerDescr
+  - m_Id: 7210153374900224
+    m_Key: gainEffect
     m_Metadata:
       m_Items: []
-  - m_Id: 7541205104582656
-    m_Key: reduceCostDescr
+  - m_Id: 7210015948529664
+    m_Key: giveEffect
     m_Metadata:
       m_Items: []
-  - m_Id: 7553544101027840
-    m_Key: addPowerDescr
+  - m_Id: 7210099683614720
+    m_Key: blockAttack
     m_Metadata:
       m_Items: []
   - m_Id: 7622866769010688
-    m_Key: swapEffectsDescr
+    m_Key: swapEffects
     m_Metadata:
       m_Items: []
   - m_Id: 7622870518718464
-    m_Key: clearEffectsDescr
+    m_Key: clearAllEffects
     m_Metadata:
       m_Items: []
   - m_Id: 7658928543358976
-    m_Key: replayCardDescr
+    m_Key: replayCard
     m_Metadata:
       m_Items: []
   - m_Id: 7672341843664896
-    m_Key: snatchHPDescr
+    m_Key: snatchHP
     m_Metadata:
       m_Items: []
   - m_Id: 7829019750817792
-    m_Key: redistributeDescr
+    m_Key: redistribute
     m_Metadata:
       m_Items: []
   - m_Id: 7837084361416704
-    m_Key: specialAttackDescr
+    m_Key: doCostDamage
     m_Metadata:
       m_Items: []
   - m_Id: 7837112253538304
-    m_Key: specialHealDescr
+    m_Key: recoverCostHP
     m_Metadata:
       m_Items: []
   - m_Id: 7842569093373952
-    m_Key: specialEnergyDescr
+    m_Key: gainCostEnergy
     m_Metadata:
       m_Items: []
   - m_Id: 7880276955881472
-    m_Key: fillHandDescr
+    m_Key: fillHand
     m_Metadata:
       m_Items: []
   - m_Id: 7920018510569472
-    m_Key: stealEnergyDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7940532016766976
-    m_Key: addDoomDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7947713579573248
-    m_Key: gainBlessingDescr
+    m_Key: stealEnergy
     m_Metadata:
       m_Items: []
   - m_Id: 7992895737946112
-    m_Key: stealHPDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7996141407821824
-    m_Key: addWeakenDescr
+    m_Key: stealHP
     m_Metadata:
       m_Items: []
   - m_Id: 8024858918117376
-    m_Key: addBlankDescr
+    m_Key: addBlank
     m_Metadata:
       m_Items: []
   - m_Id: 8024861875101696
-    m_Key: clearBlanksDescr
+    m_Key: clearBlanks
     m_Metadata:
       m_Items: []
   - m_Id: 8223596102017024
-    m_Key: bleedDescr
+    m_Key: bleed
     m_Metadata:
       m_Items: []
   - m_Id: 8223760501956608
-    m_Key: healingDescr
+    m_Key: healing
     m_Metadata:
       m_Items: []
   - m_Id: 8223787123204096
-    m_Key: powerDescr
+    m_Key: power
     m_Metadata:
       m_Items: []
   - m_Id: 8223807327166464
-    m_Key: weakenDescr
+    m_Key: weaken
     m_Metadata:
       m_Items: []
   - m_Id: 8223827040395264
-    m_Key: doomDescr
+    m_Key: doom
     m_Metadata:
       m_Items: []
   - m_Id: 8223843544981504
-    m_Key: blessingDescr
+    m_Key: blessing
     m_Metadata:
       m_Items: []
   - m_Id: 8229724533809152
-    m_Key: bombDescr
+    m_Key: bomb
     m_Metadata:
       m_Items: []
   - m_Id: 8229765759623168
-    m_Key: energiseDescr
+    m_Key: energise
     m_Metadata:
       m_Items: []
   - m_Id: 8258911885844480
@@ -176,23 +144,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8661223867408384
-    m_Key: getAttackDescr
+    m_Key: getAttack
     m_Metadata:
       m_Items: []
   - m_Id: 8661230519574528
-    m_Key: getHealDescr
+    m_Key: getHeal
     m_Metadata:
       m_Items: []
   - m_Id: 8910918694985728
-    m_Key: snatchEffectDescr
+    m_Key: snatchEffect
     m_Metadata:
       m_Items: []
   - m_Id: 8964874955644928
-    m_Key: reflectHexDescr
+    m_Key: reflectHex
     m_Metadata:
       m_Items: []
-  - m_Id: 9032632103854080
-    m_Key: addDurationDescr
+  - m_Id: 9396931322175488
+    m_Key: clearEffects
     m_Metadata:
       m_Items: []
   m_Metadata:

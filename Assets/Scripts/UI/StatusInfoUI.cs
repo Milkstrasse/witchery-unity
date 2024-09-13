@@ -17,7 +17,7 @@ public class StatusInfoUI : MonoBehaviour
         uint i = Convert.ToUInt32(effect.icon, 16);
         icon.text = Convert.ToChar(i).ToString();
 
-        infoText.StringReference.SetReference("StringTable", effect.name + "Descr");
+        infoText.StringReference.SetReference("StringTable", effect.name);
         infoText.RefreshString();
 
         (turns.StringReference["duration"] as IntVariable).Value = effect.duration;

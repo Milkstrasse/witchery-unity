@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
 
         fighterIDs = message.fighterIDs;
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++) //blank cards
         {
             cards.Add(new Card());
         }
@@ -100,5 +100,20 @@ public class Player : MonoBehaviour
         }
 
         return false;
+    }
+
+    public int GetPowerBonus()
+    {
+        int power = 0;
+
+        for (int i = 0; i < effects.Count; i++)
+        {
+            if (effects[i].statusType == StatusEffect.StatusType.Power)
+            {
+                power += effects[i].value;
+            }
+        }
+
+        return power;
     }
 }

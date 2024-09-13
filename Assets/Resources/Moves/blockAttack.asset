@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: blockAttack
   m_EditorClassIdentifier: 
   moveID: 0
-  cost: 2
+  cost: 0
   health: 
   energy: 
   effects: []
-  moveType: 2
+  moveType: 1
