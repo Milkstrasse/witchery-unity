@@ -143,7 +143,7 @@ public class PlayerFightUI : MonoBehaviour
     {
         FightManager.singleton.timeToMakeMove = 0.5f;
 
-        cards[message.cardIndex].FlipCard(false);
+        cards[message.cardIndex].FlipCard(false, false);
         cards[message.cardIndex].transform.SetParent(canvas.transform);
         
         LeanTween.move(cards[message.cardIndex].gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);

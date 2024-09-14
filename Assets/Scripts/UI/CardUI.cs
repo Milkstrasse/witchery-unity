@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
@@ -7,11 +8,12 @@ using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour
 {
-    [SerializeField] private GameObject cardBack;
+    private GameObject[] cardSides;
+
     [SerializeField] private Image portrait;
     [SerializeField] private TextMeshProUGUI icon;
-    [SerializeField] private RawImage background;
-    private RawImage cardBackground;
+    [SerializeField] private RawImage frontBackground;
+    [SerializeField] private RawImage backBackground;
     [SerializeField] private TextMeshProUGUI infoText;
 
     [SerializeField] private Color neutralFront;
@@ -28,14 +30,14 @@ public class CardUI : MonoBehaviour
 
     private void Start()
     {
+        cardSides = new GameObject[] {transform.GetChild(0).gameObject, transform.GetChild(1).gameObject};
+
         stringEvent = infoText.GetComponent<LocalizeStringEvent>();
-        cardBackground = cardBack.transform.GetChild(0).GetComponent<RawImage>();
     }
 
     public void SetupCard(Fighter fighter)
     {
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name);
-        background.color = neutralFront;
 
         icon.text = fighter.fighterID.ToString();
         infoText.text = fighter.name;
@@ -68,27 +70,58 @@ public class CardUI : MonoBehaviour
     public void HighlightCard(bool isHighlighted)
     {
         this.isHighlighted = isHighlighted;
-        background.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        cardBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
+        frontBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        backBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
     }
 
     public void SelectCard(bool isSelected)
     {
         this.isSelected = isSelected;
-        background.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        cardBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
+        frontBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        backBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
     }
 
-    public void FlipCard(bool isFlipped)
+    public void FlipCard(bool isFlipped, bool isAnimated = true)
     {
+        if (!isAnimated)
+        {
+            if (card.hasMove)
+            {
+                if (cardSides[0].transform.eulerAngles.y == 0)
+                {
+                    cardSides[0].transform.eulerAngles = new Vector3(0, 90, 0);
+                    cardSides[1].transform.eulerAngles = new Vector3(0, 0, 0);
+                }
+                else
+                {
+                    cardSides[0].transform.eulerAngles = new Vector3(0, 0, 0);
+                    cardSides[1].transform.eulerAngles = new Vector3(0, 90, 0);
+                }
+            }
+
+            return;
+        }
+
         if (card.hasMove && !isFlipped)
         {
-            cardBack.SetActive(false);
+            StartCoroutine(Flip(0));
         }
         else
         {
-            cardBack.SetActive(true);
+            StartCoroutine(Flip(1));
         }
+    }
+
+    IEnumerator Flip(int side)
+    {
+        if (cardSides[1 - side].transform.eulerAngles.y == 90 || cardSides[side].transform.eulerAngles.y == 0)
+        {
+            yield break;
+        }
+        
+        LeanTween.rotateY(cardSides[1 - side], 90, 0.1f);
+        yield return new WaitForSeconds(0.1f);
+        LeanTween.rotateY(cardSides[side], 0, 0.1f);
     }
 
     public void ShowCard(bool showCard)
