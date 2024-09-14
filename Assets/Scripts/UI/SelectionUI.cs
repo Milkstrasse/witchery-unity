@@ -9,7 +9,8 @@ public class SelectionUI : MonoBehaviour
 
     private void Start()
     {
-        manager.onTimerChanged += playerBottom.SetTimer;
+        manager.OnTimerChanged += playerBottom.SetTimer;
+        manager.OnPlayersReady += StartFight;
     }
 
     public void SetReady(int index)
@@ -29,6 +30,12 @@ public class SelectionUI : MonoBehaviour
         return manager.EditTeam(fighterID);
     }
 
+    private void StartFight()
+    {
+        playerTop.ToggleUI(false);
+        playerBottom.ToggleUI(false);
+    }
+
     public void StopSelection()
     {
         manager.ReturnToMenu();
@@ -36,6 +43,7 @@ public class SelectionUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        manager.onTimerChanged -= playerBottom.SetTimer;
+        manager.OnTimerChanged -= playerBottom.SetTimer;
+        manager.OnPlayersReady -= StartFight;
     }
 }

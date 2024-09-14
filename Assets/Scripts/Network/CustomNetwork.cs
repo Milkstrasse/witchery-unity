@@ -39,8 +39,15 @@ public class CustomNetwork : RelayNetworkManager
         if (playersReady == 2)
         {
             playersReady = 0;
-            ServerChangeScene("FightScene");
+            NetworkServer.SendToAll(new TurnMessage());
+
+            Invoke("ChangeToFightScene", 0.3f);
         }
+    }
+
+    private void ChangeToFightScene()
+    {
+        ServerChangeScene("FightScene");
     }
 
     private void OnClientReceivePlayer(PlayerMessage message)

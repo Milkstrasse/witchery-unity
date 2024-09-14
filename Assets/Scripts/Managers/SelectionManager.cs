@@ -10,9 +10,11 @@ public class SelectionManager : MonoBehaviour
    private RelayNetworkManager networkManager;
    private bool[] isReady;
 
-   public event Action<int> onTimerChanged;
+   public event Action<int> OnTimerChanged;
    private List<int> fighterIDs;
    private string[] playerNames;
+
+   public event Action OnPlayersReady;
 
    private void Start()
    {
@@ -22,6 +24,8 @@ public class SelectionManager : MonoBehaviour
       fighterIDs = new List<int>();
       playerNames = new string[]{"Player", "Player"};
       isReady = new bool[2];
+
+      NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
    }
 
    public bool SetReady(int index)
@@ -92,7 +96,7 @@ public class SelectionManager : MonoBehaviour
       while (time >= 0)
       {
          time--;
-         onTimerChanged?.Invoke(time);
+         OnTimerChanged?.Invoke(time);
 
          if (NetworkClient.isConnected && !sentMessage)
          {
@@ -121,6 +125,11 @@ public class SelectionManager : MonoBehaviour
          fighterIDs.Add(fighterID);
          return (true, fighterIDs.Count > 0);
       }
+   }
+
+   private void PlayersReady(TurnMessage message)
+   {
+      OnPlayersReady?.Invoke();
    }
 
    public void ReturnToMenu() => GlobalManager.singleton.LoadScene("MenuScene");

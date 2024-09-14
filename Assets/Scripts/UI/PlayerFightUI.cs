@@ -19,11 +19,14 @@ public class PlayerFightUI : MonoBehaviour
     private CanvasGroup cardGroup;
     [SerializeField] private Canvas canvas;
 
+    private RectTransform rectTransform;
+
     private CardUI[] cards;
 
     private void Start()
     {
         cardGroup = cardParent.GetComponent<CanvasGroup>();
+        rectTransform = GetComponent<RectTransform>();
 
         cards = new CardUI[5];
         effects = new StatusUI[5];
@@ -46,7 +49,7 @@ public class PlayerFightUI : MonoBehaviour
         }
     }
 
-    public void SetupUI(Player player, bool isInteractable)
+    public void SetupUI(Player player, bool isInteractable, bool canBePlayable)
     {
         this.player = player;
         player.OnPlayerChanged += UpdateUI;
@@ -72,7 +75,7 @@ public class PlayerFightUI : MonoBehaviour
                 cards[i].ShowCard(false);
             }
 
-            cards[i].FlipCard(!isInteractable);
+            cards[i].FlipCard(!isInteractable || !canBePlayable, 0.2f);
 
             if (i < player.effects.Count)
             {
@@ -85,11 +88,15 @@ public class PlayerFightUI : MonoBehaviour
             }
         }
 
-        cardGroup.interactable = isInteractable;
-        cardGroup.blocksRaycasts = isInteractable;
+        cardGroup.interactable = isInteractable && canBePlayable;
+        cardGroup.blocksRaycasts = isInteractable && canBePlayable;
 
-        if (isInteractable)
+        if (isInteractable && canBePlayable)
+        {
             StartCoroutine("UpdateTimer");
+        }
+
+        LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isInteractable ? 450f :  130f), 0.3f);
     }
 
     private void UpdateUI()
@@ -141,9 +148,10 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator MoveCard(MoveMessage message, CardSlot cardSlot)
     {
-        FightManager.singleton.timeToMakeMove = 0.5f;
+        FightManager.singleton.timeToMakeMove = 0.8f;
+        yield return new WaitForSeconds(0.3f);
 
-        cards[message.cardIndex].FlipCard(false, false);
+        cards[message.cardIndex].FlipCard(false, 0f);
         cards[message.cardIndex].transform.SetParent(canvas.transform);
         
         LeanTween.move(cards[message.cardIndex].gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
@@ -158,6 +166,7 @@ public class PlayerFightUI : MonoBehaviour
             cardSlot.PlayAnimation(false);
         }
 
+        cards[message.cardIndex].FlipCard(true, 0f);
         player.cardHand.RemoveAt(message.cardIndex);
 
         UpdateUI();
@@ -183,9 +192,9 @@ public class PlayerFightUI : MonoBehaviour
         FightManager.singleton.timeToMakeMove = 0f;
     }
 
-    public void MakeInteractable(bool isInteractable)
+    public void MakeInteractable(bool isInteractable, bool canBePlayable)
     {
-        if (isInteractable && !cardGroup.interactable)
+        if (isInteractable && canBePlayable && !cardGroup.interactable)
         {
             StartCoroutine("UpdateTimer");
         }
@@ -196,12 +205,14 @@ public class PlayerFightUI : MonoBehaviour
             timer.fillAmount = 1.0f;
         }
 
-        cardGroup.interactable = isInteractable;
-        cardGroup.blocksRaycasts = isInteractable;
+        LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isInteractable ? 450f : 130f), 0.3f);
+
+        cardGroup.interactable = isInteractable && canBePlayable;
+        cardGroup.blocksRaycasts = isInteractable && canBePlayable;
 
         for (int i = 0; i < cards.Length; i++)
         {
-            cards[i].FlipCard(!isInteractable);
+            cards[i].FlipCard(!isInteractable || !canBePlayable, 0.2f);
         }
     }
 

@@ -20,20 +20,23 @@ public class FightUI : MonoBehaviour
     {
         if (NetworkClient.activeHost)
         {
-            playerTop.SetupUI(manager.players[1], playerTurn == 1 && GlobalManager.singleton.maxPlayers == 1);
-            playerBottom.SetupUI(manager.players[0], playerTurn == 0);
+            playerTop.SetupUI(manager.players[1], playerTurn == 1, GlobalManager.singleton.maxPlayers == 1);
+            playerBottom.SetupUI(manager.players[0], playerTurn == 0, true);
+            cardSlot.MoveUp(playerTurn == 0);
         }
         else
         {
-            playerTop.SetupUI(manager.players[0], false);
-            playerBottom.SetupUI(manager.players[1], playerTurn == 1);
+            playerTop.SetupUI(manager.players[0], playerTurn == 0, false);
+            playerBottom.SetupUI(manager.players[1], playerTurn == 1, true);
+            cardSlot.MoveUp(playerTurn == 1);
         }
     }
 
     private void ChangePlayers(int playerTurn)
     {
-        playerTop.MakeInteractable(playerTurn == playerTop.player.playerID && GlobalManager.singleton.maxPlayers == 1);
-        playerBottom.MakeInteractable(playerTurn == playerBottom.player.playerID);
+        playerTop.MakeInteractable(playerTurn == playerTop.player.playerID, GlobalManager.singleton.maxPlayers == 1);
+        playerBottom.MakeInteractable(playerTurn == playerBottom.player.playerID, true);
+        cardSlot.MoveUp(playerTurn == playerBottom.player.playerID);
     }
 
     private void MakeMove(MoveMessage message)

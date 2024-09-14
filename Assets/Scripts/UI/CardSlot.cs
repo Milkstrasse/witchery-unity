@@ -56,13 +56,13 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             lastCardUI.SetupCard(cardUI.card);
             lastCardUI.transform.eulerAngles = cardUI.transform.eulerAngles;
-            lastCardUI.FlipCard(false);
+            lastCardUI.FlipCard(false, 0f);
         }
 
         cardUI.transform.eulerAngles = new Vector3(0, 0, isFlipped ? 180 : 0);
 
         cardUI.SetupCard(card);
-        cardUI.FlipCard(false);
+        cardUI.FlipCard(false, 0f);
     }
 
     public void ResetCard()
@@ -75,7 +75,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         }
         else
         {
-            cardUI.FlipCard(true);
+            cardUI.FlipCard(true, 0f);
         }
     }
 
@@ -88,7 +88,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
         for (int i = 0; i < 8; i++)
         {
-            LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(endX[i], endY[i], 0), 0.3f).setOnComplete(ResetAnimation);
+            LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(endX[i], endY[i], 0f), 0.3f).setOnComplete(ResetAnimation);
         }
     }
 
@@ -96,8 +96,13 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     {
         for (int i = 0; i < 8; i++)
         {
-            LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(startX[i], startY[i], 0), 0.1f).setDelay(0.3f);
+            LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(startX[i], startY[i], 0f), 0.1f).setDelay(0.3f);
         }
+    }
+
+    public void MoveUp(bool move)
+    {
+        LeanTween.moveLocalY(gameObject, move ? 160f : -160f, 0.3f);
     }
 
     private void OnDestroy()

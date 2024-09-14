@@ -8,6 +8,7 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private Transform cardParent;
     [SerializeField] private GameObject cardPrefab;
     private CanvasGroup canvasGroup;
+    private RectTransform rectTransform;
     [SerializeField] private LocalizeStringEvent stringEvent;
     [SerializeField] private Image timer;
     [SerializeField] private Button readyButton;
@@ -17,6 +18,7 @@ public class PlayerSelectionUI : MonoBehaviour
     private void Start()
     {
         canvasGroup = cardParent.parent.GetComponent<CanvasGroup>();
+        rectTransform = GetComponent<RectTransform>();
 
         int fighterAmount = GlobalManager.singleton.fighters.Length;
         cards = new CardUI[fighterAmount];
@@ -60,6 +62,7 @@ public class PlayerSelectionUI : MonoBehaviour
         if (GlobalManager.singleton.maxPlayers < 2)
         {
             readyButton.interactable = isActive;
+            LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 130f), 0.3f);
         }
     }
 

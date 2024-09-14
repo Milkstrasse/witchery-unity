@@ -63,7 +63,7 @@ public class CardUI : MonoBehaviour
         }
         else
         {
-            FlipCard(false);
+            FlipCard(false, 0f);
         }
     }
 
@@ -81,22 +81,19 @@ public class CardUI : MonoBehaviour
         backBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
     }
 
-    public void FlipCard(bool isFlipped, bool isAnimated = true)
+    public void FlipCard(bool isFlipped, float delay)
     {
-        if (!isAnimated)
+        if (delay == 0f)
         {
-            if (card.hasMove)
+            if (!card.hasMove || isFlipped)
             {
-                if (cardSides[0].transform.eulerAngles.y == 0)
-                {
-                    cardSides[0].transform.eulerAngles = new Vector3(0, 90, 0);
-                    cardSides[1].transform.eulerAngles = new Vector3(0, 0, 0);
-                }
-                else
-                {
-                    cardSides[0].transform.eulerAngles = new Vector3(0, 0, 0);
-                    cardSides[1].transform.eulerAngles = new Vector3(0, 90, 0);
-                }
+                cardSides[0].transform.eulerAngles = new Vector3(cardSides[0].transform.eulerAngles.x, 90f, cardSides[0].transform.eulerAngles.z);
+                cardSides[1].transform.eulerAngles = new Vector3(cardSides[1].transform.eulerAngles.x, 0f, cardSides[1].transform.eulerAngles.z);
+            }
+            else
+            {
+                cardSides[0].transform.eulerAngles = new Vector3(cardSides[0].transform.eulerAngles.x, 0f, cardSides[0].transform.eulerAngles.z);
+                cardSides[1].transform.eulerAngles = new Vector3(cardSides[1].transform.eulerAngles.x, 90f, cardSides[1].transform.eulerAngles.z);
             }
 
             return;
@@ -104,20 +101,22 @@ public class CardUI : MonoBehaviour
 
         if (card.hasMove && !isFlipped)
         {
-            StartCoroutine(Flip(0));
+            StartCoroutine(Flip(0, delay));
         }
         else
         {
-            StartCoroutine(Flip(1));
+            StartCoroutine(Flip(1, delay));
         }
     }
 
-    IEnumerator Flip(int side)
+    IEnumerator Flip(int side, float delay)
     {
         if (cardSides[1 - side].transform.eulerAngles.y == 90 || cardSides[side].transform.eulerAngles.y == 0)
         {
             yield break;
         }
+
+        yield return new WaitForSeconds(delay);
         
         LeanTween.rotateY(cardSides[1 - side], 90, 0.1f);
         yield return new WaitForSeconds(0.1f);
