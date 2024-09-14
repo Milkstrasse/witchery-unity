@@ -138,11 +138,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8223827040395264
-    m_Localized: verliert Spiel in
+    m_Localized: verletzt Angreifer*in
     m_Metadata:
       m_Items: []
-  - m_Id: 8223843544981504
-    m_Localized: stellt HP voll her in
+  - m_Id: 9781281683398656
+    m_Localized: "\xDCbergebe leere Karten"
     m_Metadata:
       m_Items: []
   - m_Id: 8229724533809152

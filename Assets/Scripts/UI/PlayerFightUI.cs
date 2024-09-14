@@ -39,7 +39,7 @@ public class PlayerFightUI : MonoBehaviour
         {
             CardUI card = cardParent.transform.GetChild(i).GetComponent<CardUI>();
             card.transform.localPosition = new Vector3(i * (230 - cardSpacer), -160f, 0);
-            card.GetComponent<DragDrop>().SetInit(i, this);
+            card.GetComponent<DragDrop>().SetInit();
 
             cards[i] = card;
             effects[i] = statusParent.GetChild(i).GetComponent<StatusUI>();

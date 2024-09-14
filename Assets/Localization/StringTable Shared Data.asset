@@ -124,11 +124,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8223827040395264
-    m_Key: doom
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8223843544981504
-    m_Key: blessing
+    m_Key: spice
     m_Metadata:
       m_Items: []
   - m_Id: 8229724533809152
@@ -161,6 +157,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 9396931322175488
     m_Key: clearEffects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9781281683398656
+    m_Key: handBlanks
     m_Metadata:
       m_Items: []
   m_Metadata:

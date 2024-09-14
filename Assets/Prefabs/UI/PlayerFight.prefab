@@ -869,10 +869,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: \uf70c
+  m_text: \uf024
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0596f0677f9544564b01a504441c01da, type: 2}
-  m_sharedMaterial: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 09d33f93c67e246ffa8eb8b917daee48, type: 2}
+  m_sharedMaterial: {fileID: 3672249639551237850, guid: 09d33f93c67e246ffa8eb8b917daee48, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1193,7 +1193,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: \uf00d
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0596f0677f9544564b01a504441c01da, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 09d33f93c67e246ffa8eb8b917daee48, type: 2}
   m_sharedMaterial: {fileID: 6308037680440404024, guid: d0fb0611940824dd0bd18e0b255766d9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2556,10 +2556,6 @@ PrefabInstance:
       propertyPath: info
       value: 
       objectReference: {fileID: 7455130677209217465}
-    - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2670,10 +2666,6 @@ PrefabInstance:
       propertyPath: info
       value: 
       objectReference: {fileID: 7455130677209217465}
-    - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2784,10 +2776,6 @@ PrefabInstance:
       propertyPath: info
       value: 
       objectReference: {fileID: 7455130677209217465}
-    - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2890,22 +2878,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
-    - target: {fileID: 2221191615035132587, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7291915728765631342, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2951,9 +2927,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff68fa1f7f56046cb812e046edfd846a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardIndex: 0
+  cardIndex: 1
   canvas: {fileID: 0}
-  playerFightUI: {fileID: 0}
+  playerFightUI: {fileID: 8334773474370538663}
 --- !u!1001 &4996983239127340328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3046,22 +3022,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
-    - target: {fileID: 2221191615035132587, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7291915728765631342, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3102,9 +3066,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff68fa1f7f56046cb812e046edfd846a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardIndex: 0
+  cardIndex: 3
   canvas: {fileID: 0}
-  playerFightUI: {fileID: 0}
+  playerFightUI: {fileID: 8334773474370538663}
 --- !u!224 &6165894716283219070 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1209622583104829782, guid: befab4e5540754660a53c9426286eb04, type: 3}
@@ -3202,22 +3166,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
-    - target: {fileID: 2221191615035132587, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7291915728765631342, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3260,7 +3212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardIndex: 0
   canvas: {fileID: 0}
-  playerFightUI: {fileID: 0}
+  playerFightUI: {fileID: 8334773474370538663}
 --- !u!224 &6735910247728425098 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1209622583104829782, guid: befab4e5540754660a53c9426286eb04, type: 3}
@@ -3358,22 +3310,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
-    - target: {fileID: 2221191615035132587, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7291915728765631342, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3419,9 +3359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff68fa1f7f56046cb812e046edfd846a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardIndex: 0
+  cardIndex: 2
   canvas: {fileID: 0}
-  playerFightUI: {fileID: 0}
+  playerFightUI: {fileID: 8334773474370538663}
 --- !u!1001 &6866880699487700746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3522,10 +3462,6 @@ PrefabInstance:
       propertyPath: info
       value: 
       objectReference: {fileID: 7455130677209217465}
-    - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3636,10 +3572,6 @@ PrefabInstance:
       propertyPath: info
       value: 
       objectReference: {fileID: 7455130677209217465}
-    - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3742,22 +3674,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2156244053920379046, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
-    - target: {fileID: 2221191615035132587, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7291915728765631342, guid: befab4e5540754660a53c9426286eb04, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3803,6 +3723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff68fa1f7f56046cb812e046edfd846a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardIndex: 0
+  cardIndex: 4
   canvas: {fileID: 0}
-  playerFightUI: {fileID: 0}
+  playerFightUI: {fileID: 8334773474370538663}

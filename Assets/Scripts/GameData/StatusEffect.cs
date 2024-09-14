@@ -14,7 +14,7 @@ public class StatusEffect
 
     public enum StatusType
     {
-        Health, Energy, Power
+        Health, Energy, Power, Special
     }
 
     public StatusEffect()
@@ -49,13 +49,14 @@ public class StatusEffect
                 break;
             case StatusType.Power:
                 break;
-            default: //StatusType.Health
+            case StatusType.Health:
                 if (!isDelayed || (isDelayed && duration == 1))
                 {
                     player.health = Math.Clamp(player.health + value, 0, 50);
                     isNew = true;
                 }
-
+                break;
+            default: //StatusType.Special
                 break;
         }
     }

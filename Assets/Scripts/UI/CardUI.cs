@@ -81,12 +81,6 @@ public class CardUI : MonoBehaviour
 
     public void FlipCard(bool isFlipped)
     {
-        isSelected = false;
-        isHighlighted = false;
-
-        background.color = neutralFront;
-        cardBackground.color = neutralBack;
-
         if (card.hasMove && !isFlipped)
         {
             cardBack.SetActive(false);

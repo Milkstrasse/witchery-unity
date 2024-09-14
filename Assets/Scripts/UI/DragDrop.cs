@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(CanvasGroup))]
+[RequireComponent(typeof(CanvasGroup), typeof(CardUI))]
 public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public int cardIndex;
@@ -15,17 +15,18 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private Vector2 initPosition;
     private Transform initParent;
 
+    private CardUI cardUI;
+
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+
+        cardUI = GetComponent<CardUI>();
     }
 
-    public void SetInit(int cardIndex, PlayerFightUI playerFightUI)
+    public void SetInit()
     {
-        this.cardIndex = cardIndex;
-        this.playerFightUI = playerFightUI;
-
         initParent = transform.parent;
         initPosition = rectTransform.anchoredPosition;
     }
@@ -42,7 +43,6 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
         if (eventData.pointerDrag != null)
         {
-            CardUI cardUI = eventData.pointerDrag.GetComponent<CardUI>();
             cardUI.SelectCard(rectTransform.position.y < 100f || rectTransform.position.y > Screen.height - 100f);
         }
     }
@@ -60,6 +60,8 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void ResetDrag()
     {
+        cardUI.SelectCard(false);
+
         transform.SetParent(initParent);
         rectTransform.anchoredPosition = initPosition;
         transform.SetSiblingIndex(cardIndex);

@@ -138,11 +138,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8223827040395264
-    m_Localized: loses game in
+    m_Localized: damages attacker
     m_Metadata:
       m_Items: []
-  - m_Id: 8223843544981504
-    m_Localized: regains all health in
+  - m_Id: 9781281683398656
+    m_Localized: Hand blank cards over
     m_Metadata:
       m_Items: []
   - m_Id: 8229724533809152

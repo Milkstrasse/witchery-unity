@@ -116,4 +116,18 @@ public class Player : MonoBehaviour
 
         return power;
     }
+
+    public int GetBlanksInHand()
+    {
+        int counter = 0;
+        for (int i = 0; i < cardHand.Count; i++)
+        {
+            if (!cardHand[i].hasMove)
+            {
+                counter++;
+            }
+        }
+
+        return counter;
+    }
 }

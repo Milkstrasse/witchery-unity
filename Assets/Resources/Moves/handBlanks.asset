@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0c3f2616e0734b19bc2feecd7d70d51, type: 3}
-  m_Name: doom
+  m_Name: handBlanks
   m_EditorClassIdentifier: 
-  moveID: 5
-  cost: 2
-  target: 1
+  moveID: 16
+  cost: 1
+  target: 2
   health: 0
   energy: 0
   effect:
-    name: doom
-    icon: f54c
-    duration: 5
-    value: -100
+    name: 
+    icon: 
+    duration: 0
+    value: 0
     statusType: 0
-    isDelayed: 1
+    isDelayed: 0
     isNew: 0
   moveType: 0

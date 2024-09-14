@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerData
 {
@@ -184,5 +185,30 @@ public class PlayerData
         }
 
         return power;
+    }
+
+    public StatusEffect GetEffect(string effectName)
+    {
+        for (int i = 0; i < effects.Count; i++)
+        {
+            if (effects[i].name == effectName)
+            {
+                effects[i].isNew = true;
+                return effects[i];
+            }
+        }
+
+        return null;
+    }
+
+    public void RemoveBlanks(Player player)
+    {
+        for (int i = 0; i < cardHand.Count; i++)
+        {
+            if (!player.cardHand[i].hasMove)
+            {
+                RemoveCard(i);
+            }
+        }
     }
 }

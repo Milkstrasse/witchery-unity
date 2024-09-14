@@ -55,6 +55,10 @@ public class FightLogic
         {
             switch (lastCard.card.move.moveID)
             {
+                case 16: //hand blanks over
+                    Debug.Log("AAAAAAAAAA");
+                    players[playerTurn].RemoveBlanks(FightManager.singleton.players[playerTurn]);
+                    break;
                 case 19: //fill hand
                     players[playerTurn].FillHand(5 - players[playerTurn].cardHand.Count);
                     break;
@@ -106,10 +110,16 @@ public class FightLogic
                     players[turn].energy += tempEnergy;
 
                     break;
+                case 7: //redistribute HP
+                    int allHealth = players[0].health + players[1].health;
+                    players[0].health = allHealth / 2;
+                    players[1].health = allHealth / 2;
+
+                    break;
                 case 8: //swap effects
-                    List<StatusEffect> temp = players[0].effects;
+                    List<StatusEffect> tempEffects = players[0].effects;
                     players[0].effects = players[1].effects;
-                    players[1].effects = temp;
+                    players[1].effects = tempEffects;
 
                     break;
                 case 9: //clear effects
@@ -124,14 +134,13 @@ public class FightLogic
                     }
 
                     break;
-                case 15: //redistribute HP
-                    int allHealth = players[0].health + players[1].health;
-                    players[0].health = allHealth / 2;
-                    players[1].health = allHealth / 2;
-
-                    break;
-                case 16: //add blank
+                case 15: //add blank
                     players[(move.target + turn)%2].startIndex = Math.Max(players[(move.target + turn)%2].startIndex - 1, 0);
+                    break;
+                case 16: //hand blanks over
+                    int blanks = FightManager.singleton.players[turn].GetBlanksInHand();
+                    players[1 - turn].startIndex = Math.Max(players[1 - turn].startIndex - blanks, 0);
+
                     break;
                 case 17: //clear blank
                     players[(move.target + turn)%2].startIndex = 5;
@@ -167,7 +176,25 @@ public class FightLogic
                         health = Math.Max(health + players[turn].GetPowerBonus(), 0);
                     }
 
-                    players[(move.target + turn) % 2].health = Math.Clamp(players[(move.target + turn) % 2].health + health, 0, 50);
+                    players[(move.target + turn)%2].health = Math.Clamp(players[(move.target + turn)%2].health + health, 0, 50);
+
+                    if (winner < 0 && players[(move.target + turn)%2].health == 0)
+                    {
+                        winner = 1 - (move.target + turn)%2;
+                    }
+
+                    if (move.health < 0)
+                    {
+                        StatusEffect spice = players[(move.target + turn)%2].GetEffect("spice");
+                        if (spice != null)
+                        {
+                            players[turn].health = Math.Max(players[turn].health + spice.value, 0);
+                            if (winner < 0 && players[turn].health == 0)
+                            {
+                                winner = 1 - turn;
+                            }
+                        }
+                    }
 
                     int energy = move.energy;
                     if (move.moveID == 12)
@@ -184,17 +211,12 @@ public class FightLogic
                         energy = Math.Max(energy + players[turn].GetPowerBonus(), 0);
                     }
 
-                    players[(move.target + turn) % 2].energy += energy;
+                    players[(move.target + turn)%2].energy += energy;
 
                     if (move.effect.duration > 0)
                     {
                         StatusEffect effect = new StatusEffect(move.effect);
-                        players[(move.target + turn) % 2].AddEffect(effect);
-                    }
-
-                    if (winner < 0 && players[(move.target + turn) % 2].health == 0)
-                    {
-                        winner = 1 - (move.target + turn) % 2;
+                        players[(move.target + turn)%2].AddEffect(effect);
                     }
 
                     break;
@@ -241,7 +263,7 @@ public class FightLogic
 
         if (card.hasMove && card.move.moveType == Move.MoveType.Response)
         {
-            if (card.move.moveID == lastCard.card.move.moveID % 10)
+            if (card.move.moveID == lastCard.card.move.moveID%10)
             {
                 return false;
             }
