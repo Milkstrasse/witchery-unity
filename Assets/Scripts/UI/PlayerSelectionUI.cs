@@ -43,7 +43,7 @@ public class PlayerSelectionUI : MonoBehaviour
         readyButton.interactable = result.Item2;
     }
 
-    public void ToggleUI(bool isActive)
+    public void ToggleUI(bool isActive, bool collapsable = false)
     {
         canvasGroup.interactable = isActive;
 
@@ -62,6 +62,10 @@ public class PlayerSelectionUI : MonoBehaviour
         if (GlobalManager.singleton.maxPlayers < 2)
         {
             readyButton.interactable = isActive;
+            LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 130f), 0.3f);
+        }
+        else if (collapsable)
+        {
             LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 130f), 0.3f);
         }
     }

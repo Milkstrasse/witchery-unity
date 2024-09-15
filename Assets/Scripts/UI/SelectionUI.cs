@@ -32,8 +32,8 @@ public class SelectionUI : MonoBehaviour
 
     private void StartFight()
     {
-        playerTop.ToggleUI(false);
-        playerBottom.ToggleUI(false);
+        playerTop.ToggleUI(false, true);
+        playerBottom.ToggleUI(false, true);
     }
 
     public void StopSelection()
