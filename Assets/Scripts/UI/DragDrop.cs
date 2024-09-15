@@ -60,6 +60,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void ResetDrag()
     {
+        cardUI.HighlightCard(false);
         cardUI.SelectCard(false);
 
         transform.SetParent(initParent);

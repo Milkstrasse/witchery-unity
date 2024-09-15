@@ -42,7 +42,6 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
-            eventCardUI.HighlightCard(false);
             
             SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
 
@@ -56,27 +55,16 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             lastCardUI.SetupCard(cardUI.card);
             lastCardUI.transform.eulerAngles = cardUI.transform.eulerAngles;
-            lastCardUI.FlipCard(false, 0f);
         }
 
         cardUI.transform.eulerAngles = new Vector3(0, 0, isFlipped ? 180 : 0);
-
         cardUI.SetupCard(card);
-        cardUI.FlipCard(false, 0f);
     }
 
     public void ResetCard()
     {
         cardUI.transform.eulerAngles = lastCardUI.transform.eulerAngles;
-        
-        if (lastCardUI.card.hasMove)
-        {
-            cardUI.SetupCard(lastCardUI.card);
-        }
-        else
-        {
-            cardUI.FlipCard(true, 0f);
-        }
+        cardUI.SetupCard(lastCardUI.card);
     }
 
     public void PlayAnimation(bool switchCards)

@@ -56,7 +56,6 @@ public class FightLogic
             switch (lastCard.card.move.moveID)
             {
                 case 16: //hand blanks over
-                    Debug.Log("AAAAAAAAAA");
                     players[playerTurn].RemoveBlanks(FightManager.singleton.players[playerTurn]);
                     break;
                 case 19: //fill hand

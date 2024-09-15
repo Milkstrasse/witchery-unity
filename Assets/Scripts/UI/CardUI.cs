@@ -13,6 +13,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Image portrait;
     [SerializeField] private TextMeshProUGUI icon;
     [SerializeField] private RawImage frontBackground;
+    [SerializeField] private RawImage background;
     [SerializeField] private RawImage backBackground;
     [SerializeField] private TextMeshProUGUI infoText;
 
@@ -50,6 +51,8 @@ public class CardUI : MonoBehaviour
 
         if (card.hasMove)
         {
+            cardSides[0].transform.GetChild(1).gameObject.SetActive(false);
+
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name);
 
             icon.text = card.move.cost.ToString();
@@ -63,7 +66,7 @@ public class CardUI : MonoBehaviour
         }
         else
         {
-            FlipCard(false, 0f);
+            cardSides[0].transform.GetChild(1).gameObject.SetActive(true);
         }
     }
 
@@ -71,6 +74,7 @@ public class CardUI : MonoBehaviour
     {
         this.isHighlighted = isHighlighted;
         frontBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        background.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
         backBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
     }
 
@@ -78,6 +82,7 @@ public class CardUI : MonoBehaviour
     {
         this.isSelected = isSelected;
         frontBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        background.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
         backBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
     }
 
@@ -85,7 +90,7 @@ public class CardUI : MonoBehaviour
     {
         if (delay == 0f)
         {
-            if (!card.hasMove || isFlipped)
+            if (isFlipped)
             {
                 cardSides[0].transform.eulerAngles = new Vector3(cardSides[0].transform.eulerAngles.x, 90f, cardSides[0].transform.eulerAngles.z);
                 cardSides[1].transform.eulerAngles = new Vector3(cardSides[1].transform.eulerAngles.x, 0f, cardSides[1].transform.eulerAngles.z);
@@ -99,7 +104,7 @@ public class CardUI : MonoBehaviour
             return;
         }
 
-        if (card.hasMove && !isFlipped)
+        if (!isFlipped)
         {
             StartCoroutine(Flip(0, delay));
         }
