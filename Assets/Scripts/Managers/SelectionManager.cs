@@ -37,7 +37,7 @@ public class SelectionManager : MonoBehaviour
 
       if (!isReady[index])
       {
-         if (GlobalManager.singleton.maxPlayers > 1)
+         if (GlobalManager.singleton.mode == GameMode.Online)
          {
             StopAllCoroutines();
             GlobalManager.QuitAnyConnection();
@@ -46,7 +46,7 @@ public class SelectionManager : MonoBehaviour
          return false;
       }
 
-      if (GlobalManager.singleton.maxPlayers > 1)
+      if (GlobalManager.singleton.mode == GameMode.Online)
       {
          StartCoroutine(StartConnection());
       }

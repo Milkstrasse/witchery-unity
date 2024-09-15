@@ -105,7 +105,7 @@ public class PlayerData
         for (int i = 0; i < cardStack.Count; i++)
         {
             Card card = player.cards[cardStack[i]];
-            if (card.hasMove && card.move.moveType == Move.MoveType.Standard && card.move.moveID % 10 == moveID)
+            if (card.hasMove && card.move.moveType == MoveType.Standard && card.move.moveID % 10 == moveID)
             {
                 cardHand.Add(cardStack[i]);
                 cardStack.RemoveAt(i);
@@ -119,7 +119,7 @@ public class PlayerData
         for (int k = 0; k < playedCards.Count; k++)
         {
             Card card = player.cards[playedCards[k]];
-            if (card.hasMove && card.move.moveType == Move.MoveType.Standard && card.move.moveID % 10 == moveID)
+            if (card.hasMove && card.move.moveType == MoveType.Standard && card.move.moveID % 10 == moveID)
             {
                 cardHand.Add(playedCards[k]);
                 playedCards.RemoveAt(k);

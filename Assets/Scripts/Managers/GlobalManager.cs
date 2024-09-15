@@ -9,10 +9,10 @@ public class GlobalManager : MonoBehaviour
 {
     public static GlobalManager singleton;
     public Fighter[] fighters;
-    public StatusEffect[] effects;
 
+    public GameMode mode;
     public string joincode;
-    public bool relayEnabled;
+    public bool relayEnabled = true;
     public int maxPlayers;
 
     public static int waitTime = 120;
@@ -31,6 +31,10 @@ public class GlobalManager : MonoBehaviour
         await UnityServices.InitializeAsync();
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
+        #if UNITY_EDITOR
+        relayEnabled = false;
+        #endif
+
         LoadScene("MenuScene");
     }
 
@@ -48,4 +52,9 @@ public class GlobalManager : MonoBehaviour
         NetworkClient.Shutdown();
         NetworkServer.Shutdown();
     }
+}
+
+public enum GameMode
+{
+    Online, Offline, Training
 }

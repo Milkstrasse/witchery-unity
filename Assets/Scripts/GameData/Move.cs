@@ -12,11 +12,6 @@ public class Move : ScriptableObject
     public StatusEffect effect;
     public MoveType moveType;
 
-    public enum MoveType
-    {
-        Standard, Response
-    }
-
     public string GetDescription(int offset = 0)
     {
         if (moveType == MoveType.Response)
@@ -51,4 +46,9 @@ public class Move : ScriptableObject
                 return name;
         }
     }
+}
+
+public enum MoveType
+{
+    Standard, Response
 }
