@@ -10,6 +10,7 @@ public class GlobalManager : MonoBehaviour
     public static GlobalManager singleton;
     public Fighter[] fighters;
 
+    public bool isConnected;
     public GameMode mode;
     public string joincode;
     public bool relayEnabled = true;
@@ -28,8 +29,18 @@ public class GlobalManager : MonoBehaviour
         fighters = Resources.LoadAll<Fighter>("Fighters/");
         Array.Sort(fighters, (a,b) => { return a.fighterID.CompareTo(b.fighterID); });
 
-        await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        try
+        {
+            await UnityServices.InitializeAsync();
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+            isConnected = true;
+        }
+        catch (Exception exception)
+        {
+            isConnected = false;
+            Debug.LogError(exception);
+        }
 
         #if UNITY_EDITOR
         relayEnabled = false;
