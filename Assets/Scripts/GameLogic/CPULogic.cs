@@ -56,7 +56,14 @@ public struct CPULogic
                 }
                 else
                 {
-                    prioritizedCards.Add((i, 1));
+                    if (move.moveID == 7 && logic.players[1].health > logic.players[0].health) //redistribute health
+                    {
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else
+                    {
+                        prioritizedCards.Add((i, player.cardHand[i].move.cost * -1));
+                    }
                 }
             }
             else //unplayable cards
