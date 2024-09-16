@@ -249,6 +249,11 @@ public class FightManager : MonoBehaviour
         return !sendingMessage;
     }
 
+    public MoveMessage GetMove()
+    {
+        return CPULogic.GetMove(players[1], logic);
+    }
+
     public void EndFight()
     {
         GlobalManager.singleton.LoadScene("GameOverScene");

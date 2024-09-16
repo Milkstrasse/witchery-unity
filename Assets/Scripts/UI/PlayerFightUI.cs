@@ -250,23 +250,12 @@ public class PlayerFightUI : MonoBehaviour
     IEnumerator MakeCPUMove()
     {
         yield return new WaitForSeconds(0.2f);
+        MoveMessage message = FightManager.singleton.GetMove();
+        MakeMove(message);
 
-        if (!player.cardHand[0].hasMove || (player.cardHand[0].hasMove && player.cardHand[0].move.cost <= player.energy))
-        {
-            //MoveMessage(int playerIndex, int cardIndex, bool playCard, bool cardPlayed = false)
-            MakeMove(new MoveMessage(0, 0, true));
-            yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(message.playCard ? 0.8f : 0.2f);
 
-            FightManager.singleton.SendMove(0, true, false);
-        }
-        else
-        {
-            //MoveMessage(int playerIndex, int cardIndex, bool playCard, bool cardPlayed = false)
-            MakeMove(new MoveMessage(0, 0, false));
-            yield return new WaitForSeconds(0.2f);
-
-            FightManager.singleton.SendMove(0, false, false);
-        }
+        FightManager.singleton.SendMove(0, message.playCard, false);
     }
 
     private void OnDestroy()
