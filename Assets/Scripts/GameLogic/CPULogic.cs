@@ -8,8 +8,6 @@ public struct CPULogic
     {
         List<(int, int)> prioritizedCards = new List<(int, int)>();
 
-        Debug.Log(player.cardHand.Count);
-
         for (int i = 0; i < player.cardHand.Count; i++)
         {
             if (!player.cardHand[i].hasMove)
