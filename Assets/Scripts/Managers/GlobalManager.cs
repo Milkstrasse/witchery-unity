@@ -11,6 +11,7 @@ public class GlobalManager : MonoBehaviour
     public Fighter[] fighters;
     public StatusEffect[] effects;
 
+    public bool isConnected;
     public string joincode;
     public bool relayEnabled;
     public int maxPlayers;
@@ -28,8 +29,22 @@ public class GlobalManager : MonoBehaviour
         fighters = Resources.LoadAll<Fighter>("Fighters/");
         Array.Sort(fighters, (a,b) => { return a.fighterID.CompareTo(b.fighterID); });
 
-        await UnityServices.InitializeAsync();
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        try
+        {
+            await UnityServices.InitializeAsync();
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+            isConnected = true;
+        }
+        catch (Exception exception)
+        {
+            isConnected = false;
+            Debug.LogError(exception);
+        }
+
+        #if UNITY_EDITOR
+        relayEnabled = false;
+        #endif
 
         LoadScene("MenuScene");
     }

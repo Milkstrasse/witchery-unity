@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class MenuManager : MonoBehaviour
         GlobalManager.QuitAnyConnection();
         GlobalManager.singleton.relayEnabled = false;
         GlobalManager.singleton.joincode = "";
+
+        stringEvent.GetComponentInParent<Button>().interactable = GlobalManager.singleton.isConnected;
     }
 
     public void SetJoincode(string joincode)
