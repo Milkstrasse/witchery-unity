@@ -41,9 +41,9 @@ public class FightUI : MonoBehaviour
 
     private void MakeMove(MoveMessage message)
     {
-        if (message.playerIndex == playerTop.player.playerID && GlobalManager.singleton.mode != GameMode.Offline)
+        if (message.playerIndex == playerTop.player.playerID && GlobalManager.singleton.mode == GameMode.Online)
         {
-            playerTop.MakeMove(message, cardSlot);
+            playerTop.MakeMove(message);
         }
         else
         {

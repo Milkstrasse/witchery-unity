@@ -658,6 +658,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
+    - target: {fileID: 2804883430345281152, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -799,6 +803,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -1373223932736939990, guid: 0596f0677f9544564b01a504441c01da, type: 2}
+    - target: {fileID: 2804883430345281152, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5665637966269891424, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_IsActive
       value: 1

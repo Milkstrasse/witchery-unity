@@ -163,12 +163,15 @@ public class FightManager : MonoBehaviour
     }
 
     [Client]
-    public void SendMove(int cardIndex, bool playCard)
+    public void SendMove(int cardIndex, bool playCard, bool remove = true)
     {
         sendingMessage = true;
 
-        players[logic.playerTurn].cardHand.RemoveAt(cardIndex);
-        players[logic.playerTurn].OnPlayerChanged?.Invoke();
+        if (remove)
+        {
+            players[logic.playerTurn].cardHand.RemoveAt(cardIndex);
+            players[logic.playerTurn].OnPlayerChanged?.Invoke();
+        }
         
         NetworkClient.Send(new MoveMessage(logic.playerTurn, cardIndex, playCard));
     }
