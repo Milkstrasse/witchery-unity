@@ -19,6 +19,10 @@ public struct CPULogic
             else if (player.cardHand[i].hasMove && player.cardHand[i].move.cost <= player.energy)
             {
                 Move move = player.cardHand[i].move;
+                if (move.moveID == 18 && logic.lastCard.card.hasMove) //replay card
+                {
+                    move = logic.lastCard.card.move;
+                }
 
                 int health = move.health;
                 if (move.moveID == 10 || move.moveID == 11)
@@ -130,18 +134,6 @@ public struct CPULogic
         
         var card: Card = player.cardHand[cardIndex]
         
-        if card.spell.type == 13 { //play random spell
-            while card.spell.type == 9 || card.spell.type == 10 || card.spell.type == 13 {
-                card = Card(witch: card.witch, outfit: card.outfit, spell: GlobalData.spells.values[GlobalData.spells.values.index(GlobalData.spells.values.startIndex, offsetBy: Int.random(in: 0 ..< GlobalData.spells.values.count))])
-            }
-        }
-        
-        if playedCard != nil {
-            if card.spell.type == 12 || (cardToPlay && card.spell.type == 10) { //copy card or reflect card
-                card = playedCard!.card
-            }
-        }
-        
         if player.mana >= card.spell.cost || player.cardHand[cardIndex].spell.type == 13 {
             if cardIndex == player.cardHand.count - 1 && player.critCounter == 0 && card.spell.type < 5 && card.spell.mana[0] > 0 { //no need to waste crit to gain mana if no other cards are left
                 return (cardIndex, false)
@@ -150,10 +142,6 @@ public struct CPULogic
             } else if card.spell.type == 6 && player.hasPositiveHexes() { //don't remove good hexes
                 return (cardIndex, false)
             } else if card.spell.type == 7 && !opponent.hasPositiveHexes() { //don't get negative hexes
-                return (cardIndex, false)
-            } else if card.spell.hex[1] == Hexes.bomb && opponent.hasHex(hex: Hexes.bomb) { //don't increase bomb duration
-                return (cardIndex, false)
-            } else if card.spell.hex[1] == Hexes.freeze && opponent.critCounter == 0 { //don't freeze opponent if their crit counter is 0
                 return (cardIndex, false)
             } else {
                 return (cardIndex, true)
