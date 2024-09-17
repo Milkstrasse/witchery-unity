@@ -59,7 +59,7 @@ public class PlayerSelectionUI : MonoBehaviour
             stringEvent.StringReference.SetReference("StringTable", "cancel");
         }
 
-        if (GlobalManager.singleton.maxPlayers < 2)
+        if (GlobalManager.singleton.mode == GameMode.Offline)
         {
             readyButton.interactable = isActive;
             LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 130f), 0.3f);

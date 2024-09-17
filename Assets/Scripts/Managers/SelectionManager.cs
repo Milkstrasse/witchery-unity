@@ -37,7 +37,7 @@ public class SelectionManager : MonoBehaviour
 
       if (!isReady[index])
       {
-         if (GlobalManager.singleton.maxPlayers > 1)
+         if (GlobalManager.singleton.mode == GameMode.Online)
          {
             StopAllCoroutines();
             GlobalManager.QuitAnyConnection();
@@ -46,7 +46,7 @@ public class SelectionManager : MonoBehaviour
          return false;
       }
 
-      if (GlobalManager.singleton.maxPlayers > 1)
+      if (GlobalManager.singleton.mode == GameMode.Online)
       {
          StartCoroutine(StartConnection());
       }
@@ -59,6 +59,15 @@ public class SelectionManager : MonoBehaviour
 
          NetworkClient.Send(new PlayerMessage(playerNames[index], fighterIDs.ToArray()));
          fighterIDs = new List<int>();
+
+         if (GlobalManager.singleton.mode == GameMode.Training)
+         {
+            fighterIDs.Add(0);
+            fighterIDs.Add(1);
+
+            NetworkClient.Send(new PlayerMessage(playerNames[index], fighterIDs.ToArray()));
+            fighterIDs = new List<int>();
+         }
       }
 
       return isReady[index];

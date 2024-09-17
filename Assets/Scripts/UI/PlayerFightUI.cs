@@ -18,6 +18,7 @@ public class PlayerFightUI : MonoBehaviour
     [SerializeField] private Transform cardParent;
     private CanvasGroup cardGroup;
     [SerializeField] private Canvas canvas;
+    private CardSlot cardSlot;
 
     private RectTransform rectTransform;
 
@@ -27,6 +28,7 @@ public class PlayerFightUI : MonoBehaviour
     {
         cardGroup = cardParent.GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
+        cardSlot = canvas.transform.GetChild(0).GetChild(0).GetComponent<CardSlot>();
 
         cards = new CardUI[5];
         effects = new StatusUI[5];
@@ -95,6 +97,10 @@ public class PlayerFightUI : MonoBehaviour
         {
             StartCoroutine("UpdateTimer");
         }
+        else if (GlobalManager.singleton.mode == GameMode.Training && isInteractable && !canBePlayable)
+        {
+            StartCoroutine("MakeCPUMove");
+        }
 
         LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isInteractable ? 450f :  130f), 0.3f);
     }
@@ -134,11 +140,11 @@ public class PlayerFightUI : MonoBehaviour
         }
     }
 
-    public void MakeMove(MoveMessage message, CardSlot cardSlot)
+    public void MakeMove(MoveMessage message)
     {
         if (message.playCard)
         {
-            StartCoroutine(MoveCard(message, cardSlot));
+            StartCoroutine(MoveCard(message));
         }
         else
         {
@@ -146,7 +152,7 @@ public class PlayerFightUI : MonoBehaviour
         }
     }
 
-    IEnumerator MoveCard(MoveMessage message, CardSlot cardSlot)
+    IEnumerator MoveCard(MoveMessage message)
     {
         FightManager.singleton.timeToMakeMove = 0.8f;
         yield return new WaitForSeconds(0.3f);
@@ -198,6 +204,10 @@ public class PlayerFightUI : MonoBehaviour
         {
             StartCoroutine("UpdateTimer");
         }
+        else if (GlobalManager.singleton.mode == GameMode.Training && isInteractable && !canBePlayable)
+        {
+            StartCoroutine("MakeCPUMove");
+        }
         else if (!isInteractable)
         {
             StopCoroutine("UpdateTimer");
@@ -235,6 +245,17 @@ public class PlayerFightUI : MonoBehaviour
         }
 
         FightManager.singleton.SendMove(player.playerID);
+    }
+
+    IEnumerator MakeCPUMove()
+    {
+        yield return new WaitForSeconds(0.2f);
+        MoveMessage message = FightManager.singleton.GetMove();
+        MakeMove(message);
+
+        yield return new WaitForSeconds(message.playCard ? 0.8f : 0.2f);
+
+        FightManager.singleton.SendMove(0, message.playCard, false);
     }
 
     private void OnDestroy()

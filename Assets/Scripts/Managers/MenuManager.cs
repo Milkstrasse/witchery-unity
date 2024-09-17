@@ -9,7 +9,6 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         GlobalManager.QuitAnyConnection();
-        GlobalManager.singleton.relayEnabled = false;
         GlobalManager.singleton.joincode = "";
 
         stringEvent.GetComponentInParent<Button>().interactable = GlobalManager.singleton.isConnected;
@@ -29,11 +28,18 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void EnableRelay(bool relayEnabled) => GlobalManager.singleton.relayEnabled = relayEnabled;
-
-    public void StartSelection(int max)
+    public void StartSelection(int mode)
     {
-        GlobalManager.singleton.maxPlayers = max;
+        GlobalManager.singleton.mode = (GameMode)mode;
+        if (mode == 0)
+        {
+            GlobalManager.singleton.maxPlayers = 2;
+        }
+        else
+        {
+            GlobalManager.singleton.maxPlayers = 1;
+        }
+        
         GlobalManager.singleton.LoadScene("SelectionScene");
     }
 }

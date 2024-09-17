@@ -93,7 +93,7 @@ public class FightLogic
             move = lastCard.card.move;
         }
 
-        if (move.moveType == Move.MoveType.Standard)
+        if (move.moveType == MoveType.Standard)
         {
             if (blockable && FightManager.singleton.players[1 - turn].HasResponse(move))
             {
@@ -221,7 +221,7 @@ public class FightLogic
                     break;
             }
         }
-        else if (move.moveType == Move.MoveType.Response)
+        else if (move.moveType == MoveType.Response)
         {
             if (lastCard.card.hasMove && !lastCard.played)
             {
@@ -260,7 +260,7 @@ public class FightLogic
         int cardIndex = players[message.playerIndex].cardHand[message.cardIndex];
         Card card = FightManager.singleton.players[message.playerIndex].cards[cardIndex];
 
-        if (card.hasMove && card.move.moveType == Move.MoveType.Response)
+        if (card.hasMove && card.move.moveType == MoveType.Response)
         {
             if (card.move.moveID == lastCard.card.move.moveID%10)
             {

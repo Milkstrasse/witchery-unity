@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
                 continue;
             }
 
-            if (cardHand[i].move.moveType != Move.MoveType.Response || cardHand[i].move.cost > energy)
+            if (cardHand[i].move.moveType != MoveType.Response || cardHand[i].move.cost > energy)
             {
                 continue;
             }

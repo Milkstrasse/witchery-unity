@@ -9,9 +9,9 @@ public class GlobalManager : MonoBehaviour
 {
     public static GlobalManager singleton;
     public Fighter[] fighters;
-    public StatusEffect[] effects;
 
     public bool isConnected;
+    public GameMode mode;
     public string joincode;
     public bool relayEnabled;
     public int maxPlayers;
@@ -35,6 +35,7 @@ public class GlobalManager : MonoBehaviour
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
             isConnected = true;
+            relayEnabled = true;
         }
         catch (Exception exception)
         {
@@ -63,4 +64,9 @@ public class GlobalManager : MonoBehaviour
         NetworkClient.Shutdown();
         NetworkServer.Shutdown();
     }
+}
+
+public enum GameMode
+{
+    Online, Offline, Training
 }
