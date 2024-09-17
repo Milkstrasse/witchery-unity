@@ -200,7 +200,7 @@ public class PlayerFightUI : MonoBehaviour
 
     public void MakeInteractable(bool isInteractable, bool canBePlayable)
     {
-        if (isInteractable && canBePlayable)
+        if (isInteractable && canBePlayable && !cardGroup.interactable)
         {
             StartCoroutine("UpdateTimer");
         }
