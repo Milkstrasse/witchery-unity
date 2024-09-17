@@ -13,7 +13,7 @@ public class GlobalManager : MonoBehaviour
     public bool isConnected;
     public GameMode mode;
     public string joincode;
-    public bool relayEnabled = true;
+    public bool relayEnabled;
     public int maxPlayers;
 
     public static int waitTime = 120;
@@ -35,6 +35,7 @@ public class GlobalManager : MonoBehaviour
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
             isConnected = true;
+            relayEnabled = true;
         }
         catch (Exception exception)
         {
