@@ -36,7 +36,7 @@ public class FightUI : MonoBehaviour
     {
         playerTop.MakeInteractable(playerTurn == playerTop.player.playerID, GlobalManager.singleton.mode == GameMode.Offline);
         playerBottom.MakeInteractable(playerTurn == playerBottom.player.playerID, true);
-        cardSlot.MoveUp(playerTurn == playerBottom.player.playerID);
+        cardSlot.MoveUp(playerTurn == playerBottom.player.playerID, playerTurn == playerTop.player.playerID || playerTurn == playerBottom.player.playerID);
     }
 
     private void MakeMove(MoveMessage message)
@@ -49,10 +49,7 @@ public class FightUI : MonoBehaviour
         {
             manager.timeToMakeMove = 0f;
 
-            if ((message.playCard || message.playerIndex < 0) && message.cardPlayed)
-            {
-                cardSlot.PlayAnimation(message.playerIndex < 0);
-            }
+            cardSlot.PlayAnimation(message.playerIndex < 0, (message.playCard || message.playerIndex < 0) && message.cardPlayed);
         }
     }
 

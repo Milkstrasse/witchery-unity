@@ -67,16 +67,19 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         cardUI.SetupCard(lastCardUI.card);
     }
 
-    public void PlayAnimation(bool switchCards)
+    public void PlayAnimation(bool switchCards, bool animate)
     {
         if (switchCards || !cardUI.gameObject.activeSelf)
         {
             cardUI.gameObject.SetActive(!cardUI.gameObject.activeSelf);
         }
 
-        for (int i = 0; i < 8; i++)
+        if (animate)
         {
-            LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(endX[i], endY[i], 0f), 0.3f).setOnComplete(ResetAnimation);
+            for (int i = 0; i < 8; i++)
+            {
+                LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(endX[i], endY[i], 0f), 0.3f).setOnComplete(ResetAnimation);
+            }
         }
     }
 
@@ -88,9 +91,17 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         }
     }
 
-    public void MoveUp(bool move)
+    public void MoveUp(bool move, bool fullMove = true)
     {
-        LeanTween.moveLocalY(gameObject, move ? 160f : -160f, 0.3f);
+        if (fullMove)
+        {
+            LeanTween.moveLocalY(gameObject, move ? 160f : -160f, 0.3f);
+        }
+        else
+        {
+            LeanTween.moveLocalY(gameObject, 0f, 0.3f);
+            //LeanTween.moveLocalY(gameObject, 0f, 0.3f);
+        }
     }
 
     private void OnDestroy()

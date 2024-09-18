@@ -167,10 +167,7 @@ public class PlayerFightUI : MonoBehaviour
         cards[message.cardIndex].GetComponent<DragDrop>().ResetDrag();
         cardSlot.SetupCard(player.cardHand[message.cardIndex], true);
 
-        if (message.cardPlayed)
-        {
-            cardSlot.PlayAnimation(false);
-        }
+        cardSlot.PlayAnimation(false, message.cardPlayed);
 
         cards[message.cardIndex].FlipCard(true, 0f);
         player.cardHand.RemoveAt(message.cardIndex);
