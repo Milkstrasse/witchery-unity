@@ -189,6 +189,8 @@ public class PlayerFightUI : MonoBehaviour
 
         cards[cardIndex].GetComponent<DragDrop>().ResetDrag();
         player.cardHand.RemoveAt(cardIndex);
+        
+        AudioManager.singleton.PlayStandardSound();
 
         UpdateUI();
 

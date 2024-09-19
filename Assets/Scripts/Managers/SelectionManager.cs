@@ -141,5 +141,9 @@ public class SelectionManager : MonoBehaviour
       OnPlayersReady?.Invoke();
    }
 
-   public void ReturnToMenu() => GlobalManager.singleton.LoadScene("MenuScene");
+   public void ReturnToMenu()
+   {
+      AudioManager.singleton.PlayStandardSound();
+      GlobalManager.singleton.LoadScene("MenuScene");
+   }
 }

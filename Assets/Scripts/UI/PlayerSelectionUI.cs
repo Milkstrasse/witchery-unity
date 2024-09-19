@@ -37,6 +37,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
     private void SelectCard(int cardIndex)
     {
+        AudioManager.singleton.PlayStandardSound();
+        
         (bool, bool) result = selectionUI.EditTeam(cardIndex);
         cards[cardIndex].HighlightCard(result.Item1);
 

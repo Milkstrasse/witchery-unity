@@ -55,6 +55,7 @@ public class FightUI : MonoBehaviour
 
     public void GiveUp(PlayerFightUI playerUI)
     {
+        AudioManager.singleton.PlayStandardSound();
         manager.SendMove(playerUI.player.playerID);
     }
 

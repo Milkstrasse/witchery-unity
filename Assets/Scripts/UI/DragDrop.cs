@@ -54,6 +54,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
         if (toRemove && FightManager.singleton.IsAbleToMessage())
         {
+            AudioManager.singleton.PlayStandardSound();
             FightManager.singleton.SendMove(cardIndex, false);
         }
     }

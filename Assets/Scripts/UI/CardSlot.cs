@@ -51,6 +51,8 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void SetupCard(Card card, bool isFlipped)
     {
+        AudioManager.singleton.PlayStandardSound();
+        
         if (cardUI.card.hasMove)
         {
             lastCardUI.SetupCard(cardUI.card);

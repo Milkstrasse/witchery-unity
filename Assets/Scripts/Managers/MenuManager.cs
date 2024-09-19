@@ -30,6 +30,8 @@ public class MenuManager : MonoBehaviour
 
     public void StartSelection(int mode)
     {
+        AudioManager.singleton.PlayStandardSound();
+        
         GlobalManager.singleton.mode = (GameMode)mode;
         if (mode == 0)
         {
