@@ -44,4 +44,11 @@ public class MenuManager : MonoBehaviour
         
         GlobalManager.singleton.LoadScene("SelectionScene");
     }
+
+    public void GoToSettings()
+    {
+        AudioManager.singleton.PlayStandardSound();
+        
+        GlobalManager.singleton.LoadScene("SettingsScene");
+    }
 }
