@@ -46,7 +46,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 7210015948529664
-    m_Localized: Erteile {effect}-Effekt
+    m_Localized: Erteile {duration} {effect}
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210153374900224
-    m_Localized: Erhalte {effect}-Effekt
+    m_Localized: Erhalte {duration} {effect}
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -178,6 +178,11 @@ MonoBehaviour:
     m_Localized: Entferne eigene Effekte
     m_Metadata:
       m_Items: []
+  - m_Id: 11805233679163392
+    m_Localized: Heile auf {health} HP
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357012
   references:
     version: 2
     RefIds:
@@ -197,3 +202,4 @@ MonoBehaviour:
         - id: 7920018510569472
         - id: 7992895737946112
         - id: 7210210211913728
+        - id: 11805233679163392

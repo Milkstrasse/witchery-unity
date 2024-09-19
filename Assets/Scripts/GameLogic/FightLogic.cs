@@ -155,6 +155,9 @@ public class FightLogic
                     players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, 50);
 
                     break;
+                case 21: //heal to health
+                    players[(move.target + turn)%2].health = Math.Max(players[(move.target + turn)%2].health, move.health);
+                    break;
                 case 25: //draw attack card
                     break;
                 case 26: //draw attack card
@@ -229,6 +232,13 @@ public class FightLogic
                 {
                     case 1: //snatch hp
                         int health = lastCard.card.move.health;
+
+                        if (lastCard.card.move.moveID == 21)
+                        {
+                            players[turn].health = Math.Max(players[turn].health, health);
+                            return true;
+                        }
+
                         if (lastCard.card.move.moveID == 11)
                         {
                             health *= lastCard.lastCost;

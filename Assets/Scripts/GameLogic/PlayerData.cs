@@ -39,10 +39,12 @@ public class PlayerData
         cardStack = new List<int> { 0, 1, 2, 3, 4 };
         for (int i = 0; i < message.fighterIDs.Length; i++)
         {
+            int currCount = cardStack.Count;
+
             Fighter fighter = GlobalManager.singleton.fighters[message.fighterIDs[i]];
             for (int j = 0; j < fighter.moves.Length; j++)
             {
-                cardStack.Add(i * fighter.moves.Length + j + 5);
+                cardStack.Add(currCount + j);
             }
         }
 

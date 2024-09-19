@@ -41,12 +41,12 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210015948529664
-    m_Localized: Apply {effect} effect
+    m_Localized: Apply{duration} {effect}
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210153374900224
-    m_Localized: Gain {effect} effect
+    m_Localized: Gain {duration} {effect}
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
@@ -178,6 +178,11 @@ MonoBehaviour:
     m_Localized: Clear own effects
     m_Metadata:
       m_Items: []
+  - m_Id: 11805233679163392
+    m_Localized: Heal to {health} HP
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
   references:
     version: 2
     RefIds:
@@ -197,3 +202,4 @@ MonoBehaviour:
         - id: 7920018510569472
         - id: 7992895737946112
         - id: 7210210211913728
+        - id: 11805233679163392

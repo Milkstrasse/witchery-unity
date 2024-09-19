@@ -60,6 +60,7 @@ public class CardUI : MonoBehaviour
             (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
             (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
             (stringEvent.StringReference["effect"] as StringVariable).Value = card.move.effect.name;
+            (stringEvent.StringReference["duration"] as IntVariable).Value = card.move.effect.duration;
             stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription());
 
             stringEvent.RefreshString();

@@ -38,12 +38,19 @@ public struct CPULogic
                     }
                     else
                     {
-                        prioritizedCards.Add((i, health * -1));
+                        prioritizedCards.Add((i, health * -1 + 30));
                     }
                 }
                 else if (health > 0)
                 {
-                    health = Math.Max(health + logic.players[1].GetPowerBonus(), 0);
+                    if (move.moveID == 21)
+                    {
+                        health = Math.Max(move.health - logic.players[1].health, 0);
+                    }
+                    else
+                    {
+                        health = Math.Max(health + logic.players[1].GetPowerBonus(), 0);
+                    }
 
                     if (logic.players[1].health + health > 50) //excessive healing
                     {
@@ -51,7 +58,7 @@ public struct CPULogic
                     }
                     else
                     {
-                        prioritizedCards.Add((i, 2));
+                        prioritizedCards.Add((i, health));
                     }
                 }
                 else
