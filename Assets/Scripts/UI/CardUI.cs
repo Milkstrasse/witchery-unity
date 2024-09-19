@@ -53,7 +53,7 @@ public class CardUI : MonoBehaviour
         {
             cardSides[0].transform.GetChild(1).gameObject.SetActive(false);
 
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name + "_" + card.move.target);
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name);
 
             icon.text = card.move.cost.ToString();
 
