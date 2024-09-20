@@ -3,6 +3,8 @@ using Mirror;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 
 public class GlobalManager : MonoBehaviour
@@ -42,6 +44,12 @@ public class GlobalManager : MonoBehaviour
             isConnected = false;
             Debug.LogError(exception);
         }
+
+        AsyncOperationHandle handle = LocalizationSettings.InitializationOperation;
+        await handle.Task;
+
+        int langIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("langCode", langIndex)];
 
         #if UNITY_EDITOR
         relayEnabled = false;
