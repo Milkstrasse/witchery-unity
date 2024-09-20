@@ -85,13 +85,11 @@ public class SettingsManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("kkkkkkkkkkkk");
                 langIndex = 0;
             }
         }
         else
         {
-            Debug.Log("jgljfdglfdjjglf");
             langIndex = 0;
         }
 
