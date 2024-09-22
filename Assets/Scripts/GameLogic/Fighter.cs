@@ -5,5 +5,11 @@ using UnityEngine;
 public class Fighter : ScriptableObject
 {
     public int fighterID;
+    public Role role;
     public Move[] moves;
+}
+
+public enum Role
+{
+    attack, support
 }

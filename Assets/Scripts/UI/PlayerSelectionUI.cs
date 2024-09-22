@@ -13,6 +13,11 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private Image timer;
     [SerializeField] private Button readyButton;
 
+    private int[] fighters;
+    private int currFilter;
+    [SerializeField] private LocalizeStringEvent filterEvent;
+    string[] filters;
+
     private CardUI[] cards;
 
     private void Start()
@@ -20,7 +25,10 @@ public class PlayerSelectionUI : MonoBehaviour
         canvasGroup = cardParent.parent.GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
 
+        filters = new string[] {"unfiltered", "attack", "support", "team"};
+
         int fighterAmount = GlobalManager.singleton.fighters.Length;
+        fighters = GlobalManager.singleton.GetFighters(0);
         cards = new CardUI[fighterAmount];
 
         for (int i = 0; i < fighterAmount; i++)
@@ -33,6 +41,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
             cards[i] = card;
         }
+
+        currFilter = 0;
     }
 
     private void SelectCard(int cardIndex)
@@ -81,6 +91,75 @@ public class PlayerSelectionUI : MonoBehaviour
         else
         {
             timer.fillAmount = time/(float)GlobalManager.waitTime;
+        }
+    }
+
+    private void UpdateUI(bool showTeam)
+    {
+        filterEvent.StringReference.SetReference("StringTable", filters[currFilter]);
+
+        int index = 0;
+        for (int i = 0; i < cards.Length; i++)
+        {
+            if (!showTeam && index < fighters.Length && fighters[index] == i)
+            {
+                cards[i].gameObject.SetActive(true);
+                index++;
+            }
+            else if (showTeam)
+            {
+                cards[i].gameObject.SetActive(cards[i].isHighlighted);
+            }
+            else
+            {
+                cards[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void DecreaseFilter()
+    {
+        int filterLength = filters.Length - 1;
+        if (currFilter > 0)
+        {
+            currFilter--;
+        }
+        else
+        {
+            currFilter = filterLength;
+        }
+
+        if (currFilter == filterLength)
+        {
+            UpdateUI(true);
+        }
+        else
+        {
+            fighters = GlobalManager.singleton.GetFighters(currFilter);
+            UpdateUI(false);
+        }
+    }
+
+    public void IncreaseFilter()
+    {
+        int filterLength = filters.Length - 1;
+        if (currFilter < filterLength)
+        {
+            currFilter++;
+        }
+        else
+        {
+            currFilter = 0;
+        }
+
+        if (currFilter == filterLength)
+        {
+            UpdateUI(true);
+        }
+        else
+        {
+            fighters = GlobalManager.singleton.GetFighters(currFilter);
+            UpdateUI(false);
         }
     }
 }

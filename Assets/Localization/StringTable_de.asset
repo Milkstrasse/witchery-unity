@@ -207,6 +207,22 @@ MonoBehaviour:
     m_Localized: Training
     m_Metadata:
       m_Items: []
+  - m_Id: 12959331292012544
+    m_Localized: "Unterst\xFCtzung"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12959317832491008
+    m_Localized: Angriff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12959305933250560
+    m_Localized: Alle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12963192530526208
+    m_Localized: Team
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

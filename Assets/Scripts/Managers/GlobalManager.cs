@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -61,6 +63,39 @@ public class GlobalManager : MonoBehaviour
     public void StoreRelayCode(string code)
     {
         OnCodeCreated?.Invoke(code);
+    }
+
+    public int[] GetFighters(int filter)
+    {
+        List<int> filteredFighters = new List<int>();
+
+        switch (filter)
+        {
+            case 1: //attack
+                for (int i = 0; i < fighters.Length; i++)
+                {
+                    if (fighters[i].role == Role.attack)
+                    {
+                        filteredFighters.Add(i);
+                    }
+                }
+
+                break;
+            case 2:
+                for (int i = 0; i < fighters.Length; i++)
+                {
+                    if (fighters[i].role == Role.support)
+                    {
+                        filteredFighters.Add(i);
+                    }
+                }
+
+                break;
+            default:
+                return Enumerable.Range(0, fighters.Length).ToArray();
+        }
+
+        return filteredFighters.ToArray();
     }
 
     public string GetCurrentScene() => SceneManager.GetActiveScene().name;
