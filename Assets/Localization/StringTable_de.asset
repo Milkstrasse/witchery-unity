@@ -46,7 +46,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 7210015948529664
-    m_Localized: Erteile {duration} <style="IconOutline">{effect}</style>
+    m_Localized: Erteile {duration} <style="Icon">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210153374900224
-    m_Localized: Erhalte {duration} <style="IconOutline">{effect}</style>
+    m_Localized: Erhalte {duration} <style="Icon">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357012

@@ -13,6 +13,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Image portrait;
     [SerializeField] private TextMeshProUGUI icon;
     [SerializeField] private RawImage frontBackground;
+    [SerializeField] private RawImage gradient;
     [SerializeField] private RawImage background;
     [SerializeField] private RawImage backBackground;
     [SerializeField] private TextMeshProUGUI infoText;
@@ -56,7 +57,7 @@ public class CardUI : MonoBehaviour
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name);
 
             icon.text = card.move.cost.ToString();
-            //icon.text = $"{card.move.cost} <style=IconShadow>\uf0e7</style>";
+            //icon.text = $"{card.move.cost} <style=Icon>\uf0e7</style>";
 
             (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
             (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
@@ -86,6 +87,7 @@ public class CardUI : MonoBehaviour
     {
         this.isHighlighted = isHighlighted;
         frontBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        gradient.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
         background.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
         backBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
     }
@@ -94,6 +96,7 @@ public class CardUI : MonoBehaviour
     {
         this.isSelected = isSelected;
         frontBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        gradient.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
         background.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
         backBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
     }
