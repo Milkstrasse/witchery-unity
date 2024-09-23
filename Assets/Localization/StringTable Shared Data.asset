@@ -211,6 +211,10 @@ MonoBehaviour:
     m_Key: team
     m_Metadata:
       m_Items: []
+  - m_Id: 13275175423303680
+    m_Key: clearOppEffects
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -7,7 +7,6 @@ public class StatusUI : MonoBehaviour
     [SerializeField] private StatusInfoUI info;
 
     [SerializeField] private TextMeshProUGUI icon;
-    private GameObject background;
 
     private StatusEffect effect;
     private string iconString;

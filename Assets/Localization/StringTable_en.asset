@@ -41,12 +41,12 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210015948529664
-    m_Localized: Apply{duration} {effect}
+    m_Localized: Apply{duration} <style="Icon">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210153374900224
-    m_Localized: Gain {duration} {effect}
+    m_Localized: Gain {duration} <style="Icon">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
@@ -85,17 +85,17 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7837084361416704
-    m_Localized: Do {health} * cost damage
+    m_Localized: Do {health} <style="Icon">\uf0e7</style> damage
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7837112253538304
-    m_Localized: Gain {health}  * cost of last card HP
+    m_Localized: Gain {health}  <style="Icon">\uf0e7</style> HP
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7842569093373952
-    m_Localized: Gain {energy} * cost of last card energy
+    m_Localized: Gain {energy} <style="Icon">\uf0e7</style>energy
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
@@ -221,6 +221,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 12963192530526208
     m_Localized: Team
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13275175423303680
+    m_Localized: clear opponent's effects
     m_Metadata:
       m_Items: []
   references:

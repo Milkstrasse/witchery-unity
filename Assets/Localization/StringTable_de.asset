@@ -46,7 +46,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 7210015948529664
-    m_Localized: Erteile {duration} {effect}
+    m_Localized: Erteile {duration} <style="Icon">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210153374900224
-    m_Localized: Erhalte {duration} {effect}
+    m_Localized: Erhalte {duration} <style="Icon">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -85,17 +85,17 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7837084361416704
-    m_Localized: Erteile {health} * Kosten Schaden
+    m_Localized: Erteile {health} <style="Icon">\uf0e7</style> Schaden
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 7837112253538304
-    m_Localized: Erhalte {health}  * vorherige Energiekosten HP
+    m_Localized: Erhalte {health}  <style="Icon">\uf0e7</style> HP
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 7842569093373952
-    m_Localized: Erhalte {energy} * vorherige Energiekosten Energie
+    m_Localized: Erhalte {energy} <style="Icon">\uf0e7</style> Energie
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -221,6 +221,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 12963192530526208
     m_Localized: Team
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13275175423303680
+    m_Localized: Entferne die Effekte des Gegners
     m_Metadata:
       m_Items: []
   references:

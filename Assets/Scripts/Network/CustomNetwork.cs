@@ -31,7 +31,7 @@ public class CustomNetwork : RelayNetworkManager
 
     private void OnServerReceivePlayer(NetworkConnectionToClient conn, PlayerMessage message)
     {
-        message.name = $"Player {playersReady}";
+        message.name = $"PLAYER {playersReady}";
         players.Add(message);
 
         playersReady++;
