@@ -322,14 +322,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1904033988917767169, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1904033988917767169, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -3
-      objectReference: {fileID: 0}
     - target: {fileID: 2347805197363243307, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
       propertyPath: managedReferences[296817899947950430]
       value: Unity.Localization UnityEngine.Localization.SmartFormat.PersistentVariables.IntVariable

@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 7 <font="Font Awesome 5 Free-Solid-900 SDF">\uf0e7</font>
+  m_text: 7
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e8a02252f4ec47748da2becdd6cc899, type: 2}
   m_sharedMaterial: {fileID: 6011306716087563926, guid: 6e8a02252f4ec47748da2becdd6cc899, type: 2}
@@ -869,10 +869,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: \uf024
+  m_text: \uf70c
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d3daccbcc070f43c4b9831414cbd3ae1, type: 2}
-  m_sharedMaterial: {fileID: -2601215821511921569, guid: d3daccbcc070f43c4b9831414cbd3ae1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 53774d24c77fb4b2fab5307fe310878e, type: 2}
+  m_sharedMaterial: {fileID: 6575886762143029956, guid: 53774d24c77fb4b2fab5307fe310878e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1193,7 +1193,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: \uf00d
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 09d33f93c67e246ffa8eb8b917daee48, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 53774d24c77fb4b2fab5307fe310878e, type: 2}
   m_sharedMaterial: {fileID: 3672249639551237850, guid: 09d33f93c67e246ffa8eb8b917daee48, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2798,6 +2798,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1098806399755562865, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 1098806399755562865, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 1209622583104829782, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2894,6 +2902,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8421425779598778036, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8421425779598778036, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8638234673854244025, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8638234673854244025, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8846434665892113737, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -2966,6 +2990,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1098806399755562865, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 1098806399755562865, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 1209622583104829782, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3062,6 +3094,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8421425779598778036, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8421425779598778036, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8638234673854244025, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8638234673854244025, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8846434665892113737, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -3134,6 +3182,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card
       objectReference: {fileID: 0}
+    - target: {fileID: 1098806399755562865, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 1098806399755562865, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 1209622583104829782, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3230,6 +3286,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8421425779598778036, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8421425779598778036, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8638234673854244025, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8638234673854244025, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8846434665892113737, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -3302,6 +3374,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1098806399755562865, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 1098806399755562865, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 1209622583104829782, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3398,6 +3478,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8421425779598778036, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8421425779598778036, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8638234673854244025, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8638234673854244025, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8846434665892113737, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -3690,6 +3786,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1098806399755562865, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 1098806399755562865, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 1209622583104829782, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3786,6 +3890,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8421425779598778036, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8421425779598778036, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8638234673854244025, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8638234673854244025, guid: befab4e5540754660a53c9426286eb04, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8846434665892113737, guid: befab4e5540754660a53c9426286eb04, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
