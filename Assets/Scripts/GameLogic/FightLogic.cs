@@ -67,6 +67,17 @@ public class FightLogic
                 case 26: //draw heal card
                     players[playerTurn].DrawSpecificCard(FightManager.singleton.players[playerTurn], 1);
                     break;
+                case 27: //draw energy card
+                    players[playerTurn].DrawSpecificCard(FightManager.singleton.players[playerTurn], 2);
+                    break;
+                case 28: //remove random card
+                    int cardAmount = players[1 - playerTurn].cardHand.Count;
+                    if (cardAmount > 0)
+                    {
+                        players[1 - playerTurn].cardHand.RemoveAt(UnityEngine.Random.Range(0, cardAmount));
+                    }
+
+                    break;
                 default:
                     break;
             }
@@ -245,6 +256,18 @@ public class FightLogic
                         
                         health += players[1 - turn].GetPowerBonus();
                         players[turn].health = Math.Clamp(players[turn].health + health, 0, 50);
+                        break;
+                    case 2: //snatch energy
+                        int energy = lastCard.card.move.health;
+
+                        if (lastCard.card.move.moveID == 12)
+                        {
+                            energy *= lastCard.lastCost;
+                        }
+
+                        energy += players[1 - turn].GetPowerBonus();
+                        players[turn].energy = Math.Max(players[turn].energy + energy, 0);
+
                         break;
                     case 3: //snatch effect
                         players[turn].AddEffect(lastCard.card.move.effect);

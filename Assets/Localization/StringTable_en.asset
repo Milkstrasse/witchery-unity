@@ -227,6 +227,14 @@ MonoBehaviour:
     m_Localized: clear opponent's effects
     m_Metadata:
       m_Items: []
+  - m_Id: 14019019806859264
+    m_Localized: Remove random card
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14025450773798912
+    m_Localized: Take energy for yourself
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

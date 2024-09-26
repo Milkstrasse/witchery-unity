@@ -15,128 +15,80 @@ MonoBehaviour:
   m_TableCollectionName: StringTable
   m_TableCollectionNameGuidString: 4d5f43fceb1874d3fb84d5259516bec7
   m_Entries:
-  - m_Id: 58463346688
-    m_Key: host
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1786462068736
-    m_Key: join
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2538625827856384
-    m_Key: ready
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2538677614927872
-    m_Key: cancel
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7209985523048448
-    m_Key: doDamage
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210210211913728
-    m_Key: recoverHP
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210184622465024
-    m_Key: gainEnergy
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210153374900224
-    m_Key: gainEffect
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210015948529664
-    m_Key: giveEffect
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210099683614720
-    m_Key: blockAttack
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7622866769010688
-    m_Key: swapEffects
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7622870518718464
-    m_Key: clearAllEffects
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7658928543358976
-    m_Key: replayCard
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7672341843664896
-    m_Key: snatchHP
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7829019750817792
-    m_Key: redistribute
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7837084361416704
-    m_Key: doCostDamage
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7837112253538304
-    m_Key: recoverCostHP
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7842569093373952
-    m_Key: gainCostEnergy
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7880276955881472
-    m_Key: fillHand
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7920018510569472
-    m_Key: stealEnergy
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7992895737946112
-    m_Key: stealHP
-    m_Metadata:
-      m_Items: []
   - m_Id: 8024858918117376
     m_Key: addBlank
     m_Metadata:
       m_Items: []
-  - m_Id: 8024861875101696
-    m_Key: clearBlanks
+  - m_Id: 12959317832491008
+    m_Key: attack
     m_Metadata:
       m_Items: []
   - m_Id: 8223596102017024
     m_Key: bleed
     m_Metadata:
       m_Items: []
-  - m_Id: 8223760501956608
-    m_Key: healing
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8223787123204096
-    m_Key: power
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8223807327166464
-    m_Key: weaken
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8223827040395264
-    m_Key: spice
+  - m_Id: 7210099683614720
+    m_Key: blockAttack
     m_Metadata:
       m_Items: []
   - m_Id: 8229724533809152
     m_Key: bomb
     m_Metadata:
       m_Items: []
+  - m_Id: 2538677614927872
+    m_Key: cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7622870518718464
+    m_Key: clearAllEffects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8024861875101696
+    m_Key: clearBlanks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9396931322175488
+    m_Key: clearEffects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13275175423303680
+    m_Key: clearOppEffects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12180150551568384
+    m_Key: de
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7837084361416704
+    m_Key: doCostDamage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7209985523048448
+    m_Key: doDamage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12180127193489408
+    m_Key: en
+    m_Metadata:
+      m_Items: []
   - m_Id: 8229765759623168
     m_Key: energise
     m_Metadata:
       m_Items: []
-  - m_Id: 8258911885844480
-    m_Key: turnAmount
+  - m_Id: 7880276955881472
+    m_Key: fillHand
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7842569093373952
+    m_Key: gainCostEnergy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210153374900224
+    m_Key: gainEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210184622465024
+    m_Key: gainEnergy
     m_Metadata:
       m_Items: []
   - m_Id: 8661223867408384
@@ -147,72 +99,128 @@ MonoBehaviour:
     m_Key: getHeal
     m_Metadata:
       m_Items: []
-  - m_Id: 8910918694985728
-    m_Key: snatchEffect
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8964874955644928
-    m_Key: reflectHex
-    m_Metadata:
-      m_Items: []
-  - m_Id: 9396931322175488
-    m_Key: clearEffects
+  - m_Id: 7210015948529664
+    m_Key: giveEffect
     m_Metadata:
       m_Items: []
   - m_Id: 9781281683398656
     m_Key: handBlanks
     m_Metadata:
       m_Items: []
+  - m_Id: 8223760501956608
+    m_Key: healing
+    m_Metadata:
+      m_Items: []
   - m_Id: 11805233679163392
     m_Key: healToHealth
     m_Metadata:
       m_Items: []
-  - m_Id: 12166901554733056
-    m_Key: music
+  - m_Id: 58463346688
+    m_Key: host
     m_Metadata:
       m_Items: []
-  - m_Id: 12166916067024896
-    m_Key: sound
+  - m_Id: 1786462068736
+    m_Key: join
     m_Metadata:
       m_Items: []
   - m_Id: 12166931850190848
     m_Key: language
     m_Metadata:
       m_Items: []
-  - m_Id: 12180127193489408
-    m_Key: en
+  - m_Id: 12166901554733056
+    m_Key: music
     m_Metadata:
       m_Items: []
-  - m_Id: 12180150551568384
-    m_Key: de
+  - m_Id: 8223787123204096
+    m_Key: power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2538625827856384
+    m_Key: ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7837112253538304
+    m_Key: recoverCostHP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7210210211913728
+    m_Key: recoverHP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7829019750817792
+    m_Key: redistribute
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8964874955644928
+    m_Key: reflectHex
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14019019806859264
+    m_Key: removeCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7658928543358976
+    m_Key: replayCard
     m_Metadata:
       m_Items: []
   - m_Id: 12209513565249536
     m_Key: settings
     m_Metadata:
       m_Items: []
-  - m_Id: 12210038784385024
-    m_Key: training
+  - m_Id: 8910918694985728
+    m_Key: snatchEffect
     m_Metadata:
       m_Items: []
-  - m_Id: 12959305933250560
-    m_Key: unfiltered
+  - m_Id: 14025450773798912
+    m_Key: snatchEnergy
     m_Metadata:
       m_Items: []
-  - m_Id: 12959317832491008
-    m_Key: attack
+  - m_Id: 7672341843664896
+    m_Key: snatchHP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12166916067024896
+    m_Key: sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223827040395264
+    m_Key: spice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7920018510569472
+    m_Key: stealEnergy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7992895737946112
+    m_Key: stealHP
     m_Metadata:
       m_Items: []
   - m_Id: 12959331292012544
     m_Key: support
     m_Metadata:
       m_Items: []
+  - m_Id: 7622866769010688
+    m_Key: swapEffects
+    m_Metadata:
+      m_Items: []
   - m_Id: 12963192530526208
     m_Key: team
     m_Metadata:
       m_Items: []
-  - m_Id: 13275175423303680
-    m_Key: clearOppEffects
+  - m_Id: 12210038784385024
+    m_Key: training
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8258911885844480
+    m_Key: turnAmount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12959305933250560
+    m_Key: unfiltered
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8223807327166464
+    m_Key: weaken
     m_Metadata:
       m_Items: []
   m_Metadata:
