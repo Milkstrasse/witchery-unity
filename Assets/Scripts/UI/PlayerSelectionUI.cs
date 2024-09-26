@@ -162,4 +162,12 @@ public class PlayerSelectionUI : MonoBehaviour
             UpdateUI(false);
         }
     }
+
+    private void OnDestroy()
+    {
+        for (int i = 0; i < GlobalManager.singleton.fighters.Length; i++)
+        {
+            cards[i].GetComponent<Button>().onClick.RemoveAllListeners();
+        }
+    }
 }

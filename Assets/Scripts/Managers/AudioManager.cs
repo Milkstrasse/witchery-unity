@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource musicSource;
     private AudioSource audioSource;
 
+    public bool hapticDisabled;
+
     private void Awake()
     {
         DontDestroyOnLoad(this);

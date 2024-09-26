@@ -9,10 +9,10 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     [SerializeField] private CardUI cardUI;
     [SerializeField] private CardUI lastCardUI;
 
-    private float[] startX = new float[] {0, 29, 41, 29, 0, -29, -41, -29};
-    private float[] startY = new float[] {41, 29, 0, -29, -41, -29, 0, 29};
-    private float[] endX = new float[] {0, 152, 215, 152, 0, -152, -215, -152};
-    private float[] endY = new float[] {215, 152, 0, -152, -215, -152, 0, 152};
+    private readonly float[] startX = new float[] {0, 29, 41, 29, 0, -29, -41, -29};
+    private readonly float[] startY = new float[] {41, 29, 0, -29, -41, -29, 0, 29};
+    private readonly float[] endX = new float[] {0, 152, 215, 152, 0, -152, -215, -152};
+    private readonly float[] endY = new float[] {215, 152, 0, -152, -215, -152, 0, 152};
 
     private void Start()
     {
@@ -43,11 +43,6 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     {
         if (eventData.pointerDrag != null && FightManager.singleton.IsAbleToMessage())
         {
-            /*int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;
-            CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
-            
-            SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
-            FightManager.singleton.SendMove(cardIndex, true);*/
             StartCoroutine(PlayCard(eventData.pointerDrag.GetComponent<CardUI>(), eventData.pointerDrag.GetComponent<DragDrop>().cardIndex));
         }
     }
