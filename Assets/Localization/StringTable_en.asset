@@ -235,6 +235,10 @@ MonoBehaviour:
     m_Localized: Take energy for yourself
     m_Metadata:
       m_Items: []
+  - m_Id: 14344272730906624
+    m_Localized: Draw next energy card
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private ImpactUI impactFrame;
+
     [SerializeField] private CardUI cardUI;
     [SerializeField] private CardUI lastCardUI;
 
@@ -40,13 +43,29 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     {
         if (eventData.pointerDrag != null && FightManager.singleton.IsAbleToMessage())
         {
-            int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;
+            /*int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             
             SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
-
-            FightManager.singleton.SendMove(cardIndex, true);
+            FightManager.singleton.SendMove(cardIndex, true);*/
+            StartCoroutine(PlayCard(eventData.pointerDrag.GetComponent<CardUI>(), eventData.pointerDrag.GetComponent<DragDrop>().cardIndex));
         }
+    }
+
+    IEnumerator PlayCard(CardUI eventCardUI, int cardIndex)
+    {
+        if (eventCardUI.card.isSpecial)
+        {
+            impactFrame.gameObject.SetActive(true);
+            impactFrame.SetupUI(eventCardUI.card.fighter.name, eventCardUI.transform.eulerAngles.z == 180f);
+
+            yield return new WaitForSeconds(0.8f);
+
+            impactFrame.gameObject.SetActive(false);
+        }
+
+        SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
+        FightManager.singleton.SendMove(cardIndex, true);
     }
 
     public void SetupCard(Card card, bool isFlipped)
@@ -102,7 +121,6 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         else
         {
             LeanTween.moveLocalY(gameObject, 0f, 0.3f);
-            //LeanTween.moveLocalY(gameObject, 0f, 0.3f);
         }
     }
 

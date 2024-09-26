@@ -235,6 +235,10 @@ MonoBehaviour:
     m_Localized: "Nehme Energie f\xFCr dich"
     m_Metadata:
       m_Items: []
+  - m_Id: 14344272730906624
+    m_Localized: "Ziehe n\xE4chste Energiekarte"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
