@@ -70,8 +70,6 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void SetupCard(Card card, bool isFlipped)
     {
-        AudioManager.singleton.PlayStandardSound();
-        
         if (cardUI.card.hasMove)
         {
             lastCardUI.SetupCard(cardUI.card);
@@ -97,6 +95,35 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
         if (animate)
         {
+            Card card = switchCards ? lastCardUI.card : cardUI.card;
+
+            if (card.hasMove)
+            {
+                if (card.move.moveType == MoveType.Standard)
+                {
+                    if (card.move.moveID%10 == 3)
+                    {
+                        AudioManager.singleton.PlayPositiveSound();
+                    }
+                    else if (card.move.moveID%10 == 4)
+                    {
+                        AudioManager.singleton.PlayNegativeSound();
+                    }
+                    else
+                    {
+                        AudioManager.singleton.PlayNeutralSound();
+                    }
+                }
+                else
+                {
+                    AudioManager.singleton.PlayNeutralSound();
+                }
+            }
+            else
+            {
+                AudioManager.singleton.PlayNeutralSound();
+            }
+
             for (int i = 0; i < 8; i++)
             {
                 LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(endX[i], endY[i], 0f), 0.3f).setOnComplete(ResetAnimation);

@@ -13,7 +13,12 @@ public class ImpactUI : MonoBehaviour
 
         transform.localPosition = new Vector3(0, rotated ? -160f : 160f, 0);
         impact.eulerAngles = rotated ? new Vector3(180f, 180f, 0f) : Vector3.zero;
-        LeanTween.moveLocal(portrait.gameObject, Vector3.zero, 0.2f);
+        LeanTween.moveLocal(portrait.gameObject, Vector3.zero, 0.2f).setOnComplete(PlaySound);
+    }
+
+    private void PlaySound()
+    {
+        AudioManager.singleton.PlayAttackSound();
     }
 
     private void OnDisable()

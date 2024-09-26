@@ -90,7 +90,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7837112253538304
-    m_Localized: Gain {health}  <style="IconOutline">\uf0e7</style> HP
+    m_Localized: Gain {health} <style="IconOutline">\uf0e7</style> HP
     m_Metadata:
       m_Items:
       - rid: 296817732614357011

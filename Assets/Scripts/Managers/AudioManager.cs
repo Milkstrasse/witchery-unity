@@ -24,6 +24,26 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(audioClips[0]);
     }
 
+    public void PlayPositiveSound()
+    {
+        audioSource.PlayOneShot(audioClips[1]);
+    }
+
+    public void PlayNegativeSound()
+    {
+        audioSource.PlayOneShot(audioClips[2]);
+    }
+
+    public void PlayNeutralSound()
+    {
+        audioSource.PlayOneShot(audioClips[3]);
+    }
+
+    public void PlayAttackSound()
+    {
+        audioSource.PlayOneShot(audioClips[4]);
+    }
+
     public void ChangeMusicVolume(float sliderValue) => musicSource.volume = sliderValue;
 
     public void ChangeSoundVolume(float sliderValue) => audioSource.volume = sliderValue;
