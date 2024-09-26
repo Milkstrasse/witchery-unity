@@ -28,7 +28,7 @@ public class CardUI : MonoBehaviour
     private LocalizeStringEvent stringEvent;
 
     public Card card;
-    private Player player;
+    public Player player;
 
     private void Start()
     {

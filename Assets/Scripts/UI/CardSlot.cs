@@ -14,9 +14,12 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     private readonly float[] endX = new float[] {0, 152, 215, 152, 0, -152, -215, -152};
     private readonly float[] endY = new float[] {215, 152, 0, -152, -215, -152, 0, 152};
 
+    private bool cardWasPlayed;
+
     private void Start()
     {
         FightManager.singleton.OnMoveFailed += ResetCard;
+        cardWasPlayed = true;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -49,6 +52,15 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     IEnumerator PlayCard(CardUI eventCardUI, int cardIndex)
     {
+        if (eventCardUI.card.hasMove && eventCardUI.card.move.cost > eventCardUI.player.energy)
+        {
+            yield break;
+        }
+        else if (eventCardUI.card.move.moveType == MoveType.Response && cardWasPlayed)
+        {
+            yield break;
+        }
+
         if (eventCardUI.card.isSpecial)
         {
             impactFrame.gameObject.SetActive(true);
@@ -91,6 +103,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         if (animate)
         {
             Card card = switchCards ? lastCardUI.card : cardUI.card;
+            cardWasPlayed = true;
 
             if (card.hasMove)
             {
@@ -123,6 +136,11 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             {
                 LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(endX[i], endY[i], 0f), 0.3f).setOnComplete(ResetAnimation);
             }
+        }
+        else
+        {
+            cardWasPlayed = false;
+            AudioManager.singleton.PlayStandardSound();
         }
     }
 

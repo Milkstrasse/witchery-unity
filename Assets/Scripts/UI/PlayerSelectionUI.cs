@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
@@ -53,6 +54,38 @@ public class PlayerSelectionUI : MonoBehaviour
         cards[cardIndex].HighlightCard(result.Item1);
 
         readyButton.interactable = result.Item2;
+    }
+
+    public void SelectRandomCard()
+    {
+        AudioManager.singleton.PlayStandardSound();
+        
+        int cardAmount = cards.Length;
+
+        int[] indices = Enumerable.Range(0, cardAmount).ToArray();
+        int n = cardAmount - 1;
+        while (n > 0)
+        {
+            int j = Random.Range(0, n);
+            int tmp = indices[n];
+            indices[n] = indices[j];
+            indices[j] = tmp;
+
+            n--;
+        }
+
+        for (int i = 0; i < cardAmount; i++)
+        {
+            if (!cards[indices[i]].isHighlighted)
+            {
+                (bool, bool) result = selectionUI.EditTeam(indices[i]);
+                cards[indices[i]].HighlightCard(result.Item1);
+
+                readyButton.interactable = result.Item2;
+
+                return;
+            }
+        }
     }
 
     public void ToggleUI(bool isActive, bool collapsable = false)

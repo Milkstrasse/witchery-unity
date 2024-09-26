@@ -35,6 +35,10 @@ public class FightLogic
             {
                 return false;
             }
+            else if (card.move.moveType == MoveType.Response && lastCard.played)
+            {
+                return false;
+            }
 
             players[playerTurn].energy = players[playerTurn].energy - Math.Max(card.move.cost, 0);
         }
