@@ -43,7 +43,7 @@ public class FightManager : MonoBehaviour
     [Server]
     public PlayerMessage SetupPlayer(PlayerMessage message)
     {
-        PlayerMessage msg = new PlayerMessage(message.name, message.fighterIDs);
+        PlayerMessage msg = new PlayerMessage(message.name, message.fighterIDs, message.effects);
 
         PlayerData playerData = new PlayerData(message);
         logic.players.Add(playerData);

@@ -20,3 +20,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
   - {fileID: 11400000, guid: a9b6b9d7f4bc44d43aa2d911e008133e, type: 2}
   - {fileID: 11400000, guid: a9b6b9d7f4bc44d43aa2d911e008133e, type: 2}
+  effect:
+    name: weaken
+    icon: f103
+    duration: 3
+    value: -2
+    statusType: 2
+    isDelayed: 0
+    isNew: 0

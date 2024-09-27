@@ -12,6 +12,7 @@ public class PlayerFightUI : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private TextMeshProUGUI energyText;
     [SerializeField] private Image timer;
+    [SerializeField] private Image portrait;
 
     [SerializeField] private Transform statusParent;
     private StatusUI[] effects;
@@ -55,6 +56,8 @@ public class PlayerFightUI : MonoBehaviour
     {
         this.player = player;
         player.OnPlayerChanged += UpdateUI;
+
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[player.fighterIDs[0]].name);
 
         nameText.text = player.playerName;
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";

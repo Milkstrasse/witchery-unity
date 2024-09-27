@@ -41,7 +41,10 @@ public class CardUI : MonoBehaviour
     {
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name);
 
-        icon.text = fighter.fighterID.ToString();
+        uint i = Convert.ToUInt32(fighter.effect.icon, 16);
+
+        icon.text = $"<style=IconShadow>{Convert.ToChar(i)}</style>";
+        //icon.text = fighter.fighterID.ToString();
         infoText.text = fighter.name;
     }
 

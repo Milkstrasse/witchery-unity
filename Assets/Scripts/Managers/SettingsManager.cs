@@ -10,7 +10,7 @@ public class SettingsManager : MonoBehaviour
     private bool changingLang;
     private int langIndex;
 
-     public event Action<string> OnLanguageUpdated;
+    public event Action<string> OnLanguageUpdated;
 
     private void Start()
     {

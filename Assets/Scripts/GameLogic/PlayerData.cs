@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerData
@@ -50,7 +51,7 @@ public class PlayerData
 
         playedCards = new List<int>();
         cardHand = new List<int>();
-        effects = new List<StatusEffect>();
+        effects = message.effects.ToList();
 
         startIndex = 5;
 

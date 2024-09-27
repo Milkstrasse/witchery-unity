@@ -120,19 +120,23 @@ public class SelectionManager : MonoBehaviour
       ReturnToMenu();
    }
 
-   public (bool, bool) EditTeam(int fighterID)
+   public SelectionResult EditTeam(int fighterID)
    {
       int index = fighterIDs.IndexOf(fighterID);
 
       if (index >= 0)
       {
          fighterIDs.RemoveAt(index);
-         return (false, fighterIDs.Count > 0);
+         bool hasTeam = fighterIDs.Count > 0;
+
+         return new SelectionResult(false, hasTeam, hasTeam ? fighterIDs[0] : -1);
       }
       else
       {
          fighterIDs.Add(fighterID);
-         return (true, fighterIDs.Count > 0);
+         bool hasTeam = fighterIDs.Count > 0;
+         
+         return new SelectionResult(true, hasTeam, hasTeam ? fighterIDs[0] : -1);
       }
    }
 

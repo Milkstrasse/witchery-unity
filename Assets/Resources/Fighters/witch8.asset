@@ -20,3 +20,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7e65d0ec68a344c989f010133fd747fd, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  effect:
+    name: healing
+    icon: f469
+    duration: 3
+    value: 2
+    statusType: 0
+    isDelayed: 0
+    isNew: 0

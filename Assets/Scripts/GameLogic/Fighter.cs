@@ -7,6 +7,7 @@ public class Fighter : ScriptableObject
     public int fighterID;
     public Role role;
     public Move[] moves;
+    public StatusEffect effect;
 }
 
 public enum Role

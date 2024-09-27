@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -35,9 +36,11 @@ public class Player : MonoBehaviour
         currHealth = fullHealth;
         energy = 7;
 
+        Debug.Log(message.effects.Length);
+
         cards = new List<Card>();
         cardHand = new List<Card>();
-        effects = new List<StatusEffect>();
+        effects = message.effects.ToList();
 
         fighterIDs = message.fighterIDs;
 

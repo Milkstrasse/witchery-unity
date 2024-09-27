@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerSelectionUI : MonoBehaviour
 {
     [SerializeField] private SelectionUI selectionUI;
+
     [SerializeField] private Transform cardParent;
     [SerializeField] private GameObject cardPrefab;
     private CanvasGroup canvasGroup;
@@ -13,6 +14,8 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private LocalizeStringEvent stringEvent;
     [SerializeField] private Image timer;
     [SerializeField] private Button readyButton;
+    [SerializeField] private Image portrait;
+    private int currLeader;
 
     private int[] fighters;
     private int currFilter;
@@ -44,16 +47,28 @@ public class PlayerSelectionUI : MonoBehaviour
         }
 
         currFilter = 0;
+        currLeader = -1;
     }
 
     private void SelectCard(int cardIndex)
     {
         AudioManager.singleton.PlayStandardSound();
         
-        (bool, bool) result = selectionUI.EditTeam(cardIndex);
-        cards[cardIndex].HighlightCard(result.Item1);
+        SelectionResult result = selectionUI.EditTeam(cardIndex);
+        cards[cardIndex].HighlightCard(result.wasAdded);
 
-        readyButton.interactable = result.Item2;
+        if (result.leader >= 0 && result.leader != currLeader)
+        {
+            currLeader = result.leader;
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[currLeader].name);
+        }
+
+        readyButton.interactable = result.hasTeam;
+
+        if (currFilter == filters.Length - 1)
+        {
+            UpdateUI(true);
+        }
     }
 
     public void SelectRandomCard()
@@ -78,10 +93,21 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             if (!cards[indices[i]].isHighlighted)
             {
-                (bool, bool) result = selectionUI.EditTeam(indices[i]);
-                cards[indices[i]].HighlightCard(result.Item1);
+                SelectionResult result = selectionUI.EditTeam(indices[i]);
+                cards[indices[i]].HighlightCard(result.wasAdded);
 
-                readyButton.interactable = result.Item2;
+                if (result.leader >= 0 && result.leader != currLeader)
+                {
+                    currLeader = result.leader;
+                    portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[currLeader].name);
+                }
+
+                readyButton.interactable = result.hasTeam;
+
+                if (currFilter == filters.Length - 1)
+                {
+                    UpdateUI(true);
+                }
 
                 return;
             }
@@ -106,7 +132,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (GlobalManager.singleton.mode == GameMode.Offline)
         {
-            readyButton.interactable = isActive;
+            readyButton.interactable = false;
             LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 130f), 0.3f);
         }
         else if (collapsable)
