@@ -190,6 +190,17 @@ public class PlayerData
         return power;
     }
 
+    public int GetShields()
+    {
+        StatusEffect shields = GetEffect("shields");
+        if (shields != null)
+        {
+            return shields.value;
+        }
+        
+        return 0;
+    }
+
     public StatusEffect GetEffect(string effectName)
     {
         for (int i = 0; i < effects.Count; i++)

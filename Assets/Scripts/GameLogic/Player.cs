@@ -36,8 +36,6 @@ public class Player : MonoBehaviour
         currHealth = fullHealth;
         energy = 7;
 
-        Debug.Log(message.effects.Length);
-
         cards = new List<Card>();
         cardHand = new List<Card>();
         effects = message.effects.ToList();
@@ -142,5 +140,18 @@ public class Player : MonoBehaviour
         }
 
         return counter;
+    }
+
+    public int GetShields()
+    {
+        for (int i = 0; i < effects.Count; i++)
+        {
+            if (effects[i].name == "shields")
+            {
+                return effects[i].value;
+            }
+        }
+
+        return 0;
     }
 }

@@ -30,7 +30,7 @@ public struct CPULogic
 
                 if (health < 0)
                 {
-                    health = Math.Min(health - logic.players[1].GetPowerBonus(), 0);
+                    health = Math.Min(health - logic.players[1].GetPowerBonus() + logic.players[1].GetShields(), 0);
 
                     if (logic.players[0].health + health <= 0) //opponent defeated
                     {

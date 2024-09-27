@@ -32,7 +32,7 @@ public class CustomNetwork : RelayNetworkManager
     private void OnServerReceivePlayer(NetworkConnectionToClient conn, PlayerMessage message)
     {
         message.name = $"PLAYER {playersReady}";
-        StatusEffect effect = GlobalManager.singleton.fighters[message.fighterIDs[0]].effect;
+        StatusEffect effect = new StatusEffect(GlobalManager.singleton.fighters[message.fighterIDs[0]].effect);
         message.effects = new StatusEffect[1] {effect};
 
         players.Add(message);
@@ -41,8 +41,8 @@ public class CustomNetwork : RelayNetworkManager
 
         if (playersReady == 2)
         {
-            StatusEffect effect0 = GlobalManager.singleton.fighters[players[0].fighterIDs[0]].effect;
-            StatusEffect effect1 = GlobalManager.singleton.fighters[players[1].fighterIDs[0]].effect;
+            StatusEffect effect0 = new StatusEffect(GlobalManager.singleton.fighters[players[0].fighterIDs[0]].effect);
+            StatusEffect effect1 = new StatusEffect(GlobalManager.singleton.fighters[players[1].fighterIDs[0]].effect);
 
             if (effect0.value < 0 && effect1.value < 0)
             {

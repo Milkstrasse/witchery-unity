@@ -157,11 +157,19 @@ public class CardUI : MonoBehaviour
     {
         if (card.hasMove && card.move.moveID >= 10 && card.move.moveID <= 12)
         {
-            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(update ? false : card.move.moveID >= 10 && card.move.moveID <= 12), 0);
-            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy * cardCost) + GetPowerBonus(update ? false : card.move.moveID >= 10 && card.move.moveID <= 12), 0);
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(update ? false : (card.move.moveID >= 10 && card.move.moveID <= 12)), 0);
+            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy * cardCost) + GetPowerBonus(update ? false : (card.move.moveID >= 10 && card.move.moveID <= 12)), 0);
             stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription(update ? 10 : 0));
 
             stringEvent.RefreshString();
+        }
+        else if (update && player != null)
+        {
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12) - FightManager.singleton.players[1 - player.playerID].GetShields(), 0);
+        }
+        else
+        {
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
         }
     }
 
