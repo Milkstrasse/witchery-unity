@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveID: 3
   cost: 2
+  target: 0
   health: 0
   energy: 0
   effect:
     name: healing
-    icon: f0fa
+    icon: f469
     duration: 3
     value: 2
     statusType: 0

@@ -52,13 +52,23 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     IEnumerator PlayCard(CardUI eventCardUI, int cardIndex)
     {
-        if (eventCardUI.card.hasMove && eventCardUI.card.move.cost > eventCardUI.player.energy)
+        if (eventCardUI.card.hasMove)
         {
-            yield break;
-        }
-        else if (eventCardUI.card.move.moveType == MoveType.Response && cardWasPlayed)
-        {
-            yield break;
+            if (eventCardUI.card.move.cost > eventCardUI.player.energy)
+            {
+                yield break;
+            }
+            else if (eventCardUI.card.move.moveType == MoveType.Response)
+            {
+                if (cardWasPlayed)
+                {
+                    yield break;
+                }
+                else if (cardUI.card.hasMove && !eventCardUI.player.IsResponse(cardUI.card.move, eventCardUI.card.move))
+                {
+                    yield break;
+                }
+            }
         }
 
         if (eventCardUI.card.isSpecial)

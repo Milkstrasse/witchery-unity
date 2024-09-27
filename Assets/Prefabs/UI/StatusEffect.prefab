@@ -137,10 +137,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: \uf004
+  m_text: \uf005
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 53774d24c77fb4b2fab5307fe310878e, type: 2}
-  m_sharedMaterial: {fileID: 6575886762143029956, guid: 53774d24c77fb4b2fab5307fe310878e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cf495781b04db40268ab2f50a3e52eed, type: 2}
+  m_sharedMaterial: {fileID: 8251964443455890307, guid: cf495781b04db40268ab2f50a3e52eed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

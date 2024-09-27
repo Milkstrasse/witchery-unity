@@ -88,18 +88,28 @@ public class Player : MonoBehaviour
                 continue;
             }
 
-            if (cardHand[i].move.moveType != MoveType.Response || cardHand[i].move.cost > energy)
-            {
-                continue;
-            }
-
-            if (cardHand[i].move.moveID == move.moveID % 10)
+            if (IsResponse(move, cardHand[i].move))
             {
                 return true;
             }
         }
 
         return false;
+    }
+
+    public bool IsResponse(Move move, Move response)
+    {
+        if (response.moveType != MoveType.Response)
+        {
+            return false;
+        }
+        else if (response.cost > energy)
+        {
+            return false;
+        }
+
+
+        return response.moveID == move.moveID % 10;
     }
 
     public int GetPowerBonus()
