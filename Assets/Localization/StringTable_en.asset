@@ -239,6 +239,18 @@ MonoBehaviour:
     m_Localized: Draw next energy card
     m_Metadata:
       m_Items: []
+  - m_Id: 15212795833344000
+    m_Localized: moves are directly played for
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15212657836548096
+    m_Localized: prevents effects for
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15212672940236800
+    m_Localized: reduces damage for
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
