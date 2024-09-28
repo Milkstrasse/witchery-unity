@@ -46,32 +46,43 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     {
         if (eventData.pointerDrag != null && FightManager.singleton.IsAbleToMessage())
         {
-            CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
-            int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;
+            StartCoroutine(PlayCard(eventData.pointerDrag.GetComponent<CardUI>(), eventData.pointerDrag.GetComponent<DragDrop>().cardIndex));
+        }
+    }
 
-            if (eventCardUI.card.hasMove)
+    IEnumerator PlayCard(CardUI eventCardUI, int cardIndex)
+    {
+        if (eventCardUI.card.hasMove)
+        {
+            if (eventCardUI.card.move.cost > eventCardUI.player.energy)
             {
-                if (eventCardUI.card.move.cost > eventCardUI.player.energy)
+                yield break;
+            }
+            else if (eventCardUI.card.move.moveType == MoveType.Response)
+            {
+                if (cardWasPlayed)
                 {
-                    return;
+                    yield break;
                 }
-                else if (eventCardUI.card.move.moveType == MoveType.Response)
+                else if (cardUI.card.hasMove && !eventCardUI.player.IsResponse(cardUI.card.move, eventCardUI.card.move))
                 {
-                    if (cardWasPlayed)
-                    {
-                        return;
-                    }
-                    else if (cardUI.card.hasMove && !eventCardUI.player.IsResponse(cardUI.card.move, eventCardUI.card.move))
-                    {
-                        return;
-                    }
+                    yield break;
                 }
             }
-
-            SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
-            FightManager.singleton.SendMove(cardIndex, true);
-
         }
+
+        if (eventCardUI.card.isSpecial)
+        {
+            impactFrame.gameObject.SetActive(true);
+            impactFrame.SetupUI(eventCardUI.card.fighter.name, eventCardUI.transform.eulerAngles.z == 180f);
+
+            yield return new WaitForSeconds(0.8f);
+
+            impactFrame.gameObject.SetActive(false);
+        }
+
+        SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
+        FightManager.singleton.SendMove(cardIndex, true);
     }
 
     public void SetupCard(Card card, bool isFlipped)
