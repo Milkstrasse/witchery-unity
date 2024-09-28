@@ -251,6 +251,10 @@ MonoBehaviour:
     m_Localized: "reduziert Schaden f\xFCr"
     m_Metadata:
       m_Items: []
+  - m_Id: 15264850425929728
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

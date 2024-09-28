@@ -24,6 +24,7 @@ public class GameOverManager : MonoBehaviour
             Destroy(players[i].gameObject);
         }
 
+        AudioManager.singleton.PlayStandardSound();
         GlobalManager.singleton.LoadScene("MenuScene");
     }
 }

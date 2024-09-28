@@ -17,6 +17,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private RawImage background;
     [SerializeField] private RawImage backBackground;
     [SerializeField] private TextMeshProUGUI infoText;
+    public TextMeshProUGUI animatedIcon;
 
     [SerializeField] private Color neutralFront;
     [SerializeField] private Color highlighted;
@@ -42,9 +43,8 @@ public class CardUI : MonoBehaviour
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name);
 
         uint i = Convert.ToUInt32(fighter.effect.icon, 16);
-
         icon.text = $"<style=IconShadow>{Convert.ToChar(i)}</style>";
-        //icon.text = fighter.fighterID.ToString();
+
         infoText.text = fighter.name;
     }
 
@@ -183,5 +183,25 @@ public class CardUI : MonoBehaviour
         {
             return player.GetPowerBonus();
         }
+    }
+
+    public void SetupIcon(StatusEffect effect)
+    {
+        uint i = Convert.ToUInt32(effect.icon, 16);
+        animatedIcon.text = Convert.ToChar(i).ToString();
+
+        StartCoroutine(PlayAnimation());
+    }
+
+    IEnumerator PlayAnimation()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        animatedIcon.transform.localScale = Vector3.one;
+        LeanTween.scale(animatedIcon.gameObject, new Vector3(1.5f, 1.5f, 1.5f), 0.2f).setLoopPingPong(1);
+
+        yield return new WaitForSeconds(0.4f);
+         animatedIcon.transform.localScale = Vector3.zero;
+        animatedIcon.gameObject.SetActive(false);
     }
 }

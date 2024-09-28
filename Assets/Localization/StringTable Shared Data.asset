@@ -239,6 +239,10 @@ MonoBehaviour:
     m_Key: weaken
     m_Metadata:
       m_Items: []
+  - m_Id: 15264850425929728
+    m_Key: credits
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

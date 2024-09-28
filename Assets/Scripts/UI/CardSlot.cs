@@ -108,13 +108,27 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             {
                 if (card.move.moveType == MoveType.Standard)
                 {
-                    if (card.move.moveID%10 == 3)
+                    if (card.move.effect.duration > 0)
                     {
-                        AudioManager.singleton.PlayPositiveSound();
-                    }
-                    else if (card.move.moveID%10 == 4)
-                    {
-                        AudioManager.singleton.PlayNegativeSound();
+                        if (cardUI.gameObject.activeSelf)
+                        {
+                            cardUI.animatedIcon.gameObject.SetActive(true);
+                            cardUI.SetupIcon(card.move.effect);
+                        }
+                        else
+                        {
+                            lastCardUI.animatedIcon.gameObject.SetActive(true);
+                            lastCardUI.SetupIcon(card.move.effect);
+                        }
+
+                        if (card.move.moveID % 10 == 3)
+                        {
+                            AudioManager.singleton.PlayPositiveSound();
+                        }
+                        else if (card.move.moveID % 10 == 4)
+                        {
+                            AudioManager.singleton.PlayNegativeSound();
+                        }
                     }
                     else
                     {
