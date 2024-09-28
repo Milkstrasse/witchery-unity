@@ -55,7 +55,7 @@ public class PlayerSelectionUI : MonoBehaviour
         AudioManager.singleton.PlayStandardSound();
         
         SelectionResult result = selectionUI.EditTeam(cardIndex);
-        cards[cardIndex].HighlightCard(result.wasAdded);
+        cards[cardIndex].SelectCard(result.wasAdded);
 
         if (result.leader >= 0 && result.leader != currLeader)
         {
@@ -91,10 +91,10 @@ public class PlayerSelectionUI : MonoBehaviour
 
         for (int i = 0; i < cardAmount; i++)
         {
-            if (!cards[indices[i]].isHighlighted)
+            if (!cards[indices[i]].isSelected)
             {
                 SelectionResult result = selectionUI.EditTeam(indices[i]);
-                cards[indices[i]].HighlightCard(result.wasAdded);
+                cards[indices[i]].SelectCard(result.wasAdded);
 
                 if (result.leader >= 0 && result.leader != currLeader)
                 {
@@ -167,7 +167,7 @@ public class PlayerSelectionUI : MonoBehaviour
             }
             else if (showTeam)
             {
-                cards[i].gameObject.SetActive(cards[i].isHighlighted);
+                cards[i].gameObject.SetActive(cards[i].isSelected);
             }
             else
             {

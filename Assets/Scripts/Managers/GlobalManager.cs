@@ -24,6 +24,8 @@ public class GlobalManager : MonoBehaviour
     public static int turnTime = 180;
 
     public event Action<string> OnCodeCreated;
+
+    public int[] leaders;
     
     private async void Awake()
     {
@@ -56,6 +58,8 @@ public class GlobalManager : MonoBehaviour
         #if UNITY_EDITOR
         relayEnabled = false;
         #endif
+
+        leaders = new int[2];
 
         LoadScene("MenuScene");
     }

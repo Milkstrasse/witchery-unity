@@ -85,17 +85,17 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7837084361416704
-    m_Localized: Do {health} <style="IconOutline">\uf0e7</style> damage
+    m_Localized: Do {health} <style="IconOutline">\uf00d</style> damage
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7837112253538304
-    m_Localized: Gain {health} <style="IconOutline">\uf0e7</style> HP
+    m_Localized: Gain {health} <style="IconOutline">\uf00d</style> HP
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7842569093373952
-    m_Localized: Gain {energy} <style="IconOutline">\uf0e7</style>energy
+    m_Localized: Gain {energy} <style="IconOutline">\uf00d</style>energy
     m_Metadata:
       m_Items:
       - rid: 296817732614357011

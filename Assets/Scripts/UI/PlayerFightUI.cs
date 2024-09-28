@@ -39,6 +39,15 @@ public class PlayerFightUI : MonoBehaviour
 
     private void InitUI()
     {
+        if (rectTransform.eulerAngles.z == 180f)
+        {
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalManager.singleton.leaders[0]].name);
+        }
+        else
+        {
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalManager.singleton.leaders[1]].name);
+        }
+
         float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 230 - 40)/4 * -1;
 
         for (int i = 0; i < 5; i++)

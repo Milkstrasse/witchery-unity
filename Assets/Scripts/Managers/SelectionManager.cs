@@ -58,6 +58,8 @@ public class SelectionManager : MonoBehaviour
          }
 
          NetworkClient.Send(new PlayerMessage(playerNames[index], fighterIDs.ToArray()));
+         GlobalManager.singleton.leaders[index] = fighterIDs[0];
+
          fighterIDs = new List<int>();
 
          if (GlobalManager.singleton.mode == GameMode.Training)
@@ -110,6 +112,8 @@ public class SelectionManager : MonoBehaviour
          if (NetworkClient.isConnected && !sentMessage)
          {
             NetworkClient.Send(new PlayerMessage(playerNames[1], fighterIDs.ToArray()));
+            GlobalManager.singleton.leaders[1] = fighterIDs[0];
+
             sentMessage = true;
          }
          
