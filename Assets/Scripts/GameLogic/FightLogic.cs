@@ -110,7 +110,7 @@ public class FightLogic
 
         if (move.moveType == MoveType.Standard)
         {
-            if (blockable && FightManager.singleton.players[1 - turn].HasResponse(move))
+            if (blockable && players[turn].GetEffect("accurate") == null && FightManager.singleton.players[1 - turn].HasResponse(move))
             {
                 return false;
             }
@@ -205,7 +205,7 @@ public class FightLogic
                         StatusEffect spice = players[(move.target + turn)%2].GetEffect("spice");
                         if (spice != null)
                         {
-                            players[turn].health = Math.Max(players[turn].health + spice.value, 0);
+                            players[turn].health = Math.Max(players[turn].health - spice.value, 0);
                             if (winner < 0 && players[turn].health == 0)
                             {
                                 winner = 1 - turn;

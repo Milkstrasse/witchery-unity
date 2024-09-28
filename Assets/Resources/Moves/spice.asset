@@ -21,7 +21,7 @@ MonoBehaviour:
     name: spice
     icon: f816
     duration: 3
-    value: -2
+    value: 2
     statusType: 3
     isDelayed: 0
     isNew: 0

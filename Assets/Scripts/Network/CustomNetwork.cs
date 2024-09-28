@@ -51,13 +51,19 @@ public class CustomNetwork : RelayNetworkManager
             }
             else if (effect0.value >= 0 && effect1.value < 0)
             {
-                players[0] = new PlayerMessage(players[0].name, players[0].fighterIDs, new StatusEffect[2] {effect0, effect1});
+                if (effect0.name != "blessed")
+                {
+                    players[0] = new PlayerMessage(players[0].name, players[0].fighterIDs, new StatusEffect[2] {effect0, effect1});
+                }
                 players[1] = new PlayerMessage(players[1].name, players[1].fighterIDs, new StatusEffect[0]);
             }
             else if (effect0.value < 0 && effect1.value >= 0)
             {
                 players[0] = new PlayerMessage(players[0].name, players[0].fighterIDs, new StatusEffect[0]);
-                players[1] = new PlayerMessage(players[1].name, players[1].fighterIDs, new StatusEffect[2] {effect0, effect1});
+                if (effect1.name != "blessed")
+                {
+                    players[1] = new PlayerMessage(players[1].name, players[1].fighterIDs, new StatusEffect[2] {effect1, effect0});
+                }
             }
 
             playersReady = 0;
