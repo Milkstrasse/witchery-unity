@@ -2,12 +2,10 @@ public struct SelectionResult
 {
     public bool wasAdded;
     public bool hasTeam;
-    public int leader;
 
-    public SelectionResult(bool wasAdded, bool hasTeam, int leader)
+    public SelectionResult(bool wasAdded, bool hasTeam)
     {
         this.wasAdded = wasAdded;
         this.hasTeam = hasTeam;
-        this.leader = leader;
     }
 }

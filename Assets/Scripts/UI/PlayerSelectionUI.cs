@@ -14,8 +14,6 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private LocalizeStringEvent stringEvent;
     [SerializeField] private Image timer;
     [SerializeField] private Button readyButton;
-    [SerializeField] private Image portrait;
-    private int currLeader;
 
     private int[] fighters;
     private int currFilter;
@@ -47,7 +45,6 @@ public class PlayerSelectionUI : MonoBehaviour
         }
 
         currFilter = 0;
-        currLeader = -1;
     }
 
     private void SelectCard(int cardIndex)
@@ -56,12 +53,6 @@ public class PlayerSelectionUI : MonoBehaviour
         
         SelectionResult result = selectionUI.EditTeam(cardIndex);
         cards[cardIndex].HighlightCard(result.wasAdded);
-
-        if (result.leader >= 0 && result.leader != currLeader)
-        {
-            currLeader = result.leader;
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[currLeader].name);
-        }
 
         readyButton.interactable = result.hasTeam;
 
@@ -95,12 +86,6 @@ public class PlayerSelectionUI : MonoBehaviour
             {
                 SelectionResult result = selectionUI.EditTeam(indices[i]);
                 cards[indices[i]].HighlightCard(result.wasAdded);
-
-                if (result.leader >= 0 && result.leader != currLeader)
-                {
-                    currLeader = result.leader;
-                    portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[currLeader].name);
-                }
 
                 readyButton.interactable = result.hasTeam;
 

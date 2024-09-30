@@ -133,14 +133,14 @@ public class SelectionManager : MonoBehaviour
          fighterIDs.RemoveAt(index);
          bool hasTeam = fighterIDs.Count > 0;
 
-         return new SelectionResult(false, hasTeam, hasTeam ? fighterIDs[0] : -1);
+         return new SelectionResult(false, hasTeam);
       }
       else
       {
          fighterIDs.Add(fighterID);
          bool hasTeam = fighterIDs.Count > 0;
          
-         return new SelectionResult(true, hasTeam, hasTeam ? fighterIDs[0] : -1);
+         return new SelectionResult(true, hasTeam);
       }
    }
 
