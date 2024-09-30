@@ -459,29 +459,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2347805197363243307, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
-      propertyPath: managedReferences[296817899947950430]
-      value: Unity.Localization UnityEngine.Localization.SmartFormat.PersistentVariables.IntVariable
-      objectReference: {fileID: 0}
-    - target: {fileID: 2347805197363243307, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
-      propertyPath: m_StringReference.m_LocalVariables.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2347805197363243307, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
-      propertyPath: managedReferences[296817899947950430].m_Value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2347805197363243307, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
-      propertyPath: m_StringReference.m_LocalVariables.Array.data[3].name
-      value: duration
-      objectReference: {fileID: 0}
-    - target: {fileID: 2347805197363243307, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
-      propertyPath: m_StringReference.m_LocalVariables.Array.data[3].variable
-      value: 296817899947950430
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6289074875952767223, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}

@@ -45,7 +45,7 @@ public class CardUI : MonoBehaviour
         uint i = Convert.ToUInt32(fighter.effect.icon, 16);
         icon.text = $"<style=IconShadow>{Convert.ToChar(i)}</style>";
 
-        infoText.text = fighter.name;
+        infoText.text = $"<size=+6>{fighter.name}</size>\n{fighter.role}";
     }
 
     public void SetupCard(Card card, Player player = null)
@@ -60,7 +60,6 @@ public class CardUI : MonoBehaviour
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name);
 
             icon.text = card.move.cost.ToString();
-            //icon.text = $"{card.move.cost} <style=IconShadow>\uf0e7</style>";
 
             (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
             (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
