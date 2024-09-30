@@ -13,18 +13,10 @@ MonoBehaviour:
   m_Name: witch7
   m_EditorClassIdentifier: 
   fighterID: 7
-  role: 1
+  role: 62445
   moves:
   - {fileID: 11400000, guid: 5c22551b66da744b293d982aafd399f1, type: 2}
   - {fileID: 11400000, guid: 4cdc2d9cf3e834b64b1d364c026149a8, type: 2}
   - {fileID: 11400000, guid: 4cdc2d9cf3e834b64b1d364c026149a8, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
-  effect:
-    name: healing
-    icon: f469
-    duration: 3
-    value: 2
-    statusType: 0
-    isDelayed: 0
-    isNew: 0

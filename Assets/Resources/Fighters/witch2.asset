@@ -13,18 +13,10 @@ MonoBehaviour:
   m_Name: witch2
   m_EditorClassIdentifier: 
   fighterID: 2
-  role: 0
+  role: 62796
   moves:
   - {fileID: 11400000, guid: 0ac7f2c711c16424fa11f475b083c023, type: 2}
   - {fileID: 11400000, guid: e428eab7482d24a74b7708919b33fae8, type: 2}
   - {fileID: 11400000, guid: e428eab7482d24a74b7708919b33fae8, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
-  effect:
-    name: weaken
-    icon: f103
-    duration: 3
-    value: -2
-    statusType: 2
-    isDelayed: 0
-    isNew: 0

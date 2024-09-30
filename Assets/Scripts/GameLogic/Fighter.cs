@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -7,10 +8,10 @@ public class Fighter : ScriptableObject
     public int fighterID;
     public Role role;
     public Move[] moves;
-    public StatusEffect effect;
 }
 
-public enum Role
+public enum Role: uint
 {
-    attack, support
+    attack = 62796,
+    support = 62445
 }

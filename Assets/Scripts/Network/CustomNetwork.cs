@@ -32,40 +32,12 @@ public class CustomNetwork : RelayNetworkManager
     private void OnServerReceivePlayer(NetworkConnectionToClient conn, PlayerMessage message)
     {
         message.name = $"PLAYER {playersReady}";
-        StatusEffect effect = new StatusEffect(GlobalManager.singleton.fighters[message.fighterIDs[0]].effect);
-        message.effects = new StatusEffect[1] {effect};
-
         players.Add(message);
 
         playersReady++;
 
         if (playersReady == 2)
         {
-            StatusEffect effect0 = new StatusEffect(GlobalManager.singleton.fighters[players[0].fighterIDs[0]].effect);
-            StatusEffect effect1 = new StatusEffect(GlobalManager.singleton.fighters[players[1].fighterIDs[0]].effect);
-
-            if (effect0.value < 0 && effect1.value < 0)
-            {
-                players[0] = new PlayerMessage(players[0].name, players[0].fighterIDs, new StatusEffect[1] {effect1});
-                players[1] = new PlayerMessage(players[1].name, players[1].fighterIDs, new StatusEffect[1] {effect0});
-            }
-            else if (effect0.value >= 0 && effect1.value < 0)
-            {
-                if (effect0.name != "blessed")
-                {
-                    players[0] = new PlayerMessage(players[0].name, players[0].fighterIDs, new StatusEffect[2] {effect0, effect1});
-                }
-                players[1] = new PlayerMessage(players[1].name, players[1].fighterIDs, new StatusEffect[0]);
-            }
-            else if (effect0.value < 0 && effect1.value >= 0)
-            {
-                players[0] = new PlayerMessage(players[0].name, players[0].fighterIDs, new StatusEffect[0]);
-                if (effect1.name != "blessed")
-                {
-                    players[1] = new PlayerMessage(players[1].name, players[1].fighterIDs, new StatusEffect[2] {effect1, effect0});
-                }
-            }
-
             playersReady = 0;
             NetworkServer.SendToAll(new TurnMessage());
 

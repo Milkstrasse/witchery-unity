@@ -13,18 +13,10 @@ MonoBehaviour:
   m_Name: witch3
   m_EditorClassIdentifier: 
   fighterID: 3
-  role: 1
+  role: 62445
   moves:
   - {fileID: 11400000, guid: 7fdbd2725e0d24881b45fcc821234b30, type: 2}
   - {fileID: 11400000, guid: 4b4094e717a4a479ea8cbdc710c37c52, type: 2}
   - {fileID: 11400000, guid: 4b4094e717a4a479ea8cbdc710c37c52, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
-  effect:
-    name: shields
-    icon: f3ed
-    duration: 3
-    value: 2
-    statusType: 3
-    isDelayed: 0
-    isNew: 0
