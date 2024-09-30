@@ -73,7 +73,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7658928543358976
-    m_Localized: Play last card again
+    m_Localized: Play card again
     m_Metadata:
       m_Items: []
   - m_Id: 7829019750817792
@@ -110,7 +110,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 8024858918117376
-    m_Localized: Add blank card to stack
+    m_Localized: Add blank card
     m_Metadata:
       m_Items: []
   - m_Id: 8024861875101696

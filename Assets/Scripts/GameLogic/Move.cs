@@ -30,13 +30,13 @@ public class Move : ScriptableObject
             case 8:
                 return "giveEffect";
             case 9:
-                return "gainEffect";
+                return "gainEnergy";
             case 15:
                 return "recoverCostHP";
             case 16:
                 return "doCostDamage";
             case 18:
-                return "gainEnergy";
+                return "gainEffect";
             case 20:
                 return "stealEnergy";
             case 21:

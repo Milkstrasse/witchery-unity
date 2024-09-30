@@ -73,7 +73,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7658928543358976
-    m_Localized: Spiele letzte Karte nochmals
+    m_Localized: Spiele Karte nochmals
     m_Metadata:
       m_Items: []
   - m_Id: 7829019750817792
@@ -114,7 +114,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8024858918117376
-    m_Localized: "F\xFCge leere Karte dem Stapel hinzu"
+    m_Localized: "F\xFCge leere Karte hinzu"
     m_Metadata:
       m_Items: []
   - m_Id: 8223596102017024

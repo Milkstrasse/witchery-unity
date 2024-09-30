@@ -70,6 +70,9 @@ public class FightLogic
                     }
 
                     break;
+                case 14: //clear blank
+                    players[playerTurn].RemoveBlanks();
+                    break;
                 default:
                     break;
             }
@@ -137,7 +140,7 @@ public class FightLogic
 
                     break;
                 case 13: //add blank
-                    players[(move.target + turn)%2].startIndex = Math.Max(players[(move.target + turn)%2].startIndex - 1, 0);
+                    players[(move.target + turn)%2].AddBlank();
                     break;
                 case 14: //clear blank
                     players[(move.target + turn)%2].startIndex = 5;

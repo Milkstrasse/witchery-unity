@@ -154,11 +154,11 @@ public class CardUI : MonoBehaviour
 
     public void UpdateMoveText(bool update, int cardCost)
     {
-        if (card.hasMove && (card.move.moveID == 15 || card.move.moveID == 16 || card.move.moveID == 21))
+        if (card.hasMove && (card.move.moveID == 15 || card.move.moveID == 16 || card.move.moveID == 21)) //special move
         {
             (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(!update), 0);
             (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy * cardCost) + GetPowerBonus(!update), 0);
-            stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription(update ? 10 : 0));
+            stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription(update ? 12 : 0));
 
             stringEvent.RefreshString();
         }

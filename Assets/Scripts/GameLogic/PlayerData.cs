@@ -37,10 +37,10 @@ public class PlayerData
         health = 50;
         energy = 7;
 
-        cardStack = new List<int> { 0, 1, 2, 3, 4 };
+        cardStack = new List<int>();
         for (int i = 0; i < message.fighterIDs.Length; i++)
         {
-            int currCount = cardStack.Count;
+            int currCount = cardStack.Count + 5;
 
             Fighter fighter = GlobalManager.singleton.fighters[message.fighterIDs[i]];
             for (int j = 0; j < fighter.moves.Length; j++)
@@ -76,7 +76,7 @@ public class PlayerData
 
     public void FillHand(int cardAmount)
     {
-        int amount = Math.Min(cardAmount, playedCards.Count + cardStack.Count - startIndex);
+        int amount = Math.Min(cardAmount, playedCards.Count + cardStack.Count);
 
         int i = 0;
         while (i < amount)
@@ -89,13 +89,6 @@ public class PlayerData
                 ShuffleStack();
             }
 
-            if (cardStack[0] < startIndex)
-            {
-                playedCards.Add(cardStack[0]);
-                cardStack.RemoveAt(0);
-                continue;
-            }
-
             cardHand.Add(cardStack[0]);
             cardStack.RemoveAt(0);
 
@@ -106,9 +99,8 @@ public class PlayerData
     public void RemoveCard(int cardIndex)
     {
         int card = cardHand[cardIndex];
-
-        playedCards.Add(card);
         cardHand.RemoveAt(cardIndex);
+        playedCards.Add(card);
     }
 
     public void AddEffect(StatusEffect effect)
@@ -191,13 +183,62 @@ public class PlayerData
         return null;
     }
 
-    public void RemoveBlanks(Player player)
+    public void AddBlank()
     {
+        int prevIndex = startIndex;
+        startIndex = Math.Max(startIndex - 1, 0);
+
+        if (prevIndex != startIndex)
+        {
+            cardStack.Add(startIndex);
+            ShuffleStack();
+        }
+    }
+
+    public void RemoveBlanks()
+    {
+        int toRemove = 5 - startIndex;
+
         for (int i = 0; i < cardHand.Count; i++)
         {
-            if (!player.cardHand[i].hasMove)
+            if (toRemove == 0)
             {
-                RemoveCard(i);
+                return;
+            }
+
+            if (cardHand[i] < startIndex)
+            {
+                cardHand.RemoveAt(i);
+
+                toRemove--;
+            }
+        }
+
+        for (int i = 0; i < cardStack.Count; i++)
+        {
+            if (toRemove == 0)
+            {
+                return;
+            }
+
+            if (cardStack[i] < startIndex)
+            {
+                cardStack.RemoveAt(i);
+                toRemove--;
+            }
+        }
+
+        for (int i = 0; i < playedCards.Count; i++)
+        {
+            if (toRemove == 0)
+            {
+                return;
+            }
+
+            if (playedCards[i] < startIndex)
+            {
+                playedCards.RemoveAt(i);
+                toRemove--;
             }
         }
     }
