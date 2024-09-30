@@ -121,11 +121,11 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                             lastCardUI.SetupIcon(card.move.effect);
                         }
 
-                        if (card.move.moveID % 10 == 3)
+                        if (card.move.moveID == 9) //gain effect
                         {
                             AudioManager.singleton.PlayPositiveSound();
                         }
-                        else if (card.move.moveID % 10 == 4)
+                        else if (card.move.moveID == 8) //give effect
                         {
                             AudioManager.singleton.PlayNegativeSound();
                         }

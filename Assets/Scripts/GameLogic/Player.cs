@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
         }
 
 
-        return response.moveID == move.moveID % 10;
+        return move.moveID%response.moveID == 0;
     }
 
     public int GetPowerBonus()

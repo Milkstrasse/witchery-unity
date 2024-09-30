@@ -14,33 +14,34 @@ public class Move : ScriptableObject
 
     public string GetDescription(int offset = 0)
     {
-        if (moveType == MoveType.Response)
+        if (moveType != MoveType.Standard)
         {
             return name;
         }
         
         switch (moveID - offset)
         {
-            case 0:
-                return "doDamage";
-            case 1:
-                return "recoverHP";
-            case 2:
-                return "gainEnergy";
             case 3:
-                return "gainEffect";
+                return "recoverHP";
             case 4:
-            case 5:
-                return "giveEffect";
+                return "doDamage";
             case 6:
-                return "stealEnergy";
-            case 10:
-                return "doCostDamage";
-            case 11:
+                return "healToHP";
+            case 8:
+                return "giveEffect";
+            case 9:
+                return "gainEffect";
+            case 15:
                 return "recoverCostHP";
-            case 12:
-                return "gainCostEnergy";
+            case 16:
+                return "doCostDamage";
+            case 18:
+                return "gainEnergy";
             case 20:
+                return "stealEnergy";
+            case 21:
+                return "gainCostEnergy";
+            case 28:
                 return "stealHP";
             default:
                 return name;

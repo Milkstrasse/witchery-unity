@@ -76,10 +76,6 @@ MonoBehaviour:
     m_Localized: Spiele letzte Karte nochmals
     m_Metadata:
       m_Items: []
-  - m_Id: 7672341843664896
-    m_Localized: "Nehme  HP f\xFCr dich"
-    m_Metadata:
-      m_Items: []
   - m_Id: 7829019750817792
     m_Localized: Verteile HP um
     m_Metadata:
@@ -141,10 +137,6 @@ MonoBehaviour:
     m_Localized: verletzt Angreifer*in
     m_Metadata:
       m_Items: []
-  - m_Id: 9781281683398656
-    m_Localized: "\xDCbergebe leere Karten"
-    m_Metadata:
-      m_Items: []
   - m_Id: 8229724533809152
     m_Localized: explodiert in
     m_Metadata:
@@ -158,20 +150,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
-  - m_Id: 8661223867408384
-    m_Localized: "Ziehe n\xE4chste Angriffskarte"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8661230519574528
-    m_Localized: "Ziehe n\xE4chste Heilkarte"
-    m_Metadata:
-      m_Items: []
   - m_Id: 8910918694985728
     m_Localized: "Nehme Effekt f\xFCr dich"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8964874955644928
-    m_Localized: "Reflektiere Effekt zur\xFCck"
     m_Metadata:
       m_Items: []
   - m_Id: 9396931322175488
@@ -229,14 +209,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 14019019806859264
     m_Localized: "Entferne zuf\xE4llige Karte"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 14025450773798912
-    m_Localized: "Nehme Energie f\xFCr dich"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 14344272730906624
-    m_Localized: "Ziehe n\xE4chste Energiekarte"
     m_Metadata:
       m_Items: []
   - m_Id: 15212795833344000

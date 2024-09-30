@@ -103,35 +103,6 @@ public class PlayerData
         }
     }
 
-    public void DrawSpecificCard(Player player, int moveID)
-    {
-        for (int i = 0; i < cardStack.Count; i++)
-        {
-            Card card = player.cards[cardStack[i]];
-            if (card.hasMove && card.move.moveType == MoveType.Standard && card.move.moveID % 10 == moveID)
-            {
-                cardHand.Add(cardStack[i]);
-                cardStack.RemoveAt(i);
-
-                ShuffleStack();
-
-                return;
-            }
-        }
-        
-        for (int k = 0; k < playedCards.Count; k++)
-        {
-            Card card = player.cards[playedCards[k]];
-            if (card.hasMove && card.move.moveType == MoveType.Standard && card.move.moveID % 10 == moveID)
-            {
-                cardHand.Add(playedCards[k]);
-                playedCards.RemoveAt(k);
-
-                return;
-            }
-        }
-    }
-
     public void RemoveCard(int cardIndex)
     {
         int card = cardHand[cardIndex];

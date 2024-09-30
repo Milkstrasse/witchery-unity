@@ -76,10 +76,6 @@ MonoBehaviour:
     m_Localized: Play last card again
     m_Metadata:
       m_Items: []
-  - m_Id: 7672341843664896
-    m_Localized: Take HP for yourself
-    m_Metadata:
-      m_Items: []
   - m_Id: 7829019750817792
     m_Localized: Redistribute HP
     m_Metadata:
@@ -141,10 +137,6 @@ MonoBehaviour:
     m_Localized: damages attacker
     m_Metadata:
       m_Items: []
-  - m_Id: 9781281683398656
-    m_Localized: Hand blank cards over
-    m_Metadata:
-      m_Items: []
   - m_Id: 8229724533809152
     m_Localized: explodes in
     m_Metadata:
@@ -158,20 +150,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
-  - m_Id: 8661223867408384
-    m_Localized: Draw next attack card
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8661230519574528
-    m_Localized: Draw next heal card
-    m_Metadata:
-      m_Items: []
   - m_Id: 8910918694985728
     m_Localized: Take effect for yourself
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8964874955644928
-    m_Localized: Reflect effect back
     m_Metadata:
       m_Items: []
   - m_Id: 9396931322175488
@@ -229,14 +209,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 14019019806859264
     m_Localized: Remove random card
-    m_Metadata:
-      m_Items: []
-  - m_Id: 14025450773798912
-    m_Localized: Take energy for yourself
-    m_Metadata:
-      m_Items: []
-  - m_Id: 14344272730906624
-    m_Localized: Draw next energy card
     m_Metadata:
       m_Items: []
   - m_Id: 15212795833344000

@@ -17,13 +17,13 @@ public struct CPULogic
             else if (player.cardHand[i].hasMove && player.cardHand[i].move.cost <= player.energy)
             {
                 Move move = player.cardHand[i].move;
-                if (move.moveID == 18 && logic.lastCard.card.hasMove) //replay card
+                if (move.moveID == 5 && logic.lastCard.card.hasMove) //replay card
                 {
                     move = logic.lastCard.card.move;
                 }
 
                 int health = move.health;
-                if (move.moveID == 10 || move.moveID == 11)
+                if (move.moveID == 15 || move.moveID == 16) //special moves
                 {
                     health *= logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0;
                 }
@@ -43,7 +43,7 @@ public struct CPULogic
                 }
                 else if (health > 0)
                 {
-                    if (move.moveID == 21)
+                    if (move.moveID == 6) //heal to health
                     {
                         health = Math.Max(health + logic.players[1].GetPowerBonus() - logic.players[1].health, 0);
                     }
@@ -63,7 +63,7 @@ public struct CPULogic
                 }
                 else
                 {
-                    if (move.moveID == 7 && logic.players[1].health > logic.players[0].health) //redistribute health
+                    if (move.moveID == 2 && logic.players[1].health > logic.players[0].health) //redistribute health
                     {
                         prioritizedCards.Add((i, -10));
                     }

@@ -36,7 +36,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210099683614720
-    m_Key: blockAttack
+    m_Key: blockCard
     m_Metadata:
       m_Items: []
   - m_Id: 8229724533809152
@@ -61,6 +61,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13275175423303680
     m_Key: clearOppEffects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15264850425929728
+    m_Key: credits
     m_Metadata:
       m_Items: []
   - m_Id: 12180150551568384
@@ -99,24 +103,8 @@ MonoBehaviour:
     m_Key: gainEnergy
     m_Metadata:
       m_Items: []
-  - m_Id: 8661223867408384
-    m_Key: getAttack
-    m_Metadata:
-      m_Items: []
-  - m_Id: 14344272730906624
-    m_Key: getEnergy
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8661230519574528
-    m_Key: getHeal
-    m_Metadata:
-      m_Items: []
   - m_Id: 7210015948529664
     m_Key: giveEffect
-    m_Metadata:
-      m_Items: []
-  - m_Id: 9781281683398656
-    m_Key: handBlanks
     m_Metadata:
       m_Items: []
   - m_Id: 8223760501956608
@@ -124,7 +112,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 11805233679163392
-    m_Key: healToHealth
+    m_Key: healToHP
     m_Metadata:
       m_Items: []
   - m_Id: 58463346688
@@ -163,10 +151,6 @@ MonoBehaviour:
     m_Key: redistribute
     m_Metadata:
       m_Items: []
-  - m_Id: 8964874955644928
-    m_Key: reflectHex
-    m_Metadata:
-      m_Items: []
   - m_Id: 14019019806859264
     m_Key: removeCard
     m_Metadata:
@@ -184,15 +168,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8910918694985728
-    m_Key: snatchEffect
-    m_Metadata:
-      m_Items: []
-  - m_Id: 14025450773798912
-    m_Key: snatchEnergy
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7672341843664896
-    m_Key: snatchHP
+    m_Key: snatchCard
     m_Metadata:
       m_Items: []
   - m_Id: 12166916067024896
@@ -237,10 +213,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8223807327166464
     m_Key: weaken
-    m_Metadata:
-      m_Items: []
-  - m_Id: 15264850425929728
-    m_Key: credits
     m_Metadata:
       m_Items: []
   m_Metadata:

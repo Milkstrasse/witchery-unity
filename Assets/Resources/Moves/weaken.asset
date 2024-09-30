@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c3f2616e0734b19bc2feecd7d70d51, type: 3}
   m_Name: weaken
   m_EditorClassIdentifier: 
-  moveID: 4
+  moveID: 8
   cost: 2
   target: 1
   health: 0

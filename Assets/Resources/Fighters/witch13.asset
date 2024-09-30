@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: witch13
   m_EditorClassIdentifier: 
   fighterID: 13
-  role: 1
+  role: 0
   moves:
-  - {fileID: 11400000, guid: 7422fa89322c44bfaa18f0298492a68e, type: 2}
-  - {fileID: 11400000, guid: 659e0a72e56764898925b91ddd19de01, type: 2}
-  - {fileID: 11400000, guid: 659e0a72e56764898925b91ddd19de01, type: 2}
+  - {fileID: 11400000, guid: 33f39622a31c94285b78c5108dfea649, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   effect:
-    name: healing
-    icon: f469
+    name: weaken
+    icon: f103
     duration: 3
-    value: 2
-    statusType: 0
+    value: -2
+    statusType: 2
     isDelayed: 0
     isNew: 0

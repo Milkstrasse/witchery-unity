@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c3f2616e0734b19bc2feecd7d70d51, type: 3}
   m_Name: redistribute
   m_EditorClassIdentifier: 
-  moveID: 7
+  moveID: 2
   cost: 3
   target: 2
   health: 0

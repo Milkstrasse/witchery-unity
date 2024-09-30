@@ -61,8 +61,8 @@ public class CardUI : MonoBehaviour
 
             icon.text = card.move.cost.ToString();
 
-            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
-            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID == 15 || card.move.moveID == 16 || card.move.moveID == 21), 0);
+            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveID == 15 || card.move.moveID == 16 || card.move.moveID == 21), 0);
             (stringEvent.StringReference["duration"] as IntVariable).Value = card.move.effect.duration;
 
             if (card.move.effect.duration != 0)
@@ -154,21 +154,21 @@ public class CardUI : MonoBehaviour
 
     public void UpdateMoveText(bool update, int cardCost)
     {
-        if (card.hasMove && card.move.moveID >= 10 && card.move.moveID <= 12)
+        if (card.hasMove && (card.move.moveID == 15 || card.move.moveID == 16 || card.move.moveID == 21))
         {
-            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(update ? false : (card.move.moveID >= 10 && card.move.moveID <= 12)), 0);
-            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy * cardCost) + GetPowerBonus(update ? false : (card.move.moveID >= 10 && card.move.moveID <= 12)), 0);
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(!update), 0);
+            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy * cardCost) + GetPowerBonus(!update), 0);
             stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription(update ? 10 : 0));
 
             stringEvent.RefreshString();
         }
         else if (update && player != null)
         {
-            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12) - FightManager.singleton.players[1 - player.playerID].GetShields(), 0);
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID == 15 || card.move.moveID == 16 || card.move.moveID == 21) - FightManager.singleton.players[1 - player.playerID].GetShields(), 0);
         }
         else
         {
-            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID >= 10 && card.move.moveID <= 12), 0);
+            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveID == 15 || card.move.moveID == 16 || card.move.moveID == 21), 0);
         }
     }
 
