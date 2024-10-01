@@ -32,6 +32,11 @@ public class SelectionUI : MonoBehaviour
         return manager.EditTeam(fighter);
     }
 
+    public void EditTeam(int fighter, int outfit)
+    {
+        manager.EditTeam(fighter, outfit);
+    }
+
     private void StartFight()
     {
         playerTop.ToggleUI(false, true);

@@ -240,7 +240,6 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (isEditing)
         {
-            SwitchMode(-1);
             isEditing = false;
         }
         else
@@ -263,6 +262,8 @@ public class PlayerSelectionUI : MonoBehaviour
             LeanTween.moveLocalX(cardOptions, fighterRect.sizeDelta.x * 0.5f, 0.3f);
             LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
             LeanTween.moveLocalX(cardParent.parent.gameObject, fighterRect.sizeDelta.x * 0.5f, 0.3f).setOnComplete(DestroyCards);
+
+            ToggleMode();
         }
         else
         {
@@ -307,6 +308,11 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             moveCards[i].UpdateOutfit(fighter, outfits[currFighter]);
         }
+
+        if (fighterCards[currFighter].isSelected)
+        {
+            selectionUI.EditTeam(currFighter, outfits[currFighter]);
+        }
     }
 
     public void IncreaseOutfit()
@@ -329,6 +335,11 @@ public class PlayerSelectionUI : MonoBehaviour
         for (int i = 0; i < moveCards.Length; i++)
         {
             moveCards[i].UpdateOutfit(fighter, outfits[currFighter]);
+        }
+
+        if (fighterCards[currFighter].isSelected)
+        {
+            selectionUI.EditTeam(currFighter, outfits[currFighter]);
         }
     }
 

@@ -126,7 +126,15 @@ public class SelectionManager : MonoBehaviour
 
    public SelectionResult EditTeam(SelectedFighter fighter)
    {
-      int index = fighterIDs.IndexOf(fighter);
+      int index = -1;
+      for (int i = 0; i < fighterIDs.Count; i++)
+      {
+         if (fighterIDs[i].fighterID == fighter.fighterID)
+         {
+            index = i;
+            break;
+         }
+      }
 
       if (index >= 0)
       {
@@ -145,6 +153,24 @@ public class SelectionManager : MonoBehaviour
       else
       {
          return new SelectionResult(false, true);
+      }
+   }
+
+   public void EditTeam(int fighter, int outfit)
+   {
+      int index = -1;
+      for (int i = 0; i < fighterIDs.Count; i++)
+      {
+         if (fighterIDs[i].fighterID == fighter)
+         {
+            index = i;
+            break;
+         }
+      }
+
+      if (index >= 0)
+      {
+         fighterIDs[index] = new SelectedFighter(fighter, outfit);
       }
    }
 
