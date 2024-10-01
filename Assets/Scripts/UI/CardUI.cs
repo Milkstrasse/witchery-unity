@@ -34,7 +34,6 @@ public class CardUI : MonoBehaviour
     private void Start()
     {
         cardSides = new GameObject[] {transform.GetChild(0).gameObject, transform.GetChild(1).gameObject};
-
         stringEvent = infoText.GetComponent<LocalizeStringEvent>();
     }
 
@@ -44,6 +43,32 @@ public class CardUI : MonoBehaviour
 
         icon.text = $"<style=IconShadow>{Convert.ToChar((uint) fighter.role)}</style>";
         infoText.text = $"<size=+6>{fighter.name}</size>\n{fighter.role}";
+    }
+
+    public void SetupCard(Fighter fighter, Move move)
+    {
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name);
+
+        icon.text = move.cost.ToString();
+
+        stringEvent = infoText.GetComponent<LocalizeStringEvent>();
+
+        (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(move.health) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);
+        (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(move.energy) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);
+        (stringEvent.StringReference["duration"] as IntVariable).Value = move.effect.duration;
+
+        if (move.effect.duration != 0)
+        {
+            uint i = Convert.ToUInt32(move.effect.icon, 16);
+            (stringEvent.StringReference["effect"] as StringVariable).Value = Convert.ToChar(i).ToString();
+        }
+        else
+        {
+            (stringEvent.StringReference["effect"] as StringVariable).Value = "";
+        }
+
+        stringEvent.StringReference.SetReference("StringTable", move.GetDescription());
+        stringEvent.RefreshString();
     }
 
     public void SetupCard(Card card, Player player = null)
@@ -74,7 +99,6 @@ public class CardUI : MonoBehaviour
             }
 
             stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription());
-
             stringEvent.RefreshString();
         }
         else

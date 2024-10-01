@@ -7,6 +7,7 @@ public class PlayerSelectionUI : MonoBehaviour
 {
     [SerializeField] private SelectionUI selectionUI;
 
+    [SerializeField] private Transform fighterParent;
     [SerializeField] private Transform cardParent;
     [SerializeField] private GameObject cardPrefab;
     private CanvasGroup canvasGroup;
@@ -15,50 +16,67 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private Image timer;
     [SerializeField] private Button readyButton;
 
+    [SerializeField] private Button editButton;
+    [SerializeField] private GameObject fighterOptions;
+    [SerializeField] private GameObject cardOptions;
+    [SerializeField] private Color neutral;
+    [SerializeField] private Color highlighted;
+
     private int[] fighters;
     private int currFilter;
     [SerializeField] private LocalizeStringEvent filterEvent;
     string[] filters;
 
-    private CardUI[] cards;
+    private CardUI[] fighterCards;
+    private CardUI[] moveCards;
+    private bool isEditing;
 
     private void Start()
     {
-        canvasGroup = cardParent.parent.GetComponent<CanvasGroup>();
+        canvasGroup = fighterParent.parent.GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
 
         filters = new string[] {"unfiltered", "attack", "support", "team"};
 
         int fighterAmount = GlobalManager.singleton.fighters.Length;
         fighters = GlobalManager.singleton.GetFighters(0);
-        cards = new CardUI[fighterAmount];
+        fighterCards = new CardUI[fighterAmount];
 
         for (int i = 0; i < fighterAmount; i++)
         {
-            CardUI card = Instantiate(cardPrefab, cardParent).GetComponent<CardUI>();
+            CardUI card = Instantiate(cardPrefab, fighterParent).GetComponent<CardUI>();
             card.SetupCard(GlobalManager.singleton.fighters[i]);
 
             int iCopy = i;
             card.GetComponent<Button>().onClick.AddListener(() => SelectCard(iCopy));
 
-            cards[i] = card;
+            fighterCards[i] = card;
         }
 
         currFilter = 0;
+
+        moveCards = new CardUI[0];
     }
 
     private void SelectCard(int cardIndex)
     {
         AudioManager.singleton.PlayStandardSound();
-        
-        SelectionResult result = selectionUI.EditTeam(cardIndex);
-        cards[cardIndex].HighlightCard(result.wasAdded);
 
-        readyButton.interactable = result.hasTeam;
-
-        if (currFilter == filters.Length - 1)
+        if (!isEditing)
         {
-            UpdateUI(true);
+            SelectionResult result = selectionUI.EditTeam(cardIndex);
+            fighterCards[cardIndex].HighlightCard(result.wasAdded);
+
+            readyButton.interactable = result.hasTeam;
+
+            if (currFilter == filters.Length - 1)
+            {
+                UpdateUI(true);
+            }
+        }
+        else
+        {
+            SwitchMode(cardIndex);
         }
     }
 
@@ -66,7 +84,7 @@ public class PlayerSelectionUI : MonoBehaviour
     {
         AudioManager.singleton.PlayStandardSound();
         
-        int cardAmount = cards.Length;
+        int cardAmount = fighterCards.Length;
 
         int[] indices = Enumerable.Range(0, cardAmount).ToArray();
         int n = cardAmount - 1;
@@ -82,10 +100,10 @@ public class PlayerSelectionUI : MonoBehaviour
 
         for (int i = 0; i < cardAmount; i++)
         {
-            if (!cards[indices[i]].isHighlighted)
+            if (!fighterCards[indices[i]].isHighlighted)
             {
                 SelectionResult result = selectionUI.EditTeam(indices[i]);
-                cards[indices[i]].HighlightCard(result.wasAdded);
+                fighterCards[indices[i]].HighlightCard(result.wasAdded);
 
                 readyButton.interactable = result.hasTeam;
 
@@ -143,20 +161,20 @@ public class PlayerSelectionUI : MonoBehaviour
         filterEvent.StringReference.SetReference("StringTable", filters[currFilter]);
 
         int index = 0;
-        for (int i = 0; i < cards.Length; i++)
+        for (int i = 0; i < fighterCards.Length; i++)
         {
             if (!showTeam && index < fighters.Length && fighters[index] == i)
             {
-                cards[i].gameObject.SetActive(true);
+                fighterCards[i].gameObject.SetActive(true);
                 index++;
             }
             else if (showTeam)
             {
-                cards[i].gameObject.SetActive(cards[i].isHighlighted);
+                fighterCards[i].gameObject.SetActive(fighterCards[i].isHighlighted);
             }
             else
             {
-                cards[i].gameObject.SetActive(false);
+                fighterCards[i].gameObject.SetActive(false);
             }
         }
     }
@@ -207,11 +225,66 @@ public class PlayerSelectionUI : MonoBehaviour
         }
     }
 
+    public void ToggleMode()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        if (isEditing)
+        {
+            SwitchMode(-1);
+            isEditing = false;
+        }
+        else
+        {
+            isEditing = true;
+        }
+
+        editButton.GetComponent<Image>().color = isEditing ? highlighted : neutral;
+    }
+
+    public void SwitchMode(int cardIndex)
+    {
+        RectTransform fighterRect = fighterParent.parent.GetComponent<RectTransform>();
+
+        if (cardIndex < 0)
+        {
+            LeanTween.moveLocalX(fighterOptions, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
+            LeanTween.moveLocalX(cardOptions, fighterRect.sizeDelta.x * 0.5f, 0.3f);
+            LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
+            LeanTween.moveLocalX(cardParent.parent.gameObject, fighterRect.sizeDelta.x * 0.5f, 0.3f).setOnComplete(DestroyCards);
+        }
+        else
+        {
+            Fighter fighter = GlobalManager.singleton.fighters[cardIndex];
+            moveCards = new CardUI[fighter.moves.Length];
+
+            for (int i = 0; i < fighter.moves.Length; i++)
+            {
+                GameObject card = Instantiate(cardPrefab, cardParent);
+                moveCards[i] = card.GetComponent<CardUI>();
+                moveCards[i].SetupCard(fighter, fighter.moves[i]);
+            }
+
+            LeanTween.moveLocalX(fighterOptions, -fighterRect.sizeDelta.x * 1.5f, 0.3f);
+            LeanTween.moveLocalX(cardOptions, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
+            LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 1.5f, 0.3f);
+            LeanTween.moveLocalX(cardParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
+        }
+    }
+
+    private void DestroyCards()
+    {
+        foreach (Transform i in cardParent.transform)
+        {
+            Destroy(i.gameObject);
+        }
+    }
+
     private void OnDestroy()
     {
         for (int i = 0; i < GlobalManager.singleton.fighters.Length; i++)
         {
-            cards[i].GetComponent<Button>().onClick.RemoveAllListeners();
+            fighterCards[i].GetComponent<Button>().onClick.RemoveAllListeners();
         }
     }
 }
