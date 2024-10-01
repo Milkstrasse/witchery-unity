@@ -1092,7 +1092,7 @@ MonoBehaviour:
   fighterParent: {fileID: 7559675231801517841}
   cardParent: {fileID: 7438545860537713625}
   cardPrefab: {fileID: 751564629866992320, guid: befab4e5540754660a53c9426286eb04, type: 3}
-  stringEvent: {fileID: 2375438514970021797}
+  filterText: {fileID: 8223977463391281261}
   timer: {fileID: 7599625462484518410}
   readyButton: {fileID: 344378691534329731}
   editButton: {fileID: 8689038964162385286}
@@ -1100,6 +1100,7 @@ MonoBehaviour:
   cardOptions: {fileID: 4856289608574999360}
   neutral: {r: 0.28627452, g: 0.7921569, b: 1, a: 1}
   highlighted: {r: 1, g: 0.33333334, b: 0.050980393, a: 1}
+  outfitText: {fileID: 408734944940279837}
   filterEvent: {fileID: 8223977463391281261}
 --- !u!1 &3188106083505978152
 GameObject:

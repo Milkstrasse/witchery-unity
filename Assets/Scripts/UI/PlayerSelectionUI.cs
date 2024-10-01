@@ -12,7 +12,7 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private GameObject cardPrefab;
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
-    [SerializeField] private LocalizeStringEvent stringEvent;
+    [SerializeField] private LocalizeStringEvent filterText;
     [SerializeField] private Image timer;
     [SerializeField] private Button readyButton;
 
@@ -21,6 +21,7 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private GameObject cardOptions;
     [SerializeField] private Color neutral;
     [SerializeField] private Color highlighted;
+    [SerializeField] private LocalizeStringEvent outfitText;
     private int currFighter;
     private int[] outfits;
 
@@ -131,11 +132,11 @@ public class PlayerSelectionUI : MonoBehaviour
             LeanTween.cancel(timer.gameObject);
             timer.fillAmount = 1.0f;
             
-            stringEvent.StringReference.SetReference("StringTable", "ready");
+            filterText.StringReference.SetReference("StringTable", "ready");
         }
         else
         {
-            stringEvent.StringReference.SetReference("StringTable", "cancel");
+            filterText.StringReference.SetReference("StringTable", "cancel");
         }
 
         if (GlobalManager.singleton.mode == GameMode.Offline)
@@ -271,6 +272,8 @@ public class PlayerSelectionUI : MonoBehaviour
             fighterCards[currFighter].HighlightCard(true);
 
             Fighter fighter = GlobalManager.singleton.fighters[cardIndex];
+            outfitText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currFighter]].name);
+            
             moveCards = new CardUI[fighter.moves.Length];
 
             for (int i = 0; i < fighter.moves.Length; i++)
@@ -303,6 +306,8 @@ public class PlayerSelectionUI : MonoBehaviour
             outfits[currFighter] = arrayLength;
         }
 
+        outfitText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currFighter]].name);
+
         fighterCards[currFighter].UpdateOutfit(fighter, outfits[currFighter]);
         for (int i = 0; i < moveCards.Length; i++)
         {
@@ -330,6 +335,8 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             outfits[currFighter] = 0;
         }
+
+        outfitText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currFighter]].name);
 
         fighterCards[currFighter].UpdateOutfit(fighter, outfits[currFighter]);
         for (int i = 0; i < moveCards.Length; i++)
