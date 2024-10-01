@@ -21,6 +21,8 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private GameObject cardOptions;
     [SerializeField] private Color neutral;
     [SerializeField] private Color highlighted;
+    private int currFighter;
+    private int[] outfits;
 
     private int[] fighters;
     private int currFilter;
@@ -40,6 +42,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
         int fighterAmount = GlobalManager.singleton.fighters.Length;
         fighters = GlobalManager.singleton.GetFighters(0);
+        outfits = new int[fighterAmount];
+
         fighterCards = new CardUI[fighterAmount];
 
         for (int i = 0; i < fighterAmount; i++)
@@ -54,6 +58,7 @@ public class PlayerSelectionUI : MonoBehaviour
         }
 
         currFilter = 0;
+        currFighter = 0;
 
         moveCards = new CardUI[0];
     }
@@ -64,8 +69,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (!isEditing)
         {
-            SelectionResult result = selectionUI.EditTeam(cardIndex);
-            fighterCards[cardIndex].HighlightCard(result.wasAdded);
+            SelectionResult result = selectionUI.EditTeam(new SelectedFighter(cardIndex, outfits[cardIndex]));
+            fighterCards[cardIndex].SelectCard(result.wasAdded);
 
             readyButton.interactable = result.hasTeam;
 
@@ -100,10 +105,10 @@ public class PlayerSelectionUI : MonoBehaviour
 
         for (int i = 0; i < cardAmount; i++)
         {
-            if (!fighterCards[indices[i]].isHighlighted)
+            if (!fighterCards[indices[i]].isSelected)
             {
-                SelectionResult result = selectionUI.EditTeam(indices[i]);
-                fighterCards[indices[i]].HighlightCard(result.wasAdded);
+                SelectionResult result = selectionUI.EditTeam(new SelectedFighter(indices[i], outfits[indices[i]]));
+                fighterCards[indices[i]].SelectCard(result.wasAdded);
 
                 readyButton.interactable = result.hasTeam;
 
@@ -170,7 +175,7 @@ public class PlayerSelectionUI : MonoBehaviour
             }
             else if (showTeam)
             {
-                fighterCards[i].gameObject.SetActive(fighterCards[i].isHighlighted);
+                fighterCards[i].gameObject.SetActive(fighterCards[i].isSelected);
             }
             else
             {
@@ -181,6 +186,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
     public void DecreaseFilter()
     {
+        AudioManager.singleton.PlayStandardSound();
+
         int filterLength = filters.Length - 1;
         if (currFilter > 0)
         {
@@ -204,6 +211,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
     public void IncreaseFilter()
     {
+        AudioManager.singleton.PlayStandardSound();
+
         int filterLength = filters.Length - 1;
         if (currFilter < filterLength)
         {
@@ -248,6 +257,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (cardIndex < 0)
         {
+            fighterCards[currFighter].HighlightCard(false);
+
             LeanTween.moveLocalX(fighterOptions, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
             LeanTween.moveLocalX(cardOptions, fighterRect.sizeDelta.x * 0.5f, 0.3f);
             LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
@@ -255,6 +266,9 @@ public class PlayerSelectionUI : MonoBehaviour
         }
         else
         {
+            currFighter = cardIndex;
+            fighterCards[currFighter].HighlightCard(true);
+
             Fighter fighter = GlobalManager.singleton.fighters[cardIndex];
             moveCards = new CardUI[fighter.moves.Length];
 
@@ -262,13 +276,59 @@ public class PlayerSelectionUI : MonoBehaviour
             {
                 GameObject card = Instantiate(cardPrefab, cardParent);
                 moveCards[i] = card.GetComponent<CardUI>();
-                moveCards[i].SetupCard(fighter, fighter.moves[i]);
+                moveCards[i].SetupCard(fighter, outfits[currFighter], fighter.moves[i]);
             }
 
             LeanTween.moveLocalX(fighterOptions, -fighterRect.sizeDelta.x * 1.5f, 0.3f);
             LeanTween.moveLocalX(cardOptions, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
             LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 1.5f, 0.3f);
             LeanTween.moveLocalX(cardParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
+        }
+    }
+
+    public void DecreaseOutfit()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        Fighter fighter = GlobalManager.singleton.fighters[currFighter];
+
+        int arrayLength = GlobalManager.singleton.fighters[currFighter].outfits.Length - 1;
+        if (outfits[currFighter] > 0)
+        {
+            outfits[currFighter]--;
+        }
+        else
+        {
+            outfits[currFighter] = arrayLength;
+        }
+
+        fighterCards[currFighter].UpdateOutfit(fighter, outfits[currFighter]);
+        for (int i = 0; i < moveCards.Length; i++)
+        {
+            moveCards[i].UpdateOutfit(fighter, outfits[currFighter]);
+        }
+    }
+
+    public void IncreaseOutfit()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        Fighter fighter = GlobalManager.singleton.fighters[currFighter];
+
+        int arrayLength = fighter.outfits.Length - 1;
+        if (outfits[currFighter] < arrayLength)
+        {
+            outfits[currFighter]++;
+        }
+        else
+        {
+            outfits[currFighter] = 0;
+        }
+
+        fighterCards[currFighter].UpdateOutfit(fighter, outfits[currFighter]);
+        for (int i = 0; i < moveCards.Length; i++)
+        {
+            moveCards[i].UpdateOutfit(fighter, outfits[currFighter]);
         }
     }
 

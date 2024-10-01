@@ -20,3 +20,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5c4e93dbb98ec42c0be3e5ba99d22152, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  outfits:
+  - name: standard
+    cost: 0
+  - name: magicgirl
+    cost: 0
+  currOutfit: 0

@@ -8,6 +8,7 @@ public class Fighter : ScriptableObject
     public int fighterID;
     public Role role;
     public Move[] moves;
+    public Outfit[] outfits;
 }
 
 public enum Role: uint

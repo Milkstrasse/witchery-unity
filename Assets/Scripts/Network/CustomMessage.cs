@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 
 public struct PlayerMessage : NetworkMessage
@@ -5,11 +6,11 @@ public struct PlayerMessage : NetworkMessage
     public string name;
     public int health;
     public int energy;
-    public int[] fighterIDs;
+    public SelectedFighter[] fighterIDs;
     public int[] cardHand;
     public StatusEffect[] effects;
 
-    public PlayerMessage(string name, int[] fighterIDs)
+    public PlayerMessage(string name, SelectedFighter[] fighterIDs)
     {
         this.name = name;
         this.fighterIDs = fighterIDs;
@@ -19,7 +20,7 @@ public struct PlayerMessage : NetworkMessage
         effects = new StatusEffect[0];
     }
 
-    public PlayerMessage(string name, int[] fighterIDs, StatusEffect[] effects)
+    public PlayerMessage(string name, SelectedFighter[] fighterIDs, StatusEffect[] effects)
     {
         this.name = name;
         this.fighterIDs = fighterIDs;
@@ -58,5 +59,18 @@ public struct MoveMessage : NetworkMessage
         this.playCard = playCard;
 
         this.cardPlayed = cardPlayed;
+    }
+}
+
+[Serializable]
+public struct SelectedFighter
+{
+    public int fighterID;
+    public int outfit;
+
+    public SelectedFighter(int fighterID, int outfit)
+    {
+        this.fighterID = fighterID;
+        this.outfit = outfit;
     }
 }

@@ -27,9 +27,9 @@ public class SelectionUI : MonoBehaviour
         playerBottom.ToggleUI(!isReady);
     }
 
-    public SelectionResult EditTeam(int fighterID)
+    public SelectionResult EditTeam(SelectedFighter fighter)
     {
-        return manager.EditTeam(fighterID);
+        return manager.EditTeam(fighter);
     }
 
     private void StartFight()

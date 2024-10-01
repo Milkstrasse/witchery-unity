@@ -85,7 +85,7 @@ public struct CPULogic
 
     /*
     static func getCardIndex(player: Player, opponent: Player, playedCard: PlayedCard?, cardToPlay: Bool) -> (Int, Bool) {
-        var cards: [(Int, Int)] = []
+        var cards: [SelectedFighter] = []
         
         for index in player.cardHand.indices {
             var card: Card = player.cardHand[index]

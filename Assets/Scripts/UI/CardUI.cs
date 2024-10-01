@@ -39,15 +39,15 @@ public class CardUI : MonoBehaviour
 
     public void SetupCard(Fighter fighter)
     {
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name);
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-standard");
 
         icon.text = $"<style=IconShadow>{Convert.ToChar((uint) fighter.role)}</style>";
         infoText.text = $"<size=+6>{fighter.name}</size>\n{fighter.role}";
     }
 
-    public void SetupCard(Fighter fighter, Move move)
+    public void SetupCard(Fighter fighter, int outfit, Move move)
     {
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name);
+        UpdateOutfit(fighter, outfit);
 
         icon.text = move.cost.ToString();
 
@@ -80,7 +80,7 @@ public class CardUI : MonoBehaviour
         {
             cardSides[0].transform.GetChild(1).gameObject.SetActive(false);
 
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name);
+            UpdateOutfit(card.fighter, card.outfit);
 
             icon.text = card.move.cost.ToString();
 
@@ -224,5 +224,10 @@ public class CardUI : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
          animatedIcon.transform.localScale = Vector3.zero;
         animatedIcon.gameObject.SetActive(false);
+    }
+
+    public void UpdateOutfit(Fighter fighter, int outfit)
+    {
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-" + fighter.outfits[outfit].name);
     }
 }

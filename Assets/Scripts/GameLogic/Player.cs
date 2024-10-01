@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public int fullHealth;
     public int currHealth;
     public int energy;
-    public int[] fighterIDs;
+    public SelectedFighter[] fighterIDs;
 
     public List<Card> cards;
     public List<Card> cardHand;
@@ -49,10 +49,10 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < fighterIDs.Length; i++)
         {
-            Fighter fighter = GlobalManager.singleton.fighters[fighterIDs[i]];
+            Fighter fighter = GlobalManager.singleton.fighters[fighterIDs[i].fighterID];
             for (int j = 0; j < fighter.moves.Length; j++)
             {
-                cards.Add(new Card(fighter, j));
+                cards.Add(new Card(fighter, fighterIDs[i].outfit, j));
             }
         }
 
