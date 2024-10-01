@@ -64,6 +64,11 @@ public class PlayerSelectionUI : MonoBehaviour
 
     public void SelectRandomCard()
     {
+        if (currFilter == filters.Length - 1)
+        {
+            return;
+        }
+
         AudioManager.singleton.PlayStandardSound();
         
         int cardAmount = cards.Length;
@@ -84,17 +89,15 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             if (!cards[indices[i]].isHighlighted)
             {
-                SelectionResult result = selectionUI.EditTeam(indices[i]);
-                cards[indices[i]].HighlightCard(result.wasAdded);
-
-                readyButton.interactable = result.hasTeam;
-
-                if (currFilter == filters.Length - 1)
+                if (cards[indices[i]].gameObject.activeSelf)
                 {
-                    UpdateUI(true);
-                }
+                    SelectionResult result = selectionUI.EditTeam(indices[i]);
+                    cards[indices[i]].HighlightCard(result.wasAdded);
 
-                return;
+                    readyButton.interactable = result.hasTeam;
+
+                    return;
+                }
             }
         }
     }
