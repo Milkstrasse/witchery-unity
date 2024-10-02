@@ -158,6 +158,11 @@ public class FightLogic
                     tempHealth -= players[1 - turn].health;
                     players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, 50);
 
+                    if (winner < 0 && players[1 - turn].health == 0)
+                    {
+                        winner = turn;
+                    }
+
                     break;
                 default:
                     int health = move.health;
