@@ -113,7 +113,7 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             if (!fighterCards[indices[i]].isSelected)
             {
-                if (cards[indices[i]].gameObject.activeSelf)
+                if (fighterCards[indices[i]].gameObject.activeSelf)
                 {
                     SelectionResult result = selectionUI.EditTeam(new SelectedFighter(indices[i], outfits[indices[i]]));
                     fighterCards[indices[i]].SelectCard(result.wasAdded);
