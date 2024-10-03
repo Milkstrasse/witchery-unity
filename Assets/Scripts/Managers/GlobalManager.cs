@@ -109,7 +109,7 @@ public class GlobalManager : MonoBehaviour
 
     public void GoToMenu()
     {
-        saveManager.SaveData();
+        saveManager.CreateNewData(fighters);
         LoadScene("MenuScene");
     }
 

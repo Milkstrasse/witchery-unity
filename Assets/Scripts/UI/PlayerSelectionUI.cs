@@ -310,13 +310,20 @@ public class PlayerSelectionUI : MonoBehaviour
         Fighter fighter = GlobalManager.singleton.fighters[currFighter];
 
         int arrayLength = GlobalManager.singleton.fighters[currFighter].outfits.Length - 1;
-        if (outfits[currFighter] > 0)
+        bool outfitFound = false;
+
+        while (!outfitFound)
         {
-            outfits[currFighter]--;
-        }
-        else
-        {
-            outfits[currFighter] = arrayLength;
+            if (outfits[currFighter] > 0)
+            {
+                outfits[currFighter]--;
+            }
+            else
+            {
+                outfits[currFighter] = arrayLength;
+            }
+
+            outfitFound = GlobalSettings.unlocked[currFighter, outfits[currFighter]];
         }
 
         outfitText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currFighter]].name);
@@ -340,13 +347,20 @@ public class PlayerSelectionUI : MonoBehaviour
         Fighter fighter = GlobalManager.singleton.fighters[currFighter];
 
         int arrayLength = fighter.outfits.Length - 1;
-        if (outfits[currFighter] < arrayLength)
+        bool outfitFound = false;
+
+        while (!outfitFound)
         {
-            outfits[currFighter]++;
-        }
-        else
-        {
-            outfits[currFighter] = 0;
+            if (outfits[currFighter] < arrayLength)
+            {
+                outfits[currFighter]++;
+            }
+            else
+            {
+                outfits[currFighter] = 0;
+            }
+
+            outfitFound = GlobalSettings.unlocked[currFighter, outfits[currFighter]];
         }
 
         outfitText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currFighter]].name);
