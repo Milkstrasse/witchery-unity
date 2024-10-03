@@ -88,6 +88,11 @@ public class PlayerSelectionUI : MonoBehaviour
 
     public void SelectRandomCard()
     {
+        if (currFilter == filters.Length - 1)
+        {
+            return;
+        }
+
         AudioManager.singleton.PlayStandardSound();
         
         int cardAmount = fighterCards.Length;
@@ -108,17 +113,15 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             if (!fighterCards[indices[i]].isSelected)
             {
-                SelectionResult result = selectionUI.EditTeam(new SelectedFighter(indices[i], outfits[indices[i]]));
-                fighterCards[indices[i]].SelectCard(result.wasAdded);
-
-                readyButton.interactable = result.hasTeam;
-
-                if (currFilter == filters.Length - 1)
+                if (cards[indices[i]].gameObject.activeSelf)
                 {
-                    UpdateUI(true);
-                }
+                    SelectionResult result = selectionUI.EditTeam(new SelectedFighter(indices[i], outfits[indices[i]]));
+                    fighterCards[indices[i]].SelectCard(result.wasAdded);
 
-                return;
+                    readyButton.interactable = result.hasTeam;
+
+                    return;
+                }
             }
         }
     }
