@@ -22,7 +22,7 @@ public class SelectionManager : MonoBehaviour
       networkManager.maxConnections = GlobalManager.singleton.maxPlayers;
 
       fighterIDs = new List<SelectedFighter>();
-      playerNames = new string[]{"Player", "Player"};
+      playerNames = new string[]{"Player 0", "Player 1"};
       isReady = new bool[2];
 
       NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
@@ -101,7 +101,7 @@ public class SelectionManager : MonoBehaviour
          }
       }
 
-      int time = GlobalManager.waitTime;
+      int time = GlobalSettings.waitTime;
       bool sentMessage = false;
 
       while (time >= 0)
@@ -111,7 +111,7 @@ public class SelectionManager : MonoBehaviour
 
          if (NetworkClient.isConnected && !sentMessage)
          {
-            NetworkClient.Send(new PlayerMessage(playerNames[1], fighterIDs.ToArray()));
+            NetworkClient.Send(new PlayerMessage(GlobalSettings.playerName, fighterIDs.ToArray()));
             //GlobalManager.singleton.leaders[1] = fighterIDs[0];
 
             sentMessage = true;

@@ -155,13 +155,13 @@ public class PlayerSelectionUI : MonoBehaviour
 
     public void SetTimer(int time)
     {
-        if (timer.fillAmount > time/(float)GlobalManager.waitTime)
+        if (timer.fillAmount > time/(float)GlobalSettings.waitTime)
         {
-            LeanTween.value(timer.gameObject, timer.fillAmount, time/(float)GlobalManager.waitTime, 1f ).setOnUpdate( (float val) => { timer.fillAmount = val; } );
+            LeanTween.value(timer.gameObject, timer.fillAmount, time/(float)GlobalSettings.waitTime, 1f ).setOnUpdate( (float val) => { timer.fillAmount = val; } );
         }
         else
         {
-            timer.fillAmount = time/(float)GlobalManager.waitTime;
+            timer.fillAmount = time/(float)GlobalSettings.waitTime;
         }
     }
 

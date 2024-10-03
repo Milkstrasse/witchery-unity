@@ -32,7 +32,7 @@ public class MenuManager : MonoBehaviour
     {
         AudioManager.singleton.PlayStandardSound();
         
-        GlobalManager.singleton.mode = (GameMode)mode;
+        GlobalManager.singleton.mode = (GameMode) mode;
         if (mode == 0)
         {
             GlobalManager.singleton.maxPlayers = 2;
