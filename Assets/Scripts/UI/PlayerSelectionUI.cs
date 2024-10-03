@@ -15,6 +15,7 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private LocalizeStringEvent filterText;
     [SerializeField] private Image timer;
     [SerializeField] private Button readyButton;
+    [SerializeField] private Image portrait;
 
     [SerializeField] private Button editButton;
     [SerializeField] private GameObject fighterOptions;
@@ -38,6 +39,15 @@ public class PlayerSelectionUI : MonoBehaviour
     {
         canvasGroup = fighterParent.parent.GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
+
+        if (rectTransform.eulerAngles.z == 180f)
+        {
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[0].name + "-standard");
+        }
+        else
+        {
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[1].name + "-standard");
+        }
 
         filters = new string[] {"unfiltered", "attack", "support", "team"};
 

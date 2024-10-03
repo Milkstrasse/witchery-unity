@@ -45,7 +45,6 @@ public class PlayerFightUI : MonoBehaviour
         }
         else
         {
-            //portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalManager.singleton.leaders[1]].name + "-standard");
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[1].name + "-standard");
         }
 
@@ -67,7 +66,7 @@ public class PlayerFightUI : MonoBehaviour
         this.player = player;
         player.OnPlayerChanged += UpdateUI;
 
-        //portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[player.fighterIDs[0]].name);
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[player.icon].name + "-standard");
 
         nameText.text = player.playerName;
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
