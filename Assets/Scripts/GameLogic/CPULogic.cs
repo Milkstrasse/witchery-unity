@@ -54,7 +54,7 @@ public struct CPULogic
 
                     if (logic.players[1].health + health > 50) //excessive healing
                     {
-                        prioritizedCards.Add((i, -1 - player.cardHand[i].move.cost));
+                        prioritizedCards.Add((i, -1 - move.cost));
                     }
                     else
                     {
@@ -67,9 +67,20 @@ public struct CPULogic
                     {
                         prioritizedCards.Add((i, -10));
                     }
+                    else if (move.effect.duration > 0 &&  logic.players[1 - move.target].effects.Count == 5)
+                    {
+                        if (move.effect.isDelayed || logic.players[1 - move.target].GetEffect(move.effect.name) == null) //effect can't be added
+                        {
+                            prioritizedCards.Add((i, -10));
+                        }
+                        else
+                        {
+                            prioritizedCards.Add((i, move.cost * -1));
+                        }
+                    }
                     else
                     {
-                        prioritizedCards.Add((i, player.cardHand[i].move.cost * -1));
+                        prioritizedCards.Add((i, move.cost * -1 + move.energy));
                     }
                 }
             }
