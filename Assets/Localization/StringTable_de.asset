@@ -219,6 +219,10 @@ MonoBehaviour:
     m_Localized: Credits
     m_Metadata:
       m_Items: []
+  - m_Id: 17290912945135616
+    m_Localized: "erhalte mehr Schaden f\xFCr"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
