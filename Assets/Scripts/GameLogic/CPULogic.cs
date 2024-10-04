@@ -52,7 +52,7 @@ public struct CPULogic
                         health = Math.Max(health + logic.players[1].GetPowerBonus(), 0);
                     }
 
-                    if (logic.players[1].health + health > 50) //excessive healing
+                    if (logic.players[1].health + health > GlobalSettings.health) //excessive healing
                     {
                         prioritizedCards.Add((i, -1 - move.cost));
                     }

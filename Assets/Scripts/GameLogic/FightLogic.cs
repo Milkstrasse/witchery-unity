@@ -156,7 +156,7 @@ public class FightLogic
                     int tempHealth = players[1 - turn].health;
                     players[1 - turn].health = Math.Max(players[1 - turn].health + move.health - players[turn].GetPowerBonus(), 0);
                     tempHealth -= players[1 - turn].health;
-                    players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, 50);
+                    players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalSettings.health);
 
                     if (winner < 0 && players[1 - turn].health == 0)
                     {
@@ -180,7 +180,7 @@ public class FightLogic
                         health = Math.Max(health + players[turn].GetPowerBonus(), 0);
                     }
 
-                    players[(move.target + turn)%2].health = Math.Clamp(players[(move.target + turn)%2].health + health, 0, 50);
+                    players[(move.target + turn)%2].health = Math.Clamp(players[(move.target + turn)%2].health + health, 0, GlobalSettings.health);
 
                     if (winner < 0 && players[(move.target + turn)%2].health == 0)
                     {
@@ -247,7 +247,7 @@ public class FightLogic
                         }
 
                         health += players[1 - turn].GetPowerBonus();
-                        players[turn].health = Math.Clamp(players[turn].health + health, 0, 50);
+                        players[turn].health = Math.Clamp(players[turn].health + health, 0, GlobalSettings.health);
                     }
 
                     int energy = lastCard.card.move.health;

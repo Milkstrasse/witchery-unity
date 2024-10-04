@@ -52,7 +52,7 @@ public class StatusEffect
             case StatusType.Health:
                 if (!isDelayed || (isDelayed && duration == 1))
                 {
-                    player.health = Math.Clamp(player.health + value, 0, 50);
+                    player.health = Math.Clamp(player.health + value, 0, GlobalSettings.health);
                     isNew = true;
                 }
                 break;

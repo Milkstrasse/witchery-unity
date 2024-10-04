@@ -34,7 +34,7 @@ public class PlayerData
     {
         name = message.name;
         
-        health = 50;
+        health = GlobalSettings.health;
         energy = 7;
 
         cardStack = new List<int>();
