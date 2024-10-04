@@ -337,11 +337,7 @@ public class FightLogic
             {
                 players[i].effects[j].TriggerEffect(players[i]);
 
-                if (players[i].GetEffect("freeze") == null || players[i].effects[j].name == "freeze")
-                {
-                    players[i].effects[j].duration--;
-                }
-
+                players[i].effects[j].duration--;
                 if (players[i].effects[j].duration <= 0)
                 {
                     players[i].effects.RemoveAt(j);

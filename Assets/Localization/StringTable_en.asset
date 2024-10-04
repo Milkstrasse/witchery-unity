@@ -219,10 +219,6 @@ MonoBehaviour:
     m_Localized: Credits
     m_Metadata:
       m_Items: []
-  - m_Id: 17263029111480320
-    m_Localized: freezes effects for
-    m_Metadata:
-      m_Items: []
   references:
     version: 2
     RefIds:

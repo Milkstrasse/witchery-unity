@@ -207,10 +207,6 @@ MonoBehaviour:
     m_Key: weaken
     m_Metadata:
       m_Items: []
-  - m_Id: 17263029111480320
-    m_Key: freeze
-    m_Metadata:
-      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
