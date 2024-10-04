@@ -173,7 +173,7 @@ public class FightLogic
 
                     if (health < 0)
                     {
-                        health = Math.Min(health - players[turn].GetPowerBonus() + players[(move.target + turn)%2].GetShields(), 0);
+                        health = Math.Min(health - players[turn].GetPowerBonus() + players[(move.target + turn)%2].GetDamageModifier(), 0);
                     }
                     else if (health > 0)
                     {

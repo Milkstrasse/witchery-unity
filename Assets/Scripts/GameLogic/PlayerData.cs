@@ -153,15 +153,20 @@ public class PlayerData
         return power;
     }
 
-    public int GetShields()
+    public int GetDamageModifier()
     {
-        StatusEffect shields = GetEffect("shields");
-        if (shields != null)
+        int modifier = 0;
+
+        for (int i = 0; i < effects.Count; i++)
         {
-            return shields.value;
+            if (effects[i].name == "shields" || effects[i].name == "vulnerable" )
+            {
+                effects[i].isNew = true;
+                modifier += effects[i].value;
+            }
         }
         
-        return 0;
+        return modifier;
     }
 
     public StatusEffect GetEffect(string effectName)
