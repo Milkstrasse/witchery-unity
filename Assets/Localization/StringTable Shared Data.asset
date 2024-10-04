@@ -15,10 +15,6 @@ MonoBehaviour:
   m_TableCollectionName: StringTable
   m_TableCollectionNameGuidString: 4d5f43fceb1874d3fb84d5259516bec7
   m_Entries:
-  - m_Id: 15212795833344000
-    m_Key: accurate
-    m_Metadata:
-      m_Items: []
   - m_Id: 8024858918117376
     m_Key: addBlank
     m_Metadata:
@@ -29,10 +25,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8223596102017024
     m_Key: bleed
-    m_Metadata:
-      m_Items: []
-  - m_Id: 15212657836548096
-    m_Key: blessed
     m_Metadata:
       m_Items: []
   - m_Id: 7210099683614720
@@ -213,6 +205,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8223807327166464
     m_Key: weaken
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17263029111480320
+    m_Key: freeze
     m_Metadata:
       m_Items: []
   m_Metadata:

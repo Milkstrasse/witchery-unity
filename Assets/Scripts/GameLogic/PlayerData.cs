@@ -105,11 +105,6 @@ public class PlayerData
 
     public void AddEffect(StatusEffect effect)
     {
-        if (GetEffect("blessed") != null)
-        {
-            return;
-        }
-
         int index = -1;
         if (!effect.isDelayed)
         {

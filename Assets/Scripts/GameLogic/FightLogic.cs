@@ -101,7 +101,7 @@ public class FightLogic
 
         if (move.moveType == MoveType.Standard)
         {
-            if (blockable && players[turn].GetEffect("accurate") == null && FightManager.singleton.players[1 - turn].HasResponse(move))
+            if (blockable && FightManager.singleton.players[1 - turn].HasResponse(move))
             {
                 return false;
             }
@@ -337,7 +337,11 @@ public class FightLogic
             {
                 players[i].effects[j].TriggerEffect(players[i]);
 
-                players[i].effects[j].duration--;
+                if (players[i].GetEffect("freeze") == null || players[i].effects[j].name == "freeze")
+                {
+                    players[i].effects[j].duration--;
+                }
+
                 if (players[i].effects[j].duration <= 0)
                 {
                     players[i].effects.RemoveAt(j);

@@ -211,20 +211,16 @@ MonoBehaviour:
     m_Localized: Remove random card
     m_Metadata:
       m_Items: []
-  - m_Id: 15212795833344000
-    m_Localized: cards are directly played for
-    m_Metadata:
-      m_Items: []
-  - m_Id: 15212657836548096
-    m_Localized: prevents effects for
-    m_Metadata:
-      m_Items: []
   - m_Id: 15212672940236800
     m_Localized: reduces damage for
     m_Metadata:
       m_Items: []
   - m_Id: 15264850425929728
     m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17263029111480320
+    m_Localized: freezes effects for
     m_Metadata:
       m_Items: []
   references:
