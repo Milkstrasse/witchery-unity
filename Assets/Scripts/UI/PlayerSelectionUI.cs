@@ -1,4 +1,5 @@
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
@@ -12,28 +13,26 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private GameObject cardPrefab;
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
-    [SerializeField] private LocalizeStringEvent filterText;
     [SerializeField] private Image timer;
     [SerializeField] private Button readyButton;
     [SerializeField] private Image portrait;
 
-    [SerializeField] private Button editButton;
-    [SerializeField] private GameObject fighterOptions;
-    [SerializeField] private GameObject cardOptions;
+    [SerializeField] private Button modeButton;
+    [SerializeField] private Button actionButton;
     [SerializeField] private Color neutral;
     [SerializeField] private Color highlighted;
-    [SerializeField] private LocalizeStringEvent outfitText;
-    private int currFighter;
+    private int currCard;
     private int[] outfits;
 
     private int[] fighters;
     private int currFilter;
-    [SerializeField] private LocalizeStringEvent filterEvent;
+    [SerializeField] private LocalizeStringEvent optionText;
     string[] filters;
 
     private CardUI[] fighterCards;
     private CardUI[] moveCards;
     private bool isEditing;
+    private bool isShowingInfo;
 
     private void Start()
     {
@@ -63,25 +62,30 @@ public class PlayerSelectionUI : MonoBehaviour
             card.SetupCard(GlobalManager.singleton.fighters[i]);
 
             int iCopy = i;
-            card.GetComponent<Button>().onClick.AddListener(() => SelectCard(iCopy));
+            card.GetComponent<Button>().onClick.AddListener(() => SelectCard(iCopy, false));
 
             fighterCards[i] = card;
         }
 
         currFilter = 0;
-        currFighter = 0;
+        currCard = -1;
 
         moveCards = new CardUI[0];
     }
 
-    private void SelectCard(int cardIndex)
+    private void SelectCard(int cardIndex, bool editing)
     {
         AudioManager.singleton.PlayStandardSound();
 
-        if (!isEditing)
+        if (isEditing || editing)
         {
             SelectionResult result = selectionUI.EditTeam(new SelectedFighter(cardIndex, outfits[cardIndex]));
             fighterCards[cardIndex].SelectCard(result.wasAdded);
+
+            if (!isEditing)
+            {
+                modeButton.GetComponentInChildren<TextMeshProUGUI>().text = result.wasAdded ? "\uf068" : "\uf067";
+            }
 
             readyButton.interactable = result.hasTeam;
 
@@ -92,46 +96,24 @@ public class PlayerSelectionUI : MonoBehaviour
         }
         else
         {
-            SwitchMode(cardIndex);
-        }
-    }
-
-    public void SelectRandomCard()
-    {
-        if (currFilter == filters.Length - 1)
-        {
-            return;
-        }
-
-        AudioManager.singleton.PlayStandardSound();
-        
-        int cardAmount = fighterCards.Length;
-
-        int[] indices = Enumerable.Range(0, cardAmount).ToArray();
-        int n = cardAmount - 1;
-        while (n > 0)
-        {
-            int j = Random.Range(0, n);
-            int tmp = indices[n];
-            indices[n] = indices[j];
-            indices[j] = tmp;
-
-            n--;
-        }
-
-        for (int i = 0; i < cardAmount; i++)
-        {
-            if (!fighterCards[indices[i]].isSelected)
+            if (currCard >= 0)
             {
-                if (fighterCards[indices[i]].gameObject.activeSelf)
-                {
-                    SelectionResult result = selectionUI.EditTeam(new SelectedFighter(indices[i], outfits[indices[i]]));
-                    fighterCards[indices[i]].SelectCard(result.wasAdded);
+                fighterCards[currCard].HighlightCard(false);
+            }
 
-                    readyButton.interactable = result.hasTeam;
+            if (currCard == cardIndex)
+            {
+                currCard = -1;
+                actionButton.interactable = false;
+                modeButton.GetComponentInChildren<TextMeshProUGUI>().text = "\uf304";
+            }
+            else
+            {
+                currCard = cardIndex;
+                fighterCards[currCard].HighlightCard(true);
 
-                    return;
-                }
+                actionButton.interactable = true;
+                modeButton.GetComponentInChildren<TextMeshProUGUI>().text = fighterCards[currCard].isSelected ? "\uf068" : "\uf067";
             }
         }
     }
@@ -145,11 +127,11 @@ public class PlayerSelectionUI : MonoBehaviour
             LeanTween.cancel(timer.gameObject);
             timer.fillAmount = 1.0f;
             
-            filterText.StringReference.SetReference("StringTable", "ready");
+            optionText.StringReference.SetReference("StringTable", "ready");
         }
         else
         {
-            filterText.StringReference.SetReference("StringTable", "cancel");
+            optionText.StringReference.SetReference("StringTable", "cancel");
         }
 
         if (GlobalManager.singleton.mode == GameMode.Offline)
@@ -177,7 +159,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
     private void UpdateUI(bool showTeam)
     {
-        filterEvent.StringReference.SetReference("StringTable", filters[currFilter]);
+        optionText.StringReference.SetReference("StringTable", filters[currFilter]);
 
         int index = 0;
         for (int i = 0; i < fighterCards.Length; i++)
@@ -198,53 +180,137 @@ public class PlayerSelectionUI : MonoBehaviour
         }
     }
 
-    public void DecreaseFilter()
+    public void DecreaseOption()
     {
         AudioManager.singleton.PlayStandardSound();
 
-        int filterLength = filters.Length - 1;
-        if (currFilter > 0)
+        if (!isShowingInfo)
         {
-            currFilter--;
-        }
-        else
-        {
-            currFilter = filterLength;
-        }
+            int filterLength = filters.Length - 1;
+            if (currFilter > 0)
+            {
+                currFilter--;
+            }
+            else
+            {
+                currFilter = filterLength;
+            }
 
-        if (currFilter == filterLength)
-        {
-            UpdateUI(true);
+            if (currFilter == filterLength)
+            {
+                UpdateUI(true);
+            }
+            else
+            {
+                fighters = GlobalManager.singleton.GetFighters(currFilter);
+                UpdateUI(false);
+            }
+
+            if (currCard >= 0 && !fighterCards[currCard].gameObject.activeSelf)
+            {
+                SelectCard(currCard, false);
+            }
         }
         else
         {
-            fighters = GlobalManager.singleton.GetFighters(currFilter);
-            UpdateUI(false);
+            Fighter fighter = GlobalManager.singleton.fighters[currCard];
+
+            int arrayLength = GlobalManager.singleton.fighters[currCard].outfits.Length - 1;
+            bool outfitFound = false;
+
+            while (!outfitFound)
+            {
+                if (outfits[currCard] > 0)
+                {
+                    outfits[currCard]--;
+                }
+                else
+                {
+                    outfits[currCard] = arrayLength;
+                }
+
+                outfitFound = GlobalSettings.unlocked[currCard, outfits[currCard]];
+            }
+
+            optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
+
+            fighterCards[currCard].UpdateOutfit(fighter, outfits[currCard]);
+            for (int i = 0; i < moveCards.Length; i++)
+            {
+                moveCards[i].UpdateOutfit(fighter, outfits[currCard]);
+            }
+
+            if (fighterCards[currCard].isSelected)
+            {
+                selectionUI.EditTeam(currCard, outfits[currCard]);
+            }
         }
     }
 
-    public void IncreaseFilter()
+    public void IncreaseOption()
     {
         AudioManager.singleton.PlayStandardSound();
 
-        int filterLength = filters.Length - 1;
-        if (currFilter < filterLength)
+        if (!isShowingInfo)
         {
-            currFilter++;
-        }
-        else
-        {
-            currFilter = 0;
-        }
+            int filterLength = filters.Length - 1;
+            if (currFilter < filterLength)
+            {
+                currFilter++;
+            }
+            else
+            {
+                currFilter = 0;
+            }
 
-        if (currFilter == filterLength)
-        {
-            UpdateUI(true);
+            if (currFilter == filterLength)
+            {
+                UpdateUI(true);
+            }
+            else
+            {
+                fighters = GlobalManager.singleton.GetFighters(currFilter);
+                UpdateUI(false);
+            }
+
+            if (currCard >= 0 && !fighterCards[currCard].gameObject.activeSelf)
+            {
+                SelectCard(currCard, false);
+            }
         }
         else
         {
-            fighters = GlobalManager.singleton.GetFighters(currFilter);
-            UpdateUI(false);
+            Fighter fighter = GlobalManager.singleton.fighters[currCard];
+
+            int arrayLength = fighter.outfits.Length - 1;
+            bool outfitFound = false;
+
+            while (!outfitFound)
+            {
+                if (outfits[currCard] < arrayLength)
+                {
+                    outfits[currCard]++;
+                }
+                else
+                {
+                    outfits[currCard] = 0;
+                }
+
+                outfitFound = GlobalSettings.unlocked[currCard, outfits[currCard]];
+            }
+
+            optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
+
+            fighterCards[currCard].UpdateOutfit(fighter, outfits[currCard]);
+            for (int i = 0; i < moveCards.Length; i++)
+            {
+                moveCards[i].UpdateOutfit(fighter, outfits[currCard]);
+            }
+
+            if (fighterCards[currCard].isSelected)
+            {
+                selectionUI.EditTeam(currCard, outfits[currCard]);
+            }
         }
     }
 
@@ -255,37 +321,35 @@ public class PlayerSelectionUI : MonoBehaviour
         if (isEditing)
         {
             isEditing = false;
+            modeButton.GetComponent<Image>().color = neutral;
         }
-        else
+        else if (currCard == -1)
         {
             isEditing = true;
-        }
-
-        editButton.GetComponent<Image>().color = isEditing ? highlighted : neutral;
-    }
-
-    public void SwitchMode(int cardIndex)
-    {
-        RectTransform fighterRect = fighterParent.parent.GetComponent<RectTransform>();
-
-        if (cardIndex < 0)
-        {
-            fighterCards[currFighter].HighlightCard(false);
-
-            LeanTween.moveLocalX(fighterOptions, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
-            LeanTween.moveLocalX(cardOptions, fighterRect.sizeDelta.x * 0.5f, 0.3f);
-            LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
-            LeanTween.moveLocalX(cardParent.parent.gameObject, fighterRect.sizeDelta.x * 0.5f, 0.3f).setOnComplete(DestroyCards);
-
-            ToggleMode();
+            modeButton.GetComponent<Image>().color = highlighted;
         }
         else
         {
-            currFighter = cardIndex;
-            fighterCards[currFighter].HighlightCard(true);
+            SelectCard(currCard, true);
+        }
+    }
 
-            Fighter fighter = GlobalManager.singleton.fighters[cardIndex];
-            outfitText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currFighter]].name);
+    public void SwitchMode()
+    {
+        RectTransform fighterRect = fighterParent.parent.GetComponent<RectTransform>();
+        isShowingInfo = !isShowingInfo;
+
+        if (!isShowingInfo)
+        {
+            optionText.StringReference.SetReference("StringTable", filters[currFilter]);
+
+            LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.4f);
+            LeanTween.moveLocalX(cardParent.parent.gameObject, fighterRect.sizeDelta.x * 0.5f, 0.4f).setOnComplete(DestroyCards);
+        }
+        else
+        {
+            Fighter fighter = GlobalManager.singleton.fighters[currCard];
+            optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
             
             moveCards = new CardUI[fighter.moves.Length];
 
@@ -293,87 +357,11 @@ public class PlayerSelectionUI : MonoBehaviour
             {
                 GameObject card = Instantiate(cardPrefab, cardParent);
                 moveCards[i] = card.GetComponent<CardUI>();
-                moveCards[i].SetupCard(fighter, outfits[currFighter], fighter.moves[i]);
+                moveCards[i].SetupCard(fighter, outfits[currCard], fighter.moves[i]);
             }
 
-            LeanTween.moveLocalX(fighterOptions, -fighterRect.sizeDelta.x * 1.5f, 0.3f);
-            LeanTween.moveLocalX(cardOptions, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
-            LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 1.5f, 0.3f);
-            LeanTween.moveLocalX(cardParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
-        }
-    }
-
-    public void DecreaseOutfit()
-    {
-        AudioManager.singleton.PlayStandardSound();
-
-        Fighter fighter = GlobalManager.singleton.fighters[currFighter];
-
-        int arrayLength = GlobalManager.singleton.fighters[currFighter].outfits.Length - 1;
-        bool outfitFound = false;
-
-        while (!outfitFound)
-        {
-            if (outfits[currFighter] > 0)
-            {
-                outfits[currFighter]--;
-            }
-            else
-            {
-                outfits[currFighter] = arrayLength;
-            }
-
-            outfitFound = GlobalSettings.unlocked[currFighter, outfits[currFighter]];
-        }
-
-        outfitText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currFighter]].name);
-
-        fighterCards[currFighter].UpdateOutfit(fighter, outfits[currFighter]);
-        for (int i = 0; i < moveCards.Length; i++)
-        {
-            moveCards[i].UpdateOutfit(fighter, outfits[currFighter]);
-        }
-
-        if (fighterCards[currFighter].isSelected)
-        {
-            selectionUI.EditTeam(currFighter, outfits[currFighter]);
-        }
-    }
-
-    public void IncreaseOutfit()
-    {
-        AudioManager.singleton.PlayStandardSound();
-
-        Fighter fighter = GlobalManager.singleton.fighters[currFighter];
-
-        int arrayLength = fighter.outfits.Length - 1;
-        bool outfitFound = false;
-
-        while (!outfitFound)
-        {
-            if (outfits[currFighter] < arrayLength)
-            {
-                outfits[currFighter]++;
-            }
-            else
-            {
-                outfits[currFighter] = 0;
-            }
-
-            outfitFound = GlobalSettings.unlocked[currFighter, outfits[currFighter]];
-        }
-
-        outfitText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currFighter]].name);
-
-        fighterCards[currFighter].UpdateOutfit(fighter, outfits[currFighter]);
-        for (int i = 0; i < moveCards.Length; i++)
-        {
-            moveCards[i].UpdateOutfit(fighter, outfits[currFighter]);
-        }
-
-        if (fighterCards[currFighter].isSelected)
-        {
-            selectionUI.EditTeam(currFighter, outfits[currFighter]);
+            LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 1.5f, 0.4f);
+            LeanTween.moveLocalX(cardParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.4f);
         }
     }
 
