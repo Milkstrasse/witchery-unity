@@ -266,7 +266,7 @@ public class PlayerFightUI : MonoBehaviour
 
         yield return new WaitForSeconds(message.playCard ? 0.8f : 0.2f);
 
-        FightManager.singleton.SendMove(0, message.playCard, false);
+        FightManager.singleton.SendMove(message.cardIndex, message.playCard, false);
     }
 
     private void OnDestroy()

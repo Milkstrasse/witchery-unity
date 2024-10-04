@@ -30,7 +30,7 @@ public struct CPULogic
 
                 if (health < 0)
                 {
-                    health = Math.Min(health - logic.players[1].GetPowerBonus() + logic.players[1].GetShields(), 0);
+                    health = Math.Min(health - logic.players[1].GetPowerBonus() + logic.players[0].GetShields(), 0);
 
                     if (logic.players[0].health + health <= 0) //opponent defeated
                     {
@@ -79,8 +79,11 @@ public struct CPULogic
             }
         }
 
+        (int, int)[] cards = prioritizedCards.ToArray();
+        Array.Sort(cards, (a,b) => { return b.Item2.CompareTo(a.Item2); });
+
         //MoveMessage(int playerIndex, int cardIndex, bool playCard, bool cardPlayed = false)
-        return new MoveMessage(1, prioritizedCards[0].Item1, prioritizedCards[0].Item2 > -10);
+        return new MoveMessage(1, cards[0].Item1, cards[0].Item2 > -10);
     }
 
     /*

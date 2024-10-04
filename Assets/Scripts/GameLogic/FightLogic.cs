@@ -40,7 +40,7 @@ public class FightLogic
                 return false;
             }
 
-            players[playerTurn].energy = players[playerTurn].energy - Math.Max(card.move.cost, 0);
+            players[playerTurn].energy = players[playerTurn].energy - card.move.cost;
         }
 
         bool wasPlayed = PlayCard(card, playerTurn, true);
