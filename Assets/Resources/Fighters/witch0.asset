@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: witch0
   m_EditorClassIdentifier: 
   fighterID: 0
-  role: 62796
+  role: 63367
   moves:
   - {fileID: 11400000, guid: 7fa469c9d802e457b91ba9f9957e7fbb, type: 2}
   - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
   - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
   - {fileID: 11400000, guid: 120ad528ec64d4bf29959be3f4bb8fec, type: 2}
   - {fileID: 11400000, guid: 120ad528ec64d4bf29959be3f4bb8fec, type: 2}
+  outfits:
+  - name: standard
+    cost: 0
+  - name: magicgirl
+    cost: 0

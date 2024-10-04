@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
@@ -43,7 +42,7 @@ public class FightManager : MonoBehaviour
     [Server]
     public PlayerMessage SetupPlayer(PlayerMessage message)
     {
-        PlayerMessage msg = new PlayerMessage(message.name, message.fighterIDs, message.effects);
+        PlayerMessage msg = new PlayerMessage(message.name, message.icon, message.fighterIDs, message.effects);
 
         PlayerData playerData = new PlayerData(message);
         logic.players.Add(playerData);

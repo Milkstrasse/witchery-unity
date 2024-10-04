@@ -11,7 +11,7 @@ public class SelectionManager : MonoBehaviour
    private bool[] isReady;
 
    public event Action<int> OnTimerChanged;
-   private List<int> fighterIDs;
+   private List<SelectedFighter> fighterIDs;
    private string[] playerNames;
 
    public event Action OnPlayersReady;
@@ -21,8 +21,8 @@ public class SelectionManager : MonoBehaviour
       networkManager = GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>();
       networkManager.maxConnections = GlobalManager.singleton.maxPlayers;
 
-      fighterIDs = new List<int>();
-      playerNames = new string[]{"Player", "Player"};
+      fighterIDs = new List<SelectedFighter>();
+      playerNames = new string[]{"Player 0", "Player 1"};
       isReady = new bool[2];
 
       NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
@@ -57,18 +57,18 @@ public class SelectionManager : MonoBehaviour
             networkManager.StartStandardHost();
          }
 
-         NetworkClient.Send(new PlayerMessage(playerNames[index], fighterIDs.ToArray()));
-         GlobalManager.singleton.leaders[index] = fighterIDs[0];
+         NetworkClient.Send(new PlayerMessage(playerNames[index], index, fighterIDs.ToArray()));
+         //GlobalManager.singleton.leaders[index] = fighterIDs[0];
 
-         fighterIDs = new List<int>();
+         fighterIDs = new List<SelectedFighter>();
 
          if (GlobalManager.singleton.mode == GameMode.Training)
          {
-            fighterIDs.Add(0);
-            fighterIDs.Add(1);
+            fighterIDs.Add(new SelectedFighter(0, 0));
+            fighterIDs.Add(new SelectedFighter(1, 0));
 
-            NetworkClient.Send(new PlayerMessage(playerNames[index], fighterIDs.ToArray()));
-            fighterIDs = new List<int>();
+            NetworkClient.Send(new PlayerMessage(playerNames[index], 0, fighterIDs.ToArray()));
+            fighterIDs = new List<SelectedFighter>();
          }
       }
 
@@ -101,7 +101,7 @@ public class SelectionManager : MonoBehaviour
          }
       }
 
-      int time = GlobalManager.waitTime;
+      int time = GlobalSettings.waitTime;
       bool sentMessage = false;
 
       while (time >= 0)
@@ -111,8 +111,8 @@ public class SelectionManager : MonoBehaviour
 
          if (NetworkClient.isConnected && !sentMessage)
          {
-            NetworkClient.Send(new PlayerMessage(playerNames[1], fighterIDs.ToArray()));
-            GlobalManager.singleton.leaders[1] = fighterIDs[0];
+            NetworkClient.Send(new PlayerMessage(GlobalSettings.playerName, 0, fighterIDs.ToArray()));
+            //GlobalManager.singleton.leaders[1] = fighterIDs[0];
 
             sentMessage = true;
          }
@@ -124,9 +124,17 @@ public class SelectionManager : MonoBehaviour
       ReturnToMenu();
    }
 
-   public SelectionResult EditTeam(int fighterID)
+   public SelectionResult EditTeam(SelectedFighter fighter)
    {
-      int index = fighterIDs.IndexOf(fighterID);
+      int index = -1;
+      for (int i = 0; i < fighterIDs.Count; i++)
+      {
+         if (fighterIDs[i].fighterID == fighter.fighterID)
+         {
+            index = i;
+            break;
+         }
+      }
 
       if (index >= 0)
       {
@@ -135,12 +143,34 @@ public class SelectionManager : MonoBehaviour
 
          return new SelectionResult(false, hasTeam);
       }
-      else
+      else if (fighterIDs.Count < 6)
       {
-         fighterIDs.Add(fighterID);
+         fighterIDs.Add(fighter);
          bool hasTeam = fighterIDs.Count > 0;
          
          return new SelectionResult(true, hasTeam);
+      }
+      else
+      {
+         return new SelectionResult(false, true);
+      }
+   }
+
+   public void EditTeam(int fighter, int outfit)
+   {
+      int index = -1;
+      for (int i = 0; i < fighterIDs.Count; i++)
+      {
+         if (fighterIDs[i].fighterID == fighter)
+         {
+            index = i;
+            break;
+         }
+      }
+
+      if (index >= 0)
+      {
+         fighterIDs[index] = new SelectedFighter(fighter, outfit);
       }
    }
 

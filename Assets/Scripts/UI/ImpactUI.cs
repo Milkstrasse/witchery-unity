@@ -8,7 +8,7 @@ public class ImpactUI : MonoBehaviour
 
     public void SetupUI(string fighter, bool rotated)
     {
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter);
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter + "-standard");
 
         transform.localPosition = new Vector3(0, rotated ? -160f : 160f, 0);
         impact.eulerAngles = rotated ? new Vector3(180f, 180f, 0f) : Vector3.zero;

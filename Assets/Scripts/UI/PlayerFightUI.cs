@@ -41,11 +41,11 @@ public class PlayerFightUI : MonoBehaviour
     {
         if (rectTransform.eulerAngles.z == 180f)
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalManager.singleton.leaders[0]].name);
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[0].name + "-standard");
         }
         else
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalManager.singleton.leaders[1]].name);
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[1].name + "-standard");
         }
 
         float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 230 - 40)/4 * -1;
@@ -66,7 +66,7 @@ public class PlayerFightUI : MonoBehaviour
         this.player = player;
         player.OnPlayerChanged += UpdateUI;
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[player.fighterIDs[0]].name);
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[player.icon].name + "-standard");
 
         nameText.text = player.playerName;
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
@@ -239,17 +239,17 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator UpdateTimer()
     {
-        int time = GlobalManager.turnTime;
+        int time = GlobalSettings.turnTime;
         while (time >= 0)
         {
             time--;
-            if (timer.fillAmount > time / (float)GlobalManager.turnTime)
+            if (timer.fillAmount > time / (float)GlobalSettings.turnTime)
             {
-                LeanTween.value(timer.gameObject, timer.fillAmount, time / (float)GlobalManager.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
+                LeanTween.value(timer.gameObject, timer.fillAmount, time / (float)GlobalSettings.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
             }
             else
             {
-                timer.fillAmount = time / (float)GlobalManager.turnTime;
+                timer.fillAmount = time / (float)GlobalSettings.turnTime;
             }
 
             yield return new WaitForSeconds(1.0f);

@@ -20,12 +20,9 @@ public class GlobalManager : MonoBehaviour
     public bool relayEnabled;
     public int maxPlayers;
 
-    public static int waitTime = 120;
-    public static int turnTime = 180;
-
     public event Action<string> OnCodeCreated;
 
-    public int[] leaders;
+    private SaveManager saveManager;
     
     private async void Awake()
     {
@@ -59,9 +56,17 @@ public class GlobalManager : MonoBehaviour
         relayEnabled = false;
         #endif
 
-        leaders = new int[2];
-
-        LoadScene("MenuScene");
+        saveManager = new SaveManager();
+        if (saveManager.LoadData())
+        {
+            Debug.Log("Welcome " + GlobalSettings.playerName);
+            LoadScene("MenuScene");
+        }
+        else
+        {
+            StartManager startManager = GameObject.Find("Canvas").GetComponent<StartManager>();
+            startManager.ShowUI();
+        }
     }
 
     public void StoreRelayCode(string code)
@@ -100,6 +105,12 @@ public class GlobalManager : MonoBehaviour
         }
 
         return filteredFighters.ToArray();
+    }
+
+    public void GoToMenu()
+    {
+        saveManager.CreateNewData(fighters);
+        LoadScene("MenuScene");
     }
 
     public string GetCurrentScene() => SceneManager.GetActiveScene().name;

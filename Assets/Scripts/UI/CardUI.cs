@@ -34,16 +34,41 @@ public class CardUI : MonoBehaviour
     private void Start()
     {
         cardSides = new GameObject[] {transform.GetChild(0).gameObject, transform.GetChild(1).gameObject};
-
         stringEvent = infoText.GetComponent<LocalizeStringEvent>();
     }
 
     public void SetupCard(Fighter fighter)
     {
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name);
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-standard");
 
         icon.text = $"<style=IconShadow>{Convert.ToChar((uint) fighter.role)}</style>";
         infoText.text = $"<size=+6>{fighter.name}</size>\n{fighter.role}";
+    }
+
+    public void SetupCard(Fighter fighter, int outfit, Move move)
+    {
+        UpdateOutfit(fighter, outfit);
+
+        icon.text = move.cost.ToString();
+
+        stringEvent = infoText.GetComponent<LocalizeStringEvent>();
+
+        (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(move.health) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);
+        (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(move.energy) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);
+        (stringEvent.StringReference["duration"] as IntVariable).Value = move.effect.duration;
+
+        if (move.effect.duration != 0)
+        {
+            uint i = Convert.ToUInt32(move.effect.icon, 16);
+            (stringEvent.StringReference["effect"] as StringVariable).Value = Convert.ToChar(i).ToString();
+        }
+        else
+        {
+            (stringEvent.StringReference["effect"] as StringVariable).Value = "";
+        }
+
+        stringEvent.StringReference.SetReference("StringTable", move.GetDescription());
+        stringEvent.RefreshString();
     }
 
     public void SetupCard(Card card, Player player = null)
@@ -55,7 +80,7 @@ public class CardUI : MonoBehaviour
         {
             cardSides[0].transform.GetChild(1).gameObject.SetActive(false);
 
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + card.fighter.name);
+            UpdateOutfit(card.fighter, card.outfit);
 
             icon.text = card.move.cost.ToString();
 
@@ -74,7 +99,6 @@ public class CardUI : MonoBehaviour
             }
 
             stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription());
-
             stringEvent.RefreshString();
         }
         else
@@ -200,5 +224,10 @@ public class CardUI : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
          animatedIcon.transform.localScale = Vector3.zero;
         animatedIcon.gameObject.SetActive(false);
+    }
+
+    public void UpdateOutfit(Fighter fighter, int outfit)
+    {
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-" + fighter.outfits[outfit].name);
     }
 }

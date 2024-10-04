@@ -457,6 +457,7 @@ GameObject:
   - component: {fileID: 292734617}
   - component: {fileID: 292734616}
   - component: {fileID: 292734618}
+  - component: {fileID: 292734619}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -594,10 +595,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7398ca0c91f7d4d0498bf6c3646fa8e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 1060029940}
+  manager: {fileID: 0}
   musicSlider: {fileID: 1237086804}
   soundSlider: {fileID: 1632489428}
   stringEvent: {fileID: 1564591902}
+--- !u!114 &292734619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292734611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a615588edf68a4b4680fb0360151c3ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &314933738
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,7 +694,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1060029940}
+      - m_Target: {fileID: 292734619}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: DecreaseLang
         m_Mode: 1
@@ -865,8 +878,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: \uf053
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8445ea85af7c745efa83e75d9b589d27, type: 2}
-  m_sharedMaterial: {fileID: -8192974252187712556, guid: 8445ea85af7c745efa83e75d9b589d27, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 498e585e99a2f4b9b9cb7dd18c6005ab, type: 2}
+  m_sharedMaterial: {fileID: 7751258527629197585, guid: 498e585e99a2f4b9b9cb7dd18c6005ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1232,7 +1245,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1060029940}
+      - m_Target: {fileID: 292734619}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: ReturnToMenu
         m_Mode: 1
@@ -1532,7 +1545,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1060029940}
+      - m_Target: {fileID: 292734619}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: IncreaseLang
         m_Mode: 1
@@ -1757,50 +1770,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
---- !u!1 &1060029939
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1060029941}
-  - component: {fileID: 1060029940}
-  m_Layer: 0
-  m_Name: Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1060029940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1060029939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a615588edf68a4b4680fb0360151c3ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1060029941
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1060029939}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1098854592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,7 +1853,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1060029940}
+      - m_Target: {fileID: 292734619}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: ResetSettings
         m_Mode: 1
@@ -2060,7 +2029,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1060029940}
+      - m_Target: {fileID: 292734619}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: ChangeMusicVolume
         m_Mode: 0
@@ -2332,8 +2301,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: \uf054
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8445ea85af7c745efa83e75d9b589d27, type: 2}
-  m_sharedMaterial: {fileID: -8192974252187712556, guid: 8445ea85af7c745efa83e75d9b589d27, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 498e585e99a2f4b9b9cb7dd18c6005ab, type: 2}
+  m_sharedMaterial: {fileID: 7751258527629197585, guid: 498e585e99a2f4b9b9cb7dd18c6005ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2747,7 +2716,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1060029940}
+      - m_Target: {fileID: 292734619}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: ChangeSoundVolume
         m_Mode: 0
@@ -3152,4 +3121,3 @@ SceneRoots:
   - {fileID: 544932444}
   - {fileID: 292734615}
   - {fileID: 1422458742}
-  - {fileID: 1060029941}

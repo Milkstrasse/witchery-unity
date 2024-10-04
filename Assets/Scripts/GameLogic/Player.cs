@@ -6,12 +6,13 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int playerID;
+    public int icon;
 
     public string playerName;
     public int fullHealth;
     public int currHealth;
     public int energy;
-    public int[] fighterIDs;
+    public SelectedFighter[] fighterIDs;
 
     public List<Card> cards;
     public List<Card> cardHand;
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     public void SetupPlayer(PlayerMessage message, int playerID)
     {
         this.playerID = playerID;
+        icon = message.icon;
         
         playerName = message.name;
         fullHealth = 50;
@@ -49,10 +51,10 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < fighterIDs.Length; i++)
         {
-            Fighter fighter = GlobalManager.singleton.fighters[fighterIDs[i]];
+            Fighter fighter = GlobalManager.singleton.fighters[fighterIDs[i].fighterID];
             for (int j = 0; j < fighter.moves.Length; j++)
             {
-                cards.Add(new Card(fighter, j));
+                cards.Add(new Card(fighter, fighterIDs[i].outfit, j));
             }
         }
 
