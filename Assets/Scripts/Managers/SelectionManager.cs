@@ -16,7 +16,7 @@ public class SelectionManager : MonoBehaviour
 
    public event Action OnPlayersReady;
 
-   private void Start()
+   private void Awake()
    {
       networkManager = GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>();
       networkManager.maxConnections = GlobalManager.singleton.maxPlayers;

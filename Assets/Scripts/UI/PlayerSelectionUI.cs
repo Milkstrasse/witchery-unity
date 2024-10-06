@@ -34,7 +34,7 @@ public class PlayerSelectionUI : MonoBehaviour
     private bool isEditing;
     private bool isShowingInfo;
 
-    private void Start()
+    private void Awake()
     {
         canvasGroup = fighterParent.parent.GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
@@ -77,10 +77,15 @@ public class PlayerSelectionUI : MonoBehaviour
     {
         AudioManager.singleton.PlayStandardSound();
 
+        SelectCard(new SelectedFighter(cardIndex, outfits[cardIndex]), editing);
+    }
+
+    public void SelectCard(SelectedFighter fighter, bool editing)
+    {
         if (isEditing || editing)
         {
-            SelectionResult result = selectionUI.EditTeam(new SelectedFighter(cardIndex, outfits[cardIndex]));
-            fighterCards[cardIndex].SelectCard(result.wasAdded);
+            SelectionResult result = selectionUI.EditTeam(fighter);
+            fighterCards[fighter.fighterID].SelectCard(result.wasAdded);
 
             if (!isEditing)
             {
@@ -101,7 +106,7 @@ public class PlayerSelectionUI : MonoBehaviour
                 fighterCards[currCard].HighlightCard(false);
             }
 
-            if (currCard == cardIndex)
+            if (currCard == fighter.fighterID)
             {
                 currCard = -1;
                 actionButton.interactable = false;
@@ -109,7 +114,7 @@ public class PlayerSelectionUI : MonoBehaviour
             }
             else
             {
-                currCard = cardIndex;
+                currCard = fighter.fighterID;
                 fighterCards[currCard].HighlightCard(true);
 
                 actionButton.interactable = true;

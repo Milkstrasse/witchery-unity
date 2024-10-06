@@ -7,10 +7,31 @@ public class SelectionUI : MonoBehaviour
     [SerializeField] private PlayerSelectionUI playerTop;
     [SerializeField] private PlayerSelectionUI playerBottom;
 
+    private Player[] players;
+
     private void Start()
     {
         manager.OnTimerChanged += playerBottom.SetTimer;
         manager.OnPlayersReady += StartFight;
+
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
+        players = new Player[gameObjects.Length];
+
+        if (players.Length > 0)
+        {
+            for (int i = 0; i < gameObjects.Length; i++)
+            {
+                players[i] = gameObjects[i].GetComponent<Player>();
+            }
+
+            if (GlobalManager.singleton.mode == GameMode.Offline)
+            {
+                for (int j = 0; j < players[0].fighterIDs.Length; j++)
+                {
+                    playerBottom.SelectCard(players[0].fighterIDs[j], true);
+                }
+            }
+        }
     }
 
     public void SetReady(int index)
@@ -22,6 +43,14 @@ public class SelectionUI : MonoBehaviour
         if (GlobalManager.singleton.mode == GameMode.Offline)
         {
             playerTop.ToggleUI(isReady);
+            
+            if (players.Length > 1 && isReady)
+            {
+                for (int j = 0; j < players[1].fighterIDs.Length; j++)
+                {
+                    playerTop.SelectCard(players[1].fighterIDs[j], true);
+                }
+            }
         }
 
         playerBottom.ToggleUI(!isReady);
@@ -39,6 +68,11 @@ public class SelectionUI : MonoBehaviour
 
     private void StartFight()
     {
+        for (int i = 0; i < players.Length; i++)
+        {
+            Destroy(players[i].gameObject);
+        }
+
         playerTop.ToggleUI(false, true);
         playerBottom.ToggleUI(false, true);
     }

@@ -11,9 +11,9 @@ public class GameOverUI : MonoBehaviour
         manager.OnSetupComplete += SetupUI;
     }
 
-    private void SetupUI(int player)
+    private void SetupUI(string player)
     {
-        winText.text = $"Player {player} has won";
+        winText.text = $"{player} has won";
     }
 
     public void ReturnToMenu()
