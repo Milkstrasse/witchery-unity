@@ -21,17 +21,6 @@ public struct PlayerMessage : NetworkMessage
         cardHand = new int[0];
         effects = new StatusEffect[0];
     }
-
-    public PlayerMessage(string name, int icon, SelectedFighter[] fighterIDs, StatusEffect[] effects)
-    {
-        this.name = name;
-        this.icon = icon;
-        this.fighterIDs = fighterIDs;
-        health = 0;
-        energy = 0;
-        cardHand = new int[0];
-        this.effects = effects;
-    }
 }
 
 public struct TurnMessage : NetworkMessage

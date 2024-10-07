@@ -85,6 +85,9 @@ public class PlayerSelectionUI : MonoBehaviour
         if (isEditing || editing)
         {
             SelectionResult result = selectionUI.EditTeam(fighter);
+            
+            fighterCards[fighter.fighterID].UpdateOutfit(GlobalManager.singleton.fighters[fighter.fighterID], fighter.outfit);
+            outfits[fighter.fighterID] = fighter.outfit;
             fighterCards[fighter.fighterID].SelectCard(result.wasAdded);
 
             if (!isEditing)
@@ -346,6 +349,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (!isShowingInfo)
         {
+            actionButton.GetComponent<Image>().color = neutral;
             optionText.StringReference.SetReference("StringTable", filters[currFilter]);
 
             LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.4f);
@@ -353,6 +357,8 @@ public class PlayerSelectionUI : MonoBehaviour
         }
         else
         {
+            actionButton.GetComponent<Image>().color = highlighted;
+
             Fighter fighter = GlobalManager.singleton.fighters[currCard];
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
             

@@ -87,7 +87,9 @@ public class CustomNetwork : RelayNetworkManager
                 NetworkServer.SendToAll(players[i]);
             }
 
-            networkSceneName = ""; //reset scene so new server can start correctly
+            //reset scene so new server can start correctly
+            networkSceneName = "";
+            players = new List<PlayerMessage>();
         }
     }
 
