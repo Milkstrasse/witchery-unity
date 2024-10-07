@@ -15,6 +15,7 @@ public class PlayerSelectionUI : MonoBehaviour
     private RectTransform rectTransform;
     [SerializeField] private Image timer;
     [SerializeField] private Button readyButton;
+    [SerializeField] private LocalizeStringEvent readyText;
     [SerializeField] private Image portrait;
 
     [SerializeField] private Button modeButton;
@@ -85,7 +86,7 @@ public class PlayerSelectionUI : MonoBehaviour
         if (isEditing || editing)
         {
             SelectionResult result = selectionUI.EditTeam(fighter);
-            
+
             fighterCards[fighter.fighterID].UpdateOutfit(GlobalManager.singleton.fighters[fighter.fighterID], fighter.outfit);
             outfits[fighter.fighterID] = fighter.outfit;
             fighterCards[fighter.fighterID].SelectCard(result.wasAdded);
@@ -135,11 +136,11 @@ public class PlayerSelectionUI : MonoBehaviour
             LeanTween.cancel(timer.gameObject);
             timer.fillAmount = 1.0f;
             
-            optionText.StringReference.SetReference("StringTable", "ready");
+            readyText.StringReference.SetReference("StringTable", "ready");
         }
         else
         {
-            optionText.StringReference.SetReference("StringTable", "cancel");
+            readyText.StringReference.SetReference("StringTable", "cancel");
         }
 
         if (GlobalManager.singleton.mode == GameMode.Offline)

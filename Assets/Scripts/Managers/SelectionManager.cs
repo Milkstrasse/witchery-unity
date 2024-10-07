@@ -67,7 +67,7 @@ public class SelectionManager : MonoBehaviour
             fighterIDs.Add(new SelectedFighter(UnityEngine.Random.Range(0, GlobalManager.singleton.fighters.Length), 0));
             fighterIDs.Add(new SelectedFighter(UnityEngine.Random.Range(0, GlobalManager.singleton.fighters.Length), 0));
 
-            NetworkClient.Send(new PlayerMessage(playerNames[index], 0, fighterIDs.ToArray()));
+            NetworkClient.Send(new PlayerMessage(playerNames[1 - index], 0, fighterIDs.ToArray()));
             fighterIDs = new List<SelectedFighter>();
          }
       }
@@ -112,8 +112,6 @@ public class SelectionManager : MonoBehaviour
          if (NetworkClient.isConnected && !sentMessage)
          {
             NetworkClient.Send(new PlayerMessage(GlobalSettings.playerName, 0, fighterIDs.ToArray()));
-            //GlobalManager.singleton.leaders[1] = fighterIDs[0];
-
             sentMessage = true;
          }
          

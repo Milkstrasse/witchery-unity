@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 
 public class SelectionUI : MonoBehaviour
@@ -24,11 +25,18 @@ public class SelectionUI : MonoBehaviour
                 players[i] = gameObjects[i].GetComponent<Player>();
             }
 
-            if (GlobalManager.singleton.mode == GameMode.Offline)
+            if (GlobalManager.singleton.mode != GameMode.Online || NetworkClient.activeHost)
             {
                 for (int j = 0; j < players[0].fighterIDs.Length; j++)
                 {
                     playerBottom.SelectCard(players[0].fighterIDs[j], true);
+                }
+            }
+            else
+            {
+                for (int j = 0; j < players[1].fighterIDs.Length; j++)
+                {
+                    playerBottom.SelectCard(players[1].fighterIDs[j], true);
                 }
             }
         }
@@ -43,7 +51,7 @@ public class SelectionUI : MonoBehaviour
         if (GlobalManager.singleton.mode == GameMode.Offline)
         {
             playerTop.ToggleUI(isReady);
-            
+
             if (players.Length > 1 && isReady)
             {
                 for (int j = 0; j < players[1].fighterIDs.Length; j++)

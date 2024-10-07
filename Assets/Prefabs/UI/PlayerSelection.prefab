@@ -960,6 +960,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 751564629866992320, guid: befab4e5540754660a53c9426286eb04, type: 3}
   timer: {fileID: 7599625462484518410}
   readyButton: {fileID: 344378691534329731}
+  readyText: {fileID: 2375438514970021797}
   portrait: {fileID: 2108096082149886536}
   modeButton: {fileID: 8689038964162385286}
   actionButton: {fileID: 5830670813190114372}

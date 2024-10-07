@@ -26,6 +26,12 @@ public class GameOverManager : MonoBehaviour
     public void ReturnToMenu()
     {
         AudioManager.singleton.PlayStandardSound();
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            Destroy(players[i].gameObject);
+        }
+        
         GlobalManager.singleton.LoadScene("MenuScene");
     }
 }
