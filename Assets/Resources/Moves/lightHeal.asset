@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: lightHeal
   m_EditorClassIdentifier: 
   moveID: 3
-  cost: 2
+  cost: 3
   target: 0
-  health: 5
+  health: 7
   energy: 0
   effect:
     name: 

@@ -1,13 +1,12 @@
-using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class SaveManager
 {
-    string saveFilePath = Application.persistentDataPath + "/PlayerData.dat";
+    private static readonly string saveFilePath = Application.persistentDataPath + "/PlayerData.dat";
 
-    public bool LoadData()
+    public static bool LoadData()
     {
         if (!File.Exists(saveFilePath))
             return false;
@@ -19,12 +18,13 @@ public class SaveManager
         file.Close();
 
         GlobalSettings.playerName = playerData.name;
+        GlobalSettings.money = playerData.money;
         GlobalSettings.unlocked = playerData.unlocked;
 
         return true;
     }
 
-    public void CreateNewData(Fighter[] fighters)
+    public static void CreateNewData(Fighter[] fighters)
     {
         int fighterAmount = fighters.Length;
 
@@ -42,9 +42,9 @@ public class SaveManager
         SaveData();
     }
 
-    private void SaveData()
+    public static void SaveData()
     {
-        SavedData playerData = new SavedData(GlobalSettings.playerName, GlobalSettings.unlocked);
+        SavedData playerData = new SavedData(GlobalSettings.playerName, GlobalSettings.money, GlobalSettings.unlocked);
 
         BinaryFormatter binary = new BinaryFormatter();
 		FileStream file = File.Create(saveFilePath);                     
@@ -59,18 +59,5 @@ public class SaveManager
         {
             File.Delete(saveFilePath);
         }
-    }
-}
-
-[Serializable]
-public struct SavedData
-{
-    public string name;
-    public bool[,] unlocked;
-
-    public SavedData(string name, bool[,] unlocked)
-    {
-        this.name = name;
-        this.unlocked = unlocked;
     }
 }

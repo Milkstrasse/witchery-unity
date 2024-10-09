@@ -114,7 +114,7 @@ public class PlayerFightUI : MonoBehaviour
             StartCoroutine("MakeCPUMove");
         }
 
-        LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isInteractable ? 450f :  130f), 0.3f);
+        LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isInteractable ? 450f :  120f), 0.3f);
     }
 
     private void UpdateUI()
@@ -226,7 +226,7 @@ public class PlayerFightUI : MonoBehaviour
             timer.fillAmount = 1.0f;
         }
 
-        LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isInteractable ? 450f : 130f), 0.3f);
+        LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isInteractable ? 450f : 120f), 0.3f);
 
         cardGroup.interactable = isInteractable && canBePlayable;
         cardGroup.blocksRaycasts = isInteractable && canBePlayable;

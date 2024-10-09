@@ -24,5 +24,4 @@ MonoBehaviour:
   - name: standard
     cost: 0
   - name: magicgirl
-    cost: 0
-  currOutfit: 0
+    cost: 200

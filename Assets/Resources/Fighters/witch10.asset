@@ -24,4 +24,4 @@ MonoBehaviour:
   - name: standard
     cost: 0
   - name: magicgirl
-    cost: 0
+    cost: 200

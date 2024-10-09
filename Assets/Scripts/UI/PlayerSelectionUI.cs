@@ -146,11 +146,11 @@ public class PlayerSelectionUI : MonoBehaviour
         if (GlobalManager.singleton.mode == GameMode.Offline)
         {
             readyButton.interactable = false;
-            LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 130f), 0.3f);
+            LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 120f), 0.3f);
         }
         else if (collapsable)
         {
-            LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 130f), 0.3f);
+            LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 120), 0.3f);
         }
     }
 
@@ -345,6 +345,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
     public void SwitchMode()
     {
+        AudioManager.singleton.PlayStandardSound();
+        
         RectTransform fighterRect = fighterParent.parent.GetComponent<RectTransform>();
         isShowingInfo = !isShowingInfo;
 

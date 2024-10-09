@@ -21,8 +21,6 @@ public class GlobalManager : MonoBehaviour
     public int maxPlayers;
 
     public event Action<string> OnCodeCreated;
-
-    private SaveManager saveManager;
     
     private async void Awake()
     {
@@ -56,8 +54,7 @@ public class GlobalManager : MonoBehaviour
         relayEnabled = false;
         #endif
 
-        saveManager = new SaveManager();
-        if (saveManager.LoadData())
+        if (SaveManager.LoadData())
         {
             Debug.Log("Welcome " + GlobalSettings.playerName);
             LoadScene("MenuScene");
@@ -109,7 +106,7 @@ public class GlobalManager : MonoBehaviour
 
     public void GoToMenu()
     {
-        saveManager.CreateNewData(fighters);
+        SaveManager.CreateNewData(fighters);
         LoadScene("MenuScene");
     }
 

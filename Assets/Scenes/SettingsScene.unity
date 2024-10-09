@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7398ca0c91f7d4d0498bf6c3646fa8e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
+  manager: {fileID: 292734619}
   musicSlider: {fileID: 1237086804}
   soundSlider: {fileID: 1632489428}
   stringEvent: {fileID: 1564591902}
