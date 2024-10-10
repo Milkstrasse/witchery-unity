@@ -144,16 +144,19 @@ public class Player : MonoBehaviour
         return counter;
     }
 
-    public int GetShields()
+    public int GetDamageModifier()
     {
+        int modifier = 0;
+
         for (int i = 0; i < effects.Count; i++)
         {
-            if (effects[i].name == "shields")
+            if (effects[i].name == "shields" || effects[i].name == "vulnerable" )
             {
-                return effects[i].value;
+                effects[i].isNew = true;
+                modifier += effects[i].value;
             }
         }
-
-        return 0;
+        
+        return modifier;
     }
 }

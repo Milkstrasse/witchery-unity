@@ -179,6 +179,14 @@ MonoBehaviour:
     m_Key: standard
     m_Metadata:
       m_Items: []
+  - m_Id: 19427704657928192
+    m_Key: stealCostEnergy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19427698743959552
+    m_Key: stealCostHP
+    m_Metadata:
+      m_Items: []
   - m_Id: 7920018510569472
     m_Key: stealEnergy
     m_Metadata:

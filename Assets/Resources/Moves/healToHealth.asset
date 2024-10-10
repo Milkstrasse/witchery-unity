@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c3f2616e0734b19bc2feecd7d70d51, type: 3}
   m_Name: healToHealth
   m_EditorClassIdentifier: 
-  moveID: 6
+  moveID: 33
   cost: 3
   target: 0
-  health: 35
+  health: 45
   energy: 0
   effect:
     name: 

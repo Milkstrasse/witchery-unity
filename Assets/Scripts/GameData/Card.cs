@@ -12,4 +12,6 @@ public struct Card
         move = fighter.moves[moveIndex];
         hasMove = true;
     }
+
+    public readonly bool IsSpecialMove => (move.moveID >= 8 && move.moveID <= 10) || (move.moveID >= 20 && move.moveID <= 21);
 }

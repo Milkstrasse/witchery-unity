@@ -21,28 +21,32 @@ public class Move : ScriptableObject
         
         switch (moveID - offset)
         {
+            case 2:
+                return "doDamage";
             case 3:
                 return "recoverHP";
             case 4:
-                return "doDamage";
-            case 6:
-                return "healToHP";
+                return "stealHP";
             case 8:
-                return "giveEffect";
-            case 9:
-                return "gainEnergy";
-            case 15:
-                return "recoverCostHP";
-            case 16:
                 return "doCostDamage";
-            case 18:
-                return "gainEffect";
-            case 20:
+            case 9:
+                return "recoverCostHP";
+            case 10:
+                return "stealCostHP";
+            case 14:
                 return "stealEnergy";
+            case 15:
+                return "gainEnergy";
+            case 20:
+                return "stealCostEnergy";
             case 21:
                 return "gainCostEnergy";
-            case 28:
-                return "stealHP";
+            case 26:
+                return "giveEffect";
+            case 27:
+                return "gainEffect";
+            case 33:
+                return "healToHP";
             default:
                 return name;
         }

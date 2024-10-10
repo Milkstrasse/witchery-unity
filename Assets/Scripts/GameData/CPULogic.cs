@@ -17,13 +17,13 @@ public struct CPULogic
             else if (player.cardHand[i].hasMove && player.cardHand[i].move.cost <= player.energy)
             {
                 Move move = player.cardHand[i].move;
-                if (move.moveID == 5 && logic.lastCard.card.hasMove) //replay card
+                if (move.moveID == 7 && logic.lastCard.card.hasMove) //replay card
                 {
                     move = logic.lastCard.card.move;
                 }
 
                 int health = move.health;
-                if (move.moveID == 15 || move.moveID == 16) //special moves
+                if (move.moveID >= 8 && move.moveID <= 10) //special moves
                 {
                     health *= logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0;
                 }
