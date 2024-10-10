@@ -49,7 +49,7 @@ public class PlayerSelectionUI : MonoBehaviour
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[1].name + "-standard");
         }
 
-        filters = new string[] {"unfiltered", "attack", "support", "team"};
+        filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};
 
         int fighterAmount = GlobalManager.singleton.fighters.Length;
         fighters = GlobalManager.singleton.GetFighters(0);

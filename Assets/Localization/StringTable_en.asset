@@ -188,11 +188,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12959317832491008
-    m_Localized: Attack
+    m_Localized: Damage
     m_Metadata:
       m_Items: []
   - m_Id: 12959331292012544
-    m_Localized: Support
+    m_Localized: Recovery
     m_Metadata:
       m_Items: []
   - m_Id: 12959305933250560
@@ -241,6 +241,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
+  - m_Id: 19529877668487168
+    m_Localized: Control
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

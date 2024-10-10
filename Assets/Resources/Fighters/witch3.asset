@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: witch3
   m_EditorClassIdentifier: 
   fighterID: 3
-  role: 62445
+  role: 63198
   moves:
-  - {fileID: 11400000, guid: 7fdbd2725e0d24881b45fcc821234b30, type: 2}
-  - {fileID: 11400000, guid: 4b4094e717a4a479ea8cbdc710c37c52, type: 2}
-  - {fileID: 11400000, guid: 4b4094e717a4a479ea8cbdc710c37c52, type: 2}
-  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
-  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 62685afb6290948738ae8f884794c7f7, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: a9b6b9d7f4bc44d43aa2d911e008133e, type: 2}
+  - {fileID: 11400000, guid: a9b6b9d7f4bc44d43aa2d911e008133e, type: 2}
   outfits:
   - name: standard
     cost: 0

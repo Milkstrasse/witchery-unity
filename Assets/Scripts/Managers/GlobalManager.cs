@@ -77,20 +77,30 @@ public class GlobalManager : MonoBehaviour
 
         switch (filter)
         {
-            case 1: //attack
+            case 1: //damage
                 for (int i = 0; i < fighters.Length; i++)
                 {
-                    if (fighters[i].role == Role.attack)
+                    if (fighters[i].role == Role.damage)
                     {
                         filteredFighters.Add(i);
                     }
                 }
 
                 break;
-            case 2:
+            case 2: //control
                 for (int i = 0; i < fighters.Length; i++)
                 {
-                    if (fighters[i].role == Role.support)
+                    if (fighters[i].role == Role.control)
+                    {
+                        filteredFighters.Add(i);
+                    }
+                }
+
+                break;
+            case 3: //recovery
+                for (int i = 0; i < fighters.Length; i++)
+                {
+                    if (fighters[i].role == Role.recovery)
                     {
                         filteredFighters.Add(i);
                     }

@@ -19,10 +19,6 @@ MonoBehaviour:
     m_Key: addBlank
     m_Metadata:
       m_Items: []
-  - m_Id: 12959317832491008
-    m_Key: attack
-    m_Metadata:
-      m_Items: []
   - m_Id: 8223596102017024
     m_Key: bleed
     m_Metadata:
@@ -57,6 +53,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 15264850425929728
     m_Key: credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12959317832491008
+    m_Key: damage
     m_Metadata:
       m_Items: []
   - m_Id: 12180150551568384
@@ -127,6 +127,10 @@ MonoBehaviour:
     m_Key: music
     m_Metadata:
       m_Items: []
+  - m_Id: 19529877668487168
+    m_Key: control
+    m_Metadata:
+      m_Items: []
   - m_Id: 8223787123204096
     m_Key: power
     m_Metadata:
@@ -141,6 +145,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 7210210211913728
     m_Key: recoverHP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12959331292012544
+    m_Key: recovery
     m_Metadata:
       m_Items: []
   - m_Id: 7829019750817792
@@ -193,10 +201,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 7992895737946112
     m_Key: stealHP
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12959331292012544
-    m_Key: support
     m_Metadata:
       m_Items: []
   - m_Id: 7622866769010688

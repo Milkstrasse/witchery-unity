@@ -19,7 +19,7 @@ MonoBehaviour:
   energy: 0
   effect:
     name: vulnerable
-    icon: f54c
+    icon: f7a9
     duration: 3
     value: -2
     statusType: 3

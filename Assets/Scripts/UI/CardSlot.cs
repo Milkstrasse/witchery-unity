@@ -24,7 +24,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null)
+        if (eventData.pointerDrag != null && eventData.pointerDrag.GetComponent<Drag>() == null)
         {
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             eventCardUI.HighlightCard(true);
@@ -34,7 +34,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null)
+        if (eventData.pointerDrag != null && eventData.pointerDrag.GetComponent<Drag>() == null)
         {
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             eventCardUI.HighlightCard(false);
@@ -44,7 +44,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && FightManager.singleton.IsAbleToMessage())
+        if (eventData.pointerDrag != null && eventData.pointerDrag.GetComponent<Drag>() == null && FightManager.singleton.IsAbleToMessage())
         {
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;

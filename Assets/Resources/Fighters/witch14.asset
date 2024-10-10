@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: witch14
   m_EditorClassIdentifier: 
   fighterID: 14
-  role: 62445
+  role: 62569
   moves:
-  - {fileID: 11400000, guid: 71c20d86684774b96a8dd635367afdd1, type: 2}
-  - {fileID: 11400000, guid: 0679131e1c92941308535cb2fcf25d6f, type: 2}
-  - {fileID: 11400000, guid: 0679131e1c92941308535cb2fcf25d6f, type: 2}
+  - {fileID: 11400000, guid: 0ac7f2c711c16424fa11f475b083c023, type: 2}
+  - {fileID: 11400000, guid: 182a3421fa5e44f929e53b9d89975220, type: 2}
+  - {fileID: 11400000, guid: 182a3421fa5e44f929e53b9d89975220, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   outfits:

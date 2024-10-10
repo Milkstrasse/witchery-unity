@@ -13,6 +13,7 @@ public class Fighter : ScriptableObject
 
 public enum Role: uint //use decimal from hexadecimal to decimal converter
 {
-    attack = 63367,
-    support = 62445
+    control = 61475,
+    damage = 63198,
+    recovery = 62569
 }

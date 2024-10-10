@@ -188,11 +188,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12959331292012544
-    m_Localized: "Unterst\xFCtzung"
+    m_Localized: Erholung
     m_Metadata:
       m_Items: []
   - m_Id: 12959317832491008
-    m_Localized: Angriff
+    m_Localized: Schaden
     m_Metadata:
       m_Items: []
   - m_Id: 12959305933250560
@@ -241,6 +241,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
+  - m_Id: 19529877668487168
+    m_Localized: Kontrolle
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
