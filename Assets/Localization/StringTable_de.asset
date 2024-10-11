@@ -204,11 +204,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13275175423303680
-    m_Localized: Entferne die Effekte des Gegners
+    m_Localized: Entferne feindl. Effekte
     m_Metadata:
       m_Items: []
   - m_Id: 14019019806859264
-    m_Localized: "Entferne zuf\xE4llige Karte"
+    m_Localized: "Entferne zuf\xE4ll. Karte"
     m_Metadata:
       m_Items: []
   - m_Id: 15212672940236800
