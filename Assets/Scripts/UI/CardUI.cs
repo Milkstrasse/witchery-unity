@@ -42,7 +42,10 @@ public class CardUI : MonoBehaviour
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-standard");
 
         icon.text = $"<style=IconShadow>{Convert.ToChar((uint) fighter.role)}</style>";
-        infoText.text = $"<size=+6>{fighter.name}</size>\n{fighter.role}";
+
+        stringEvent = infoText.GetComponent<LocalizeStringEvent>();
+        stringEvent.StringReference.SetReference("StringTable", fighter.role.ToString());
+        infoText.text = $"<size=+6>{fighter.name}</size>\n" + infoText.text;
     }
 
     public void SetupCard(Fighter fighter, int outfit, Move move)

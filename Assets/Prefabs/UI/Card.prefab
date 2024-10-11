@@ -187,7 +187,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: \uf7e4
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8445ea85af7c745efa83e75d9b589d27, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f92ca406883494adeb17b49871c5f46f, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 699769f74d4f64b8298fecf6086b903d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &7641949006019662879
