@@ -120,8 +120,26 @@ public class FightLogic
 
                     int tempHealth = players[1 - turn].health;
                     players[1 - turn].health = Math.Max(players[1 - turn].health + hpToSteal - players[turn].GetPowerBonus() + players[1 - turn].GetDamageModifier(), 0);
-                    tempHealth -= players[1 - turn].health;
-                    players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalSettings.health);
+
+                    StatusEffect stealSpice = players[1 - turn].GetEffect("spice");
+                    if (stealSpice != null)
+                    {
+                        players[turn].health = Math.Max(players[turn].health - stealSpice.value, 0);
+                        if (winner < 0 && players[turn].health == 0)
+                        {
+                            winner = 1 - turn;
+                        }
+                        else
+                        {
+                            tempHealth -= players[1 - turn].health;
+                            players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalSettings.health);
+                        }
+                    }
+                    else
+                    {
+                        tempHealth -= players[1 - turn].health;
+                        players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalSettings.health);
+                    }
 
                     if (winner < 0 && players[1 - turn].health == 0)
                     {
@@ -155,6 +173,30 @@ public class FightLogic
                     players[1 - turn].energy = Math.Max(players[1 - turn].energy + energyToSteal - players[turn].GetPowerBonus(), 0);
                     tempEnergy -= players[1 - turn].energy;
                     players[turn].energy += tempEnergy;
+
+                    break;
+                case 16: //explosion
+                    int damage = move.health;
+                    int damageA = Math.Min(damage - players[turn].GetPowerBonus() + players[1 - turn].GetDamageModifier(), 0);
+                    int damageB = Math.Min(damage - players[turn].GetPowerBonus() + players[turn].GetDamageModifier(), 0);
+
+                    players[1 - turn].health = Math.Clamp(players[1 - turn].health + damageA, 0, GlobalSettings.health);
+                    if (winner < 0 && players[1 - turn].health == 0)
+                    {
+                        winner = turn;
+                    }
+
+                    StatusEffect exSpice = players[1 - turn].GetEffect("spice");
+                    if (exSpice != null)
+                    {
+                        players[turn].health = Math.Max(players[turn].health - exSpice.value, 0);
+                        if (winner < 0 && players[turn].health == 0)
+                        {
+                            winner = 1 - turn;
+                        }
+                    }
+
+                    players[turn].health = Math.Clamp(players[turn].health + damageB, 0, GlobalSettings.health);
 
                     break;
                 case 17: //clear effects

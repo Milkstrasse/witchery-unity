@@ -37,6 +37,8 @@ public class Move : ScriptableObject
                 return "stealEnergy";
             case 15:
                 return "gainEnergy";
+            case 16:
+                return "doSpecialDamage";
             case 20:
                 return "stealCostEnergy";
             case 21:

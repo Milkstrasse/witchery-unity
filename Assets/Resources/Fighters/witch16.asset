@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0a895a7e95554706af00b395749ee36, type: 3}
-  m_Name: witch15
+  m_Name: witch16
   m_EditorClassIdentifier: 
-  fighterID: 15
-  role: 63198
+  fighterID: 16
+  role: 61475
   moves:
-  - {fileID: 11400000, guid: 33f39622a31c94285b78c5108dfea649, type: 2}
-  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
-  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
-  - {fileID: 11400000, guid: 62685afb6290948738ae8f884794c7f7, type: 2}
-  - {fileID: 11400000, guid: 62685afb6290948738ae8f884794c7f7, type: 2}
+  - {fileID: 11400000, guid: e5dda212c64884b2a87e0a8c22a3d1f1, type: 2}
+  - {fileID: 11400000, guid: 0679131e1c92941308535cb2fcf25d6f, type: 2}
+  - {fileID: 11400000, guid: 0679131e1c92941308535cb2fcf25d6f, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   outfits:
   - name: standard
     cost: 0
