@@ -387,6 +387,18 @@ public class PlayerSelectionUI : MonoBehaviour
         }
     }
 
+    public void StopSelection()
+    {
+        if (isShowingInfo)
+        {
+            SwitchMode();
+        }
+        else
+        {
+            selectionUI.StopSelection();
+        }
+    }
+
     private void OnDestroy()
     {
         for (int i = 0; i < GlobalManager.singleton.fighters.Length; i++)

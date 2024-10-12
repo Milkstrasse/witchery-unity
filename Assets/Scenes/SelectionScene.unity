@@ -641,34 +641,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1356084580}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StopSelection
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SelectionUI, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 2913371108934280962, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
       propertyPath: m_Name
       value: PlayerBottom
@@ -1064,58 +1036,6 @@ PrefabInstance:
     - target: {fileID: 2237968411355374201, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
       propertyPath: m_Interactable
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1356084580}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1356084580}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StopSelection
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: StopSelection
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SelectionUI, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: SelectionUI, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2913371108934280962, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
       propertyPath: m_Name
