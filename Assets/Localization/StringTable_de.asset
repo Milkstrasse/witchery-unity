@@ -23,8 +23,8 @@ MonoBehaviour:
     m_Localized: Hosten
     m_Metadata:
       m_Items: []
-  - m_Id: 1786462068736
-    m_Localized: Beitritt
+  - m_Id: 25373414918184960
+    m_Localized: CLIENT
     m_Metadata:
       m_Items: []
   - m_Id: 2538625827856384
@@ -259,7 +259,31 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 25240888039956480
-    m_Localized: Kaufen
+    m_Localized: Besuchen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25370911526871040
+    m_Localized: "K\xE4mpfen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25373394303180800
+    m_Localized: SERVER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25374387497590784
+    m_Localized: Beitrittscode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25422104013824000
+    m_Localized: Revanche
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25423449387163648
+    m_Localized: VERLUST
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25423436519038976
+    m_Localized: GEWINN
     m_Metadata:
       m_Items: []
   references:

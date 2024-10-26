@@ -46,7 +46,7 @@ public class SelectionManager : MonoBehaviour
          return false;
       }
 
-      if (GlobalManager.singleton.mode == GameMode.Online)
+      if (GlobalManager.singleton.mode == GameMode.Online && !NetworkServer.active)
       {
          StartCoroutine(StartConnection());
       }

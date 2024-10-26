@@ -317,7 +317,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: \uf787
+  m_text: \uf005
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 88f9c16bec4c147dfac14116e44c6931, type: 2}
   m_sharedMaterial: {fileID: -6805171952997524195, guid: 88f9c16bec4c147dfac14116e44c6931, type: 2}
@@ -893,6 +893,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1174065620}
     m_Modifications:
+    - target: {fileID: 868112341038797141, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_text
+      value: Host
+      objectReference: {fileID: 0}
+    - target: {fileID: 882634267515743103, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 58463346688
+      objectReference: {fileID: 0}
+    - target: {fileID: 882634267515743103, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:4d5f43fceb1874d3fb84d5259516bec7
+      objectReference: {fileID: 0}
     - target: {fileID: 2978865134916989469, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Material
       value: 
@@ -1015,7 +1027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8248399213454254063, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
-      value: 58463346688
+      value: 25373394303180800
       objectReference: {fileID: 0}
     - target: {fileID: 8248399213454254063, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
@@ -1023,7 +1035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9208531939231868765, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_text
-      value: HOST
+      value: SERVER
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1550,6 +1562,7 @@ GameObject:
   - component: {fileID: 950913665}
   - component: {fileID: 950913664}
   - component: {fileID: 950913663}
+  - component: {fileID: 950913666}
   m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
@@ -1616,7 +1629,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Joincode
+  m_text: Join code
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e8a02252f4ec47748da2becdd6cc899, type: 2}
   m_sharedMaterial: {fileID: 6011306716087563926, guid: 6e8a02252f4ec47748da2becdd6cc899, type: 2}
@@ -1693,6 +1706,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950913661}
   m_CullTransparentMesh: 1
+--- !u!114 &950913666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950913661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:4d5f43fceb1874d3fb84d5259516bec7
+    m_TableEntryReference:
+      m_KeyId: 25374387497590784
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 950913664}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &952347269
 GameObject:
   m_ObjectHideFlags: 0
@@ -3576,7 +3629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8248399213454254063, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
-      value: 1786462068736
+      value: 25373414918184960
       objectReference: {fileID: 0}
     - target: {fileID: 8248399213454254063, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
@@ -3584,7 +3637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9208531939231868765, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_text
-      value: JOIN
+      value: CLIENT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -4106,7 +4159,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 868112341038797141, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_text
-      value: Purchase
+      value: Visit
+      objectReference: {fileID: 0}
+    - target: {fileID: 882634267515743103, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 25240888039956480
+      objectReference: {fileID: 0}
+    - target: {fileID: 882634267515743103, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:4d5f43fceb1874d3fb84d5259516bec7
       objectReference: {fileID: 0}
     - target: {fileID: 2978865134916989469, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Material
@@ -5017,6 +5078,14 @@ PrefabInstance:
     - target: {fileID: 868112341038797141, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_text
       value: Fight
+      objectReference: {fileID: 0}
+    - target: {fileID: 882634267515743103, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 25370911526871040
+      objectReference: {fileID: 0}
+    - target: {fileID: 882634267515743103, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:4d5f43fceb1874d3fb84d5259516bec7
       objectReference: {fileID: 0}
     - target: {fileID: 3560565257910096827, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.b
