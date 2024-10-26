@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1786462068736
-    m_Localized: Beitreten
+    m_Localized: Beitritt
     m_Metadata:
       m_Items: []
   - m_Id: 2538625827856384
@@ -250,6 +250,18 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
+  - m_Id: 25237366556844032
+    m_Localized: LADEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25237386391707648
+    m_Localized: DUELL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25240888039956480
+    m_Localized: Kaufen
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

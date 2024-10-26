@@ -9,6 +9,7 @@ public class RelayCode : MonoBehaviour
     private void Start()
     {
         codeText = GetComponent<TextMeshProUGUI>();
+        codeText.text = "";
         GlobalManager.singleton.OnCodeCreated += ShowCode;
     }
 

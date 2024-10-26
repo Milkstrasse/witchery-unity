@@ -250,6 +250,18 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
+  - m_Id: 25237366556844032
+    m_Localized: SHOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25237386391707648
+    m_Localized: DUEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25240888039956480
+    m_Localized: Purchase
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

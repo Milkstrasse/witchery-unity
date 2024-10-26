@@ -20,8 +20,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
     [SerializeField] private Button modeButton;
     [SerializeField] private Button actionButton;
-    [SerializeField] private Color neutral;
-    [SerializeField] private Color highlighted;
+    [SerializeField] private Material neutral;
+    [SerializeField] private Material highlighted;
     private int currCard;
     private int[] outfits;
 
@@ -330,12 +330,12 @@ public class PlayerSelectionUI : MonoBehaviour
         if (isEditing)
         {
             isEditing = false;
-            modeButton.GetComponent<Image>().color = neutral;
+            modeButton.GetComponent<Image>().material = neutral;
         }
         else if (currCard == -1)
         {
             isEditing = true;
-            modeButton.GetComponent<Image>().color = highlighted;
+            modeButton.GetComponent<Image>().material = highlighted;
         }
         else
         {
@@ -352,15 +352,15 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (!isShowingInfo)
         {
-            actionButton.GetComponent<Image>().color = neutral;
+            actionButton.GetComponent<Image>().material = neutral;
             optionText.StringReference.SetReference("StringTable", filters[currFilter]);
 
-            LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.4f);
-            LeanTween.moveLocalX(cardParent.parent.gameObject, fighterRect.sizeDelta.x * 0.5f, 0.4f).setOnComplete(DestroyCards);
+            LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
+            LeanTween.moveLocalX(cardParent.parent.gameObject, fighterRect.sizeDelta.x * 0.5f + 20f, 0.3f).setOnComplete(DestroyCards);
         }
         else
         {
-            actionButton.GetComponent<Image>().color = highlighted;
+            actionButton.GetComponent<Image>().material = highlighted;
 
             Fighter fighter = GlobalManager.singleton.fighters[currCard];
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
@@ -374,8 +374,8 @@ public class PlayerSelectionUI : MonoBehaviour
                 moveCards[i].SetupCard(fighter, outfits[currCard], fighter.moves[i]);
             }
 
-            LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 1.5f, 0.4f);
-            LeanTween.moveLocalX(cardParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.4f);
+            LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 1.5f - 20f, 0.3f);
+            LeanTween.moveLocalX(cardParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
         }
     }
 

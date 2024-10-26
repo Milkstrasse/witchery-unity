@@ -19,10 +19,10 @@ public class CardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI infoText;
     public TextMeshProUGUI animatedIcon;
 
-    [SerializeField] private Color neutralFront;
-    [SerializeField] private Color highlighted;
-    [SerializeField] private Color selected;
-    [SerializeField] private Color neutralBack;
+    [SerializeField] private Material neutralFront;
+    [SerializeField] private Material highlighted;
+    [SerializeField] private Material selected;
+    [SerializeField] private Material neutralBack;
     public bool isSelected;
     public bool isHighlighted;
 
@@ -113,19 +113,19 @@ public class CardUI : MonoBehaviour
     public void HighlightCard(bool isHighlighted)
     {
         this.isHighlighted = isHighlighted;
-        frontBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        gradient.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        background.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
-        backBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
+        frontBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        gradient.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        background.material = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
+        backBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
     }
 
     public void SelectCard(bool isSelected)
     {
         this.isSelected = isSelected;
-        frontBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        gradient.color = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        background.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
-        backBackground.color = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
+        frontBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        gradient.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
+        background.material = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
+        backBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
     }
 
     public void FlipCard(bool isFlipped, float delay)

@@ -1,31 +1,38 @@
 using UnityEngine;
-using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private LocalizeStringEvent stringEvent;
+    [SerializeField] private RectTransform mainMenu;
+    [SerializeField] private RectTransform modeMenu;
+
+    [SerializeField] private Button joinButton;
+    [SerializeField] private Button hostButton;
 
     private void Start()
     {
         GlobalManager.QuitAnyConnection();
         GlobalManager.singleton.joincode = "";
 
-        stringEvent.GetComponentInParent<Button>().interactable = GlobalManager.singleton.isConnected;
+        joinButton.interactable = GlobalManager.singleton.isConnected;
+        hostButton.interactable = GlobalManager.singleton.isConnected;
+    }
+
+    public void SwitchToModeMenu()
+    {
+        LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 1.5f - 20f, 0.3f);
+        LeanTween.moveLocalX(modeMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
+    }
+
+    public void SwitchToMainMenu()
+    {
+        LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
+        LeanTween.moveLocalX(modeMenu.gameObject, mainMenu.sizeDelta.x * 0.5f + 20f, 0.3f);
     }
 
     public void SetJoincode(string joincode)
     {
-        if (joincode == null || joincode == "")
-        {
-            GlobalManager.singleton.joincode = "";
-            stringEvent.StringReference.SetReference("StringTable", "host");
-        }
-        else
-        {
-            GlobalManager.singleton.joincode = joincode;
-            stringEvent.StringReference.SetReference("StringTable", "join");
-        }
+        GlobalManager.singleton.joincode = joincode;
     }
 
     public void StartSelection(int mode)

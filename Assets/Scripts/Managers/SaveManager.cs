@@ -53,7 +53,7 @@ public class SaveManager
 		file.Close();
     }
 
-    public void DeleteData()
+    public static void DeleteData()
     {
         if (File.Exists(saveFilePath))
         {

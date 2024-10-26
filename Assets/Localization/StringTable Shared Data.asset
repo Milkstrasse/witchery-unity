@@ -235,6 +235,18 @@ MonoBehaviour:
     m_Key: doSpecialDamage
     m_Metadata:
       m_Items: []
+  - m_Id: 25237366556844032
+    m_Key: shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25237386391707648
+    m_Key: duel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25240888039956480
+    m_Key: purchase
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
