@@ -46,9 +46,13 @@ public class SelectionManager : MonoBehaviour
          return false;
       }
 
-      if (GlobalManager.singleton.mode == GameMode.Online && !NetworkServer.active)
+      if (GlobalManager.singleton.mode == GameMode.Online && !NetworkClient.active)
       {
          StartCoroutine(StartConnection());
+      }
+      else if (GlobalManager.singleton.mode == GameMode.Online)
+      {
+         NetworkClient.Send(new PlayerMessage(GlobalSettings.playerName, 0, fighterIDs.ToArray()));
       }
       else
       {

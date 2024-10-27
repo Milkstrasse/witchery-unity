@@ -633,14 +633,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 941157209722783098, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 941157209722783098, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2913371108934280962, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
       propertyPath: m_Name
       value: PlayerBottom
@@ -1023,14 +1015,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 887180795891550366, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 941157209722783098, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 941157209722783098, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2237968411355374201, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}

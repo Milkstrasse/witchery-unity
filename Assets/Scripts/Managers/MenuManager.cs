@@ -49,6 +49,17 @@ public class MenuManager : MonoBehaviour
         GlobalManager.singleton.joincode = joincode;
     }
 
+    public void StartSelection()
+    {
+        if (GlobalManager.singleton.joincode == "")
+            return;
+        
+        AudioManager.singleton.PlayStandardSound();
+        
+        GlobalManager.singleton.maxPlayers = 2;
+        GlobalManager.singleton.LoadScene("SelectionScene");
+    }
+
     public void StartSelection(int mode)
     {
         AudioManager.singleton.PlayStandardSound();

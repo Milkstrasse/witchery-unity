@@ -168,8 +168,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 54, y: 0}
-  m_SizeDelta: {x: -112, y: 60}
+  m_AnchoredPosition: {x: 52.5, y: 0}
+  m_SizeDelta: {x: -105, y: 45}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5600500573799156123
 CanvasRenderer:
@@ -226,8 +226,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 65
+  m_fontSizeBase: 65
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1712,6 +1712,7 @@ MonoBehaviour:
   energyText: {fileID: 3935120087418316556}
   timer: {fileID: 8552740641901104175}
   portrait: {fileID: 4204229585897281424}
+  exitButton: {fileID: 4376961096478150116}
   statusParent: {fileID: 8194149064693334505}
   cardParent: {fileID: 8372298097285678186}
   canvas: {fileID: 0}

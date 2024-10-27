@@ -89,7 +89,13 @@ public class CustomNetwork : RelayNetworkManager
 
             //reset scene so new server can start correctly
             networkSceneName = "";
+            playersReady = 0;
             players = new List<PlayerMessage>();
+        }
+        else if (sceneName == "SelectionScene")
+        {
+            NetworkServer.ReplaceHandler<PlayerMessage>(OnServerReceivePlayer);
+            NetworkServer.ReplaceHandler<TurnMessage>(OnClientIsReady);
         }
     }
 

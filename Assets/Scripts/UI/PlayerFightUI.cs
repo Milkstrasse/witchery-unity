@@ -13,6 +13,7 @@ public class PlayerFightUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI energyText;
     [SerializeField] private Image timer;
     [SerializeField] private Image portrait;
+    [SerializeField] private Button exitButton;
 
     [SerializeField] private Transform statusParent;
     private StatusUI[] effects;
@@ -101,6 +102,8 @@ public class PlayerFightUI : MonoBehaviour
                 effects[i].gameObject.SetActive(false);
             }
         }
+
+        exitButton.interactable = canBePlayable;
 
         cardGroup.interactable = isInteractable && canBePlayable;
         cardGroup.blocksRaycasts = isInteractable && canBePlayable;

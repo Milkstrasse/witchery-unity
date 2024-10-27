@@ -1,5 +1,7 @@
 using System;
+using Mirror;
 using UnityEngine;
+using Utp;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -15,12 +17,20 @@ public class GameOverManager : MonoBehaviour
         players[1] = playerObjects[1].GetComponent<Player>();
 
         OnSetupComplete?.Invoke(players[0].hasWon ? players[0].playerID : players[1].playerID);
+
+        NetworkServer.ReplaceHandler<TurnMessage>(OnRematch);
     }
 
     public void Rematch()
     {
         AudioManager.singleton.PlayStandardSound();
-        GlobalManager.singleton.LoadScene("SelectionScene");
+        NetworkClient.Send(new TurnMessage());
+    }
+
+    [Server]
+    public void OnRematch(NetworkConnectionToClient conn, TurnMessage message)
+    {
+        GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>().ServerChangeScene("SelectionScene");
     }
 
     public void ReturnToMenu()
