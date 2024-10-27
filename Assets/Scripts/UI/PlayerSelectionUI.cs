@@ -331,11 +331,15 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             isEditing = false;
             modeButton.GetComponent<Image>().material = neutral;
+            actionButton.GetComponentInChildren<TextMeshProUGUI>().text = "\uf128";
+            actionButton.interactable = false;
         }
         else if (currCard == -1)
         {
             isEditing = true;
             modeButton.GetComponent<Image>().material = highlighted;
+            actionButton.GetComponentInChildren<TextMeshProUGUI>().text = "\uf074";
+            actionButton.interactable = true;
         }
         else
         {
@@ -343,9 +347,53 @@ public class PlayerSelectionUI : MonoBehaviour
         }
     }
 
+    public void SelectRandomCard()
+    {
+        if (currFilter == filters.Length - 1)
+        {
+            return;
+        }
+
+        int cardAmount = fighterCards.Length;
+
+        int[] indices = Enumerable.Range(0, cardAmount).ToArray();
+        int n = cardAmount - 1;
+        while (n > 0)
+        {
+            int j = Random.Range(0, n);
+            int tmp = indices[n];
+            indices[n] = indices[j];
+            indices[j] = tmp;
+
+            n--;
+        }
+
+        for (int i = 0; i < cardAmount; i++)
+        {
+            if (!fighterCards[indices[i]].isSelected)
+            {
+                if (fighterCards[indices[i]].gameObject.activeSelf)
+                {
+                    SelectionResult result = selectionUI.EditTeam(new SelectedFighter(indices[i], 0));
+                    fighterCards[indices[i]].SelectCard(result.wasAdded);
+
+                    readyButton.interactable = result.hasTeam;
+
+                    return;
+                }
+            }
+        }
+    }
+
     public void SwitchMode()
     {
         AudioManager.singleton.PlayStandardSound();
+
+        if (currCard < 0)
+        {
+            SelectRandomCard();
+            return;
+        }
         
         RectTransform fighterRect = fighterParent.parent.GetComponent<RectTransform>();
         isShowingInfo = !isShowingInfo;
