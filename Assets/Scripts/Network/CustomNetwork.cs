@@ -6,7 +6,7 @@ using Utp;
 
 public class CustomNetwork : RelayNetworkManager
 {
-    private List<PlayerMessage> players;
+    private PlayerMessage[] players;
     private int playersReady;
 
     public override void OnStartServer()
@@ -14,7 +14,7 @@ public class CustomNetwork : RelayNetworkManager
         base.OnStartServer();
 
         playersReady = 0;
-        players = new List<PlayerMessage>();
+        players = new PlayerMessage[2];
 
         NetworkServer.RegisterHandler<PlayerMessage>(OnServerReceivePlayer);
         NetworkServer.RegisterHandler<TurnMessage>(OnClientIsReady);
@@ -31,7 +31,18 @@ public class CustomNetwork : RelayNetworkManager
 
     private void OnServerReceivePlayer(NetworkConnectionToClient conn, PlayerMessage message)
     {
-        players.Add(message);
+        if (conn.connectionId != NetworkServer.localConnection.connectionId)
+        {
+            players[1] = message;
+        }
+        else if (players[1].name != "")
+        {
+            players[0] = message;
+        }
+        else
+        {
+            players[1] = message;
+        }
 
         playersReady++;
 
@@ -90,7 +101,7 @@ public class CustomNetwork : RelayNetworkManager
             //reset scene so new server can start correctly
             networkSceneName = "";
             playersReady = 0;
-            players = new List<PlayerMessage>();
+            players = new PlayerMessage[2];
         }
         else if (sceneName == "SelectionScene")
         {
