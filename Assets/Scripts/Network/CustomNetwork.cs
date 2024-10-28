@@ -35,7 +35,7 @@ public class CustomNetwork : RelayNetworkManager
         {
             players[1] = message;
         }
-        else if (players[1].fighterIDs != null)
+        else if (players[1].fighterIDs != null || players[0].fighterIDs == null)
         {
             players[0] = message;
         }

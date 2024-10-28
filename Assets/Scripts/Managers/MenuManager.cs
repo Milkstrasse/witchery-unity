@@ -55,6 +55,8 @@ public class MenuManager : MonoBehaviour
             return;
         
         AudioManager.singleton.PlayStandardSound();
+
+        GlobalManager.singleton.mode = GameMode.Online;
         
         GlobalManager.singleton.maxPlayers = 2;
         GlobalManager.singleton.LoadScene("SelectionScene");

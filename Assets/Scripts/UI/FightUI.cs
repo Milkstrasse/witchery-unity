@@ -49,7 +49,7 @@ public class FightUI : MonoBehaviour
         {
             manager.timeToMakeMove = 0f;
 
-            cardSlot.PlayAnimation(message.playerIndex < 0, message.playCard && message.cardPlayed);
+            cardSlot.PlayAnimation(message.playerIndex + 5 == playerBottom.player.playerID, message.playCard && message.cardPlayed);
         }
     }
 
