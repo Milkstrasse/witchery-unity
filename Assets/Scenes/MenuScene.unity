@@ -4063,9 +4063,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1515725496}
     m_Modifications:
+    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2103665511}
+    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartSelection
+      objectReference: {fileID: 0}
+    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5934132055143448897, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_text
-      value: \uf023
+      value: \uf188
       objectReference: {fileID: 0}
     - target: {fileID: 6193589589378804777, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Name
