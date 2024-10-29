@@ -5,8 +5,8 @@ using Utp;
 
 public class GameOverManager : MonoBehaviour
 {
-    public Player[] players;
-    public event Action<int> OnSetupComplete;
+    private Player[] players;
+    public event Action<Player[]> OnSetupComplete;
 
     private void Start()
     {
@@ -16,7 +16,7 @@ public class GameOverManager : MonoBehaviour
         players[0] = playerObjects[0].GetComponent<Player>();
         players[1] = playerObjects[1].GetComponent<Player>();
 
-        OnSetupComplete?.Invoke(players[0].hasWon ? players[0].playerID : players[1].playerID);
+        OnSetupComplete?.Invoke(players);
 
         NetworkServer.ReplaceHandler<TurnMessage>(OnRematch);
     }

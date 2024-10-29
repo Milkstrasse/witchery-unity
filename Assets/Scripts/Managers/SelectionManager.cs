@@ -22,7 +22,7 @@ public class SelectionManager : MonoBehaviour
       networkManager.maxConnections = GlobalManager.singleton.maxPlayers;
 
       fighterIDs = new List<SelectedFighter>();
-      playerNames = new string[2]{"Player 0", "Player 1"};
+      playerNames = new string[2]{"PLAYER", GlobalSettings.playerName};
       isReady = new bool[2];
 
       NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
@@ -52,7 +52,7 @@ public class SelectionManager : MonoBehaviour
       }
       else if (GlobalManager.singleton.mode == GameMode.Online)
       {
-         NetworkClient.Send(new PlayerMessage(GlobalSettings.playerName, 0, fighterIDs.ToArray()));
+         NetworkClient.Send(new PlayerMessage(GlobalSettings.playerName, GlobalSettings.icon, fighterIDs.ToArray()));
       }
       else
       {
@@ -61,7 +61,7 @@ public class SelectionManager : MonoBehaviour
             networkManager.StartStandardHost();
          }
 
-         NetworkClient.Send(new PlayerMessage(playerNames[index], index, fighterIDs.ToArray()));
+         NetworkClient.Send(new PlayerMessage(playerNames[index], index * GlobalSettings.icon, fighterIDs.ToArray()));
          //GlobalManager.singleton.leaders[index] = fighterIDs[0];
 
          fighterIDs = new List<SelectedFighter>();
@@ -115,7 +115,7 @@ public class SelectionManager : MonoBehaviour
 
          if (NetworkClient.isConnected && !sentMessage)
          {
-            NetworkClient.Send(new PlayerMessage(GlobalSettings.playerName, 0, fighterIDs.ToArray()));
+            NetworkClient.Send(new PlayerMessage(GlobalSettings.playerName, GlobalSettings.icon, fighterIDs.ToArray()));
             sentMessage = true;
          }
          

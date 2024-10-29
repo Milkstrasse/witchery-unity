@@ -14,12 +14,13 @@ public class SaveManager
         BinaryFormatter binary = new BinaryFormatter();
         FileStream file = File.Open(saveFilePath, FileMode.Open);
 
-        SavedData playerData = (SavedData)binary.Deserialize(file);
+        SavedData savedData = (SavedData)binary.Deserialize(file);
         file.Close();
 
-        GlobalSettings.playerName = playerData.name;
-        GlobalSettings.money = playerData.money;
-        GlobalSettings.unlocked = playerData.unlocked;
+        GlobalSettings.playerName = savedData.name;
+        GlobalSettings.icon = savedData.icon;
+        GlobalSettings.money = savedData.money;
+        GlobalSettings.unlocked = savedData.unlocked;
 
         return true;
     }
@@ -44,12 +45,12 @@ public class SaveManager
 
     public static void SaveData()
     {
-        SavedData playerData = new SavedData(GlobalSettings.playerName, GlobalSettings.money, GlobalSettings.unlocked);
+        SavedData savedData = new SavedData(GlobalSettings.playerName, GlobalSettings.icon, GlobalSettings.money, GlobalSettings.unlocked);
 
         BinaryFormatter binary = new BinaryFormatter();
 		FileStream file = File.Create(saveFilePath);                     
 
-		binary.Serialize(file, playerData);
+		binary.Serialize(file, savedData);
 		file.Close();
     }
 

@@ -5,6 +5,10 @@ using UnityEngine.Localization.Components;
 public class GameOverUI : MonoBehaviour
 {
     [SerializeField] private GameOverManager manager;
+
+    [SerializeField] private PlayerOverUI topPlayer;
+    [SerializeField] private PlayerOverUI bottomPlayer;
+
     [SerializeField] private LocalizeStringEvent topText;
     [SerializeField] private LocalizeStringEvent bottomText;
 
@@ -13,17 +17,17 @@ public class GameOverUI : MonoBehaviour
         manager.OnSetupComplete += SetupUI;
     }
 
-    private void SetupUI(int player)
+    private void SetupUI(Player[] players)
     {
         if (NetworkClient.activeHost)
         {
-            topText.StringReference.SetReference("StringTable", player == 1 ? "victory" : "defeat");
-            bottomText.StringReference.SetReference("StringTable", player == 0 ? "victory" : "defeat");
+            topPlayer.UpdateUI(players[1]);
+            bottomPlayer.UpdateUI(players[0]);
         }
         else
         {
-            topText.StringReference.SetReference("StringTable", player == 0 ? "victory" : "defeat");
-            bottomText.StringReference.SetReference("StringTable", player == 1 ? "victory" : "defeat");
+            topPlayer.UpdateUI(players[0]);
+            bottomPlayer.UpdateUI(players[1]);
         }
     }
 

@@ -17,6 +17,7 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private Button readyButton;
     [SerializeField] private LocalizeStringEvent readyText;
     [SerializeField] private Image portrait;
+    [SerializeField] private TextMeshProUGUI playerName;
 
     [SerializeField] private Button modeButton;
     [SerializeField] private Button actionButton;
@@ -46,7 +47,8 @@ public class PlayerSelectionUI : MonoBehaviour
         }
         else
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[1].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalSettings.icon].name + "-standard");
+            playerName.text = GlobalSettings.playerName;
         }
 
         filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};

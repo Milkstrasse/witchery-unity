@@ -7,6 +7,8 @@ public class MenuManager : MonoBehaviour
     {
         GlobalManager.QuitAnyConnection();
         GlobalManager.singleton.joincode = "";
+
+        SaveManager.SaveData();
     }
 
     public void SetJoincode(string joincode)

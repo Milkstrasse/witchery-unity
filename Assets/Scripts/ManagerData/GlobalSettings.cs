@@ -1,6 +1,7 @@
 public static class GlobalSettings
 {
-    public static string playerName = "Player";
+    public static string playerName = "PLAYER";
+    public static int icon = 0;
     public static int money = 500;
     public static bool[,] unlocked;
 

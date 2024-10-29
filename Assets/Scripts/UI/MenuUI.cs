@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour
 {
+    [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI playerName;
     [SerializeField] private TextMeshProUGUI money;
 
@@ -15,6 +16,7 @@ public class MenuUI : MonoBehaviour
 
     private void Start()
     {
+        icon.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalSettings.icon].name + "-standard");
         playerName.text = GlobalSettings.playerName;
         money.text = $"{GlobalSettings.money} SP";
 

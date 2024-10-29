@@ -25,8 +25,6 @@ public class ShopManager : MonoBehaviour
     public void ReturnToMenu()
     {
         AudioManager.singleton.PlayStandardSound();
-        SaveManager.SaveData();
-
         GlobalManager.singleton.LoadScene("MenuScene");
     }
 }

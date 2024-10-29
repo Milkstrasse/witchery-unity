@@ -5187,6 +5187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 639f05f0b32514012ad7fdd76be3de91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 8807029546168256549}
   playerName: {fileID: 1521480857944152054}
   money: {fileID: 2497044030952891941}
   mainMenu: {fileID: 916721804}

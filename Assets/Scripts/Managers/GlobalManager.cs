@@ -9,6 +9,8 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 
+using Random = UnityEngine.Random;
+
 public class GlobalManager : MonoBehaviour
 {
     public static GlobalManager singleton;
@@ -117,6 +119,8 @@ public class GlobalManager : MonoBehaviour
     public void GoToMenu()
     {
         SaveManager.CreateNewData(fighters);
+        GlobalSettings.icon = Random.Range(0, fighters.Length);
+        
         LoadScene("MenuScene");
     }
 
