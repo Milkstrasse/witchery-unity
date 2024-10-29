@@ -45,11 +45,17 @@ public class FightUI : MonoBehaviour
         {
             playerTop.MakeMove(message);
         }
-        else
+        else if (GlobalManager.singleton.mode == GameMode.Online)
         {
             manager.timeToMakeMove = 0f;
 
             cardSlot.PlayAnimation(message.playerIndex + 5 == playerBottom.player.playerID, message.playCard && message.cardPlayed);
+        }
+        else
+        {
+            manager.timeToMakeMove = 0f;
+
+            cardSlot.PlayAnimation(message.playerIndex < 0, message.playCard && message.cardPlayed);
         }
     }
 

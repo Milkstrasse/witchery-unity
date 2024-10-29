@@ -22,6 +22,15 @@ public struct CPULogic
                     move = logic.lastCard.card.move;
                 }
 
+                if (logic.lastCard.card.hasMove && !logic.lastCard.played)
+                {
+                    if (player.IsResponse(logic.lastCard.card.move, move))
+                    {
+                        prioritizedCards.Add((i, 50));
+                        continue;
+                    }
+                }
+
                 int health = move.health;
                 if (move.moveID >= 8 && move.moveID <= 10) //special moves
                 {

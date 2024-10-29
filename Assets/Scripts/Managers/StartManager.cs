@@ -14,7 +14,7 @@ public class StartManager : MonoBehaviour
 
     public void ChangeName(string name)
     {
-        GlobalSettings.playerName = name.Trim();
+        GlobalSettings.playerName = name.Trim().ToUpper();
         continueButton.interactable = GlobalSettings.playerName.Length > 0;
     }
 }
