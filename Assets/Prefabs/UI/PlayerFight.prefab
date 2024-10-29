@@ -1194,7 +1194,7 @@ MonoBehaviour:
   m_text: \uf00d
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 88f9c16bec4c147dfac14116e44c6931, type: 2}
-  m_sharedMaterial: {fileID: 3672249639551237850, guid: 09d33f93c67e246ffa8eb8b917daee48, type: 2}
+  m_sharedMaterial: {fileID: -6805171952997524195, guid: 88f9c16bec4c147dfac14116e44c6931, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1257,7 +1257,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &5515532999631797695
@@ -1874,9 +1874,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8404849448481585050}
+  - {fileID: 1122613661677351419}
   - {fileID: 4170192325293594927}
   - {fileID: 6351205680079293666}
-  - {fileID: 1122613661677351419}
   m_Father: {fileID: 7010090686372570305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}

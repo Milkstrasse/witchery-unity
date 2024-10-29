@@ -15,6 +15,7 @@ public class GlobalManager : MonoBehaviour
 {
     public static GlobalManager singleton;
     public Fighter[] fighters;
+    public Theme[] themes;
 
     public bool isConnected;
     public GameMode mode;
@@ -31,6 +32,8 @@ public class GlobalManager : MonoBehaviour
 
         fighters = Resources.LoadAll<Fighter>("Fighters/");
         Array.Sort(fighters, (a,b) => { return a.fighterID.CompareTo(b.fighterID); });
+
+        themes = Resources.LoadAll<Theme>("Themes/");
 
         try
         {

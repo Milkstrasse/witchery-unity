@@ -8,11 +8,13 @@ public class SettingsUI : MonoBehaviour
 
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider soundSlider;
-    [SerializeField] private LocalizeStringEvent stringEvent;
+    [SerializeField] private LocalizeStringEvent currLang;
+    [SerializeField] private LocalizeStringEvent currTheme;
 
     private void Start()
     {
         manager.OnLanguageUpdated += UpdateLanguage;
+        manager.OnThemeUpdated += UpdateTheme;
 
         musicSlider.value = AudioManager.singleton.GetMusicVolume();
         soundSlider.value = AudioManager.singleton.GetSoundVolume();
@@ -23,11 +25,17 @@ public class SettingsUI : MonoBehaviour
 
     private void UpdateLanguage(string lang)
     {
-        stringEvent.StringReference.SetReference("StringTable", lang);
+        currLang.StringReference.SetReference("StringTable", lang);
+    }
+
+    private void UpdateTheme(string theme)
+    {
+        currTheme.StringReference.SetReference("StringTable", theme);
     }
 
     private void OnDestroy()
     {
         manager.OnLanguageUpdated -= UpdateLanguage;
+        manager.OnThemeUpdated -= UpdateTheme;
     }
 }

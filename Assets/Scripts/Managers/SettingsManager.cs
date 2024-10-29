@@ -9,13 +9,19 @@ public class SettingsManager : MonoBehaviour
 {
     private bool changingLang;
     private int langIndex;
+    private int themeIndex;
+
+    [SerializeField] Material[] materials;
 
     public event Action<string> OnLanguageUpdated;
+    public event Action<string> OnThemeUpdated;
 
     private void Start()
     {
         langIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
         OnLanguageUpdated?.Invoke(LocalizationSettings.SelectedLocale.Identifier.Code);
+
+        themeIndex = 1;
     }
 
     public void ChangeMusicVolume(float sliderValue) => AudioManager.singleton.ChangeMusicVolume(sliderValue);
@@ -60,6 +66,48 @@ public class SettingsManager : MonoBehaviour
         StartCoroutine(SetLocale(langIndex));
     }
 
+    public void DecreaseTheme()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        if (themeIndex > 0)
+        {
+            themeIndex--;
+        }
+        else
+        {
+            themeIndex = GlobalManager.singleton.themes.Length - 1;
+        }
+
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].color = GlobalManager.singleton.themes[themeIndex].colors[i];
+        }
+
+        OnThemeUpdated?.Invoke(GlobalManager.singleton.themes[themeIndex].name);
+    }
+
+    public void IncreaseTheme()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        if (themeIndex < GlobalManager.singleton.themes.Length - 1)
+        {
+            themeIndex++;
+        }
+        else
+        {
+            themeIndex = 0;
+        }
+        
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].color = GlobalManager.singleton.themes[themeIndex].colors[i];
+        }
+
+        OnThemeUpdated?.Invoke(GlobalManager.singleton.themes[themeIndex].name);
+    }
+
     IEnumerator SetLocale(int localID)
     {
         changingLang = true;
@@ -94,6 +142,7 @@ public class SettingsManager : MonoBehaviour
         }
 
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langIndex];
+        themeIndex = 1;
         
         GlobalManager.singleton.LoadScene("SettingsScene");
     }
