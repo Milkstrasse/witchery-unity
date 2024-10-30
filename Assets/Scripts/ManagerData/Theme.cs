@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 
@@ -5,4 +6,5 @@ using UnityEngine;
 public class Theme : ScriptableObject
 {
     public Color[] colors;
+    public TMP_StyleSheet sheet;
 }
