@@ -299,6 +299,14 @@ MonoBehaviour:
     m_Key: weaken
     m_Metadata:
       m_Items: []
+  - m_Id: 27041791818588160
+    m_Key: default
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27041812098048000
+    m_Key: custom
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

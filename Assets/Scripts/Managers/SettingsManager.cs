@@ -11,10 +11,6 @@ public class SettingsManager : MonoBehaviour
     private bool changingLang;
     private int langIndex;
     private bool changingTheme;
-    private int themeIndex;
-
-    [SerializeField] Material[] materials;
-    [SerializeField] TMP_StyleSheet sheet;
 
     public event Action<string> OnLanguageUpdated;
     public event Action<string> OnThemeUpdated;
@@ -23,8 +19,6 @@ public class SettingsManager : MonoBehaviour
     {
         langIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
         OnLanguageUpdated?.Invoke(LocalizationSettings.SelectedLocale.Identifier.Code);
-
-        themeIndex = 1;
     }
 
     public void ChangeMusicVolume(float sliderValue) => AudioManager.singleton.ChangeMusicVolume(sliderValue);
@@ -76,13 +70,13 @@ public class SettingsManager : MonoBehaviour
 
         AudioManager.singleton.PlayStandardSound();
 
-        if (themeIndex > 0)
+        if (GlobalSettings.themeIndex > 0)
         {
-            themeIndex--;
+            GlobalSettings.themeIndex--;
         }
         else
         {
-            themeIndex = GlobalManager.singleton.themes.Length - 1;
+            GlobalSettings.themeIndex = GlobalManager.singleton.themes.Length - 1;
         }
 
         StartCoroutine(ChangeTheme());
@@ -95,13 +89,13 @@ public class SettingsManager : MonoBehaviour
 
         AudioManager.singleton.PlayStandardSound();
 
-        if (themeIndex < GlobalManager.singleton.themes.Length - 1)
+        if (GlobalSettings.themeIndex < GlobalManager.singleton.themes.Length - 1)
         {
-            themeIndex++;
+            GlobalSettings.themeIndex++;
         }
         else
         {
-            themeIndex = 0;
+            GlobalSettings.themeIndex = 0;
         }
         
         StartCoroutine(ChangeTheme());
@@ -111,17 +105,10 @@ public class SettingsManager : MonoBehaviour
     {
         changingTheme = true;
 
-        for (int i = 0; i < GlobalManager.singleton.themes[themeIndex].colors.Length; i++)
-        {
-            materials[i].color = GlobalManager.singleton.themes[themeIndex].colors[i];
-        }
-
+        GlobalManager.singleton.ApplyTheme(GlobalSettings.themeIndex);
         yield return null;
 
-        TMP_Settings.defaultStyleSheet = GlobalManager.singleton.themes[themeIndex].sheet;
-        TMP_Settings.defaultStyleSheet.RefreshStyles();
-
-        OnThemeUpdated?.Invoke(GlobalManager.singleton.themes[themeIndex].name);
+        OnThemeUpdated?.Invoke(GlobalManager.singleton.themes[GlobalSettings.themeIndex].name);
 
         changingTheme = false;
     }
@@ -165,9 +152,11 @@ public class SettingsManager : MonoBehaviour
         }
 
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langIndex];
-        themeIndex = 1;
-        
+        GlobalSettings.themeIndex = 1;
+
         GlobalManager.singleton.LoadScene("SettingsScene");
+
+        StartCoroutine(ChangeTheme());
     }
 
     public void ReturnToMenu()
@@ -180,6 +169,7 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("music", AudioManager.singleton.GetMusicVolume());
         PlayerPrefs.SetFloat("sound", AudioManager.singleton.GetSoundVolume());
         PlayerPrefs.SetInt("langCode", langIndex);
+        PlayerPrefs.SetInt("theme", GlobalSettings.themeIndex);
         PlayerPrefs.Save();
 
         GlobalManager.singleton.LoadScene("MenuScene");

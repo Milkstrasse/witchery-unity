@@ -21,6 +21,8 @@ public class SettingsUI : MonoBehaviour
 
         musicSlider.enabled = true;
         soundSlider.enabled = true;
+
+        currTheme.StringReference.SetReference("StringTable", GlobalManager.singleton.themes[GlobalSettings.themeIndex].name);
     }
 
     private void UpdateLanguage(string lang)

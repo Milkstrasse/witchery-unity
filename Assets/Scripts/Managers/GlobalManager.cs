@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mirror;
+using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class GlobalManager : MonoBehaviour
     public static GlobalManager singleton;
     public Fighter[] fighters;
     public Theme[] themes;
+
+    [SerializeField] Material[] materials;
 
     public bool isConnected;
     public GameMode mode;
@@ -54,6 +57,9 @@ public class GlobalManager : MonoBehaviour
 
         int langIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("langCode", langIndex)];
+        GlobalSettings.themeIndex = PlayerPrefs.GetInt("theme", 1);
+
+        ApplyTheme(GlobalSettings.themeIndex);
 
         #if UNITY_EDITOR
         relayEnabled = false;
@@ -117,6 +123,17 @@ public class GlobalManager : MonoBehaviour
         }
 
         return filteredFighters.ToArray();
+    }
+
+    public void ApplyTheme(int themeIndex)
+    {
+        for (int i = 0; i < themes[GlobalSettings.themeIndex].colors.Length; i++)
+        {
+            materials[i].color = themes[GlobalSettings.themeIndex].colors[i];
+        }
+
+        TMP_Settings.defaultStyleSheet = themes[GlobalSettings.themeIndex].sheet;
+        TMP_Settings.defaultStyleSheet.RefreshStyles();
     }
 
     public void GoToMenu()
