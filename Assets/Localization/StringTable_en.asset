@@ -179,10 +179,6 @@ MonoBehaviour:
     m_Localized: English
     m_Metadata:
       m_Items: []
-  - m_Id: 12209513565249536
-    m_Localized: Settings
-    m_Metadata:
-      m_Items: []
   - m_Id: 12210038784385024
     m_Localized: TRAINING
     m_Metadata:
@@ -215,10 +211,6 @@ MonoBehaviour:
     m_Localized: reduces damage for
     m_Metadata:
       m_Items: []
-  - m_Id: 15264850425929728
-    m_Localized: Credits
-    m_Metadata:
-      m_Items: []
   - m_Id: 17290912945135616
     m_Localized: take more damage for
     m_Metadata:
@@ -245,11 +237,6 @@ MonoBehaviour:
     m_Localized: Control
     m_Metadata:
       m_Items: []
-  - m_Id: 20164846254284800
-    m_Localized: Do {health} <style="IconOutline">\uf54c</style> damage
-    m_Metadata:
-      m_Items:
-      - rid: 296817732614357011
   - m_Id: 25237366556844032
     m_Localized: SHOP
     m_Metadata:
@@ -314,14 +301,16 @@ MonoBehaviour:
     m_Localized: PLAYER
     m_Metadata:
       m_Items: []
-  - m_Id: 27041791818588160
-    m_Localized: Default
+  - m_Id: 27441377439637504
+    m_Localized: <size=+6>{name}</size>\n{role}
     m_Metadata:
-      m_Items: []
-  - m_Id: 27041812098048000
-    m_Localized: Custom
+      m_Items:
+      - rid: 296817732614357011
+  - m_Id: 27457199604228096
+    m_Localized: Do {health} <style="IconOutline">\uf54c</style> damage
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357011
   references:
     version: 2
     RefIds:
@@ -344,4 +333,5 @@ MonoBehaviour:
         - id: 11805233679163392
         - id: 19427698743959552
         - id: 19427704657928192
-        - id: 20164846254284800
+        - id: 27441377439637504
+        - id: 27457199604228096

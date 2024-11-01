@@ -67,10 +67,6 @@ MonoBehaviour:
     m_Key: control
     m_Metadata:
       m_Items: []
-  - m_Id: 15264850425929728
-    m_Key: credits
-    m_Metadata:
-      m_Items: []
   - m_Id: 12959317832491008
     m_Key: damage
     m_Metadata:
@@ -91,7 +87,7 @@ MonoBehaviour:
     m_Key: doDamage
     m_Metadata:
       m_Items: []
-  - m_Id: 20164846254284800
+  - m_Id: 27457199604228096
     m_Key: doSpecialDamage
     m_Metadata:
       m_Items: []
@@ -113,6 +109,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 25370911526871040
     m_Key: fight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27441377439637504
+    m_Key: fighterDescr
     m_Metadata:
       m_Items: []
   - m_Id: 7880276955881472
@@ -145,6 +145,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 58463346688
     m_Key: host
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27405063205937152
+    m_Key: ja
     m_Metadata:
       m_Items: []
   - m_Id: 25374387497590784
@@ -209,10 +213,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 26340997322498048
     m_Key: serverDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12209513565249536
-    m_Key: settings
     m_Metadata:
       m_Items: []
   - m_Id: 15212672940236800
