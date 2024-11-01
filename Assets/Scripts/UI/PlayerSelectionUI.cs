@@ -2,6 +2,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class PlayerSelectionUI : MonoBehaviour
@@ -43,12 +44,13 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (rectTransform.eulerAngles.z == 180f)
         {
+            SetName(LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", "player"));
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[0].name + "-standard");
         }
         else
         {
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalSettings.icon].name + "-standard");
-            playerName.text = GlobalSettings.playerName;
+            SetName(GlobalSettings.playerName);
         }
 
         filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};
@@ -74,6 +76,11 @@ public class PlayerSelectionUI : MonoBehaviour
         currCard = -1;
 
         moveCards = new CardUI[0];
+    }
+
+    public void SetName(string name)
+    {
+        playerName.text = name;
     }
 
     private void SelectCard(int cardIndex, bool editing)

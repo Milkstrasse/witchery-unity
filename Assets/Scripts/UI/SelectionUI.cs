@@ -27,6 +27,8 @@ public class SelectionUI : MonoBehaviour
 
             if (GlobalManager.singleton.mode != GameMode.Online || NetworkClient.activeHost)
             {
+                playerTop.SetName(players[1].name);
+
                 for (int j = 0; j < players[0].fighterIDs.Length; j++)
                 {
                     playerBottom.SelectCard(players[0].fighterIDs[j], true);
@@ -34,6 +36,8 @@ public class SelectionUI : MonoBehaviour
             }
             else
             {
+                playerTop.SetName(players[0].name);
+
                 for (int j = 0; j < players[1].fighterIDs.Length; j++)
                 {
                     playerBottom.SelectCard(players[1].fighterIDs[j], true);

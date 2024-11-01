@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using Utp;
 
 public class SelectionManager : MonoBehaviour
@@ -22,7 +23,7 @@ public class SelectionManager : MonoBehaviour
       networkManager.maxConnections = GlobalManager.singleton.maxPlayers;
 
       fighterIDs = new List<SelectedFighter>();
-      playerNames = new string[2]{"PLAYER", GlobalSettings.playerName};
+      playerNames = new string[2]{LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", "player"), GlobalSettings.playerName};
       isReady = new bool[2];
 
       NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
