@@ -88,7 +88,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 340570659
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -553,7 +553,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 340570659
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 340570659
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1348,7 +1348,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 340570659
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -2169,7 +2169,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 340570659
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -2416,7 +2416,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 340570659
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -2747,7 +2747,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: -1961220799
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -3132,7 +3132,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 340570659
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -3267,7 +3267,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 340570659
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
