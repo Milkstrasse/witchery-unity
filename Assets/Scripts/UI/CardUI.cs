@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
@@ -43,9 +44,12 @@ public class CardUI : MonoBehaviour
 
         icon.text = $"<style=IconShadow>{Convert.ToChar((uint) fighter.role)}</style>";
 
+        infoText.text = "";
         stringEvent = infoText.GetComponent<LocalizeStringEvent>();
-        stringEvent.StringReference.SetReference("StringTable", fighter.role.ToString());
-        infoText.text = $"<size=+6>{fighter.name}</size>\n" + infoText.text;
+        (stringEvent.StringReference["name"] as StringVariable).Value = fighter.name;
+        (stringEvent.StringReference["role"] as StringVariable).Value = LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", fighter.role.ToString());
+        
+        stringEvent.StringReference.SetReference("StringTable", "fighterDescr");
     }
 
     public void SetupCard(Fighter fighter, int outfit, Move move)

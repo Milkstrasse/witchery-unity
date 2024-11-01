@@ -979,6 +979,12 @@ MonoBehaviour:
     - name: duration
       variable:
         rid: 296818163417612685
+    - name: name
+      variable:
+        rid: 6175659975647952941
+    - name: role
+      variable:
+        rid: 6175659975647952942
   m_FormatArguments: []
   m_UpdateString:
     m_PersistentCalls:
@@ -1014,6 +1020,14 @@ MonoBehaviour:
       type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:
         m_Value: 0
+    - rid: 6175659975647952941
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 
+    - rid: 6175659975647952942
+      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 
 --- !u!1 &8645398596931181403
 GameObject:
   m_ObjectHideFlags: 0
