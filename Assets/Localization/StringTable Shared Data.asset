@@ -307,6 +307,10 @@ MonoBehaviour:
     m_Key: custom
     m_Metadata:
       m_Items: []
+  - m_Id: 27476618044760064
+    m_Key: palette
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
