@@ -167,6 +167,10 @@ MonoBehaviour:
     m_Key: music
     m_Metadata:
       m_Items: []
+  - m_Id: 28496886263439360
+    m_Key: handoverBlanks
+    m_Metadata:
+      m_Items: []
   - m_Id: 26400137377996800
     m_Key: player
     m_Metadata:

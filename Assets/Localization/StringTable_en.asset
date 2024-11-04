@@ -311,6 +311,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
+  - m_Id: 28496886263439360
+    m_Localized: Hand over blank cards
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

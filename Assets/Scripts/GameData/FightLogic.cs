@@ -70,7 +70,8 @@ public class FightLogic
                     }
 
                     break;
-                case 23: //clear blank
+                case 23: //clear blanks
+                case 25: //clear blanks after handover
                     players[playerTurn].RemoveBlanks();
                     break;
                 default:
@@ -212,10 +213,15 @@ public class FightLogic
 
                     break;
                 case 19: //add blank
-                    players[(move.target + turn)%2].AddBlank();
+                    players[(move.target + turn)%2].AddBlanks(1);
                     break;
-                case 23: //clear blank
+                case 23: //clear blanks
                     players[(move.target + turn)%2].startIndex = 5;
+                    break;
+                case 25: //hand over blanks
+                    int blanks = 5 - players[playerTurn].startIndex;
+                    players[(move.target + turn)%2].AddBlanks(blanks);
+
                     break;
                 case 33: //heal to health
                     players[(move.target + turn)%2].health = Math.Max(players[(move.target + turn)%2].health, move.health + players[turn].GetPowerBonus());

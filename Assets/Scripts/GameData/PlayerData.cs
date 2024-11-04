@@ -182,14 +182,19 @@ public class PlayerData
         return null;
     }
 
-    public void AddBlank()
+    public void AddBlanks(int amount)
     {
         int prevIndex = startIndex;
-        startIndex = Math.Max(startIndex - 1, 0);
+        startIndex = Math.Max(startIndex - amount, 0);
 
         if (prevIndex != startIndex)
         {
-            cardStack.Add(startIndex);
+            while (startIndex > 0)
+            {
+                cardStack.Add(startIndex);
+                startIndex--;
+            }
+            
             ShuffleStack();
         }
     }
