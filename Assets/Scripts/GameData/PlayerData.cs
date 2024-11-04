@@ -189,10 +189,10 @@ public class PlayerData
 
         if (prevIndex != startIndex)
         {
-            while (startIndex > 0)
+            while (amount > 0)
             {
                 cardStack.Add(startIndex);
-                startIndex--;
+                amount--;
             }
             
             ShuffleStack();

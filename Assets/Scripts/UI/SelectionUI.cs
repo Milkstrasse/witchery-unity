@@ -52,7 +52,7 @@ public class SelectionUI : MonoBehaviour
         
         bool isReady = manager.SetReady(index);
         
-        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Testing)
+        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Testing || GlobalManager.singleton.mode == GameMode.LifeAsResource)
         {
             playerTop.ToggleUI(isReady);
 

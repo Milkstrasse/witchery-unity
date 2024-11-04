@@ -40,7 +40,21 @@ public class FightLogic
                 return false;
             }
 
-            players[playerTurn].energy = players[playerTurn].energy - card.move.cost;
+            if (GlobalManager.singleton.mode == GameMode.LifeAsResource)
+            {
+                if (card.move.cost >= players[playerTurn].health)
+                {
+                    return false;
+                }
+                else
+                {
+                    players[playerTurn].health -= card.move.cost;
+                }
+            }
+            else
+            {
+                players[playerTurn].energy = players[playerTurn].energy - card.move.cost;
+            }
         }
 
         bool wasPlayed = PlayCard(card, playerTurn, true);
