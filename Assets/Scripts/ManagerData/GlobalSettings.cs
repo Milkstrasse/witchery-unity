@@ -9,6 +9,7 @@ public static class GlobalSettings
     public static readonly int turnTime = 180;
     public static readonly int health = 75;
 
+    public static bool setEnergy;
     public static bool lifeIsResource;
     public static bool stackEffectValue;
     public static bool regainHP;

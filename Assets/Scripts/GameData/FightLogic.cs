@@ -417,6 +417,10 @@ public class FightLogic
             {
                 players[i].health = Math.Max(players[i].health + players[i].energy, GlobalSettings.health);
             }
+            else if (GlobalSettings.setEnergy)
+            {
+                players[i].energy = 7;
+            }
             else
             {
                 players[i].energy += 7;

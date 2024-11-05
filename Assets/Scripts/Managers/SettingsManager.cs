@@ -71,6 +71,7 @@ public class SettingsManager : MonoBehaviour
         changingLang = false;
     }
 
+    public void ToggleSetEnergy(bool toggleValue) => GlobalSettings.setEnergy = toggleValue;
     public void ToggleLifeResource(bool toggleValue) => GlobalSettings.lifeIsResource = toggleValue;
     public void ToggleStackEffect(bool toggleValue) => GlobalSettings.stackEffectValue = toggleValue;
     public void ToggleRegainHP(bool toggleValue) => GlobalSettings.regainHP = toggleValue;
@@ -98,6 +99,11 @@ public class SettingsManager : MonoBehaviour
         }
 
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langIndex];
+
+        GlobalSettings.setEnergy = false;
+        GlobalSettings.lifeIsResource = false;
+        GlobalSettings.stackEffectValue = false;
+        GlobalSettings.regainHP = false;
         
         GlobalManager.singleton.LoadScene("SettingsScene");
     }

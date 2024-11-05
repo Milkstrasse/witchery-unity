@@ -10,6 +10,11 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Slider soundSlider;
     [SerializeField] private LocalizeStringEvent stringEvent;
 
+    [SerializeField] private Toggle toggle1;
+    [SerializeField] private Toggle toggle2;
+    [SerializeField] private Toggle toggle3;
+    [SerializeField] private Toggle toggle4;
+
     private void Start()
     {
         manager.OnLanguageUpdated += UpdateLanguage;
@@ -19,6 +24,11 @@ public class SettingsUI : MonoBehaviour
 
         musicSlider.enabled = true;
         soundSlider.enabled = true;
+
+        toggle1.isOn = GlobalSettings.setEnergy;
+        toggle2.isOn = GlobalSettings.lifeIsResource;
+        toggle3.isOn = GlobalSettings.stackEffectValue;
+        toggle4.isOn = GlobalSettings.regainHP;
     }
 
     private void UpdateLanguage(string lang)
