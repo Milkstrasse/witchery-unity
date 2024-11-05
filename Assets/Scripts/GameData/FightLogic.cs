@@ -31,28 +31,41 @@ public class FightLogic
 
         if (card.hasMove)
         {
-            if (card.move.cost > players[playerTurn].energy)
-            {
-                return false;
-            }
-            else if (card.move.moveType == MoveType.Response && lastCard.played)
-            {
-                return false;
-            }
-
             if (GlobalSettings.lifeIsResource)
             {
                 if (card.move.cost >= players[playerTurn].health)
                 {
                     return false;
                 }
-                else
+                else if (card.move.moveType == MoveType.Response && lastCard.played)
                 {
-                    players[playerTurn].health -= card.move.cost;
+                    return false;
+                }
+
+                players[playerTurn].health -= card.move.cost;
+            }
+            else if (GlobalSettings.noCostNoMatch)
+            {
+                if (lastCard.card.hasMove && card.move.cost == lastCard.card.move.cost)
+                {
+                    return false;
+                }
+                else if (card.move.moveType == MoveType.Response && lastCard.played)
+                {
+                    return false;
                 }
             }
             else
             {
+                if (card.move.cost > players[playerTurn].energy)
+                {
+                    return false;
+                }
+                else if (card.move.moveType == MoveType.Response && lastCard.played)
+                {
+                    return false;
+                }
+
                 players[playerTurn].energy = players[playerTurn].energy - card.move.cost;
             }
         }
@@ -417,7 +430,7 @@ public class FightLogic
             {
                 players[i].health = Math.Max(players[i].health + players[i].energy, GlobalSettings.health);
             }
-            else if (GlobalSettings.setEnergy)
+            else if (GlobalSettings.setEnergy || GlobalSettings.noCostNoMatch)
             {
                 players[i].energy = 7;
             }

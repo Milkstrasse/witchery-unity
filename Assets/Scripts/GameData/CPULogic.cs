@@ -14,6 +14,10 @@ public struct CPULogic
             {
                 prioritizedCards.Add((i, 0));
             }
+            else if (GlobalSettings.noCostNoMatch && player.cardHand[i].hasMove && logic.lastCard.card.hasMove && player.cardHand[i].move.cost == logic.lastCard.card.move.cost)
+            {
+                prioritizedCards.Add((i, -10)); //unplayable card
+            }
             else if (player.cardHand[i].hasMove && player.cardHand[i].move.cost <= player.energy)
             {
                 Move move = player.cardHand[i].move;

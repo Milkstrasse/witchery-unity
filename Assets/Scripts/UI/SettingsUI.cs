@@ -14,6 +14,7 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Toggle toggle2;
     [SerializeField] private Toggle toggle3;
     [SerializeField] private Toggle toggle4;
+    [SerializeField] private Toggle toggle5;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class SettingsUI : MonoBehaviour
         toggle2.isOn = GlobalSettings.lifeIsResource;
         toggle3.isOn = GlobalSettings.stackEffectValue;
         toggle4.isOn = GlobalSettings.regainHP;
+        toggle5.isOn = GlobalSettings.noCostNoMatch;
     }
 
     private void UpdateLanguage(string lang)

@@ -75,6 +75,7 @@ public class SettingsManager : MonoBehaviour
     public void ToggleLifeResource(bool toggleValue) => GlobalSettings.lifeIsResource = toggleValue;
     public void ToggleStackEffect(bool toggleValue) => GlobalSettings.stackEffectValue = toggleValue;
     public void ToggleRegainHP(bool toggleValue) => GlobalSettings.regainHP = toggleValue;
+    public void ToggleCostMatch(bool toggleValue) => GlobalSettings.noCostNoMatch = toggleValue;
 
     public void ResetSettings()
     {
@@ -104,6 +105,7 @@ public class SettingsManager : MonoBehaviour
         GlobalSettings.lifeIsResource = false;
         GlobalSettings.stackEffectValue = false;
         GlobalSettings.regainHP = false;
+        GlobalSettings.noCostNoMatch = false;
         
         GlobalManager.singleton.LoadScene("SettingsScene");
     }
