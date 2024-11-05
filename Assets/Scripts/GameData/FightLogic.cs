@@ -40,7 +40,7 @@ public class FightLogic
                 return false;
             }
 
-            if (GlobalManager.singleton.mode == GameMode.LifeAsResource)
+            if (GlobalSettings.lifeIsResource)
             {
                 if (card.move.cost >= players[playerTurn].health)
                 {
@@ -67,7 +67,7 @@ public class FightLogic
 
     public void RemoveCard(MoveMessage message)
     {
-        if (!message.playCard && GlobalManager.singleton.mode == GameMode.LifeAsResource)
+        if (!message.playCard && GlobalSettings.regainHP)
         {
             int cardIndex = players[playerTurn].cardHand[message.cardIndex];
             Card card = FightManager.singleton.players[playerTurn].cards[cardIndex];
@@ -413,9 +413,9 @@ public class FightLogic
     {
         for (int i = 0; i < players.Count; i++)
         {
-            if (GlobalManager.singleton.mode == GameMode.LifeAsResource)
+            if (GlobalSettings.lifeIsResource)
             {
-                players[i].health = Math.Max(players[i].health + 7, GlobalSettings.health);
+                players[i].health = Math.Max(players[i].health + players[i].energy, GlobalSettings.health);
             }
             else
             {

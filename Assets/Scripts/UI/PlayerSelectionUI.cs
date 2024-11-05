@@ -152,7 +152,7 @@ public class PlayerSelectionUI : MonoBehaviour
             readyText.StringReference.SetReference("StringTable", "cancel");
         }
 
-        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Testing || GlobalManager.singleton.mode == GameMode.LifeAsResource)
+        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Testing)
         {
             readyButton.interactable = false;
             LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 120f), 0.3f);

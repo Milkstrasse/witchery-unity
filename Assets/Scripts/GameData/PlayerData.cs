@@ -161,7 +161,15 @@ public class PlayerData
             if (effects[i].name == "shields" || effects[i].name == "vulnerable" )
             {
                 effects[i].isNew = true;
-                modifier += effects[i].value;
+                
+                if (GlobalSettings.stackEffectValue)
+                {
+                    modifier += effects[i].value * effects[i].duration;
+                }
+                else
+                {
+                    modifier += effects[i].value;
+                }
             }
         }
         
