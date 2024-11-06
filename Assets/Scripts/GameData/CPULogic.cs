@@ -93,7 +93,7 @@ public struct CPULogic
                     }
                     else
                     {
-                        prioritizedCards.Add((i, move.cost * -1 + move.energy));
+                        prioritizedCards.Add((i, move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
                     }
                 }
             }

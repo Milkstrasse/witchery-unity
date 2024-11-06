@@ -136,13 +136,17 @@ public class FightManager : MonoBehaviour
         }
         else //Game Over
         {
-            OnTurnChanged?.Invoke(-1);
+            if (messages.AddToQueue(message, false))
+            {
+                StartCoroutine(InvokeQueue());
+            }
+            /*OnTurnChanged?.Invoke(-1);
 
             for (int i = 0; i < message.players.Length; i++)
             {
                 PlayerData player = message.players[i];
                 players[i].UpdatePlayer(player, true);
-            }
+            }*/
 
             StartCoroutine(EndFight(message.playerTurn + 2));
         }
@@ -155,7 +159,7 @@ public class FightManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
 
         players[winner].hasWon = true;
         GlobalManager.singleton.LoadScene("GameOverScene");

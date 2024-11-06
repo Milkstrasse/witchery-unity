@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveID: 25
   cost: 1
-  target: 1
+  target: 2
   health: 0
   energy: 0
   effect:
