@@ -43,16 +43,32 @@ public class StatusEffect
         switch (statusType)
         {
             case StatusType.Energy:
-                player.energy += value;
+                if (GlobalSettings.stackEffectValue)
+                {
+                    player.energy += value * duration;
+                }
+                else
+                {
+                    player.energy += value;
+                }
+
                 isNew = true;
-                
+
                 break;
             case StatusType.Power:
                 break;
             case StatusType.Health:
                 if (!isDelayed || (isDelayed && duration == 1))
                 {
-                    player.health = Math.Clamp(player.health + value, 0, GlobalSettings.health);
+                    if (GlobalSettings.stackEffectValue)
+                    {
+                        player.health = Math.Clamp(player.health + value * duration, 0, GlobalSettings.health);
+                    }
+                    else
+                    {
+                        player.health = Math.Clamp(player.health + value, 0, GlobalSettings.health);
+                    }
+
                     isNew = true;
                 }
                 break;
