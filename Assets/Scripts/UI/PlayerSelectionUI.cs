@@ -44,8 +44,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (rectTransform.eulerAngles.z == 180f)
         {
-            SetName(LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", "player"));
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[0].name + "-standard");
+            SetName(LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", "player"));
         }
         else
         {
@@ -100,7 +100,7 @@ public class PlayerSelectionUI : MonoBehaviour
             outfits[fighter.fighterID] = fighter.outfit;
             fighterCards[fighter.fighterID].SelectCard(result.wasAdded);
 
-            if (!isEditing)
+            if (fighterCards[fighter.fighterID].isHighlighted)
             {
                 modeButton.GetComponentInChildren<TextMeshProUGUI>().text = result.wasAdded ? "\uf068" : "\uf067";
             }

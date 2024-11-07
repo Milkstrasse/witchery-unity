@@ -27,7 +27,7 @@ public class SelectionUI : MonoBehaviour
 
             if (GlobalManager.singleton.mode != GameMode.Online || NetworkClient.activeHost)
             {
-                playerTop.SetName(players[1].name);
+                playerTop.SetName(players[1].playerName);
 
                 for (int j = 0; j < players[0].fighterIDs.Length; j++)
                 {
@@ -36,7 +36,7 @@ public class SelectionUI : MonoBehaviour
             }
             else
             {
-                playerTop.SetName(players[0].name);
+                playerTop.SetName(players[0].playerName);
 
                 for (int j = 0; j < players[1].fighterIDs.Length; j++)
                 {
@@ -91,6 +91,11 @@ public class SelectionUI : MonoBehaviour
 
     public void StopSelection()
     {
+        for (int i = 0; i < players.Length; i++)
+        {
+            Destroy(players[i].gameObject);
+        }
+        
         manager.ReturnToMenu();
     }
 
