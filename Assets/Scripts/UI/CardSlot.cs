@@ -6,7 +6,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 {
     [SerializeField] private ImpactUI impactFrame;
 
-    [SerializeField] private CardUI cardUI;
+    public CardUI cardUI;
     [SerializeField] private CardUI lastCardUI;
 
     private readonly float[] startX = new float[] {0, 29, 41, 29, 0, -29, -41, -29};
@@ -14,7 +14,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     private readonly float[] endX = new float[] {0, 152, 215, 152, 0, -152, -215, -152};
     private readonly float[] endY = new float[] {215, 152, 0, -152, -215, -152, 0, 152};
 
-    private bool cardWasPlayed;
+    public bool cardWasPlayed;
 
     private void Start()
     {
@@ -61,7 +61,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                     {
                         return;
                     }
-                    else if (cardUI.card.hasMove && !eventCardUI.player.IsResponse(cardUI.card.move, eventCardUI.card.move))
+                    else if (cardUI.card.hasMove && !eventCardUI.card.move.IsResponseTo(cardUI.card.move, eventCardUI.player.energy))
                     {
                         return;
                     }

@@ -53,6 +53,21 @@ public class Move : ScriptableObject
                 return name;
         }
     }
+
+    public bool IsResponseTo(Move move, int playerEnergy)
+    {
+        if (moveType != MoveType.Response)
+        {
+            return false;
+        }
+        else if (cost > playerEnergy)
+        {
+            return false;
+        }
+
+
+        return move.moveID%moveID == 0;
+    }
 }
 
 public enum MoveType

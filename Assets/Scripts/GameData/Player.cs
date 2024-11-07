@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         OnPlayerChanged?.Invoke();
     }
 
-    public bool HasResponse(Move move)
+    public bool HasResponseTo(Move move)
     {
         for (int i = 0; i < cardHand.Count; i++)
         {
@@ -99,28 +99,13 @@ public class Player : MonoBehaviour
                 continue;
             }
 
-            if (IsResponse(move, cardHand[i].move))
+            if (cardHand[i].move.IsResponseTo(move, energy))
             {
                 return true;
             }
         }
 
         return false;
-    }
-
-    public bool IsResponse(Move move, Move response)
-    {
-        if (response.moveType != MoveType.Response)
-        {
-            return false;
-        }
-        else if (response.cost > energy)
-        {
-            return false;
-        }
-
-
-        return move.moveID%response.moveID == 0;
     }
 
     public int GetPowerBonus()

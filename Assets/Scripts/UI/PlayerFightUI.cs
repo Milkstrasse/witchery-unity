@@ -212,7 +212,7 @@ public class PlayerFightUI : MonoBehaviour
         FightManager.singleton.timeToMakeMove = 0f;
     }
 
-    public void MakeInteractable(bool isInteractable, bool canBePlayable)
+    public void MakeInteractable(bool isInteractable, bool canBePlayable, CardSlot cardSlot = null)
     {
         if (isInteractable && canBePlayable && !cardGroup.interactable)
         {
@@ -237,6 +237,15 @@ public class PlayerFightUI : MonoBehaviour
         for (int i = 0; i < cards.Length; i++)
         {
             cards[i].FlipCard(!isInteractable || !canBePlayable, 0.2f);
+
+            if (cardSlot != null && !cardSlot.cardWasPlayed && cardSlot.cardUI.card.hasMove && cards[i].card.hasMove && cards[i].card.move.IsResponseTo(cardSlot.cardUI.card.move, player.energy))
+            {
+                cards[i].SelectCard(true); //highlights response cards
+            }
+            else
+            {
+                cards[i].SelectCard(false);
+            }
         }
     }
 

@@ -144,7 +144,7 @@ public class FightLogic
 
         if (move.moveType == MoveType.Standard)
         {
-            if (blockable && FightManager.singleton.players[1 - turn].HasResponse(move))
+            if (blockable && FightManager.singleton.players[1 - turn].HasResponseTo(move))
             {
                 return false;
             }
@@ -386,9 +386,9 @@ public class FightLogic
         int cardIndex = players[message.playerIndex].cardHand[message.cardIndex];
         Card card = FightManager.singleton.players[message.playerIndex].cards[cardIndex];
 
-        if (card.hasMove && card.move.moveType == MoveType.Response)
+        if (message.playCard)
         {
-            if (lastCard.card.move.moveID%card.move.moveID == 0)
+            if (card.hasMove && card.move.IsResponseTo(lastCard.card.move, players[message.playerIndex].energy))
             {
                 return false;
             }
