@@ -63,6 +63,22 @@ public class FightUI : MonoBehaviour
     {
         AudioManager.singleton.PlayStandardSound();
         manager.SendMove(playerUI.player.playerID);
+
+        if (playerUI.IsActive())
+        {
+            cardSlot.MoveUp(false, false);
+            playerUI.MakeInteractable(false, true);
+        }
+        else if (playerUI.player.playerID == playerBottom.player.playerID)
+        {
+            cardSlot.MoveUp(true, false);
+            playerTop.MakeInteractable(false, true);
+        }
+        else
+        {
+            cardSlot.MoveUp(false, false);
+            playerBottom.MakeInteractable(false, true);
+        }
     }
 
     private void OnDestroy()

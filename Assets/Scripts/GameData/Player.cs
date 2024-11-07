@@ -36,14 +36,14 @@ public class Player : MonoBehaviour
         playerName = message.name;
         fullHealth = GlobalSettings.health;
         currHealth = fullHealth;
-        
-        if (GlobalSettings.noEnergy)
+
+        if (GlobalSettings.startAndGainEnergy)
         {
-            energy = 0;
+            energy = 7;
         }
         else
         {
-            energy = 7;
+            energy = 0;
         }
 
         cards = new List<Card>();

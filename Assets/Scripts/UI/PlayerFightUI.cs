@@ -272,6 +272,11 @@ public class PlayerFightUI : MonoBehaviour
         FightManager.singleton.SendMove(message.cardIndex, message.playCard, false);
     }
 
+    public bool IsActive()
+    {
+        return rectTransform.sizeDelta.y > 200f;
+    }
+
     private void OnDestroy()
     {
         if (player != null)

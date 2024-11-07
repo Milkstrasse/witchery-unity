@@ -80,7 +80,7 @@ public class FightLogic
 
     public void RemoveCard(MoveMessage message)
     {
-        if (!message.playCard && GlobalSettings.regainResource)
+        if (!message.playCard && !GlobalSettings.noRegainResource)
         {
             int cardIndex = players[playerTurn].cardHand[message.cardIndex];
             Card card = FightManager.singleton.players[playerTurn].cards[cardIndex];
@@ -89,7 +89,7 @@ public class FightLogic
             {
                 players[playerTurn].health = Math.Min(players[playerTurn].health + card.move.cost, GlobalSettings.health);
             }
-            else
+            else if (card.hasMove)
             {
                 players[playerTurn].energy += card.move.cost;
             }
@@ -441,7 +441,7 @@ public class FightLogic
             {
                 players[i].energy = 7;
             }
-            else if (!GlobalSettings.noEnergy)
+            else if (GlobalSettings.startAndGainEnergy)
             {
                 players[i].energy += 7;
             }

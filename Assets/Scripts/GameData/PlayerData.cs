@@ -34,14 +34,14 @@ public class PlayerData
         name = message.name;
         
         health = GlobalSettings.health;
-        
-        if (GlobalSettings.noEnergy)
+
+        if (GlobalSettings.startAndGainEnergy)
         {
-            energy = 0;
+            energy = 7;
         }
         else
         {
-            energy = 7;
+            energy = 0;
         }
 
         cardStack = new List<int>();

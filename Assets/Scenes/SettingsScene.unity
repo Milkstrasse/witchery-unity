@@ -2140,7 +2140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Regain Resource after discard
+  m_text: Don't regain Resource after discard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e5d77af622c634d9b8d3c8a64d0927a2, type: 2}
   m_sharedMaterial: {fileID: 1538768402756865766, guid: e5d77af622c634d9b8d3c8a64d0927a2, type: 2}
@@ -2244,12 +2244,12 @@ RectTransform:
   - {fileID: 1632489427}
   - {fileID: 1347606036}
   - {fileID: 242757534}
-  - {fileID: 1584223462}
   - {fileID: 225151724}
   - {fileID: 118293335}
   - {fileID: 1110182370}
   - {fileID: 719735766}
   - {fileID: 417315980}
+  - {fileID: 1584223462}
   m_Father: {fileID: 1414498604}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
@@ -5035,7 +5035,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start without energy
+  m_text: Start & gain energy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e5d77af622c634d9b8d3c8a64d0927a2, type: 2}
   m_sharedMaterial: {fileID: 1538768402756865766, guid: e5d77af622c634d9b8d3c8a64d0927a2, type: 2}

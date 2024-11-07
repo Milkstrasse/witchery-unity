@@ -25,9 +25,9 @@ public class SettingsUI : MonoBehaviour
         toggles[0].isOn = GlobalSettings.setEnergy;
         toggles[1].isOn = GlobalSettings.lifeIsResource;
         toggles[2].isOn = GlobalSettings.stackEffectValue;
-        toggles[3].isOn = GlobalSettings.regainResource;
+        toggles[3].isOn = GlobalSettings.noRegainResource;
         toggles[4].isOn = GlobalSettings.noCostNoMatch;
-        toggles[5].isOn = GlobalSettings.noEnergy;
+        toggles[5].isOn = GlobalSettings.startAndGainEnergy;
     }
 
     private void UpdateLanguage(string lang)
