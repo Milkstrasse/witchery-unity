@@ -12,6 +12,7 @@ public static class GlobalSettings
     public static bool setEnergy;
     public static bool lifeIsResource;
     public static bool stackEffectValue;
-    public static bool regainHP;
+    public static bool regainResource;
     public static bool noCostNoMatch;
+    public static bool noEnergy;
 }
