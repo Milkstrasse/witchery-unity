@@ -76,7 +76,7 @@ public class FightManager : MonoBehaviour
         float sendDelay = 0f;
         if (logic.PlayLastCard(message))
         {
-            NetworkServer.SendToAll(new MoveMessage(logic.playerTurn - 5, 0, true, true));
+            NetworkServer.SendToAll(new MoveMessage(message.playCard ? logic.playerTurn - 5 : logic.playerTurn + 5, 0, true, true));
             NetworkServer.SendToAll(new TurnMessage(logic.playerTurn - 5, logic.players.ToArray()));
             
             sendDelay = 1.5f;

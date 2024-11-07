@@ -16,7 +16,6 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private Transform initParent;
 
     private CardUI cardUI;
-    private bool isSelected;
 
     private void Start()
     {
@@ -34,8 +33,6 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        isSelected = cardUI.isSelected;
-
         canvasGroup.blocksRaycasts = false;
         transform.SetParent(canvas.gameObject.transform);
     }
@@ -44,7 +41,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;
 
-        if (eventData.pointerDrag != null && !isSelected)
+        if (eventData.pointerDrag != null)
         {
             cardUI.SelectCard(rectTransform.position.y < 100f || rectTransform.position.y > Screen.height - 100f);
         }
@@ -54,11 +51,6 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         bool toRemove = rectTransform.position.y < 100f || rectTransform.position.y > Screen.height - 100f;
         ResetDrag();
-
-        if (isSelected)
-        {
-            cardUI.SelectCard(true);
-        }
 
         if (toRemove && FightManager.singleton.IsAbleToMessage())
         {
