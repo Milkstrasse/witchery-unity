@@ -92,7 +92,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         cardUI.SetupCard(lastCardUI.card);
     }
 
-    public void PlayAnimation(bool switchCards, bool animate)
+    public void PlayAnimation(bool switchCards, bool animate, bool cardPlayed)
     {
         if (switchCards || !cardUI.gameObject.activeSelf)
         {
@@ -150,7 +150,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                 LeanTween.moveLocal(transform.GetChild(i).gameObject, new Vector3(endX[i], endY[i], 0f), 0.3f).setOnComplete(ResetAnimation);
             }
         }
-        else
+        else if (cardPlayed)
         {
             cardWasPlayed = false;
             AudioManager.singleton.PlayStandardSound();
