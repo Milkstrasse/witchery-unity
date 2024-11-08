@@ -77,6 +77,7 @@ public class SettingsManager : MonoBehaviour
     public void ToggleRegainResource(bool toggleValue) => GlobalSettings.noRegainResource = toggleValue;
     public void ToggleCostMatch(bool toggleValue) => GlobalSettings.noCostNoMatch = toggleValue;
     public void ToggleEnergy(bool toggleValue) => GlobalSettings.startAndGainEnergy = toggleValue;
+    public void ToggleDecay(bool toggleValue) => GlobalSettings.noEffectDecay = toggleValue;
 
     public void ResetSettings()
     {
@@ -108,6 +109,7 @@ public class SettingsManager : MonoBehaviour
         GlobalSettings.noRegainResource = false;
         GlobalSettings.noCostNoMatch = false;
         GlobalSettings.startAndGainEnergy = false;
+        GlobalSettings.noEffectDecay = false;
         
         GlobalManager.singleton.LoadScene("SettingsScene");
     }

@@ -15,4 +15,5 @@ public static class GlobalSettings
     public static bool noRegainResource;
     public static bool noCostNoMatch;
     public static bool startAndGainEnergy;
+    public static bool noEffectDecay;
 }

@@ -22,12 +22,13 @@ public class SettingsUI : MonoBehaviour
         musicSlider.enabled = true;
         soundSlider.enabled = true;
 
-        toggles[0].isOn = GlobalSettings.setEnergy;
-        toggles[1].isOn = GlobalSettings.lifeIsResource;
-        toggles[2].isOn = GlobalSettings.stackEffectValue;
-        toggles[3].isOn = GlobalSettings.noRegainResource;
-        toggles[4].isOn = GlobalSettings.noCostNoMatch;
-        toggles[5].isOn = GlobalSettings.startAndGainEnergy;
+        toggles[0].isOn = GlobalSettings.lifeIsResource;
+        toggles[1].isOn = GlobalSettings.stackEffectValue;
+        toggles[2].isOn = GlobalSettings.noRegainResource;
+        toggles[3].isOn = GlobalSettings.noCostNoMatch;
+        toggles[4].isOn = GlobalSettings.startAndGainEnergy;
+        toggles[5].isOn = GlobalSettings.setEnergy;
+        toggles[6].isOn = GlobalSettings.noEffectDecay;
     }
 
     private void UpdateLanguage(string lang)

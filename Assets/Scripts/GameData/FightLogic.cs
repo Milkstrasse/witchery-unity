@@ -453,7 +453,11 @@ public class FightLogic
             {
                 players[i].effects[j].TriggerEffect(players[i]);
 
-                players[i].effects[j].duration--;
+                if (!GlobalSettings.noEffectDecay)
+                {
+                    players[i].effects[j].duration--;
+                }
+
                 if (players[i].effects[j].duration <= 0)
                 {
                     players[i].effects.RemoveAt(j);
