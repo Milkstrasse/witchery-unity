@@ -99,14 +99,13 @@ public struct CPULogic
             }
             else //unplayable cards
             {
-                prioritizedCards.Add((i, -10));
+                prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
             }
         }
 
         (int, int)[] cards = prioritizedCards.ToArray();
         Array.Sort(cards, (a,b) => { return b.Item2.CompareTo(a.Item2); });
 
-        //MoveMessage(int playerIndex, int cardIndex, bool playCard, bool cardPlayed = false)
         return new MoveMessage(1, cards[0].Item1, cards[0].Item2 > -10);
     }
 
