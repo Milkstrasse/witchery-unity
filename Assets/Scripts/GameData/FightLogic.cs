@@ -342,7 +342,7 @@ public class FightLogic
         {
             if (lastCard.card.hasMove && !lastCard.played)
             {
-                if (move.moveID == 3) //snatch card
+                if (move.moveID == 3) //take card effect
                 {
                     int health = lastCard.card.move.health;
 

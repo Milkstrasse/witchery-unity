@@ -61,7 +61,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210099683614720
-    m_Localized: Block attack
+    m_Localized: Block effect of card
     m_Metadata:
       m_Items: []
   - m_Id: 7622866769010688
@@ -148,7 +148,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 8910918694985728
-    m_Localized: Take effect for yourself
+    m_Localized: Take effect of card
     m_Metadata:
       m_Items: []
   - m_Id: 9396931322175488
