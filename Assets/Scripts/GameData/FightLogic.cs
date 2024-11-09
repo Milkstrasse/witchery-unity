@@ -461,7 +461,7 @@ public class FightLogic
             {
                 players[i].effects[j].TriggerEffect(players[i]);
 
-                if (!GlobalSettings.noEffectDecay)
+                if (GlobalSettings.effectDecay)
                 {
                     players[i].effects[j].duration--;
                 }

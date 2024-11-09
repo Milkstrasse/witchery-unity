@@ -43,7 +43,7 @@ public class StatusEffect
         switch (statusType)
         {
             case StatusType.Energy:
-                if (GlobalSettings.stackEffectValue)
+                if (!GlobalSettings.noValueStack)
                 {
                     player.energy += value * duration;
                 }
@@ -60,7 +60,7 @@ public class StatusEffect
             case StatusType.Health:
                 if (!isDelayed || (isDelayed && duration == 1))
                 {
-                    if (GlobalSettings.stackEffectValue)
+                    if (!GlobalSettings.noValueStack)
                     {
                         player.health = Math.Clamp(player.health + value * duration, 0, GlobalSettings.health);
                     }

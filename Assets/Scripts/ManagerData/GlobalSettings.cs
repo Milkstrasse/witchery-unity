@@ -11,9 +11,9 @@ public static class GlobalSettings
 
     public static bool setEnergy;
     public static bool lifeIsResource;
-    public static bool stackEffectValue;
+    public static bool noValueStack;
     public static bool noRegainResource;
     public static bool noCostNoMatch;
     public static bool startAndGainEnergy;
-    public static bool noEffectDecay;
+    public static bool effectDecay;
 }

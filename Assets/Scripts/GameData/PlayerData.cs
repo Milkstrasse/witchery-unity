@@ -170,7 +170,7 @@ public class PlayerData
             {
                 effects[i].isNew = true;
                 
-                if (GlobalSettings.stackEffectValue)
+                if (!GlobalSettings.noValueStack)
                 {
                     modifier += effects[i].value * effects[i].duration;
                 }
