@@ -17,7 +17,7 @@ MonoBehaviour:
   moves:
   - {fileID: 11400000, guid: cbcd1f94fec434e5f98ffaa6c4767865, type: 2}
   - {fileID: 11400000, guid: 4b4094e717a4a479ea8cbdc710c37c52, type: 2}
-  - {fileID: 11400000, guid: 4b4094e717a4a479ea8cbdc710c37c52, type: 2}
+  - {fileID: 11400000, guid: fde4046764fad42158d7794f50db64e4, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   outfits:
