@@ -116,7 +116,16 @@ public class Player : MonoBehaviour
         {
             if (effects[i].statusType == StatusEffect.StatusType.Power)
             {
-                power += effects[i].value;
+                effects[i].isNew = true;
+
+                if (GlobalSettings.stackEffectValue)
+                {
+                    power += effects[i].value * effects[i].duration;
+                }
+                else
+                {
+                    power += effects[i].value;
+                }
             }
         }
 
