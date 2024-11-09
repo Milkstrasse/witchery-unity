@@ -71,13 +71,10 @@ public class SettingsManager : MonoBehaviour
         changingLang = false;
     }
 
-    public void ToggleSetEnergy(bool toggleValue) => GlobalSettings.setEnergy = toggleValue;
     public void ToggleLifeResource(bool toggleValue) => GlobalSettings.lifeIsResource = toggleValue;
-    public void ToggleStackEffect(bool toggleValue) => GlobalSettings.noValueStack = toggleValue;
     public void ToggleRegainResource(bool toggleValue) => GlobalSettings.noRegainResource = toggleValue;
     public void ToggleCostMatch(bool toggleValue) => GlobalSettings.noCostNoMatch = toggleValue;
     public void ToggleEnergy(bool toggleValue) => GlobalSettings.startAndGainEnergy = toggleValue;
-    public void ToggleDecay(bool toggleValue) => GlobalSettings.effectDecay = toggleValue;
 
     public void ResetSettings()
     {
@@ -103,13 +100,10 @@ public class SettingsManager : MonoBehaviour
 
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langIndex];
 
-        GlobalSettings.setEnergy = false;
         GlobalSettings.lifeIsResource = false;
-        GlobalSettings.noValueStack = false;
         GlobalSettings.noRegainResource = false;
         GlobalSettings.noCostNoMatch = false;
         GlobalSettings.startAndGainEnergy = false;
-        GlobalSettings.effectDecay = false;
         
         GlobalManager.singleton.LoadScene("SettingsScene");
     }

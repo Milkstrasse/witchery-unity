@@ -29,29 +29,12 @@ public class StatusUI : MonoBehaviour
         }
     }
 
-    public void ShowDuration(bool showDuration)
-    {
-        if (effect == null)
-        {
-            return;
-        }
-        
-        if (showDuration)
-        {
-            icon.text = effect.duration.ToString();
-        }
-        else
-        {
-            icon.text = iconString;
-        }
-    }
-
     public void HideInfo()
     {
         info.gameObject.SetActive(false);
     }
 
-    public void ShowInfo(int index)
+    public void ShowInfo()
     {
         if (effect == null)
         {
@@ -59,6 +42,6 @@ public class StatusUI : MonoBehaviour
         }
 
         info.gameObject.SetActive(true);
-        info.SetupInfo(effect, index);
+        info.SetupInfo(effect);
     }
 }

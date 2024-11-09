@@ -113,21 +113,18 @@ public class PlayerData
     public void AddEffect(StatusEffect effect)
     {
         int index = -1;
-        if (!effect.isDelayed)
+        for (int i = 0; i < effects.Count; i++)
         {
-            for (int i = 0; i < effects.Count; i++)
+            if (effects[i].name == effect.name)
             {
-                if (effects[i].name == effect.name)
-                {
-                    index = i;
-                    break;
-                }
+                index = i;
+                break;
             }
         }
 
         if (index >= 0)
         {
-            effects[index].duration += effect.duration;
+            effects[index].multiplier += effect.multiplier;
             effects[index].isNew = true;
         }
         else if (effects.Count < 5)
@@ -169,15 +166,7 @@ public class PlayerData
             if (effects[i].name == "shields" || effects[i].name == "vulnerable" )
             {
                 effects[i].isNew = true;
-                
-                if (!GlobalSettings.noValueStack)
-                {
-                    modifier += effects[i].value * effects[i].duration;
-                }
-                else
-                {
-                    modifier += effects[i].value;
-                }
+                modifier += effects[i].value * effects[i].multiplier;
             }
         }
         

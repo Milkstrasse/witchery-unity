@@ -100,7 +100,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210153374900224
-    m_Localized: "{duration} <style=\"IconOutline\">{effect}</style> \u3092 \u3046\u3051\u308B"
+    m_Localized: "<style=\"IconOutline\">{effect}</style> \u3092 \u3046\u3051\u308B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
@@ -193,23 +193,21 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 8223596102017024
-    m_Localized: "\u306E \u30C0\u30E1\u30FC\u30B8\u3092 \u3042\u305F\u3048\u308B"
+    m_Localized: "{value} \u30C0\u30E1\u30FC\u30B8 \u3092 \u3046\u3051\u308B"
     m_Metadata:
-      m_Items: []
-  - m_Id: 8229724533809152
-    m_Localized: "\u3067 \u3070\u304F\u306F\u3064\u3059\u308B "
-    m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 6175659975647952932
   - m_Id: 8229765759623168
-    m_Localized: "\u306E \u30A8\u30CD\u30EB\u30AE\u30FC\u3092 \u3046\u307F\u3060\u3059"
+    m_Localized: "{value} \u3064 \u306E \u30A8\u30CD\u30EB\u30AE\u30FC \u3092 \u3046\u3051\u3068\u308B"
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 6175659975647952932
   - m_Id: 7880276955881472
     m_Localized: "\u30AB\u30FC\u30C9 \u3092 5 \u307E\u3044 \u3072\u304F"
     m_Metadata:
       m_Items: []
   - m_Id: 7210184622465024
-    m_Localized: "\u30A8\u30CD\u30EB\u30AE\u30FC \u3092 \u3048\u308B"
+    m_Localized: "{energy} \u3064 \u306E \u30A8\u30CD\u30EB\u30AE\u30FC \u3092 \u3046\u3051\u3068\u308B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
@@ -220,15 +218,15 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 7210015948529664
-    m_Localized: "{duration} \u3064\u306E <style=\"IconOutline\">{effect}</style>
-      \u3092 \u304A\u3046\u3088\u3046"
+    m_Localized: "<style=\"IconOutline\">{effect}</style> \u3092 \u3046\u3051\u308B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 8223760501956608
-    m_Localized: "\u3092 \u3044\u3084\u3059"
+    m_Localized: "{value} HP \u3092 \u3046\u3051\u3068\u308B"
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 6175659975647952932
   - m_Id: 11805233679163392
     m_Localized: "HP {health} \u307E\u3067 \u304B\u3044\u3075\u304F"
     m_Metadata:
@@ -239,9 +237,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8223787123204096
-    m_Localized: "\u306E \u304D\u3087\u3046\u304B \u30AB\u30FC\u30C9"
+    m_Localized: "\u30AB\u30FC\u30C9 \u306E \u304B\u3061 \u306B +{value} \u3059\u308B"
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 6175659975647952932
   - m_Id: 7210210211913728
     m_Localized: "{health} HP \u3092 \u3046\u3051\u3068\u308B"
     m_Metadata:
@@ -265,35 +264,33 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 15212672940236800
-    m_Localized: "\u306E \u30C0\u30E1\u30FC\u30B8 \u3092 \u3051\u3044\u3052\u3093\u3059\u308B"
+    m_Localized: "\u30C0\u30E1\u30FC\u30B8 \u3092 -{value} \u3059\u308B"
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 6175659975647952932
   - m_Id: 8910918694985728
     m_Localized: "\u3042\u306A\u305F \u306B \u3053\u3046\u304B \u3092 \u3082\u305F\u3089\u3059"
     m_Metadata:
       m_Items: []
   - m_Id: 8223827040395264
-    m_Localized: "\u30C0\u30E1\u30FC\u30B8\u30A2\u30BF\u30C3\u30AB\u30FC"
+    m_Localized: "\u3053\u3046\u3052\u304D\u304C\u308F \u306B {value} \u30C0\u30E1\u30FC\u30B8"
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 6175659975647952932
   - m_Id: 7622866769010688
     m_Localized: "\u30B9\u30EF\u30C3\u30D7 \u3053\u3046\u304B"
     m_Metadata:
       m_Items: []
-  - m_Id: 8258911885844480
-    m_Localized: "{duration} \u30E9\u30A6\u30F3\u30C9"
+  - m_Id: 17290912945135616
+    m_Localized: "\u30C0\u30E1\u30FC\u30B8 \u3092 +{value} \u3059\u308B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
-  - m_Id: 17290912945135616
-    m_Localized: "\u306E \u30C0\u30E1\u30FC\u30B8\u304C \u304C \u3075\u3048\u308B"
-    m_Metadata:
-      m_Items: []
   - m_Id: 8223807327166464
-    m_Localized: "\u306E \u30AB\u30FC\u30C9 \u3092 \u3058\u3083\u304F\u305F\u3044\u304B
-      \u3055\u305B\u308B"
+    m_Localized: "\u30AB\u30FC\u30C9 \u306E \u304B\u3061 \u306B {value} \u3059\u308B"
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 6175659975647952932
   - m_Id: 7920018510569472
     m_Localized: "{energy} \u30A8\u30CD\u30EB\u30AE\u30FC \u3092 \u306C\u3059\u3080"
     m_Metadata:
@@ -346,10 +343,17 @@ MonoBehaviour:
         - id: 7842569093373952
         - id: 11805233679163392
         - id: 7210210211913728
-        - id: 8258911885844480
         - id: 19427704657928192
         - id: 19427698743959552
         - id: 7920018510569472
         - id: 7992895737946112
         - id: 27457199604228096
         - id: 7837112253538304
+        - id: 8223596102017024
+        - id: 8229765759623168
+        - id: 8223760501956608
+        - id: 8223787123204096
+        - id: 8223807327166464
+        - id: 17290912945135616
+        - id: 15212672940236800
+        - id: 8223827040395264

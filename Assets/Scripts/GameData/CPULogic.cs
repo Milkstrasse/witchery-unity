@@ -80,16 +80,9 @@ public struct CPULogic
                     {
                         prioritizedCards.Add((i, -10));
                     }
-                    else if (move.effect.duration > 0 &&  logic.players[1 - move.target].effects.Count == 5)
+                    else if (move.effect.multiplier > 0 &&  logic.players[1 - move.target].effects.Count == 5)
                     {
-                        if (move.effect.isDelayed || logic.players[1 - move.target].GetEffect(move.effect.name) == null) //effect can't be added
-                        {
-                            prioritizedCards.Add((i, -10));
-                        }
-                        else
-                        {
-                            prioritizedCards.Add((i, move.cost * -1));
-                        }
+                        prioritizedCards.Add((i, move.cost * -1));
                     }
                     else
                     {

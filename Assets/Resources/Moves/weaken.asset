@@ -20,9 +20,8 @@ MonoBehaviour:
   effect:
     name: weaken
     icon: f103
-    duration: 3
+    multiplier: 1
     value: -2
     statusType: 2
-    isDelayed: 0
     isNew: 0
   moveType: 0

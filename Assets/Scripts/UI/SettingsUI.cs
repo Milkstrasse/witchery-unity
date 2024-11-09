@@ -23,12 +23,9 @@ public class SettingsUI : MonoBehaviour
         soundSlider.enabled = true;
 
         toggles[0].isOn = GlobalSettings.lifeIsResource;
-        toggles[1].isOn = GlobalSettings.noValueStack;
-        toggles[2].isOn = GlobalSettings.noRegainResource;
-        toggles[3].isOn = GlobalSettings.noCostNoMatch;
-        toggles[4].isOn = GlobalSettings.startAndGainEnergy;
-        toggles[5].isOn = GlobalSettings.setEnergy;
-        toggles[6].isOn = GlobalSettings.effectDecay;
+        toggles[1].isOn = GlobalSettings.noRegainResource;
+        toggles[2].isOn = GlobalSettings.noCostNoMatch;
+        toggles[3].isOn = GlobalSettings.startAndGainEnergy;
     }
 
     private void UpdateLanguage(string lang)

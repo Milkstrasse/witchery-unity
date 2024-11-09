@@ -329,7 +329,7 @@ public class FightLogic
 
                     players[(move.target + turn)%2].energy += energy;
 
-                    if (move.effect.duration > 0)
+                    if (move.effect.multiplier > 0)
                     {
                         StatusEffect effect = new StatusEffect(move.effect);
                         players[(move.target + turn)%2].AddEffect(effect);
@@ -375,7 +375,7 @@ public class FightLogic
                         players[turn].energy = Math.Max(players[turn].energy + energy, 0);
                     }
 
-                    if (lastCard.card.move.effect.duration > 0)
+                    if (lastCard.card.move.effect.multiplier > 0)
                     {
                         players[turn].AddEffect(lastCard.card.move.effect);
                     }
@@ -445,10 +445,6 @@ public class FightLogic
             {
                 players[i].health = Math.Max(players[i].health + players[i].energy, GlobalSettings.health);
             }
-            else if (GlobalSettings.setEnergy || GlobalSettings.noCostNoMatch)
-            {
-                players[i].energy = 7;
-            }
             else if (GlobalSettings.startAndGainEnergy)
             {
                 players[i].energy += 7;
@@ -461,12 +457,7 @@ public class FightLogic
             {
                 players[i].effects[j].TriggerEffect(players[i]);
 
-                if (GlobalSettings.effectDecay)
-                {
-                    players[i].effects[j].duration--;
-                }
-
-                if (players[i].effects[j].duration <= 0)
+                if (players[i].effects[j].multiplier <= 0)
                 {
                     players[i].effects.RemoveAt(j);
                 }

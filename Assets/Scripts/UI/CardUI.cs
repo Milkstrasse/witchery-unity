@@ -62,9 +62,8 @@ public class CardUI : MonoBehaviour
 
         (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(move.health) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);
         (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(move.energy) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);
-        (stringEvent.StringReference["duration"] as IntVariable).Value = move.effect.duration;
 
-        if (move.effect.duration != 0)
+        if (move.effect.multiplier != 0)
         {
             uint i = Convert.ToUInt32(move.effect.icon, 16);
             (stringEvent.StringReference["effect"] as StringVariable).Value = Convert.ToChar(i).ToString();
@@ -93,9 +92,8 @@ public class CardUI : MonoBehaviour
 
             (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.IsSpecialMove), 0);
             (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.IsSpecialMove), 0);
-            (stringEvent.StringReference["duration"] as IntVariable).Value = card.move.effect.duration;
 
-            if (card.move.effect.duration != 0)
+            if (card.move.effect.multiplier != 0)
             {
                 uint i = Convert.ToUInt32(card.move.effect.icon, 16);
                 (stringEvent.StringReference["effect"] as StringVariable).Value = Convert.ToChar(i).ToString();

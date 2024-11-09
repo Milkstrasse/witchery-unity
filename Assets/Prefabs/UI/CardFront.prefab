@@ -877,7 +877,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Apply 3 <style="IconOutline">\uf043</style> to everybody
+  m_text: Apply <style="IconOutline">\uf043</style> to everybody
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e8a02252f4ec47748da2becdd6cc899, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 485d36f45d7cb41a7b1e600330f2e2cc, type: 2}
@@ -976,9 +976,6 @@ MonoBehaviour:
     - name: effect
       variable:
         rid: 296818163417612684
-    - name: duration
-      variable:
-        rid: 296818163417612685
     - name: name
       variable:
         rid: 6175659975647952941
@@ -1016,10 +1013,6 @@ MonoBehaviour:
       type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:
         m_Value: 
-    - rid: 296818163417612685
-      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
-      data:
-        m_Value: 0
     - rid: 6175659975647952941
       type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:

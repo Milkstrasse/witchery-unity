@@ -41,12 +41,12 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210015948529664
-    m_Localized: Apply{duration} <style="IconOutline">{effect}</style>
+    m_Localized: Apply <style="IconOutline">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210153374900224
-    m_Localized: Gain {duration} <style="IconOutline">{effect}</style>
+    m_Localized: Obtain <style="IconOutline">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
@@ -118,35 +118,32 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8223596102017024
-    m_Localized: does damage for
+    m_Localized: Receive {value} damage
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357011
   - m_Id: 8223760501956608
-    m_Localized: heals for
+    m_Localized: Recover {value} HP
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357011
   - m_Id: 8223787123204096
-    m_Localized: strengthens cards for
+    m_Localized: Adds +{value} to the card's value
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357011
   - m_Id: 8223807327166464
-    m_Localized: weakens cards for
+    m_Localized: Adds -{value} to the card's value
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357011
   - m_Id: 8223827040395264
-    m_Localized: damages attacker
+    m_Localized: Attacker receives {value} damage
     m_Metadata:
-      m_Items: []
-  - m_Id: 8229724533809152
-    m_Localized: explodes in
-    m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357011
   - m_Id: 8229765759623168
-    m_Localized: generates energy for
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8258911885844480
-    m_Localized: '{duration} round(s)'
+    m_Localized: Receive {value} energy
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
@@ -208,13 +205,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 15212672940236800
-    m_Localized: reduces damage for
+    m_Localized: Receive -{value} damage
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357011
   - m_Id: 17290912945135616
-    m_Localized: take more damage for
+    m_Localized: Receive +{value} damage
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357011
   - m_Id: 16293902418960384
     m_Localized: Standard
     m_Metadata:
@@ -327,7 +326,6 @@ MonoBehaviour:
       data:
         m_Entries: 
         m_SharedEntries:
-        - id: 8258911885844480
         - id: 7209985523048448
         - id: 7210015948529664
         - id: 7210153374900224
@@ -343,3 +341,11 @@ MonoBehaviour:
         - id: 19427704657928192
         - id: 27441377439637504
         - id: 27457199604228096
+        - id: 8223596102017024
+        - id: 8229765759623168
+        - id: 8223760501956608
+        - id: 8223787123204096
+        - id: 8223807327166464
+        - id: 17290912945135616
+        - id: 15212672940236800
+        - id: 8223827040395264

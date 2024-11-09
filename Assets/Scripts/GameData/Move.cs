@@ -44,9 +44,9 @@ public class Move : ScriptableObject
             case 21:
                 return "gainCostEnergy";
             case 26:
-                return "giveEffect";
+                return "applyEffect";
             case 27:
-                return "gainEffect";
+                return "obtainEffect";
             case 33:
                 return "healToHP";
             default:

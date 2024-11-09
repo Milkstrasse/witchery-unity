@@ -5,10 +5,9 @@ public class StatusEffect
 {
     public string name;
     public string icon;
-    public int duration;
+    public int multiplier;
     public int value;
     public StatusType statusType;
-    public bool isDelayed;
 
     public bool isNew;
 
@@ -20,20 +19,18 @@ public class StatusEffect
     public StatusEffect()
     {
         icon = "";
-        duration = 0;
+        multiplier = 0;
         value = 0;
         statusType = StatusType.Health;
-        isDelayed = false;
     }
 
     public StatusEffect(StatusEffect initEffect)
     {
         name = initEffect.name;
         icon = initEffect.icon;
-        duration = initEffect.duration;
+        multiplier = initEffect.multiplier;
         value = initEffect.value;
         statusType = initEffect.statusType;
-        isDelayed = initEffect.isDelayed;
 
         isNew = true;
     }
@@ -43,34 +40,16 @@ public class StatusEffect
         switch (statusType)
         {
             case StatusType.Energy:
-                if (!GlobalSettings.noValueStack)
-                {
-                    player.energy += value * duration;
-                }
-                else
-                {
-                    player.energy += value;
-                }
-
+                player.energy += value * multiplier;
                 isNew = true;
 
                 break;
             case StatusType.Power:
                 break;
             case StatusType.Health:
-                if (!isDelayed || (isDelayed && duration == 1))
-                {
-                    if (!GlobalSettings.noValueStack)
-                    {
-                        player.health = Math.Clamp(player.health + value * duration, 0, GlobalSettings.health);
-                    }
-                    else
-                    {
-                        player.health = Math.Clamp(player.health + value, 0, GlobalSettings.health);
-                    }
+                player.health = Math.Clamp(player.health + value * multiplier, 0, GlobalSettings.health);
+                isNew = true;
 
-                    isNew = true;
-                }
                 break;
             default: //StatusType.Special
                 break;

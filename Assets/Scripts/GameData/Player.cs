@@ -146,15 +146,7 @@ public class Player : MonoBehaviour
             if (effects[i].name == "shields" || effects[i].name == "vulnerable" )
             {
                 effects[i].isNew = true;
-
-                if (!GlobalSettings.noValueStack)
-                {
-                    modifier += effects[i].value * effects[i].duration;
-                }
-                else
-                {
-                    modifier += effects[i].value;
-                }
+                modifier += effects[i].value * effects[i].multiplier;
             }
         }
         

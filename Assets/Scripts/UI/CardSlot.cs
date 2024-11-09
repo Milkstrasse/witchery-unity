@@ -108,7 +108,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             {
                 if (card.move.moveType == MoveType.Standard)
                 {
-                    if (card.move.effect.duration > 0)
+                    if (card.move.effect.multiplier > 0)
                     {
                         if (cardUI.gameObject.activeSelf)
                         {

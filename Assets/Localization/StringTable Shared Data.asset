@@ -27,10 +27,6 @@ MonoBehaviour:
     m_Key: blockCard
     m_Metadata:
       m_Items: []
-  - m_Id: 8229724533809152
-    m_Key: bomb
-    m_Metadata:
-      m_Items: []
   - m_Id: 2538677614927872
     m_Key: cancel
     m_Metadata:
@@ -65,6 +61,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 19529877668487168
     m_Key: control
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30324888605548544
+    m_Key: copyEffects
     m_Metadata:
       m_Items: []
   - m_Id: 12959317832491008
@@ -123,16 +123,16 @@ MonoBehaviour:
     m_Key: gainCostEnergy
     m_Metadata:
       m_Items: []
-  - m_Id: 7210153374900224
-    m_Key: gainEffect
-    m_Metadata:
-      m_Items: []
   - m_Id: 7210184622465024
     m_Key: gainEnergy
     m_Metadata:
       m_Items: []
   - m_Id: 7210015948529664
-    m_Key: giveEffect
+    m_Key: applyEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28496886263439360
+    m_Key: handoverBlanks
     m_Metadata:
       m_Items: []
   - m_Id: 8223760501956608
@@ -167,8 +167,8 @@ MonoBehaviour:
     m_Key: music
     m_Metadata:
       m_Items: []
-  - m_Id: 28496886263439360
-    m_Key: handoverBlanks
+  - m_Id: 7210153374900224
+    m_Key: obtainEffect
     m_Metadata:
       m_Items: []
   - m_Id: 26400137377996800
@@ -279,10 +279,6 @@ MonoBehaviour:
     m_Key: training
     m_Metadata:
       m_Items: []
-  - m_Id: 8258911885844480
-    m_Key: turnAmount
-    m_Metadata:
-      m_Items: []
   - m_Id: 12959305933250560
     m_Key: unfiltered
     m_Metadata:
@@ -301,10 +297,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8223807327166464
     m_Key: weaken
-    m_Metadata:
-      m_Items: []
-  - m_Id: 30324888605548544
-    m_Key: copyEffects
     m_Metadata:
       m_Items: []
   m_Metadata:
