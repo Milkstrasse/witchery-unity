@@ -116,7 +116,8 @@ public class Player : MonoBehaviour
         {
             if (effects[i].statusType == StatusEffect.StatusType.Power)
             {
-                power += effects[i].value;
+                effects[i].isNew = true;
+                power += effects[i].value * effects[i].multiplier;
             }
         }
 
