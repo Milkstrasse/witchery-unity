@@ -65,7 +65,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 7622866769010688
-    m_Localized: Effekte tauschen
+    m_Localized: Tausche Effekte
     m_Metadata:
       m_Items: []
   - m_Id: 7622870518718464
@@ -313,6 +313,10 @@ MonoBehaviour:
       - rid: 296817732614357012
   - m_Id: 28496886263439360
     m_Localized: "\xDCbergebe leere Karten"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30324888605548544
+    m_Localized: Kopiere Effekte
     m_Metadata:
       m_Items: []
   references:

@@ -265,6 +265,14 @@ public class FightLogic
                     players[(move.target + turn)%2].AddBlanks(blanks);
 
                     break;
+                case 29: //copy effects
+                    players[turn].effects = players[1 - turn].effects;
+                    for (int i = 0; i < players[turn].effects.Count; i++)
+                    {
+                        players[turn].effects[i].isNew = true;
+                    }
+
+                    break;
                 case 33: //heal to health
                     players[(move.target + turn)%2].health = Math.Max(players[(move.target + turn)%2].health, move.health + players[turn].GetPowerBonus());
                     break;

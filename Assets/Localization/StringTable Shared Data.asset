@@ -303,6 +303,10 @@ MonoBehaviour:
     m_Key: weaken
     m_Metadata:
       m_Items: []
+  - m_Id: 30324888605548544
+    m_Key: copyEffects
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
