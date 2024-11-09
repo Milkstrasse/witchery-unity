@@ -167,7 +167,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210099683614720
-    m_Localized: "\u30AB\u30FC\u30C9 \u306E \u30D6\u30ED\u30C3\u30AF \u3053\u3046\u304B"
+    m_Localized: "\u30AB\u30FC\u30C9 \u306E <style=\"Highlighted\">\u30D6\u30ED\u30C3\u30AF</style>
+      \u3053\u3046\u304B"
     m_Metadata:
       m_Items: []
   - m_Id: 8024861875101696
@@ -187,8 +188,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7837084361416704
-    m_Localized: "{health} <style=\"IconOutline\">\\uf00d</style> \u30C0\u30E1\u30FC\u30B8
-      \u3092 \u3042\u305F\u3048\u308B"
+    m_Localized: "{health} <style=\"IconOutline\"><style=\"Highlighted\">\\uf00d</style></style>
+      \u30C0\u30E1\u30FC\u30B8 \u3092 \u3042\u305F\u3048\u308B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
@@ -212,8 +213,8 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 7842569093373952
-    m_Localized: "{energy} <style=\"IconOutline\">\\uf00d</style> \u30A8\u30CD\u30EB\u30AE\u30FC
-      \u3092 \u3048\u308B"
+    m_Localized: "{energy} <style=\"IconOutline\"><style=\"Highlighted\">\\uf00d</style></style>
+      \u30A8\u30CD\u30EB\u30AE\u30FC \u3092 \u3048\u308B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
@@ -247,7 +248,8 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 7837112253538304
-    m_Localized: "{health} <style=\"IconOutline\">\\uf00d</style> HP \u3092 \u3046\u3051\u3068\u308B"
+    m_Localized: "{health} <style=\"IconOutline\"><style=\"Highlighted\">\\uf00d</style></style>
+      HP \u3092 \u3046\u3051\u3068\u308B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
@@ -269,7 +271,7 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 8910918694985728
-    m_Localized: "\u30AB\u30FC\u30C9 \u306E \u3053\u3046\u304B \u3092 \u3048\u308B"
+    m_Localized: "\u30AB\u30FC\u30C9 \u306E \u3053\u3046\u304B \u3092 <style=\"Highlighted\">\u3048\u308B</style>"
     m_Metadata:
       m_Items: []
   - m_Id: 8223827040395264
@@ -297,13 +299,14 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 19427704657928192
-    m_Localized: "{energy} <style=\"IconOutline\">\\uf00d</style> \u30A8\u30CD\u30EB\u30AE\u30FC
-      \u3092 \u306C\u3059\u3080"
+    m_Localized: "{energy} <style=\"IconOutline\"><style=\"Highlighted\">\\uf00d</style></style>
+      \u30A8\u30CD\u30EB\u30AE\u30FC \u3092 \u306C\u3059\u3080"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 19427698743959552
-    m_Localized: "{health} <style=\"IconOutline\">\\uf00d</style> HP \u3092 \u306C\u3059\u3080"
+    m_Localized: "{health} <style=\"IconOutline\"><style=\"Highlighted\">\\uf00d</style></style>
+      HP \u3092 \u306C\u3059\u3080"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
@@ -313,8 +316,8 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 27457199604228096
-    m_Localized: "{health} <style=\"IconOutline\">\\uf54c</style> \u30C0\u30E1\u30FC\u30B8
-      \u3092 \u3042\u305F\u3048\u308B"
+    m_Localized: "{health} <style=\"IconOutline\"><style=\"Highlighted\">\\uf54c</style></style>
+      \u30C0\u30E1\u30FC\u30B8 \u3092 \u3042\u305F\u3048\u308B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
