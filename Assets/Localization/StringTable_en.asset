@@ -336,6 +336,14 @@ MonoBehaviour:
     m_Localized: Palette
     m_Metadata:
       m_Items: []
+  - m_Id: 30839589168996352
+    m_Localized: GRIMOIRE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30839593145196544
+    m_Localized: Overview
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

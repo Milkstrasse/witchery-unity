@@ -10,6 +10,7 @@ public class MenuUI : MonoBehaviour
 
     [SerializeField] private RectTransform mainMenu;
     [SerializeField] private RectTransform modeMenu;
+    [SerializeField] private RectTransform overviewMenu;
 
     [SerializeField] private Button joinButton;
     [SerializeField] private Button hostButton;
@@ -40,13 +41,21 @@ public class MenuUI : MonoBehaviour
         LeanTween.moveLocalX(modeMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
     }
 
-    public void SwitchToMainMenu()
+    public void SwitchToOverviewMenu()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 1.5f - 20f, 0.3f);
+        LeanTween.moveLocalX(overviewMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
+    }
+
+    public void SwitchToMainMenu(GameObject currMenu)
     {
         AudioManager.singleton.PlayStandardSound();
         
         GlobalManager.singleton.maxPlayers = 0;
 
         LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
-        LeanTween.moveLocalX(modeMenu.gameObject, mainMenu.sizeDelta.x * 0.5f + 20f, 0.3f);
+        LeanTween.moveLocalX(currMenu, mainMenu.sizeDelta.x * 0.5f + 20f, 0.3f);
     }
 }
