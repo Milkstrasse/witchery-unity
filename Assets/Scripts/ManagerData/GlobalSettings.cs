@@ -9,6 +9,8 @@ public static class GlobalSettings
     public static readonly int turnTime = 180;
     public static readonly int health = 75;
 
+    public static SelectedFighter[] shopFighters;
+
     public static int themeIndex;
 
     public static bool lifeIsResource;

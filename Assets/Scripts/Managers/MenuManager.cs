@@ -11,7 +11,14 @@ public class MenuManager : MonoBehaviour
         GlobalManager.QuitAnyConnection();
         GlobalManager.singleton.joincode = "";
 
-        CreateShopOptions(6, 0);
+        if (GlobalSettings.shopFighters.Length > 0)
+        {
+            OnShopOptionsCreated?.Invoke(GlobalSettings.shopFighters, 0);
+        }
+        else
+        {
+            CreateShopOptions(6, 0);
+        }
     }
 
     public void CreateShopOptions(int amount, int offset)
@@ -33,6 +40,20 @@ public class MenuManager : MonoBehaviour
 
             amount--;
         }
+
+        if (options.Length > 3)
+        {
+            GlobalSettings.shopFighters = options;
+        }
+        else
+        {
+            for (int i = 0; i < options.Length; i++)
+            {
+                GlobalSettings.shopFighters[i + offset] = options[i];
+            }
+        }
+
+        SaveManager.SaveData();
 
         OnShopOptionsCreated?.Invoke(options, offset);
     }

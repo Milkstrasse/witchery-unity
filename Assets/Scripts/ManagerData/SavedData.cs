@@ -8,12 +8,14 @@ public struct SavedData
     public int icon;
     public int money;
     public bool[,] unlocked;
+    public SelectedFighter[] shopFighters;
 
-    public SavedData(string name, int icon, int money, bool[,] unlocked)
+    public SavedData(string name, int icon, int money, bool[,] unlocked, SelectedFighter[] shopFighters)
     {
         this.name = name;
         this.icon = icon;
         this.money = money;
         this.unlocked = unlocked;
+        this.shopFighters = shopFighters;
     }
 }

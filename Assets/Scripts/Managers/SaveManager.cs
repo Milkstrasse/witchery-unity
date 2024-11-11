@@ -21,6 +21,7 @@ public class SaveManager
         GlobalSettings.icon = savedData.icon;
         GlobalSettings.money = savedData.money;
         GlobalSettings.unlocked = savedData.unlocked;
+        GlobalSettings.shopFighters = savedData.shopFighters;
 
         return true;
     }
@@ -40,12 +41,14 @@ public class SaveManager
             }
         }
 
+        GlobalSettings.shopFighters = new SelectedFighter[0];
+
         SaveData();
     }
 
     public static void SaveData()
     {
-        SavedData savedData = new SavedData(GlobalSettings.playerName, GlobalSettings.icon, GlobalSettings.money, GlobalSettings.unlocked);
+        SavedData savedData = new SavedData(GlobalSettings.playerName, GlobalSettings.icon, GlobalSettings.money, GlobalSettings.unlocked, GlobalSettings.shopFighters);
 
         BinaryFormatter binary = new BinaryFormatter();
 		FileStream file = File.Create(saveFilePath);                     

@@ -112,6 +112,8 @@ public class ShopUI : MonoBehaviour
                 manager.CreateShopOptions(3, 0);
             }
         }
+
+        SaveManager.SaveData();
     }
 
     public void ToggleShop()
