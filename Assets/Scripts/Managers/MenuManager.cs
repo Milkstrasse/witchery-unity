@@ -99,6 +99,12 @@ public class MenuManager : MonoBehaviour
         GlobalManager.singleton.LoadScene(scene);
     }
 
+    public void AddMoney()
+    {
+        GlobalSettings.money += 100;
+        OnMoneyChanged?.Invoke(GlobalSettings.money);
+    }
+
     public void DeletePlayer()
     {
         SaveManager.DeleteData();
