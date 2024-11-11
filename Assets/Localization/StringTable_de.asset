@@ -344,6 +344,18 @@ MonoBehaviour:
     m_Localized: "\xDCbersicht"
     m_Metadata:
       m_Items: []
+  - m_Id: 31044054782304256
+    m_Localized: Kaufen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31058970465525760
+    m_Localized: "K\xE4mpfer*innen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31058953466011648
+    m_Localized: Outfits
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

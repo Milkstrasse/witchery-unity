@@ -319,6 +319,18 @@ MonoBehaviour:
     m_Key: overview
     m_Metadata:
       m_Items: []
+  - m_Id: 31044054782304256
+    m_Key: purchase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31058953466011648
+    m_Key: outfits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31058970465525760
+    m_Key: fighters
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

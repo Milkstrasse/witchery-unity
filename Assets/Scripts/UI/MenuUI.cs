@@ -4,19 +4,22 @@ using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour
 {
+    [SerializeField] private MenuManager manager;
+
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI playerName;
     [SerializeField] private TextMeshProUGUI money;
 
     [SerializeField] private RectTransform mainMenu;
     [SerializeField] private RectTransform modeMenu;
-    [SerializeField] private RectTransform overviewMenu;
 
     [SerializeField] private Button joinButton;
     [SerializeField] private Button hostButton;
 
     private void Start()
     {
+        manager.OnMoneyChanged += UpdatePlayer;
+
         icon.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalSettings.icon].name + "-standard");
         playerName.text = GlobalSettings.playerName;
         money.text = $"{GlobalSettings.money} SP";
@@ -41,12 +44,12 @@ public class MenuUI : MonoBehaviour
         LeanTween.moveLocalX(modeMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
     }
 
-    public void SwitchToOverviewMenu()
+    public void SwitchToMenu(GameObject newMenu)
     {
         AudioManager.singleton.PlayStandardSound();
 
         LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 1.5f - 20f, 0.3f);
-        LeanTween.moveLocalX(overviewMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
+        LeanTween.moveLocalX(newMenu, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
     }
 
     public void SwitchToMainMenu(GameObject currMenu)
@@ -57,5 +60,15 @@ public class MenuUI : MonoBehaviour
 
         LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
         LeanTween.moveLocalX(currMenu, mainMenu.sizeDelta.x * 0.5f + 20f, 0.3f);
+    }
+
+    private void UpdatePlayer(int money)
+    {
+        this.money.text = $"{money} SP";
+    }
+
+    private void OnDestroy()
+    {
+        manager.OnMoneyChanged -= UpdatePlayer;
     }
 }

@@ -1,62 +1,156 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
-    [SerializeField] private ShopManager manager;
-
-    [SerializeField] private ShopOptionUI shopPrefab;
-    [SerializeField] private RectTransform shopParent;
-    [SerializeField] private TextMeshProUGUI balance;
+    [SerializeField] private MenuManager manager;
+    [SerializeField] private GridLayoutGroup shopLayout;
+    private ShopOptionUI[] options;
+    [SerializeField] private LocalizeStringEvent shopTitle;
+    [SerializeField] private TextMeshProUGUI refresh;
+    private int refreshOutfits;
+    private int refreshFighters;
+    private bool shwowingFighters;
 
     private void Start()
     {
-        balance.text = GlobalSettings.money.ToString();
+        manager.OnShopOptionsCreated += SetupShopOptions;
 
-        for (int i = 0; i < GlobalManager.singleton.fighters.Length; i++)
+        options = shopLayout.transform.GetComponentsInChildren<ShopOptionUI>();
+    }
+
+    private void SetupShopOptions(SelectedFighter[] fighters, int startIndex)
+    {
+        if (fighters.Length < 6)
         {
-            Fighter fighter = GlobalManager.singleton.fighters[i];
-            for (int j = 0; j < fighter.outfits.Length; j++)
+            if (startIndex == 0)
             {
-                if (!GlobalSettings.unlocked[i, j])
+                refreshOutfits = 0;
+            }
+            else
+            {
+                refreshFighters = 0;
+            }
+        }
+
+        for (int i = 0; i < fighters.Length; i++)
+        {
+            options[startIndex + i].SetupUI(GlobalManager.singleton.fighters[fighters[i].fighterID], fighters[i].outfit);
+            
+            if (fighters.Length < 6)
+            {
+                if (options[i].button.interactable && i < 3 && startIndex < 3)
                 {
-                    int jCopy = j;
-
-                    ShopOptionUI option = Instantiate(shopPrefab, shopParent);
-                    option.SetupUI(fighter, j);
-
-                    option.GetComponent<Button>().onClick.AddListener(() => UnlockOutfit(option));
+                    refreshOutfits += 40;
                 }
+                else if (options[startIndex + i].button.interactable && i < 3 && startIndex > 0)
+                {
+                    refreshFighters += 40;
+                }
+            }
+            else
+            {
+                if (i < 3 && options[i].button.interactable)
+                {
+                    refreshOutfits += 40;
+                }
+                else if (options[i].button.interactable)
+                {
+                    refreshFighters += 40;
+                }
+            }
+        }
+
+        if (shwowingFighters)
+        {
+            refresh.text = $"{refreshFighters} SP";
+        }
+        else
+        {
+            refresh.text = $"{refreshOutfits} SP";
+        }
+    }
+
+    public void UnlockOutfit(int index)
+    {
+        if (manager.UnlockOutfit(options[index].fighter, options[index].outfit))
+        {
+            AudioManager.singleton.PlayStandardSound();
+
+            options[index].button.interactable = false;
+
+            refreshOutfits -= 40;
+            refresh.text = $"{refreshOutfits} SP";
+        }
+    }
+
+    public void RefreshShop()
+    {
+        if (shwowingFighters)
+        {
+            if (GlobalSettings.money >= refreshFighters)
+            {
+                AudioManager.singleton.PlayStandardSound();
+
+                GlobalSettings.money -= refreshFighters;
+
+                manager.OnMoneyChanged.Invoke(GlobalSettings.money);
+                manager.CreateShopOptions(3, 3);
+            }
+        }
+        else
+        {
+            if (GlobalSettings.money >= refreshOutfits)
+            {
+                AudioManager.singleton.PlayStandardSound();
+
+                GlobalSettings.money -= refreshOutfits;
+
+                manager.OnMoneyChanged.Invoke(GlobalSettings.money);
+                manager.CreateShopOptions(3, 0);
             }
         }
     }
 
-    private void UnlockOutfit(ShopOptionUI optionUI)
+    public void ToggleShop()
     {
-        if (manager.UnlockOutfit(optionUI.fighter, optionUI.outfit))
+        AudioManager.singleton.PlayStandardSound();
+
+        shwowingFighters = !shwowingFighters;
+
+        if (shwowingFighters)
         {
-            Destroy(optionUI.gameObject);
-            UpdateUI();
+            shopLayout.startCorner = GridLayoutGroup.Corner.UpperRight;
+            refresh.text = $"{refreshFighters} SP";
+
+            shopTitle.StringReference.SetReference("StringTable", "fighters");
+        }
+        else
+        {
+            shopLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
+            refresh.text = $"{refreshOutfits} SP";
+
+            shopTitle.StringReference.SetReference("StringTable", "outfits");
         }
     }
 
-    private void UpdateUI()
+    public void ReturnToMenu(MenuUI menuUI)
     {
-        balance.text = GlobalSettings.money.ToString();
-    }
+        AudioManager.singleton.PlayStandardSound();
 
-    public void Reset()
-    {
-        manager.Reset();
-        UpdateUI();
+        SaveManager.SaveData();
+
+        shwowingFighters = false;
+        shopLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
+        shopTitle.StringReference.SetReference("StringTable", "outfits");
+
+        menuUI.SwitchToMainMenu(gameObject);
     }
 
     private void OnDestroy()
     {
-        foreach (Transform child in shopParent)
-        {
-            child.GetComponent<Button>().onClick.RemoveAllListeners();
-        }
+        manager.OnShopOptionsCreated -= SetupShopOptions;
     }
 }

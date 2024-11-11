@@ -143,11 +143,15 @@ public class OverviewUI : MonoBehaviour
         }
     }
 
-    public void HideCards()
+    public void ReturnToMenu(MenuUI menuUI)
     {
+        AudioManager.singleton.PlayStandardSound();
+
         showingCards = false;
 
         fighterRect.transform.localPosition = new Vector3(0f, fighterRect.transform.localPosition.y, fighterRect.transform.localPosition.z);
         toggleBackground.material = neutral;
+
+        menuUI.SwitchToMainMenu(gameObject);
     }
 }
