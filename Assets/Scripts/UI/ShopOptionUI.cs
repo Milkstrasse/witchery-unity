@@ -17,7 +17,14 @@ public class ShopOptionUI : MonoBehaviour
         this.fighter = fighter;
         this.outfit = outfit;
 
-        button.interactable = !GlobalSettings.unlocked[fighter.fighterID, outfit];
+        if (outfit > 0)
+        {
+            button.interactable = GlobalSettings.unlocked[fighter.fighterID, 0] && !GlobalSettings.unlocked[fighter.fighterID, outfit];
+        }
+        else
+        {
+            button.interactable = !GlobalSettings.unlocked[fighter.fighterID, 0];
+        }
 
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-" + fighter.outfits[outfit].name);
         title.text = fighter.name;

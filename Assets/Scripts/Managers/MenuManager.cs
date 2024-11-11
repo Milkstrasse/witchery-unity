@@ -21,7 +21,15 @@ public class MenuManager : MonoBehaviour
         while (amount > 0)
         {
             int fighter = UnityEngine.Random.Range(0, GlobalManager.singleton.fighters.Length);
-            options[amount - 1] = new SelectedFighter(fighter, UnityEngine.Random.Range(1, GlobalManager.singleton.fighters[fighter].outfits.Length));
+            
+            if (amount + offset > 3)
+            {
+                options[amount - 1] = new SelectedFighter(fighter, 0);
+            }
+            else
+            {
+                options[amount - 1] = new SelectedFighter(fighter, UnityEngine.Random.Range(1, GlobalManager.singleton.fighters[fighter].outfits.Length));
+            }
 
             amount--;
         }
