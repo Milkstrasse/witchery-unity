@@ -347,6 +347,10 @@ MonoBehaviour:
     m_Key: claimAll
     m_Metadata:
       m_Items: []
+  - m_Id: 31570974661926912
+    m_Key: claimed
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -524,6 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: {fileID: 8331320779149031974}
   description: {fileID: 3096847404458250864}
+  claimText: {fileID: 4994931530142732164}
   reward: {fileID: 8438150595275118254}
   claimButton: {fileID: 317317134886826984}
 --- !u!1 &4367338281837242972

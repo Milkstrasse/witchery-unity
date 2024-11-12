@@ -19,6 +19,10 @@ public class DebugManager : MonoBehaviour
     }
 
     public void AddMoney() => SaveManager.savedData.money += 100;
-    public void DeleteData() => SaveManager.DeleteData();
+    public void DeleteData()
+    {
+        SaveManager.DeleteData();
+        GlobalManager.singleton.LoadScene("StartScene");
+    }
     public void ReturnToMenu() => GlobalManager.singleton.LoadScene("MenuScene");
 }

@@ -17,12 +17,19 @@ public class MissionOptionUI : MonoBehaviour
         title.text = mission.name;
         reward.text = mission.reward.ToString();
 
-        claimButton.interactable = !claimed && mission.isClaimable;
+        claimButton.interactable = mission.isClaimable;
+        
+        if (claimed)
+        {
+            Claim();
+        }
     }
 
     public void Claim()
     {
         claimButton.interactable = false;
         reward.gameObject.SetActive(false);
+
+        claimText.StringReference.SetReference("StringTable", "claimed");
     }
 }
