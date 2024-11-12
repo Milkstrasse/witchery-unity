@@ -77,7 +77,7 @@ public class ShopUI : MonoBehaviour
     {
         if (manager.UnlockOutfit(options[index].fighter, options[index].outfit))
         {
-            AudioManager.singleton.PlayStandardSound();
+            AudioManager.singleton.PlayPositiveSound();
 
             options[index].button.interactable = false;
 

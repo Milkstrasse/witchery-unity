@@ -311,7 +311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6193589589378804777, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Name
-      value: HomeCard (1)
+      value: RandomCPU
       objectReference: {fileID: 0}
     - target: {fileID: 7896369229768226696, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Pivot.x
@@ -5484,8 +5484,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1606828588346783801}
-  - {fileID: 1585733790}
   - {fileID: 1777096708}
+  - {fileID: 1585733790}
   - {fileID: 1358370049}
   m_Father: {fileID: 563664036}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6205,13 +6205,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1227851668}
     m_Modifications:
-    - target: {fileID: 5934132055143448897, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
-      propertyPath: m_text
-      value: \uf023
-      objectReference: {fileID: 0}
     - target: {fileID: 6193589589378804777, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Name
-      value: HomeCard (3)
+      value: HomeCard (2)
       objectReference: {fileID: 0}
     - target: {fileID: 7896369229768226696, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Pivot.x
@@ -7054,7 +7050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6193589589378804777, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Name
-      value: HomeCard (3)
+      value: HomeCard (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7896369229768226696, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Pivot.x
@@ -7508,14 +7504,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2103665511}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: DeletePlayer
-        m_Mode: 1
+        m_MethodName: GoToScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: DebugScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1504181279
@@ -8699,42 +8695,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1227851668}
     m_Modifications:
-    - target: {fileID: 5039365176735358283, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
-      propertyPath: m_text
-      value: Don't press
-      objectReference: {fileID: 0}
-    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2103665511}
-    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: AddMoney
-      objectReference: {fileID: 0}
-    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5368009003763571059, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5934132055143448897, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
-      propertyPath: m_text
-      value: \uf023
-      objectReference: {fileID: 0}
     - target: {fileID: 6193589589378804777, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Name
       value: HomeCard (1)
@@ -8818,10 +8778,6 @@ PrefabInstance:
     - target: {fileID: 7896369229768226696, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8740075587570442926, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
-      propertyPath: m_text
-      value: MONEY
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9289,7 +9245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6193589589378804777, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Name
-      value: HomeCard
+      value: SameDevice
       objectReference: {fileID: 0}
     - target: {fileID: 7896369229768226696, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Pivot.x
@@ -9478,7 +9434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6193589589378804777, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Name
-      value: HomeCard (2)
+      value: SelectedCPU
       objectReference: {fileID: 0}
     - target: {fileID: 7896369229768226696, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Pivot.x
@@ -10000,7 +9956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6193589589378804777, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Name
-      value: HomeCard (2)
+      value: Journal
       objectReference: {fileID: 0}
     - target: {fileID: 7896369229768226696, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Pivot.x
@@ -12304,7 +12260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6193589589378804777, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Name
-      value: HomeCard
+      value: Contacts
       objectReference: {fileID: 0}
     - target: {fileID: 7896369229768226696, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Pivot.x

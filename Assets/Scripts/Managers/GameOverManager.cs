@@ -25,7 +25,7 @@ public class GameOverManager : MonoBehaviour
             if (players[0].hasWon)
             {
                 SaveManager.savedData.money += 25;
-                SaveManager.savedData.amountOfWins += 1;
+                SaveManager.savedData.timesWon += 1;
             }
             else
             {
@@ -37,7 +37,7 @@ public class GameOverManager : MonoBehaviour
             if (players[1].hasWon)
             {
                 SaveManager.savedData.money += 25;
-                SaveManager.savedData.amountOfWins += 1;
+                SaveManager.savedData.timesWon += 1;
             }
             else
             {
@@ -45,7 +45,7 @@ public class GameOverManager : MonoBehaviour
             }
         }
 
-        SaveManager.savedData.amountOfFights += 1;
+        SaveManager.savedData.timesFought += 1;
 
         SaveManager.SaveData();
     }

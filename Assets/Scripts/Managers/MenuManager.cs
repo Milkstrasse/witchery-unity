@@ -99,17 +99,6 @@ public class MenuManager : MonoBehaviour
         GlobalManager.singleton.LoadScene(scene);
     }
 
-    public void AddMoney()
-    {
-        SaveManager.savedData.money += 100;
-        OnMoneyChanged?.Invoke(SaveManager.savedData.money);
-    }
-
-    public void DeletePlayer()
-    {
-        SaveManager.DeleteData();
-    }
-
     public bool UnlockOutfit(Fighter fighter, int outfit)
     {
         int cost = fighter.outfits[outfit].cost;

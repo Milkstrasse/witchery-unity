@@ -10,9 +10,9 @@ public struct SavedData
     public bool[,] unlocked;
     public SelectedFighter[] shopFighters;
 
-    public int amountOfFights;
-    public int amountOfWins;
-    public int amountOfFirstWins;
+    public int timesFought;
+    public int timesWon;
+    public int timesWonFirst;
     public int damageDone;
     public int healingDone;
     public int energyCreated;
@@ -40,9 +40,9 @@ public struct SavedData
         unlocked = new bool[0, 0];
         shopFighters = new SelectedFighter[0];
 
-        amountOfFights = 0;
-        amountOfWins = 0;
-        amountOfFirstWins = 0;
+        timesFought = 0;
+        timesWon = 0;
+        timesWonFirst = 0;
         damageDone = 0;
         healingDone = 0;
         energyCreated = 0;
