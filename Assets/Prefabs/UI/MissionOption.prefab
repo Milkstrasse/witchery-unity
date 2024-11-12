@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 7332775762214414302}
   - component: {fileID: 4419381470615901088}
   m_Layer: 5
-  m_Name: Mission
+  m_Name: MissionOption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

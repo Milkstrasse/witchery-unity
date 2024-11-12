@@ -918,10 +918,10 @@ RectTransform:
   - {fileID: 1981880843}
   m_Father: {fileID: 813814022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 940}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 695, y: -1024.9999}
+  m_SizeDelta: {x: 1390, y: 940}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &120508600
 MonoBehaviour:
@@ -977,10 +977,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 813814022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 345, y: -1494.9999}
+  m_SizeDelta: {x: 690, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &173584058
 GameObject:
@@ -2724,10 +2724,10 @@ RectTransform:
   - {fileID: 716842857}
   m_Father: {fileID: 813814022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 70}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 345, y: -1529.9999}
+  m_SizeDelta: {x: 690, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &514459327
 GameObject:
@@ -3796,7 +3796,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 813814022}
-  - component: {fileID: 813814023}
   - component: {fileID: 813814024}
   m_Layer: 5
   m_Name: ShopMenu
@@ -3827,32 +3826,6 @@ RectTransform:
   m_AnchoredPosition: {x: 710, y: 0}
   m_SizeDelta: {x: 690, y: 0}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &813814023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 813814021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 6
-  m_Spacing: -10
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &813814024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3866,7 +3839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 2103665511}
-  shopLayout: {fileID: 120508600}
+  shopRect: {fileID: 120508599}
   shopTitle: {fileID: 1541607349}
   refresh: {fileID: 443557126}
 --- !u!1 &914084414
@@ -5116,6 +5089,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1115473305}
   - component: {fileID: 1115473306}
+  - component: {fileID: 1115473307}
   m_Layer: 5
   m_Name: MissionMenu
   m_TagString: Untagged
@@ -5173,6 +5147,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1115473307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115473304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6330fdf1cf5e4dbc9ba7ac30769d177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missionParent: {fileID: 514459328}
+  missionPrefab: {fileID: 3896124598410515108, guid: 92e086d5bdc3246508123d988c129398, type: 3}
 --- !u!1001 &1169521571
 PrefabInstance:
   m_ObjectHideFlags: 0

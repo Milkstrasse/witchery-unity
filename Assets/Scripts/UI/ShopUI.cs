@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ShopUI : MonoBehaviour
 {
     [SerializeField] private MenuManager manager;
-    [SerializeField] private GridLayoutGroup shopLayout;
+    [SerializeField] private RectTransform shopRect;
     private ShopOptionUI[] options;
     [SerializeField] private LocalizeStringEvent shopTitle;
     [SerializeField] private TextMeshProUGUI refresh;
@@ -18,7 +18,7 @@ public class ShopUI : MonoBehaviour
     {
         manager.OnShopOptionsCreated += SetupShopOptions;
 
-        options = shopLayout.transform.GetComponentsInChildren<ShopOptionUI>();
+        options = shopRect.transform.GetComponentsInChildren<ShopOptionUI>();
     }
 
     private void SetupShopOptions(SelectedFighter[] fighters, int startIndex)
@@ -126,14 +126,14 @@ public class ShopUI : MonoBehaviour
 
         if (shwowingFighters)
         {
-            shopLayout.startCorner = GridLayoutGroup.Corner.UpperRight;
+            LeanTween.moveLocalX(shopRect.gameObject, 0f, 0.3f);
             refresh.text = $"{refreshFighters} SP";
 
             shopTitle.StringReference.SetReference("StringTable", "fighters");
         }
         else
         {
-            shopLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
+            LeanTween.moveLocalX(shopRect.gameObject, shopRect.sizeDelta.x/2f, 0.3f);
             refresh.text = $"{refreshOutfits} SP";
 
             shopTitle.StringReference.SetReference("StringTable", "outfits");
@@ -147,8 +147,7 @@ public class ShopUI : MonoBehaviour
         SaveManager.SaveData();
 
         shwowingFighters = false;
-        shopLayout.startCorner = GridLayoutGroup.Corner.UpperLeft;
-        shopTitle.StringReference.SetReference("StringTable", "outfits");
+        shopRect.localPosition = new Vector3(shopRect.sizeDelta.x/2f, shopRect.localPosition.y, shopRect.localPosition.z);
 
         menuUI.SwitchToMainMenu(gameObject);
     }
