@@ -31,43 +31,16 @@ public class FightLogic
 
         if (card.hasMove)
         {
-            if (GlobalSettings.lifeIsResource)
+            if (card.move.cost > players[playerTurn].energy)
             {
-                if (card.move.cost >= players[playerTurn].health)
-                {
-                    return false;
-                }
-                else if (card.move.moveType == MoveType.Response && lastCard.played)
-                {
-                    return false;
-                }
+                return false;
+            }
+            else if (card.move.moveType == MoveType.Response && lastCard.played)
+            {
+                return false;
+            }
 
-                players[playerTurn].health -= card.move.cost;
-            }
-            else if (GlobalSettings.noCostNoMatch)
-            {
-                if (lastCard.card.hasMove && card.move.cost == lastCard.card.move.cost)
-                {
-                    return false;
-                }
-                else if (card.move.moveType == MoveType.Response && lastCard.played)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if (card.move.cost > players[playerTurn].energy)
-                {
-                    return false;
-                }
-                else if (card.move.moveType == MoveType.Response && lastCard.played)
-                {
-                    return false;
-                }
-
-                players[playerTurn].energy = players[playerTurn].energy - card.move.cost;
-            }
+            players[playerTurn].energy = players[playerTurn].energy - card.move.cost;
         }
 
         bool wasPlayed = PlayCard(card, playerTurn, true);
@@ -80,16 +53,12 @@ public class FightLogic
 
     public void RemoveCard(MoveMessage message)
     {
-        if (!message.playCard && !GlobalSettings.noRegainResource)
+        if (!message.playCard)
         {
             int cardIndex = players[playerTurn].cardHand[message.cardIndex];
             Card card = FightManager.singleton.players[playerTurn].cards[cardIndex];
 
-            if (GlobalSettings.lifeIsResource)
-            {
-                players[playerTurn].health = Math.Min(players[playerTurn].health + card.move.cost, GlobalSettings.health);
-            }
-            else if (card.hasMove)
+            if (card.hasMove)
             {
                 players[playerTurn].energy += card.move.cost;
             }
@@ -175,13 +144,13 @@ public class FightLogic
                         else
                         {
                             tempHealth -= players[1 - turn].health;
-                            players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalSettings.health);
+                            players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalData.health);
                         }
                     }
                     else
                     {
                         tempHealth -= players[1 - turn].health;
-                        players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalSettings.health);
+                        players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalData.health);
                     }
 
                     if (winner < 0 && players[1 - turn].health == 0)
@@ -223,7 +192,7 @@ public class FightLogic
                     int damageA = Math.Min(damage - players[turn].GetPowerBonus() + players[1 - turn].GetDamageModifier(), 0);
                     int damageB = Math.Min(damage - players[turn].GetPowerBonus() + players[turn].GetDamageModifier(), 0);
 
-                    players[1 - turn].health = Math.Clamp(players[1 - turn].health + damageA, 0, GlobalSettings.health);
+                    players[1 - turn].health = Math.Clamp(players[1 - turn].health + damageA, 0, GlobalData.health);
                     if (winner < 0 && players[1 - turn].health == 0)
                     {
                         winner = turn;
@@ -239,7 +208,7 @@ public class FightLogic
                         }
                     }
 
-                    players[turn].health = Math.Clamp(players[turn].health + damageB, 0, GlobalSettings.health);
+                    players[turn].health = Math.Clamp(players[turn].health + damageB, 0, GlobalData.health);
 
                     break;
                 case 17: //clear effects
@@ -292,7 +261,7 @@ public class FightLogic
                         health = Math.Max(health + players[turn].GetPowerBonus(), 0);
                     }
 
-                    players[(move.target + turn)%2].health = Math.Clamp(players[(move.target + turn)%2].health + health, 0, GlobalSettings.health);
+                    players[(move.target + turn)%2].health = Math.Clamp(players[(move.target + turn)%2].health + health, 0, GlobalData.health);
 
                     if (winner < 0 && players[(move.target + turn)%2].health == 0)
                     {
@@ -359,7 +328,7 @@ public class FightLogic
                         }
 
                         health += players[1 - turn].GetPowerBonus();
-                        players[turn].health = Math.Clamp(players[turn].health + health, 0, GlobalSettings.health);
+                        players[turn].health = Math.Clamp(players[turn].health + health, 0, GlobalData.health);
                     }
 
                     int energy = lastCard.card.move.health;
@@ -441,15 +410,6 @@ public class FightLogic
     {
         for (int i = 0; i < players.Count; i++)
         {
-            if (GlobalSettings.lifeIsResource)
-            {
-                players[i].health = Math.Max(players[i].health + players[i].energy, GlobalSettings.health);
-            }
-            else if (GlobalSettings.startAndGainEnergy)
-            {
-                players[i].energy += 7;
-            }
-            
             players[i].FillHand(5);
 
             int j = 0;

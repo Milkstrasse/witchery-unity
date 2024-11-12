@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Globalization;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -70,13 +68,13 @@ public class SettingsManager : MonoBehaviour
 
         AudioManager.singleton.PlayStandardSound();
 
-        if (GlobalSettings.themeIndex > 0)
+        if (GlobalData.themeIndex > 0)
         {
-            GlobalSettings.themeIndex--;
+            GlobalData.themeIndex--;
         }
         else
         {
-            GlobalSettings.themeIndex = GlobalManager.singleton.themes.Length - 1;
+            GlobalData.themeIndex = GlobalManager.singleton.themes.Length - 1;
         }
 
         StartCoroutine(ChangeTheme());
@@ -89,13 +87,13 @@ public class SettingsManager : MonoBehaviour
 
         AudioManager.singleton.PlayStandardSound();
 
-        if (GlobalSettings.themeIndex < GlobalManager.singleton.themes.Length - 1)
+        if (GlobalData.themeIndex < GlobalManager.singleton.themes.Length - 1)
         {
-            GlobalSettings.themeIndex++;
+            GlobalData.themeIndex++;
         }
         else
         {
-            GlobalSettings.themeIndex = 0;
+            GlobalData.themeIndex = 0;
         }
         
         StartCoroutine(ChangeTheme());
@@ -105,10 +103,10 @@ public class SettingsManager : MonoBehaviour
     {
         changingTheme = true;
 
-        GlobalManager.singleton.ApplyTheme(GlobalSettings.themeIndex);
+        GlobalManager.singleton.ApplyTheme();
         yield return null;
 
-        OnThemeUpdated?.Invoke(GlobalManager.singleton.themes[GlobalSettings.themeIndex].name);
+        OnThemeUpdated?.Invoke(GlobalManager.singleton.themes[GlobalData.themeIndex].name);
 
         changingTheme = false;
     }
@@ -123,11 +121,6 @@ public class SettingsManager : MonoBehaviour
 
         changingLang = false;
     }
-
-    public void ToggleLifeResource(bool toggleValue) => GlobalSettings.lifeIsResource = toggleValue;
-    public void ToggleRegainResource(bool toggleValue) => GlobalSettings.noRegainResource = toggleValue;
-    public void ToggleCostMatch(bool toggleValue) => GlobalSettings.noCostNoMatch = toggleValue;
-    public void ToggleEnergy(bool toggleValue) => GlobalSettings.startAndGainEnergy = toggleValue;
 
     public void ResetSettings()
     {
@@ -158,11 +151,7 @@ public class SettingsManager : MonoBehaviour
 
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langIndex];
 
-        GlobalSettings.lifeIsResource = false;
-        GlobalSettings.noRegainResource = false;
-        GlobalSettings.noCostNoMatch = false;
-        GlobalSettings.startAndGainEnergy = false;
-        GlobalSettings.themeIndex = 1;
+        GlobalData.themeIndex = 1;
 
         GlobalManager.singleton.LoadScene("SettingsScene");
 
@@ -179,7 +168,7 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("music", AudioManager.singleton.GetMusicVolume());
         PlayerPrefs.SetFloat("sound", AudioManager.singleton.GetSoundVolume());
         PlayerPrefs.SetInt("langCode", langIndex);
-        PlayerPrefs.SetInt("theme", GlobalSettings.themeIndex);
+        PlayerPrefs.SetInt("theme", GlobalData.themeIndex);
         PlayerPrefs.Save();
 
         GlobalManager.singleton.LoadScene("MenuScene");

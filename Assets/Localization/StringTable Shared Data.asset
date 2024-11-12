@@ -19,6 +19,10 @@ MonoBehaviour:
     m_Key: addBlank
     m_Metadata:
       m_Items: []
+  - m_Id: 7210015948529664
+    m_Key: applyEffect
+    m_Metadata:
+      m_Items: []
   - m_Id: 8223596102017024
     m_Key: bleed
     m_Metadata:
@@ -29,6 +33,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2538677614927872
     m_Key: cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31440676506820608
+    m_Key: claim
     m_Metadata:
       m_Items: []
   - m_Id: 7622870518718464
@@ -59,6 +67,10 @@ MonoBehaviour:
     m_Key: combat
     m_Metadata:
       m_Items: []
+  - m_Id: 30839589168996352
+    m_Key: contacts
+    m_Metadata:
+      m_Items: []
   - m_Id: 19529877668487168
     m_Key: control
     m_Metadata:
@@ -67,12 +79,20 @@ MonoBehaviour:
     m_Key: copyEffects
     m_Metadata:
       m_Items: []
+  - m_Id: 27041812098048000
+    m_Key: custom
+    m_Metadata:
+      m_Items: []
   - m_Id: 12959317832491008
     m_Key: damage
     m_Metadata:
       m_Items: []
   - m_Id: 12180150551568384
     m_Key: de
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27041791818588160
+    m_Key: default
     m_Metadata:
       m_Items: []
   - m_Id: 25423449387163648
@@ -115,6 +135,10 @@ MonoBehaviour:
     m_Key: fighterDescr
     m_Metadata:
       m_Items: []
+  - m_Id: 31058970465525760
+    m_Key: fighters
+    m_Metadata:
+      m_Items: []
   - m_Id: 7880276955881472
     m_Key: fillHand
     m_Metadata:
@@ -125,10 +149,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 7210184622465024
     m_Key: gainEnergy
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7210015948529664
-    m_Key: applyEffect
     m_Metadata:
       m_Items: []
   - m_Id: 28496886263439360
@@ -155,12 +175,20 @@ MonoBehaviour:
     m_Key: joincode
     m_Metadata:
       m_Items: []
+  - m_Id: 31438435200786432
+    m_Key: journal
+    m_Metadata:
+      m_Items: []
   - m_Id: 12166931850190848
     m_Key: language
     m_Metadata:
       m_Items: []
   - m_Id: 16293959922868224
     m_Key: magicgirl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31438245853126656
+    m_Key: missions
     m_Metadata:
       m_Items: []
   - m_Id: 12166901554733056
@@ -171,12 +199,28 @@ MonoBehaviour:
     m_Key: obtainEffect
     m_Metadata:
       m_Items: []
+  - m_Id: 31058953466011648
+    m_Key: outfits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30839593145196544
+    m_Key: overview
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27476618044760064
+    m_Key: palette
+    m_Metadata:
+      m_Items: []
   - m_Id: 26400137377996800
     m_Key: player
     m_Metadata:
       m_Items: []
   - m_Id: 8223787123204096
     m_Key: power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31044054782304256
+    m_Key: purchase
     m_Metadata:
       m_Items: []
   - m_Id: 2538625827856384
@@ -231,10 +275,6 @@ MonoBehaviour:
     m_Key: shopDescr
     m_Metadata:
       m_Items: []
-  - m_Id: 8910918694985728
-    m_Key: takeCard
-    m_Metadata:
-      m_Items: []
   - m_Id: 12166916067024896
     m_Key: sound
     m_Metadata:
@@ -271,6 +311,10 @@ MonoBehaviour:
     m_Key: swapEffects
     m_Metadata:
       m_Items: []
+  - m_Id: 8910918694985728
+    m_Key: takeCard
+    m_Metadata:
+      m_Items: []
   - m_Id: 12963192530526208
     m_Key: team
     m_Metadata:
@@ -299,36 +343,8 @@ MonoBehaviour:
     m_Key: weaken
     m_Metadata:
       m_Items: []
-  - m_Id: 27041791818588160
-    m_Key: default
-    m_Metadata:
-      m_Items: []
-  - m_Id: 27041812098048000
-    m_Key: custom
-    m_Metadata:
-      m_Items: []
-  - m_Id: 27476618044760064
-    m_Key: palette
-    m_Metadata:
-      m_Items: []
-  - m_Id: 30839589168996352
-    m_Key: grimoire
-    m_Metadata:
-      m_Items: []
-  - m_Id: 30839593145196544
-    m_Key: overview
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31044054782304256
-    m_Key: purchase
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31058953466011648
-    m_Key: outfits
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31058970465525760
-    m_Key: fighters
+  - m_Id: 31442481177419776
+    m_Key: claimAll
     m_Metadata:
       m_Items: []
   m_Metadata:

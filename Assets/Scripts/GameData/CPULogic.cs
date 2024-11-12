@@ -14,10 +14,6 @@ public struct CPULogic
             {
                 prioritizedCards.Add((i, 0));
             }
-            else if (GlobalSettings.noCostNoMatch && player.cardHand[i].hasMove && logic.lastCard.card.hasMove && player.cardHand[i].move.cost == logic.lastCard.card.move.cost)
-            {
-                prioritizedCards.Add((i, -10)); //unplayable card
-            }
             else if (player.cardHand[i].hasMove && player.cardHand[i].move.cost <= player.energy)
             {
                 Move move = player.cardHand[i].move;
@@ -65,7 +61,7 @@ public struct CPULogic
                         health = Math.Max(health + logic.players[1].GetPowerBonus(), 0);
                     }
 
-                    if (logic.players[1].health + health > GlobalSettings.health) //excessive healing
+                    if (logic.players[1].health + health > GlobalData.health) //excessive healing
                     {
                         prioritizedCards.Add((i, -1 - move.cost));
                     }

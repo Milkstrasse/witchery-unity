@@ -49,8 +49,8 @@ public class PlayerSelectionUI : MonoBehaviour
         }
         else
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalSettings.icon].name + "-standard");
-            SetName(GlobalSettings.playerName);
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[SaveManager.savedData.icon].name + "-standard");
+            SetName(SaveManager.savedData.name);
         }
 
         filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};
@@ -165,13 +165,13 @@ public class PlayerSelectionUI : MonoBehaviour
 
     public void SetTimer(int time)
     {
-        if (timer.fillAmount > time/(float)GlobalSettings.waitTime)
+        if (timer.fillAmount > time/(float)GlobalData.waitTime)
         {
-            LeanTween.value(timer.gameObject, timer.fillAmount, time/(float)GlobalSettings.waitTime, 1f ).setOnUpdate( (float val) => { timer.fillAmount = val; } );
+            LeanTween.value(timer.gameObject, timer.fillAmount, time/(float)GlobalData.waitTime, 1f ).setOnUpdate( (float val) => { timer.fillAmount = val; } );
         }
         else
         {
-            timer.fillAmount = time/(float)GlobalSettings.waitTime;
+            timer.fillAmount = time/(float)GlobalData.waitTime;
         }
     }
 
@@ -247,7 +247,7 @@ public class PlayerSelectionUI : MonoBehaviour
                     outfits[currCard] = arrayLength;
                 }
 
-                outfitFound = GlobalSettings.unlocked[currCard, outfits[currCard]];
+                outfitFound = SaveManager.savedData.unlocked[currCard, outfits[currCard]];
             }
 
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
@@ -314,7 +314,7 @@ public class PlayerSelectionUI : MonoBehaviour
                     outfits[currCard] = 0;
                 }
 
-                outfitFound = GlobalSettings.unlocked[currCard, outfits[currCard]];
+                outfitFound = SaveManager.savedData.unlocked[currCard, outfits[currCard]];
             }
 
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);

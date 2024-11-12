@@ -11,9 +11,9 @@ public class MenuManager : MonoBehaviour
         GlobalManager.QuitAnyConnection();
         GlobalManager.singleton.joincode = "";
 
-        if (GlobalSettings.shopFighters.Length > 0)
+        if (SaveManager.savedData.shopFighters.Length > 0)
         {
-            OnShopOptionsCreated?.Invoke(GlobalSettings.shopFighters, 0);
+            OnShopOptionsCreated?.Invoke(SaveManager.savedData.shopFighters, 0);
         }
         else
         {
@@ -43,13 +43,13 @@ public class MenuManager : MonoBehaviour
 
         if (options.Length > 3)
         {
-            GlobalSettings.shopFighters = options;
+            SaveManager.savedData.shopFighters = options;
         }
         else
         {
             for (int i = 0; i < options.Length; i++)
             {
-                GlobalSettings.shopFighters[i + offset] = options[i];
+                SaveManager.savedData.shopFighters[i + offset] = options[i];
             }
         }
 
@@ -101,8 +101,8 @@ public class MenuManager : MonoBehaviour
 
     public void AddMoney()
     {
-        GlobalSettings.money += 100;
-        OnMoneyChanged?.Invoke(GlobalSettings.money);
+        SaveManager.savedData.money += 100;
+        OnMoneyChanged?.Invoke(SaveManager.savedData.money);
     }
 
     public void DeletePlayer()
@@ -113,12 +113,13 @@ public class MenuManager : MonoBehaviour
     public bool UnlockOutfit(Fighter fighter, int outfit)
     {
         int cost = fighter.outfits[outfit].cost;
-        if (GlobalSettings.money >= cost && !GlobalSettings.unlocked[fighter.fighterID, outfit])
+        if (SaveManager.savedData.money >= cost && !SaveManager.savedData.unlocked[fighter.fighterID, outfit])
         {
-            GlobalSettings.money -= cost;
-            GlobalSettings.unlocked[fighter.fighterID, outfit] = true;
+            SaveManager.savedData.money -= cost;
+            SaveManager.savedData.unlocked[fighter.fighterID, outfit] = true;
+            SaveManager.savedData.moneySpent += cost;
 
-            OnMoneyChanged?.Invoke(GlobalSettings.money);
+            OnMoneyChanged?.Invoke(SaveManager.savedData.money);
 
             return true;
         }

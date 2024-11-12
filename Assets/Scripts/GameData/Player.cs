@@ -34,17 +34,10 @@ public class Player : MonoBehaviour
         icon = message.icon;
         
         playerName = message.name;
-        fullHealth = GlobalSettings.health;
+        fullHealth = GlobalData.health;
         currHealth = fullHealth;
 
-        if (GlobalSettings.startAndGainEnergy)
-        {
-            energy = 7;
-        }
-        else
-        {
-            energy = 0;
-        }
+        energy = 0;
 
         cards = new List<Card>();
         cardHand = new List<Card>();

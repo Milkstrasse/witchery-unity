@@ -90,25 +90,27 @@ public class ShopUI : MonoBehaviour
     {
         if (shwowingFighters)
         {
-            if (GlobalSettings.money >= refreshFighters)
+            if (SaveManager.savedData.money >= refreshFighters)
             {
                 AudioManager.singleton.PlayStandardSound();
 
-                GlobalSettings.money -= refreshFighters;
+                SaveManager.savedData.money -= refreshFighters;
+                SaveManager.savedData.moneySpent += refreshFighters;
 
-                manager.OnMoneyChanged.Invoke(GlobalSettings.money);
+                manager.OnMoneyChanged.Invoke(SaveManager.savedData.money);
                 manager.CreateShopOptions(3, 3);
             }
         }
         else
         {
-            if (GlobalSettings.money >= refreshOutfits)
+            if (SaveManager.savedData.money >= refreshOutfits)
             {
                 AudioManager.singleton.PlayStandardSound();
 
-                GlobalSettings.money -= refreshOutfits;
+                SaveManager.savedData.money -= refreshOutfits;
+                SaveManager.savedData.moneySpent += refreshOutfits;
 
-                manager.OnMoneyChanged.Invoke(GlobalSettings.money);
+                manager.OnMoneyChanged.Invoke(SaveManager.savedData.money);
                 manager.CreateShopOptions(3, 0);
             }
         }

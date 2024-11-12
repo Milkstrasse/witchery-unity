@@ -57,9 +57,9 @@ public class GlobalManager : MonoBehaviour
 
         int langIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("langCode", langIndex)];
-        GlobalSettings.themeIndex = PlayerPrefs.GetInt("theme", 1);
+        GlobalData.themeIndex = PlayerPrefs.GetInt("theme", 1);
 
-        ApplyTheme(GlobalSettings.themeIndex);
+        ApplyTheme();
 
         #if UNITY_EDITOR
         relayEnabled = false;
@@ -67,7 +67,7 @@ public class GlobalManager : MonoBehaviour
 
         if (SaveManager.LoadData())
         {
-            Debug.Log("Welcome " + GlobalSettings.playerName);
+            Debug.Log("Welcome " + SaveManager.savedData.name);
             LoadScene("MenuScene");
         }
         else
@@ -125,21 +125,20 @@ public class GlobalManager : MonoBehaviour
         return filteredFighters.ToArray();
     }
 
-    public void ApplyTheme(int themeIndex)
+    public void ApplyTheme()
     {
-        for (int i = 0; i < themes[GlobalSettings.themeIndex].colors.Length; i++)
+        for (int i = 0; i < themes[GlobalData.themeIndex].colors.Length; i++)
         {
-            materials[i].color = themes[GlobalSettings.themeIndex].colors[i];
+            materials[i].color = themes[GlobalData.themeIndex].colors[i];
         }
 
-        TMP_Settings.defaultStyleSheet = themes[GlobalSettings.themeIndex].sheet;
+        TMP_Settings.defaultStyleSheet = themes[GlobalData.themeIndex].sheet;
         TMP_Settings.defaultStyleSheet.RefreshStyles();
     }
 
     public void GoToMenu()
     {
-        SaveManager.CreateNewData(fighters);
-        GlobalSettings.icon = Random.Range(0, fighters.Length);
+        SaveManager.CreateNewData(fighters, Random.Range(0, fighters.Length));
         
         LoadScene("MenuScene");
     }

@@ -10,11 +10,13 @@ public class StartManager : MonoBehaviour
     public void ShowUI()
     {
         playerPopup.SetActive(true);
+
+        SaveManager.savedData = new SavedData();
     }
 
     public void ChangeName(string name)
     {
-        GlobalSettings.playerName = name.Trim().ToUpper();
-        continueButton.interactable = GlobalSettings.playerName.Length > 0;
+        SaveManager.savedData.name = name.Trim().ToUpper();
+        continueButton.interactable = SaveManager.savedData.name.Length > 0;
     }
 }

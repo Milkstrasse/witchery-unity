@@ -242,17 +242,17 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator UpdateTimer()
     {
-        int time = GlobalSettings.turnTime;
+        int time = GlobalData.turnTime;
         while (time >= 0)
         {
             time--;
-            if (timer.fillAmount > time / (float)GlobalSettings.turnTime)
+            if (timer.fillAmount > time / (float)GlobalData.turnTime)
             {
-                LeanTween.value(timer.gameObject, timer.fillAmount, time / (float)GlobalSettings.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
+                LeanTween.value(timer.gameObject, timer.fillAmount, time / (float)GlobalData.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
             }
             else
             {
-                timer.fillAmount = time / (float)GlobalSettings.turnTime;
+                timer.fillAmount = time / (float)GlobalData.turnTime;
             }
 
             yield return new WaitForSeconds(1.0f);

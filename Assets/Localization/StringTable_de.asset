@@ -337,7 +337,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 30839589168996352
-    m_Localized: GRIMOIRE
+    m_Localized: KONTAKTE
     m_Metadata:
       m_Items: []
   - m_Id: 30839593145196544
@@ -354,6 +354,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 31058953466011648
     m_Localized: Outfits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31438245853126656
+    m_Localized: Missionen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31438435200786432
+    m_Localized: LOGBUCH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31440676506820608
+    m_Localized: Erhalte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31442481177419776
+    m_Localized: Alles erhalten
     m_Metadata:
       m_Items: []
   references:

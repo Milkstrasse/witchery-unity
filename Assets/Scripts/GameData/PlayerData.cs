@@ -33,16 +33,8 @@ public class PlayerData
     {
         name = message.name;
         
-        health = GlobalSettings.health;
-
-        if (GlobalSettings.startAndGainEnergy)
-        {
-            energy = 7;
-        }
-        else
-        {
-            energy = 0;
-        }
+        health = GlobalData.health;
+        energy = 0;
 
         cardStack = new List<int>();
         for (int i = 0; i < message.fighterIDs.Length; i++)

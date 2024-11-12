@@ -20,9 +20,9 @@ public class MenuUI : MonoBehaviour
     {
         manager.OnMoneyChanged += UpdatePlayer;
 
-        icon.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalSettings.icon].name + "-standard");
-        playerName.text = GlobalSettings.playerName;
-        money.text = $"{GlobalSettings.money} SP";
+        icon.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[SaveManager.savedData.icon].name + "-standard");
+        playerName.text = SaveManager.savedData.name;
+        money.text = $"{SaveManager.savedData.money} SP";
 
         joinButton.interactable = GlobalManager.singleton.isConnected;
         hostButton.interactable = GlobalManager.singleton.isConnected;

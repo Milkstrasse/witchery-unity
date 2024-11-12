@@ -11,8 +11,6 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private LocalizeStringEvent currLang;
     [SerializeField] private LocalizeStringEvent currTheme;
 
-    [SerializeField] private Toggle[] toggles;
-
     private void Start()
     {
         manager.OnLanguageUpdated += UpdateLanguage;
@@ -24,12 +22,7 @@ public class SettingsUI : MonoBehaviour
         musicSlider.enabled = true;
         soundSlider.enabled = true;
 
-        toggles[0].isOn = GlobalSettings.lifeIsResource;
-        toggles[1].isOn = GlobalSettings.noRegainResource;
-        toggles[2].isOn = GlobalSettings.noCostNoMatch;
-        toggles[3].isOn = GlobalSettings.startAndGainEnergy;
-
-        currTheme.StringReference.SetReference("StringTable", GlobalManager.singleton.themes[GlobalSettings.themeIndex].name);
+        currTheme.StringReference.SetReference("StringTable", GlobalManager.singleton.themes[GlobalData.themeIndex].name);
     }
 
     private void UpdateLanguage(string lang)
