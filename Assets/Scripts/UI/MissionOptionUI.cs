@@ -5,13 +5,24 @@ using UnityEngine.UI;
 
 public class MissionOptionUI : MonoBehaviour
 {
-    [SerializeField] private LocalizeStringEvent title;
+    [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private LocalizeStringEvent description;
+    [SerializeField] private LocalizeStringEvent claimText;
     [SerializeField] private TextMeshProUGUI reward;
-    [SerializeField] private Button claimButton;
 
-    public void SetupUI()
+    public Button claimButton;
+
+    public void SetupUI(Mission mission, bool claimed)
     {
-        
+        title.text = mission.name;
+        reward.text = mission.reward.ToString();
+
+        claimButton.interactable = !claimed && mission.isClaimable;
+    }
+
+    public void Claim()
+    {
+        claimButton.interactable = false;
+        reward.gameObject.SetActive(false);
     }
 }

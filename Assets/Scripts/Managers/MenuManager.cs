@@ -19,6 +19,11 @@ public class MenuManager : MonoBehaviour
         {
             CreateShopOptions(6, 0);
         }
+
+        for (int i = 0; i < GlobalData.missions.Length; i++)
+        {
+            GlobalData.missions[i].CheckStatus();
+        }
     }
 
     public void CreateShopOptions(int amount, int offset)
@@ -27,7 +32,7 @@ public class MenuManager : MonoBehaviour
 
         while (amount > 0)
         {
-            int fighter = UnityEngine.Random.Range(0, GlobalManager.singleton.fighters.Length);
+            int fighter = UnityEngine.Random.Range(0, GlobalData.fighters.Length);
             
             if (amount + offset > 3)
             {
@@ -35,7 +40,7 @@ public class MenuManager : MonoBehaviour
             }
             else
             {
-                options[amount - 1] = new SelectedFighter(fighter, UnityEngine.Random.Range(1, GlobalManager.singleton.fighters[fighter].outfits.Length));
+                options[amount - 1] = new SelectedFighter(fighter, UnityEngine.Random.Range(1, GlobalData.fighters[fighter].outfits.Length));
             }
 
             amount--;
@@ -113,6 +118,22 @@ public class MenuManager : MonoBehaviour
             return true;
         }
         
+        return false;
+    }
+
+    public bool ClaimMission(int index)
+    {
+        Mission mission = GlobalData.missions[index];
+
+        if (mission.isClaimable && !SaveManager.savedData.missions[index])
+        {
+            SaveManager.savedData.money += mission.reward;
+            SaveManager.savedData.missions[index] = true;
+
+            OnMoneyChanged?.Invoke(SaveManager.savedData.money);
+            return true;
+        }
+
         return false;
     }
 }

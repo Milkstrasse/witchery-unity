@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0146d437cd642a2829d80e0cf46dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: {fileID: 2828917936861620245}
+  title: {fileID: 8331320779149031974}
   description: {fileID: 3096847404458250864}
   reward: {fileID: 8438150595275118254}
   claimButton: {fileID: 317317134886826984}

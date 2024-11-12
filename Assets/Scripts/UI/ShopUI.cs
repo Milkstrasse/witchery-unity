@@ -37,7 +37,7 @@ public class ShopUI : MonoBehaviour
 
         for (int i = 0; i < fighters.Length; i++)
         {
-            options[startIndex + i].SetupUI(GlobalManager.singleton.fighters[fighters[i].fighterID], fighters[i].outfit);
+            options[startIndex + i].SetupUI(GlobalData.fighters[fighters[i].fighterID], fighters[i].outfit);
             
             if (fighters.Length < 6)
             {

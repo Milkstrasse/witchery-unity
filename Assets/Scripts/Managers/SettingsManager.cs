@@ -74,7 +74,7 @@ public class SettingsManager : MonoBehaviour
         }
         else
         {
-            GlobalData.themeIndex = GlobalManager.singleton.themes.Length - 1;
+            GlobalData.themeIndex = GlobalData.themes.Length - 1;
         }
 
         StartCoroutine(ChangeTheme());
@@ -87,7 +87,7 @@ public class SettingsManager : MonoBehaviour
 
         AudioManager.singleton.PlayStandardSound();
 
-        if (GlobalData.themeIndex < GlobalManager.singleton.themes.Length - 1)
+        if (GlobalData.themeIndex < GlobalData.themes.Length - 1)
         {
             GlobalData.themeIndex++;
         }
@@ -106,7 +106,7 @@ public class SettingsManager : MonoBehaviour
         GlobalManager.singleton.ApplyTheme();
         yield return null;
 
-        OnThemeUpdated?.Invoke(GlobalManager.singleton.themes[GlobalData.themeIndex].name);
+        OnThemeUpdated?.Invoke(GlobalData.themes[GlobalData.themeIndex].name);
 
         changingTheme = false;
     }

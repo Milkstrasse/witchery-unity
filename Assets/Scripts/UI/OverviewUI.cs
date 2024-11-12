@@ -29,14 +29,14 @@ public class OverviewUI : MonoBehaviour
 
     private void Start()
     {
-        int fighterAmount = GlobalManager.singleton.fighters.Length;
+        int fighterAmount = GlobalData.fighters.Length;
 
         fighterCards = new CardUI[fighterAmount];
 
         for (int i = 0; i < fighterAmount; i++)
         {
             CardUI card = Instantiate(cardPrefab, fighterParent).GetComponent<CardUI>();
-            card.SetupCard(GlobalManager.singleton.fighters[i]);
+            card.SetupCard(GlobalData.fighters[i]);
 
             int iCopy = i;
             card.GetComponent<Button>().onClick.AddListener(() => SelectCard(iCopy));
@@ -47,23 +47,23 @@ public class OverviewUI : MonoBehaviour
         placeholder.SetAsLastSibling();
 
         moveCards = fighterRect.transform.GetComponentsInChildren<CardUI>();
-        outfit.StringReference.SetReference("StringTable", GlobalManager.singleton.fighters[currCard].outfits[currOutfit].name);
+        outfit.StringReference.SetReference("StringTable", GlobalData.fighters[currCard].outfits[currOutfit].name);
 
         SetupFighter();
     }
 
     private void SetupFighter()
     {
-        fighterCards[currCard].SelectCard(true);
+        fighterCards[currCard].HighlightCard(true);
 
-        Fighter fighter = GlobalManager.singleton.fighters[currCard];
+        Fighter fighter = GlobalData.fighters[currCard];
 
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-standard");
         title.text = fighter.name;
 
         for (int i = 0; i < moveCards.Length; i++)
         {
-            moveCards[i].SetupCard(GlobalManager.singleton.fighters[currCard], currOutfit, GlobalManager.singleton.fighters[currCard].moves[i*3/2]);
+            moveCards[i].SetupCard(GlobalData.fighters[currCard], currOutfit, GlobalData.fighters[currCard].moves[i*3/2]);
         }
     }
 
@@ -73,8 +73,8 @@ public class OverviewUI : MonoBehaviour
 
         currOutfit = 0;
 
-        fighterCards[currCard].UpdateOutfit(GlobalManager.singleton.fighters[currCard], currOutfit);
-        fighterCards[currCard].SelectCard(false);
+        fighterCards[currCard].UpdateOutfit(GlobalData.fighters[currCard], currOutfit);
+        fighterCards[currCard].HighlightCard(false);
 
         currCard = cardIndex;
         
@@ -91,12 +91,12 @@ public class OverviewUI : MonoBehaviour
         }
         else
         {
-            currOutfit = GlobalManager.singleton.fighters[currCard].outfits.Length - 1;
+            currOutfit = GlobalData.fighters[currCard].outfits.Length - 1;
         }
 
         SetupFighter();
 
-        Fighter fighter = GlobalManager.singleton.fighters[currCard];
+        Fighter fighter = GlobalData.fighters[currCard];
 
         fighterCards[currCard].UpdateOutfit(fighter, currOutfit);
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-" + fighter.outfits[currOutfit].name);
@@ -107,7 +107,7 @@ public class OverviewUI : MonoBehaviour
     {
         AudioManager.singleton.PlayStandardSound();
 
-        if (currOutfit < GlobalManager.singleton.fighters[currCard].outfits.Length - 1)
+        if (currOutfit < GlobalData.fighters[currCard].outfits.Length - 1)
         {
             currOutfit++;
         }
@@ -118,7 +118,7 @@ public class OverviewUI : MonoBehaviour
 
         SetupFighter();
 
-        Fighter fighter = GlobalManager.singleton.fighters[currCard];
+        Fighter fighter = GlobalData.fighters[currCard];
 
         fighterCards[currCard].UpdateOutfit(fighter, currOutfit);
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-" + fighter.outfits[currOutfit].name);

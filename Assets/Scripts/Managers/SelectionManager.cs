@@ -69,8 +69,8 @@ public class SelectionManager : MonoBehaviour
 
          if (GlobalManager.singleton.mode == GameMode.Training)
          {
-            fighterIDs.Add(new SelectedFighter(UnityEngine.Random.Range(0, GlobalManager.singleton.fighters.Length), 0));
-            fighterIDs.Add(new SelectedFighter(UnityEngine.Random.Range(0, GlobalManager.singleton.fighters.Length), 0));
+            fighterIDs.Add(new SelectedFighter(UnityEngine.Random.Range(0, GlobalData.fighters.Length), 0));
+            fighterIDs.Add(new SelectedFighter(UnityEngine.Random.Range(0, GlobalData.fighters.Length), 0));
 
             NetworkClient.Send(new PlayerMessage(playerNames[1 - index], 0, fighterIDs.ToArray()));
             fighterIDs = new List<SelectedFighter>();

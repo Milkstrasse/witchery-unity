@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < fighterIDs.Length; i++)
         {
-            Fighter fighter = GlobalManager.singleton.fighters[fighterIDs[i].fighterID];
+            Fighter fighter = GlobalData.fighters[fighterIDs[i].fighterID];
             for (int j = 0; j < fighter.moves.Length; j++)
             {
                 cards.Add(new Card(fighter, fighterIDs[i].outfit, j));

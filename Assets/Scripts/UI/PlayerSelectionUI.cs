@@ -44,18 +44,18 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (rectTransform.eulerAngles.z == 180f)
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[0].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[0].name + "-standard");
             SetName(LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", "player"));
         }
         else
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[SaveManager.savedData.icon].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
             SetName(SaveManager.savedData.name);
         }
 
         filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};
 
-        int fighterAmount = GlobalManager.singleton.fighters.Length;
+        int fighterAmount = GlobalData.fighters.Length;
         fighters = GlobalManager.singleton.GetFighters(0);
         outfits = new int[fighterAmount];
 
@@ -64,7 +64,7 @@ public class PlayerSelectionUI : MonoBehaviour
         for (int i = 0; i < fighterAmount; i++)
         {
             CardUI card = Instantiate(cardPrefab, fighterParent).GetComponent<CardUI>();
-            card.SetupCard(GlobalManager.singleton.fighters[i]);
+            card.SetupCard(GlobalData.fighters[i]);
 
             int iCopy = i;
             card.GetComponent<Button>().onClick.AddListener(() => SelectCard(iCopy, false));
@@ -96,7 +96,7 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             SelectionResult result = selectionUI.EditTeam(fighter);
 
-            fighterCards[fighter.fighterID].UpdateOutfit(GlobalManager.singleton.fighters[fighter.fighterID], fighter.outfit);
+            fighterCards[fighter.fighterID].UpdateOutfit(GlobalData.fighters[fighter.fighterID], fighter.outfit);
             outfits[fighter.fighterID] = fighter.outfit;
             fighterCards[fighter.fighterID].SelectCard(result.wasAdded);
 
@@ -231,9 +231,9 @@ public class PlayerSelectionUI : MonoBehaviour
         }
         else
         {
-            Fighter fighter = GlobalManager.singleton.fighters[currCard];
+            Fighter fighter = GlobalData.fighters[currCard];
 
-            int arrayLength = GlobalManager.singleton.fighters[currCard].outfits.Length - 1;
+            int arrayLength = GlobalData.fighters[currCard].outfits.Length - 1;
             bool outfitFound = false;
 
             while (!outfitFound)
@@ -298,7 +298,7 @@ public class PlayerSelectionUI : MonoBehaviour
         }
         else
         {
-            Fighter fighter = GlobalManager.singleton.fighters[currCard];
+            Fighter fighter = GlobalData.fighters[currCard];
 
             int arrayLength = fighter.outfits.Length - 1;
             bool outfitFound = false;
@@ -419,7 +419,7 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             actionButton.GetComponent<Image>().material = highlighted;
 
-            Fighter fighter = GlobalManager.singleton.fighters[currCard];
+            Fighter fighter = GlobalData.fighters[currCard];
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
             
             moveCards = new CardUI[fighter.moves.Length];
@@ -458,7 +458,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        for (int i = 0; i < GlobalManager.singleton.fighters.Length; i++)
+        for (int i = 0; i < GlobalData.fighters.Length; i++)
         {
             fighterCards[i].GetComponent<Button>().onClick.RemoveAllListeners();
         }

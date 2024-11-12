@@ -42,11 +42,11 @@ public class PlayerFightUI : MonoBehaviour
     {
         if (rectTransform.eulerAngles.z == 180f)
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[0].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[0].name + "-standard");
         }
         else
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[1].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[1].name + "-standard");
         }
 
         float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 230 - 40)/4 * -1;
@@ -67,7 +67,7 @@ public class PlayerFightUI : MonoBehaviour
         this.player = player;
         player.OnPlayerChanged += UpdateUI;
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[player.icon].name + "-standard");
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-standard");
 
         nameText.text = player.playerName;
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";

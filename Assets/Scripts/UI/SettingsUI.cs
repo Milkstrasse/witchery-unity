@@ -22,7 +22,7 @@ public class SettingsUI : MonoBehaviour
         musicSlider.enabled = true;
         soundSlider.enabled = true;
 
-        currTheme.StringReference.SetReference("StringTable", GlobalManager.singleton.themes[GlobalData.themeIndex].name);
+        currTheme.StringReference.SetReference("StringTable", GlobalData.themes[GlobalData.themeIndex].name);
     }
 
     private void UpdateLanguage(string lang)

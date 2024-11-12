@@ -22,12 +22,11 @@ public class SaveManager
         return true;
     }
 
-    public static void CreateNewData(Fighter[] fighters, int icon)
+    public static void CreateNewData(Fighter[] fighters, Mission[] missions, int icon)
     {
         savedData.icon = icon;
 
         int fighterAmount = fighters.Length;
-
         savedData.unlocked = new bool[fighterAmount, fighters[0].outfits.Length];
         for (int i = 0; i < fighterAmount; i++)
         {
@@ -39,6 +38,8 @@ public class SaveManager
             }
         }
 
+        savedData.missions = new bool[missions.Length];
+        
         savedData.shopFighters = new SelectedFighter[0];
 
         SaveData();

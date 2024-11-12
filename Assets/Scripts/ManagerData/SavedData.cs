@@ -8,6 +8,7 @@ public struct SavedData
     public int icon;
     public int money;
     public bool[,] unlocked;
+    public bool[] missions;
     public SelectedFighter[] shopFighters;
 
     public int timesFought;
@@ -38,6 +39,7 @@ public struct SavedData
 
         money = 0;
         unlocked = new bool[0, 0];
+        missions = new bool[0];
         shopFighters = new SelectedFighter[0];
 
         timesFought = 0;
