@@ -120,7 +120,7 @@ public class FightLogic
 
             switch (move.moveID)
             {
-                case 1: //fill hand
+                case 1: //fill hands
                     break;
                 case 4: //steal health
                 case 10:
@@ -161,8 +161,8 @@ public class FightLogic
                     break;
                 case 5: //redistribute HP
                     int allHealth = players[0].health + players[1].health;
-                    players[0].health = allHealth / 2;
-                    players[1].health = allHealth / 2;
+                    players[0].health = allHealth/2;
+                    players[1].health = allHealth/2;
 
                     break;
                 case 7: //replay last card
@@ -209,6 +209,10 @@ public class FightLogic
                     }
 
                     players[turn].health = Math.Clamp(players[turn].health + damageB, 0, GlobalData.health);
+                    if (winner < 0 && players[turn].health == 0)
+                    {
+                        winner = 1 - turn;
+                    }
 
                     break;
                 case 17: //clear effects

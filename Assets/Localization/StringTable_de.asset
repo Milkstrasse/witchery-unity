@@ -376,6 +376,14 @@ MonoBehaviour:
     m_Localized: Erhalten
     m_Metadata:
       m_Items: []
+  - m_Id: 31755230017216512
+    m_Localized: Kategorie 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31755241757073408
+    m_Localized: Kategorie 2
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
