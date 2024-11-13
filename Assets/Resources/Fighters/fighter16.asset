@@ -22,6 +22,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   outfits:
   - name: standard
-    cost: 0
+    cost: 300
   - name: magicgirl
     cost: 200

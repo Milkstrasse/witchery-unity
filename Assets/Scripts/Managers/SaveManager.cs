@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -28,14 +29,9 @@ public class SaveManager
 
         int fighterAmount = fighters.Length;
         savedData.unlocked = new bool[fighterAmount, fighters[0].outfits.Length];
-        for (int i = 0; i < fighterAmount; i++)
+        for (int i = 0; i < Math.Min(fighterAmount, 8); i++)
         {
             savedData.unlocked[i, 0] = true;
-
-            if (i < 2)
-            {
-                savedData.unlocked[i, 1] = true;
-            }
         }
 
         savedData.missions = new bool[missions.Length];

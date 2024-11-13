@@ -67,7 +67,9 @@ public class PlayerSelectionUI : MonoBehaviour
             card.SetupCard(GlobalData.fighters[i]);
 
             int iCopy = i;
-            card.GetComponent<Button>().onClick.AddListener(() => SelectCard(iCopy, false));
+            Button cardButton = card.GetComponent<Button>();
+            cardButton.onClick.AddListener(() => SelectCard(iCopy, false));
+            cardButton.interactable = SaveManager.savedData.unlocked[i, 0];
 
             fighterCards[i] = card;
         }
@@ -356,7 +358,7 @@ public class PlayerSelectionUI : MonoBehaviour
         }
     }
 
-    public void SelectRandomCard()
+    private void SelectRandomCard()
     {
         if (currFilter == filters.Length - 1)
         {
@@ -381,9 +383,19 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             if (!fighterCards[indices[i]].isSelected)
             {
-                if (fighterCards[indices[i]].gameObject.activeSelf)
+                if (fighterCards[indices[i]].gameObject.activeSelf && fighterCards[indices[i]].GetComponent<Button>().interactable)
                 {
                     SelectionResult result = selectionUI.EditTeam(new SelectedFighter(indices[i], 0));
+
+                    if (result.wasAdded)
+                    {
+                        AudioManager.singleton.PlayStandardSound();
+                    }
+                    else
+                    {
+                        AudioManager.singleton.PlayNegativeSound();
+                    }
+
                     fighterCards[indices[i]].SelectCard(result.wasAdded);
 
                     readyButton.interactable = result.hasTeam;
@@ -392,17 +404,19 @@ public class PlayerSelectionUI : MonoBehaviour
                 }
             }
         }
+
+        AudioManager.singleton.PlayNegativeSound();
     }
 
     public void SwitchMode()
     {
-        AudioManager.singleton.PlayStandardSound();
-
         if (currCard < 0)
         {
             SelectRandomCard();
             return;
         }
+
+        AudioManager.singleton.PlayStandardSound();
         
         RectTransform fighterRect = fighterParent.parent.GetComponent<RectTransform>();
         isShowingInfo = !isShowingInfo;

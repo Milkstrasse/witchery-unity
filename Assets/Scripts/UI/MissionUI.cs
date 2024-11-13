@@ -83,7 +83,7 @@ public class MissionUI : MonoBehaviour
 
         if (shwowingCat2)
         {
-            LeanTween.moveLocalX(cat1Parent.parent.gameObject, -710f, 0.3f);
+            LeanTween.moveLocalX(cat1Parent.parent.gameObject, -cat1Parent.sizeDelta.x - 20f, 0.3f);
             LeanTween.moveLocalX(cat2Parent.parent.gameObject, 0f, 0.3f);
 
             category.StringReference.SetReference("StringTable", "cat2");
@@ -91,7 +91,7 @@ public class MissionUI : MonoBehaviour
         else
         {
             LeanTween.moveLocalX(cat1Parent.parent.gameObject, 0f, 0.3f);
-            LeanTween.moveLocalX(cat2Parent.parent.gameObject, 710f, 0.3f);
+            LeanTween.moveLocalX(cat2Parent.parent.gameObject, cat1Parent.sizeDelta.x + 20f, 0.3f);
 
             category.StringReference.SetReference("StringTable", "cat1");
         }
@@ -106,7 +106,7 @@ public class MissionUI : MonoBehaviour
         shwowingCat2 = false;
 
         cat1Parent.parent.localPosition = new Vector3(0f, cat1Parent.parent.localPosition.y, cat1Parent.parent.localPosition.z);
-        cat2Parent.parent.localPosition = new Vector3(710f, cat2Parent.parent.localPosition.y, cat2Parent.parent.localPosition.z);
+        cat2Parent.parent.localPosition = new Vector3(cat1Parent.sizeDelta.x + 20f, cat2Parent.parent.localPosition.y, cat2Parent.parent.localPosition.z);
 
         category.StringReference.SetReference("StringTable", "cat1");
 

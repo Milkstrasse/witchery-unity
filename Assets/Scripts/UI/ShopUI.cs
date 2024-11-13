@@ -126,7 +126,7 @@ public class ShopUI : MonoBehaviour
 
         if (shwowingFighters)
         {
-            LeanTween.moveLocalX(shopRect.gameObject, -shopRect.sizeDelta.x/2f, 0.3f);
+            LeanTween.moveLocalX(shopRect.gameObject, -shopRect.sizeDelta.x/2f - 10f, 0.3f);
             refresh.text = $"{refreshFighters} SP";
 
             shopTitle.StringReference.SetReference("StringTable", "fighters");
