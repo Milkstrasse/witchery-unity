@@ -63,14 +63,17 @@ public class SelectionManager : MonoBehaviour
          }
 
          NetworkClient.Send(new PlayerMessage(playerNames[index], index * SaveManager.savedData.icon, fighterIDs.ToArray()));
-         //GlobalManager.singleton.leaders[index] = fighterIDs[0];
 
+         int fighterAmount = fighterIDs.Count;
          fighterIDs = new List<SelectedFighter>();
 
          if (GlobalManager.singleton.mode == GameMode.Training)
          {
-            fighterIDs.Add(new SelectedFighter(UnityEngine.Random.Range(0, GlobalData.fighters.Length), 0));
-            fighterIDs.Add(new SelectedFighter(UnityEngine.Random.Range(0, GlobalData.fighters.Length), 0));
+            int[] numbers = GlobalManager.singleton.GetRandomNumbers(fighterAmount, GlobalData.fighters.Length);
+            for (int i = 0; i < fighterAmount; i++)
+            {
+               fighterIDs.Add(new SelectedFighter(numbers[i], 0));
+            }
 
             NetworkClient.Send(new PlayerMessage(playerNames[1 - index], 0, fighterIDs.ToArray()));
             fighterIDs = new List<SelectedFighter>();

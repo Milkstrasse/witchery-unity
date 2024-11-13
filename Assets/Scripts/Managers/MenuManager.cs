@@ -31,22 +31,19 @@ public class MenuManager : MonoBehaviour
 
     public void CreateShopOptions(int amount, int offset)
     {
+        int[] numbers = GlobalManager.singleton.GetRandomNumbers(amount, GlobalData.fighters.Length);
         SelectedFighter[] options = new SelectedFighter[amount];
 
-        while (amount > 0)
+        for (int i = 0; i < amount; i++)
         {
-            int fighter = UnityEngine.Random.Range(0, GlobalData.fighters.Length);
-            
             if (amount + offset > 3)
             {
-                options[amount - 1] = new SelectedFighter(fighter, 0);
+                options[i] = new SelectedFighter(numbers[i], 0);
             }
             else
             {
-                options[amount - 1] = new SelectedFighter(fighter, UnityEngine.Random.Range(1, GlobalData.fighters[fighter].outfits.Length));
+                options[i] = new SelectedFighter(numbers[i], UnityEngine.Random.Range(1, GlobalData.fighters[numbers[i]].outfits.Length));
             }
-
-            amount--;
         }
 
         if (options.Length > 3)

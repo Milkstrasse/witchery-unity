@@ -145,6 +145,23 @@ public class GlobalManager : MonoBehaviour
 
     public void LoadScene(string scene) => SceneManager.LoadScene(scene);
 
+    public int[] GetRandomNumbers(int amount, int max)
+    {
+        int[] numbers = Enumerable.Repeat(-1, amount).ToArray();
+
+        while (amount > 0)
+        {
+            int random = Random.Range(0, max);
+            if (!numbers.Contains(random))
+            {
+                numbers[amount - 1] = random;
+                amount--;
+            }
+        }
+
+        return numbers;
+    }
+
     public static void QuitAnyConnection()
     {
         NetworkClient.Shutdown();
