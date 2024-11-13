@@ -75,7 +75,6 @@ public class ShopUI : MonoBehaviour
 
     public void UnlockOutfit(int index)
     {
-        Debug.Log(index);
         if (manager.UnlockOutfit(options[index].fighter, options[index].outfit))
         {
             AudioManager.singleton.PlayPositiveSound();
@@ -86,16 +85,19 @@ public class ShopUI : MonoBehaviour
             {
                 refreshFighters -= 40;
                 refresh.text = $"{refreshFighters} SP";
+
+                for (int i = 0; i < 3; i++)
+                {
+                    if (options[i].CheckStatus())
+                    {
+                        refreshOutfits += 40;
+                    }
+                }
             }
             else
             {
                 refreshOutfits -= 40;
                 refresh.text = $"{refreshOutfits} SP";
-
-                for (int i = 0; i < 3; i++)
-                {
-                    options[i].CheckStatus();
-                }
             }
         }
     }

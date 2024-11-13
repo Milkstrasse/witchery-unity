@@ -31,11 +31,14 @@ public class ShopOptionUI : MonoBehaviour
         cost.text = $"{fighter.outfits[outfit].cost} SP";
     }
 
-    public void CheckStatus()
+    public bool CheckStatus()
     {
         if (!button.interactable)
         {
             button.interactable = SaveManager.savedData.unlocked[fighter.fighterID, 0] && !SaveManager.savedData.unlocked[fighter.fighterID, outfit];
+            return button.interactable;
         }
+
+        return false;
     }
 }
