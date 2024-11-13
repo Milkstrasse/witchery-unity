@@ -126,14 +126,14 @@ public class ShopUI : MonoBehaviour
 
         if (shwowingFighters)
         {
-            LeanTween.moveLocalX(shopRect.gameObject, 0f, 0.3f);
+            LeanTween.moveLocalX(shopRect.gameObject, -shopRect.sizeDelta.x/2f, 0.3f);
             refresh.text = $"{refreshFighters} SP";
 
             shopTitle.StringReference.SetReference("StringTable", "fighters");
         }
         else
         {
-            LeanTween.moveLocalX(shopRect.gameObject, shopRect.sizeDelta.x/2f, 0.3f);
+            LeanTween.moveLocalX(shopRect.gameObject, 0f, 0.3f);
             refresh.text = $"{refreshOutfits} SP";
 
             shopTitle.StringReference.SetReference("StringTable", "outfits");
@@ -147,7 +147,7 @@ public class ShopUI : MonoBehaviour
         SaveManager.SaveData();
 
         shwowingFighters = false;
-        shopRect.localPosition = new Vector3(shopRect.sizeDelta.x/2f, shopRect.localPosition.y, shopRect.localPosition.z);
+        shopRect.localPosition = new Vector3(0f, shopRect.localPosition.y, shopRect.localPosition.z);
 
         menuUI.SwitchToMainMenu(gameObject);
     }
