@@ -4,6 +4,7 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     public event Action<SelectedFighter[], int> OnShopOptionsCreated;
+    public event Action OnMissionsUpdated;
     public Action<int> OnMoneyChanged;
 
     private void Start()
@@ -24,6 +25,8 @@ public class MenuManager : MonoBehaviour
         {
             GlobalData.missions[i].CheckStatus();
         }
+
+        OnMissionsUpdated?.Invoke();
     }
 
     public void CreateShopOptions(int amount, int offset)

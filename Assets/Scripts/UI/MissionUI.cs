@@ -13,23 +13,33 @@ public class MissionUI : MonoBehaviour
 
     private void Start()
     {
+        manager.OnMissionsUpdated += UpdateMissions;
+
         toClaim = 0;
         missions = new MissionOptionUI[GlobalData.missions.Length];
 
         for (int i = 0; i < GlobalData.missions.Length; i++)
         {
             MissionOptionUI mission = Instantiate(missionPrefab, missionParent).GetComponent<MissionOptionUI>();
-            mission.SetupUI(GlobalData.missions[i], SaveManager.savedData.missions[i]);
-
-            if (mission.claimButton.interactable)
-            {
-                toClaim++;
-            }
 
             int iCopy = i;
             mission.claimButton.onClick.AddListener(() => ClaimMission(iCopy));
 
             missions[i] = mission;
+        }
+    }
+
+    private void UpdateMissions()
+    {
+        toClaim = 0;
+
+        for (int i = 0; i < missions.Length; i++)
+        {
+            missions[i].SetupUI(GlobalData.missions[i], SaveManager.savedData.missions[i]);
+            if (missions[i].claimButton.interactable)
+            {
+                toClaim++;
+            }
         }
 
         allButton.interactable = toClaim != 0;
@@ -42,6 +52,9 @@ public class MissionUI : MonoBehaviour
             AudioManager.singleton.PlayPositiveSound();
 
             missions[index].Claim();
+
+            toClaim--;
+            allButton.interactable = toClaim != 0;
         }
     }
 
@@ -64,5 +77,10 @@ public class MissionUI : MonoBehaviour
         SaveManager.SaveData();
 
         menuUI.SwitchToMainMenu(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        manager.OnMissionsUpdated -= UpdateMissions;
     }
 }
