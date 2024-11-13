@@ -75,14 +75,28 @@ public class ShopUI : MonoBehaviour
 
     public void UnlockOutfit(int index)
     {
+        Debug.Log(index);
         if (manager.UnlockOutfit(options[index].fighter, options[index].outfit))
         {
             AudioManager.singleton.PlayPositiveSound();
 
             options[index].button.interactable = false;
 
-            refreshOutfits -= 40;
-            refresh.text = $"{refreshOutfits} SP";
+            if (shwowingFighters)
+            {
+                refreshFighters -= 40;
+                refresh.text = $"{refreshFighters} SP";
+            }
+            else
+            {
+                refreshOutfits -= 40;
+                refresh.text = $"{refreshOutfits} SP";
+
+                for (int i = 0; i < 3; i++)
+                {
+                    options[i].CheckStatus();
+                }
+            }
         }
     }
 

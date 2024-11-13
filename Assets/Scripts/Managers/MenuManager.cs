@@ -21,6 +21,11 @@ public class MenuManager : MonoBehaviour
             CreateShopOptions(6, 0);
         }
 
+        CheckMissions();
+    }
+
+    public void CheckMissions()
+    {
         for (int i = 0; i < GlobalData.missions.Length; i++)
         {
             GlobalData.missions[i].CheckStatus();
@@ -36,7 +41,7 @@ public class MenuManager : MonoBehaviour
 
         for (int i = 0; i < amount; i++)
         {
-            if (amount + offset > 3)
+            if (i + offset >= 3)
             {
                 options[i] = new SelectedFighter(numbers[i], 0);
             }

@@ -10,6 +10,7 @@ public class MissionUI : MonoBehaviour
     [SerializeField] private GameObject missionPrefab;
     [SerializeField] private Button allButton;
     [SerializeField] private LocalizeStringEvent category;
+    [SerializeField] private GameObject bookmark;
 
     private MissionOptionUI[] missions;
     private int toClaim;
@@ -48,6 +49,7 @@ public class MissionUI : MonoBehaviour
         }
 
         allButton.interactable = toClaim != 0;
+        bookmark.SetActive(toClaim != 0);
     }
 
     private void ClaimMission(int index)
@@ -60,6 +62,7 @@ public class MissionUI : MonoBehaviour
 
             toClaim--;
             allButton.interactable = toClaim != 0;
+            bookmark.SetActive(toClaim != 0);
         }
     }
 
@@ -73,6 +76,7 @@ public class MissionUI : MonoBehaviour
         }
 
         allButton.interactable = false;
+        bookmark.SetActive(false);
     }
 
     public void ToggleCategories()

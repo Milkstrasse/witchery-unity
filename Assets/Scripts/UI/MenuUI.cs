@@ -60,6 +60,8 @@ public class MenuUI : MonoBehaviour
 
         LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
         LeanTween.moveLocalX(currMenu, mainMenu.sizeDelta.x * 0.5f + 20f, 0.3f);
+
+        manager.CheckMissions();
     }
 
     private void UpdatePlayer(int money)
