@@ -222,6 +222,8 @@ public class PlayerData
             }
         }
 
+        bool shuffle = false;
+
         for (int i = 0; i < cardStack.Count; i++)
         {
             if (toRemove == 0)
@@ -232,8 +234,14 @@ public class PlayerData
             if (cardStack[i] < startIndex)
             {
                 cardStack.RemoveAt(i);
+                shuffle = true;
                 toRemove--;
             }
+        }
+
+        if (shuffle)
+        {
+            ShuffleStack();
         }
 
         for (int i = 0; i < playedCards.Count; i++)
