@@ -50,6 +50,22 @@ public class SaveManager
 		file.Close();
     }
 
+    public static void UpdateStats(PlayerData playerData)
+    {
+        if (!savedData.healedOpponent)
+        {
+            savedData.healedOpponent = playerData.healedOpponent;
+        }
+        if (!savedData.selfKO)
+        {
+            savedData.selfKO = playerData.selfKO;
+        }
+        if (!savedData.wonWithEffect)
+        {
+            savedData.wonWithEffect = playerData.wonWithEffect;
+        }
+    }
+
     public static void DeleteData()
     {
         if (File.Exists(saveFilePath))

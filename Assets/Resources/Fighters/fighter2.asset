@@ -15,9 +15,9 @@ MonoBehaviour:
   fighterID: 2
   role: 61475
   moves:
-  - {fileID: 11400000, guid: 9242c60e4253a4345af74c9b37e08d29, type: 2}
-  - {fileID: 11400000, guid: 9165c48fdd6644a52924f42400ba38a7, type: 2}
-  - {fileID: 11400000, guid: 9165c48fdd6644a52924f42400ba38a7, type: 2}
+  - {fileID: 11400000, guid: e5dda212c64884b2a87e0a8c22a3d1f1, type: 2}
+  - {fileID: 11400000, guid: 0679131e1c92941308535cb2fcf25d6f, type: 2}
+  - {fileID: 11400000, guid: 0679131e1c92941308535cb2fcf25d6f, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   outfits:

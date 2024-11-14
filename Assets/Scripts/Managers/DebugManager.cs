@@ -12,8 +12,10 @@ public class DebugManager : MonoBehaviour
         stringBuilder.Append("\n");
         stringBuilder.Append($"times fought: {SaveManager.savedData.timesFought}\n");
         stringBuilder.Append($"times won: {SaveManager.savedData.timesWon}\n");
-        stringBuilder.Append($"times won going first: {SaveManager.savedData.timesWonFirst}\n");
-        stringBuilder.Append($"money spent: {SaveManager.savedData.moneySpent}");
+        stringBuilder.Append($"money spent: {SaveManager.savedData.moneySpent}\n");
+        stringBuilder.Append($"self KOed: {SaveManager.savedData.selfKO}\n");
+        stringBuilder.Append($"healed opponent: {SaveManager.savedData.healedOpponent}\n");
+        stringBuilder.Append($"won with effect: {SaveManager.savedData.wonWithEffect}\n");
 
         data.text = stringBuilder.ToString();
     }

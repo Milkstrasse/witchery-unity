@@ -14,6 +14,13 @@ public class PlayerData
 
     public int startIndex;
 
+    public bool startedFirst;
+    public int maxEffects;
+    public bool healedOpponent;
+    public bool stoleNothing;
+    public bool wonWithEffect;
+    public bool selfKO;
+
     public PlayerData()
     {
         name = "";

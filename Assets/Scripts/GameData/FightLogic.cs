@@ -133,6 +133,11 @@ public class FightLogic
                     int tempHealth = players[1 - turn].health;
                     players[1 - turn].health = Math.Max(players[1 - turn].health + hpToSteal - players[turn].GetPowerBonus() + players[1 - turn].GetDamageModifier(), 0);
 
+                    if (winner < 0 && players[1 - turn].health == 0)
+                    {
+                        winner = turn;
+                    }
+
                     StatusEffect stealSpice = players[1 - turn].GetEffect("spice");
                     if (stealSpice != null)
                     {
@@ -144,22 +149,32 @@ public class FightLogic
                         else
                         {
                             tempHealth -= players[1 - turn].health;
+                            if (tempHealth == 0)
+                            {
+                                players[turn].stoleNothing = true;
+                            }
+
                             players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalData.health);
                         }
                     }
                     else
                     {
                         tempHealth -= players[1 - turn].health;
-                        players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalData.health);
-                    }
+                        if (tempHealth == 0)
+                        {
+                            players[turn].stoleNothing = true;
+                        }
 
-                    if (winner < 0 && players[1 - turn].health == 0)
-                    {
-                        winner = turn;
+                        players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalData.health);
                     }
 
                     break;
                 case 5: //redistribute HP
+                    if (players[1 - turn].health < players[turn].health)
+                    {
+                        players[turn].healedOpponent = true;
+                    }
+
                     int allHealth = players[0].health + players[1].health;
                     players[0].health = allHealth/2;
                     players[1].health = allHealth/2;
@@ -183,7 +198,13 @@ public class FightLogic
 
                     int tempEnergy = players[1 - turn].energy;
                     players[1 - turn].energy = Math.Max(players[1 - turn].energy + energyToSteal - players[turn].GetPowerBonus(), 0);
+                    
                     tempEnergy -= players[1 - turn].energy;
+                    if (tempEnergy == 0)
+                    {
+                        players[turn].stoleNothing = true;
+                    }
+
                     players[turn].energy += tempEnergy;
 
                     break;
@@ -204,6 +225,7 @@ public class FightLogic
                         players[turn].health = Math.Max(players[turn].health - exSpice.value, 0);
                         if (winner < 0 && players[turn].health == 0)
                         {
+                            players[1 - turn].wonWithEffect = true;
                             winner = 1 - turn;
                         }
                     }
@@ -211,6 +233,7 @@ public class FightLogic
                     players[turn].health = Math.Clamp(players[turn].health + damageB, 0, GlobalData.health);
                     if (winner < 0 && players[turn].health == 0)
                     {
+                        players[turn].selfKO = true;
                         winner = 1 - turn;
                     }
 
@@ -280,6 +303,7 @@ public class FightLogic
                             players[turn].health = Math.Max(players[turn].health - spice.value, 0);
                             if (winner < 0 && players[turn].health == 0)
                             {
+                                players[1 - turn].wonWithEffect = true;
                                 winner = 1 - turn;
                             }
                         }
@@ -432,6 +456,7 @@ public class FightLogic
 
                 if (winner < 0 && players[i].health == 0)
                 {
+                    players[1 - i].wonWithEffect = true;
                     winner = 1 - i;
                 }
             }

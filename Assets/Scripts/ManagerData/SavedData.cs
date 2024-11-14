@@ -29,8 +29,8 @@ public struct SavedData
     public bool healedOpponent;
     public int maxDamageDone;
     public int maxHealingDone;
-    public int winWithMinHealth;
-    public int winWithEffect;
+    public int wonWithMinHealth;
+    public bool wonWithEffect;
     public bool selfKO;
 
     public SavedData(string name, int icon)
@@ -61,8 +61,8 @@ public struct SavedData
         healedOpponent = false;
         maxDamageDone = 0;
         maxHealingDone = 0;
-        winWithMinHealth = 0;
-        winWithEffect = 0;
+        wonWithMinHealth = 0;
+        wonWithEffect = false;
         selfKO = false;
     }
 }

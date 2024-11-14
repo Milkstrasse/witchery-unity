@@ -112,6 +112,7 @@ public class FightManager : MonoBehaviour
             if (logic.playerTurn == -1) //start fight
             {
                 logic.playerTurn = message.playerTurn;
+                logic.players[logic.playerTurn].startedFirst = true;
 
                 GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
                 players[0] = playerObjects[0].GetComponent<Player>();
@@ -210,18 +211,15 @@ public class FightManager : MonoBehaviour
                     logic.playerTurn += 5;
                 }
 
-                if (message.players.Length > 1)
+                for (int i = 0; i < message.players.Length; i++)
                 {
-                    for (int i = 0; i < message.players.Length; i++)
+                    PlayerData player = message.players[i];
+                    players[i].UpdatePlayer(player, message.playerTurn >= 0);
+
+                    if ((NetworkServer.activeHost && i == 0) || (!NetworkServer.activeHost && i == 1))
                     {
-                        PlayerData player = message.players[i];
-                        players[i].UpdatePlayer(player, message.playerTurn >= 0);
+                        SaveManager.UpdateStats(player);
                     }
-                }
-                else
-                {
-                    PlayerData player = message.players[0];
-                    players[logic.playerTurn].UpdatePlayer(player, true);
                 }
 
                 if (message.failed)
