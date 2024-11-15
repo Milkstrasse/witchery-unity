@@ -1,12 +1,23 @@
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DebugManager : MonoBehaviour
 {
+    [SerializeField] private Button moneyButton;
     [SerializeField] private TextMeshProUGUI data;
     private void Start()
     {
+        if (SaveManager.savedData.name == "DEV")
+        {
+            moneyButton.interactable = true;
+        }
+        
+        #if UNITY_EDITOR
+        moneyButton.interactable = true;
+        #endif
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.Append(SaveManager.savedData.name);
         stringBuilder.Append("\n");
@@ -20,11 +31,21 @@ public class DebugManager : MonoBehaviour
         data.text = stringBuilder.ToString();
     }
 
-    public void AddMoney() => SaveManager.savedData.money += 100;
+    public void AddMoney()
+    {
+        AudioManager.singleton.PlayPositiveSound();
+        SaveManager.savedData.money += 100;
+    }
     public void DeleteData()
     {
+        AudioManager.singleton.PlayNegativeSound();
+
         SaveManager.DeleteData();
         GlobalManager.singleton.LoadScene("StartScene");
     }
-    public void ReturnToMenu() => GlobalManager.singleton.LoadScene("MenuScene");
+    public void ReturnToMenu()
+    {
+        AudioManager.singleton.PlayStandardSound();
+        GlobalManager.singleton.LoadScene("MenuScene");
+    }
 }

@@ -363,6 +363,10 @@ MonoBehaviour:
     m_Key: tutorial
     m_Metadata:
       m_Items: []
+  - m_Id: 32480461346299904
+    m_Key: profile
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
