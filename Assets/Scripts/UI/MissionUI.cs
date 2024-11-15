@@ -79,14 +79,20 @@ public class MissionUI : MonoBehaviour
         bookmark.SetActive(false);
     }
 
-    public void ToggleCategories()
+    public void DecreaseOption()
     {
+        if (LeanTween.isTweening(cat1Parent.parent.gameObject))
+        {
+            return;
+        }
+        
         AudioManager.singleton.PlayStandardSound();
 
         shwowingCat2 = !shwowingCat2;
 
         if (shwowingCat2)
         {
+            cat2Parent.parent.localPosition = new Vector3(cat1Parent.sizeDelta.x + 20f, cat2Parent.parent.localPosition.y, cat2Parent.parent.localPosition.z);
             LeanTween.moveLocalX(cat1Parent.parent.gameObject, -cat1Parent.sizeDelta.x - 20f, 0.3f);
             LeanTween.moveLocalX(cat2Parent.parent.gameObject, 0f, 0.3f);
 
@@ -94,6 +100,36 @@ public class MissionUI : MonoBehaviour
         }
         else
         {
+            cat1Parent.parent.localPosition = new Vector3(cat1Parent.sizeDelta.x + 20f, cat1Parent.parent.localPosition.y, cat1Parent.parent.localPosition.z);
+            LeanTween.moveLocalX(cat1Parent.parent.gameObject, 0f, 0.3f);
+            LeanTween.moveLocalX(cat2Parent.parent.gameObject, -cat1Parent.sizeDelta.x - 20f, 0.3f);
+
+            category.StringReference.SetReference("StringTable", "cat1");
+        }
+    }
+
+    public void IncreaseOption()
+    {
+        if (LeanTween.isTweening(cat1Parent.parent.gameObject))
+        {
+            return;
+        }
+
+        AudioManager.singleton.PlayStandardSound();
+
+        shwowingCat2 = !shwowingCat2;
+
+        if (shwowingCat2)
+        {
+            cat2Parent.parent.localPosition = new Vector3(-cat1Parent.sizeDelta.x - 20f, cat2Parent.parent.localPosition.y, cat2Parent.parent.localPosition.z);
+            LeanTween.moveLocalX(cat1Parent.parent.gameObject, cat1Parent.sizeDelta.x + 20f, 0.3f);
+            LeanTween.moveLocalX(cat2Parent.parent.gameObject, 0f, 0.3f);
+
+            category.StringReference.SetReference("StringTable", "cat2");
+        }
+        else
+        {
+            cat1Parent.parent.localPosition = new Vector3(-cat1Parent.sizeDelta.x - 20f, cat1Parent.parent.localPosition.y, cat1Parent.parent.localPosition.z);
             LeanTween.moveLocalX(cat1Parent.parent.gameObject, 0f, 0.3f);
             LeanTween.moveLocalX(cat2Parent.parent.gameObject, cat1Parent.sizeDelta.x + 20f, 0.3f);
 

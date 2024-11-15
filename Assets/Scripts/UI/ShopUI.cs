@@ -1,12 +1,13 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
-using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
     [SerializeField] private MenuManager manager;
-    [SerializeField] private RectTransform shopRect;
+    [SerializeField] private RectTransform outfitRect;
+    [SerializeField] private RectTransform fighterRect;
     private ShopOptionUI[] options;
     [SerializeField] private LocalizeStringEvent shopTitle;
     [SerializeField] private TextMeshProUGUI refresh;
@@ -18,7 +19,15 @@ public class ShopUI : MonoBehaviour
     {
         manager.OnShopOptionsCreated += SetupShopOptions;
 
-        options = shopRect.transform.GetComponentsInChildren<ShopOptionUI>();
+        options = new ShopOptionUI[6];
+
+        ShopOptionUI[] outfits = outfitRect.transform.GetComponentsInChildren<ShopOptionUI>();
+        ShopOptionUI[] fighters = fighterRect.transform.GetComponentsInChildren<ShopOptionUI>();
+
+        Array.Copy(outfits, options, outfits.Length);
+        Array.Copy(fighters, 0, options, outfits.Length, fighters.Length);
+
+        Debug.Log(options.Length);
     }
 
     private void SetupShopOptions(SelectedFighter[] fighters, int startIndex)
@@ -132,24 +141,64 @@ public class ShopUI : MonoBehaviour
         SaveManager.SaveData();
     }
 
-    public void ToggleShop()
+    public void DecreaseOption()
     {
+        if (LeanTween.isTweening(outfitRect))
+        {
+            return;
+        }
+
         AudioManager.singleton.PlayStandardSound();
 
         shwowingFighters = !shwowingFighters;
 
         if (shwowingFighters)
         {
-            LeanTween.moveLocalX(shopRect.gameObject, -shopRect.sizeDelta.x/2f - 10f, 0.3f);
-            refresh.text = $"{refreshFighters} SP";
+            fighterRect.localPosition = new Vector3(outfitRect.sizeDelta.x + 20f, fighterRect.localPosition.y, fighterRect.localPosition.z);
+            LeanTween.moveLocalX(outfitRect.gameObject, -outfitRect.sizeDelta.x - 20f, 0.3f);
+            LeanTween.moveLocalX(fighterRect.gameObject, 0f, 0.3f);
 
+            refresh.text = $"{refreshFighters} SP";
             shopTitle.StringReference.SetReference("StringTable", "fighters");
         }
         else
         {
-            LeanTween.moveLocalX(shopRect.gameObject, 0f, 0.3f);
-            refresh.text = $"{refreshOutfits} SP";
+            outfitRect.localPosition = new Vector3(outfitRect.sizeDelta.x + 20f, outfitRect.localPosition.y, outfitRect.localPosition.z);
+            LeanTween.moveLocalX(outfitRect.gameObject, 0f, 0.3f);
+            LeanTween.moveLocalX(fighterRect.gameObject, -outfitRect.sizeDelta.x - 20f, 0.3f);
 
+            refresh.text = $"{refreshOutfits} SP";
+            shopTitle.StringReference.SetReference("StringTable", "outfits");
+        }
+    }
+
+    public void IncreaseOption()
+    {
+        if (LeanTween.isTweening(outfitRect))
+        {
+            return;
+        }
+        
+        AudioManager.singleton.PlayStandardSound();
+
+        shwowingFighters = !shwowingFighters;
+
+        if (shwowingFighters)
+        {
+            fighterRect.localPosition = new Vector3(-outfitRect.sizeDelta.x - 20f, fighterRect.localPosition.y, fighterRect.localPosition.z);
+            LeanTween.moveLocalX(outfitRect.gameObject, outfitRect.sizeDelta.x + 20f, 0.3f);
+            LeanTween.moveLocalX(fighterRect.gameObject, 0f, 0.3f);
+
+            refresh.text = $"{refreshFighters} SP";
+            shopTitle.StringReference.SetReference("StringTable", "fighters");
+        }
+        else
+        {
+            outfitRect.localPosition = new Vector3(-outfitRect.sizeDelta.x - 20f, outfitRect.localPosition.y, outfitRect.localPosition.z);
+            LeanTween.moveLocalX(outfitRect.gameObject, 0f, 0.3f);
+            LeanTween.moveLocalX(fighterRect.gameObject, outfitRect.sizeDelta.x + 20f, 0.3f);
+
+            refresh.text = $"{refreshOutfits} SP";
             shopTitle.StringReference.SetReference("StringTable", "outfits");
         }
     }
@@ -161,7 +210,8 @@ public class ShopUI : MonoBehaviour
         SaveManager.SaveData();
 
         shwowingFighters = false;
-        shopRect.localPosition = new Vector3(0f, shopRect.localPosition.y, shopRect.localPosition.z);
+        outfitRect.localPosition = new Vector3(0f, outfitRect.localPosition.y, outfitRect.localPosition.z);
+        fighterRect.localPosition = new Vector3(outfitRect.sizeDelta.x + 20f, fighterRect.localPosition.y, fighterRect.localPosition.z);
 
         menuUI.SwitchToMainMenu(gameObject);
     }
