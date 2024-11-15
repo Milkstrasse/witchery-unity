@@ -316,7 +316,7 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 27457199604228096
-    m_Localized: "{health} <style=\"IconOutline\"><style=\"Highlighted\">\\uf54c</style></style>
+    m_Localized: "{health} <style=\"IconOutline\"><style=\"Highlighted\">\\uf1e2</style></style>
       \u30C0\u30E1\u30FC\u30B8 \u3092 \u3042\u305F\u3048\u308B"
     m_Metadata:
       m_Items:

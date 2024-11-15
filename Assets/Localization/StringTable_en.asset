@@ -311,7 +311,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 27457199604228096
-    m_Localized: Do {health} <style="IconOutline"><style="Highlighted">\uf54c</style></style>
+    m_Localized: Do {health} <style="IconOutline"><style="Highlighted">\uf1e2</style></style>
       damage
     m_Metadata:
       m_Items:
