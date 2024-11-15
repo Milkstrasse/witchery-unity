@@ -7,10 +7,12 @@ public class ShopOptionUI : MonoBehaviour
     [SerializeField] private Image portrait;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI cost;
+    [SerializeField] private Button button;
 
     public Fighter fighter;
     public int outfit;
-    public Button button;
+
+    public bool isUnlockable;
 
     public void SetupUI(Fighter fighter, int outfit)
     {
@@ -19,12 +21,14 @@ public class ShopOptionUI : MonoBehaviour
 
         if (outfit > 0)
         {
-            button.interactable = SaveManager.savedData.unlocked[fighter.fighterID, 0] && !SaveManager.savedData.unlocked[fighter.fighterID, outfit];
+            isUnlockable = SaveManager.savedData.unlocked[fighter.fighterID, 0] && !SaveManager.savedData.unlocked[fighter.fighterID, outfit];
         }
         else
         {
-            button.interactable = !SaveManager.savedData.unlocked[fighter.fighterID, 0];
+            isUnlockable = !SaveManager.savedData.unlocked[fighter.fighterID, 0];
         }
+
+        button.interactable = isUnlockable && SaveManager.savedData.money >= fighter.outfits[outfit].cost;
 
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-" + fighter.outfits[outfit].name);
         title.text = fighter.name;
@@ -33,12 +37,11 @@ public class ShopOptionUI : MonoBehaviour
 
     public bool CheckStatus()
     {
-        if (!button.interactable)
-        {
-            button.interactable = SaveManager.savedData.unlocked[fighter.fighterID, 0] && !SaveManager.savedData.unlocked[fighter.fighterID, outfit];
-            return button.interactable;
-        }
+        bool lastStatus = isUnlockable;
 
-        return false;
+        isUnlockable = SaveManager.savedData.unlocked[fighter.fighterID, 0] && !SaveManager.savedData.unlocked[fighter.fighterID, outfit];
+        button.interactable = isUnlockable && SaveManager.savedData.money >= fighter.outfits[outfit].cost;
+
+        return lastStatus != isUnlockable;
     }
 }

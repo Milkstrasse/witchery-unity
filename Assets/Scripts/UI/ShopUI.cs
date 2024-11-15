@@ -41,22 +41,22 @@ public class ShopUI : MonoBehaviour
             
             if (fighters.Length < 6)
             {
-                if (options[i].button.interactable && i < 3 && startIndex < 3)
+                if (options[i].isUnlockable && i < 3 && startIndex < 3)
                 {
                     refreshOutfits += 40;
                 }
-                else if (options[startIndex + i].button.interactable && i < 3 && startIndex > 0)
+                else if (options[startIndex + i].isUnlockable && i < 3 && startIndex > 0)
                 {
                     refreshFighters += 40;
                 }
             }
             else
             {
-                if (i < 3 && options[i].button.interactable)
+                if (i < 3 && options[i].isUnlockable)
                 {
                     refreshOutfits += 40;
                 }
-                else if (options[i].button.interactable)
+                else if (options[i].isUnlockable)
                 {
                     refreshFighters += 40;
                 }
@@ -79,25 +79,28 @@ public class ShopUI : MonoBehaviour
         {
             AudioManager.singleton.PlayPositiveSound();
 
-            options[index].button.interactable = false;
+            options[index].CheckStatus();
 
             if (shwowingFighters)
             {
                 refreshFighters -= 40;
                 refresh.text = $"{refreshFighters} SP";
-
-                for (int i = 0; i < 3; i++)
-                {
-                    if (options[i].CheckStatus())
-                    {
-                        refreshOutfits += 40;
-                    }
-                }
             }
             else
             {
                 refreshOutfits -= 40;
                 refresh.text = $"{refreshOutfits} SP";
+            }
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (options[i].CheckStatus())
+                {
+                    if (i < 3)
+                    {
+                        refreshOutfits += 40;
+                    }
+                }
             }
         }
     }
