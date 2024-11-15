@@ -24,24 +24,24 @@ public class GameOverManager : MonoBehaviour
         {
             if (players[0].hasWon)
             {
-                SaveManager.savedData.money += 25;
+                SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 25, 999999);
                 SaveManager.savedData.timesWon += 1;
             }
             else
             {
-                SaveManager.savedData.money += 5;
+                SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 5, 999999);
             }
         }
         else
         {
             if (players[1].hasWon)
             {
-                SaveManager.savedData.money += 25;
+                SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 25, 999999);
                 SaveManager.savedData.timesWon += 1;
             }
             else
             {
-                SaveManager.savedData.money += 5;
+                SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 5, 999999);
             }
         }
 

@@ -22,7 +22,7 @@ public class MenuUI : MonoBehaviour
 
         icon.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
         playerName.text = SaveManager.savedData.name;
-        money.text = $"{SaveManager.savedData.money} SP";
+        money.text = $"{SaveManager.savedData.money:n0} SP";
 
         joinButton.interactable = GlobalManager.singleton.isConnected;
         hostButton.interactable = GlobalManager.singleton.isConnected;
@@ -66,7 +66,7 @@ public class MenuUI : MonoBehaviour
 
     private void UpdatePlayer(int money)
     {
-        this.money.text = $"{money} SP";
+        this.money.text = $"{money:n0} SP";
     }
 
     private void OnDestroy()

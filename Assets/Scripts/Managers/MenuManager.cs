@@ -132,7 +132,7 @@ public class MenuManager : MonoBehaviour
 
         if (mission.isClaimable && !SaveManager.savedData.missions[index])
         {
-            SaveManager.savedData.money += mission.reward;
+            SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + mission.reward, 999999);
             SaveManager.savedData.missions[index] = true;
 
             OnMoneyChanged?.Invoke(SaveManager.savedData.money);

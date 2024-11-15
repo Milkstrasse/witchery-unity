@@ -9,7 +9,6 @@ public class StatusUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI icon;
 
     private StatusEffect effect;
-    private string iconString;
 
     public void SetupEffect(StatusEffect effect)
     {
@@ -17,8 +16,6 @@ public class StatusUI : MonoBehaviour
 
         uint i = Convert.ToUInt32(effect.icon, 16);
         icon.text = Convert.ToChar(i).ToString();
-
-        iconString = icon.text;
 
         if (effect.isNew)
         {

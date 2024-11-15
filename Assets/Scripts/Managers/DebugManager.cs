@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -34,7 +35,7 @@ public class DebugManager : MonoBehaviour
     public void AddMoney()
     {
         AudioManager.singleton.PlayPositiveSound();
-        SaveManager.savedData.money += 100;
+        SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 100, 999999);
     }
     public void DeleteData()
     {
