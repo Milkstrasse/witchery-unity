@@ -79,8 +79,6 @@ public class ShopUI : MonoBehaviour
         {
             AudioManager.singleton.PlayPositiveSound();
 
-            options[index].CheckStatus();
-
             if (shwowingFighters)
             {
                 refreshFighters -= 40;
@@ -94,12 +92,9 @@ public class ShopUI : MonoBehaviour
 
             for (int i = 0; i < 6; i++)
             {
-                if (options[i].CheckStatus())
+                if (options[i].CheckStatus() && i < 3)
                 {
-                    if (i < 3)
-                    {
-                        refreshOutfits += 40;
-                    }
+                    refreshOutfits += 40;
                 }
             }
         }

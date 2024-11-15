@@ -39,7 +39,15 @@ public class ShopOptionUI : MonoBehaviour
     {
         bool lastStatus = isUnlockable;
 
-        isUnlockable = SaveManager.savedData.unlocked[fighter.fighterID, 0] && !SaveManager.savedData.unlocked[fighter.fighterID, outfit];
+        if (outfit > 0)
+        {
+            isUnlockable = SaveManager.savedData.unlocked[fighter.fighterID, 0] && !SaveManager.savedData.unlocked[fighter.fighterID, outfit];
+        }
+        else
+        {
+            isUnlockable = !SaveManager.savedData.unlocked[fighter.fighterID, 0];
+        }
+
         button.interactable = isUnlockable && SaveManager.savedData.money >= fighter.outfits[outfit].cost;
 
         return lastStatus != isUnlockable;

@@ -40,13 +40,17 @@ public class PlayerFightUI : MonoBehaviour
 
     private void InitUI()
     {
-        if (rectTransform.eulerAngles.z == 180f)
+        if (player != null)
+        {
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-standard");
+        }
+        else if (rectTransform.eulerAngles.z == 180f)
         {
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[0].name + "-standard");
         }
         else
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[1].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
         }
 
         float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 230 - 40)/4 * -1;
