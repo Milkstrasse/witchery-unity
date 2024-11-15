@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CreditsManager : MonoBehaviour
+public class GenericManager : MonoBehaviour
 {
     public void ReturnToMenu()
     {
