@@ -76,9 +76,25 @@ public struct CPULogic
                     {
                         prioritizedCards.Add((i, -10));
                     }
-                    else if (move.effect.multiplier > 0 &&  logic.players[1 - move.target].effects.Count == 5)
+                    else if (logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == null)
                     {
-                        prioritizedCards.Add((i, move.cost * -1));
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else if (move.moveID == 11 && logic.players[0].cardHand.Count == 0) //remove random card
+                    {
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else if (move.moveID == 13 && logic.players[1].CheckEffectBalance() >= logic.players[0].CheckEffectBalance()) //swap effects
+                    {
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else if (move.moveID == 17 && move.target != 1 && logic.players[1].CheckEffectBalance() >= 0) //clear own effects
+                    {
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else if (move.moveID == 17 && move.target == 1 && logic.players[0].CheckEffectBalance() < 0) //clear opponent's effects
+                    {
+                        prioritizedCards.Add((i, -10));
                     }
                     else
                     {

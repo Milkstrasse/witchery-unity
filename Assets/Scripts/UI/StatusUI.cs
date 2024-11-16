@@ -17,7 +17,7 @@ public class StatusUI : MonoBehaviour
         uint i = Convert.ToUInt32(effect.icon, 16);
         icon.text = Convert.ToChar(i).ToString();
 
-        if (effect.isNew)
+        if (effect.isNew && !LeanTween.isTweening(icon.gameObject))
         {
             LeanTween.scale(transform.GetChild(0).gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
             LeanTween.scale(icon.gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);

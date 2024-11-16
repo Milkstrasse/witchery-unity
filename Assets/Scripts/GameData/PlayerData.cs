@@ -172,18 +172,37 @@ public class PlayerData
         return modifier;
     }
 
-    public StatusEffect GetEffect(string effectName)
+    public StatusEffect GetEffect(string effectName, bool setNew = true)
     {
         for (int i = 0; i < effects.Count; i++)
         {
             if (effects[i].name == effectName)
             {
-                effects[i].isNew = true;
+                effects[i].isNew = setNew;
                 return effects[i];
             }
         }
 
         return null;
+    }
+
+    public int CheckEffectBalance()
+    {
+        int balance = 0;
+
+        for (int i = 0; i < effects.Count; i++)
+        {
+            if (effects[i].value >= 0)
+            {
+                balance += effects[i].multiplier;
+            }
+            else
+            {
+                balance -= effects[i].multiplier;
+            }
+        }
+
+        return balance;
     }
 
     public void AddBlanks(int amount)
