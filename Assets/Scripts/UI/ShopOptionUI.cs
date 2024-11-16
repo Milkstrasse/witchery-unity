@@ -9,6 +9,11 @@ public class ShopOptionUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cost;
     [SerializeField] private Button button;
 
+    [SerializeField] private RawImage background;
+    [SerializeField] private Image triangle;
+    [SerializeField] private Material neutral;
+    [SerializeField] private Material highlighted;
+
     public Fighter fighter;
     public int outfit;
 
@@ -33,6 +38,9 @@ public class ShopOptionUI : MonoBehaviour
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-" + fighter.outfits[outfit].name);
         title.text = fighter.name;
         cost.text = $"{fighter.outfits[outfit].cost} SP";
+
+        background.material = isUnlockable ? highlighted : neutral;
+        triangle.material = isUnlockable ? highlighted : neutral;
     }
 
     public bool CheckStatus()
@@ -49,6 +57,9 @@ public class ShopOptionUI : MonoBehaviour
         }
 
         button.interactable = isUnlockable && SaveManager.savedData.money >= fighter.outfits[outfit].cost;
+
+        background.material = isUnlockable ? highlighted : neutral;
+        triangle.material = isUnlockable ? highlighted : neutral;
 
         return lastStatus != isUnlockable;
     }

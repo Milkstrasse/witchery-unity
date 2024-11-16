@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private RectTransform fighterRect;
     private ShopOptionUI[] options;
     [SerializeField] private LocalizeStringEvent shopTitle;
-    [SerializeField] private TextMeshProUGUI refresh;
+    [SerializeField] private Button refreshButton;
+    [SerializeField] private TextMeshProUGUI buttonText;
     private int refreshOutfits;
     private int refreshFighters;
     private bool shwowingFighters;
@@ -18,6 +20,7 @@ public class ShopUI : MonoBehaviour
     private void Start()
     {
         manager.OnShopOptionsCreated += SetupShopOptions;
+        manager.OnMoneyChanged += CheckRefreshStatus;
 
         options = new ShopOptionUI[6];
 
@@ -72,11 +75,13 @@ public class ShopUI : MonoBehaviour
 
         if (shwowingFighters)
         {
-            refresh.text = $"{refreshFighters} SP";
+            buttonText.text = $"{refreshFighters} SP";
+            refreshButton.interactable = refreshFighters <= SaveManager.savedData.money;
         }
         else
         {
-            refresh.text = $"{refreshOutfits} SP";
+            buttonText.text = $"{refreshOutfits} SP";
+            refreshButton.interactable = refreshOutfits <= SaveManager.savedData.money;
         }
     }
 
@@ -89,12 +94,12 @@ public class ShopUI : MonoBehaviour
             if (shwowingFighters)
             {
                 refreshFighters -= 40;
-                refresh.text = $"{refreshFighters} SP";
+                buttonText.text = $"{refreshFighters} SP";
             }
             else
             {
                 refreshOutfits -= 40;
-                refresh.text = $"{refreshOutfits} SP";
+                buttonText.text = $"{refreshOutfits} SP";
             }
 
             for (int i = 0; i < 6; i++)
@@ -152,21 +157,25 @@ public class ShopUI : MonoBehaviour
 
         if (shwowingFighters)
         {
-            fighterRect.localPosition = new Vector3(outfitRect.sizeDelta.x + 20f, fighterRect.localPosition.y, fighterRect.localPosition.z);
-            LeanTween.moveLocalX(outfitRect.gameObject, -outfitRect.sizeDelta.x - 20f, 0.3f);
+            fighterRect.localPosition = new Vector3(-outfitRect.sizeDelta.x - 20f, fighterRect.localPosition.y, fighterRect.localPosition.z);
+            LeanTween.moveLocalX(outfitRect.gameObject, outfitRect.sizeDelta.x + 20f, 0.3f);
             LeanTween.moveLocalX(fighterRect.gameObject, 0f, 0.3f);
 
-            refresh.text = $"{refreshFighters} SP";
+            buttonText.text = $"{refreshFighters} SP";
             shopTitle.StringReference.SetReference("StringTable", "fighters");
+
+            refreshButton.interactable = refreshFighters <= SaveManager.savedData.money;
         }
         else
         {
-            outfitRect.localPosition = new Vector3(outfitRect.sizeDelta.x + 20f, outfitRect.localPosition.y, outfitRect.localPosition.z);
+            outfitRect.localPosition = new Vector3(-outfitRect.sizeDelta.x - 20f, outfitRect.localPosition.y, outfitRect.localPosition.z);
             LeanTween.moveLocalX(outfitRect.gameObject, 0f, 0.3f);
-            LeanTween.moveLocalX(fighterRect.gameObject, -outfitRect.sizeDelta.x - 20f, 0.3f);
+            LeanTween.moveLocalX(fighterRect.gameObject, outfitRect.sizeDelta.x + 20f, 0.3f);
 
-            refresh.text = $"{refreshOutfits} SP";
+            buttonText.text = $"{refreshOutfits} SP";
             shopTitle.StringReference.SetReference("StringTable", "outfits");
+
+            refreshButton.interactable = refreshOutfits <= SaveManager.savedData.money;
         }
     }
 
@@ -183,21 +192,37 @@ public class ShopUI : MonoBehaviour
 
         if (shwowingFighters)
         {
-            fighterRect.localPosition = new Vector3(-outfitRect.sizeDelta.x - 20f, fighterRect.localPosition.y, fighterRect.localPosition.z);
-            LeanTween.moveLocalX(outfitRect.gameObject, outfitRect.sizeDelta.x + 20f, 0.3f);
+            fighterRect.localPosition = new Vector3(outfitRect.sizeDelta.x + 20f, fighterRect.localPosition.y, fighterRect.localPosition.z);
+            LeanTween.moveLocalX(outfitRect.gameObject, -outfitRect.sizeDelta.x - 20f, 0.3f);
             LeanTween.moveLocalX(fighterRect.gameObject, 0f, 0.3f);
 
-            refresh.text = $"{refreshFighters} SP";
+            buttonText.text = $"{refreshFighters} SP";
             shopTitle.StringReference.SetReference("StringTable", "fighters");
+
+            refreshButton.interactable = refreshFighters <= SaveManager.savedData.money;
         }
         else
         {
-            outfitRect.localPosition = new Vector3(-outfitRect.sizeDelta.x - 20f, outfitRect.localPosition.y, outfitRect.localPosition.z);
+            outfitRect.localPosition = new Vector3(outfitRect.sizeDelta.x + 20f, outfitRect.localPosition.y, outfitRect.localPosition.z);
             LeanTween.moveLocalX(outfitRect.gameObject, 0f, 0.3f);
-            LeanTween.moveLocalX(fighterRect.gameObject, outfitRect.sizeDelta.x + 20f, 0.3f);
+            LeanTween.moveLocalX(fighterRect.gameObject, -outfitRect.sizeDelta.x - 20f, 0.3f);
 
-            refresh.text = $"{refreshOutfits} SP";
+            buttonText.text = $"{refreshOutfits} SP";
             shopTitle.StringReference.SetReference("StringTable", "outfits");
+
+            refreshButton.interactable = refreshOutfits <= SaveManager.savedData.money;
+        }
+    }
+
+    private void CheckRefreshStatus(int money)
+    {
+        if (shwowingFighters)
+        {
+            refreshButton.interactable = refreshFighters <= money;
+        }
+        else
+        {
+            refreshButton.interactable = refreshOutfits <= money;
         }
     }
 
@@ -217,5 +242,6 @@ public class ShopUI : MonoBehaviour
     private void OnDestroy()
     {
         manager.OnShopOptionsCreated -= SetupShopOptions;
+        manager.OnMoneyChanged -= CheckRefreshStatus;
     }
 }

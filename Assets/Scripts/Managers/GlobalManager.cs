@@ -147,7 +147,12 @@ public class GlobalManager : MonoBehaviour
 
     public void LoadScene(string scene)
     {
-        lastScene = GetCurrentScene();
+        string temp = GetCurrentScene();
+        if (temp != scene)
+        {
+            lastScene = temp;
+        }
+        
         SceneManager.LoadScene(scene);
     }
 

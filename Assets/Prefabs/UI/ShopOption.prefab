@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 690, y: 320}
+  m_SizeDelta: {x: 690, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7642887508233895547
 CanvasRenderer:
@@ -137,9 +137,14 @@ MonoBehaviour:
   portrait: {fileID: 7814872245238179756}
   title: {fileID: 4924052188182486788}
   cost: {fileID: 4012977154883127705}
+  button: {fileID: 790191923314764770}
+  background: {fileID: 1018036626358421923}
+  triangle: {fileID: 1353884108335270468}
+  neutral: {fileID: 2100000, guid: a9d0349a83e274f7587fc5ab57c8836c, type: 2}
+  highlighted: {fileID: 2100000, guid: 128f62befdd034365adb34aa8f8769bb, type: 2}
   fighter: {fileID: 0}
   outfit: 0
-  button: {fileID: 790191923314764770}
+  isUnlockable: 0
 --- !u!1001 &4296144197986760793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,6 +299,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1018036626358421923 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3872588289864462842, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+  m_PrefabInstance: {fileID: 4296144197986760793}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1353884108335270468 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2978865134916989469, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+  m_PrefabInstance: {fileID: 4296144197986760793}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4012977154883127705 stripped
