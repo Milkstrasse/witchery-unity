@@ -96,6 +96,10 @@ public struct CPULogic
                     {
                         prioritizedCards.Add((i, -10));
                     }
+                    else if (move.moveID == 23 || move.moveID == 25 && logic.players[1].startIndex == 5) //hand over blanks
+                    {
+                        prioritizedCards.Add((i, -10));
+                    }
                     else
                     {
                         prioritizedCards.Add((i, move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
