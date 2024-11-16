@@ -26,8 +26,6 @@ public class ShopUI : MonoBehaviour
 
         Array.Copy(outfits, options, outfits.Length);
         Array.Copy(fighters, 0, options, outfits.Length, fighters.Length);
-
-        Debug.Log(options.Length);
     }
 
     private void SetupShopOptions(SelectedFighter[] fighters, int startIndex)
@@ -178,7 +176,7 @@ public class ShopUI : MonoBehaviour
         {
             return;
         }
-        
+
         AudioManager.singleton.PlayStandardSound();
 
         shwowingFighters = !shwowingFighters;

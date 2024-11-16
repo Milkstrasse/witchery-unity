@@ -141,6 +141,18 @@ public class PlayerFightUI : MonoBehaviour
             {
                 cards[i].SetupCard(player.cardHand[i], player);
                 cards[i].ShowCard(true);
+
+                if (GlobalData.highlightPlayable)
+                {
+                    if (!cardSlot.cardWasPlayed && player.cardHand[i].hasMove && player.cardHand[i].move.IsResponseTo(cardSlot.cardUI.card.move, player.energy))
+                    {
+                        cards[i].SelectCard(true);
+                    }
+                    else
+                    {
+                        cards[i].SelectCard(false);
+                    }
+                }
             }
             else
             {

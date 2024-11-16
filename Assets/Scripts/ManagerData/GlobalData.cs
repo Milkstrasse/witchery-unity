@@ -6,6 +6,7 @@ public static class GlobalData
     public static readonly int waitTime = 120;
     public static readonly int turnTime = 180;
     public static readonly int health = 75;
+    public static bool highlightPlayable = false;
 
     public static int themeIndex;
     public static Theme[] themes;
