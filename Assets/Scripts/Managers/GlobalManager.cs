@@ -16,13 +16,14 @@ public class GlobalManager : MonoBehaviour
 {
     public static GlobalManager singleton;
 
-    [SerializeField] Material[] materials;
+    [SerializeField] private Material[] materials;
 
     public bool isConnected;
     public GameMode mode;
     public string joincode;
     public bool relayEnabled;
     public int maxPlayers;
+    public string lastScene;
 
     public event Action<string> OnCodeCreated;
     
@@ -144,7 +145,11 @@ public class GlobalManager : MonoBehaviour
 
     public string GetCurrentScene() => SceneManager.GetActiveScene().name;
 
-    public void LoadScene(string scene) => SceneManager.LoadScene(scene);
+    public void LoadScene(string scene)
+    {
+        lastScene = GetCurrentScene();
+        SceneManager.LoadScene(scene);
+    }
 
     public int[] GetRandomNumbers(int amount, int max)
     {

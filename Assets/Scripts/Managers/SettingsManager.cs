@@ -165,7 +165,7 @@ public class SettingsManager : MonoBehaviour
         GlobalData.highlightPlayable = enable;
     }
 
-    public void ReturnToMenu()
+    public void ReturnToScene()
     {
         if (changingLang || changingTheme)
             return;
@@ -179,6 +179,6 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("theme", GlobalData.themeIndex);
         PlayerPrefs.Save();
 
-        GlobalManager.singleton.LoadScene("MenuScene");
+        GlobalManager.singleton.LoadScene(GlobalManager.singleton.lastScene);
     }
 }

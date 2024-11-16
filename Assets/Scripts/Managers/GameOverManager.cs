@@ -62,6 +62,12 @@ public class GameOverManager : MonoBehaviour
         GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>().ServerChangeScene("SelectionScene");
     }
 
+    public void GoToSettings()
+    {
+        AudioManager.singleton.PlayStandardSound();
+        GlobalManager.singleton.LoadScene("SettingsScene");
+    }
+
     public void ReturnToMenu()
     {
         AudioManager.singleton.PlayStandardSound();
