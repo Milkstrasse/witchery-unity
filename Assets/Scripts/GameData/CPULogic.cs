@@ -14,10 +14,6 @@ public struct CPULogic
             {
                 prioritizedCards.Add((i, 0));
             }
-            else if (GlobalSettings.noCostNoMatch && player.cardHand[i].hasMove && logic.lastCard.card.hasMove && player.cardHand[i].move.cost == logic.lastCard.card.move.cost)
-            {
-                prioritizedCards.Add((i, -10)); //unplayable card
-            }
             else if (player.cardHand[i].hasMove && player.cardHand[i].move.cost <= player.energy)
             {
                 Move move = player.cardHand[i].move;
@@ -33,6 +29,12 @@ public struct CPULogic
                         prioritizedCards.Add((i, 50));
                         continue;
                     }
+                }
+
+                if (move.moveType == MoveType.Response)
+                {
+                    prioritizedCards.Add((i, -10));
+                    continue;
                 }
 
                 int health = move.health;
@@ -65,7 +67,7 @@ public struct CPULogic
                         health = Math.Max(health + logic.players[1].GetPowerBonus(), 0);
                     }
 
-                    if (logic.players[1].health + health > GlobalSettings.health) //excessive healing
+                    if (logic.players[1].health + health > GlobalData.health) //excessive healing
                     {
                         prioritizedCards.Add((i, -1 - move.cost));
                     }
@@ -80,16 +82,29 @@ public struct CPULogic
                     {
                         prioritizedCards.Add((i, -10));
                     }
-                    else if (move.effect.duration > 0 &&  logic.players[1 - move.target].effects.Count == 5)
+                    else if (logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == null)
                     {
-                        if (move.effect.isDelayed || logic.players[1 - move.target].GetEffect(move.effect.name) == null) //effect can't be added
-                        {
-                            prioritizedCards.Add((i, -10));
-                        }
-                        else
-                        {
-                            prioritizedCards.Add((i, move.cost * -1));
-                        }
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else if (move.moveID == 11 && logic.players[0].cardHand.Count == 0) //remove random card
+                    {
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else if (move.moveID == 13 && logic.players[1].CheckEffectBalance() >= logic.players[0].CheckEffectBalance()) //swap effects
+                    {
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else if (move.moveID == 17 && move.target != 1 && logic.players[1].CheckEffectBalance() >= 0) //clear own effects
+                    {
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else if (move.moveID == 17 && move.target == 1 && logic.players[0].CheckEffectBalance() < 0) //clear opponent's effects
+                    {
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else if (move.moveID == 23 || move.moveID == 25 && logic.players[1].startIndex == 5) //hand over blanks
+                    {
+                        prioritizedCards.Add((i, -10));
                     }
                     else
                     {

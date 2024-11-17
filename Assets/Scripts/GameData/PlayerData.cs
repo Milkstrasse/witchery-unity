@@ -14,6 +14,15 @@ public class PlayerData
 
     public int startIndex;
 
+    public bool startedFirst;
+    public int roundsPlayed;
+    public bool playedUntilEnd;
+    public int maxEffects;
+    public bool healedOpponent;
+    public bool stoleNothing;
+    public bool wonWithEffect;
+    public bool selfKO;
+
     public PlayerData()
     {
         name = "";
@@ -33,23 +42,15 @@ public class PlayerData
     {
         name = message.name;
         
-        health = GlobalSettings.health;
-
-        if (GlobalSettings.startAndGainEnergy)
-        {
-            energy = 7;
-        }
-        else
-        {
-            energy = 0;
-        }
+        health = GlobalData.health;
+        energy = 0;
 
         cardStack = new List<int>();
         for (int i = 0; i < message.fighterIDs.Length; i++)
         {
             int currCount = cardStack.Count + 5;
 
-            Fighter fighter = GlobalManager.singleton.fighters[message.fighterIDs[i].fighterID];
+            Fighter fighter = GlobalData.fighters[message.fighterIDs[i].fighterID];
             for (int j = 0; j < fighter.moves.Length; j++)
             {
                 cardStack.Add(currCount + j);
@@ -113,21 +114,18 @@ public class PlayerData
     public void AddEffect(StatusEffect effect)
     {
         int index = -1;
-        if (!effect.isDelayed)
+        for (int i = 0; i < effects.Count; i++)
         {
-            for (int i = 0; i < effects.Count; i++)
+            if (effects[i].name == effect.name)
             {
-                if (effects[i].name == effect.name)
-                {
-                    index = i;
-                    break;
-                }
+                index = i;
+                break;
             }
         }
 
         if (index >= 0)
         {
-            effects[index].duration += effect.duration;
+            effects[index].multiplier += effect.multiplier;
             effects[index].isNew = true;
         }
         else if (effects.Count < 5)
@@ -153,15 +151,7 @@ public class PlayerData
             if (effects[i].statusType == StatusEffect.StatusType.Power)
             {
                 effects[i].isNew = true;
-
-                if (GlobalSettings.stackEffectValue)
-                {
-                    power += effects[i].value * effects[i].duration;
-                }
-                else
-                {
-                    power += effects[i].value;
-                }
+                power += effects[i].value * effects[i].multiplier;
             }
         }
 
@@ -177,33 +167,44 @@ public class PlayerData
             if (effects[i].name == "shields" || effects[i].name == "vulnerable" )
             {
                 effects[i].isNew = true;
-                
-                if (GlobalSettings.stackEffectValue)
-                {
-                    modifier += effects[i].value * effects[i].duration;
-                }
-                else
-                {
-                    modifier += effects[i].value;
-                }
+                modifier += effects[i].value * effects[i].multiplier;
             }
         }
         
         return modifier;
     }
 
-    public StatusEffect GetEffect(string effectName)
+    public StatusEffect GetEffect(string effectName, bool setNew = true)
     {
         for (int i = 0; i < effects.Count; i++)
         {
             if (effects[i].name == effectName)
             {
-                effects[i].isNew = true;
+                effects[i].isNew = setNew;
                 return effects[i];
             }
         }
 
         return null;
+    }
+
+    public int CheckEffectBalance()
+    {
+        int balance = 0;
+
+        for (int i = 0; i < effects.Count; i++)
+        {
+            if (effects[i].value >= 0)
+            {
+                balance += effects[i].multiplier;
+            }
+            else
+            {
+                balance -= effects[i].multiplier;
+            }
+        }
+
+        return balance;
     }
 
     public void AddBlanks(int amount)
@@ -242,6 +243,8 @@ public class PlayerData
             }
         }
 
+        bool shuffle = false;
+
         for (int i = 0; i < cardStack.Count; i++)
         {
             if (toRemove == 0)
@@ -252,8 +255,14 @@ public class PlayerData
             if (cardStack[i] < startIndex)
             {
                 cardStack.RemoveAt(i);
+                shuffle = true;
                 toRemove--;
             }
+        }
+
+        if (shuffle)
+        {
+            ShuffleStack();
         }
 
         for (int i = 0; i < playedCards.Count; i++)

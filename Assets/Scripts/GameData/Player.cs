@@ -34,17 +34,10 @@ public class Player : MonoBehaviour
         icon = message.icon;
         
         playerName = message.name;
-        fullHealth = GlobalSettings.health;
+        fullHealth = GlobalData.health;
         currHealth = fullHealth;
 
-        if (GlobalSettings.startAndGainEnergy)
-        {
-            energy = 7;
-        }
-        else
-        {
-            energy = 0;
-        }
+        energy = 0;
 
         cards = new List<Card>();
         cardHand = new List<Card>();
@@ -59,7 +52,7 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < fighterIDs.Length; i++)
         {
-            Fighter fighter = GlobalManager.singleton.fighters[fighterIDs[i].fighterID];
+            Fighter fighter = GlobalData.fighters[fighterIDs[i].fighterID];
             for (int j = 0; j < fighter.moves.Length; j++)
             {
                 cards.Add(new Card(fighter, fighterIDs[i].outfit, j));
@@ -117,15 +110,7 @@ public class Player : MonoBehaviour
             if (effects[i].statusType == StatusEffect.StatusType.Power)
             {
                 effects[i].isNew = true;
-
-                if (GlobalSettings.stackEffectValue)
-                {
-                    power += effects[i].value * effects[i].duration;
-                }
-                else
-                {
-                    power += effects[i].value;
-                }
+                power += effects[i].value * effects[i].multiplier;
             }
         }
 
@@ -155,15 +140,7 @@ public class Player : MonoBehaviour
             if (effects[i].name == "shields" || effects[i].name == "vulnerable" )
             {
                 effects[i].isNew = true;
-
-                if (GlobalSettings.stackEffectValue)
-                {
-                    modifier += effects[i].value * effects[i].duration;
-                }
-                else
-                {
-                    modifier += effects[i].value;
-                }
+                modifier += effects[i].value * effects[i].multiplier;
             }
         }
         

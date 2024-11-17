@@ -202,7 +202,7 @@ namespace Mirror
             HashSet<NetworkIdentity> tmp = new HashSet<NetworkIdentity>(owned);
             foreach (NetworkIdentity netIdentity in tmp)
             {
-                if (netIdentity != null)
+                if (netIdentity != null && netIdentity.gameObject != null)
                 {
                     // unspawn scene objects, destroy instantiated objects.
                     // fixes: https://github.com/MirrorNetworking/Mirror/issues/3538

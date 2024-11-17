@@ -8,13 +8,14 @@ public class SettingsUI : MonoBehaviour
 
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider soundSlider;
-    [SerializeField] private LocalizeStringEvent stringEvent;
-
-    [SerializeField] private Toggle[] toggles;
+    [SerializeField] private LocalizeStringEvent currLang;
+    [SerializeField] private LocalizeStringEvent currTheme;
+    [SerializeField] private Toggle toggle;
 
     private void Start()
     {
         manager.OnLanguageUpdated += UpdateLanguage;
+        manager.OnThemeUpdated += UpdateTheme;
 
         musicSlider.value = AudioManager.singleton.GetMusicVolume();
         soundSlider.value = AudioManager.singleton.GetSoundVolume();
@@ -22,22 +23,24 @@ public class SettingsUI : MonoBehaviour
         musicSlider.enabled = true;
         soundSlider.enabled = true;
 
-        toggles[0].isOn = GlobalSettings.lifeIsResource;
-        toggles[1].isOn = GlobalSettings.stackEffectValue;
-        toggles[2].isOn = GlobalSettings.noRegainResource;
-        toggles[3].isOn = GlobalSettings.noCostNoMatch;
-        toggles[4].isOn = GlobalSettings.startAndGainEnergy;
-        toggles[5].isOn = GlobalSettings.setEnergy;
-        toggles[6].isOn = GlobalSettings.noEffectDecay;
+        currTheme.StringReference.SetReference("StringTable", GlobalData.themes[GlobalData.themeIndex].name);
+
+        toggle.isOn = GlobalData.highlightPlayable;
     }
 
     private void UpdateLanguage(string lang)
     {
-        stringEvent.StringReference.SetReference("StringTable", lang);
+        currLang.StringReference.SetReference("StringTable", lang);
+    }
+
+    private void UpdateTheme(string theme)
+    {
+        currTheme.StringReference.SetReference("StringTable", theme);
     }
 
     private void OnDestroy()
     {
         manager.OnLanguageUpdated -= UpdateLanguage;
+        manager.OnThemeUpdated -= UpdateTheme;
     }
 }

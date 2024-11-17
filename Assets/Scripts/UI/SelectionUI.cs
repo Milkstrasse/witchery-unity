@@ -48,9 +48,16 @@ public class SelectionUI : MonoBehaviour
 
     public void SetReady(int index)
     {
-        AudioManager.singleton.PlayStandardSound();
-        
         bool isReady = manager.SetReady(index);
+
+        if (isReady)
+        {
+            AudioManager.singleton.PlayPositiveSound();
+        }
+        else
+        {
+            AudioManager.singleton.PlayNegativeSound();
+        }
         
         if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Testing)
         {

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour
 {
+    [SerializeField] private MenuManager manager;
+
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI playerName;
     [SerializeField] private TextMeshProUGUI money;
@@ -13,15 +15,19 @@ public class MenuUI : MonoBehaviour
 
     [SerializeField] private Button joinButton;
     [SerializeField] private Button hostButton;
+    [SerializeField] private Button arenaButton;
 
     private void Start()
     {
-        icon.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[GlobalSettings.icon].name + "-standard");
-        playerName.text = GlobalSettings.playerName;
-        money.text = $"{GlobalSettings.money} SP";
+        manager.OnMoneyChanged += UpdatePlayer;
+
+        icon.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
+        playerName.text = SaveManager.savedData.name;
+        money.text = $"{SaveManager.savedData.money:n0} SP";
 
         joinButton.interactable = GlobalManager.singleton.isConnected;
         hostButton.interactable = GlobalManager.singleton.isConnected;
+        arenaButton.interactable = GlobalManager.singleton.isConnected;
 
         if (GlobalManager.singleton.maxPlayers > 0)
         {
@@ -40,13 +46,33 @@ public class MenuUI : MonoBehaviour
         LeanTween.moveLocalX(modeMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
     }
 
-    public void SwitchToMainMenu()
+    public void SwitchToMenu(GameObject newMenu)
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 1.5f - 20f, 0.3f);
+        LeanTween.moveLocalX(newMenu, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
+    }
+
+    public void SwitchToMainMenu(GameObject currMenu)
     {
         AudioManager.singleton.PlayStandardSound();
         
         GlobalManager.singleton.maxPlayers = 0;
 
         LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
-        LeanTween.moveLocalX(modeMenu.gameObject, mainMenu.sizeDelta.x * 0.5f + 20f, 0.3f);
+        LeanTween.moveLocalX(currMenu, mainMenu.sizeDelta.x * 0.5f + 20f, 0.3f);
+
+        manager.CheckMissions();
+    }
+
+    private void UpdatePlayer(int money)
+    {
+        this.money.text = $"{money:n0} SP";
+    }
+
+    private void OnDestroy()
+    {
+        manager.OnMoneyChanged -= UpdatePlayer;
     }
 }

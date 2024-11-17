@@ -159,7 +159,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 340570659
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -274,14 +274,14 @@ MonoBehaviour:
         - m_Target: {fileID: 6279476255877334832}
           m_TargetAssemblyTypeName: StatusUI, Assembly-CSharp
           m_MethodName: ShowInfo
-          m_Mode: 3
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
   - eventID: 3
     callback:

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Globalization;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -9,8 +8,10 @@ public class SettingsManager : MonoBehaviour
 {
     private bool changingLang;
     private int langIndex;
+    private bool changingTheme;
 
     public event Action<string> OnLanguageUpdated;
+    public event Action<string> OnThemeUpdated;
 
     private void Start()
     {
@@ -60,6 +61,56 @@ public class SettingsManager : MonoBehaviour
         StartCoroutine(SetLocale(langIndex));
     }
 
+    public void DecreaseTheme()
+    {
+        if (changingTheme)
+            return;
+
+        AudioManager.singleton.PlayStandardSound();
+
+        if (GlobalData.themeIndex > 0)
+        {
+            GlobalData.themeIndex--;
+        }
+        else
+        {
+            GlobalData.themeIndex = GlobalData.themes.Length - 1;
+        }
+
+        StartCoroutine(ChangeTheme());
+    }
+
+    public void IncreaseTheme()
+    {
+        if (changingTheme)
+            return;
+
+        AudioManager.singleton.PlayStandardSound();
+
+        if (GlobalData.themeIndex < GlobalData.themes.Length - 1)
+        {
+            GlobalData.themeIndex++;
+        }
+        else
+        {
+            GlobalData.themeIndex = 0;
+        }
+        
+        StartCoroutine(ChangeTheme());
+    }
+
+    IEnumerator ChangeTheme()
+    {
+        changingTheme = true;
+
+        GlobalManager.singleton.ApplyTheme();
+        yield return null;
+
+        OnThemeUpdated?.Invoke(GlobalData.themes[GlobalData.themeIndex].name);
+
+        changingTheme = false;
+    }
+
     IEnumerator SetLocale(int localID)
     {
         changingLang = true;
@@ -71,18 +122,15 @@ public class SettingsManager : MonoBehaviour
         changingLang = false;
     }
 
-    public void ToggleSetEnergy(bool toggleValue) => GlobalSettings.setEnergy = toggleValue;
-    public void ToggleLifeResource(bool toggleValue) => GlobalSettings.lifeIsResource = toggleValue;
-    public void ToggleStackEffect(bool toggleValue) => GlobalSettings.stackEffectValue = toggleValue;
-    public void ToggleRegainResource(bool toggleValue) => GlobalSettings.noRegainResource = toggleValue;
-    public void ToggleCostMatch(bool toggleValue) => GlobalSettings.noCostNoMatch = toggleValue;
-    public void ToggleEnergy(bool toggleValue) => GlobalSettings.startAndGainEnergy = toggleValue;
-    public void ToggleDecay(bool toggleValue) => GlobalSettings.noEffectDecay = toggleValue;
-
     public void ResetSettings()
     {
+        if (changingLang || changingTheme)
+            return;
+
         ChangeMusicVolume(1f);
         ChangeSoundVolume(1f);
+
+        AudioManager.singleton.PlayStandardSound();
 
         if (Application.systemLanguage != SystemLanguage.Unknown)
         {
@@ -102,27 +150,35 @@ public class SettingsManager : MonoBehaviour
         }
 
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langIndex];
+        GlobalData.highlightPlayable = false;
+        GlobalData.themeIndex = 1;
 
-        GlobalSettings.setEnergy = false;
-        GlobalSettings.lifeIsResource = false;
-        GlobalSettings.stackEffectValue = false;
-        GlobalSettings.noRegainResource = false;
-        GlobalSettings.noCostNoMatch = false;
-        GlobalSettings.startAndGainEnergy = false;
-        GlobalSettings.noEffectDecay = false;
-        
         GlobalManager.singleton.LoadScene("SettingsScene");
+
+        StartCoroutine(ChangeTheme());
     }
 
-    public void ReturnToMenu()
+    public void HighlightCard(bool enable)
     {
+        //AudioManager.singleton.PlayStandardSound();
+
+        GlobalData.highlightPlayable = enable;
+    }
+
+    public void ReturnToScene()
+    {
+        if (changingLang || changingTheme)
+            return;
+
         AudioManager.singleton.PlayStandardSound();
 
         PlayerPrefs.SetFloat("music", AudioManager.singleton.GetMusicVolume());
         PlayerPrefs.SetFloat("sound", AudioManager.singleton.GetSoundVolume());
         PlayerPrefs.SetInt("langCode", langIndex);
+        PlayerPrefs.SetInt("highlightPlayable", GlobalData.highlightPlayable ? 1 : 0);
+        PlayerPrefs.SetInt("theme", GlobalData.themeIndex);
         PlayerPrefs.Save();
 
-        GlobalManager.singleton.LoadScene("MenuScene");
+        GlobalManager.singleton.LoadScene(GlobalManager.singleton.lastScene);
     }
 }

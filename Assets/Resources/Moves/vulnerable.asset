@@ -20,9 +20,8 @@ MonoBehaviour:
   effect:
     name: vulnerable
     icon: f7a9
-    duration: 3
+    multiplier: 1
     value: -2
     statusType: 3
-    isDelayed: 0
     isNew: 0
   moveType: 0

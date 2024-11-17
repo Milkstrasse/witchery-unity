@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0a895a7e95554706af00b395749ee36, type: 3}
+  m_Name: fighter9
+  m_EditorClassIdentifier: 
+  fighterID: 9
+  role: 63198
+  moves:
+  - {fileID: 11400000, guid: 0ac7f2c711c16424fa11f475b083c023, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: 4e0f577f8160e4c3dbd7e289e1b0cf88, type: 2}
+  - {fileID: 11400000, guid: 4e0f577f8160e4c3dbd7e289e1b0cf88, type: 2}
+  outfits:
+  - name: standard
+    cost: 300
+  - name: magicgirl
+    cost: 200

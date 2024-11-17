@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Diagnostics;
 using Mirror;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class FightManager : MonoBehaviour
 
     private CustomQueue messages;
 
+    private Stopwatch stopwatch;
+
     private void Awake()
     {
         singleton = this;
@@ -27,6 +30,8 @@ public class FightManager : MonoBehaviour
 
     private void Start()
     {
+        stopwatch = new Stopwatch();
+
         players = new Player[2];
         logic = new FightLogic();
 
@@ -109,9 +114,12 @@ public class FightManager : MonoBehaviour
         {
             sendingMessage = false;
 
-            if (logic.playerTurn == -1) //start fight
+            if (logic.playerTurn == -1) //start game
             {
+                stopwatch.Start();
+
                 logic.playerTurn = message.playerTurn;
+                logic.players[logic.playerTurn].startedFirst = true;
 
                 GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
                 players[0] = playerObjects[0].GetComponent<Player>();
@@ -136,23 +144,26 @@ public class FightManager : MonoBehaviour
         }
         else //Game Over
         {
+            stopwatch.Stop();
+
+            TimeSpan ts = stopwatch.Elapsed;
+            string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}";
+            
+            UnityEngine.Debug.Log("Fight ended after " + elapsedTime);
+            UnityEngine.Debug.Log($"{logic.players[0].roundsPlayed} round(s) were played");
+
+            players[message.playerTurn + 2].hasWon = true;
+
             if (messages.AddToQueue(message, false))
             {
                 StartCoroutine(InvokeQueue());
             }
-            /*OnTurnChanged?.Invoke(-1);
 
-            for (int i = 0; i < message.players.Length; i++)
-            {
-                PlayerData player = message.players[i];
-                players[i].UpdatePlayer(player, true);
-            }*/
-
-            StartCoroutine(EndFight(message.playerTurn + 2));
+            StartCoroutine("EndFight");
         }
     }
 
-    IEnumerator EndFight(int winner)
+    IEnumerator EndFight()
     {
         while (timeToMakeMove > 0f)
         {
@@ -161,7 +172,6 @@ public class FightManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-        players[winner].hasWon = true;
         GlobalManager.singleton.LoadScene("GameOverScene");
     }
 
@@ -210,18 +220,15 @@ public class FightManager : MonoBehaviour
                     logic.playerTurn += 5;
                 }
 
-                if (message.players.Length > 1)
+                for (int i = 0; i < message.players.Length; i++)
                 {
-                    for (int i = 0; i < message.players.Length; i++)
+                    PlayerData player = message.players[i];
+                    players[i].UpdatePlayer(player, message.playerTurn >= 0);
+
+                    if ((NetworkServer.activeHost && i == 0) || (!NetworkServer.activeHost && i == 1))
                     {
-                        PlayerData player = message.players[i];
-                        players[i].UpdatePlayer(player, message.playerTurn >= 0);
+                        SaveManager.UpdateStats(player, players[0].hasWon || players[1].hasWon, players[i].hasWon);
                     }
-                }
-                else
-                {
-                    PlayerData player = message.players[0];
-                    players[logic.playerTurn].UpdatePlayer(player, true);
                 }
 
                 if (message.failed)
@@ -255,10 +262,5 @@ public class FightManager : MonoBehaviour
     public MoveMessage GetMove()
     {
         return CPULogic.GetMove(players[1], logic);
-    }
-
-    public void EndFight()
-    {
-        GlobalManager.singleton.LoadScene("GameOverScene");
     }
 }

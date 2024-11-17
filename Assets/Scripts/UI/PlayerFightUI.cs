@@ -40,13 +40,17 @@ public class PlayerFightUI : MonoBehaviour
 
     private void InitUI()
     {
-        if (rectTransform.eulerAngles.z == 180f)
+        if (player != null)
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[0].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-standard");
+        }
+        else if (rectTransform.eulerAngles.z == 180f)
+        {
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[0].name + "-standard");
         }
         else
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[1].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
         }
 
         float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 230 - 40)/4 * -1;
@@ -67,7 +71,7 @@ public class PlayerFightUI : MonoBehaviour
         this.player = player;
         player.OnPlayerChanged += UpdateUI;
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalManager.singleton.fighters[player.icon].name + "-standard");
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-standard");
 
         nameText.text = player.playerName;
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
@@ -137,6 +141,18 @@ public class PlayerFightUI : MonoBehaviour
             {
                 cards[i].SetupCard(player.cardHand[i], player);
                 cards[i].ShowCard(true);
+
+                if (GlobalData.highlightPlayable)
+                {
+                    if (!cardSlot.cardWasPlayed && player.cardHand[i].hasMove && player.cardHand[i].move.IsResponseTo(cardSlot.cardUI.card.move, player.energy))
+                    {
+                        cards[i].SelectCard(true);
+                    }
+                    else
+                    {
+                        cards[i].SelectCard(false);
+                    }
+                }
             }
             else
             {
@@ -242,17 +258,17 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator UpdateTimer()
     {
-        int time = GlobalSettings.turnTime;
+        int time = GlobalData.turnTime;
         while (time >= 0)
         {
             time--;
-            if (timer.fillAmount > time / (float)GlobalSettings.turnTime)
+            if (timer.fillAmount > time / (float)GlobalData.turnTime)
             {
-                LeanTween.value(timer.gameObject, timer.fillAmount, time / (float)GlobalSettings.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
+                LeanTween.value(timer.gameObject, timer.fillAmount, time / (float)GlobalData.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
             }
             else
             {
-                timer.fillAmount = time / (float)GlobalSettings.turnTime;
+                timer.fillAmount = time / (float)GlobalData.turnTime;
             }
 
             yield return new WaitForSeconds(1.0f);

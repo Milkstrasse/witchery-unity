@@ -520,7 +520,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4a73a18b3269847038159b7a2848ee41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eff68ac4287514bf79dcd7ab51c03724, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -764,7 +764,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 340570659
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -847,7 +847,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_SizeDelta: {x: -30, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6863143794931327038
 CanvasRenderer:
@@ -877,7 +877,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Apply 3 <style="IconOutline">\uf043</style> to everybody
+  m_text: Apply <style="IconOutline">\uf043</style> to everybody
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e8a02252f4ec47748da2becdd6cc899, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 485d36f45d7cb41a7b1e600330f2e2cc, type: 2}
@@ -899,7 +899,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 340570659
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -976,9 +976,6 @@ MonoBehaviour:
     - name: effect
       variable:
         rid: 296818163417612684
-    - name: duration
-      variable:
-        rid: 296818163417612685
     - name: name
       variable:
         rid: 6175659975647952941
@@ -1016,10 +1013,6 @@ MonoBehaviour:
       type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:
         m_Value: 
-    - rid: 296818163417612685
-      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
-      data:
-        m_Value: 0
     - rid: 6175659975647952941
       type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:

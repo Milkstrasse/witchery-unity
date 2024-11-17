@@ -20,29 +20,6 @@ public class GameOverManager : MonoBehaviour
 
         NetworkServer.ReplaceHandler<TurnMessage>(OnRematch);
 
-        if (NetworkClient.activeHost)
-        {
-            if (players[0].hasWon)
-            {
-                GlobalSettings.money += 25;
-            }
-            else
-            {
-                GlobalSettings.money += 5;
-            }
-        }
-        else
-        {
-            if (players[1].hasWon)
-            {
-                GlobalSettings.money += 25;
-            }
-            else
-            {
-                GlobalSettings.money += 5;
-            }
-        }
-
         SaveManager.SaveData();
     }
 
@@ -56,6 +33,12 @@ public class GameOverManager : MonoBehaviour
     public void OnRematch(NetworkConnectionToClient conn, TurnMessage message)
     {
         GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>().ServerChangeScene("SelectionScene");
+    }
+
+    public void GoToSettings()
+    {
+        AudioManager.singleton.PlayStandardSound();
+        GlobalManager.singleton.LoadScene("SettingsScene");
     }
 
     public void ReturnToMenu()

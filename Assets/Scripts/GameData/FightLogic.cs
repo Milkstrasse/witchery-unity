@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class FightLogic
 {
@@ -31,43 +30,16 @@ public class FightLogic
 
         if (card.hasMove)
         {
-            if (GlobalSettings.lifeIsResource)
+            if (card.move.cost > players[playerTurn].energy)
             {
-                if (card.move.cost >= players[playerTurn].health)
-                {
-                    return false;
-                }
-                else if (card.move.moveType == MoveType.Response && lastCard.played)
-                {
-                    return false;
-                }
+                return false;
+            }
+            else if (card.move.moveType == MoveType.Response && lastCard.played)
+            {
+                return false;
+            }
 
-                players[playerTurn].health -= card.move.cost;
-            }
-            else if (GlobalSettings.noCostNoMatch)
-            {
-                if (lastCard.card.hasMove && card.move.cost == lastCard.card.move.cost)
-                {
-                    return false;
-                }
-                else if (card.move.moveType == MoveType.Response && lastCard.played)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if (card.move.cost > players[playerTurn].energy)
-                {
-                    return false;
-                }
-                else if (card.move.moveType == MoveType.Response && lastCard.played)
-                {
-                    return false;
-                }
-
-                players[playerTurn].energy = players[playerTurn].energy - card.move.cost;
-            }
+            players[playerTurn].energy = players[playerTurn].energy - card.move.cost;
         }
 
         bool wasPlayed = PlayCard(card, playerTurn, true);
@@ -80,16 +52,12 @@ public class FightLogic
 
     public void RemoveCard(MoveMessage message)
     {
-        if (!message.playCard && !GlobalSettings.noRegainResource)
+        if (!message.playCard)
         {
             int cardIndex = players[playerTurn].cardHand[message.cardIndex];
             Card card = FightManager.singleton.players[playerTurn].cards[cardIndex];
 
-            if (GlobalSettings.lifeIsResource)
-            {
-                players[playerTurn].health = Math.Min(players[playerTurn].health + card.move.cost, GlobalSettings.health);
-            }
-            else if (card.hasMove)
+            if (card.hasMove)
             {
                 players[playerTurn].energy += card.move.cost;
             }
@@ -120,7 +88,7 @@ public class FightLogic
                     break;
             }
         }
-        
+
         NextTurn(message.playCard);
     }
 
@@ -130,7 +98,7 @@ public class FightLogic
         {
             return true;
         }
-        
+
         Move move = card.move;
         if (move.moveID == 7 && lastCard != null) //replay last card
         {
@@ -151,7 +119,7 @@ public class FightLogic
 
             switch (move.moveID)
             {
-                case 1: //fill hand
+                case 1: //fill hands
                     break;
                 case 4: //steal health
                 case 10:
@@ -164,33 +132,54 @@ public class FightLogic
                     int tempHealth = players[1 - turn].health;
                     players[1 - turn].health = Math.Max(players[1 - turn].health + hpToSteal - players[turn].GetPowerBonus() + players[1 - turn].GetDamageModifier(), 0);
 
+                    if (winner < 0 && players[1 - turn].health == 0)
+                    {
+                        players[0].playedUntilEnd = true;
+                        players[1].playedUntilEnd = true;
+
+                        winner = turn;
+                    }
+
                     StatusEffect stealSpice = players[1 - turn].GetEffect("spice");
                     if (stealSpice != null)
                     {
                         players[turn].health = Math.Max(players[turn].health - stealSpice.value, 0);
                         if (winner < 0 && players[turn].health == 0)
                         {
+                            players[0].playedUntilEnd = true;
+                            players[1].playedUntilEnd = true;
+
                             winner = 1 - turn;
                         }
                         else
                         {
                             tempHealth -= players[1 - turn].health;
-                            players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalSettings.health);
+                            if (tempHealth == 0)
+                            {
+                                players[turn].stoleNothing = true;
+                            }
+
+                            players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalData.health);
                         }
                     }
                     else
                     {
                         tempHealth -= players[1 - turn].health;
-                        players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalSettings.health);
-                    }
+                        if (tempHealth == 0)
+                        {
+                            players[turn].stoleNothing = true;
+                        }
 
-                    if (winner < 0 && players[1 - turn].health == 0)
-                    {
-                        winner = turn;
+                        players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, GlobalData.health);
                     }
 
                     break;
                 case 5: //redistribute HP
+                    if (players[1 - turn].health < players[turn].health)
+                    {
+                        players[turn].healedOpponent = true;
+                    }
+
                     int allHealth = players[0].health + players[1].health;
                     players[0].health = allHealth / 2;
                     players[1].health = allHealth / 2;
@@ -214,7 +203,13 @@ public class FightLogic
 
                     int tempEnergy = players[1 - turn].energy;
                     players[1 - turn].energy = Math.Max(players[1 - turn].energy + energyToSteal - players[turn].GetPowerBonus(), 0);
+
                     tempEnergy -= players[1 - turn].energy;
+                    if (tempEnergy == 0)
+                    {
+                        players[turn].stoleNothing = true;
+                    }
+
                     players[turn].energy += tempEnergy;
 
                     break;
@@ -223,9 +218,12 @@ public class FightLogic
                     int damageA = Math.Min(damage - players[turn].GetPowerBonus() + players[1 - turn].GetDamageModifier(), 0);
                     int damageB = Math.Min(damage - players[turn].GetPowerBonus() + players[turn].GetDamageModifier(), 0);
 
-                    players[1 - turn].health = Math.Clamp(players[1 - turn].health + damageA, 0, GlobalSettings.health);
+                    players[1 - turn].health = Math.Clamp(players[1 - turn].health + damageA, 0, GlobalData.health);
                     if (winner < 0 && players[1 - turn].health == 0)
                     {
+                        players[0].playedUntilEnd = true;
+                        players[1].playedUntilEnd = true;
+
                         winner = turn;
                     }
 
@@ -235,11 +233,23 @@ public class FightLogic
                         players[turn].health = Math.Max(players[turn].health - exSpice.value, 0);
                         if (winner < 0 && players[turn].health == 0)
                         {
+                            players[0].playedUntilEnd = true;
+                            players[1].playedUntilEnd = true;
+
+                            players[1 - turn].wonWithEffect = true;
                             winner = 1 - turn;
                         }
                     }
 
-                    players[turn].health = Math.Clamp(players[turn].health + damageB, 0, GlobalSettings.health);
+                    players[turn].health = Math.Clamp(players[turn].health + damageB, 0, GlobalData.health);
+                    if (winner < 0 && players[turn].health == 0)
+                    {
+                        players[0].playedUntilEnd = true;
+                        players[1].playedUntilEnd = true;
+
+                        players[turn].selfKO = true;
+                        winner = 1 - turn;
+                    }
 
                     break;
                 case 17: //clear effects
@@ -250,19 +260,19 @@ public class FightLogic
                     }
                     else
                     {
-                        players[(move.target + turn)%2].effects = new List<StatusEffect>();
+                        players[(move.target + turn) % 2].effects = new List<StatusEffect>();
                     }
 
                     break;
                 case 19: //add blank
-                    players[(move.target + turn)%2].AddBlanks(1);
+                    players[(move.target + turn) % 2].AddBlanks(1);
                     break;
                 case 23: //clear blanks
-                    players[(move.target + turn)%2].startIndex = 5;
+                    players[(move.target + turn) % 2].startIndex = 5;
                     break;
                 case 25: //hand over blanks
                     int blanks = 5 - players[playerTurn].startIndex;
-                    players[(move.target + turn)%2].AddBlanks(blanks);
+                    players[(move.target + turn) % 2].AddBlanks(blanks);
 
                     break;
                 case 29: //copy effects
@@ -274,7 +284,7 @@ public class FightLogic
 
                     break;
                 case 33: //heal to health
-                    players[(move.target + turn)%2].health = Math.Max(players[(move.target + turn)%2].health, move.health + players[turn].GetPowerBonus());
+                    players[(move.target + turn) % 2].health = Math.Max(players[(move.target + turn) % 2].health, move.health + players[turn].GetPowerBonus());
                     break;
                 default:
                     int health = move.health;
@@ -285,28 +295,35 @@ public class FightLogic
 
                     if (health < 0)
                     {
-                        health = Math.Min(health - players[turn].GetPowerBonus() + players[(move.target + turn)%2].GetDamageModifier(), 0);
+                        health = Math.Min(health - players[turn].GetPowerBonus() + players[(move.target + turn) % 2].GetDamageModifier(), 0);
                     }
                     else if (health > 0)
                     {
                         health = Math.Max(health + players[turn].GetPowerBonus(), 0);
                     }
 
-                    players[(move.target + turn)%2].health = Math.Clamp(players[(move.target + turn)%2].health + health, 0, GlobalSettings.health);
+                    players[(move.target + turn) % 2].health = Math.Clamp(players[(move.target + turn) % 2].health + health, 0, GlobalData.health);
 
-                    if (winner < 0 && players[(move.target + turn)%2].health == 0)
+                    if (winner < 0 && players[(move.target + turn) % 2].health == 0)
                     {
-                        winner = 1 - (move.target + turn)%2;
+                        players[0].playedUntilEnd = true;
+                        players[1].playedUntilEnd = true;
+
+                        winner = 1 - (move.target + turn) % 2;
                     }
 
                     if (move.health < 0)
                     {
-                        StatusEffect spice = players[(move.target + turn)%2].GetEffect("spice");
+                        StatusEffect spice = players[(move.target + turn) % 2].GetEffect("spice");
                         if (spice != null)
                         {
                             players[turn].health = Math.Max(players[turn].health - spice.value, 0);
                             if (winner < 0 && players[turn].health == 0)
                             {
+                                players[0].playedUntilEnd = true;
+                                players[1].playedUntilEnd = true;
+
+                                players[1 - turn].wonWithEffect = true;
                                 winner = 1 - turn;
                             }
                         }
@@ -327,12 +344,12 @@ public class FightLogic
                         energy = Math.Max(energy + players[turn].GetPowerBonus(), 0);
                     }
 
-                    players[(move.target + turn)%2].energy += energy;
+                    players[(move.target + turn) % 2].energy += energy;
 
-                    if (move.effect.duration > 0)
+                    if (move.effect.multiplier > 0)
                     {
                         StatusEffect effect = new StatusEffect(move.effect);
-                        players[(move.target + turn)%2].AddEffect(effect);
+                        players[(move.target + turn) % 2].AddEffect(effect);
                     }
 
                     break;
@@ -342,7 +359,7 @@ public class FightLogic
         {
             if (lastCard.card.hasMove && !lastCard.played)
             {
-                if (move.moveID == 3) //snatch card
+                if (move.moveID == 3) //take card effect
                 {
                     int health = lastCard.card.move.health;
 
@@ -359,7 +376,7 @@ public class FightLogic
                         }
 
                         health += players[1 - turn].GetPowerBonus();
-                        players[turn].health = Math.Clamp(players[turn].health + health, 0, GlobalSettings.health);
+                        players[turn].health = Math.Clamp(players[turn].health + health, 0, GlobalData.health);
                     }
 
                     int energy = lastCard.card.move.health;
@@ -375,7 +392,7 @@ public class FightLogic
                         players[turn].energy = Math.Max(players[turn].energy + energy, 0);
                     }
 
-                    if (lastCard.card.move.effect.duration > 0)
+                    if (lastCard.card.move.effect.multiplier > 0)
                     {
                         players[turn].AddEffect(lastCard.card.move.effect);
                     }
@@ -441,19 +458,7 @@ public class FightLogic
     {
         for (int i = 0; i < players.Count; i++)
         {
-            if (GlobalSettings.lifeIsResource)
-            {
-                players[i].health = Math.Max(players[i].health + players[i].energy, GlobalSettings.health);
-            }
-            else if (GlobalSettings.setEnergy || GlobalSettings.noCostNoMatch)
-            {
-                players[i].energy = 7;
-            }
-            else if (GlobalSettings.startAndGainEnergy)
-            {
-                players[i].energy += 7;
-            }
-            
+            players[i].roundsPlayed += 1;
             players[i].FillHand(5);
 
             int j = 0;
@@ -461,12 +466,7 @@ public class FightLogic
             {
                 players[i].effects[j].TriggerEffect(players[i]);
 
-                if (!GlobalSettings.noEffectDecay)
-                {
-                    players[i].effects[j].duration--;
-                }
-
-                if (players[i].effects[j].duration <= 0)
+                if (players[i].effects[j].multiplier <= 0)
                 {
                     players[i].effects.RemoveAt(j);
                 }
@@ -477,6 +477,10 @@ public class FightLogic
 
                 if (winner < 0 && players[i].health == 0)
                 {
+                    players[0].playedUntilEnd = true;
+                    players[1].playedUntilEnd = true;
+
+                    players[1 - i].wonWithEffect = true;
                     winner = 1 - i;
                 }
             }
