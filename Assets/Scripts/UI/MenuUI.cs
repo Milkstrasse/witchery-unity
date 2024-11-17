@@ -15,6 +15,7 @@ public class MenuUI : MonoBehaviour
 
     [SerializeField] private Button joinButton;
     [SerializeField] private Button hostButton;
+    [SerializeField] private Button arenaButton;
 
     private void Start()
     {
@@ -26,6 +27,7 @@ public class MenuUI : MonoBehaviour
 
         joinButton.interactable = GlobalManager.singleton.isConnected;
         hostButton.interactable = GlobalManager.singleton.isConnected;
+        arenaButton.interactable = GlobalManager.singleton.isConnected;
 
         if (GlobalManager.singleton.maxPlayers > 0)
         {

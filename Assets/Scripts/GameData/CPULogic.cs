@@ -31,6 +31,12 @@ public struct CPULogic
                     }
                 }
 
+                if (move.moveType == MoveType.Response)
+                {
+                    prioritizedCards.Add((i, -10));
+                    continue;
+                }
+
                 int health = move.health;
                 if (move.moveID >= 8 && move.moveID <= 10) //special moves
                 {

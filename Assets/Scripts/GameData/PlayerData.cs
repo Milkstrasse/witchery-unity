@@ -15,6 +15,8 @@ public class PlayerData
     public int startIndex;
 
     public bool startedFirst;
+    public int roundsPlayed;
+    public bool playedUntilEnd;
     public int maxEffects;
     public bool healedOpponent;
     public bool stoleNothing;

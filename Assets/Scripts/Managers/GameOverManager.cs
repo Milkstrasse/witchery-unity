@@ -20,33 +20,6 @@ public class GameOverManager : MonoBehaviour
 
         NetworkServer.ReplaceHandler<TurnMessage>(OnRematch);
 
-        if (NetworkClient.activeHost)
-        {
-            if (players[0].hasWon)
-            {
-                SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 25, 999999);
-                SaveManager.savedData.timesWon += 1;
-            }
-            else
-            {
-                SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 5, 999999);
-            }
-        }
-        else
-        {
-            if (players[1].hasWon)
-            {
-                SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 25, 999999);
-                SaveManager.savedData.timesWon += 1;
-            }
-            else
-            {
-                SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 5, 999999);
-            }
-        }
-
-        SaveManager.savedData.timesFought += 1;
-
         SaveManager.SaveData();
     }
 

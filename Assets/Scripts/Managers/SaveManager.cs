@@ -50,7 +50,7 @@ public class SaveManager
 		file.Close();
     }
 
-    public static void UpdateStats(PlayerData playerData)
+    public static void UpdateStats(PlayerData playerData, bool gameHasEnded, bool hasWon)
     {
         if (!savedData.healedOpponent)
         {
@@ -63,6 +63,22 @@ public class SaveManager
         if (!savedData.wonWithEffect)
         {
             savedData.wonWithEffect = playerData.wonWithEffect;
+        }
+
+        if (playerData.playedUntilEnd || (gameHasEnded && playerData.roundsPlayed >= 3))
+        {
+            Debug.Log($"Played for {playerData.roundsPlayed} round(s)");
+            savedData.timesFought++;
+
+            if (hasWon)
+            {
+                savedData.timesWon++;
+                savedData.money = Math.Min(savedData.money + 25, 999999);
+            }
+            else
+            {
+                savedData.money = Math.Min(savedData.money + 5, 999999);
+            }
         }
     }
 

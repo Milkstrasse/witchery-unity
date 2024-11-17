@@ -63,10 +63,6 @@ MonoBehaviour:
     m_Key: clientDescr
     m_Metadata:
       m_Items: []
-  - m_Id: 26344869151629312
-    m_Key: combat
-    m_Metadata:
-      m_Items: []
   - m_Id: 30839589168996352
     m_Key: contacts
     m_Metadata:
@@ -365,6 +361,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 32480461346299904
     m_Key: profile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33362073927802880
+    m_Key: online
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33362076356304896
+    m_Key: offline
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33362290127396864
+    m_Key: arena
     m_Metadata:
       m_Items: []
   m_Metadata:

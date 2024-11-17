@@ -293,8 +293,8 @@ MonoBehaviour:
     m_Localized: "Trete einem Server bei um online zu k\xE4mpfen"
     m_Metadata:
       m_Items: []
-  - m_Id: 26344869151629312
-    m_Localized: KAMPF
+  - m_Id: 33362076356304896
+    m_Localized: Offline
     m_Metadata:
       m_Items: []
   - m_Id: 26344951418707968
@@ -390,6 +390,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 32480461346299904
     m_Localized: Profil
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33362073927802880
+    m_Localized: Online
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33362290127396864
+    m_Localized: Arena
     m_Metadata:
       m_Items: []
   references:
