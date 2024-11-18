@@ -5,16 +5,16 @@ using Utp;
 
 public class GameOverManager : MonoBehaviour
 {
-    private Player[] players;
-    public event Action<Player[]> OnSetupComplete;
+    private PlayerObject[] players;
+    public event Action<PlayerObject[]> OnSetupComplete;
 
     private void Start()
     {
-        players = new Player[2];
+        players = new PlayerObject[2];
 
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
-        players[0] = playerObjects[0].GetComponent<Player>();
-        players[1] = playerObjects[1].GetComponent<Player>();
+        players[0] = playerObjects[0].GetComponent<PlayerObject>();
+        players[1] = playerObjects[1].GetComponent<PlayerObject>();
 
         OnSetupComplete?.Invoke(players);
 

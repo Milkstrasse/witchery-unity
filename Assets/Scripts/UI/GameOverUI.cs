@@ -17,7 +17,7 @@ public class GameOverUI : MonoBehaviour
         manager.OnSetupComplete += SetupUI;
     }
 
-    private void SetupUI(Player[] players)
+    private void SetupUI(PlayerObject[] players)
     {
         if (NetworkClient.activeHost)
         {

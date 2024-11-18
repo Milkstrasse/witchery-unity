@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct CPULogic
 {
-    public static MoveMessage GetMove(Player player, FightLogic logic)
+    public static MoveMessage GetMove(PlayerObject player, FightLogic logic)
     {
         List<(int, int)> prioritizedCards = new List<(int, int)>();
 

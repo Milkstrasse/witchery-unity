@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerObject : MonoBehaviour
 {
     public int playerID;
     public int icon;

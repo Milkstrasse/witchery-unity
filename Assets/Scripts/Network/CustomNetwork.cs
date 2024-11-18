@@ -63,7 +63,7 @@ public class CustomNetwork : RelayNetworkManager
     private void OnClientReceivePlayer(PlayerMessage message)
     {
         GameObject playerObject = Instantiate(playerPrefab);
-        Player player = playerObject.GetComponent<Player>();
+        PlayerObject player = playerObject.GetComponent<PlayerObject>();
         player.SetupPlayer(message, playersReady);
 
         playersReady++;

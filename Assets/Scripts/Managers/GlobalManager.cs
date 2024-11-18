@@ -40,6 +40,7 @@ public class GlobalManager : MonoBehaviour
         try
         {
             await UnityServices.InitializeAsync();
+            AuthenticationService.Instance.SwitchProfile(UnityEngine.Random.Range(0, 1000000).ToString());
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
             isConnected = true;
@@ -182,5 +183,5 @@ public class GlobalManager : MonoBehaviour
 
 public enum GameMode
 {
-    Online, Offline, Training, Testing
+    Online, Matchmaker, Offline, Training, Testing
 }
