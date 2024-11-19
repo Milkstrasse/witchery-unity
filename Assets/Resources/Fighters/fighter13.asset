@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: fighter13
   m_EditorClassIdentifier: 
   fighterID: 13
-  role: 61475
+  role: 63198
   moves:
-  - {fileID: 11400000, guid: cbcd1f94fec434e5f98ffaa6c4767865, type: 2}
-  - {fileID: 11400000, guid: 4b4094e717a4a479ea8cbdc710c37c52, type: 2}
-  - {fileID: 11400000, guid: fde4046764fad42158d7794f50db64e4, type: 2}
-  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
-  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: fe642b13aa3a74a10a574a4cfd4c5b1b, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: 1fe97fa2bf70f4b49a4504ac56778835, type: 2}
+  - {fileID: 11400000, guid: 1fe97fa2bf70f4b49a4504ac56778835, type: 2}
   outfits:
   - name: standard
     cost: 300
