@@ -183,5 +183,5 @@ public class GlobalManager : MonoBehaviour
 
 public enum GameMode
 {
-    Online, Matchmaker, Offline, Training, Testing
+    Online, Offline, Training, Testing
 }

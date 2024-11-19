@@ -5,7 +5,6 @@
     "com.unity.jobs": "0.11.0-preview.6",
     "com.unity.localization": "1.5.2",
     "com.unity.nuget.newtonsoft-json": "3.2.1",
-    "com.unity.services.matchmaker": "1.1.5",
     "com.unity.services.relay": "1.1.1",
     "com.unity.test-framework": "1.1.33",
     "com.unity.textmeshpro": "3.0.9",

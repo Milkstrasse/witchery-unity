@@ -2,10 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
-using Org.BouncyCastle.Asn1.Cms;
-using Unity.Services.Authentication;
-using Unity.Services.Matchmaker;
-using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using Utp;
@@ -21,10 +17,6 @@ public class SelectionManager : MonoBehaviour
 
    public event Action OnPlayersReady;
 
-   private const string DEFAULT_QUEUE = "default-queue";
-   private CreateTicketResponse createTicketResponse;
-   private float pollTicketTimer = 1.1f;
-
    private void Awake()
    {
       networkManager = GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>();
@@ -35,16 +27,6 @@ public class SelectionManager : MonoBehaviour
       isReady = new bool[2];
 
       NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
-   }
-
-   //https://www.youtube.com/watch?v=90Iw1aNbSYE
-   private async void FindMatch()
-   {
-      Debug.Log("Find match...");
-
-      createTicketResponse = await MatchmakerService.Instance.CreateTicketAsync(new List<Player> {
-         new(AuthenticationService.Instance.PlayerId, new Dictionary<string, object>())
-      }, new CreateTicketOptions { QueueName = DEFAULT_QUEUE});
    }
 
    public bool SetReady(int index)
@@ -74,18 +56,6 @@ public class SelectionManager : MonoBehaviour
          else
          {
             NetworkClient.Send(new PlayerMessage(SaveManager.savedData.name, SaveManager.savedData.icon, fighterIDs.ToArray()));
-         }
-      }
-      else if (GlobalManager.singleton.mode == GameMode.Matchmaker)
-      {
-         if (!NetworkServer.active)
-         {
-            FindMatch();
-            StartCoroutine(CheckTickets());
-         }
-         else
-         {
-            Debug.Log("NOT IMPLEMENTED");
          }
       }
       else
@@ -161,63 +131,6 @@ public class SelectionManager : MonoBehaviour
 
       GlobalManager.QuitAnyConnection();
       ReturnToMenu();
-   }
-
-   IEnumerator CheckTickets()
-   {
-      yield return new WaitForSeconds(pollTicketTimer);
-
-      if (createTicketResponse != null)
-      {
-         PollMatchmakerTicket();
-      }
-      else
-      {
-         yield break;
-      }
-   }
-
-   private async void PollMatchmakerTicket()
-   {
-      Debug.Log("PollMatchmakerTicket");
-      TicketStatusResponse ticketStatus = await MatchmakerService.Instance.GetTicketAsync(createTicketResponse.Id);
-
-      if (ticketStatus == null) //no update, keep waiting
-      {
-         return;
-      }
-
-      if (ticketStatus.Type == typeof(MultiplayAssignment))
-      {
-         MultiplayAssignment multiplayAssignment = ticketStatus.Value as MultiplayAssignment;
-
-         switch (multiplayAssignment.Status)
-         {
-            case MultiplayAssignment.StatusOptions.Found:
-               createTicketResponse = null;
-
-               string ipv4Address = multiplayAssignment.Ip;
-               ushort port = (ushort)multiplayAssignment.Port;
-
-               networkManager.networkAddress = ipv4Address;
-               networkManager.GetComponent<UtpTransport>().Port = port;
-
-               networkManager.JoinStandardServer();
-
-               break;
-            case MultiplayAssignment.StatusOptions.InProgress:
-               //wating
-               break;
-            case MultiplayAssignment.StatusOptions.Failed:
-               createTicketResponse = null;
-               Debug.Log("Failed to create server");
-               break;
-            case MultiplayAssignment.StatusOptions.Timeout:
-               createTicketResponse = null;
-               Debug.Log("Timeout");
-               break;
-         }
-      }
    }
 
    public SelectionResult EditTeam(SelectedFighter fighter)
