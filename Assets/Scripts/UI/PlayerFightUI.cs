@@ -186,7 +186,7 @@ public class PlayerFightUI : MonoBehaviour
     IEnumerator MoveCard(MoveMessage message)
     {
         Card card = player.cardHand[message.cardIndex];
-        CardUI cardUI =  cards[message.cardIndex];
+        CardUI cardUI = cards[message.cardIndex];
 
         if (card.isSpecial)
         {
@@ -306,6 +306,11 @@ public class PlayerFightUI : MonoBehaviour
         MakeMove(message);
 
         yield return new WaitForSeconds(message.playCard ? 0.8f : 0.2f);
+
+        while (FightManager.singleton.timeToMakeMove > 0f)
+        {
+            yield return new WaitForSeconds(0.2f);
+        }
 
         FightManager.singleton.SendMove(message.cardIndex, message.playCard, false);
     }

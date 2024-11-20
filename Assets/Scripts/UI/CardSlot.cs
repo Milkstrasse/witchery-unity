@@ -77,7 +77,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     IEnumerator PlayCard(CardUI eventCardUI, int cardIndex)
     {
-        if (eventCardUI.card.hasMove && eventCardUI.card.move.moveID == 1)
+        if (eventCardUI.card.isSpecial)
         {
             impactFrame.gameObject.SetActive(true);
             impactFrame.SetupUI(eventCardUI.card.fighter.name, eventCardUI.transform.eulerAngles.z == 180f);

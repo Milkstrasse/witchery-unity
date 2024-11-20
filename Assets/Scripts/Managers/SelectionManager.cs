@@ -182,7 +182,6 @@ public class SelectionManager : MonoBehaviour
 
    private void PlayersReady(TurnMessage message)
    {
-      Debug.Log(message.playerTurn);
       OnPlayersReady?.Invoke();
    }
 
