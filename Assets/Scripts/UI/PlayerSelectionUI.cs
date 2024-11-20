@@ -44,7 +44,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (rectTransform.eulerAngles.z == 180f)
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[0].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
             SetName(LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", "player"));
         }
         else
@@ -97,6 +97,8 @@ public class PlayerSelectionUI : MonoBehaviour
         if (isEditing || editing)
         {
             SelectionResult result = selectionUI.EditTeam(fighter);
+
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader].name + "-standard");
 
             fighterCards[fighter.fighterID].UpdateOutfit(GlobalData.fighters[fighter.fighterID], fighter.outfit);
             outfits[fighter.fighterID] = fighter.outfit;
@@ -389,6 +391,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
                     if (result.wasAdded)
                     {
+                        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader].name + "-standard");
+
                         AudioManager.singleton.PlayStandardSound();
                     }
                     else
@@ -443,6 +447,8 @@ public class PlayerSelectionUI : MonoBehaviour
                 GameObject card = Instantiate(cardPrefab, cardParent);
                 moveCards[i] = card.GetComponent<CardUI>();
                 moveCards[i].SetupCard(fighter, outfits[currCard], fighter.moves[i]);
+                
+                moveCards[i].HighlightCard(i == 0);
             }
 
             LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 1.5f - 20f, 0.3f);

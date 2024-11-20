@@ -307,9 +307,9 @@ public class PlayerFightUI : MonoBehaviour
 
         yield return new WaitForSeconds(message.playCard ? 0.8f : 0.2f);
 
-        while (FightManager.singleton.timeToMakeMove > 0f)
+        if (message.playCard && player.cardHand[message.cardIndex].isSpecial)
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.8f);
         }
 
         FightManager.singleton.SendMove(message.cardIndex, message.playCard, false);
