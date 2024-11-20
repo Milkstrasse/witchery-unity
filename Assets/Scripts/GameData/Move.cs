@@ -21,6 +21,7 @@ public class Move : ScriptableObject
         
         switch (moveID - offset)
         {
+            case 1:
             case 2:
                 return "doDamage";
             case 3:

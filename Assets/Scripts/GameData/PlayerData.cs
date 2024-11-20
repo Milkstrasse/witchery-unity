@@ -51,9 +51,19 @@ public class PlayerData
             int currCount = cardStack.Count + 5;
 
             Fighter fighter = GlobalData.fighters[message.fighterIDs[i].fighterID];
-            for (int j = 0; j < fighter.moves.Length; j++)
+            if (i == 0)
             {
-                cardStack.Add(currCount + j);
+                for (int j = 0; j < fighter.moves.Length; j++)
+                {
+                    cardStack.Add(currCount + j);
+                }
+            }
+            else
+            {
+                for (int j = 0; j < fighter.moves.Length - 1; j++)
+                {
+                    cardStack.Add(currCount + j);
+                }
             }
         }
 
