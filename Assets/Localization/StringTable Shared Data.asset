@@ -135,10 +135,6 @@ MonoBehaviour:
     m_Key: fighters
     m_Metadata:
       m_Items: []
-  - m_Id: 7880276955881472
-    m_Key: fillHand
-    m_Metadata:
-      m_Items: []
   - m_Id: 7842569093373952
     m_Key: gainCostEnergy
     m_Metadata:

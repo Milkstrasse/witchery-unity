@@ -7234,7 +7234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6193589589378804777, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Name
-      value: Matchmaking
+      value: Untitled
       objectReference: {fileID: 0}
     - target: {fileID: 7896369229768226696, guid: dac1600e4233e4beb9a8752bf7300af0, type: 3}
       propertyPath: m_Pivot.x
@@ -7815,9 +7815,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1649658017}
-  - {fileID: 1415921681}
   - {fileID: 8751252}
   - {fileID: 1704235088}
+  - {fileID: 1415921681}
   m_Father: {fileID: 1385810615}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -11963,19 +11963,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2146519925}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1369647117}
-        m_TargetAssemblyTypeName: OverviewUI, Assembly-CSharp
-        m_MethodName: ToggleCards
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: SettingsScene
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2146519925
 MonoBehaviour:
   m_ObjectHideFlags: 0

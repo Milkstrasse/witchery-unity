@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private ImpactUI impactFrame;
+    public ImpactUI impactFrame;
 
     public CardUI cardUI;
     [SerializeField] private CardUI lastCardUI;
@@ -68,10 +68,27 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                 }
             }
 
-            SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
-            FightManager.singleton.SendMove(cardIndex, true);
+            StartCoroutine(PlayCard(eventCardUI, cardIndex));
 
+            //SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
+            //FightManager.singleton.SendMove(cardIndex, true);
         }
+    }
+
+    IEnumerator PlayCard(CardUI eventCardUI, int cardIndex)
+    {
+        if (eventCardUI.card.hasMove && eventCardUI.card.move.moveID == 1)
+        {
+            impactFrame.gameObject.SetActive(true);
+            impactFrame.SetupUI(eventCardUI.card.fighter.name, eventCardUI.transform.eulerAngles.z == 180f);
+
+            yield return new WaitForSeconds(0.8f);
+
+            impactFrame.gameObject.SetActive(false);
+        }
+
+        SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
+        FightManager.singleton.SendMove(cardIndex, true);
     }
 
     public void SetupCard(Card card, bool isFlipped)

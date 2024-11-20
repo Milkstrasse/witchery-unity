@@ -98,10 +98,6 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
-  - m_Id: 7880276955881472
-    m_Localized: Ziehe Karten bis du 5 hast
-    m_Metadata:
-      m_Items: []
   - m_Id: 7920018510569472
     m_Localized: Stehle {energy} Energie
     m_Metadata:

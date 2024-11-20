@@ -98,10 +98,6 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
-  - m_Id: 7880276955881472
-    m_Localized: Fill hand up to 5 cards
-    m_Metadata:
-      m_Items: []
   - m_Id: 7920018510569472
     m_Localized: Steal {energy} energy
     m_Metadata:

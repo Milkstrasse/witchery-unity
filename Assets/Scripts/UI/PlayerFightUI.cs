@@ -185,22 +185,44 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator MoveCard(MoveMessage message)
     {
-        FightManager.singleton.timeToMakeMove = 0.8f;
+        Card card = player.cardHand[message.cardIndex];
+        CardUI cardUI =  cards[message.cardIndex];
+
+        if (card.isSpecial)
+        {
+            FightManager.singleton.timeToMakeMove = 1.6f;
+        }
+        else
+        {
+            FightManager.singleton.timeToMakeMove = 0.8f;
+        }
+
         yield return new WaitForSeconds(0.3f);
 
-        cards[message.cardIndex].FlipCard(false, 0f);
-        cards[message.cardIndex].transform.SetParent(canvas.transform);
+        cardUI.FlipCard(false, 0f);
+        cardUI.transform.SetParent(canvas.transform);
         
-        LeanTween.move(cards[message.cardIndex].gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
+        LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
         
         yield return new WaitForSeconds(0.5f);
 
-        cards[message.cardIndex].GetComponent<DragDrop>().ResetDrag();
-        cardSlot.SetupCard(player.cardHand[message.cardIndex], true);
+        if (card.isSpecial)
+        {
+            cardSlot.impactFrame.transform.SetAsLastSibling();
+            cardSlot.impactFrame.gameObject.SetActive(true);
+            cardSlot.impactFrame.SetupUI(card.fighter.name, true);
+
+            yield return new WaitForSeconds(0.8f);
+
+            cardSlot.impactFrame.gameObject.SetActive(false);
+        }
+
+        cardUI.GetComponent<DragDrop>().ResetDrag();
+        cardSlot.SetupCard(card, true);
 
         cardSlot.PlayAnimation(false, message.cardPlayed, true);
 
-        cards[message.cardIndex].FlipCard(true, 0f);
+        cardUI.FlipCard(true, 0f);
         player.cardHand.RemoveAt(message.cardIndex);
 
         UpdateUI();

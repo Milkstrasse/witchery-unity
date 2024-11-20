@@ -13,16 +13,15 @@ MonoBehaviour:
   m_Name: healToHealth
   m_EditorClassIdentifier: 
   moveID: 33
-  cost: 3
+  cost: 4
   target: 0
   health: 45
   energy: 0
   effect:
     name: 
     icon: 
-    duration: 0
+    multiplier: 0
     value: 0
     statusType: 0
-    isDelayed: 0
     isNew: 0
   moveType: 0

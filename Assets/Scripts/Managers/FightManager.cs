@@ -72,6 +72,11 @@ public class FightManager : MonoBehaviour
             return;
         }
 
+        if (!logic.players[0].startedFirst && !logic.players[1].startedFirst)
+        {
+            logic.players[logic.playerTurn].startedFirst = true;
+        }
+
         if (message.cardIndex < 0) //player gave up, winner - 2
         {
             NetworkServer.SendToAll(new TurnMessage(-1 - message.playerIndex, new PlayerData[]{logic.players[message.playerIndex]}));
@@ -119,7 +124,6 @@ public class FightManager : MonoBehaviour
                 stopwatch.Start();
 
                 logic.playerTurn = message.playerTurn;
-                logic.players[logic.playerTurn].startedFirst = true;
 
                 GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
                 players[0] = playerObjects[0].GetComponent<Player>();

@@ -203,10 +203,6 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
-  - m_Id: 7880276955881472
-    m_Localized: "\u30AB\u30FC\u30C9 \u3092 5 \u307E\u3044 \u3072\u304F"
-    m_Metadata:
-      m_Items: []
   - m_Id: 7210184622465024
     m_Localized: "{energy} \u3064 \u306E \u30A8\u30CD\u30EB\u30AE\u30FC \u3092 \u3048\u308B"
     m_Metadata:
