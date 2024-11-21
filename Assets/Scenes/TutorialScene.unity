@@ -877,23 +877,26 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Goal: reduce opponents HP to 0\n\nBoth players start with 75 HP (75 can\u2019t
-    be exceeded)\n\nEach player starts with five cards.\nPlayers take turns playing
-    a card. If opponent can\u2019t play a card their turn is skipped, if both players
-    can\u2019t play their cards a new round will start after all effects are triggered
-    in player order.\n\nPlaying cards: To play a card draw it to the center, the
-    card can only be played if player has enough energy (card cost is in the top
-    left corner). When stealing: player gets the amount that was actually stolen.
-    Playing a card ends the turn.\n\nDiscarding cards: To discard a card drag it
-    to the bottom or top of the screen. Discarding will gain the player the card
-    cost as energy and doesn\u2019t end the turn unless it\u2019s the last card.\n\nEffects:
-    Players can only have up to 5 effects & can\u2019t have more than 5 blank cards.
-    Effects are stacked & become more powerful (effect value * amount).\n\nBlank
-    cards: Blank cards are added to the player's draw pile and shuffled. The draw
-    pile is also shuffled when removing blank cards from itself.\n\nSpecial Cards:\nBlock
-    & take cards can only played as a response to another played card.\n\nEmpty draw
-    pile: Cards are removed from stack and are returned to the players shuffled.\n\nThe
-    game is over when one player has given up or has no health left."
+  m_text: "Goal: reduce opponents HP to 0\n\nStarting the Game\n\nBoth players start
+    with 75 HP (can\u2019t be exceeded)\nCombine all move cards of each fighter to
+    create your deck. Add the leader move card and then shuffle the deck to create
+    your draw pile.\n\nPlaying the Game\n\nNew round: Each player draws five cards
+    after all effects are triggered in turn order.\n\nPlayer turn: Players take turns
+    playing a card. If opponent can\u2019t play a card their turn is skipped, if
+    both players can\u2019t play their cards a new round will start.\n\nPlaying cards:
+    To play a card draw it to the center, the card can only be played if player has
+    enough energy (card cost is in the top left corner). When stealing: player gets
+    the amount that was actually stolen. Playing a card ends the turn.\n  \nDiscarding
+    cards: To discard a card drag it to the bottom or top of the screen. Discarding
+    will gain the player the card cost as energy and doesn\u2019t end the turn unless
+    it\u2019s the last card.\n\nEffects: Players can only have up to 5 effects &
+    can\u2019t have more than 5 blank cards. Effects are stacked & become more powerful
+    (effect value * amount).\n\nBlank cards: Blank cards are added to the player's
+    draw pile and shuffled. The draw pile is also shuffled when removing blank cards
+    from itself.\n  \nSpecial Cards: Block & take cards can only played as a response
+    to another played card.\nLeader card can't be blocked nor taken!\n\nEmpty draw
+    pile: Cards are removed from stack and are returned to the players shuffled.\n\nEnd
+    of Game\n\nThe game is over when a player has given up or has no health left."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e5d77af622c634d9b8d3c8a64d0927a2, type: 2}
   m_sharedMaterial: {fileID: 1538768402756865766, guid: e5d77af622c634d9b8d3c8a64d0927a2, type: 2}
