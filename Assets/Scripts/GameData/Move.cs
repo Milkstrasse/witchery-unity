@@ -14,7 +14,7 @@ public class Move : ScriptableObject
 
     public string GetDescription(int offset = 0)
     {
-        if (moveType != MoveType.Standard)
+        if (moveType == MoveType.Response)
         {
             return name;
         }
@@ -73,5 +73,5 @@ public class Move : ScriptableObject
 
 public enum MoveType
 {
-    Standard, Response
+    Standard, Response, Signature
 }

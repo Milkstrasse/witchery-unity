@@ -57,7 +57,14 @@ public class CardUI : MonoBehaviour
     {
         UpdateOutfit(fighter, outfit);
 
-        icon.text = move.cost.ToString();
+        if (move.moveID == 1)
+        {
+            icon.text = $"<style=IconShadow>\uf005</style>";
+        }
+        else
+        {
+            icon.text = move.cost.ToString();
+        }
 
         stringEvent = infoText.GetComponent<LocalizeStringEvent>();
 

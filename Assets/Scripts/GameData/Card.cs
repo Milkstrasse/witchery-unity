@@ -13,7 +13,7 @@ public struct Card
         move = fighter.moves[moveIndex];
         hasMove = true;
 
-        isSpecial = move.moveID == 1;
+        isSpecial = move.moveType == MoveType.Signature;
     }
 
     public readonly bool IsSpecialMove => (move.moveID >= 8 && move.moveID <= 10) || (move.moveID >= 20 && move.moveID <= 21);
