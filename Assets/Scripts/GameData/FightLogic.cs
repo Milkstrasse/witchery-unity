@@ -116,8 +116,6 @@ public class FightLogic
 
             switch (move.moveID)
             {
-                case 1: //fill hands
-                    break;
                 case 4: //steal health
                 case 10:
                     int hpToSteal = move.health;
