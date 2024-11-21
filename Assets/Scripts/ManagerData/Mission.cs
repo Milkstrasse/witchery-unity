@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Mission", menuName = "ScriptableObjects/Mission")]
 public class Mission : ScriptableObject
 {
+    public string descrKey;
+    
     public int reward;
     public int goalValue;
     public string checkVariable;

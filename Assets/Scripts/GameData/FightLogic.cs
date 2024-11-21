@@ -105,6 +105,11 @@ public class FightLogic
             }
 
             move = lastCard.card.move;
+
+            if (move.moveID == 1)
+            {
+                players[playerTurn].replayedLeader = true;
+            }
         }
 
         if (move.moveType == MoveType.Standard)

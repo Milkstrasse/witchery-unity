@@ -392,10 +392,26 @@ MonoBehaviour:
     m_Localized: Online
     m_Metadata:
       m_Items: []
-  - m_Id: 33362290127396864
-    m_Localized: Arena
+  - m_Id: 34667935183134720
+    m_Localized: Fight {amount} times
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 296817732614357011
+  - m_Id: 34668335646892032
+    m_Localized: Win {amount} times
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
+  - m_Id: 34668589179985920
+    m_Localized: Spend {amount} SP
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
+  - m_Id: 34677428671471616
+    m_Localized: Have {amount} effects at once
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
   references:
     version: 2
     RefIds:
@@ -427,3 +443,7 @@ MonoBehaviour:
         - id: 17290912945135616
         - id: 15212672940236800
         - id: 8223827040395264
+        - id: 34667935183134720
+        - id: 34668335646892032
+        - id: 34668589179985920
+        - id: 34677428671471616

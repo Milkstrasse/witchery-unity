@@ -150,13 +150,14 @@ public class FightManager : MonoBehaviour
         {
             stopwatch.Stop();
 
+            players[message.playerTurn + 2].hasWon = true;
+
             TimeSpan ts = stopwatch.Elapsed;
             string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}";
-            
+
             UnityEngine.Debug.Log("Fight ended after " + elapsedTime);
             UnityEngine.Debug.Log($"{logic.players[0].roundsPlayed} round(s) were played");
-
-            players[message.playerTurn + 2].hasWon = true;
+            UnityEngine.Debug.Log($"First player has won ? {(logic.players[0].startedFirst && players[0].hasWon) || (logic.players[1].startedFirst && players[1].hasWon)}");
 
             if (messages.AddToQueue(message, false))
             {

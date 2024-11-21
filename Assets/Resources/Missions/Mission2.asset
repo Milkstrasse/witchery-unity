@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0de20dfe1a448b9bb7c1ac16200675, type: 3}
   m_Name: Mission2
   m_EditorClassIdentifier: 
+  descrKey: fightTimes
   reward: 10
-  goalValue: 2
+  goalValue: 5
   checkVariable: timesFought
+  isClaimable: 0
+  category: 0

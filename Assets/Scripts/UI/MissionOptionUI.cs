@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 public class MissionOptionUI : MonoBehaviour
@@ -15,8 +16,10 @@ public class MissionOptionUI : MonoBehaviour
     public void SetupUI(Mission mission, bool claimed)
     {
         title.text = mission.name;
+        description.StringReference.SetReference("StringTable", mission.descrKey);
+        (description.StringReference["amount"] as IntVariable).Value = mission.goalValue;
+       
         reward.text = mission.reward.ToString();
-
         claimButton.interactable = mission.isClaimable;
         
         if (claimed)

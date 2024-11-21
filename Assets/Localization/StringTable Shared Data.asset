@@ -367,8 +367,20 @@ MonoBehaviour:
     m_Key: offline
     m_Metadata:
       m_Items: []
-  - m_Id: 33362290127396864
-    m_Key: arena
+  - m_Id: 34667935183134720
+    m_Key: fightTimes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34668335646892032
+    m_Key: winTimes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34668589179985920
+    m_Key: spendMoney
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34677428671471616
+    m_Key: haveEffects
     m_Metadata:
       m_Items: []
   m_Metadata:

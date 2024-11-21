@@ -56,6 +56,10 @@ public class SaveManager
         {
             savedData.healedOpponent = playerData.healedOpponent;
         }
+        if (!savedData.nothingStolen)
+        {
+            savedData.nothingStolen = playerData.stoleNothing;
+        }
         if (!savedData.selfKO)
         {
             savedData.selfKO = playerData.selfKO;
@@ -64,10 +68,15 @@ public class SaveManager
         {
             savedData.wonWithEffect = playerData.wonWithEffect;
         }
+        if (!savedData.replayedLeader)
+        {
+            savedData.replayedLeader = playerData.replayedLeader;
+        }
+
+        savedData.maxEffectCount = Math.Max(playerData.maxEffects, savedData.maxEffectCount);
 
         if (playerData.playedUntilEnd || (gameHasEnded && playerData.roundsPlayed >= 3))
         {
-            Debug.Log($"Played for {playerData.roundsPlayed} round(s)");
             savedData.timesFought++;
 
             if (hasWon)

@@ -22,6 +22,7 @@ public class PlayerData
     public bool stoleNothing;
     public bool wonWithEffect;
     public bool selfKO;
+    public bool replayedLeader;
 
     public PlayerData()
     {
@@ -141,6 +142,8 @@ public class PlayerData
         else if (effects.Count < 5)
         {
             effects.Add(effect);
+
+            maxEffects = Math.Max(effects.Count, maxEffects);
         }
     }
 
