@@ -42,11 +42,7 @@ public class PlayerFightUI : MonoBehaviour
     {
         if (player != null)
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-standard");
-        }
-        else if (rectTransform.eulerAngles.z == 180f)
-        {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[0].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
         }
         else
         {
@@ -71,7 +67,7 @@ public class PlayerFightUI : MonoBehaviour
         this.player = player;
         player.OnPlayerChanged += UpdateUI;
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-standard");
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
 
         nameText.text = player.playerName;
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
@@ -210,7 +206,7 @@ public class PlayerFightUI : MonoBehaviour
         {
             cardSlot.impactFrame.transform.SetAsLastSibling();
             cardSlot.impactFrame.gameObject.SetActive(true);
-            cardSlot.impactFrame.SetupUI(card.fighter.name, true);
+            cardSlot.impactFrame.SetupUI(card.fighter.name, card.fighter.outfits[card.outfit].name, true);
 
             yield return new WaitForSeconds(0.8f);
 

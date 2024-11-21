@@ -80,7 +80,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         if (eventCardUI.card.isSpecial)
         {
             impactFrame.gameObject.SetActive(true);
-            impactFrame.SetupUI(eventCardUI.card.fighter.name, eventCardUI.transform.eulerAngles.z == 180f);
+            impactFrame.SetupUI(eventCardUI.card.fighter.name, eventCardUI.card.fighter.outfits[eventCardUI.card.outfit].name, eventCardUI.transform.eulerAngles.z == 180f);
 
             yield return new WaitForSeconds(0.8f);
 

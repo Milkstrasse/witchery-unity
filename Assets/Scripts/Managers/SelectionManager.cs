@@ -53,7 +53,7 @@ public class SelectionManager : MonoBehaviour
       }
       else if (GlobalManager.singleton.mode == GameMode.Online)
       {
-         NetworkClient.Send(new PlayerMessage(SaveManager.savedData.name, fighterIDs[0].fighterID, fighterIDs.ToArray()));
+         NetworkClient.Send(new PlayerMessage(SaveManager.savedData.name, fighterIDs.ToArray()));
       }
       else
       {
@@ -62,7 +62,7 @@ public class SelectionManager : MonoBehaviour
             networkManager.StartStandardHost();
          }
 
-         NetworkClient.Send(new PlayerMessage(playerNames[index], fighterIDs[0].fighterID, fighterIDs.ToArray()));
+         NetworkClient.Send(new PlayerMessage(playerNames[index], fighterIDs.ToArray()));
 
          int fighterAmount = fighterIDs.Count;
          fighterIDs = new List<SelectedFighter>();
@@ -75,7 +75,7 @@ public class SelectionManager : MonoBehaviour
                fighterIDs.Add(new SelectedFighter(numbers[i], 0));
             }
 
-            NetworkClient.Send(new PlayerMessage(playerNames[1 - index], fighterIDs[0].fighterID, fighterIDs.ToArray()));
+            NetworkClient.Send(new PlayerMessage(playerNames[1 - index], fighterIDs.ToArray()));
             fighterIDs = new List<SelectedFighter>();
          }
       }
@@ -119,7 +119,7 @@ public class SelectionManager : MonoBehaviour
 
          if (NetworkClient.isConnected && !sentMessage)
          {
-            NetworkClient.Send(new PlayerMessage(SaveManager.savedData.name, SaveManager.savedData.icon, fighterIDs.ToArray()));
+            NetworkClient.Send(new PlayerMessage(SaveManager.savedData.name, fighterIDs.ToArray()));
             sentMessage = true;
          }
          
@@ -147,17 +147,17 @@ public class SelectionManager : MonoBehaviour
          fighterIDs.RemoveAt(index);
          bool hasTeam = fighterIDs.Count > 0;
 
-         return new SelectionResult(false, hasTeam, hasTeam ? fighterIDs[0].fighterID : SaveManager.savedData.icon);
+         return new SelectionResult(false, hasTeam, hasTeam ? fighterIDs[0] : new SelectedFighter(SaveManager.savedData.icon, 0));
       }
       else if (fighterIDs.Count < 6)
       {
          fighterIDs.Add(fighter);
          
-         return new SelectionResult(true, true, fighterIDs[0].fighterID);
+         return new SelectionResult(true, true, fighterIDs[0]);
       }
       else
       {
-         return new SelectionResult(false, true, fighterIDs[0].fighterID);
+         return new SelectionResult(false, true, fighterIDs[0]);
       }
    }
 

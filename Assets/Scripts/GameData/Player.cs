@@ -6,7 +6,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int playerID;
-    public int icon;
 
     public string playerName;
     public int fullHealth;
@@ -31,7 +30,6 @@ public class Player : MonoBehaviour
     public void SetupPlayer(PlayerMessage message, int playerID)
     {
         this.playerID = playerID;
-        icon = message.icon;
         
         playerName = message.name;
         fullHealth = GlobalData.health;

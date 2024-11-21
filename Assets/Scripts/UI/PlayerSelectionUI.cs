@@ -98,7 +98,7 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             SelectionResult result = selectionUI.EditTeam(fighter);
 
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
 
             fighterCards[fighter.fighterID].UpdateOutfit(GlobalData.fighters[fighter.fighterID], fighter.outfit);
             outfits[fighter.fighterID] = fighter.outfit;
@@ -391,7 +391,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
                     if (result.wasAdded)
                     {
-                        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader].name + "-standard");
+                        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
 
                         AudioManager.singleton.PlayStandardSound();
                     }

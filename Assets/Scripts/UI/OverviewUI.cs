@@ -71,7 +71,13 @@ public class OverviewUI : MonoBehaviour
     {
         AudioManager.singleton.PlayStandardSound();
 
+        if (currCard == cardIndex)
+        {
+            return;
+        }
+
         currOutfit = 0;
+        outfit.StringReference.SetReference("StringTable", GlobalData.fighters[currCard].outfits[currOutfit].name);
 
         fighterCards[currCard].UpdateOutfit(GlobalData.fighters[currCard], currOutfit);
         fighterCards[currCard].HighlightCard(false);

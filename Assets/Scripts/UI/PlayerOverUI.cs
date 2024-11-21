@@ -17,7 +17,7 @@ public class PlayerOverUI : MonoBehaviour
     {
         title.StringReference.SetReference("StringTable", player.hasWon ? "victory" : "defeat");
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-standard");
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
 
         background.material = player.hasWon ? victory : defeat;
         triangle.material = player.hasWon ? victory : defeat;
