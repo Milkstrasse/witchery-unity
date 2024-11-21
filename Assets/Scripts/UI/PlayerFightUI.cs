@@ -49,12 +49,12 @@ public class PlayerFightUI : MonoBehaviour
             portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
         }
 
-        float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 230 - 40)/4 * -1;
+        float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 235 - 40)/4 * -1;
 
         for (int i = 0; i < 5; i++)
         {
             CardUI card = cardParent.transform.GetChild(i).GetComponent<CardUI>();
-            card.transform.localPosition = new Vector3(i * (230 - cardSpacer), -160f, 0);
+            card.transform.localPosition = new Vector3(i * (235 - cardSpacer), -160f, 0);
             card.GetComponent<DragDrop>().SetInit();
 
             cards[i] = card;
