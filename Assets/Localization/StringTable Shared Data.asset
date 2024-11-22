@@ -55,12 +55,8 @@ MonoBehaviour:
     m_Key: clearOppEffects
     m_Metadata:
       m_Items: []
-  - m_Id: 25373414918184960
-    m_Key: client
-    m_Metadata:
-      m_Items: []
   - m_Id: 26341001055428608
-    m_Key: clientDescr
+    m_Key: onlineDescr
     m_Metadata:
       m_Items: []
   - m_Id: 30839589168996352
@@ -249,10 +245,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 25373394303180800
     m_Key: server
-    m_Metadata:
-      m_Items: []
-  - m_Id: 26340997322498048
-    m_Key: serverDescr
     m_Metadata:
       m_Items: []
   - m_Id: 15212672940236800

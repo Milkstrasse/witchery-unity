@@ -13,9 +13,8 @@ public class MenuUI : MonoBehaviour
     [SerializeField] private RectTransform mainMenu;
     [SerializeField] private RectTransform modeMenu;
 
-    [SerializeField] private Button joinButton;
-    [SerializeField] private Button hostButton;
-    [SerializeField] private Button arenaButton;
+    [SerializeField] private Button onlineButton;
+    [SerializeField] private GameObject popUp;
 
     private void Start()
     {
@@ -25,15 +24,20 @@ public class MenuUI : MonoBehaviour
         playerName.text = SaveManager.savedData.name;
         money.text = $"{SaveManager.savedData.money:n0} SP";
 
-        joinButton.interactable = GlobalManager.singleton.isConnected;
-        hostButton.interactable = GlobalManager.singleton.isConnected;
-        arenaButton.interactable = GlobalManager.singleton.isConnected;
+        onlineButton.interactable = GlobalManager.singleton.isConnected;
 
-        if (GlobalManager.singleton.maxPlayers > 0)
+        /*if (GlobalManager.singleton.maxPlayers > 0)
         {
             mainMenu.localPosition = new Vector3(-mainMenu.sizeDelta.x * 1.5f - 20f, mainMenu.localPosition.y, mainMenu.localPosition.z);
             modeMenu.localPosition = new Vector3(-mainMenu.sizeDelta.x * 0.5f, modeMenu.localPosition.y, modeMenu.localPosition.z);
-        }
+        }*/
+    }
+
+    public void TogglePopup(bool enable)
+    {
+        AudioManager.singleton.PlayStandardSound();
+        
+        popUp.SetActive(enable);
     }
 
     public void SwitchToModeMenu()

@@ -23,10 +23,6 @@ MonoBehaviour:
     m_Localized: Host
     m_Metadata:
       m_Items: []
-  - m_Id: 25373414918184960
-    m_Localized: CLIENT
-    m_Metadata:
-      m_Items: []
   - m_Id: 2538625827856384
     m_Localized: Ready
     m_Metadata:
@@ -281,12 +277,8 @@ MonoBehaviour:
     m_Localized: Unlock new outfits and fighters
     m_Metadata:
       m_Items: []
-  - m_Id: 26340997322498048
-    m_Localized: Start a server to fight online against an opponent
-    m_Metadata:
-      m_Items: []
   - m_Id: 26341001055428608
-    m_Localized: Join a server to fight online against an opponent
+    m_Localized: Fight online against others and earn rewards
     m_Metadata:
       m_Items: []
   - m_Id: 33362076356304896
@@ -389,7 +381,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 33362073927802880
-    m_Localized: Online
+    m_Localized: ONLINE
     m_Metadata:
       m_Items: []
   - m_Id: 34667935183134720
