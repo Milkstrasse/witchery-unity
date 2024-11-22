@@ -57,6 +57,7 @@ public class GlobalManager : MonoBehaviour
         int langIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("langCode", langIndex)];
         GlobalData.highlightPlayable = PlayerPrefs.GetInt("highlightPlayable", 0) != 0;
+        GlobalData.animateImpact = PlayerPrefs.GetInt("animateImpact", 0) != 0;
         GlobalData.themeIndex = PlayerPrefs.GetInt("theme", 1);
 
         ApplyTheme();

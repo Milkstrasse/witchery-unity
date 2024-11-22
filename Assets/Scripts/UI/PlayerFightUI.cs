@@ -184,7 +184,7 @@ public class PlayerFightUI : MonoBehaviour
         Card card = player.cardHand[message.cardIndex];
         CardUI cardUI = cards[message.cardIndex];
 
-        if (card.isSpecial)
+        if (card.isSpecial && GlobalData.animateImpact)
         {
             FightManager.singleton.timeToMakeMove = 1.6f;
         }
@@ -202,7 +202,7 @@ public class PlayerFightUI : MonoBehaviour
         
         yield return new WaitForSeconds(0.5f);
 
-        if (card.isSpecial)
+        if (card.isSpecial && GlobalData.animateImpact)
         {
             cardSlot.impactFrame.transform.SetAsLastSibling();
             cardSlot.impactFrame.gameObject.SetActive(true);
@@ -303,7 +303,7 @@ public class PlayerFightUI : MonoBehaviour
 
         yield return new WaitForSeconds(message.playCard ? 0.8f : 0.2f);
 
-        if (message.playCard && player.cardHand[message.cardIndex].isSpecial)
+        if (message.playCard && player.cardHand[message.cardIndex].isSpecial && GlobalData.animateImpact)
         {
             yield return new WaitForSeconds(0.8f);
         }
