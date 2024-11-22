@@ -383,6 +383,10 @@ MonoBehaviour:
     m_Key: haveEffects
     m_Metadata:
       m_Items: []
+  - m_Id: 35036214569459712
+    m_Key: journalDescr
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

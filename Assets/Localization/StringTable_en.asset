@@ -412,6 +412,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
+  - m_Id: 35036214569459712
+    m_Localized: Fulfill missions to earn rewards
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
