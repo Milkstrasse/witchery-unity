@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class RelayCode : MonoBehaviour
 {
-    [SerializeField] private TMP_InputField codeText;
+    [SerializeField] private TextMeshProUGUI codeText;
 
     private void Start()
     {
@@ -14,7 +14,6 @@ public class RelayCode : MonoBehaviour
 
     private void ShowCode(string code)
     {
-        Debug.Log("IIIIIIIII");
         codeText.text = code;
     }
 }
