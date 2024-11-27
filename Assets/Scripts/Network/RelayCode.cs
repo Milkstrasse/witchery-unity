@@ -1,20 +1,20 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-[RequireComponent(typeof(TextMeshProUGUI))]
 public class RelayCode : MonoBehaviour
 {
-    private TextMeshProUGUI codeText;
+    [SerializeField] private TMP_InputField codeText;
 
     private void Start()
     {
-        codeText = GetComponent<TextMeshProUGUI>();
         codeText.text = "";
         GlobalManager.singleton.OnCodeCreated += ShowCode;
     }
 
     private void ShowCode(string code)
     {
+        Debug.Log("IIIIIIIII");
         codeText.text = code;
     }
 }

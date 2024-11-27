@@ -63,7 +63,7 @@ public class GlobalManager : MonoBehaviour
         ApplyTheme();
 
         #if UNITY_EDITOR
-        relayEnabled = false;
+            relayEnabled = false;
         #endif
 
         if (SaveManager.LoadData())
