@@ -1,5 +1,6 @@
 using Mirror;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FightUI : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class FightUI : MonoBehaviour
     [SerializeField] private PlayerFightUI playerTop;
     [SerializeField] private PlayerFightUI playerBottom;
     [SerializeField] private CardSlot cardSlot;
+    [SerializeField] private RawImage background;
 
     private void Start()
     {
@@ -30,6 +32,8 @@ public class FightUI : MonoBehaviour
             playerBottom.SetupUI(manager.players[1], playerTurn == 1, true);
             cardSlot.MoveUp(playerTurn == 1);
         }
+
+        background.enabled = true;
     }
 
     private void ChangePlayers(int playerTurn)

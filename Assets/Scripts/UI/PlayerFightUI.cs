@@ -40,17 +40,7 @@ public class PlayerFightUI : MonoBehaviour
 
     private void InitUI()
     {
-        if (player != null)
-        {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
-        }
-        else
-        {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
-        }
-
-        float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 235 - 40)/4 * -1;
-
+        float cardSpacer = (Screen.width / canvas.scaleFactor - 5 * 235 - 40) / 4 * -1;
         for (int i = 0; i < 5; i++)
         {
             CardUI card = cardParent.transform.GetChild(i).GetComponent<CardUI>();
@@ -72,6 +62,8 @@ public class PlayerFightUI : MonoBehaviour
         nameText.text = player.playerName;
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
         energyText.text = player.energy.ToString();
+
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 120f);
 
         if (cards[0] == null)
         {

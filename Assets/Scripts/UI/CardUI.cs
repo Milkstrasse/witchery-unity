@@ -9,14 +9,14 @@ using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour
 {
-    private GameObject[] cardSides;
+    [SerializeField] private GameObject[] cardSides;
 
     [SerializeField] private Image portrait;
     [SerializeField] private TextMeshProUGUI icon;
     [SerializeField] private RawImage frontBackground;
     [SerializeField] private RawImage gradient;
     [SerializeField] private RawImage backBackground;
-    [SerializeField] private TextMeshProUGUI infoText;
+    [SerializeField] private LocalizeStringEvent infoText;
     public TextMeshProUGUI animatedIcon;
 
     [SerializeField] private Material neutralFront;
@@ -26,18 +26,10 @@ public class CardUI : MonoBehaviour
     public bool isSelected;
     public bool isHighlighted;
 
-    private LocalizeStringEvent stringEvent;
-
     public Card card;
     public PlayerObject player;
 
     private bool isSubscribed;
-
-    private void Start()
-    {
-        cardSides = new GameObject[] {transform.GetChild(0).gameObject, transform.GetChild(1).gameObject};
-        stringEvent = infoText.GetComponent<LocalizeStringEvent>();
-    }
 
     public void SetupCard(Fighter fighter)
     {
@@ -45,12 +37,10 @@ public class CardUI : MonoBehaviour
 
         icon.text = $"<style=IconShadow>{Convert.ToChar((uint) fighter.role)}</style>";
 
-        infoText.text = "";
-        stringEvent = infoText.GetComponent<LocalizeStringEvent>();
-        (stringEvent.StringReference["name"] as StringVariable).Value = fighter.name;
-        (stringEvent.StringReference["role"] as StringVariable).Value = LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", fighter.role.ToString());
+        (infoText.StringReference["name"] as StringVariable).Value = fighter.name;
+        (infoText.StringReference["role"] as StringVariable).Value = LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", fighter.role.ToString());
         
-        stringEvent.StringReference.SetReference("StringTable", "fighterDescr");
+        infoText.StringReference.SetReference("StringTable", "fighterDescr");
     }
 
     public void SetupCard(Fighter fighter, int outfit, Move move)
@@ -66,23 +56,21 @@ public class CardUI : MonoBehaviour
             icon.text = move.cost.ToString();
         }
 
-        stringEvent = infoText.GetComponent<LocalizeStringEvent>();
-
-        (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(move.health) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);
-        (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(move.energy) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);
+        (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(move.health) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);
+        (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(move.energy) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);
 
         if (move.effect.multiplier != 0)
         {
             uint i = Convert.ToUInt32(move.effect.icon, 16);
-            (stringEvent.StringReference["effect"] as StringVariable).Value = Convert.ToChar(i).ToString();
+            (infoText.StringReference["effect"] as StringVariable).Value = Convert.ToChar(i).ToString();
         }
         else
         {
-            (stringEvent.StringReference["effect"] as StringVariable).Value = "";
+            (infoText.StringReference["effect"] as StringVariable).Value = "";
         }
 
-        stringEvent.StringReference.SetReference("StringTable", move.GetDescription());
-        stringEvent.RefreshString();
+        infoText.StringReference.SetReference("StringTable", move.GetDescription());
+        infoText.RefreshString();
     }
 
     public void SetupCard(Card card, PlayerObject player = null)
@@ -105,21 +93,21 @@ public class CardUI : MonoBehaviour
 
             icon.text = card.move.cost.ToString();
 
-            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.IsSpecialMove), 0);
-            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.IsSpecialMove), 0);
+            (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.IsSpecialMove), 0);
+            (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.IsSpecialMove), 0);
 
             if (card.move.effect.multiplier != 0)
             {
                 uint i = Convert.ToUInt32(card.move.effect.icon, 16);
-                (stringEvent.StringReference["effect"] as StringVariable).Value = Convert.ToChar(i).ToString();
+                (infoText.StringReference["effect"] as StringVariable).Value = Convert.ToChar(i).ToString();
             }
             else
             {
-                (stringEvent.StringReference["effect"] as StringVariable).Value = "";
+                (infoText.StringReference["effect"] as StringVariable).Value = "";
             }
 
-            stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription());
-            stringEvent.RefreshString();
+            infoText.StringReference.SetReference("StringTable", card.move.GetDescription());
+            infoText.RefreshString();
         }
         else
         {
@@ -206,25 +194,25 @@ public class CardUI : MonoBehaviour
         {
             if (card.move.target > 0)
             {
-                (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(!update) - FightManager.singleton.players[1 - player.playerID].GetDamageModifier(), 0);
+                (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(!update) - FightManager.singleton.players[1 - player.playerID].GetDamageModifier(), 0);
             }
             else
             {
-                (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(!update), 0);
+                (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(!update), 0);
             }
 
-            (stringEvent.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy * cardCost) + GetPowerBonus(!update), 0);
-            stringEvent.StringReference.SetReference("StringTable", card.move.GetDescription(update ? 6 : 0));
+            (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy * cardCost) + GetPowerBonus(!update), 0);
+            infoText.StringReference.SetReference("StringTable", card.move.GetDescription(update ? 6 : 0));
 
-            stringEvent.RefreshString();
+            infoText.RefreshString();
         }
         else if (update && card.move.target > 0)
         {
-            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.IsSpecialMove) - FightManager.singleton.players[1 - player.playerID].GetDamageModifier(), 0);
+            (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.IsSpecialMove) - FightManager.singleton.players[1 - player.playerID].GetDamageModifier(), 0);
         }
         else
         {
-            (stringEvent.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.IsSpecialMove), 0);
+            (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.IsSpecialMove), 0);
         }
     }
 

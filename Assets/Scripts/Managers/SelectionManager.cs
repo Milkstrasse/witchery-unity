@@ -16,6 +16,7 @@ public class SelectionManager : MonoBehaviour
    private string[] playerNames;
 
    public event Action OnPlayersReady;
+   //private bool readyToFight;
 
    private void Awake()
    {
@@ -181,7 +182,12 @@ public class SelectionManager : MonoBehaviour
 
    private void PlayersReady(TurnMessage message)
    {
+      /*if (readyToFight)
+         return;*/
+      
       OnPlayersReady?.Invoke();
+      NetworkClient.UnregisterHandler<TurnMessage>();
+      //readyToFight = true;
    }
 
    public void ReturnToMenu()

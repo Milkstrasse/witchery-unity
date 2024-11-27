@@ -146,15 +146,24 @@ public class GlobalManager : MonoBehaviour
 
     public string GetCurrentScene() => SceneManager.GetActiveScene().name;
 
-    public void LoadScene(string scene)
+    public void LoadScene(string scene, LoadSceneMode sceneMode = LoadSceneMode.Single)
     {
         string temp = GetCurrentScene();
         if (temp != scene)
         {
             lastScene = temp;
         }
-        
-        SceneManager.LoadScene(scene);
+
+        SceneManager.LoadScene(scene, new LoadSceneParameters
+        {
+            loadSceneMode = sceneMode,
+            localPhysicsMode = LocalPhysicsMode.Physics3D
+        });
+    }
+
+    public AsyncOperation UnloadScene(string scene)
+    {
+        return SceneManager.UnloadSceneAsync(scene);
     }
 
     public int[] GetRandomNumbers(int amount, int max)

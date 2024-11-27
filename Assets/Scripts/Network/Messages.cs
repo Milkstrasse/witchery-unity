@@ -25,7 +25,7 @@ public struct TurnMessage : NetworkMessage
 {
     public int playerTurn;
     public bool failed;
-    public PlayerData[] players; 
+    public PlayerData[] players;
 
     public TurnMessage(int playerTurn, PlayerData[] players, bool failed = false)
     {

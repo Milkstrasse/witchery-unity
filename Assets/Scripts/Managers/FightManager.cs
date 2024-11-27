@@ -23,6 +23,9 @@ public class FightManager : MonoBehaviour
 
     private Stopwatch stopwatch;
 
+    [SerializeField] private GameObject fightCamera;
+    [SerializeField] private GameObject fightEvents;
+
     private void Awake()
     {
         singleton = this;
@@ -121,15 +124,9 @@ public class FightManager : MonoBehaviour
 
             if (logic.playerTurn == -1) //start game
             {
-                stopwatch.Start();
-
                 logic.playerTurn = message.playerTurn;
 
-                GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
-                players[0] = playerObjects[0].GetComponent<PlayerObject>();
-                players[1] = playerObjects[1].GetComponent<PlayerObject>();
-
-                OnSetupComplete?.Invoke(logic.playerTurn);
+                StartCoroutine("SetupFight");
             }
             else
             {
@@ -156,8 +153,11 @@ public class FightManager : MonoBehaviour
             string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}";
 
             UnityEngine.Debug.Log("Fight ended after " + elapsedTime);
-            UnityEngine.Debug.Log($"{logic.players[0].roundsPlayed} round(s) were played");
-            UnityEngine.Debug.Log($"First player has won ? {(logic.players[0].startedFirst && players[0].hasWon) || (logic.players[1].startedFirst && players[1].hasWon)}");
+            if (logic.players.Count > 0)
+            {
+                UnityEngine.Debug.Log($"{logic.players[0].roundsPlayed} round(s) were played");
+                UnityEngine.Debug.Log($"First player has won ? {(logic.players[0].startedFirst && players[0].hasWon) || (logic.players[1].startedFirst && players[1].hasWon)}");
+            }
 
             if (messages.AddToQueue(message, false))
             {
@@ -166,6 +166,28 @@ public class FightManager : MonoBehaviour
 
             StartCoroutine("EndFight");
         }
+    }
+
+    IEnumerator SetupFight()
+    {
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+        while (playerObjects.Length < 2)
+        {
+            playerObjects = GameObject.FindGameObjectsWithTag("Player");
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        players[0] = playerObjects[0].GetComponent<PlayerObject>();
+        players[1] = playerObjects[1].GetComponent<PlayerObject>();
+
+        OnSetupComplete?.Invoke(logic.playerTurn);
+
+        yield return GlobalManager.singleton.UnloadScene("SelectionScene");
+        
+        fightCamera.SetActive(true);
+        fightEvents.SetActive(true);
+
+        stopwatch.Start();
     }
 
     IEnumerator EndFight()
