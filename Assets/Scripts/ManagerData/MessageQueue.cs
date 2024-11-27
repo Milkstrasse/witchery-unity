@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Mirror;
 
-public class CustomQueue
+public class MessageQueue
 {
     private List<NetworkMessage> messages;
     private int priorityIndex;
 
-    public CustomQueue()
+    public MessageQueue()
     {
         priorityIndex = 0;
         messages = new List<NetworkMessage>();

@@ -8,7 +8,7 @@ public class FightManager : MonoBehaviour
 {
     public static FightManager singleton;
 
-    public Player[] players;
+    public PlayerObject[] players;
     private FightLogic logic;
 
     public event Action<int> OnSetupComplete;
@@ -19,7 +19,7 @@ public class FightManager : MonoBehaviour
     private bool sendingMessage;
     public float timeToMakeMove;
 
-    private CustomQueue messages;
+    private MessageQueue messages;
 
     private Stopwatch stopwatch;
 
@@ -32,10 +32,10 @@ public class FightManager : MonoBehaviour
     {
         stopwatch = new Stopwatch();
 
-        players = new Player[2];
+        players = new PlayerObject[2];
         logic = new FightLogic();
 
-        messages = new CustomQueue();
+        messages = new MessageQueue();
 
         sendingMessage = true;
 
@@ -126,8 +126,8 @@ public class FightManager : MonoBehaviour
                 logic.playerTurn = message.playerTurn;
 
                 GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
-                players[0] = playerObjects[0].GetComponent<Player>();
-                players[1] = playerObjects[1].GetComponent<Player>();
+                players[0] = playerObjects[0].GetComponent<PlayerObject>();
+                players[1] = playerObjects[1].GetComponent<PlayerObject>();
 
                 OnSetupComplete?.Invoke(logic.playerTurn);
             }

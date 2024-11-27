@@ -29,7 +29,7 @@ public class CardUI : MonoBehaviour
     private LocalizeStringEvent stringEvent;
 
     public Card card;
-    public Player player;
+    public PlayerObject player;
 
     private bool isSubscribed;
 
@@ -85,7 +85,7 @@ public class CardUI : MonoBehaviour
         stringEvent.RefreshString();
     }
 
-    public void SetupCard(Card card, Player player = null)
+    public void SetupCard(Card card, PlayerObject player = null)
     {
         this.card = card;
         this.player = player;

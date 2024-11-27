@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerFightUI : MonoBehaviour
 {
-    public Player player;
+    public PlayerObject player;
 
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI healthText;
@@ -62,7 +62,7 @@ public class PlayerFightUI : MonoBehaviour
         }
     }
 
-    public void SetupUI(Player player, bool isInteractable, bool canBePlayable)
+    public void SetupUI(PlayerObject player, bool isInteractable, bool canBePlayable)
     {
         this.player = player;
         player.OnPlayerChanged += UpdateUI;

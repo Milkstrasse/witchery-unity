@@ -8,7 +8,7 @@ public class SelectionUI : MonoBehaviour
     [SerializeField] private PlayerSelectionUI playerTop;
     [SerializeField] private PlayerSelectionUI playerBottom;
 
-    private Player[] players;
+    private PlayerObject[] players;
 
     private void Start()
     {
@@ -16,13 +16,13 @@ public class SelectionUI : MonoBehaviour
         manager.OnPlayersReady += StartFight;
 
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
-        players = new Player[gameObjects.Length];
+        players = new PlayerObject[gameObjects.Length];
 
         if (players.Length > 0)
         {
             for (int i = 0; i < gameObjects.Length; i++)
             {
-                players[i] = gameObjects[i].GetComponent<Player>();
+                players[i] = gameObjects[i].GetComponent<PlayerObject>();
             }
 
             if (GlobalManager.singleton.mode != GameMode.Online || NetworkClient.activeHost)

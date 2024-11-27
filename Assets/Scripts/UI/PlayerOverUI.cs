@@ -13,7 +13,7 @@ public class PlayerOverUI : MonoBehaviour
     [SerializeField] private Material victory;
     [SerializeField] private Material defeat;
 
-    public void UpdateUI(Player player)
+    public void UpdateUI(PlayerObject player)
     {
         title.StringReference.SetReference("StringTable", player.hasWon ? "victory" : "defeat");
 
