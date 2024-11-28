@@ -47,14 +47,7 @@ public class CardUI : MonoBehaviour
     {
         UpdateOutfit(fighter, outfit);
 
-        if (move.moveID == 1)
-        {
-            icon.text = $"<style=IconShadow>\uf005</style>";
-        }
-        else
-        {
-            icon.text = move.cost.ToString();
-        }
+        icon.text = move.cost.ToString();
 
         (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(move.health) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);
         (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(move.energy) + GetPowerBonus(move.moveID == 15 || move.moveID == 16 || move.moveID == 21), 0);

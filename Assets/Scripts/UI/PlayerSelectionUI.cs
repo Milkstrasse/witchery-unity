@@ -98,8 +98,6 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             SelectionResult result = selectionUI.EditTeam(fighter);
 
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
-
             fighterCards[fighter.fighterID].UpdateOutfit(GlobalData.fighters[fighter.fighterID], fighter.outfit);
             outfits[fighter.fighterID] = fighter.outfit;
             fighterCards[fighter.fighterID].SelectCard(result.wasAdded);
@@ -391,9 +389,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
                     if (result.wasAdded)
                     {
-                        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
-
-                        AudioManager.singleton.PlayStandardSound();
+                        AudioManager.singleton.PlayPositiveSound();
                     }
                     else
                     {
@@ -447,8 +443,6 @@ public class PlayerSelectionUI : MonoBehaviour
                 GameObject card = Instantiate(cardPrefab, cardParent);
                 moveCards[i] = card.GetComponent<CardUI>();
                 moveCards[i].SetupCard(fighter, outfits[currCard], fighter.moves[i]);
-                
-                moveCards[i].HighlightCard(i == 0);
             }
 
             LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 1.5f - 20f, 0.3f);

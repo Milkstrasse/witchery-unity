@@ -73,5 +73,5 @@ public class Move : ScriptableObject
 
 public enum MoveType
 {
-    Standard, Response, Signature
+    Standard, Response
 }

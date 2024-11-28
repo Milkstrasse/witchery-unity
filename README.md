@@ -4,7 +4,7 @@
 
 ## Starting the Game
 Both players start with 75 HP (can’t be exceeded)
-Combine all move cards of each fighter to create your deck. Add the leader move card and then shuffle the deck to create your draw pile.
+Combine all move cards of each fighter to create your deck & then shuffle it to create your draw pile.
 
 ## Playing the Game
 
@@ -21,7 +21,6 @@ Combine all move cards of each fighter to create your deck. Add the leader move 
 **Blank cards:** Blank cards are added to the player's draw pile and shuffled. The draw pile is also shuffled when removing blank cards from itself.
   
 **Special Cards:** Block & take cards can only played as a response to another played card.
-Leader card can't be blocked nor taken!
 
 **Empty draw pile:** Cards are removed from stack and are returned to the players shuffled.
 

@@ -50,7 +50,7 @@ public class FightManager : MonoBehaviour
     [Server]
     public PlayerMessage SetupPlayer(PlayerMessage message)
     {
-        PlayerMessage msg = new PlayerMessage(message.name, message.fighterIDs);
+        PlayerMessage msg = new PlayerMessage(message.name, message.icon, message.fighterIDs);
 
         PlayerData playerData = new PlayerData(message);
         logic.players.Add(playerData);
@@ -176,6 +176,8 @@ public class FightManager : MonoBehaviour
             playerObjects = GameObject.FindGameObjectsWithTag("Player");
             yield return new WaitForSeconds(0.3f);
         }
+
+        yield return new WaitForSeconds(0.5f);
 
         players[0] = playerObjects[0].GetComponent<PlayerObject>();
         players[1] = playerObjects[1].GetComponent<PlayerObject>();
