@@ -7,6 +7,7 @@ public struct CPULogic
     public static MoveMessage GetMove(PlayerObject player, FightLogic logic)
     {
         List<(int, int)> prioritizedCards = new List<(int, int)>();
+        float missingHP = 1 - player.currHealth/player.fullHealth;
 
         for (int i = 0; i < player.cardHand.Count; i++)
         {
@@ -53,10 +54,10 @@ public struct CPULogic
                     }
                     else
                     {
-                        prioritizedCards.Add((i, health * -1 + 30));
+                        prioritizedCards.Add((i, health * -1));
                     }
                 }
-                else if (health > 0)
+                else if (health > 0 && missingHP > 0.6)
                 {
                     if (move.moveID == 21) //heal to health
                     {
@@ -69,12 +70,10 @@ public struct CPULogic
 
                     if (logic.players[1].health + health > GlobalData.health) //excessive healing
                     {
-                        prioritizedCards.Add((i, -1 - move.cost));
+                        health = GlobalData.health - logic.players[1].health;
                     }
-                    else
-                    {
-                        prioritizedCards.Add((i, health));
-                    }
+                    
+                    prioritizedCards.Add((i, health));
                 }
                 else
                 {

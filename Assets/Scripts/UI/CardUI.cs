@@ -62,7 +62,7 @@ public class CardUI : MonoBehaviour
             (infoText.StringReference["effect"] as StringVariable).Value = "";
         }
 
-        infoText.StringReference.SetReference("StringTable", move.GetDescription());
+        infoText.StringReference.SetReference("StringTable", move.GetDescription(false));
         infoText.RefreshString();
     }
 
@@ -99,7 +99,7 @@ public class CardUI : MonoBehaviour
                 (infoText.StringReference["effect"] as StringVariable).Value = "";
             }
 
-            infoText.StringReference.SetReference("StringTable", card.move.GetDescription());
+            infoText.StringReference.SetReference("StringTable", card.move.GetDescription(false));
             infoText.RefreshString();
         }
         else
@@ -195,7 +195,7 @@ public class CardUI : MonoBehaviour
             }
 
             (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy * cardCost) + GetPowerBonus(!update), 0);
-            infoText.StringReference.SetReference("StringTable", card.move.GetDescription(update ? 6 : 0));
+            infoText.StringReference.SetReference("StringTable", card.move.GetDescription(update));
 
             infoText.RefreshString();
         }
