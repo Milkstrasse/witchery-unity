@@ -17,7 +17,7 @@ public struct CPULogic
             else if (player.cardHand[i].hasMove && player.cardHand[i].move.cost <= player.energy)
             {
                 Move move = player.cardHand[i].move;
-                if (move.moveID == 7 && logic.lastCard.card.hasMove) //replay card
+                if (move.moveID == 1 && logic.lastCard.card.hasMove) //replay card
                 {
                     move = logic.lastCard.card.move;
                 }
@@ -38,7 +38,7 @@ public struct CPULogic
                 }
 
                 int health = move.health;
-                if (move.moveID >= 8 && move.moveID <= 10) //special moves
+                if ((move.moveID == 2 || move.moveID == 3) && move.moveType == MoveType.Special) //special moves
                 {
                     health *= logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0;
                 }
@@ -58,7 +58,7 @@ public struct CPULogic
                 }
                 else if (health > 0)
                 {
-                    if (move.moveID == 6) //heal to health
+                    if (move.moveID == 21) //heal to health
                     {
                         health = Math.Max(health + logic.players[1].GetPowerBonus() - logic.players[1].health, 0);
                     }
@@ -78,7 +78,7 @@ public struct CPULogic
                 }
                 else
                 {
-                    if (move.moveID == 2 && logic.players[1].health > logic.players[0].health) //redistribute health
+                    if (move.moveID == 5 && logic.players[1].health > logic.players[0].health) //redistribute health
                     {
                         prioritizedCards.Add((i, -10));
                     }
@@ -86,23 +86,23 @@ public struct CPULogic
                     {
                         prioritizedCards.Add((i, -10));
                     }
-                    else if (move.moveID == 11 && logic.players[0].cardHand.Count == 0) //remove random card
+                    else if (move.moveID == 7 && logic.players[0].cardHand.Count == 0) //remove random card
                     {
                         prioritizedCards.Add((i, -10));
                     }
-                    else if (move.moveID == 13 && logic.players[1].CheckEffectBalance() >= logic.players[0].CheckEffectBalance()) //swap effects
+                    else if (move.moveID == 11 && logic.players[1].CheckEffectBalance() >= logic.players[0].CheckEffectBalance()) //swap effects
                     {
                         prioritizedCards.Add((i, -10));
                     }
-                    else if (move.moveID == 17 && move.target != 1 && logic.players[1].CheckEffectBalance() >= 0) //clear own effects
+                    else if (move.moveID == 13 && move.target != 1 && logic.players[1].CheckEffectBalance() >= 0) //clear own effects
                     {
                         prioritizedCards.Add((i, -10));
                     }
-                    else if (move.moveID == 17 && move.target == 1 && logic.players[0].CheckEffectBalance() < 0) //clear opponent's effects
+                    else if (move.moveID == 13 && move.target == 1 && logic.players[0].CheckEffectBalance() < 0) //clear opponent's effects
                     {
                         prioritizedCards.Add((i, -10));
                     }
-                    else if (move.moveID == 23 || move.moveID == 25 && logic.players[1].startIndex == 5) //hand over blanks
+                    else if (move.moveID == 25 || move.moveID == 25 && logic.players[1].startIndex == 5) //hand over blanks
                     {
                         prioritizedCards.Add((i, -10));
                     }

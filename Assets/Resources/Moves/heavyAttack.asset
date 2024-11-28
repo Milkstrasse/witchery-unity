@@ -20,9 +20,8 @@ MonoBehaviour:
   effect:
     name: 
     icon: 
-    duration: 0
+    multiplier: 0
     value: 0
     statusType: 0
-    isDelayed: 0
     isNew: 0
   moveType: 0

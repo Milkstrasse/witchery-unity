@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c3f2616e0734b19bc2feecd7d70d51, type: 3}
   m_Name: clearOppEffects
   m_EditorClassIdentifier: 
-  moveID: 17
+  moveID: 13
   cost: 1
   target: 1
   health: 0
@@ -20,9 +20,8 @@ MonoBehaviour:
   effect:
     name: 
     icon: 
-    duration: 0
+    multiplier: 0
     value: 0
     statusType: 0
-    isDelayed: 0
     isNew: 0
   moveType: 0

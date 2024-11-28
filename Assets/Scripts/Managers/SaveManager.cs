@@ -68,10 +68,6 @@ public class SaveManager
         {
             savedData.wonWithEffect = playerData.wonWithEffect;
         }
-        if (!savedData.replayedLeader)
-        {
-            savedData.replayedLeader = playerData.replayedLeader;
-        }
 
         savedData.maxEffectCount = Math.Max(playerData.maxEffects, savedData.maxEffectCount);
 

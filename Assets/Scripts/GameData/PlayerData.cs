@@ -22,7 +22,6 @@ public class PlayerData
     public bool stoleNothing;
     public bool wonWithEffect;
     public bool selfKO;
-    public bool replayedLeader;
 
     public PlayerData()
     {

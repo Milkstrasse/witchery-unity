@@ -32,7 +32,6 @@ public struct SavedData
     public int wonWithMinHealth;
     public bool wonWithEffect;
     public bool selfKO;
-    public bool replayedLeader;
 
     public SavedData(string name, int icon)
     {
@@ -65,6 +64,5 @@ public struct SavedData
         wonWithMinHealth = 0;
         wonWithEffect = false;
         selfKO = false;
-        replayedLeader = false;
     }
 }

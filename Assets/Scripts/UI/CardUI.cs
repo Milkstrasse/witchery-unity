@@ -86,8 +86,8 @@ public class CardUI : MonoBehaviour
 
             icon.text = card.move.cost.ToString();
 
-            (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.IsSpecialMove), 0);
-            (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.IsSpecialMove), 0);
+            (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
+            (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
 
             if (card.move.effect.multiplier != 0)
             {
@@ -183,7 +183,7 @@ public class CardUI : MonoBehaviour
         if (!card.hasMove)
             return;
 
-        if (card.IsSpecialMove) //special move
+        if (card.move.moveType == MoveType.Special) //special move
         {
             if (card.move.target > 0)
             {
@@ -201,11 +201,11 @@ public class CardUI : MonoBehaviour
         }
         else if (update && card.move.target > 0)
         {
-            (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.IsSpecialMove) - FightManager.singleton.players[1 - player.playerID].GetDamageModifier(), 0);
+            (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveType == MoveType.Special) - FightManager.singleton.players[1 - player.playerID].GetDamageModifier(), 0);
         }
         else
         {
-            (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.IsSpecialMove), 0);
+            (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
         }
     }
 
