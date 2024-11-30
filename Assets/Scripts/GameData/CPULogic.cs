@@ -61,23 +61,23 @@ public struct CPULogic
                 {
                     if (move.moveID == 21) //heal to health
                     {
-                        health = Math.Max(health + logic.players[1].GetPowerBonus() - logic.players[1].health, 0);
+                        health = Math.Max(health + logic.players[1].GetPowerBonus() - player.currHealth, 0);
                     }
                     else
                     {
                         health = Math.Max(health + logic.players[1].GetPowerBonus(), 0);
                     }
 
-                    if (logic.players[1].health + health > GlobalData.health) //excessive healing
+                    if (player.currHealth + health > player.fullHealth) //excessive healing
                     {
-                        health = GlobalData.health - logic.players[1].health;
+                        health = player.fullHealth - player.currHealth;
                     }
                     
                     prioritizedCards.Add((i, health));
                 }
                 else
                 {
-                    if (move.moveID == 5 && logic.players[1].health > logic.players[0].health) //redistribute health
+                    if (move.moveID == 5 && player.currHealth > logic.players[0].health) //redistribute health
                     {
                         prioritizedCards.Add((i, -10));
                     }

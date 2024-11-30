@@ -15,6 +15,6 @@ MonoBehaviour:
   descrKey: 
   reward: 20
   goalValue: -1
-  checkVariable: replayedLeader
+  checkVariable: wonWithEffect
   isClaimable: 0
   category: 1

@@ -42,7 +42,7 @@ public class PlayerData
     {
         name = message.name;
         
-        health = GlobalData.health;
+        health = message.health;
         energy = 0;
 
         cardStack = new List<int>();
@@ -133,7 +133,7 @@ public class PlayerData
             }
         }
 
-        if (index >= 0)
+        if (index >= 0 && effects[index].multiplier < GlobalData.effectLimit)
         {
             effects[index].multiplier += effect.multiplier;
             effects[index].isNew = true;

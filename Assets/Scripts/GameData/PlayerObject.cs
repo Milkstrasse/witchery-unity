@@ -34,8 +34,8 @@ public class PlayerObject : MonoBehaviour
         
         icon = message.icon;
         playerName = message.name;
-        fullHealth = GlobalData.health;
-        currHealth = fullHealth;
+        fullHealth = message.health;
+        currHealth = message.health;
 
         energy = 0;
 

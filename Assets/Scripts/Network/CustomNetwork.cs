@@ -61,6 +61,7 @@ public class CustomNetwork : RelayNetworkManager
         for (int i = 0; i < 2; i++)
         {
             players[i] = FightManager.singleton.SetupPlayer(players[i]);
+            players[i].health = GlobalData.health;
             NetworkServer.SendToAll(players[i]);
         }
 
