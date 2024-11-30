@@ -82,7 +82,7 @@ public class PlayerFightUI : MonoBehaviour
                 cards[i].ShowCard(false);
             }
 
-            cards[i].FlipCard(!isInteractable || !canBePlayable, 0.2f);
+            cards[i].FlipCard(!isInteractable || !canBePlayable, 0.2f + i * 0.02f);
 
             if (i < player.effects.Count)
             {
@@ -262,7 +262,7 @@ public class PlayerFightUI : MonoBehaviour
 
         for (int i = 0; i < cards.Length; i++)
         {
-            cards[i].FlipCard(!isInteractable || !canBePlayable, 0.2f);
+            cards[i].FlipCard(!isInteractable || !canBePlayable, 0.2f + i * 0.02f);
         }
     }
 

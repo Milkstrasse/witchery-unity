@@ -107,7 +107,7 @@ public class FightLogic
             move = lastCard.card.move;
         }
 
-        if (move.moveType == MoveType.Standard)
+        if (move.moveType != MoveType.Response)
         {
             if (blockable && FightManager.singleton.players[1 - turn].HasResponseTo(move))
             {

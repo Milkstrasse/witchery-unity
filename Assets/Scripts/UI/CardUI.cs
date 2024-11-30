@@ -237,7 +237,7 @@ public class CardUI : MonoBehaviour
         LeanTween.scale(animatedIcon.gameObject, new Vector3(1.5f, 1.5f, 1.5f), 0.2f).setLoopPingPong(1);
 
         yield return new WaitForSeconds(0.4f);
-         animatedIcon.transform.localScale = Vector3.zero;
+        animatedIcon.transform.localScale = Vector3.zero;
         animatedIcon.gameObject.SetActive(false);
     }
 

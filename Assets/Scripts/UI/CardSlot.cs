@@ -79,16 +79,20 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     {
         if (eventCardUI.card.isSpecial && GlobalData.animateImpact)
         {
+            eventCardUI.player.cardHand.RemoveAt(cardIndex);
+            eventCardUI.player.OnPlayerChanged?.Invoke();
+
+            impactFrame.transform.SetAsLastSibling();
             impactFrame.gameObject.SetActive(true);
             impactFrame.SetupUI(eventCardUI.card.fighter.name, eventCardUI.card.fighter.outfits[eventCardUI.card.outfit].name, eventCardUI.transform.eulerAngles.z == 180f);
 
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSecondsRealtime(0.8f);
 
             impactFrame.gameObject.SetActive(false);
         }
 
         SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
-        FightManager.singleton.SendMove(cardIndex, true);
+        FightManager.singleton.SendMove(cardIndex, true, !eventCardUI.card.isSpecial || !GlobalData.animateImpact);
     }
 
     public void SetupCard(Card card, bool isFlipped)
@@ -138,11 +142,11 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                             lastCardUI.SetupIcon(card.move.effect);
                         }
 
-                        if (card.move.moveID == 26) //give effect
+                        if (card.move.moveID == 14) //give effect
                         {
                             AudioManager.singleton.PlayNegativeSound();
                         }
-                        else if (card.move.moveID == 27) //gain effect
+                        else if (card.move.moveID == 15) //gain effect
                         {
                             AudioManager.singleton.PlayPositiveSound();
                         }
