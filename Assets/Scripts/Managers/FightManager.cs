@@ -51,6 +51,7 @@ public class FightManager : MonoBehaviour
     public PlayerMessage SetupPlayer(PlayerMessage message)
     {
         PlayerMessage msg = new PlayerMessage(message.name, message.icon, message.fighterIDs);
+        msg.health = message.health;
 
         PlayerData playerData = new PlayerData(message);
         logic.players.Add(playerData);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 public class PlayerData
@@ -41,7 +42,7 @@ public class PlayerData
     public PlayerData(PlayerMessage message)
     {
         name = message.name;
-        
+
         health = message.health;
         energy = 0;
 
