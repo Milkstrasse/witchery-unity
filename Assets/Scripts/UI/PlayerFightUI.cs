@@ -114,8 +114,9 @@ public class PlayerFightUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
-        LeanTween.value(healthBar.gameObject, healthBar.fillAmount, player.currHealth/(float)player.fullHealth, 0.3f).setOnUpdate( (float val) => { healthBar.fillAmount = val; } );
+        string health = healthText.text.Split('/')[0];
+        LeanTween.value(healthText.gameObject, float.Parse(health), player.currHealth, 0.5f).setOnUpdate((float val) => { healthText.text = $"{Mathf.RoundToInt(val)}/{player.fullHealth}HP"; });
+        LeanTween.value(healthBar.gameObject, healthBar.fillAmount, player.currHealth/(float)player.fullHealth, 0.5f).setOnUpdate((float val) => { healthBar.fillAmount = val; });
 
         if (energyText.text != player.energy.ToString())
         {

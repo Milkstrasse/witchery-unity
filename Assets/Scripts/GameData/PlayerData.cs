@@ -129,7 +129,7 @@ public class PlayerData
             effects[index].multiplier += effect.multiplier;
             effects[index].isNew = true;
         }
-        else if (effects.Count < 5)
+        else if (index < 0 && effects.Count < 5)
         {
             effects.Add(effect);
 
