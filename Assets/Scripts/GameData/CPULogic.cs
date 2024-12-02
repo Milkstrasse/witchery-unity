@@ -81,7 +81,7 @@ public struct CPULogic
                     {
                         prioritizedCards.Add((i, -10));
                     }
-                    else if (logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == null)
+                    else if (logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == 0)
                     {
                         prioritizedCards.Add((i, -10));
                     }

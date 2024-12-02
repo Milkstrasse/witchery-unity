@@ -136,10 +136,10 @@ public class FightLogic
                         winner = turn;
                     }
 
-                    StatusEffect stealSpice = players[1 - turn].GetEffect("spice");
-                    if (stealSpice != null)
+                    int stealSpice = players[1 - turn].GetEffect("spice");
+                    if (stealSpice != 0)
                     {
-                        players[turn].health = Math.Max(players[turn].health - stealSpice.value, 0);
+                        players[turn].health = Math.Max(players[turn].health - stealSpice, 0);
                         if (winner < 0 && players[turn].health == 0)
                         {
                             players[0].playedUntilEnd = true;
@@ -214,10 +214,10 @@ public class FightLogic
                         winner = turn;
                     }
 
-                    StatusEffect exSpice = players[1 - turn].GetEffect("spice");
-                    if (exSpice != null)
+                    int exSpice = players[1 - turn].GetEffect("spice");
+                    if (exSpice != 0)
                     {
-                        players[turn].health = Math.Max(players[turn].health - exSpice.value, 0);
+                        players[turn].health = Math.Max(players[turn].health - exSpice, 0);
                         if (winner < 0 && players[turn].health == 0)
                         {
                             players[0].playedUntilEnd = true;
@@ -307,10 +307,10 @@ public class FightLogic
 
                     if (move.health < 0)
                     {
-                        StatusEffect spice = players[(move.target + turn) % 2].GetEffect("spice");
-                        if (spice != null)
+                        int spice = players[(move.target + turn) % 2].GetEffect("spice");
+                        if (spice != 0)
                         {
-                            players[turn].health = Math.Max(players[turn].health - spice.value, 0);
+                            players[turn].health = Math.Max(players[turn].health - spice, 0);
                             if (winner < 0 && players[turn].health == 0)
                             {
                                 players[0].playedUntilEnd = true;
@@ -458,15 +458,7 @@ public class FightLogic
             while (j < players[i].effects.Count)
             {
                 players[i].effects[j].TriggerEffect(players[i]);
-
-                if (players[i].effects[j].multiplier <= 0)
-                {
-                    players[i].effects.RemoveAt(j);
-                }
-                else
-                {
-                    j++;
-                }
+                j++;
 
                 if (winner < 0 && players[i].health == 0)
                 {

@@ -23,7 +23,17 @@ public class StatusUI : MonoBehaviour
             LeanTween.scale(icon.gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
 
             effect.isNew = false;
+
+            if (effect.multiplier == 0)
+            {
+                Invoke("Hide", 0.5f);
+            }
         }
+    }
+
+    private void Hide()
+    {
+        gameObject.SetActive(false);
     }
 
     public void HideInfo()

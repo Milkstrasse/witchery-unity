@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 public class PlayerData
@@ -139,9 +138,19 @@ public class PlayerData
 
     public void UnmarkEffects()
     {
-        for (int i = 0; i < effects.Count; i++)
+        int i = 0;
+        while (i < effects.Count)
         {
             effects[i].isNew = false;
+            
+            if (effects[i].multiplier <= 0)
+            {
+                effects.RemoveAt(i);
+            }
+            else
+            {
+                i++;
+            }
         }
     }
 
@@ -155,6 +164,8 @@ public class PlayerData
             {
                 effects[i].isNew = true;
                 power += effects[i].value * effects[i].multiplier;
+
+                ConsumeEffect(i);
             }
         }
 
@@ -171,24 +182,40 @@ public class PlayerData
             {
                 effects[i].isNew = true;
                 modifier += effects[i].value * effects[i].multiplier;
+
+                ConsumeEffect(i);
             }
         }
         
         return modifier;
     }
 
-    public StatusEffect GetEffect(string effectName, bool setNew = true)
+    public int GetEffect(string effectName, bool setNew = true)
     {
+        int value = 0;
+
         for (int i = 0; i < effects.Count; i++)
         {
             if (effects[i].name == effectName)
             {
                 effects[i].isNew = setNew;
-                return effects[i];
+                value = effects[i].value * effects[i].multiplier;
+
+                if (setNew)
+                {
+                    ConsumeEffect(i);
+                }
+
+                return value;
             }
         }
 
-        return null;
+        return value;
+    }
+
+    private void ConsumeEffect(int index)
+    {
+        effects[index].multiplier -= 1;
     }
 
     public int CheckEffectBalance()

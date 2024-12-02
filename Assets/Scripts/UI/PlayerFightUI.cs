@@ -150,12 +150,18 @@ public class PlayerFightUI : MonoBehaviour
 
             if (i < player.effects.Count)
             {
-                effects[i].gameObject.SetActive(true);
-                effects[i].SetupEffect(player.effects[i]);
+                if (player.effects[i].isNew || player.effects[i].multiplier > 0)
+                {
+                    effects[i].gameObject.SetActive(true);
+                    effects[i].SetupEffect(player.effects[i]);
+                }
             }
             else
             {
-                effects[i].gameObject.SetActive(false);
+                if (!LeanTween.isTweening(effects[i].gameObject))
+                {
+                    effects[i].gameObject.SetActive(false);
+                }
             }
         }
     }
