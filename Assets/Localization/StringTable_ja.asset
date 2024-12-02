@@ -96,7 +96,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210153374900224
-    m_Localized: "<style=\"IconOutline\">{effect}</style> \u3092 \u3046\u3051\u308B"
+    m_Localized: "{multiplier} <style=\"IconOutline\">{effect}</style> \u3092 \u3046\u3051\u308B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
@@ -206,7 +206,7 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 7210015948529664
-    m_Localized: "<style=\"IconOutline\">{effect}</style> \u3092 \u3046\u3051\u308B"
+    m_Localized: "{multiplier} <style=\"IconOutline\">{effect}</style> \u3092 \u3046\u3051\u308B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932

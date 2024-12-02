@@ -37,12 +37,12 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210015948529664
-    m_Localized: Apply <style="IconOutline">{effect}</style>
+    m_Localized: Apply {multiplier} <style="IconOutline">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210153374900224
-    m_Localized: Obtain <style="IconOutline">{effect}</style>
+    m_Localized: Obtain {multiplier} <style="IconOutline">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
