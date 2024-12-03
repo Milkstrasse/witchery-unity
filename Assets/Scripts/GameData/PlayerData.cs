@@ -41,8 +41,8 @@ public class PlayerData
     public PlayerData(PlayerMessage message)
     {
         name = message.name;
-        
-        health = GlobalData.health;
+
+        health = message.health;
         energy = 0;
 
         cardStack = new List<int>();
@@ -123,22 +123,34 @@ public class PlayerData
             }
         }
 
-        if (index >= 0)
+        if (index >= 0 && effects[index].multiplier < GlobalData.effectLimit)
         {
             effects[index].multiplier += effect.multiplier;
             effects[index].isNew = true;
         }
-        else if (effects.Count < 5)
+        else if (index < 0 && effects.Count < 5)
         {
             effects.Add(effect);
+
+            maxEffects = Math.Max(effects.Count, maxEffects);
         }
     }
 
     public void UnmarkEffects()
     {
-        for (int i = 0; i < effects.Count; i++)
+        int i = 0;
+        while (i < effects.Count)
         {
             effects[i].isNew = false;
+            
+            if (effects[i].multiplier <= 0)
+            {
+                effects.RemoveAt(i);
+            }
+            else
+            {
+                i++;
+            }
         }
     }
 
@@ -152,6 +164,8 @@ public class PlayerData
             {
                 effects[i].isNew = true;
                 power += effects[i].value * effects[i].multiplier;
+
+                ConsumeEffect(i);
             }
         }
 
@@ -168,24 +182,40 @@ public class PlayerData
             {
                 effects[i].isNew = true;
                 modifier += effects[i].value * effects[i].multiplier;
+
+                ConsumeEffect(i);
             }
         }
         
         return modifier;
     }
 
-    public StatusEffect GetEffect(string effectName, bool setNew = true)
+    public int GetEffect(string effectName, bool setNew = true)
     {
+        int value = 0;
+
         for (int i = 0; i < effects.Count; i++)
         {
             if (effects[i].name == effectName)
             {
                 effects[i].isNew = setNew;
-                return effects[i];
+                value = effects[i].value * effects[i].multiplier;
+
+                if (setNew)
+                {
+                    ConsumeEffect(i);
+                }
+
+                return value;
             }
         }
 
-        return null;
+        return value;
+    }
+
+    private void ConsumeEffect(int index)
+    {
+        effects[index].multiplier -= 1;
     }
 
     public int CheckEffectBalance()

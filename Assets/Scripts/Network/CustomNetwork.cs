@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utp;
 
 public class CustomNetwork : RelayNetworkManager
@@ -57,7 +58,17 @@ public class CustomNetwork : RelayNetworkManager
 
     private void ChangeToFightScene()
     {
-        ServerChangeScene("FightScene");
+        for (int i = 0; i < 2; i++)
+        {
+            players[i].health = GlobalData.health;
+            players[i] = FightManager.singleton.SetupPlayer(players[i]);
+            NetworkServer.SendToAll(players[i]);
+        }
+
+        //reset scene so new server can start correctly
+        networkSceneName = "";
+        playersReady = 0;
+        players = new PlayerMessage[2];
     }
 
     private void OnClientReceivePlayer(PlayerMessage message)
@@ -90,20 +101,7 @@ public class CustomNetwork : RelayNetworkManager
     {
         base.OnServerSceneChanged(sceneName);
 
-        if (sceneName == "FightScene")
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                players[i] = FightManager.singleton.SetupPlayer(players[i]);
-                NetworkServer.SendToAll(players[i]);
-            }
-
-            //reset scene so new server can start correctly
-            networkSceneName = "";
-            playersReady = 0;
-            players = new PlayerMessage[2];
-        }
-        else if (sceneName == "SelectionScene")
+        if (sceneName == "SelectionScene")
         {
             NetworkServer.ReplaceHandler<PlayerMessage>(OnServerReceivePlayer);
             NetworkServer.ReplaceHandler<TurnMessage>(OnClientIsReady);

@@ -58,12 +58,13 @@ public class GlobalManager : MonoBehaviour
         int langIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("langCode", langIndex)];
         GlobalData.highlightPlayable = PlayerPrefs.GetInt("highlightPlayable", 0) != 0;
+        GlobalData.animateImpact = PlayerPrefs.GetInt("animateImpact", 0) != 0;
         GlobalData.themeIndex = PlayerPrefs.GetInt("theme", 1);
 
         ApplyTheme();
 
         #if UNITY_EDITOR
-        relayEnabled = false;
+            relayEnabled = false;
         #endif
 
         if (SaveManager.LoadData())
@@ -146,15 +147,24 @@ public class GlobalManager : MonoBehaviour
 
     public string GetCurrentScene() => SceneManager.GetActiveScene().name;
 
-    public void LoadScene(string scene)
+    public void LoadScene(string scene, LoadSceneMode sceneMode = LoadSceneMode.Single)
     {
         string temp = GetCurrentScene();
         if (temp != scene)
         {
             lastScene = temp;
         }
-        
-        SceneManager.LoadScene(scene);
+
+        SceneManager.LoadScene(scene, new LoadSceneParameters
+        {
+            loadSceneMode = sceneMode,
+            localPhysicsMode = LocalPhysicsMode.Physics3D
+        });
+    }
+
+    public AsyncOperation UnloadScene(string scene)
+    {
+        return SceneManager.UnloadSceneAsync(scene);
     }
 
     public int[] GetRandomNumbers(int amount, int max)

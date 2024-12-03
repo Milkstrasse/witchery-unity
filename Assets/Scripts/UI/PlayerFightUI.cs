@@ -40,25 +40,11 @@ public class PlayerFightUI : MonoBehaviour
 
     private void InitUI()
     {
-        if (player != null)
-        {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-standard");
-        }
-        else if (rectTransform.eulerAngles.z == 180f)
-        {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[0].name + "-standard");
-        }
-        else
-        {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
-        }
-
-        float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 230 - 40)/4 * -1;
-
+        float cardSpacer = (Screen.width / canvas.scaleFactor - 5 * 235 - 40) / 4 * -1;
         for (int i = 0; i < 5; i++)
         {
             CardUI card = cardParent.transform.GetChild(i).GetComponent<CardUI>();
-            card.transform.localPosition = new Vector3(i * (230 - cardSpacer), -160f, 0);
+            card.transform.localPosition = new Vector3(i * (235 - cardSpacer), -160f, 0);
             card.GetComponent<DragDrop>().SetInit();
 
             cards[i] = card;
@@ -71,11 +57,13 @@ public class PlayerFightUI : MonoBehaviour
         this.player = player;
         player.OnPlayerChanged += UpdateUI;
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-standard");
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
 
         nameText.text = player.playerName;
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
         energyText.text = player.energy.ToString();
+
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 120f);
 
         if (cards[0] == null)
         {
@@ -94,7 +82,7 @@ public class PlayerFightUI : MonoBehaviour
                 cards[i].ShowCard(false);
             }
 
-            cards[i].FlipCard(!isInteractable || !canBePlayable, 0.2f);
+            cards[i].FlipCard(!isInteractable || !canBePlayable, 0.2f + i * 0.02f);
 
             if (i < player.effects.Count)
             {
@@ -126,8 +114,9 @@ public class PlayerFightUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
-        LeanTween.value(healthBar.gameObject, healthBar.fillAmount, player.currHealth/(float)player.fullHealth, 0.3f).setOnUpdate( (float val) => { healthBar.fillAmount = val; } );
+        string health = healthText.text.Split('/')[0];
+        LeanTween.value(healthText.gameObject, float.Parse(health), player.currHealth, 0.5f).setOnUpdate((float val) => { healthText.text = $"{Mathf.RoundToInt(val)}/{player.fullHealth}HP"; });
+        LeanTween.value(healthBar.gameObject, healthBar.fillAmount, player.currHealth/(float)player.fullHealth, 0.5f).setOnUpdate((float val) => { healthBar.fillAmount = val; });
 
         if (energyText.text != player.energy.ToString())
         {
@@ -161,12 +150,18 @@ public class PlayerFightUI : MonoBehaviour
 
             if (i < player.effects.Count)
             {
-                effects[i].gameObject.SetActive(true);
-                effects[i].SetupEffect(player.effects[i]);
+                if (player.effects[i].isNew || player.effects[i].multiplier > 0)
+                {
+                    effects[i].gameObject.SetActive(true);
+                    effects[i].SetupEffect(player.effects[i]);
+                }
             }
             else
             {
-                effects[i].gameObject.SetActive(false);
+                if (!LeanTween.isTweening(effects[i].gameObject))
+                {
+                    effects[i].gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -185,22 +180,44 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator MoveCard(MoveMessage message)
     {
-        FightManager.singleton.timeToMakeMove = 0.8f;
+        Card card = player.cardHand[message.cardIndex];
+        CardUI cardUI = cards[message.cardIndex];
+
+        if (card.isSpecial && GlobalData.animateImpact)
+        {
+            FightManager.singleton.timeToMakeMove = 1.6f;
+        }
+        else
+        {
+            FightManager.singleton.timeToMakeMove = 0.8f;
+        }
+
         yield return new WaitForSeconds(0.3f);
 
-        cards[message.cardIndex].FlipCard(false, 0f);
-        cards[message.cardIndex].transform.SetParent(canvas.transform);
+        cardUI.FlipCard(false, 0f);
+        cardUI.transform.SetParent(canvas.transform);
         
-        LeanTween.move(cards[message.cardIndex].gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
+        LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
         
         yield return new WaitForSeconds(0.5f);
 
-        cards[message.cardIndex].GetComponent<DragDrop>().ResetDrag();
-        cardSlot.SetupCard(player.cardHand[message.cardIndex], true);
+        if (card.isSpecial && GlobalData.animateImpact)
+        {
+            cardSlot.impactFrame.transform.SetAsLastSibling();
+            cardSlot.impactFrame.gameObject.SetActive(true);
+            cardSlot.impactFrame.SetupUI(card.fighter.name, card.fighter.outfits[card.outfit].name, true);
+
+            yield return new WaitForSeconds(0.8f);
+
+            cardSlot.impactFrame.gameObject.SetActive(false);
+        }
+
+        cardUI.GetComponent<DragDrop>().ResetDrag();
+        cardSlot.SetupCard(card, true);
 
         cardSlot.PlayAnimation(false, message.cardPlayed, true);
 
-        cards[message.cardIndex].FlipCard(true, 0f);
+        cardUI.FlipCard(true, 0f);
         player.cardHand.RemoveAt(message.cardIndex);
 
         UpdateUI();
@@ -252,7 +269,7 @@ public class PlayerFightUI : MonoBehaviour
 
         for (int i = 0; i < cards.Length; i++)
         {
-            cards[i].FlipCard(!isInteractable || !canBePlayable, 0.2f);
+            cards[i].FlipCard(!isInteractable || !canBePlayable, 0.2f + i * 0.02f);
         }
     }
 
@@ -284,6 +301,11 @@ public class PlayerFightUI : MonoBehaviour
         MakeMove(message);
 
         yield return new WaitForSeconds(message.playCard ? 0.8f : 0.2f);
+
+        if (message.playCard && player.cardHand[message.cardIndex].isSpecial && GlobalData.animateImpact)
+        {
+            yield return new WaitForSeconds(0.8f);
+        }
 
         FightManager.singleton.SendMove(message.cardIndex, message.playCard, false);
     }

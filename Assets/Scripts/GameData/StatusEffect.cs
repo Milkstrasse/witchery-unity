@@ -41,14 +41,18 @@ public class StatusEffect
         {
             case StatusType.Energy:
                 player.energy += value * multiplier;
+
                 isNew = true;
+                multiplier -= 1;
 
                 break;
             case StatusType.Power:
                 break;
             case StatusType.Health:
                 player.health = Math.Clamp(player.health + value * multiplier, 0, GlobalData.health);
+                
                 isNew = true;
+                multiplier -= 1;
 
                 break;
             default: //StatusType.Special

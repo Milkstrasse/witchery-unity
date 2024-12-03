@@ -19,9 +19,12 @@ public class FightManager : MonoBehaviour
     private bool sendingMessage;
     public float timeToMakeMove;
 
-    private CustomQueue messages;
+    private MessageQueue messages;
 
     private Stopwatch stopwatch;
+
+    [SerializeField] private GameObject fightCamera;
+    [SerializeField] private GameObject fightEvents;
 
     private void Awake()
     {
@@ -35,7 +38,7 @@ public class FightManager : MonoBehaviour
         players = new PlayerObject[2];
         logic = new FightLogic();
 
-        messages = new CustomQueue();
+        messages = new MessageQueue();
 
         sendingMessage = true;
 
@@ -48,6 +51,7 @@ public class FightManager : MonoBehaviour
     public PlayerMessage SetupPlayer(PlayerMessage message)
     {
         PlayerMessage msg = new PlayerMessage(message.name, message.icon, message.fighterIDs);
+        msg.health = message.health;
 
         PlayerData playerData = new PlayerData(message);
         logic.players.Add(playerData);
@@ -70,6 +74,11 @@ public class FightManager : MonoBehaviour
             conn.Send(new TurnMessage(message.playerIndex, new PlayerData[] { logic.players[message.playerIndex] }, true));
             
             return;
+        }
+
+        if (!logic.players[0].startedFirst && !logic.players[1].startedFirst)
+        {
+            logic.players[logic.playerTurn].startedFirst = true;
         }
 
         if (message.cardIndex < 0) //player gave up, winner - 2
@@ -116,16 +125,9 @@ public class FightManager : MonoBehaviour
 
             if (logic.playerTurn == -1) //start game
             {
-                stopwatch.Start();
-
                 logic.playerTurn = message.playerTurn;
-                logic.players[logic.playerTurn].startedFirst = true;
 
-                GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
-                players[0] = playerObjects[0].GetComponent<PlayerObject>();
-                players[1] = playerObjects[1].GetComponent<PlayerObject>();
-
-                OnSetupComplete?.Invoke(logic.playerTurn);
+                StartCoroutine("SetupFight");
             }
             else
             {
@@ -146,13 +148,17 @@ public class FightManager : MonoBehaviour
         {
             stopwatch.Stop();
 
+            players[message.playerTurn + 2].hasWon = true;
+
             TimeSpan ts = stopwatch.Elapsed;
             string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}";
-            
-            UnityEngine.Debug.Log("Fight ended after " + elapsedTime);
-            UnityEngine.Debug.Log($"{logic.players[0].roundsPlayed} round(s) were played");
 
-            players[message.playerTurn + 2].hasWon = true;
+            UnityEngine.Debug.Log("Fight ended after " + elapsedTime);
+            if (logic.players.Count > 0)
+            {
+                UnityEngine.Debug.Log($"{logic.players[0].roundsPlayed} round(s) were played");
+                UnityEngine.Debug.Log($"First player has won ? {(logic.players[0].startedFirst && players[0].hasWon) || (logic.players[1].startedFirst && players[1].hasWon)}");
+            }
 
             if (messages.AddToQueue(message, false))
             {
@@ -161,6 +167,30 @@ public class FightManager : MonoBehaviour
 
             StartCoroutine("EndFight");
         }
+    }
+
+    IEnumerator SetupFight()
+    {
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+        while (playerObjects.Length < 2)
+        {
+            playerObjects = GameObject.FindGameObjectsWithTag("Player");
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        players[0] = playerObjects[0].GetComponent<PlayerObject>();
+        players[1] = playerObjects[1].GetComponent<PlayerObject>();
+
+        OnSetupComplete?.Invoke(logic.playerTurn);
+
+        yield return GlobalManager.singleton.UnloadScene("SelectionScene");
+        
+        fightCamera.SetActive(true);
+        fightEvents.SetActive(true);
+
+        stopwatch.Start();
     }
 
     IEnumerator EndFight()

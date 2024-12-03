@@ -1,8 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] private Button joinButton;
+    
     public event Action<SelectedFighter[], int> OnShopOptionsCreated;
     public event Action OnMissionsUpdated;
     public Action<int> OnMoneyChanged;
@@ -71,6 +74,7 @@ public class MenuManager : MonoBehaviour
     public void SetJoincode(string joincode)
     {
         GlobalManager.singleton.joincode = joincode;
+        joinButton.interactable = joincode.Length > 0;
     }
 
     public void StartSelection()

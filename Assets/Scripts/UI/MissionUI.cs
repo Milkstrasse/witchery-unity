@@ -49,7 +49,7 @@ public class MissionUI : MonoBehaviour
         }
 
         allButton.interactable = toClaim != 0;
-        bookmark.SetActive(toClaim != 0);
+        //bookmark.SetActive(toClaim != 0);
     }
 
     private void ClaimMission(int index)
@@ -62,7 +62,7 @@ public class MissionUI : MonoBehaviour
 
             toClaim--;
             allButton.interactable = toClaim != 0;
-            bookmark.SetActive(toClaim != 0);
+            //bookmark.SetActive(toClaim != 0);
         }
     }
 
@@ -76,7 +76,7 @@ public class MissionUI : MonoBehaviour
         }
 
         allButton.interactable = false;
-        bookmark.SetActive(false);
+        //bookmark.SetActive(false);
     }
 
     public void DecreaseOption()

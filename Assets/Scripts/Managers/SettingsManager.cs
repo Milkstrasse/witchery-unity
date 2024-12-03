@@ -150,19 +150,29 @@ public class SettingsManager : MonoBehaviour
         }
 
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[langIndex];
-        GlobalData.highlightPlayable = false;
         GlobalData.themeIndex = 1;
+
+        GlobalData.highlightPlayable = true;
+        GlobalData.animateImpact = true;
 
         GlobalManager.singleton.LoadScene("SettingsScene");
 
         StartCoroutine(ChangeTheme());
     }
 
+    public void PlaySound()
+    {
+        AudioManager.singleton.PlayStandardSound();
+    }
+
     public void HighlightCard(bool enable)
     {
-        //AudioManager.singleton.PlayStandardSound();
-
         GlobalData.highlightPlayable = enable;
+    }
+
+    public void AnimateImpact(bool enable)
+    {
+        GlobalData.animateImpact = enable;
     }
 
     public void ReturnToScene()
@@ -176,6 +186,7 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("sound", AudioManager.singleton.GetSoundVolume());
         PlayerPrefs.SetInt("langCode", langIndex);
         PlayerPrefs.SetInt("highlightPlayable", GlobalData.highlightPlayable ? 1 : 0);
+        PlayerPrefs.SetInt("animateImpact", GlobalData.animateImpact ? 1 : 0);
         PlayerPrefs.SetInt("theme", GlobalData.themeIndex);
         PlayerPrefs.Save();
 

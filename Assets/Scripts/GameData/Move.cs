@@ -12,42 +12,67 @@ public class Move : ScriptableObject
     public StatusEffect effect;
     public MoveType moveType;
 
-    public string GetDescription(int offset = 0)
+    public string GetDescription(bool ignoreType)
     {
-        if (moveType != MoveType.Standard)
+        if (moveType == MoveType.Response)
         {
             return name;
         }
         
-        switch (moveID - offset)
+        switch (moveID)
         {
             case 2:
-                return "doDamage";
+                if (!ignoreType && moveType == MoveType.Special)
+                {
+                    return "doCostDamage";
+                }
+                else
+                {
+                    return "doDamage";
+                }
             case 3:
-                return "recoverHP";
+                if (!ignoreType && moveType == MoveType.Special)
+                {
+                    return "recoverCostHP";
+                }
+                else
+                {
+                    return "recoverHP";
+                }
             case 4:
-                return "stealHP";
+                if (!ignoreType && moveType == MoveType.Special)
+                {
+                    return "stealCostHP";
+                }
+                else
+                {
+                    return "stealHP";
+                }
             case 8:
-                return "doCostDamage";
+                if (!ignoreType && moveType == MoveType.Special)
+                {
+                    return "stealCostEnergy";
+                }
+                else
+                {
+                    return "stealEnergy";
+                }
             case 9:
-                return "recoverCostHP";
+                if (!ignoreType && moveType == MoveType.Special)
+                {
+                    return "gainCostEnergy";
+                }
+                else
+                {
+                    return "gainEnergy";
+                }
             case 10:
-                return "stealCostHP";
-            case 14:
-                return "stealEnergy";
-            case 15:
-                return "gainEnergy";
-            case 16:
                 return "doSpecialDamage";
-            case 20:
-                return "stealCostEnergy";
-            case 21:
-                return "gainCostEnergy";
-            case 26:
+            case 14:
                 return "applyEffect";
-            case 27:
+            case 15:
                 return "obtainEffect";
-            case 33:
+            case 21:
                 return "healToHP";
             default:
                 return name;
@@ -72,5 +97,5 @@ public class Move : ScriptableObject
 
 public enum MoveType
 {
-    Standard, Response
+    Standard, Response, Special
 }

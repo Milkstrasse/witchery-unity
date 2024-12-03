@@ -44,7 +44,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (rectTransform.eulerAngles.z == 180f)
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[0].name + "-standard");
+            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
             SetName(LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", "player"));
         }
         else
@@ -389,7 +389,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
                     if (result.wasAdded)
                     {
-                        AudioManager.singleton.PlayStandardSound();
+                        AudioManager.singleton.PlayPositiveSound();
                     }
                     else
                     {

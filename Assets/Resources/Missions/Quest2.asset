@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Quest2
   m_EditorClassIdentifier: 
   reward: 20
-  goalValue: 80
-  checkVariable: moneySpent
+  goalValue: -1
+  checkVariable: selfKO
   isClaimable: 0
   category: 1

@@ -16,6 +16,7 @@ public class SelectionManager : MonoBehaviour
    private string[] playerNames;
 
    public event Action OnPlayersReady;
+   //private bool readyToFight;
 
    private void Awake()
    {
@@ -65,7 +66,7 @@ public class SelectionManager : MonoBehaviour
             networkManager.StartStandardHost();
          }
 
-         NetworkClient.Send(new PlayerMessage(playerNames[index], index * SaveManager.savedData.icon, fighterIDs.ToArray()));
+         NetworkClient.Send(new PlayerMessage(playerNames[index], SaveManager.savedData.icon, fighterIDs.ToArray()));
 
          int fighterAmount = fighterIDs.Count;
          fighterIDs = new List<SelectedFighter>();
@@ -78,7 +79,7 @@ public class SelectionManager : MonoBehaviour
                fighterIDs.Add(new SelectedFighter(numbers[i], 0));
             }
 
-            NetworkClient.Send(new PlayerMessage(playerNames[1 - index], 0, fighterIDs.ToArray()));
+            NetworkClient.Send(new PlayerMessage(playerNames[1 - index], fighterIDs[0].fighterID, fighterIDs.ToArray()));
             fighterIDs = new List<SelectedFighter>();
          }
       }
@@ -155,9 +156,8 @@ public class SelectionManager : MonoBehaviour
       else if (fighterIDs.Count < 6)
       {
          fighterIDs.Add(fighter);
-         bool hasTeam = fighterIDs.Count > 0;
          
-         return new SelectionResult(true, hasTeam);
+         return new SelectionResult(true, true);
       }
       else
       {
@@ -185,7 +185,12 @@ public class SelectionManager : MonoBehaviour
 
    private void PlayersReady(TurnMessage message)
    {
+      /*if (readyToFight)
+         return;*/
+      
       OnPlayersReady?.Invoke();
+      NetworkClient.UnregisterHandler<TurnMessage>();
+      //readyToFight = true;
    }
 
    public void ReturnToMenu()

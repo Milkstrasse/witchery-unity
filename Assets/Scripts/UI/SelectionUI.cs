@@ -1,5 +1,6 @@
 using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SelectionUI : MonoBehaviour
 {
@@ -94,6 +95,8 @@ public class SelectionUI : MonoBehaviour
 
         playerTop.ToggleUI(false, true);
         playerBottom.ToggleUI(false, true);
+
+        GlobalManager.singleton.LoadScene("FightScene", LoadSceneMode.Additive);
     }
 
     public void StopSelection()

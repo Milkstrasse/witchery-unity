@@ -4,6 +4,7 @@ public struct Card
     public int outfit;
     public Move move;
     public bool hasMove;
+    public bool isSpecial;
 
     public Card(Fighter fighter, int outfit, int moveIndex)
     {
@@ -11,7 +12,7 @@ public struct Card
         this.outfit = outfit;
         move = fighter.moves[moveIndex];
         hasMove = true;
-    }
 
-    public readonly bool IsSpecialMove => (move.moveID >= 8 && move.moveID <= 10) || (move.moveID >= 20 && move.moveID <= 21);
+        isSpecial = moveIndex == 0;
+    }
 }

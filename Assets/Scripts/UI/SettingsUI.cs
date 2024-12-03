@@ -10,7 +10,8 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Slider soundSlider;
     [SerializeField] private LocalizeStringEvent currLang;
     [SerializeField] private LocalizeStringEvent currTheme;
-    [SerializeField] private Toggle toggle;
+    [SerializeField] private Toggle animate;
+    [SerializeField] private Toggle highlight;
 
     private void Start()
     {
@@ -25,7 +26,10 @@ public class SettingsUI : MonoBehaviour
 
         currTheme.StringReference.SetReference("StringTable", GlobalData.themes[GlobalData.themeIndex].name);
 
-        toggle.isOn = GlobalData.highlightPlayable;
+        highlight.isOn = GlobalData.highlightPlayable;
+        animate.isOn = GlobalData.animateImpact;
+        highlight.enabled = true;
+        animate.enabled = true;
     }
 
     private void UpdateLanguage(string lang)

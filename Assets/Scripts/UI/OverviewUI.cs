@@ -63,7 +63,7 @@ public class OverviewUI : MonoBehaviour
 
         for (int i = 0; i < moveCards.Length; i++)
         {
-            moveCards[i].SetupCard(GlobalData.fighters[currCard], currOutfit, GlobalData.fighters[currCard].moves[i*3/2]);
+            moveCards[i].SetupCard(GlobalData.fighters[currCard], currOutfit, GlobalData.fighters[currCard].moves[i]);
         }
     }
 
@@ -71,7 +71,13 @@ public class OverviewUI : MonoBehaviour
     {
         AudioManager.singleton.PlayStandardSound();
 
+        if (currCard == cardIndex)
+        {
+            return;
+        }
+
         currOutfit = 0;
+        outfit.StringReference.SetReference("StringTable", GlobalData.fighters[currCard].outfits[currOutfit].name);
 
         fighterCards[currCard].UpdateOutfit(GlobalData.fighters[currCard], currOutfit);
         fighterCards[currCard].HighlightCard(false);
@@ -125,7 +131,7 @@ public class OverviewUI : MonoBehaviour
         outfit.StringReference.SetReference("StringTable", fighter.outfits[currOutfit].name);
     }
 
-    public void ToggleCards()
+    /*public void ToggleCards()
     {
         AudioManager.singleton.PlayStandardSound();
 
@@ -141,7 +147,7 @@ public class OverviewUI : MonoBehaviour
             LeanTween.moveLocalX(fighterRect.gameObject, 0f, 0.3f);
             toggleBackground.material = neutral;
         }
-    }
+    }*/
 
     public void ReturnToMenu(MenuUI menuUI)
     {

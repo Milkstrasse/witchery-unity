@@ -6,9 +6,9 @@ public class ImpactUI : MonoBehaviour
     [SerializeField] private Transform impact;
     [SerializeField] private Image portrait;
 
-    public void SetupUI(string fighter, bool rotated)
+    public void SetupUI(string fighter, string outfit, bool rotated)
     {
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter + "-standard");
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter + "-" + outfit);
 
         transform.localPosition = new Vector3(0, rotated ? -160f : 160f, 0);
         impact.eulerAngles = rotated ? new Vector3(180f, 180f, 0f) : Vector3.zero;

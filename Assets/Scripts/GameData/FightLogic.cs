@@ -69,10 +69,7 @@ public class FightLogic
         {
             switch (lastCard.card.move.moveID)
             {
-                case 1: //fill hand
-                    players[playerTurn].FillHand(5 - players[playerTurn].cardHand.Count);
-                    break;
-                case 11: //remove random card
+                case 7: //remove random card
                     int cardAmount = players[1 - playerTurn].cardHand.Count;
                     if (cardAmount > 0)
                     {
@@ -100,7 +97,7 @@ public class FightLogic
         }
 
         Move move = card.move;
-        if (move.moveID == 7 && lastCard != null) //replay last card
+        if (move.moveID == 1 && lastCard != null) //replay last card
         {
             if (!lastCard.card.hasMove)
             {
@@ -110,7 +107,7 @@ public class FightLogic
             move = lastCard.card.move;
         }
 
-        if (move.moveType == MoveType.Standard)
+        if (move.moveType != MoveType.Response)
         {
             if (blockable && FightManager.singleton.players[1 - turn].HasResponseTo(move))
             {
@@ -119,12 +116,11 @@ public class FightLogic
 
             switch (move.moveID)
             {
-                case 1: //fill hands
+                case 1: //replay last card
                     break;
                 case 4: //steal health
-                case 10:
                     int hpToSteal = move.health;
-                    if (move.moveID == 10) //special move
+                    if (move.moveType == MoveType.Special)
                     {
                         hpToSteal *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
                     }
@@ -140,10 +136,10 @@ public class FightLogic
                         winner = turn;
                     }
 
-                    StatusEffect stealSpice = players[1 - turn].GetEffect("spice");
-                    if (stealSpice != null)
+                    int stealSpice = players[1 - turn].GetEffect("spice");
+                    if (stealSpice != 0)
                     {
-                        players[turn].health = Math.Max(players[turn].health - stealSpice.value, 0);
+                        players[turn].health = Math.Max(players[turn].health - stealSpice, 0);
                         if (winner < 0 && players[turn].health == 0)
                         {
                             players[0].playedUntilEnd = true;
@@ -185,18 +181,9 @@ public class FightLogic
                     players[1].health = allHealth / 2;
 
                     break;
-                case 7: //replay last card
-                    break;
-                case 13: //swap effects
-                    List<StatusEffect> tempEffects = players[0].effects;
-                    players[0].effects = players[1].effects;
-                    players[1].effects = tempEffects;
-
-                    break;
-                case 14: //steal energy
-                case 20:
+                case 8: //steal energy
                     int energyToSteal = move.energy;
-                    if (move.moveID == 20) //special move
+                    if (move.moveType == MoveType.Special)
                     {
                         energyToSteal *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
                     }
@@ -213,7 +200,7 @@ public class FightLogic
                     players[turn].energy += tempEnergy;
 
                     break;
-                case 16: //explosion
+                case 10: //explosion
                     int damage = move.health;
                     int damageA = Math.Min(damage - players[turn].GetPowerBonus() + players[1 - turn].GetDamageModifier(), 0);
                     int damageB = Math.Min(damage - players[turn].GetPowerBonus() + players[turn].GetDamageModifier(), 0);
@@ -227,10 +214,10 @@ public class FightLogic
                         winner = turn;
                     }
 
-                    StatusEffect exSpice = players[1 - turn].GetEffect("spice");
-                    if (exSpice != null)
+                    int exSpice = players[1 - turn].GetEffect("spice");
+                    if (exSpice != 0)
                     {
-                        players[turn].health = Math.Max(players[turn].health - exSpice.value, 0);
+                        players[turn].health = Math.Max(players[turn].health - exSpice, 0);
                         if (winner < 0 && players[turn].health == 0)
                         {
                             players[0].playedUntilEnd = true;
@@ -252,7 +239,13 @@ public class FightLogic
                     }
 
                     break;
-                case 17: //clear effects
+                case 11: //swap effects
+                    List<StatusEffect> tempEffects = players[0].effects;
+                    players[0].effects = players[1].effects;
+                    players[1].effects = tempEffects;
+
+                    break;
+                case 13: //clear effects
                     if (move.target == 2)
                     {
                         players[0].effects = new List<StatusEffect>();
@@ -264,8 +257,19 @@ public class FightLogic
                     }
 
                     break;
+                case 17: //copy effects
+                    players[turn].effects = players[1 - turn].effects;
+                    for (int i = 0; i < players[turn].effects.Count; i++)
+                    {
+                        players[turn].effects[i].isNew = true;
+                    }
+
+                    break;
                 case 19: //add blank
                     players[(move.target + turn) % 2].AddBlanks(1);
+                    break;
+                case 21: //heal to health
+                    players[(move.target + turn) % 2].health = Math.Max(players[(move.target + turn) % 2].health, move.health + players[turn].GetPowerBonus());
                     break;
                 case 23: //clear blanks
                     players[(move.target + turn) % 2].startIndex = 5;
@@ -275,20 +279,9 @@ public class FightLogic
                     players[(move.target + turn) % 2].AddBlanks(blanks);
 
                     break;
-                case 29: //copy effects
-                    players[turn].effects = players[1 - turn].effects;
-                    for (int i = 0; i < players[turn].effects.Count; i++)
-                    {
-                        players[turn].effects[i].isNew = true;
-                    }
-
-                    break;
-                case 33: //heal to health
-                    players[(move.target + turn) % 2].health = Math.Max(players[(move.target + turn) % 2].health, move.health + players[turn].GetPowerBonus());
-                    break;
                 default:
                     int health = move.health;
-                    if (move.moveID == 8 || move.moveID == 9) //special moves
+                    if (move.moveType == MoveType.Special)
                     {
                         health *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
                     }
@@ -314,10 +307,10 @@ public class FightLogic
 
                     if (move.health < 0)
                     {
-                        StatusEffect spice = players[(move.target + turn) % 2].GetEffect("spice");
-                        if (spice != null)
+                        int spice = players[(move.target + turn) % 2].GetEffect("spice");
+                        if (spice != 0)
                         {
-                            players[turn].health = Math.Max(players[turn].health - spice.value, 0);
+                            players[turn].health = Math.Max(players[turn].health - spice, 0);
                             if (winner < 0 && players[turn].health == 0)
                             {
                                 players[0].playedUntilEnd = true;
@@ -330,7 +323,7 @@ public class FightLogic
                     }
 
                     int energy = move.energy;
-                    if (move.moveID == 21) //special move
+                    if (move.moveType == MoveType.Special)
                     {
                         energy *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
                     }
@@ -365,11 +358,11 @@ public class FightLogic
 
                     if (health != 0)
                     {
-                        if (lastCard.card.move.moveID == 9) //special heal
+                        if (lastCard.card.move.moveID == 3 && lastCard.card.move.moveType == MoveType.Special) //special heal
                         {
                             health *= lastCard.lastCost;
                         }
-                        else if (lastCard.card.move.moveID == 33) //heal to health
+                        else if (lastCard.card.move.moveID == 21) //heal to health
                         {
                             players[turn].health = Math.Max(players[turn].health, health + players[1 - turn].GetPowerBonus());
                             return true;
@@ -383,7 +376,7 @@ public class FightLogic
 
                     if (energy != 0)
                     {
-                        if (lastCard.card.move.moveID == 21) //special energy
+                        if (lastCard.card.move.moveID == 9 && lastCard.card.move.moveType == MoveType.Special) //special energy
                         {
                             energy *= lastCard.lastCost;
                         }
@@ -465,15 +458,7 @@ public class FightLogic
             while (j < players[i].effects.Count)
             {
                 players[i].effects[j].TriggerEffect(players[i]);
-
-                if (players[i].effects[j].multiplier <= 0)
-                {
-                    players[i].effects.RemoveAt(j);
-                }
-                else
-                {
-                    j++;
-                }
+                j++;
 
                 if (winner < 0 && players[i].health == 0)
                 {

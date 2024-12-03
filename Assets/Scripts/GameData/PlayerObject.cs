@@ -31,11 +31,11 @@ public class PlayerObject : MonoBehaviour
     public void SetupPlayer(PlayerMessage message, int playerID)
     {
         this.playerID = playerID;
-        icon = message.icon;
         
+        icon = message.icon;
         playerName = message.name;
-        fullHealth = GlobalData.health;
-        currHealth = fullHealth;
+        fullHealth = message.health;
+        currHealth = message.health;
 
         energy = 0;
 

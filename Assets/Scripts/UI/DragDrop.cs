@@ -17,16 +17,13 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     private CardUI cardUI;
 
-    private void Start()
+    public void SetInit()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 
         cardUI = GetComponent<CardUI>();
-    }
 
-    public void SetInit()
-    {
         initParent = transform.parent;
         initPosition = rectTransform.anchoredPosition;
     }

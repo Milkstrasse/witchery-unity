@@ -1253,8 +1253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffc9e7777e844d08a1c4100c807adae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fighters: []
-  themes: []
   materials:
   - {fileID: 2100000, guid: 10842f26f0d6b4e258345c28bfe1eabe, type: 2}
   - {fileID: 2100000, guid: f09a7cddc24974b2689c01c4c1439390, type: 2}
@@ -1268,6 +1266,7 @@ MonoBehaviour:
   joincode: 
   relayEnabled: 0
   maxPlayers: 0
+  lastScene: 
 --- !u!82 &1766523638
 AudioSource:
   m_ObjectHideFlags: 0

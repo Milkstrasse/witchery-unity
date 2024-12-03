@@ -55,12 +55,8 @@ MonoBehaviour:
     m_Key: clearOppEffects
     m_Metadata:
       m_Items: []
-  - m_Id: 25373414918184960
-    m_Key: client
-    m_Metadata:
-      m_Items: []
   - m_Id: 26341001055428608
-    m_Key: clientDescr
+    m_Key: onlineDescr
     m_Metadata:
       m_Items: []
   - m_Id: 30839589168996352
@@ -133,10 +129,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 31058970465525760
     m_Key: fighters
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7880276955881472
-    m_Key: fillHand
     m_Metadata:
       m_Items: []
   - m_Id: 7842569093373952
@@ -255,10 +247,6 @@ MonoBehaviour:
     m_Key: server
     m_Metadata:
       m_Items: []
-  - m_Id: 26340997322498048
-    m_Key: serverDescr
-    m_Metadata:
-      m_Items: []
   - m_Id: 15212672940236800
     m_Key: shields
     m_Metadata:
@@ -371,8 +359,24 @@ MonoBehaviour:
     m_Key: offline
     m_Metadata:
       m_Items: []
-  - m_Id: 33362290127396864
-    m_Key: arena
+  - m_Id: 34667935183134720
+    m_Key: fightTimes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34668335646892032
+    m_Key: winTimes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34668589179985920
+    m_Key: spendMoney
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34677428671471616
+    m_Key: haveEffects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35036214569459712
+    m_Key: journalDescr
     m_Metadata:
       m_Items: []
   m_Metadata:

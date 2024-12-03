@@ -73,7 +73,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 230, y: 320}
+  m_SizeDelta: {x: 235, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6923224953780964602
 CanvasRenderer:
@@ -973,6 +973,9 @@ MonoBehaviour:
     - name: energy
       variable:
         rid: 296818163417612683
+    - name: multiplier
+      variable:
+        rid: 6175660565917073911
     - name: effect
       variable:
         rid: 296818163417612684
@@ -1021,6 +1024,10 @@ MonoBehaviour:
       type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:
         m_Value: 
+    - rid: 6175660565917073911
+      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 0
 --- !u!1 &8645398596931181403
 GameObject:
   m_ObjectHideFlags: 0
