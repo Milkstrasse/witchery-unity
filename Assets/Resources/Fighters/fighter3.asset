@@ -13,13 +13,24 @@ MonoBehaviour:
   m_Name: fighter3
   m_EditorClassIdentifier: 
   fighterID: 3
-  role: 63198
+  role: 61475
   moves:
+<<<<<<< Updated upstream
   - {fileID: 11400000, guid: 0ac7f2c711c16424fa11f475b083c023, type: 2}
   - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
   - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
   - {fileID: 11400000, guid: 4e0f577f8160e4c3dbd7e289e1b0cf88, type: 2}
   - {fileID: 11400000, guid: 4e0f577f8160e4c3dbd7e289e1b0cf88, type: 2}
+=======
+  - {fileID: 11400000, guid: d0d4e7ea06f80453abaaefca61b36a38, type: 2}
+  - {fileID: 11400000, guid: 1fe97fa2bf70f4b49a4504ac56778835, type: 2}
+  - {fileID: 11400000, guid: 1fe97fa2bf70f4b49a4504ac56778835, type: 2}
+  - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+>>>>>>> Stashed changes
   outfits:
   - name: standard
     cost: 300

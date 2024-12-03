@@ -15,11 +15,14 @@ MonoBehaviour:
   fighterID: 4
   role: 61475
   moves:
-  - {fileID: 11400000, guid: d0d4e7ea06f80453abaaefca61b36a38, type: 2}
-  - {fileID: 11400000, guid: 941a01699d8f44fbd95b702e62934afc, type: 2}
-  - {fileID: 11400000, guid: 941a01699d8f44fbd95b702e62934afc, type: 2}
+  - {fileID: 11400000, guid: 71c20d86684774b96a8dd635367afdd1, type: 2}
+  - {fileID: 11400000, guid: e428eab7482d24a74b7708919b33fae8, type: 2}
+  - {fileID: 11400000, guid: e428eab7482d24a74b7708919b33fae8, type: 2}
+  - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
   outfits:
   - name: standard
     cost: 300

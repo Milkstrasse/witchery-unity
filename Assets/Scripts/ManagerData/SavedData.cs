@@ -32,37 +32,4 @@ public struct SavedData
     public int wonWithMinHealth;
     public bool wonWithEffect;
     public bool selfKO;
-
-    public SavedData(string name, int icon)
-    {
-        this.name = name;
-        this.icon = icon;
-
-        money = 0;
-        unlocked = new bool[0, 0];
-        missions = new bool[0];
-        shopFighters = new SelectedFighter[0];
-
-        timesFought = 0;
-        timesWon = 0;
-        timesWonFirst = 0;
-        damageDone = 0;
-        healingDone = 0;
-        energyCreated = 0;
-        healingStolen = 0;
-        energyStolen = 0;
-        effectsApplied = 0;
-        timesReplayed = 0;
-        timesBlocked = 0;
-        timesTaken = 0;
-        moneySpent = 0;
-        nothingStolen = false;
-        maxEffectCount = 0;
-        healedOpponent = false;
-        maxDamageDone = 0;
-        maxHealingDone = 0;
-        wonWithMinHealth = 0;
-        wonWithEffect = false;
-        selfKO = false;
-    }
 }
