@@ -57,9 +57,9 @@ public class PlayerFightUI : MonoBehaviour
         this.player = player;
         player.OnPlayerChanged += UpdateUI;
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
 
-        nameText.text = player.playerName;
+        nameText.text = GlobalData.fighters[player.fighterIDs[0].fighterID].name;
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
         energyText.text = player.energy.ToString();
 

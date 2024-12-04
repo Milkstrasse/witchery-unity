@@ -28,7 +28,7 @@ public class SelectionUI : MonoBehaviour
 
             if (GlobalManager.singleton.mode != GameMode.Online || NetworkClient.activeHost)
             {
-                playerTop.SetName(players[1].playerName);
+                playerTop.SetLeader(GlobalData.fighters[players[1].fighterIDs[0].fighterID], players[1].fighterIDs[0].outfit);
 
                 for (int j = 0; j < players[0].fighterIDs.Length; j++)
                 {
@@ -37,7 +37,7 @@ public class SelectionUI : MonoBehaviour
             }
             else
             {
-                playerTop.SetName(players[0].playerName);
+                playerTop.SetLeader(GlobalData.fighters[players[0].fighterIDs[0].fighterID], players[0].fighterIDs[0].fighterID);
 
                 for (int j = 0; j < players[1].fighterIDs.Length; j++)
                 {

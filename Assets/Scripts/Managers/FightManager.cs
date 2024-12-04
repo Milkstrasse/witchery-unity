@@ -50,7 +50,7 @@ public class FightManager : MonoBehaviour
     [Server]
     public PlayerMessage SetupPlayer(PlayerMessage message)
     {
-        PlayerMessage msg = new PlayerMessage(message.name, message.icon, message.fighterIDs);
+        PlayerMessage msg = new PlayerMessage(message.fighterIDs);
         msg.health = message.health;
 
         PlayerData playerData = new PlayerData(message);

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Fighter : ScriptableObject
 {
     public int fighterID;
+    public int health;
     public Role role;
     public Move[] moves;
     public Outfit[] outfits; //has to be same amount! for all fighters because uf 2d array, [][] jagged array could be alternative

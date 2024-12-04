@@ -974,7 +974,8 @@ MonoBehaviour:
   readyButton: {fileID: 344378691534329731}
   readyText: {fileID: 2375438514970021797}
   portrait: {fileID: 2108096082149886536}
-  playerName: {fileID: 8242940014531712411}
+  nameText: {fileID: 8242940014531712411}
+  healthText: {fileID: 7731613226998374781}
   modeButton: {fileID: 8689038964162385286}
   actionButton: {fileID: 5830670813190114372}
   neutral: {fileID: 2100000, guid: a9d0349a83e274f7587fc5ab57c8836c, type: 2}

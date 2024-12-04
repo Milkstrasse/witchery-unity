@@ -38,7 +38,7 @@ public class CardUI : MonoBehaviour
         icon.text = $"<style=IconShadow>{Convert.ToChar((uint) fighter.role)}</style>";
 
         (infoText.StringReference["name"] as StringVariable).Value = fighter.name;
-        (infoText.StringReference["role"] as StringVariable).Value = LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", fighter.role.ToString());
+        (infoText.StringReference["health"] as IntVariable).Value = fighter.health;
         
         infoText.StringReference.SetReference("StringTable", "fighterDescr");
     }

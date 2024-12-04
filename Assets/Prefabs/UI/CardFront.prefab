@@ -982,9 +982,6 @@ MonoBehaviour:
     - name: name
       variable:
         rid: 6175659975647952941
-    - name: role
-      variable:
-        rid: 6175659975647952942
   m_FormatArguments: []
   m_UpdateString:
     m_PersistentCalls:
@@ -1017,10 +1014,6 @@ MonoBehaviour:
       data:
         m_Value: 
     - rid: 6175659975647952941
-      type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
-      data:
-        m_Value: 
-    - rid: 6175659975647952942
       type: {class: StringVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:
         m_Value: 

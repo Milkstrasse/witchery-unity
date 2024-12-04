@@ -8,7 +8,6 @@ public class PlayerObject : MonoBehaviour
     public int playerID;
     public int icon;
 
-    public string playerName;
     public int fullHealth;
     public int currHealth;
     public int energy;
@@ -32,8 +31,6 @@ public class PlayerObject : MonoBehaviour
     {
         this.playerID = playerID;
         
-        icon = message.icon;
-        playerName = message.name;
         fullHealth = message.health;
         currHealth = message.health;
 
@@ -109,7 +106,6 @@ public class PlayerObject : MonoBehaviour
         {
             if (effects[i].statusType == StatusEffect.StatusType.Power)
             {
-                effects[i].isNew = true;
                 power += effects[i].value * effects[i].multiplier;
             }
         }
@@ -139,7 +135,6 @@ public class PlayerObject : MonoBehaviour
         {
             if (effects[i].name == "shields" || effects[i].name == "vulnerable" )
             {
-                effects[i].isNew = true;
                 modifier += effects[i].value * effects[i].multiplier;
             }
         }

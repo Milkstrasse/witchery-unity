@@ -18,7 +18,8 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private Button readyButton;
     [SerializeField] private LocalizeStringEvent readyText;
     [SerializeField] private Image portrait;
-    [SerializeField] private TextMeshProUGUI playerName;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI healthText;
 
     [SerializeField] private Button modeButton;
     [SerializeField] private Button actionButton;
@@ -42,16 +43,7 @@ public class PlayerSelectionUI : MonoBehaviour
         canvasGroup = fighterParent.parent.GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
 
-        if (rectTransform.eulerAngles.z == 180f)
-        {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
-            SetName(LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", "player"));
-        }
-        else
-        {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
-            SetName(SaveManager.savedData.name);
-        }
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[0].name + "-standard");
 
         filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};
 
@@ -80,9 +72,11 @@ public class PlayerSelectionUI : MonoBehaviour
         moveCards = new CardUI[0];
     }
 
-    public void SetName(string name)
+    public void SetLeader(Fighter leader, int outfit)
     {
-        playerName.text = name;
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + leader.name + "-" + leader.outfits[outfit].name);
+            healthText.text = $"{leader.health}/{leader.health}HP";
+        nameText.text = leader.name;
     }
 
     private void SelectCard(int cardIndex, bool editing)
@@ -97,6 +91,8 @@ public class PlayerSelectionUI : MonoBehaviour
         if (isEditing || editing)
         {
             SelectionResult result = selectionUI.EditTeam(fighter);
+
+            SetLeader(GlobalData.fighters[result.leader.fighterID], result.leader.outfit);
 
             fighterCards[fighter.fighterID].UpdateOutfit(GlobalData.fighters[fighter.fighterID], fighter.outfit);
             outfits[fighter.fighterID] = fighter.outfit;
@@ -389,6 +385,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
                     if (result.wasAdded)
                     {
+                        SetLeader(GlobalData.fighters[result.leader.fighterID], result.leader.outfit);
                         AudioManager.singleton.PlayPositiveSound();
                     }
                     else

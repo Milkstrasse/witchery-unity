@@ -60,7 +60,7 @@ public class CustomNetwork : RelayNetworkManager
     {
         for (int i = 0; i < 2; i++)
         {
-            players[i].health = GlobalData.health;
+            players[i].health = GlobalData.fighters[players[i].fighterIDs[0].fighterID].health;
             players[i] = FightManager.singleton.SetupPlayer(players[i]);
             NetworkServer.SendToAll(players[i]);
         }

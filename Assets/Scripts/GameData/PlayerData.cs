@@ -40,8 +40,6 @@ public class PlayerData
 
     public PlayerData(PlayerMessage message)
     {
-        name = message.name;
-
         health = message.health;
         energy = 0;
 

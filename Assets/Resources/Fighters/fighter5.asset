@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: fighter5
   m_EditorClassIdentifier: 
   fighterID: 5
+  health: 60
   role: 63198
   moves:
-  - {fileID: 11400000, guid: 4e0f577f8160e4c3dbd7e289e1b0cf88, type: 2}
-  - {fileID: 11400000, guid: 941a01699d8f44fbd95b702e62934afc, type: 2}
-  - {fileID: 11400000, guid: 941a01699d8f44fbd95b702e62934afc, type: 2}
-  - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}
-  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
-  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
-  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
-  - {fileID: 11400000, guid: 7fa469c9d802e457b91ba9f9957e7fbb, type: 2}
+  - {fileID: 11400000, guid: 5c4e93dbb98ec42c0be3e5ba99d22152, type: 2}
+  - {fileID: 11400000, guid: 120ad528ec64d4bf29959be3f4bb8fec, type: 2}
+  - {fileID: 11400000, guid: 120ad528ec64d4bf29959be3f4bb8fec, type: 2}
+  - {fileID: 11400000, guid: cbcd1f94fec434e5f98ffaa6c4767865, type: 2}
+  - {fileID: 11400000, guid: 0ac7f2c711c16424fa11f475b083c023, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   outfits:
   - name: standard
     cost: 300
