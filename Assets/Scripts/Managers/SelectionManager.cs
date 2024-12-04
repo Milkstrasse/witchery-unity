@@ -24,7 +24,7 @@ public class SelectionManager : MonoBehaviour
       networkManager.maxConnections = GlobalManager.singleton.maxPlayers;
 
       fighterIDs = new List<SelectedFighter>();
-      playerNames = new string[2]{LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", "player"), SaveManager.savedData.name};
+      playerNames = new string[2]{GlobalData.fighters[0].name, GlobalData.fighters[0].name};
       isReady = new bool[2];
 
       NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
@@ -165,7 +165,7 @@ public class SelectionManager : MonoBehaviour
       }
    }
 
-   public void EditTeam(int fighter, int outfit)
+   public SelectionResult EditTeam(int fighter, int outfit)
    {
       int index = -1;
       for (int i = 0; i < fighterIDs.Count; i++)
@@ -181,6 +181,8 @@ public class SelectionManager : MonoBehaviour
       {
          fighterIDs[index] = new SelectedFighter(fighter, outfit);
       }
+
+      return new SelectionResult(false, true, fighterIDs[0]);
    }
 
    private void PlayersReady(TurnMessage message)

@@ -10,18 +10,11 @@ public class DebugManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI data;
     private void Start()
     {
-        if (SaveManager.savedData.name == "DEV")
-        {
-            moneyButton.interactable = true;
-        }
-        
         #if UNITY_EDITOR
         moneyButton.interactable = true;
         #endif
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.Append(SaveManager.savedData.name);
-        stringBuilder.Append("\n");
         stringBuilder.Append($"times fought: {SaveManager.savedData.timesFought}\n");
         stringBuilder.Append($"times won: {SaveManager.savedData.timesWon}\n");
         stringBuilder.Append($"money spent: {SaveManager.savedData.moneySpent}\n");

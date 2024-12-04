@@ -67,16 +67,12 @@ public class GlobalManager : MonoBehaviour
             relayEnabled = false;
         #endif
 
-        if (SaveManager.LoadData())
+        if (!SaveManager.LoadData())
         {
-            Debug.Log("Welcome " + SaveManager.savedData.name);
-            LoadScene("MenuScene");
+            SaveManager.CreateNewData(GlobalData.fighters, GlobalData.missions);
         }
-        else
-        {
-            StartManager startManager = GameObject.Find("Canvas").GetComponent<StartManager>();
-            startManager.ShowUI();
-        }
+
+        LoadScene("MenuScene");
     }
 
     public void StoreRelayCode(string code)
@@ -136,13 +132,6 @@ public class GlobalManager : MonoBehaviour
 
         TMP_Settings.defaultStyleSheet = GlobalData.themes[GlobalData.themeIndex].sheet;
         TMP_Settings.defaultStyleSheet.RefreshStyles();
-    }
-
-    public void GoToMenu()
-    {
-        SaveManager.CreateNewData(GlobalData.fighters, GlobalData.missions, Random.Range(0, GlobalData.fighters.Length));
-        
-        LoadScene("MenuScene");
     }
 
     public string GetCurrentScene() => SceneManager.GetActiveScene().name;

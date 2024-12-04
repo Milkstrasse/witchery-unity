@@ -1,11 +1,8 @@
 using System;
-using UnityEngine;
 
 [Serializable]
 public struct SavedData
 {
-    public string name;
-    public int icon;
     public int money;
     public bool[,] unlocked;
     public bool[] missions;

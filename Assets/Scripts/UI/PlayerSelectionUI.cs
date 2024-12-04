@@ -43,7 +43,7 @@ public class PlayerSelectionUI : MonoBehaviour
         canvasGroup = fighterParent.parent.GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[0].name + "-standard");
+        SetLeader(GlobalData.fighters[0], 0);
 
         filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};
 
@@ -75,7 +75,7 @@ public class PlayerSelectionUI : MonoBehaviour
     public void SetLeader(Fighter leader, int outfit)
     {
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + leader.name + "-" + leader.outfits[outfit].name);
-            healthText.text = $"{leader.health}/{leader.health}HP";
+        healthText.text = $"{leader.health}/{leader.health}HP";
         nameText.text = leader.name;
     }
 
@@ -258,7 +258,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
             if (fighterCards[currCard].isSelected)
             {
-                selectionUI.EditTeam(currCard, outfits[currCard]);
+                SelectionResult result = selectionUI.EditTeam(currCard, outfits[currCard]);
+                portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
             }
         }
     }
@@ -325,7 +326,8 @@ public class PlayerSelectionUI : MonoBehaviour
 
             if (fighterCards[currCard].isSelected)
             {
-                selectionUI.EditTeam(currCard, outfits[currCard]);
+                SelectionResult result = selectionUI.EditTeam(currCard, outfits[currCard]);
+                portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
             }
         }
     }

@@ -23,10 +23,8 @@ public class SaveManager
         return true;
     }
 
-    public static void CreateNewData(Fighter[] fighters, Mission[] missions, int icon)
+    public static void CreateNewData(Fighter[] fighters, Mission[] missions)
     {
-        savedData.icon = icon;
-
         int fighterAmount = fighters.Length;
         savedData.unlocked = new bool[fighterAmount, fighters[0].outfits.Length];
         for (int i = 0; i < Math.Min(fighterAmount, 8); i++)
