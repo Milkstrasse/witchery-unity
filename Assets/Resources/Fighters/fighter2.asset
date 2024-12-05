@@ -16,7 +16,7 @@ MonoBehaviour:
   health: 80
   role: 62569
   moves:
-  - {fileID: 11400000, guid: 7fdbd2725e0d24881b45fcc821234b30, type: 2}
+  - {fileID: 11400000, guid: 0ac7f2c711c16424fa11f475b083c023, type: 2}
   - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}
   - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}
   - {fileID: 11400000, guid: c9cf718dd776f480c87549cacf425acf, type: 2}
