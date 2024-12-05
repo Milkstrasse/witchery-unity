@@ -101,7 +101,7 @@ public struct CPULogic
                     {
                         prioritizedCards.Add((i, -10));
                     }
-                    else if (move.moveID == 25 || move.moveID == 25 && logic.players[1].startIndex == 5) //hand over blanks
+                    else if ((move.moveID == 23 || move.moveID == 25) && logic.players[1].startIndex == 5) //hand over or clear blanks
                     {
                         prioritizedCards.Add((i, -10));
                     }
