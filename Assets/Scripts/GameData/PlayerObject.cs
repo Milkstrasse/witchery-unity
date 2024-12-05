@@ -50,9 +50,16 @@ public class PlayerObject : MonoBehaviour
         for (int i = 0; i < fighterIDs.Length; i++)
         {
             Fighter fighter = GlobalData.fighters[fighterIDs[i].fighterID];
-            for (int j = 0; j < fighter.moves.Length; j++)
+            if (i == 0)
             {
-                cards.Add(new Card(fighter, fighterIDs[i].outfit, j));
+                for (int j = 0; j < fighter.moves.Length; j++)
+                {
+                    cards.Add(new Card(fighter, fighterIDs[i].outfit, j));
+                }
+            }
+            else
+            {
+                cards.Add(new Card(fighter, fighterIDs[i].outfit, 0));
             }
         }
 

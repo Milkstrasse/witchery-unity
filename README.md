@@ -3,8 +3,9 @@
 **Goal: reduce opponents HP to 0**
 
 ## Starting the Game
-Both players start with 75 HP (can’t be exceeded)
-Combine all move cards of each fighter to create your deck & then shuffle it to create your draw pile.
+Choose your leader & and your supporting fighters.
+Combine all move cards of your leader & add only the signature moves of your supports to create your deck & then shuffle it to create your draw pile.
+Each player starts with the health points of their leader (can't be exceeded).
 
 ## Playing the Game
 

@@ -38,12 +38,15 @@ public class PlayerSelectionUI : MonoBehaviour
     private bool isEditing;
     private bool isShowingInfo;
 
+    private int leader;
+
     private void Awake()
     {
         canvasGroup = fighterParent.parent.GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
 
         SetLeader(GlobalData.fighters[0], 0);
+        leader = -1;
 
         filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};
 
@@ -97,6 +100,15 @@ public class PlayerSelectionUI : MonoBehaviour
             fighterCards[fighter.fighterID].UpdateOutfit(GlobalData.fighters[fighter.fighterID], fighter.outfit);
             outfits[fighter.fighterID] = fighter.outfit;
             fighterCards[fighter.fighterID].SelectCard(result.wasAdded);
+
+            if (result.hasTeam)
+            {
+                leader = result.leader.fighterID;
+            }
+            else
+            {
+                leader = -1;
+            }
 
             if (fighterCards[fighter.fighterID].isHighlighted)
             {
@@ -395,6 +407,15 @@ public class PlayerSelectionUI : MonoBehaviour
                         AudioManager.singleton.PlayNegativeSound();
                     }
 
+                    if (result.hasTeam)
+                    {
+                        leader = result.leader.fighterID;
+                    }
+                    else
+                    {
+                        leader = -1;
+                    }
+
                     fighterCards[indices[i]].SelectCard(result.wasAdded);
 
                     readyButton.interactable = result.hasTeam;
@@ -442,6 +463,11 @@ public class PlayerSelectionUI : MonoBehaviour
                 GameObject card = Instantiate(cardPrefab, cardParent);
                 moveCards[i] = card.GetComponent<CardUI>();
                 moveCards[i].SetupCard(fighter, outfits[currCard], fighter.moves[i]);
+
+                if (leader >= 0 && leader != currCard && i != 0)
+                {
+                    moveCards[i].FlipCard(true, 0f);
+                }
             }
 
             LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 1.5f - 20f, 0.3f);
