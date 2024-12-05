@@ -205,7 +205,7 @@ public class PlayerFightUI : MonoBehaviour
         {
             cardSlot.impactFrame.transform.SetAsLastSibling();
             cardSlot.impactFrame.gameObject.SetActive(true);
-            cardSlot.impactFrame.SetupUI(card.fighter.name, card.fighter.outfits[card.outfit].name, true);
+            cardSlot.impactFrame.SetupUI(card.move.target, card.fighter.name, card.fighter.outfits[card.outfit].name, true);
 
             yield return new WaitForSeconds(0.8f);
 

@@ -46,6 +46,11 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(audioClips[4]);
     }
 
+    public void PlayHealSound()
+    {
+        audioSource.PlayOneShot(audioClips[5]);
+    }
+
     public void ChangeMusicVolume(float sliderValue) => musicSource.volume = sliderValue;
 
     public void ChangeSoundVolume(float sliderValue) => audioSource.volume = sliderValue;

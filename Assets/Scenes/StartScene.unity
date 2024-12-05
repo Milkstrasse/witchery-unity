@@ -361,6 +361,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3aa6f17e2ceaf4457be7e678f246cbf0, type: 3}
   - {fileID: 8300000, guid: 65d8a3103cb2f426185ada1d4b43ce18, type: 3}
   - {fileID: 8300000, guid: 8506baae244f04464a2334ce7481ebe1, type: 3}
+  - {fileID: 8300000, guid: 5703bb41d0f0f4fab8b8a42478acd1ee, type: 3}
   musicSource: {fileID: 1766523638}
   hapticDisabled: 0
 --- !u!82 &927369747

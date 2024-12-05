@@ -6,8 +6,12 @@ public class ImpactUI : MonoBehaviour
     [SerializeField] private Transform impact;
     [SerializeField] private Image portrait;
 
-    public void SetupUI(string fighter, string outfit, bool rotated)
+    private int target;
+
+    public void SetupUI(int target, string fighter, string outfit, bool rotated)
     {
+        this.target = target;
+
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter + "-" + outfit);
 
         transform.localPosition = new Vector3(0, rotated ? -160f : 160f, 0);
@@ -20,7 +24,15 @@ public class ImpactUI : MonoBehaviour
 
     private void PlaySound()
     {
-        AudioManager.singleton.PlayAttackSound();
+        if (target == 0)
+        {
+            AudioManager.singleton.PlayHealSound();
+        }
+        else
+        {
+            AudioManager.singleton.PlayAttackSound();
+        }
+        
         Time.timeScale = 1;
     }
 
