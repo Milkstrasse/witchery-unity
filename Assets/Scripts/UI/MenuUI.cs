@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,71 +7,95 @@ public class MenuUI : MonoBehaviour
 {
     [SerializeField] private MenuManager manager;
 
-    [SerializeField] private Image icon;
-    [SerializeField] private TextMeshProUGUI playerName;
+    [SerializeField] private Transform header;
+    [SerializeField] private Transform headerImage;
     [SerializeField] private TextMeshProUGUI money;
 
-    [SerializeField] private RectTransform mainMenu;
-    [SerializeField] private RectTransform modeMenu;
+    [SerializeField] private ScrollRect scrollRect;
+    [SerializeField] private RectTransform[] menus;
+    [SerializeField] private Image[] buttons;
+    [SerializeField] private Material neutral;
+    [SerializeField] private Material highlighted;
 
-    [SerializeField] private Button onlineButton;
-    [SerializeField] private GameObject popUp;
+    private int currMenu;
+
+    //[SerializeField] private Button onlineButton;
+    //[SerializeField] private GameObject popUp;
 
     private void Start()
     {
         manager.OnMoneyChanged += UpdatePlayer;
 
+        headerImage.position = new Vector3(headerImage.position.x, header.position.y, headerImage.position.z);
         money.text = $"{SaveManager.savedData.money:n0} SP";
 
-        onlineButton.interactable = GlobalManager.singleton.isConnected;
+        currMenu = GlobalManager.singleton.maxPlayers;
 
-        /*if (GlobalManager.singleton.maxPlayers > 0)
+        for (int i = 0; i < currMenu; i++)
         {
-            mainMenu.localPosition = new Vector3(-mainMenu.sizeDelta.x * 1.5f - 20f, mainMenu.localPosition.y, mainMenu.localPosition.z);
-            modeMenu.localPosition = new Vector3(-mainMenu.sizeDelta.x * 0.5f, modeMenu.localPosition.y, modeMenu.localPosition.z);
-        }*/
+            menus[i].localPosition = new Vector3(-menus[0].sizeDelta.x - 30f, menus[i].localPosition.y, menus[i].localPosition.z);
+        }
+        menus[currMenu].localPosition = new Vector3(0f, menus[currMenu].localPosition.y, menus[currMenu].localPosition.z);
+
+        if (currMenu != 0)
+        {
+            buttons[0].material = neutral;
+            buttons[currMenu].material = highlighted;
+        }
+
+        //onlineButton.interactable = GlobalManager.singleton.isConnected;
     }
 
-    public void TogglePopup(bool enable)
+    /*public void TogglePopup(bool enable)
     {
         AudioManager.singleton.PlayStandardSound();
         
         popUp.SetActive(enable);
-    }
+    }*/
 
-    public void SwitchToModeMenu()
+    public void SwitchToMenu(int index)
     {
         AudioManager.singleton.PlayStandardSound();
 
-        GlobalManager.singleton.maxPlayers = 5;
+        if (currMenu == index)
+            return;
 
-        LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 1.5f - 20f, 0.3f);
-        LeanTween.moveLocalX(modeMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
-    }
-
-    public void SwitchToMenu(GameObject newMenu)
-    {
-        AudioManager.singleton.PlayStandardSound();
-
-        LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 1.5f - 20f, 0.3f);
-        LeanTween.moveLocalX(newMenu, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
-    }
-
-    public void SwitchToMainMenu(GameObject currMenu)
-    {
-        AudioManager.singleton.PlayStandardSound();
+        if (currMenu == 4)
+        {
+            SettingsManager settings = menus[4].GetComponent<SettingsManager>();
+            if (!settings.SavingSettings())
+            {
+                return;
+            }
+        }
         
-        GlobalManager.singleton.maxPlayers = 0;
+        GlobalManager.singleton.maxPlayers = index;
 
-        LeanTween.moveLocalX(mainMenu.gameObject, -mainMenu.sizeDelta.x * 0.5f, 0.3f);
-        LeanTween.moveLocalX(currMenu, mainMenu.sizeDelta.x * 0.5f + 20f, 0.3f);
+        buttons[currMenu].material = neutral;
+        buttons[index].material = highlighted;
 
-        manager.CheckMissions();
+        if (currMenu < index)
+        {
+            menus[index].localPosition = new Vector3(menus[currMenu].sizeDelta.x + 30f, menus[index].localPosition.y, menus[index].localPosition.z);
+            LeanTween.moveLocalX(menus[currMenu].gameObject, -menus[currMenu].sizeDelta.x - 30f, 0.3f);
+        }
+        else
+        {
+            menus[index].localPosition = new Vector3(-menus[currMenu].sizeDelta.x - 30f, menus[index].localPosition.y, menus[index].localPosition.z);
+            LeanTween.moveLocalX(menus[currMenu].gameObject, menus[currMenu].sizeDelta.x + 30f, 0.3f);
+        }
+
+        LeanTween.moveLocalX(menus[index].gameObject, 0f, 0.3f);
+
+        currMenu = index;
+        scrollRect.content = menus[currMenu];
+        scrollRect.verticalNormalizedPosition = 1;
     }
 
     private void UpdatePlayer(int money)
     {
         this.money.text = $"{money:n0} SP";
+        manager.CheckMissions();
     }
 
     private void OnDestroy()

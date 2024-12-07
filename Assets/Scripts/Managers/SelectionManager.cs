@@ -198,6 +198,8 @@ public class SelectionManager : MonoBehaviour
    public void ReturnToMenu()
    {
       AudioManager.singleton.PlayStandardSound();
+      
+      GlobalManager.singleton.maxPlayers = 2;
       GlobalManager.singleton.LoadScene("MenuScene");
    }
 }

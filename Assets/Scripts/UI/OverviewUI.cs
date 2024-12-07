@@ -158,6 +158,6 @@ public class OverviewUI : MonoBehaviour
         fighterRect.transform.localPosition = new Vector3(0f, fighterRect.transform.localPosition.y, fighterRect.transform.localPosition.z);
         toggleBackground.material = neutral;
 
-        menuUI.SwitchToMainMenu(gameObject);
+        menuUI.SwitchToMenu(0);
     }
 }

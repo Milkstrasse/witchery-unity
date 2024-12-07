@@ -6,7 +6,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private Button joinButton;
     
-    public event Action<SelectedFighter[], int> OnShopOptionsCreated;
+    public event Action<SelectedFighter[]> OnShopOptionsCreated;
     public event Action OnMissionsUpdated;
     public Action<int> OnMoneyChanged;
 
@@ -17,11 +17,11 @@ public class MenuManager : MonoBehaviour
 
         if (SaveManager.savedData.shopFighters.Length > 0)
         {
-            OnShopOptionsCreated?.Invoke(SaveManager.savedData.shopFighters, 0);
+            OnShopOptionsCreated?.Invoke(SaveManager.savedData.shopFighters);
         }
         else
         {
-            CreateShopOptions(6, 0);
+            CreateShopOptions(4);
         }
 
         CheckMissions();
@@ -37,38 +37,21 @@ public class MenuManager : MonoBehaviour
         OnMissionsUpdated?.Invoke();
     }
 
-    public void CreateShopOptions(int amount, int offset)
+    public void CreateShopOptions(int amount)
     {
         int[] numbers = GlobalManager.singleton.GetRandomNumbers(amount, GlobalData.fighters.Length);
         SelectedFighter[] options = new SelectedFighter[amount];
 
         for (int i = 0; i < amount; i++)
         {
-            if (i + offset >= 3)
-            {
-                options[i] = new SelectedFighter(numbers[i], 0);
-            }
-            else
-            {
-                options[i] = new SelectedFighter(numbers[i], UnityEngine.Random.Range(1, GlobalData.fighters[numbers[i]].outfits.Length));
-            }
+            options[i] = new SelectedFighter(numbers[i], UnityEngine.Random.Range(1, GlobalData.fighters[numbers[i]].outfits.Length));
         }
 
-        if (options.Length > 3)
-        {
-            SaveManager.savedData.shopFighters = options;
-        }
-        else
-        {
-            for (int i = 0; i < options.Length; i++)
-            {
-                SaveManager.savedData.shopFighters[i + offset] = options[i];
-            }
-        }
+        SaveManager.savedData.shopFighters = options;
 
         SaveManager.SaveData();
 
-        OnShopOptionsCreated?.Invoke(options, offset);
+        OnShopOptionsCreated?.Invoke(options);
     }
 
     public void SetJoincode(string joincode)
@@ -105,12 +88,6 @@ public class MenuManager : MonoBehaviour
         }
         
         GlobalManager.singleton.LoadScene("SelectionScene");
-    }
-
-    public void GoToScene(string scene)
-    {
-        AudioManager.singleton.PlayStandardSound();
-        GlobalManager.singleton.LoadScene(scene);
     }
 
     public bool UnlockOutfit(Fighter fighter, int outfit)

@@ -40,6 +40,7 @@ public class SettingsUI : MonoBehaviour
     private void UpdateTheme(string theme)
     {
         currTheme.StringReference.SetReference("StringTable", theme);
+        GlobalManager.singleton.LoadScene("MenuScene");
     }
 
     private void OnDestroy()

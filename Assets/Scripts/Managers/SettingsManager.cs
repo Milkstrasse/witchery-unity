@@ -6,9 +6,8 @@ using UnityEngine.Localization.Settings;
 
 public class SettingsManager : MonoBehaviour
 {
-    private bool changingLang;
+    private bool applying;
     private int langIndex;
-    private bool changingTheme;
 
     public event Action<string> OnLanguageUpdated;
     public event Action<string> OnThemeUpdated;
@@ -25,7 +24,7 @@ public class SettingsManager : MonoBehaviour
 
     public void DecreaseLang()
     {
-        if (changingLang)
+        if (applying)
             return;
 
         AudioManager.singleton.PlayStandardSound();
@@ -44,7 +43,7 @@ public class SettingsManager : MonoBehaviour
 
     public void IncreaseLang()
     {
-        if (changingLang)
+        if (applying)
             return;
 
         AudioManager.singleton.PlayStandardSound();
@@ -63,7 +62,7 @@ public class SettingsManager : MonoBehaviour
 
     public void DecreaseTheme()
     {
-        if (changingTheme)
+        if (applying)
             return;
 
         AudioManager.singleton.PlayStandardSound();
@@ -82,7 +81,7 @@ public class SettingsManager : MonoBehaviour
 
     public void IncreaseTheme()
     {
-        if (changingTheme)
+        if (applying)
             return;
 
         AudioManager.singleton.PlayStandardSound();
@@ -101,30 +100,30 @@ public class SettingsManager : MonoBehaviour
 
     IEnumerator ChangeTheme()
     {
-        changingTheme = true;
+        applying = true;
 
         GlobalManager.singleton.ApplyTheme();
         yield return null;
 
         OnThemeUpdated?.Invoke(GlobalData.themes[GlobalData.themeIndex].name);
 
-        changingTheme = false;
+        applying = false;
     }
 
     IEnumerator SetLocale(int localID)
     {
-        changingLang = true;
+        applying = true;
 
         yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localID];
         OnLanguageUpdated?.Invoke(LocalizationSettings.SelectedLocale.Identifier.Code);
 
-        changingLang = false;
+        applying = false;
     }
 
     public void ResetSettings()
     {
-        if (changingLang || changingTheme)
+        if (applying)
             return;
 
         ChangeMusicVolume(1f);
@@ -155,7 +154,7 @@ public class SettingsManager : MonoBehaviour
         GlobalData.highlightPlayable = true;
         GlobalData.animateImpact = true;
 
-        GlobalManager.singleton.LoadScene("SettingsScene");
+        GlobalManager.singleton.LoadScene("MenuScene");
 
         StartCoroutine(ChangeTheme());
     }
@@ -175,12 +174,25 @@ public class SettingsManager : MonoBehaviour
         GlobalData.animateImpact = enable;
     }
 
-    public void ReturnToScene()
+    public void DeleteData()
     {
-        if (changingLang || changingTheme)
-            return;
+        AudioManager.singleton.PlayNegativeSound();
 
-        AudioManager.singleton.PlayStandardSound();
+        SaveManager.DeleteData();
+        GlobalManager.singleton.LoadScene("MenuScene");
+    }
+
+    public void AddMoney()
+    {
+        AudioManager.singleton.PlayPositiveSound();
+        SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 100, 999999);
+        
+    }
+
+    public bool SavingSettings()
+    {
+        if (applying)
+            return false;
 
         PlayerPrefs.SetFloat("music", AudioManager.singleton.GetMusicVolume());
         PlayerPrefs.SetFloat("sound", AudioManager.singleton.GetSoundVolume());
@@ -190,6 +202,6 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("theme", GlobalData.themeIndex);
         PlayerPrefs.Save();
 
-        GlobalManager.singleton.LoadScene(GlobalManager.singleton.lastScene);
+        return true;
     }
 }

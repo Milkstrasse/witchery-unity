@@ -5,6 +5,7 @@ using Mirror;
 using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -40,7 +41,7 @@ public class GlobalManager : MonoBehaviour
         try
         {
             await UnityServices.InitializeAsync();
-            AuthenticationService.Instance.SwitchProfile(UnityEngine.Random.Range(0, 1000000).ToString());
+            AuthenticationService.Instance.SwitchProfile(Random.Range(0, 1000000).ToString());
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
             isConnected = true;
@@ -48,7 +49,6 @@ public class GlobalManager : MonoBehaviour
         }
         catch (Exception exception)
         {
-            isConnected = AuthenticationService.Instance.IsSignedIn;
             Debug.LogError(exception);
         }
 
