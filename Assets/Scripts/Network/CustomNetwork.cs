@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Utp;
 
 public class CustomNetwork : RelayNetworkManager
