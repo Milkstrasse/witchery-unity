@@ -117,6 +117,9 @@ public class MenuManager : MonoBehaviour
             SaveManager.savedData.missions[index] = true;
 
             OnMoneyChanged?.Invoke(SaveManager.savedData.money);
+
+            SaveManager.SaveData();
+            
             return true;
         }
 

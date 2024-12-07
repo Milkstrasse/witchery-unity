@@ -26,7 +26,7 @@ public class MissionUI : MonoBehaviour
         }
 
         RectTransform rectTransform = transform as RectTransform;
-        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 100 * GlobalData.missions.Length + (GlobalData.missions.Length - 1) * 10f);
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 100f * GlobalData.missions.Length + (GlobalData.missions.Length - 1) * 24f);
     }
 
     private void UpdateMissions()
