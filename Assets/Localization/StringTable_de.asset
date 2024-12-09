@@ -282,7 +282,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 33362076356304896
-    m_Localized: Offline
+    m_Localized: OFFLINE
     m_Metadata:
       m_Items: []
   - m_Id: 26344951418707968
@@ -406,6 +406,14 @@ MonoBehaviour:
       - rid: 296817732614357012
   - m_Id: 35036214569459712
     m_Localized: "Erf\xFClle Missionen um Belohnungen zu erhalten"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41257244396871680
+    m_Localized: "Zur\xFCck"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41257480569741312
+    m_Localized: Karten
     m_Metadata:
       m_Items: []
   references:

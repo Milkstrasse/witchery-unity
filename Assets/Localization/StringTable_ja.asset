@@ -413,6 +413,14 @@ MonoBehaviour:
       \u307B\u3046\u3057\u3085\u3046 \u3092 \u3048\u308B"
     m_Metadata:
       m_Items: []
+  - m_Id: 41257244396871680
+    m_Localized: "\u305B\u306A\u304B"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41257480569741312
+    m_Localized: "\u306F\u306A\u3075\u3060"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
