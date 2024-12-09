@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 public class PlayerData
@@ -260,7 +261,6 @@ public class PlayerData
             if (cardHand[i] < 0)
             {
                 cardHand.RemoveAt(i);
-
                 blanks--;
             }
         }

@@ -290,7 +290,6 @@ public class FightLogic
                     players[(move.target + turn) % 2].health = Math.Max(players[(move.target + turn) % 2].health, move.health + players[turn].GetPowerBonus());
                     break;
                 case 23: //clear blanks
-                    players[(move.target + turn) % 2].blanks = 0;
                     break;
                 case 25: //hand over blanks
                     players[(move.target + turn) % 2].AddBlanks(players[playerTurn].blanks);
