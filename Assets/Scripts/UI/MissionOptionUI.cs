@@ -16,8 +16,8 @@ public class MissionOptionUI : MonoBehaviour
     public void SetupUI(Mission mission, bool claimed)
     {
         title.text = mission.name;
-        description.StringReference.SetReference("StringTable", mission.descrKey);
         (description.StringReference["amount"] as IntVariable).Value = mission.goalValue;
+        description.StringReference.SetReference("StringTable", mission.descrKey);
        
         reward.text = mission.reward.ToString();
         claimButton.interactable = mission.isClaimable;

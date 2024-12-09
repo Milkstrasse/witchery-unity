@@ -64,7 +64,6 @@ public class PlayerSelectionUI : MonoBehaviour
             int iCopy = i;
             Button cardButton = card.GetComponent<Button>();
             cardButton.onClick.AddListener(() => SelectCard(iCopy, false));
-            cardButton.interactable = SaveManager.savedData.unlocked[i, 0];
 
             fighterCards[i] = card;
         }

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d0de20dfe1a448b9bb7c1ac16200675, type: 3}
-  m_Name: Quest1
+  m_Name: Mission8
   m_EditorClassIdentifier: 
-  descrKey: 
-  reward: 10
-  goalValue: -1
-  checkVariable: healedOpponent
+  descrKey: haveEffects
+  reward: 20
+  goalValue: 3
+  checkVariable: maxEffectCount
   isClaimable: 0
-  category: 1
+  category: 0

@@ -33,14 +33,30 @@ public class CardUI : MonoBehaviour
 
     public void SetupCard(Fighter fighter)
     {
+        bool isUnlocked = SaveManager.savedData.unlocked[fighter.fighterID, 0];
+
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-standard");
 
-        icon.text = $"<style=IconShadow>{Convert.ToChar((uint) fighter.role)}</style>";
+        if (isUnlocked)
+        {
+            icon.text = $"<style=IconShadow>{Convert.ToChar((uint)fighter.role)}</style>";
 
-        (infoText.StringReference["name"] as StringVariable).Value = fighter.name;
-        (infoText.StringReference["health"] as IntVariable).Value = fighter.health;
-        
-        infoText.StringReference.SetReference("StringTable", "fighterDescr");
+            (infoText.StringReference["name"] as StringVariable).Value = fighter.name;
+            (infoText.StringReference["health"] as IntVariable).Value = fighter.health;
+
+            infoText.StringReference.SetReference("StringTable", "fighterDescr");
+        }
+        else
+        {
+            icon.text = "<style=IconShadow>\uf005</style>";
+            if (fighter.unlockMission != null)
+            {
+                (infoText.StringReference["amount"] as IntVariable).Value = fighter.unlockMission.goalValue;
+                infoText.StringReference.SetReference("StringTable", fighter.unlockMission.descrKey);
+            }
+        }
+
+        GetComponent<Button>().interactable = isUnlocked;
     }
 
     public void SetupCard(Fighter fighter, int outfit, Move move)
@@ -51,7 +67,7 @@ public class CardUI : MonoBehaviour
 
         (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(move.health) + GetPowerBonus(move.moveType == MoveType.Special), 0);
         (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(move.energy) + GetPowerBonus(move.moveType == MoveType.Special), 0);
-        (infoText.StringReference["multiplier"] as IntVariable).Value = move.effect.multiplier;
+        (infoText.StringReference["amount"] as IntVariable).Value = move.effect.multiplier;
 
         if (move.effect.multiplier != 0)
         {
@@ -89,7 +105,7 @@ public class CardUI : MonoBehaviour
 
             (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
             (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
-            (infoText.StringReference["multiplier"] as IntVariable).Value = card.move.effect.multiplier;
+            (infoText.StringReference["amount"] as IntVariable).Value = card.move.effect.multiplier;
 
             if (card.move.effect.multiplier != 0)
             {

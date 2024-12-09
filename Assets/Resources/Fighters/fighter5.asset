@@ -30,3 +30,4 @@ MonoBehaviour:
     cost: 300
   - name: magicgirl
     cost: 200
+  unlockMission: {fileID: 11400000, guid: 3660ae9e9d2a84f119925d420ad834bd, type: 2}

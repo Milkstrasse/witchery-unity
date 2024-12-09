@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class OverviewUI : MonoBehaviour
 {
+    [SerializeField] private MenuManager manager;
+
     [SerializeField] private Image portrait;
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private TextMeshProUGUI motto;
@@ -17,6 +19,8 @@ public class OverviewUI : MonoBehaviour
 
     private void Start()
     {
+        manager.OnFightersUpdated += UpdateFighters;
+
         int fighterAmount = GlobalData.fighters.Length;
 
         fighterCards = new CardUI[fighterAmount];
@@ -35,6 +39,14 @@ public class OverviewUI : MonoBehaviour
         SetupFighter();
         RectTransform rectTransform = transform as RectTransform;
         rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 300f * Mathf.Ceil(GlobalData.fighters.Length/3f) + (Mathf.Ceil(GlobalData.fighters.Length/3f - 1f) * 24f));
+    }
+
+    private void UpdateFighters()
+    {
+        for (int i = 0; i < fighterCards.Length; i++)
+        {
+            fighterCards[i].SetupCard(GlobalData.fighters[i]);
+        }
     }
 
     private void SetupFighter()
@@ -61,5 +73,10 @@ public class OverviewUI : MonoBehaviour
         currCard = cardIndex;
         
         SetupFighter();
+    }
+
+    private void OnDestroy()
+    {
+        manager.OnFightersUpdated -= UpdateFighters;
     }
 }

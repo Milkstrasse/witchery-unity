@@ -41,6 +41,8 @@ public class MenuUI : MonoBehaviour
         {
             buttons[0].material = neutral;
             buttons[currMenu].material = highlighted;
+            
+            scrollRect.content = menus[currMenu];
         }
 
         //onlineButton.interactable = GlobalManager.singleton.isConnected;
@@ -60,7 +62,11 @@ public class MenuUI : MonoBehaviour
         if (currMenu == index)
             return;
 
-        if (currMenu == 4)
+        if (currMenu == 3)
+        {
+            manager.fighterNotification.SetActive(false);
+        }
+        else if (currMenu == 4)
         {
             SettingsManager settings = menus[4].GetComponent<SettingsManager>();
             if (!settings.SavingSettings())

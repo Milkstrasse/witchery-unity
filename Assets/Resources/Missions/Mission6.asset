@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0de20dfe1a448b9bb7c1ac16200675, type: 3}
   m_Name: Mission6
   m_EditorClassIdentifier: 
-  descrKey: spendMoney
-  reward: 20
-  goalValue: 80
-  checkVariable: moneySpent
+  descrKey: 
+  reward: 10
+  goalValue: -1
+  checkVariable: healedOpponent
   isClaimable: 0
   category: 0

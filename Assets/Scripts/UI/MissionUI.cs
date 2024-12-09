@@ -11,22 +11,29 @@ public class MissionUI : MonoBehaviour
     private void Start()
     {
         manager.OnMissionsUpdated += UpdateMissions;
-
-        toClaim = 0;
         missions = new MissionOptionUI[GlobalData.missions.Length];
+
+        int nulls = 0;
 
         for (int i = 0; i < GlobalData.missions.Length; i++)
         {
-            MissionOptionUI mission = Instantiate(missionPrefab, transform).GetComponent<MissionOptionUI>();
+            if (GlobalData.missions[i].category == Mission.Category.Mission)
+            {
+                MissionOptionUI mission = Instantiate(missionPrefab, transform).GetComponent<MissionOptionUI>();
 
-            int iCopy = i;
-            mission.claimButton.onClick.AddListener(() => ClaimMission(iCopy));
+                int iCopy = i;
+                mission.claimButton.onClick.AddListener(() => ClaimMission(iCopy));
 
-            missions[i] = mission;
+                missions[i] = mission;
+            }
+            else
+            {
+                nulls++;
+            }
         }
 
         RectTransform rectTransform = transform as RectTransform;
-        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 100f * GlobalData.missions.Length + (GlobalData.missions.Length - 1) * 24f);
+        rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 100f * (GlobalData.missions.Length - nulls) + (GlobalData.missions.Length - nulls - 1) * 24f);
     }
 
     private void UpdateMissions()
@@ -35,14 +42,15 @@ public class MissionUI : MonoBehaviour
 
         for (int i = 0; i < missions.Length; i++)
         {
-            missions[i].SetupUI(GlobalData.missions[i], SaveManager.savedData.missions[i]);
-            if (missions[i].claimButton.interactable)
+            if (missions[i] != null)
             {
-                toClaim++;
+                missions[i].SetupUI(GlobalData.missions[i], SaveManager.savedData.missions[i]);
+                if (missions[i].claimButton.interactable)
+                {
+                    toClaim++;
+                }
             }
         }
-
-        //bookmark.SetActive(toClaim != 0);
     }
 
     private void ClaimMission(int index)
@@ -54,7 +62,7 @@ public class MissionUI : MonoBehaviour
             missions[index].Claim();
 
             toClaim--;
-            //bookmark.SetActive(toClaim != 0);
+            manager.missionNotification.SetActive(toClaim == 0);
         }
     }
 

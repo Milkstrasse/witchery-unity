@@ -973,7 +973,7 @@ MonoBehaviour:
     - name: energy
       variable:
         rid: 296818163417612683
-    - name: multiplier
+    - name: amount
       variable:
         rid: 6175660565917073911
     - name: effect

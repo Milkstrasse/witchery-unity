@@ -27,7 +27,7 @@ public class SaveManager
     {
         int fighterAmount = fighters.Length;
         savedData.unlocked = new bool[fighterAmount, fighters[0].outfits.Length];
-        for (int i = 0; i < Math.Min(fighterAmount, 8); i++)
+        for (int i = 0; i < Math.Min(fighterAmount, 4); i++)
         {
             savedData.unlocked[i, 0] = true;
         }

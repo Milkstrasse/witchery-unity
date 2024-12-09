@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d0de20dfe1a448b9bb7c1ac16200675, type: 3}
-  m_Name: Quest5
+  m_Name: Unlock1
   m_EditorClassIdentifier: 
-  descrKey: 
-  reward: 20
-  goalValue: -1
-  checkVariable: wonWithEffect
-  isClaimable: 0
+  descrKey: fightTimes
+  reward: 4
+  goalValue: 1
+  checkVariable: timesFought
+  isClaimable: 1
   category: 1

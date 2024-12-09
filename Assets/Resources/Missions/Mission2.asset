@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Mission2
   m_EditorClassIdentifier: 
   descrKey: fightTimes
-  reward: 10
-  goalValue: 5
+  reward: 20
+  goalValue: 25
   checkVariable: timesFought
   isClaimable: 0
   category: 0

@@ -5,8 +5,11 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private Button joinButton;
+    public GameObject fighterNotification;
+    public GameObject missionNotification;
     
     public event Action<SelectedFighter[]> OnShopOptionsCreated;
+    public event Action OnFightersUpdated;
     public event Action OnMissionsUpdated;
     public Action<int> OnMoneyChanged;
 
@@ -29,11 +32,25 @@ public class MenuManager : MonoBehaviour
 
     public void CheckMissions()
     {
+        bool updateOverview = false;
+        bool missionsToClaim = false;
+
         for (int i = 0; i < GlobalData.missions.Length; i++)
         {
-            GlobalData.missions[i].CheckStatus();
+            if (GlobalData.missions[i].CheckStatus(i) == 3)
+            {
+                updateOverview = true;
+            }
+            else if (GlobalData.missions[i].CheckStatus(i) == 4)
+            {
+                missionsToClaim = true;
+            }
         }
 
+        fighterNotification.SetActive(updateOverview);
+        missionNotification.SetActive(missionsToClaim);
+
+        OnFightersUpdated?.Invoke();
         OnMissionsUpdated?.Invoke();
     }
 
