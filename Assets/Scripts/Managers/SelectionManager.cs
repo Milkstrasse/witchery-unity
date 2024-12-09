@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 using Utp;
 
 public class SelectionManager : MonoBehaviour
@@ -13,10 +12,8 @@ public class SelectionManager : MonoBehaviour
 
    public event Action<int> OnTimerChanged;
    private List<SelectedFighter> fighterIDs;
-   private string[] playerNames;
 
    public event Action OnPlayersReady;
-   //private bool readyToFight;
 
    private void Awake()
    {
@@ -24,7 +21,6 @@ public class SelectionManager : MonoBehaviour
       networkManager.maxConnections = GlobalManager.singleton.maxPlayers;
 
       fighterIDs = new List<SelectedFighter>();
-      playerNames = new string[2]{GlobalData.fighters[0].name, GlobalData.fighters[0].name};
       isReady = new bool[2];
 
       NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
@@ -187,12 +183,8 @@ public class SelectionManager : MonoBehaviour
 
    private void PlayersReady(TurnMessage message)
    {
-      /*if (readyToFight)
-         return;*/
-      
       OnPlayersReady?.Invoke();
       NetworkClient.UnregisterHandler<TurnMessage>();
-      //readyToFight = true;
    }
 
    public void ReturnToMenu()

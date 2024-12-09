@@ -3,7 +3,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
-using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 

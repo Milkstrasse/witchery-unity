@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class PlayedCard
 {
     public Card card;

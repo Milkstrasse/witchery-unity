@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,9 +17,6 @@ public class MenuUI : MonoBehaviour
     [SerializeField] private Material highlighted;
 
     private int currMenu;
-
-    //[SerializeField] private Button onlineButton;
-    //[SerializeField] private GameObject popUp;
 
     private void Start()
     {
@@ -44,16 +40,7 @@ public class MenuUI : MonoBehaviour
             
             scrollRect.content = menus[currMenu];
         }
-
-        //onlineButton.interactable = GlobalManager.singleton.isConnected;
     }
-
-    /*public void TogglePopup(bool enable)
-    {
-        AudioManager.singleton.PlayStandardSound();
-        
-        popUp.SetActive(enable);
-    }*/
 
     public void SwitchToMenu(int index)
     {

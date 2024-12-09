@@ -2,7 +2,6 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
-using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class PlayerSelectionUI : MonoBehaviour

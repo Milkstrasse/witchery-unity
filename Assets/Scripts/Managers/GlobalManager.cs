@@ -5,7 +5,6 @@ using Mirror;
 using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.ResourceManagement.AsyncOperations;
