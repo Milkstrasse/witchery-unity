@@ -66,7 +66,7 @@ public class CardUI : MonoBehaviour
 
         (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(move.health) + GetPowerBonus(move.moveType == MoveType.Special), 0);
         (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(move.energy) + GetPowerBonus(move.moveType == MoveType.Special), 0);
-        (infoText.StringReference["amount"] as IntVariable).Value = move.effect.multiplier;
+        (infoText.StringReference["amount"] as IntVariable).Value = move.effect.multiplier + GetPowerBonus(false);
 
         if (move.effect.multiplier != 0)
         {
@@ -104,7 +104,7 @@ public class CardUI : MonoBehaviour
 
             (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
             (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
-            (infoText.StringReference["amount"] as IntVariable).Value = card.move.effect.multiplier;
+            (infoText.StringReference["amount"] as IntVariable).Value = card.move.effect.multiplier + GetPowerBonus(false);
 
             if (card.move.effect.multiplier != 0)
             {

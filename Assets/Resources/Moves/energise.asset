@@ -20,7 +20,7 @@ MonoBehaviour:
   effect:
     name: energise
     icon: f7e4
-    multiplier: 1
+    multiplier: 3
     value: 2
     statusType: 1
     isNew: 0

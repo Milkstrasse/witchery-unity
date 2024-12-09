@@ -20,7 +20,7 @@ MonoBehaviour:
   effect:
     name: shields
     icon: f3ed
-    multiplier: 1
+    multiplier: 3
     value: 2
     statusType: 3
     isNew: 0

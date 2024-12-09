@@ -80,10 +80,6 @@ public struct CPULogic
                     {
                         prioritizedCards.Add((i, -10));
                     }
-                    else if (logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == 0)
-                    {
-                        prioritizedCards.Add((i, -10));
-                    }
                     else if (move.moveID == 7 && logic.players[0].cardHand.Count == 0) //remove random card
                     {
                         prioritizedCards.Add((i, -10));
@@ -97,6 +93,14 @@ public struct CPULogic
                         prioritizedCards.Add((i, -10));
                     }
                     else if (move.moveID == 13 && move.target == 1 && logic.players[0].CheckEffectBalance() < 0) //clear opponent's effects
+                    {
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else if (move.moveID == 14 && logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == 0) //apply effect
+                    {
+                        prioritizedCards.Add((i, -10));
+                    }
+                    else if (move.moveID == 15 && logic.players[1].effects.Count == 5 && logic.players[1].GetEffect(move.effect.name, false) == 0) //gain effect
                     {
                         prioritizedCards.Add((i, -10));
                     }

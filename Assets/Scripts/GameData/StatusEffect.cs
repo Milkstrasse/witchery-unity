@@ -24,11 +24,11 @@ public class StatusEffect
         statusType = StatusType.Health;
     }
 
-    public StatusEffect(StatusEffect initEffect)
+    public StatusEffect(StatusEffect initEffect, int powerBonus)
     {
         name = initEffect.name;
         icon = initEffect.icon;
-        multiplier = initEffect.multiplier;
+        multiplier = initEffect.multiplier + powerBonus;
         value = initEffect.value;
         statusType = initEffect.statusType;
 

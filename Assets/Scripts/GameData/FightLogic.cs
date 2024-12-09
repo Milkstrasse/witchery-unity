@@ -356,7 +356,7 @@ public class FightLogic
 
                     if (move.effect.multiplier > 0)
                     {
-                        StatusEffect effect = new StatusEffect(move.effect);
+                        StatusEffect effect = new StatusEffect(move.effect, players[turn].GetPowerBonus());
                         players[(move.target + turn) % 2].AddEffect(effect);
                     }
 
