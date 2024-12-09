@@ -26,7 +26,16 @@ public class FightLogic
         }
 
         int cardIndex = players[playerTurn].cardHand[message.cardIndex];
-        Card card = FightManager.singleton.players[playerTurn].cards[cardIndex];
+        
+        Card card;
+        if (cardIndex < 0)
+        {
+            card = new Card();
+        }
+        else
+        {
+            card = FightManager.singleton.players[playerTurn].cards[cardIndex];
+        }
 
         if (card.hasMove)
         {
@@ -55,7 +64,16 @@ public class FightLogic
         if (!message.playCard)
         {
             int cardIndex = players[playerTurn].cardHand[message.cardIndex];
-            Card card = FightManager.singleton.players[playerTurn].cards[cardIndex];
+
+            Card card;
+            if (cardIndex < 0)
+            {
+                card = new Card();
+            }
+            else
+            {
+                card = FightManager.singleton.players[playerTurn].cards[cardIndex];
+            }
 
             if (card.hasMove)
             {
@@ -272,12 +290,10 @@ public class FightLogic
                     players[(move.target + turn) % 2].health = Math.Max(players[(move.target + turn) % 2].health, move.health + players[turn].GetPowerBonus());
                     break;
                 case 23: //clear blanks
-                    players[(move.target + turn) % 2].startIndex = 5;
+                    players[(move.target + turn) % 2].blanks = 0;
                     break;
                 case 25: //hand over blanks
-                    int blanks = 5 - players[playerTurn].startIndex;
-                    players[(move.target + turn) % 2].AddBlanks(blanks);
-
+                    players[(move.target + turn) % 2].AddBlanks(players[playerTurn].blanks);
                     break;
                 default:
                     int health = move.health;
@@ -402,7 +418,16 @@ public class FightLogic
             return false;
 
         int cardIndex = players[message.playerIndex].cardHand[message.cardIndex];
-        Card card = FightManager.singleton.players[message.playerIndex].cards[cardIndex];
+        
+        Card card;
+        if (cardIndex < 0)
+        {
+            card = new Card();
+        }
+        else
+        {
+            card = FightManager.singleton.players[message.playerIndex].cards[cardIndex];
+        }
 
         if (message.playCard)
         {

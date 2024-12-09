@@ -42,11 +42,6 @@ public class PlayerObject : MonoBehaviour
 
         fighterIDs = message.fighterIDs;
 
-        for (int i = 0; i < 5; i++) //blank cards
-        {
-            cards.Add(new Card());
-        }
-
         for (int i = 0; i < fighterIDs.Length; i++)
         {
             Fighter fighter = GlobalData.fighters[fighterIDs[i].fighterID];
@@ -80,7 +75,14 @@ public class PlayerObject : MonoBehaviour
             cardHand = new List<Card>();
             for (int i = 0; i < playerData.cardHand.Count; i++)
             {
-                cardHand.Add(cards[playerData.cardHand[i]]);
+                if (playerData.cardHand[i] < 0)
+                {
+                    cardHand.Add(new Card());
+                }
+                else
+                {
+                    cardHand.Add(cards[playerData.cardHand[i]]);
+                }
             }
         }
 
