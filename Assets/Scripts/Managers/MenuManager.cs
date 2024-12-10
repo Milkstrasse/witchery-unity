@@ -144,4 +144,36 @@ public class MenuManager : MonoBehaviour
 
         return false;
     }
+
+    public void DeleteData()
+    {
+        AudioManager.singleton.PlayNegativeSound();
+
+        SaveManager.DeleteData();
+        SaveManager.CreateNewData(GlobalData.fighters, GlobalData.missions);
+
+        CheckMissions();
+    }
+
+    public void AddMoney()
+    {
+        AudioManager.singleton.PlayPositiveSound();
+        SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 100, 999999);
+
+        SaveManager.SaveData();
+    }
+
+    public void UnlockFighters()
+    {
+        AudioManager.singleton.PlayPositiveSound();
+
+        for (int i = 0; i < GlobalData.fighters.Length; i++)
+        {
+            SaveManager.savedData.unlocked[i, 0] = true;
+        }
+
+        SaveManager.SaveData();
+
+        CheckMissions();
+    }
 }

@@ -882,8 +882,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1164579712}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 2103665511}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: DeleteData
         m_Mode: 1
         m_Arguments:
@@ -3123,8 +3123,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1164579712}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 2103665511}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: UnlockFighters
         m_Mode: 1
         m_Arguments:
@@ -9941,8 +9941,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1164579712}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 2103665511}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: AddMoney
         m_Mode: 1
         m_Arguments:
