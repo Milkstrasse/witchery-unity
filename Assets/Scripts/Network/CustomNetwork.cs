@@ -108,8 +108,6 @@ public class CustomNetwork : RelayNetworkManager
 
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
-        Debug.Log("Server disconnect");
-
         base.OnServerDisconnect(conn);
 
         if (GlobalManager.singleton.GetCurrentScene() == "FightScene")
@@ -124,8 +122,6 @@ public class CustomNetwork : RelayNetworkManager
 
     public override void OnClientDisconnect()
     {
-        Debug.Log("Client disconnect");
-
         base.OnClientDisconnect();
 
         if (GlobalManager.singleton.GetCurrentScene() == "FightScene")
