@@ -77,11 +77,12 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     IEnumerator PlayCard(CardUI eventCardUI, int cardIndex)
     {
-        if (eventCardUI.card.isSpecial && GlobalData.animateImpact)
+        Card card = new Card(eventCardUI.card);
+        if (card.isSpecial && GlobalData.animateImpact)
         {
             impactFrame.transform.SetAsLastSibling();
             impactFrame.gameObject.SetActive(true);
-            impactFrame.SetupUI(eventCardUI.card.move.target, eventCardUI.card.fighter.name, eventCardUI.card.fighter.outfits[eventCardUI.card.outfit].name, eventCardUI.transform.eulerAngles.z == 180f);
+            impactFrame.SetupUI(card.move.target, card.fighter.name, card.fighter.outfits[card.outfit].name, transform.eulerAngles.z == 180f);
 
             eventCardUI.player.cardHand.RemoveAt(cardIndex);
             eventCardUI.player.OnPlayerChanged?.Invoke();
@@ -91,8 +92,8 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             impactFrame.gameObject.SetActive(false);
         }
 
-        SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
-        FightManager.singleton.SendMove(cardIndex, true, !eventCardUI.card.isSpecial || !GlobalData.animateImpact);
+        SetupCard(card, eventCardUI.transform.eulerAngles.z == 180f);
+        FightManager.singleton.SendMove(cardIndex, true, !card.isSpecial || !GlobalData.animateImpact);
     }
 
     public void SetupCard(Card card, bool isFlipped)

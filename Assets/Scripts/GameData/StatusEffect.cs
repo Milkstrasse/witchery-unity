@@ -28,7 +28,7 @@ public class StatusEffect
     {
         name = initEffect.name;
         icon = initEffect.icon;
-        multiplier = initEffect.multiplier + powerBonus;
+        multiplier = Math.Max(initEffect.multiplier + powerBonus, 0);
         value = initEffect.value;
         statusType = initEffect.statusType;
 

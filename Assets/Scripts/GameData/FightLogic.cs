@@ -383,7 +383,7 @@ public class FightLogic
                             return true;
                         }
 
-                        health += players[1 - turn].GetPowerBonus();
+                        health = Math.Max(health + players[1 - turn].GetPowerBonus(), 0);
                         players[turn].health = Math.Clamp(players[turn].health + health, 0, GlobalData.health);
                     }
 
@@ -396,8 +396,8 @@ public class FightLogic
                             energy *= lastCard.lastCost;
                         }
 
-                        energy += players[1 - turn].GetPowerBonus();
-                        players[turn].energy = Math.Max(players[turn].energy + energy, 0);
+                        energy = Math.Max(energy + players[1 - turn].GetPowerBonus(), 0);
+                        players[turn].energy = players[turn].energy + energy;
                     }
 
                     if (lastCard.card.move.effect.multiplier > 0)

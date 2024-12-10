@@ -118,6 +118,8 @@ public class MenuManager : MonoBehaviour
 
             OnMoneyChanged?.Invoke(SaveManager.savedData.money);
 
+            SaveManager.SaveData();
+
             return true;
         }
         

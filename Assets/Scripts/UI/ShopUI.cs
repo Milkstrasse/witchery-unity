@@ -28,15 +28,6 @@ public class ShopUI : MonoBehaviour
         }
     }
 
-    public void ReturnToMenu(MenuUI menuUI)
-    {
-        AudioManager.singleton.PlayStandardSound();
-
-        SaveManager.SaveData();
-
-        menuUI.SwitchToMenu(0);
-    }
-
     private void OnDestroy()
     {
         manager.OnShopOptionsCreated -= SetupShopOptions;

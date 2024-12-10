@@ -49,6 +49,8 @@ public class MenuUI : MonoBehaviour
         if (currMenu == index)
             return;
 
+        manager.CheckMissions();
+
         if (currMenu == 3)
         {
             manager.fighterNotification.SetActive(false);

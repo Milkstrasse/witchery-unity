@@ -186,7 +186,20 @@ public class SettingsManager : MonoBehaviour
     {
         AudioManager.singleton.PlayPositiveSound();
         SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 100, 999999);
-        
+
+        SaveManager.SaveData();
+    }
+
+    public void UnlockFighters()
+    {
+        AudioManager.singleton.PlayPositiveSound();
+
+        for (int i = 0; i < GlobalData.fighters.Length; i++)
+        {
+            SaveManager.savedData.unlocked[i, 0] = true;
+        }
+
+        SaveManager.SaveData();
     }
 
     public bool SavingSettings()
