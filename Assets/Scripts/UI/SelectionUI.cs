@@ -37,7 +37,7 @@ public class SelectionUI : MonoBehaviour
             }
             else
             {
-                playerTop.SetLeader(GlobalData.fighters[players[0].fighterIDs[0].fighterID], players[0].fighterIDs[0].fighterID);
+                playerTop.SetLeader(GlobalData.fighters[players[0].fighterIDs[0].fighterID], players[0].fighterIDs[0].outfit);
 
                 for (int j = 0; j < players[1].fighterIDs.Length; j++)
                 {
