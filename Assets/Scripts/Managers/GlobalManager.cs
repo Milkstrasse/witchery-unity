@@ -176,6 +176,12 @@ public class GlobalManager : MonoBehaviour
     {
         NetworkClient.Shutdown();
         NetworkServer.Shutdown();
+
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            Destroy(gameObjects[i]);
+        }
     }
 }
 
