@@ -25,8 +25,18 @@ public class GameOverManager : MonoBehaviour
 
     public void Rematch()
     {
-        AudioManager.singleton.PlayStandardSound();
-        NetworkClient.Send(new TurnMessage());
+        if (NetworkServer.connections.Count == GlobalManager.singleton.maxPlayers)
+        {
+            AudioManager.singleton.PlayPositiveSound();
+            NetworkClient.Send(new TurnMessage());
+        }
+        else
+        {
+            AudioManager.singleton.PlayNegativeSound();
+
+            GlobalManager.singleton.maxPlayers = 2;
+            GlobalManager.singleton.LoadScene("MenuScene");
+        }
     }
 
     [Server]
