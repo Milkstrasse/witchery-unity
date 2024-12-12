@@ -5,8 +5,6 @@ public static class GlobalData
 
     public static readonly int waitTime = 120;
     public static readonly int turnTime = 180;
-    public static readonly int health = 75;
-    public static readonly int effectLimit = 5;
 
     public static bool highlightPlayable = true;
     public static bool animateImpact = true;

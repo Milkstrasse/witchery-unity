@@ -6,6 +6,7 @@ public class PlayerData
 {
     public string name;
     public int health;
+    public int maxHealth;
     public int energy;
     public List<int> cardStack;
     public List<int> playedCards;
@@ -28,6 +29,7 @@ public class PlayerData
         name = "";
         
         health = 0;
+        maxHealth = 0;
         energy = 0;
 
         cardStack = new List<int>();
@@ -41,6 +43,7 @@ public class PlayerData
     public PlayerData(PlayerMessage message)
     {
         health = message.health;
+        maxHealth = message.health;
         energy = 0;
 
         cardStack = new List<int>();
@@ -126,7 +129,7 @@ public class PlayerData
             }
         }
 
-        if (index >= 0 && effects[index].multiplier < GlobalData.effectLimit)
+        if (index >= 0)
         {
             effects[index].multiplier += effect.multiplier;
             effects[index].isNew = true;

@@ -49,7 +49,7 @@ public class StatusEffect
             case StatusType.Power:
                 break;
             case StatusType.Health:
-                player.health = Math.Clamp(player.health + value * multiplier, 0, GlobalData.health);
+                player.health = Math.Clamp(player.health + value * multiplier, 0, player.maxHealth);
                 
                 isNew = true;
                 multiplier -= 1;
