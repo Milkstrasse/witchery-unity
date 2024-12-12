@@ -69,9 +69,23 @@ public class Move : ScriptableObject
             case 10:
                 return "doSpecialDamage";
             case 14:
-                return "applyEffect";
+                if (!ignoreType && moveType == MoveType.Special)
+                {
+                    return "applyCostEffect";
+                }
+                else
+                {
+                    return "applyEffect";
+                }
             case 15:
-                return "obtainEffect";
+                if (!ignoreType && moveType == MoveType.Special)
+                {
+                    return "obtainCostEffect";
+                }
+                else
+                {
+                    return "obtainEffect";
+                }
             case 21:
                 return "healToHP";
             default:

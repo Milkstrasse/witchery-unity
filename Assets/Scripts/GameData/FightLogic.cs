@@ -356,7 +356,16 @@ public class FightLogic
 
                     if (move.effect.multiplier > 0)
                     {
-                        StatusEffect effect = new StatusEffect(move.effect, players[turn].GetPowerBonus());
+                        int effectAmount = move.effect.multiplier;
+                        
+                        if (move.moveType == MoveType.Special)
+                        {
+                            effectAmount *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
+                        }
+
+                        effectAmount = Math.Max(effectAmount + players[turn].GetPowerBonus(), 0);
+
+                        StatusEffect effect = new StatusEffect(move.effect, effectAmount);
                         players[(move.target + turn) % 2].AddEffect(effect);
                     }
 

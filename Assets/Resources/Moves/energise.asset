@@ -20,8 +20,8 @@ MonoBehaviour:
   effect:
     name: energise
     icon: f7e4
-    multiplier: 3
+    multiplier: 2
     value: 2
     statusType: 1
     isNew: 0
-  moveType: 0
+  moveType: 2

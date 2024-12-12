@@ -416,6 +416,18 @@ MonoBehaviour:
     m_Localized: Cards
     m_Metadata:
       m_Items: []
+  - m_Id: 42265179151392768
+    m_Localized: Apply {amount} <style="IconOutline"><style="Highlighted">\uf00d</style></style>
+      <style="IconOutline">{effect}</style>
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
+  - m_Id: 42265206460506112
+    m_Localized: Obtain {amount} <style="IconOutline"><style="Highlighted">\uf00d</style></style>
+      <style="IconOutline">{effect}</style>
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
   references:
     version: 2
     RefIds:
@@ -451,3 +463,5 @@ MonoBehaviour:
         - id: 34668335646892032
         - id: 34668589179985920
         - id: 34677428671471616
+        - id: 42265179151392768
+        - id: 42265206460506112

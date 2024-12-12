@@ -24,11 +24,11 @@ public class StatusEffect
         statusType = StatusType.Health;
     }
 
-    public StatusEffect(StatusEffect initEffect, int powerBonus)
+    public StatusEffect(StatusEffect initEffect, int amount)
     {
         name = initEffect.name;
         icon = initEffect.icon;
-        multiplier = Math.Max(initEffect.multiplier + powerBonus, 0);
+        multiplier = amount;
         value = initEffect.value;
         statusType = initEffect.statusType;
 

@@ -135,11 +135,11 @@ public class PlayerFightUI : MonoBehaviour
                 {
                     if (!cardSlot.cardWasPlayed && player.cardHand[i].hasMove && player.cardHand[i].move.IsResponseTo(cardSlot.cardUI.card.move, player.energy))
                     {
-                        cards[i].SelectCard(true);
+                        cards[i].FocusCard(true);
                     }
                     else
                     {
-                        cards[i].SelectCard(false);
+                        cards[i].FocusCard(false);
                     }
                 }
             }

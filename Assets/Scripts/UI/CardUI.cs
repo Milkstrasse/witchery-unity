@@ -21,9 +21,12 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Material neutralFront;
     [SerializeField] private Material highlighted;
     [SerializeField] private Material selected;
+    [SerializeField] private Material focused;
     [SerializeField] private Material neutralBack;
-    public bool isSelected;
+
     public bool isHighlighted;
+    public bool isSelected;
+    public bool isFocused;
 
     public Card card;
     public PlayerObject player;
@@ -66,7 +69,7 @@ public class CardUI : MonoBehaviour
 
         (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(move.health) + GetPowerBonus(move.moveType == MoveType.Special), 0);
         (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(move.energy) + GetPowerBonus(move.moveType == MoveType.Special), 0);
-        (infoText.StringReference["amount"] as IntVariable).Value = Math.Max(move.effect.multiplier + GetPowerBonus(false), 0);
+        (infoText.StringReference["amount"] as IntVariable).Value = Math.Max(move.effect.multiplier + GetPowerBonus(move.moveType == MoveType.Special), 0);
 
         if (move.effect.multiplier != 0)
         {
@@ -104,7 +107,7 @@ public class CardUI : MonoBehaviour
 
             (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
             (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
-            (infoText.StringReference["amount"] as IntVariable).Value = Math.Max(card.move.effect.multiplier + GetPowerBonus(false), 0);
+            (infoText.StringReference["amount"] as IntVariable).Value = Math.Max(card.move.effect.multiplier + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
 
             if (card.move.effect.multiplier != 0)
             {
@@ -133,17 +136,47 @@ public class CardUI : MonoBehaviour
     public void HighlightCard(bool isHighlighted)
     {
         this.isHighlighted = isHighlighted;
-        frontBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        gradient.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        backBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
+        SetMaterial();
     }
 
     public void SelectCard(bool isSelected)
     {
         this.isSelected = isSelected;
-        frontBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        gradient.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        backBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
+        SetMaterial();
+    }
+
+    public void FocusCard(bool isFocused)
+    {
+        this.isFocused = isFocused;
+        SetMaterial();
+    }
+
+    private void SetMaterial()
+    {
+        if (isHighlighted)
+        {
+            frontBackground.material = highlighted;
+            gradient.material = highlighted;
+            backBackground.material = highlighted;
+        }
+        else if (isSelected)
+        {
+            frontBackground.material = selected;
+            gradient.material = selected;
+            backBackground.material = selected;
+        }
+        else if (isFocused)
+        {
+            frontBackground.material = focused;
+            gradient.material = focused;
+            backBackground.material = focused;
+        }
+        else
+        {
+            frontBackground.material = neutralFront;
+            gradient.material = neutralFront;
+            backBackground.material = neutralBack;
+        }
     }
 
     public void FlipCard(bool isFlipped, float delay)
@@ -212,6 +245,7 @@ public class CardUI : MonoBehaviour
             }
 
             (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy * cardCost) + GetPowerBonus(!update), 0);
+            (infoText.StringReference["amount"] as IntVariable).Value = Math.Max(card.move.effect.multiplier * cardCost + GetPowerBonus(!update), 0);
             infoText.StringReference.SetReference("StringTable", card.move.GetDescription(update));
 
             infoText.RefreshString();
