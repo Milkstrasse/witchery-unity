@@ -353,6 +353,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Unlock new outfits
       objectReference: {fileID: 0}
+    - target: {fileID: 4593890245341541820, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1657,6 +1661,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85569693}
     m_Modifications:
+    - target: {fileID: 4593890245341541820, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1944,6 +1952,10 @@ PrefabInstance:
     - target: {fileID: 4286619931470150619, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_text
       value: Fight online against others and earn rewards
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593890245341541820, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
       objectReference: {fileID: 0}
     - target: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Pivot.x
@@ -2503,6 +2515,10 @@ PrefabInstance:
     - target: {fileID: 3560565257910096827, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593890245341541820, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
       objectReference: {fileID: 0}
     - target: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Pivot.x
@@ -3309,6 +3325,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85569693}
     m_Modifications:
+    - target: {fileID: 4593890245341541820, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3542,6 +3562,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 2100000, guid: 128f62befdd034365adb34aa8f8769bb, type: 2}
+    - target: {fileID: 4593890245341541820, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4320,6 +4344,10 @@ PrefabInstance:
     - target: {fileID: 4286619931470150619, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_text
       value: Fight online against others and earn rewards
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593890245341541820, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
       objectReference: {fileID: 0}
     - target: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Pivot.x
@@ -5282,6 +5310,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 723946944}
     m_Modifications:
+    - target: {fileID: 314757968563129829, guid: 6338417291a2e4a9e81c72ac562c9adc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5028191343306794725, guid: 6338417291a2e4a9e81c72ac562c9adc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8011,6 +8043,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 723946944}
     m_Modifications:
+    - target: {fileID: 314757968563129829, guid: 6338417291a2e4a9e81c72ac562c9adc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5028191343306794725, guid: 6338417291a2e4a9e81c72ac562c9adc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8379,6 +8415,10 @@ PrefabInstance:
     - target: {fileID: 4286619931470150619, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_text
       value: Fight against others and earn rewards
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593890245341541820, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
       objectReference: {fileID: 0}
     - target: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Pivot.x
@@ -10299,6 +10339,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 723946944}
     m_Modifications:
+    - target: {fileID: 314757968563129829, guid: 6338417291a2e4a9e81c72ac562c9adc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5028191343306794725, guid: 6338417291a2e4a9e81c72ac562c9adc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11268,6 +11312,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4593890245341541820, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11871,6 +11919,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 85569693}
     m_Modifications:
+    - target: {fileID: 4593890245341541820, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12219,8 +12271,8 @@ Canvas:
   m_GameObject: {fileID: 2103665504}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 926235817}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -12443,6 +12495,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 723946944}
     m_Modifications:
+    - target: {fileID: 314757968563129829, guid: 6338417291a2e4a9e81c72ac562c9adc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5028191343306794725, guid: 6338417291a2e4a9e81c72ac562c9adc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12719,6 +12775,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 2100000, guid: 128f62befdd034365adb34aa8f8769bb, type: 2}
+    - target: {fileID: 4593890245341541820, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12829,6 +12889,63 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5943587558489085354, guid: 37078fd07601a4f2584fe3a325693f08, type: 3}
   m_PrefabInstance: {fileID: 2131288069}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2517560953724387029
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3768542392844060249, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
+      propertyPath: m_Name
+      value: Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181733834330158673, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181733834330158673, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181733834330158673, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181733834330158673, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181733834330158673, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181733834330158673, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181733834330158673, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181733834330158673, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181733834330158673, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181733834330158673, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3824651e27fcf4dad8108c1676ef0d43, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -12836,3 +12953,4 @@ SceneRoots:
   - {fileID: 926235818}
   - {fileID: 2103665510}
   - {fileID: 914084417}
+  - {fileID: 2517560953724387029}

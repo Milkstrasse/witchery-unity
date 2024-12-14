@@ -81,6 +81,8 @@ public class OverviewUI : MonoBehaviour
 
     public void ToggleInfo(bool showInfo)
     {
+        AudioManager.singleton.PlayStandardSound();
+        
         infoButton.SetActive(!showInfo);
         backButton.SetActive(showInfo);
 

@@ -149,7 +149,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 27441377439637504
-    m_Localized: <size=+6>{name}</size>\n{health}HP
+    m_Localized: <size=+6>{effect}</size>\n{health}HP
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
