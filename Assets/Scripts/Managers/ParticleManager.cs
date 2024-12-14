@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//to make particle appear above canvas: canvas render mode -> screen space camera
+
 [RequireComponent(typeof(ParticleSystem))]
 public class ParticleManager : MonoBehaviour
 {
