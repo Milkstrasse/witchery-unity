@@ -102,11 +102,11 @@ public class PlayerFightUI : MonoBehaviour
 
         if (isInteractable && canBePlayable)
         {
-            StartCoroutine("UpdateTimer");
+            StartCoroutine(UpdateTimer());
         }
         else if ((GlobalManager.singleton.mode == GameMode.Training || GlobalManager.singleton.mode == GameMode.Testing) && isInteractable && !canBePlayable)
         {
-            StartCoroutine("MakeCPUMove");
+            StartCoroutine(MakeCPUMove());
         }
 
         LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isInteractable ? 450f :  120f), 0.3f);
@@ -249,11 +249,11 @@ public class PlayerFightUI : MonoBehaviour
     {
         if (isInteractable && canBePlayable && !cardGroup.interactable)
         {
-            StartCoroutine("UpdateTimer");
+            StartCoroutine(UpdateTimer());
         }
         else if ((GlobalManager.singleton.mode == GameMode.Training || GlobalManager.singleton.mode == GameMode.Testing) && isInteractable && !canBePlayable)
         {
-            StartCoroutine("MakeCPUMove");
+            StartCoroutine(MakeCPUMove());
         }
         else if (!isInteractable)
         {

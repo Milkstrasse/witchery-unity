@@ -127,7 +127,7 @@ public class FightManager : MonoBehaviour
             {
                 logic.playerTurn = message.playerTurn;
 
-                StartCoroutine("SetupFight");
+                StartCoroutine(SetupFight());
             }
             else
             {
@@ -165,7 +165,7 @@ public class FightManager : MonoBehaviour
                 StartCoroutine(InvokeQueue());
             }
 
-            StartCoroutine("EndFight");
+            StartCoroutine(EndFight());
         }
     }
 
