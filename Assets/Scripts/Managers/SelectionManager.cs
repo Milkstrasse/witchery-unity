@@ -229,14 +229,6 @@ public class SelectionManager : MonoBehaviour
       GlobalManager.singleton.LoadScene("SelectionScene");
    }
 
-   public void AddMoney()
-   {
-      AudioManager.singleton.PlayPositiveSound();
-      SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 100, 999999);
-
-      SaveManager.SaveData();
-   }
-
    public void UnlockFighters()
    {
       AudioManager.singleton.PlayPositiveSound();

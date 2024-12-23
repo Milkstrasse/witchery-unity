@@ -278,12 +278,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 34667935183134720
-    m_Localized: "{amount} \u304B\u3044\u305B\u3093\u3046"
+    m_Localized: "{amount}/{health} \u304B\u3044\u305B\u3093\u3046"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 34668335646892032
-    m_Localized: "{amount} \u304B\u3044 \u304B\u3064"
+    m_Localized: "{amount}/{health} \u304B\u3044 \u304B\u3064"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932

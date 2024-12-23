@@ -53,7 +53,12 @@ public class CardUI : MonoBehaviour
             icon.text = "<style=IconShadow>\uf005</style>";
             if (fighter.unlockMission != null)
             {
-                (infoText.StringReference["amount"] as IntVariable).Value = fighter.unlockMission.goalValue;
+                if (fighter.unlockMission.goalValue > 0)
+                {
+                    (infoText.StringReference["amount"] as IntVariable).Value = (int)SaveManager.savedData.GetType().GetField(fighter.unlockMission.checkVariable).GetValue(SaveManager.savedData);
+                }
+
+                (infoText.StringReference["health"] as IntVariable).Value = fighter.unlockMission.goalValue;
                 infoText.StringReference.SetReference("StringTable", fighter.unlockMission.descrKey);
             }
         }

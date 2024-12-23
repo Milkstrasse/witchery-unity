@@ -277,12 +277,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 34667935183134720
-    m_Localized: "K\xE4mpfe {amount} mal"
+    m_Localized: "K\xE4mpfe {amount}/{health} mal"
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 34668335646892032
-    m_Localized: Gewinne {amount} mal
+    m_Localized: Gewinne {amount}/{health} mal
     m_Metadata:
       m_Items:
       - rid: 296817732614357012

@@ -3,7 +3,6 @@ using System;
 [Serializable]
 public struct SavedData
 {
-    public int money;
     public bool[,] unlocked;
     public bool[] missions;
     public SelectedFighter[] shopFighters;
@@ -20,7 +19,6 @@ public struct SavedData
     public int timesReplayed;
     public int timesBlocked;
     public int timesTaken;
-    public int moneySpent;
     public bool nothingStolen;
     public int maxEffectCount;
     public bool healedOpponent;

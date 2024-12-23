@@ -277,12 +277,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 34667935183134720
-    m_Localized: Fight {amount} times
+    m_Localized: Fight {amount}/{health} times
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 34668335646892032
-    m_Localized: Win {amount} times
+    m_Localized: Win {amount}/{health} times
     m_Metadata:
       m_Items:
       - rid: 296817732614357011

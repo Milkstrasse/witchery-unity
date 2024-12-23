@@ -78,11 +78,6 @@ public class SaveManager
             if (hasWon)
             {
                 savedData.timesWon++;
-                savedData.money = Math.Min(savedData.money + 25, 999999);
-            }
-            else
-            {
-                savedData.money = Math.Min(savedData.money + 5, 999999);
             }
         }
     }

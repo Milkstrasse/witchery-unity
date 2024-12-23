@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   descrKey: fightTimes
   reward: 4
-  goalValue: 1
+  goalValue: 5
   checkVariable: timesFought
-  isClaimable: 1
+  isClaimable: 0
   category: 1
