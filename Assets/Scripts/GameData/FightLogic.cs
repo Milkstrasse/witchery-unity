@@ -195,8 +195,8 @@ public class FightLogic
                     }
 
                     int allHealth = players[0].health + players[1].health;
-                    players[0].health = allHealth/2;
-                    players[1].health = allHealth/2;
+                    players[0].health = Math.Clamp(allHealth/2, 0, players[0].maxHealth);
+                    players[1].health = Math.Clamp(allHealth/2, 0, players[1].maxHealth);
 
                     break;
                 case 8: //steal energy
