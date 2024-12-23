@@ -613,7 +613,7 @@ GameObject:
   - component: {fileID: 3607612561047390156}
   - component: {fileID: 2570704479232679380}
   m_Layer: 5
-  m_Name: Return
+  m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -721,9 +721,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -4372093048404515158}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerSelectionUI, Assembly-CSharp
-        m_MethodName: StopSelection
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -978,6 +978,7 @@ MonoBehaviour:
   healthText: {fileID: 7731613226998374781}
   modeButton: {fileID: 8689038964162385286}
   actionButton: {fileID: 5830670813190114372}
+  cpuButton: {fileID: 2570704479232679380}
   neutral: {fileID: 2100000, guid: a9d0349a83e274f7587fc5ab57c8836c, type: 2}
   highlighted: {fileID: 2100000, guid: 2bfa174f672b6464ea31d71e1d1032a0, type: 2}
   optionText: {fileID: 8223977463391281261}
@@ -1327,7 +1328,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: \uf00d
+  m_text: \uf013
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 88f9c16bec4c147dfac14116e44c6931, type: 2}
   m_sharedMaterial: {fileID: -6805171952997524195, guid: 88f9c16bec4c147dfac14116e44c6931, type: 2}

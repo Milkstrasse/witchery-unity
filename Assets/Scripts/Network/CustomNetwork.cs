@@ -113,7 +113,7 @@ public class CustomNetwork : RelayNetworkManager
         if (GlobalManager.singleton.GetCurrentScene() == "FightScene")
         {
             StopServer();
-            GlobalManager.singleton.LoadScene("MenuScene");
+            GlobalManager.singleton.LoadScene("SelectionScene");
         } else
         {
             playersReady = Math.Max(playersReady - 1, 0);
@@ -126,7 +126,7 @@ public class CustomNetwork : RelayNetworkManager
 
         if (GlobalManager.singleton.GetCurrentScene() == "FightScene")
         {
-            GlobalManager.singleton.LoadScene("MenuScene");
+            GlobalManager.singleton.LoadScene("SelectionScene");
         }
     }
 }

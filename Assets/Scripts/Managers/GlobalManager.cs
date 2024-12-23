@@ -37,6 +37,9 @@ public class GlobalManager : MonoBehaviour
         GlobalData.missions = Resources.LoadAll<Mission>("Missions/");
         GlobalData.themes = Resources.LoadAll<Theme>("Themes/");
 
+        mode = GameMode.Offline;
+        maxPlayers = 1;
+
         try
         {
             await UnityServices.InitializeAsync();
@@ -45,6 +48,9 @@ public class GlobalManager : MonoBehaviour
 
             isConnected = true;
             relayEnabled = true;
+
+            mode = GameMode.Online;
+            maxPlayers = 2;
         }
         catch (Exception exception)
         {
@@ -71,7 +77,7 @@ public class GlobalManager : MonoBehaviour
             SaveManager.CreateNewData(GlobalData.fighters, GlobalData.missions);
         }
 
-        LoadScene("MenuScene");
+        LoadScene("SelectionScene");
     }
 
     public void StoreRelayCode(string code)

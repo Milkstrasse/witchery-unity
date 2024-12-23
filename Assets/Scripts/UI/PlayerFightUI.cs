@@ -279,13 +279,13 @@ public class PlayerFightUI : MonoBehaviour
         while (time >= 0)
         {
             time--;
-            if (timer.fillAmount > time / (float)GlobalData.turnTime)
+            if (timer.fillAmount > time/(float)GlobalData.turnTime)
             {
-                LeanTween.value(timer.gameObject, timer.fillAmount, time / (float)GlobalData.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
+                LeanTween.value(timer.gameObject, timer.fillAmount, time/(float)GlobalData.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
             }
             else
             {
-                timer.fillAmount = time / (float)GlobalData.turnTime;
+                timer.fillAmount = time/(float)GlobalData.turnTime;
             }
 
             yield return new WaitForSeconds(1.0f);

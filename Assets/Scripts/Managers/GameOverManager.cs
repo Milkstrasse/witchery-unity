@@ -33,9 +33,7 @@ public class GameOverManager : MonoBehaviour
         else
         {
             AudioManager.singleton.PlayNegativeSound();
-
-            GlobalManager.singleton.maxPlayers = 2;
-            GlobalManager.singleton.LoadScene("MenuScene");
+            GlobalManager.singleton.LoadScene("SelectionScene");
         }
     }
 
@@ -60,6 +58,6 @@ public class GameOverManager : MonoBehaviour
             Destroy(players[i].gameObject);
         }
         
-        GlobalManager.singleton.LoadScene("MenuScene");
+        GlobalManager.singleton.LoadScene("SelectionScene");
     }
 }

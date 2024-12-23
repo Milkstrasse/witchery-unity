@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using TMPro;
 using UnityEngine;
 using Utp;
 
 public class SelectionManager : MonoBehaviour
 {
+   [SerializeField] private SettingsManager settings;
+   [SerializeField] private TMP_InputField relayCode;
+
    private RelayNetworkManager networkManager;
    private bool[] isReady;
 
@@ -30,6 +34,11 @@ public class SelectionManager : MonoBehaviour
    {
       if (fighterIDs.Count == 0)
          return index == 0;
+
+      if (index == 1)
+      {
+         relayCode.interactable = isReady[index];
+      }
 
       isReady[index] = !isReady[index];
 
@@ -83,6 +92,20 @@ public class SelectionManager : MonoBehaviour
       return isReady[index];
    }
 
+   public bool ToggleCPU()
+   {
+      if (GlobalManager.singleton.mode == GameMode.Offline)
+      {
+         GlobalManager.singleton.mode = GameMode.Testing;
+         return true;
+      }
+      else
+      {
+         GlobalManager.singleton.mode = GameMode.Offline;
+         return false;
+      }
+   }
+
    IEnumerator StartConnection()
    {
       if (GlobalManager.singleton.joincode == "" || networkManager.maxConnections < 2) //start host
@@ -127,7 +150,6 @@ public class SelectionManager : MonoBehaviour
       }
 
       GlobalManager.QuitAnyConnection();
-      ReturnToMenu();
    }
 
    public SelectionResult EditTeam(SelectedFighter fighter)
@@ -187,11 +209,62 @@ public class SelectionManager : MonoBehaviour
       NetworkClient.UnregisterHandler<TurnMessage>();
    }
 
-   public void ReturnToMenu()
+   public void CheckMissions()
+   {
+      for (int i = 0; i < GlobalData.missions.Length; i++)
+      {
+         GlobalData.missions[i].CheckStatus(i);
+      }
+   }
+
+   public void DeleteData()
+   {
+      AudioManager.singleton.PlayNegativeSound();
+
+      SaveManager.DeleteData();
+      SaveManager.CreateNewData(GlobalData.fighters, GlobalData.missions);
+
+      CheckMissions();
+
+      GlobalManager.singleton.LoadScene("SelectionScene");
+   }
+
+   public void AddMoney()
+   {
+      AudioManager.singleton.PlayPositiveSound();
+      SaveManager.savedData.money = Math.Min(SaveManager.savedData.money + 100, 999999);
+
+      SaveManager.SaveData();
+   }
+
+   public void UnlockFighters()
+   {
+      AudioManager.singleton.PlayPositiveSound();
+
+      for (int i = 0; i < GlobalData.fighters.Length; i++)
+      {
+         SaveManager.savedData.unlocked[i, 0] = true;
+      }
+
+      SaveManager.SaveData();
+
+      CheckMissions();
+   }
+
+   public void ToggleSettings(bool enable)
    {
       AudioManager.singleton.PlayStandardSound();
-      
-      GlobalManager.singleton.maxPlayers = 2;
-      GlobalManager.singleton.LoadScene("MenuScene");
+
+      if (!enable)
+      {
+         if (settings.SavingSettings())
+         {
+            settings.gameObject.SetActive(false);
+         }
+      }
+      else
+      {
+         settings.gameObject.SetActive(true);
+      }
    }
 }

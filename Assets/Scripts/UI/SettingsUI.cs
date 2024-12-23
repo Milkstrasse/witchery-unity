@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class SettingsUI : MonoBehaviour
@@ -24,6 +25,7 @@ public class SettingsUI : MonoBehaviour
         musicSlider.enabled = true;
         soundSlider.enabled = true;
 
+        currLang.StringReference.SetReference("StringTable", LocalizationSettings.SelectedLocale.Identifier.Code);
         currTheme.StringReference.SetReference("StringTable", GlobalData.themes[GlobalData.themeIndex].name);
 
         highlight.isOn = GlobalData.highlightPlayable;
@@ -40,7 +42,6 @@ public class SettingsUI : MonoBehaviour
     private void UpdateTheme(string theme)
     {
         currTheme.StringReference.SetReference("StringTable", theme);
-        GlobalManager.singleton.LoadScene("MenuScene");
     }
 
     private void OnDestroy()

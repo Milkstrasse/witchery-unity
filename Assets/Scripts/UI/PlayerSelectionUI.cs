@@ -22,6 +22,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
     [SerializeField] private Button modeButton;
     [SerializeField] private Button actionButton;
+    [SerializeField] private Button cpuButton;
     [SerializeField] private Material neutral;
     [SerializeField] private Material highlighted;
     private int currCard;
@@ -154,10 +155,12 @@ public class PlayerSelectionUI : MonoBehaviour
             timer.fillAmount = 1.0f;
             
             readyText.StringReference.SetReference("StringTable", "ready");
+            cpuButton.interactable = true;
         }
         else
         {
             readyText.StringReference.SetReference("StringTable", "cancel");
+            cpuButton.interactable = false;
         }
 
         if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Testing)
@@ -481,15 +484,17 @@ public class PlayerSelectionUI : MonoBehaviour
         }
     }
 
-    public void StopSelection()
+    public void ToggleCPU()
     {
-        if (isShowingInfo)
+        AudioManager.singleton.PlayStandardSound();
+        
+        if (selectionUI.ToggleCPU())
         {
-            SwitchMode();
+            cpuButton.GetComponent<Image>().material = highlighted;
         }
         else
         {
-            selectionUI.StopSelection();
+            cpuButton.GetComponent<Image>().material = neutral;
         }
     }
 

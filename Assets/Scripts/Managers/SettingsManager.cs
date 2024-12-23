@@ -154,8 +154,6 @@ public class SettingsManager : MonoBehaviour
         GlobalData.highlightPlayable = true;
         GlobalData.animateImpact = true;
 
-        GlobalManager.singleton.LoadScene("MenuScene");
-
         StartCoroutine(ChangeTheme());
     }
 

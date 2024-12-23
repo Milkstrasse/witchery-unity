@@ -195,8 +195,8 @@ public class FightLogic
                     }
 
                     int allHealth = players[0].health + players[1].health;
-                    players[0].health = allHealth / 2;
-                    players[1].health = allHealth / 2;
+                    players[0].health = allHealth/2;
+                    players[1].health = allHealth/2;
 
                     break;
                 case 8: //steal energy

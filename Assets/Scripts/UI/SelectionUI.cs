@@ -86,6 +86,11 @@ public class SelectionUI : MonoBehaviour
         return manager.EditTeam(fighter, outfit);
     }
 
+    public bool ToggleCPU()
+    {
+        return manager.ToggleCPU();
+    }
+
     private void StartFight()
     {
         for (int i = 0; i < players.Length; i++)
@@ -97,16 +102,6 @@ public class SelectionUI : MonoBehaviour
         playerBottom.ToggleUI(false, true);
 
         GlobalManager.singleton.LoadScene("FightScene", LoadSceneMode.Additive);
-    }
-
-    public void StopSelection()
-    {
-        for (int i = 0; i < players.Length; i++)
-        {
-            Destroy(players[i].gameObject);
-        }
-        
-        manager.ReturnToMenu();
     }
 
     private void OnDestroy()
