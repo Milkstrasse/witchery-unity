@@ -40,22 +40,24 @@ public class GlobalManager : MonoBehaviour
         mode = GameMode.Offline;
         maxPlayers = 1;
 
-        try
-        {
-            await UnityServices.InitializeAsync();
-            AuthenticationService.Instance.SwitchProfile(Random.Range(0, 1000000).ToString());
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        #if !UNITY_EDITOR
+            try
+            {
+                await UnityServices.InitializeAsync();
+                AuthenticationService.Instance.SwitchProfile(Random.Range(0, 1000000).ToString());
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-            isConnected = true;
-            relayEnabled = true;
+                isConnected = true;
+                relayEnabled = true;
 
-            mode = GameMode.Online;
-            maxPlayers = 2;
-        }
-        catch (Exception exception)
-        {
-            Debug.LogError(exception);
-        }
+                mode = GameMode.Online;
+                maxPlayers = 2;
+            }
+            catch (Exception exception)
+            {
+                Debug.LogError(exception);
+            }
+        #endif
 
         AsyncOperationHandle handle = LocalizationSettings.InitializationOperation;
         await handle.Task;

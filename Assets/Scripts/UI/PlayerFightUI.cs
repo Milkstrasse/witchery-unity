@@ -196,8 +196,12 @@ public class PlayerFightUI : MonoBehaviour
 
         cardUI.FlipCard(false, 0f);
         cardUI.transform.SetParent(canvas.transform);
+
+        Debug.Log(canvas.scaleFactor);
+        Debug.Log(canvas.transform.localScale);
         
-        LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
+        //234/2 = 117
+        LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 117f * canvas.transform.localScale.x, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
         
         yield return new WaitForSeconds(0.5f);
 
@@ -229,8 +233,12 @@ public class PlayerFightUI : MonoBehaviour
     {
         FightManager.singleton.timeToMakeMove = 0.2f;
 
-        Vector3 targetPositon = new Vector3(cards[cardIndex].transform.position.x, cards[cardIndex].transform.position.y + 200f, cards[cardIndex].transform.position.z);
         cards[cardIndex].transform.SetParent(canvas.transform);
+
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(cards[cardIndex].transform.position);
+        Vector3 targetPositon = new Vector3(screenPos.x, screenPos.y + 250f, screenPos.z);
+        targetPositon = Camera.main.ScreenToWorldPoint(targetPositon);
+        
         LeanTween.move(cards[cardIndex].gameObject, targetPositon, 0.2f);
 
         yield return new WaitForSeconds(0.2f);
@@ -245,11 +253,11 @@ public class PlayerFightUI : MonoBehaviour
         FightManager.singleton.timeToMakeMove = 0f;
     }
 
-    public void MakeInteractable(bool isInteractable, bool canBePlayable, CardSlot cardSlot = null)
+    public void MakeInteractable(bool isInteractable, bool canBePlayable)
     {
         if (isInteractable && canBePlayable && !cardGroup.interactable)
         {
-            StartCoroutine(UpdateTimer());
+            StartCoroutine("UpdateTimer");
         }
         else if ((GlobalManager.singleton.mode == GameMode.Training || GlobalManager.singleton.mode == GameMode.Testing) && isInteractable && !canBePlayable)
         {
@@ -296,7 +304,8 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator MakeCPUMove()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.4f);
+
         MoveMessage message = FightManager.singleton.GetMove();
         MakeMove(message);
 
