@@ -241,6 +241,8 @@ public class SelectionManager : MonoBehaviour
       SaveManager.SaveData();
 
       CheckMissions();
+
+      GlobalManager.singleton.LoadScene("SelectionScene");
    }
 
    public void ToggleSettings(bool enable)

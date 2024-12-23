@@ -31,10 +31,9 @@ public class GameOverUI : MonoBehaviour
         }
     }
 
-    public void ReturnToMenu()
+    public void ReturnToSelection()
     {
-        GlobalManager.singleton.maxPlayers = 0;
-        manager.ReturnToMenu();
+        manager.ReturnToSelection();
     }
 
     private void OnDestroy()

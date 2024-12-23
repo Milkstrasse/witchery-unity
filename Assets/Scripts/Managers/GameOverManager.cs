@@ -43,13 +43,13 @@ public class GameOverManager : MonoBehaviour
         GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>().ServerChangeScene("SelectionScene");
     }
 
-    public void GoToSettings()
+    public void GoToCredits()
     {
         AudioManager.singleton.PlayStandardSound();
-        GlobalManager.singleton.LoadScene("SettingsScene");
+        GlobalManager.singleton.LoadScene("CreditsScene");
     }
 
-    public void ReturnToMenu()
+    public void ReturnToSelection()
     {
         AudioManager.singleton.PlayStandardSound();
 
@@ -58,6 +58,7 @@ public class GameOverManager : MonoBehaviour
             Destroy(players[i].gameObject);
         }
         
+        GlobalManager.singleton.mode = GameMode.Offline;
         GlobalManager.singleton.LoadScene("SelectionScene");
     }
 }

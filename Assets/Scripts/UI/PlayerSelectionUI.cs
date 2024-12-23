@@ -48,6 +48,11 @@ public class PlayerSelectionUI : MonoBehaviour
         SetLeader(GlobalData.fighters[0], 0);
         leader = -1;
 
+        if (!GlobalManager.singleton.isConnected)
+        {
+            readyText.StringReference.SetReference("StringTable", "ready");
+        }
+
         filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};
 
         int fighterAmount = GlobalData.fighters.Length;
