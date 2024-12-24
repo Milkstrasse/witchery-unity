@@ -196,9 +196,6 @@ public class PlayerFightUI : MonoBehaviour
 
         cardUI.FlipCard(false, 0f);
         cardUI.transform.SetParent(canvas.transform);
-
-        Debug.Log(canvas.scaleFactor);
-        Debug.Log(canvas.transform.localScale);
         
         //234/2 = 117
         LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 117f * canvas.transform.localScale.x, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);

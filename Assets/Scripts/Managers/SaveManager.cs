@@ -32,6 +32,7 @@ public class SaveManager
         for (int i = 0; i < Math.Min(fighterAmount, 4); i++)
         {
             savedData.unlocked[i, 0] = true;
+            savedData.unlocked[i, 1] = i < 2;
         }
 
         savedData.missions = new bool[missions.Length];

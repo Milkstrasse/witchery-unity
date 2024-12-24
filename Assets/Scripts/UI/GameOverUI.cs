@@ -9,9 +9,6 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private PlayerOverUI topPlayer;
     [SerializeField] private PlayerOverUI bottomPlayer;
 
-    [SerializeField] private LocalizeStringEvent topText;
-    [SerializeField] private LocalizeStringEvent bottomText;
-
     private void Awake()
     {
         manager.OnSetupComplete += SetupUI;
