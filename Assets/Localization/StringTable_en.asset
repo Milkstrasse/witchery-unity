@@ -138,10 +138,9 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 8229765759623168
-    m_Localized: Receive {value} energy
+    m_Localized: Heal opponent
     m_Metadata:
-      m_Items:
-      - rid: 296817732614357011
+      m_Items: []
   - m_Id: 8910918694985728
     m_Localized: <style="Highlighted">Take</style> effect of card
     m_Metadata:
@@ -318,7 +317,15 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 46667486177779712
-    m_Localized: self ko
+    m_Localized: Knock yourself out
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46714514295480320
+    m_Localized: Steal status effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46759368538972160
+    m_Localized: Steal nothing
     m_Metadata:
       m_Items: []
   references:
@@ -345,7 +352,6 @@ MonoBehaviour:
         - id: 27441377439637504
         - id: 27457199604228096
         - id: 8223596102017024
-        - id: 8229765759623168
         - id: 8223760501956608
         - id: 8223787123204096
         - id: 8223807327166464

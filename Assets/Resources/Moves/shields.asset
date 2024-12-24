@@ -22,6 +22,6 @@ MonoBehaviour:
     icon: f3ed
     multiplier: 3
     value: 2
-    statusType: 3
+    statusType: 2
     isNew: 0
   moveType: 2

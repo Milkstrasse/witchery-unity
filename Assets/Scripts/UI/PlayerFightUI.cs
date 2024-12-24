@@ -256,13 +256,13 @@ public class PlayerFightUI : MonoBehaviour
         {
             StartCoroutine("UpdateTimer");
         }
-        else if ((GlobalManager.singleton.mode == GameMode.Training || GlobalManager.singleton.mode == GameMode.Testing) && isInteractable && !canBePlayable)
+        else if (isInteractable && !canBePlayable && (GlobalManager.singleton.mode == GameMode.Training || GlobalManager.singleton.mode == GameMode.Testing))
         {
             StartCoroutine(MakeCPUMove());
         }
         else if (!isInteractable)
         {
-            StopCoroutine("UpdateTimer");
+            StopAllCoroutines();
             LeanTween.cancel(timer.gameObject);
             timer.fillAmount = 1.0f;
         }

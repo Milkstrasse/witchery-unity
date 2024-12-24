@@ -138,10 +138,9 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 8229765759623168
-    m_Localized: Erhalte {value} Energie
+    m_Localized: Heile Gegner*in
     m_Metadata:
-      m_Items:
-      - rid: 296817732614357012
+      m_Items: []
   - m_Id: 8910918694985728
     m_Localized: "<style=\"Highlighted\">\xDCbernehme</style> Karteneffekt"
     m_Metadata:
@@ -318,7 +317,15 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 46667486177779712
-    m_Localized: self ko
+    m_Localized: Schlag dich selbst K.O.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46714514295480320
+    m_Localized: Stehle Statuseffekte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46759368538972160
+    m_Localized: Stehle nichts
     m_Metadata:
       m_Items: []
   references:
@@ -345,7 +352,6 @@ MonoBehaviour:
         - id: 27441377439637504
         - id: 27457199604228096
         - id: 8223596102017024
-        - id: 8229765759623168
         - id: 8223760501956608
         - id: 8223787123204096
         - id: 8223807327166464

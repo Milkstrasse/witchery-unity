@@ -143,10 +143,9 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 8229765759623168
-    m_Localized: "{value} \u3064 \u306E \u30A8\u30CD\u30EB\u30AE\u30FC \u3092 \u3046\u3051\u3068\u308B"
+    m_Localized: "\u3042\u3044\u3066 \u3092 \u3044\u3084\u3059"
     m_Metadata:
-      m_Items:
-      - rid: 6175659975647952932
+      m_Items: []
   - m_Id: 7210184622465024
     m_Localized: "{energy} \u3064 \u306E \u30A8\u30CD\u30EB\u30AE\u30FC \u3092 \u3048\u308B"
     m_Metadata:
@@ -319,7 +318,15 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 46667486177779712
-    m_Localized: self ko
+    m_Localized: "\u307F\u305A\u304B\u3089 \u3092 \u3075\u308B\u3044\u305F\u305F\u305B\u308B"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46714514295480320
+    m_Localized: "\u30B9\u30C6\u30A4\u30EB\u306E\u30B9\u30C6\u30FC\u30BF\u30B9 \u3053\u3046\u304B"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46759368538972160
+    m_Localized: "\u306A\u306B \u3082 \u306C\u3059\u307E\u306A\u3044"
     m_Metadata:
       m_Items: []
   references:
@@ -346,7 +353,6 @@ MonoBehaviour:
         - id: 27457199604228096
         - id: 7837112253538304
         - id: 8223596102017024
-        - id: 8229765759623168
         - id: 8223760501956608
         - id: 8223787123204096
         - id: 8223807327166464

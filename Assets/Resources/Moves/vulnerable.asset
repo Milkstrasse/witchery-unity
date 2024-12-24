@@ -22,6 +22,6 @@ MonoBehaviour:
     icon: f7a9
     multiplier: 1
     value: -2
-    statusType: 3
+    statusType: 2
     isNew: 0
   moveType: 0

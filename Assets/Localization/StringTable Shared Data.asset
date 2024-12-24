@@ -100,7 +100,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8229765759623168
-    m_Key: energise
+    m_Key: healOpponent
     m_Metadata:
       m_Items: []
   - m_Id: 27441377439637504
@@ -285,6 +285,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 46667486177779712
     m_Key: selfKOd
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46714514295480320
+    m_Key: stealEffects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46759368538972160
+    m_Key: stealNothing
     m_Metadata:
       m_Items: []
   m_Metadata:
