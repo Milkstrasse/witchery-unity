@@ -83,41 +83,91 @@ public struct CPULogic
                 }
                 else
                 {
-                    if (move.moveID == 5 && player.currHealth > logic.players[0].health) //redistribute health
+                    switch (move.moveID)
                     {
-                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
-                    }
-                    else if (move.moveID == 7 && logic.players[0].cardHand.Count == 0) //remove random card
-                    {
-                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
-                    }
-                    else if (move.moveID == 11 && logic.players[1].CheckEffectBalance() >= logic.players[0].CheckEffectBalance()) //swap effects
-                    {
-                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
-                    }
-                    else if (move.moveID == 13 && move.target != 1 && logic.players[1].CheckEffectBalance() >= 0) //clear own effects
-                    {
-                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
-                    }
-                    else if (move.moveID == 13 && move.target == 1 && logic.players[0].CheckEffectBalance() < 0) //clear opponent's effects
-                    {
-                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
-                    }
-                    else if (move.moveID == 14 && logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == 0) //apply effect
-                    {
-                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
-                    }
-                    else if (move.moveID == 15 && logic.players[1].effects.Count == 5 && logic.players[1].GetEffect(move.effect.name, false) == 0) //gain effect
-                    {
-                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
-                    }
-                    else if ((move.moveID == 23 || move.moveID == 25) && logic.players[1].blanks == 0) //hand over or clear blanks
-                    {
-                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
-                    }
-                    else
-                    {
-                        prioritizedCards.Add((i, move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
+                        case 5:
+                            if (player.currHealth >= logic.players[0].health) //redistribute health
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                goto default;
+                            }
+                        case 7:
+                            if (logic.players[0].cardHand.Count == 0) //remove random card
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                goto default;
+                            }
+                        case 11:
+                            if (logic.players[1].CheckEffectBalance() >= logic.players[0].CheckEffectBalance()) //swap effects
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                goto default;
+                            }
+                        case 13:
+                            if (move.target != 1 && logic.players[1].CheckEffectBalance() >= 0) //clear own effects
+                            {
+                                goto case 0;
+                            }
+                            else if (move.target == 1 && logic.players[0].CheckEffectBalance() < 0) //clear opponent's effects
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                goto default;
+                            }
+                        case 14:
+                            if (logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == 0) //apply effect
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                goto default;
+                            }
+                        case 15:
+                            if (logic.players[1].effects.Count == 5 && logic.players[1].GetEffect(move.effect.name, false) == 0) //gain effect
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                goto default;
+                            }
+                        case 16:
+                            if (logic.players[0].CheckEffectBalance() < 0) //steal effects
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                goto default;
+                            }
+                        case 23:
+                        case 25:
+                            if (logic.players[1].blanks == 0) //hand over or clear blanks
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                goto default;
+                            }
+                        case 0:
+                            prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
+                            break;
+                        default:
+                            prioritizedCards.Add((i, move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
+                            break;
                     }
                 }
             }

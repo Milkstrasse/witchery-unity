@@ -13,7 +13,7 @@ public class StatusEffect
 
     public enum StatusType
     {
-        Health, Energy, Power, Special
+        Health, Power, Damage, Special
     }
 
     public StatusEffect()
@@ -39,15 +39,6 @@ public class StatusEffect
     {
         switch (statusType)
         {
-            case StatusType.Energy:
-                player.energy += value * multiplier;
-
-                isNew = true;
-                multiplier -= 1;
-
-                break;
-            case StatusType.Power:
-                break;
             case StatusType.Health:
                 player.health = Math.Clamp(player.health + value * multiplier, 0, player.maxHealth);
                 
@@ -55,7 +46,7 @@ public class StatusEffect
                 multiplier -= 1;
 
                 break;
-            default: //StatusType.Special
+            default:
                 break;
         }
     }

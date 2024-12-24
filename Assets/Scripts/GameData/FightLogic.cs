@@ -275,6 +275,15 @@ public class FightLogic
                     }
 
                     break;
+                case 16: //steal effects
+                    for (int i = 0; i < players[1 - turn].effects.Count; i++)
+                    {
+                        players[turn].AddEffect(players[1 - turn].effects[i]);
+                    }
+
+                    players[1 - turn].effects = new List<StatusEffect>();
+
+                    break;
                 case 17: //copy effects
                     players[turn].effects = players[1 - turn].effects;
                     for (int i = 0; i < players[turn].effects.Count; i++)

@@ -142,7 +142,7 @@ public class PlayerObject : MonoBehaviour
 
         for (int i = 0; i < effects.Count; i++)
         {
-            if (effects[i].name == "shields" || effects[i].name == "vulnerable" )
+            if (effects[i].statusType == StatusEffect.StatusType.Damage)
             {
                 modifier += effects[i].value * effects[i].multiplier;
             }
