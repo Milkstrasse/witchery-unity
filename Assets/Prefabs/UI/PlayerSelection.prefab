@@ -88,7 +88,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 340570659
+  m_TextStyleHashCode: -1961220799
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -553,7 +553,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 340570659
+  m_TextStyleHashCode: -1961220799
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -659,7 +659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: a9d0349a83e274f7587fc5ab57c8836c, type: 2}
+  m_Material: {fileID: 2100000, guid: 4f00463ae4e71488398c94237e13d437, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -792,7 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: a9d0349a83e274f7587fc5ab57c8836c, type: 2}
+  m_Material: {fileID: 2100000, guid: 4f00463ae4e71488398c94237e13d437, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -979,8 +979,8 @@ MonoBehaviour:
   modeButton: {fileID: 8689038964162385286}
   actionButton: {fileID: 5830670813190114372}
   cpuButton: {fileID: 2570704479232679380}
-  neutral: {fileID: 2100000, guid: a9d0349a83e274f7587fc5ab57c8836c, type: 2}
-  highlighted: {fileID: 2100000, guid: 2bfa174f672b6464ea31d71e1d1032a0, type: 2}
+  neutral: {fileID: 2100000, guid: 4f00463ae4e71488398c94237e13d437, type: 2}
+  highlighted: {fileID: 2100000, guid: a9d0349a83e274f7587fc5ab57c8836c, type: 2}
   optionText: {fileID: 8223977463391281261}
 --- !u!1 &3188106083505978152
 GameObject:
@@ -1141,7 +1141,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 340570659
+  m_TextStyleHashCode: -1961220799
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1350,7 +1350,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 340570659
+  m_TextStyleHashCode: -1961220799
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1705,7 +1705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: a9d0349a83e274f7587fc5ab57c8836c, type: 2}
+  m_Material: {fileID: 2100000, guid: 4f00463ae4e71488398c94237e13d437, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -1991,7 +1991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: a9d0349a83e274f7587fc5ab57c8836c, type: 2}
+  m_Material: {fileID: 2100000, guid: 4f00463ae4e71488398c94237e13d437, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -2171,7 +2171,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 340570659
+  m_TextStyleHashCode: -1961220799
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -3134,7 +3134,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 340570659
+  m_TextStyleHashCode: -1961220799
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2

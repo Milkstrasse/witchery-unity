@@ -38,7 +38,7 @@ public struct CPULogic
                 }
 
                 int health = move.health;
-                if ((move.moveID == 2 || move.moveID == 3) && move.moveType == MoveType.Special) //special moves
+                if (move.moveID >= 2 && move.moveID <= 4 && move.moveType == MoveType.Special) //special moves
                 {
                     health *= logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0;
                 }
@@ -53,7 +53,14 @@ public struct CPULogic
                     }
                     else
                     {
-                        prioritizedCards.Add((i, health * -1));
+                        if (move.moveID == 10 && player.currHealth + health <= 0) //special damage
+                        {
+                            prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
+                        }
+                        else
+                        {
+                            prioritizedCards.Add((i, health * -1));
+                        }
                     }
                 }
                 else if (health > 0 && missingHP > 0.6)
@@ -78,35 +85,35 @@ public struct CPULogic
                 {
                     if (move.moveID == 5 && player.currHealth > logic.players[0].health) //redistribute health
                     {
-                        prioritizedCards.Add((i, -10));
+                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                     }
                     else if (move.moveID == 7 && logic.players[0].cardHand.Count == 0) //remove random card
                     {
-                        prioritizedCards.Add((i, -10));
+                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                     }
                     else if (move.moveID == 11 && logic.players[1].CheckEffectBalance() >= logic.players[0].CheckEffectBalance()) //swap effects
                     {
-                        prioritizedCards.Add((i, -10));
+                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                     }
                     else if (move.moveID == 13 && move.target != 1 && logic.players[1].CheckEffectBalance() >= 0) //clear own effects
                     {
-                        prioritizedCards.Add((i, -10));
+                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                     }
                     else if (move.moveID == 13 && move.target == 1 && logic.players[0].CheckEffectBalance() < 0) //clear opponent's effects
                     {
-                        prioritizedCards.Add((i, -10));
+                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                     }
                     else if (move.moveID == 14 && logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == 0) //apply effect
                     {
-                        prioritizedCards.Add((i, -10));
+                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                     }
                     else if (move.moveID == 15 && logic.players[1].effects.Count == 5 && logic.players[1].GetEffect(move.effect.name, false) == 0) //gain effect
                     {
-                        prioritizedCards.Add((i, -10));
+                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                     }
                     else if ((move.moveID == 23 || move.moveID == 25) && logic.players[1].blanks == 0) //hand over or clear blanks
                     {
-                        prioritizedCards.Add((i, -10));
+                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                     }
                     else
                     {

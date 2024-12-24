@@ -103,7 +103,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
             fighterCards[fighter.fighterID].UpdateOutfit(GlobalData.fighters[fighter.fighterID], fighter.outfit);
             outfits[fighter.fighterID] = fighter.outfit;
-            fighterCards[fighter.fighterID].SelectCard(result.wasAdded);
+            fighterCards[fighter.fighterID].FocusCard(result.wasAdded);
 
             if (result.hasTeam)
             {
@@ -145,7 +145,7 @@ public class PlayerSelectionUI : MonoBehaviour
                 fighterCards[currCard].HighlightCard(true);
 
                 actionButton.interactable = true;
-                modeButton.GetComponentInChildren<TextMeshProUGUI>().text = fighterCards[currCard].isSelected ? "\uf068" : "\uf067";
+                modeButton.GetComponentInChildren<TextMeshProUGUI>().text = fighterCards[currCard].isFocused ? "\uf068" : "\uf067";
             }
         }
     }
@@ -205,7 +205,7 @@ public class PlayerSelectionUI : MonoBehaviour
             }
             else if (showTeam)
             {
-                fighterCards[i].gameObject.SetActive(fighterCards[i].isSelected);
+                fighterCards[i].gameObject.SetActive(fighterCards[i].isFocused);
             }
             else
             {
@@ -274,7 +274,7 @@ public class PlayerSelectionUI : MonoBehaviour
                 moveCards[i].UpdateOutfit(fighter, outfits[currCard]);
             }
 
-            if (fighterCards[currCard].isSelected)
+            if (fighterCards[currCard].isFocused)
             {
                 SelectionResult result = selectionUI.EditTeam(currCard, outfits[currCard]);
                 portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
@@ -342,7 +342,7 @@ public class PlayerSelectionUI : MonoBehaviour
                 moveCards[i].UpdateOutfit(fighter, outfits[currCard]);
             }
 
-            if (fighterCards[currCard].isSelected)
+            if (fighterCards[currCard].isFocused)
             {
                 SelectionResult result = selectionUI.EditTeam(currCard, outfits[currCard]);
                 portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
@@ -397,7 +397,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
         for (int i = 0; i < cardAmount; i++)
         {
-            if (!fighterCards[indices[i]].isSelected)
+            if (!fighterCards[indices[i]].isFocused)
             {
                 if (fighterCards[indices[i]].gameObject.activeSelf && fighterCards[indices[i]].GetComponent<Button>().interactable)
                 {
@@ -422,7 +422,7 @@ public class PlayerSelectionUI : MonoBehaviour
                         leader = -1;
                     }
 
-                    fighterCards[indices[i]].SelectCard(result.wasAdded);
+                    fighterCards[indices[i]].FocusCard(result.wasAdded);
 
                     readyButton.interactable = result.hasTeam;
 
