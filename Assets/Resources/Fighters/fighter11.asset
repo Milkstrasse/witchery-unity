@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0a895a7e95554706af00b395749ee36, type: 3}
-  m_Name: fighter9
+  m_Name: fighter11
   m_EditorClassIdentifier: 
-  fighterID: 9
-  health: 60
-  role: 61475
+  fighterID: 11
+  health: 85
+  role: 62569
   moves:
-  - {fileID: 11400000, guid: 5455d4333982948cc983dd8d2d5c94a0, type: 2}
-  - {fileID: 11400000, guid: 941a01699d8f44fbd95b702e62934afc, type: 2}
-  - {fileID: 11400000, guid: 9242c60e4253a4345af74c9b37e08d29, type: 2}
-  - {fileID: 11400000, guid: e428eab7482d24a74b7708919b33fae8, type: 2}
-  - {fileID: 11400000, guid: e428eab7482d24a74b7708919b33fae8, type: 2}
+  - {fileID: 11400000, guid: 8967d129bff39440eaeb90c04dfcdd22, type: 2}
+  - {fileID: 11400000, guid: e5dda212c64884b2a87e0a8c22a3d1f1, type: 2}
+  - {fileID: 11400000, guid: 010c3021a6fc64e65a0f70533488067e, type: 2}
+  - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}
+  - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
@@ -30,4 +30,4 @@ MonoBehaviour:
     cost: 300
   - name: magicgirl
     cost: 200
-  unlockMission: {fileID: 11400000, guid: b3b0165f1f3d04078b8727491888964c, type: 2}
+  unlockMission: {fileID: 11400000, guid: eae3015da361747d298570bfe2890c81, type: 2}

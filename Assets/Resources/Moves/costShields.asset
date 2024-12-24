@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0c3f2616e0734b19bc2feecd7d70d51, type: 3}
-  m_Name: spice
+  m_Name: costShields
   m_EditorClassIdentifier: 
   moveID: 15
   cost: 2
@@ -18,10 +18,10 @@ MonoBehaviour:
   health: 0
   energy: 0
   effect:
-    name: spice
-    icon: f816
+    name: shields
+    icon: f3ed
     multiplier: 3
     value: 2
-    statusType: 3
+    statusType: 2
     isNew: 0
   moveType: 2

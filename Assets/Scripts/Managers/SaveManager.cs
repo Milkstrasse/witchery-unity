@@ -20,6 +20,38 @@ public class SaveManager
         savedData = (SavedData)binary.Deserialize(file);
         file.Close();
 
+        int deltaUnlocked = GlobalData.fighters.Length - savedData.unlocked.GetLength(0);
+        if (deltaUnlocked > 0)
+        {
+            bool[,] unlocked = new bool[GlobalData.fighters.Length, GlobalData.fighters[0].outfits.Length];
+            for (int i = 0; i < savedData.unlocked.GetLength(0); i++)
+            {
+                for (int j = 0; j < GlobalData.fighters[0].outfits.Length; j++)
+                {
+                    unlocked[i, j] = savedData.unlocked[i, j];
+                }
+            }
+
+            savedData.unlocked = unlocked;
+        }
+
+        int deltaMissions = GlobalData.missions.Length - savedData.missions.Length;
+        if (deltaMissions > 0)
+        {
+            bool[] missions = new bool[GlobalData.missions.Length];
+            for (int i = 0; i < savedData.missions.Length; i++)
+            {
+                missions[i] = savedData.missions[i];
+            }
+
+            savedData.missions = missions;
+        }
+
+        if (deltaUnlocked > 0 || deltaMissions > 0)
+        {
+            SaveData();
+        }
+
         return true;
     }
 

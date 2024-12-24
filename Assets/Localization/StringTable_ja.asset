@@ -292,7 +292,7 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 34677428671471616
-    m_Localized: "\u3044\u3061 \u3069 \u306B {amount} \u3064 \u306E \u3053\u3046\u304B"
+    m_Localized: "{amount}/{health} \u3064 \u306E \u3053\u3046\u304B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932

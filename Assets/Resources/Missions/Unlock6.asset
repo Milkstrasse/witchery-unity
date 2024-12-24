@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d0de20dfe1a448b9bb7c1ac16200675, type: 3}
-  m_Name: Unlock5
+  m_Name: Unlock6
   m_EditorClassIdentifier: 
-  descrKey: haveEffects
-  reward: 8
-  goalValue: 2
-  checkVariable: maxEffectCount
+  descrKey: stealNothing
+  reward: 9
+  goalValue: -1
+  checkVariable: nothingStolen
   isClaimable: 0
   category: 1

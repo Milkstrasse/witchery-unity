@@ -9,12 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d0de20dfe1a448b9bb7c1ac16200675, type: 3}
-  m_Name: Unlock5
+  m_Script: {fileID: 11500000, guid: b0c3f2616e0734b19bc2feecd7d70d51, type: 3}
+  m_Name: costPower
   m_EditorClassIdentifier: 
-  descrKey: haveEffects
-  reward: 8
-  goalValue: 2
-  checkVariable: maxEffectCount
-  isClaimable: 0
-  category: 1
+  moveID: 15
+  cost: 2
+  target: 0
+  health: 0
+  energy: 0
+  effect:
+    name: power
+    icon: f102
+    multiplier: 3
+    value: 1
+    statusType: 1
+    isNew: 0
+  moveType: 2

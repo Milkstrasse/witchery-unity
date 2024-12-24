@@ -291,7 +291,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 34677428671471616
-    m_Localized: Have {amount} effects at once
+    m_Localized: Have {amount}/{health} effects
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
