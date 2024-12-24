@@ -6,6 +6,8 @@ using UnityEngine.Localization.Settings;
 
 public class SettingsManager : MonoBehaviour
 {
+    [SerializeField] private GameObject[] objectsToUpdate;
+
     private bool applying;
     private int langIndex;
 
@@ -104,6 +106,12 @@ public class SettingsManager : MonoBehaviour
 
         GlobalManager.singleton.ApplyTheme();
         yield return null;
+
+        for (int i = 0; i < objectsToUpdate.Length; i++)
+        {
+            objectsToUpdate[i].SetActive(false);
+            objectsToUpdate[i].SetActive(true);
+        }
 
         OnThemeUpdated?.Invoke(GlobalData.themes[GlobalData.themeIndex].name);
 

@@ -17,7 +17,7 @@ Each player starts with the health points of their leader (can't be exceeded).
   
 **Discarding cards:** To discard a card drag it to the bottom or top of the screen. Discarding will gain the player the card cost as energy and doesn’t end the turn unless it’s the last card.
 
-**Effects:** Players can only have up to 5 effects & can’t have more than 5 blank cards. Effects are stacked & become more powerful (effect value * amount).
+**Effects:** Players can only have up to 5 effects. Effects are stacked & become more powerful (effect value * amount).
 
 **Blank cards:** Blank cards are added to the player's draw pile and shuffled. The draw pile is also shuffled when removing blank cards from itself.
   
