@@ -18,7 +18,16 @@ public class SettingsUI : MonoBehaviour
     {
         manager.OnLanguageUpdated += UpdateLanguage;
         manager.OnThemeUpdated += UpdateTheme;
+        manager.OnSettingsReset += UpdateSettings;
 
+        UpdateSettings();
+
+        highlight.enabled = true;
+        animate.enabled = true;
+    }
+
+    private void UpdateSettings()
+    {
         musicSlider.value = AudioManager.singleton.GetMusicVolume();
         soundSlider.value = AudioManager.singleton.GetSoundVolume();
 
@@ -30,8 +39,6 @@ public class SettingsUI : MonoBehaviour
 
         highlight.isOn = GlobalData.highlightPlayable;
         animate.isOn = GlobalData.animateImpact;
-        highlight.enabled = true;
-        animate.enabled = true;
     }
 
     private void UpdateLanguage(string lang)

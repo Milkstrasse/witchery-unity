@@ -11,11 +11,11 @@ public class SettingsManager : MonoBehaviour
 
     public event Action<string> OnLanguageUpdated;
     public event Action<string> OnThemeUpdated;
+    public event Action OnSettingsReset;
 
     private void Start()
     {
         langIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
-        OnLanguageUpdated?.Invoke(LocalizationSettings.SelectedLocale.Identifier.Code);
     }
 
     public void ChangeMusicVolume(float sliderValue) => AudioManager.singleton.ChangeMusicVolume(sliderValue);
@@ -153,6 +153,8 @@ public class SettingsManager : MonoBehaviour
 
         GlobalData.highlightPlayable = true;
         GlobalData.animateImpact = true;
+
+        OnSettingsReset?.Invoke();
 
         StartCoroutine(ChangeTheme());
     }

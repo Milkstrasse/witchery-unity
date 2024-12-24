@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: fighter5
   m_EditorClassIdentifier: 
   fighterID: 5
-  health: 60
-  role: 63198
+  health: 70
+  role: 61475
   moves:
+  - {fileID: 11400000, guid: 71c20d86684774b96a8dd635367afdd1, type: 2}
   - {fileID: 11400000, guid: 5c4e93dbb98ec42c0be3e5ba99d22152, type: 2}
   - {fileID: 11400000, guid: 120ad528ec64d4bf29959be3f4bb8fec, type: 2}
-  - {fileID: 11400000, guid: 120ad528ec64d4bf29959be3f4bb8fec, type: 2}
-  - {fileID: 11400000, guid: cbcd1f94fec434e5f98ffaa6c4767865, type: 2}
-  - {fileID: 11400000, guid: 941a01699d8f44fbd95b702e62934afc, type: 2}
+  - {fileID: 11400000, guid: 010c3021a6fc64e65a0f70533488067e, type: 2}
+  - {fileID: 11400000, guid: 010c3021a6fc64e65a0f70533488067e, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
