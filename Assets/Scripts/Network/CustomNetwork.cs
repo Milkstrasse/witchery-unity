@@ -114,7 +114,8 @@ public class CustomNetwork : RelayNetworkManager
         {
             StopServer();
             GlobalManager.singleton.LoadScene("SelectionScene");
-        } else
+        }
+        else
         {
             playersReady = Math.Max(playersReady - 1, 0);
         }
