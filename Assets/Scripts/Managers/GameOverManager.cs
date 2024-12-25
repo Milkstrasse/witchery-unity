@@ -6,7 +6,7 @@ using Utp;
 public class GameOverManager : MonoBehaviour
 {
     [SerializeField] private GameObject credits;
-    
+
     private PlayerObject[] players;
     public event Action<PlayerObject[]> OnSetupComplete;
 
@@ -55,6 +55,8 @@ public class GameOverManager : MonoBehaviour
     public void ReturnToSelection()
     {
         AudioManager.singleton.PlayStandardSound();
+
+        GlobalManager.QuitAnyConnection();
 
         for (int i = 0; i < players.Length; i++)
         {
