@@ -85,8 +85,8 @@ public struct CPULogic
                 {
                     switch (move.moveID)
                     {
-                        case 5:
-                            if (player.currHealth >= logic.players[0].health) //redistribute health
+                        case 5: //redistribute health
+                            if (player.currHealth >= logic.players[0].health)
                             {
                                 goto case 0;
                             }
@@ -94,8 +94,8 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 7:
-                            if (logic.players[0].cardHand.Count == 0) //remove random card
+                        case 7: //remove random card
+                            if (logic.players[0].cardHand.Count == 0)
                             {
                                 goto case 0;
                             }
@@ -103,8 +103,8 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 11:
-                            if (logic.players[1].CheckEffectBalance() >= logic.players[0].CheckEffectBalance()) //swap effects
+                        case 11: //swap effects
+                            if (logic.players[1].CheckEffectBalance() >= logic.players[0].CheckEffectBalance())
                             {
                                 goto case 0;
                             }
@@ -112,7 +112,7 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 13:
+                        case 13: //clear effects
                             if (move.target != 1 && logic.players[1].CheckEffectBalance() >= 0) //clear own effects
                             {
                                 goto case 0;
@@ -125,8 +125,12 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 14:
-                            if (logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == 0) //apply effect
+                        case 14: //apply effect
+                            if (move.moveType == MoveType.Special && (!logic.lastCard.card.hasMove || logic.lastCard.card.move.cost == 0))
+                            {
+                                goto case 0;
+                            }
+                            else if (logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == 0)
                             {
                                 goto case 0;
                             }
@@ -134,8 +138,12 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 15:
-                            if (logic.players[1].effects.Count == 5 && logic.players[1].GetEffect(move.effect.name, false) == 0) //gain effect
+                        case 15: //gain effect
+                            if (move.moveType == MoveType.Special && (!logic.lastCard.card.hasMove || logic.lastCard.card.move.cost == 0))
+                            {
+                                goto case 0;
+                            }
+                            else if (logic.players[1].effects.Count == 5 && logic.players[1].GetEffect(move.effect.name, false) == 0)
                             {
                                 goto case 0;
                             }
@@ -143,8 +151,8 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 16:
-                            if (logic.players[0].CheckEffectBalance() < 0) //steal effects
+                        case 16: //steal effects
+                            if (logic.players[0].CheckEffectBalance() < 0)
                             {
                                 goto case 0;
                             }
@@ -152,9 +160,9 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 23:
-                        case 25:
-                            if (logic.players[1].blanks == 0) //hand over or clear blanks
+                        case 23: //clear blanks
+                        case 25: //hand over blanks
+                            if (logic.players[1].blanks == 0)
                             {
                                 goto case 0;
                             }

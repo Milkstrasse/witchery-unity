@@ -160,11 +160,6 @@ public class FightManager : MonoBehaviour
                 UnityEngine.Debug.Log($"First player has won ? {(logic.players[0].startedFirst && players[0].hasWon) || (logic.players[1].startedFirst && players[1].hasWon)}");
             }
 
-            int roundsPlayed = Math.Max(logic.players[0].roundsPlayed, logic.players[1].roundsPlayed);
-
-            players[0].energy = roundsPlayed;
-            players[1].energy = roundsPlayed;
-
             if (messages.AddToQueue(message, false))
             {
                 StartCoroutine(InvokeQueue());
@@ -206,6 +201,11 @@ public class FightManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1.5f);
+
+        int roundsPlayed = Math.Max(logic.players[0].roundsPlayed, logic.players[1].roundsPlayed);
+
+        players[0].energy = roundsPlayed;
+        players[1].energy = roundsPlayed;
 
         GlobalManager.singleton.LoadScene("GameOverScene");
     }

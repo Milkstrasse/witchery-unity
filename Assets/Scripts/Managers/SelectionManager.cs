@@ -28,6 +28,8 @@ public class SelectionManager : MonoBehaviour
       isReady = new bool[2];
 
       NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
+
+      CheckMissions();
    }
 
    public bool SetReady(int index)
