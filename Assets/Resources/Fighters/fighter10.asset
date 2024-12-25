@@ -16,13 +16,13 @@ MonoBehaviour:
   health: 50
   role: 63198
   moves:
-  - {fileID: 11400000, guid: 5455d4333982948cc983dd8d2d5c94a0, type: 2}
-  - {fileID: 11400000, guid: 941a01699d8f44fbd95b702e62934afc, type: 2}
-  - {fileID: 11400000, guid: 9242c60e4253a4345af74c9b37e08d29, type: 2}
-  - {fileID: 11400000, guid: e428eab7482d24a74b7708919b33fae8, type: 2}
-  - {fileID: 11400000, guid: e428eab7482d24a74b7708919b33fae8, type: 2}
-  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
-  - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
+  - {fileID: 11400000, guid: 9d8e655f1fd3e493bb5166bf1495a5dd, type: 2}
+  - {fileID: 11400000, guid: 0ac7f2c711c16424fa11f475b083c023, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}
+  - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   outfits:

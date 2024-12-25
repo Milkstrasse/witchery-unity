@@ -5,6 +5,8 @@ using Utp;
 
 public class GameOverManager : MonoBehaviour
 {
+    [SerializeField] private GameObject credits;
+    
     private PlayerObject[] players;
     public event Action<PlayerObject[]> OnSetupComplete;
 
@@ -43,10 +45,11 @@ public class GameOverManager : MonoBehaviour
         GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>().ServerChangeScene("SelectionScene");
     }
 
-    public void GoToCredits()
+    public void ToggleCredits(bool enable)
     {
         AudioManager.singleton.PlayStandardSound();
-        GlobalManager.singleton.LoadScene("CreditsScene");
+
+        credits.SetActive(enable);
     }
 
     public void ReturnToSelection()
