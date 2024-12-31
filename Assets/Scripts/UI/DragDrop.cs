@@ -41,14 +41,14 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (eventData.pointerDrag != null)
         {
             Vector3 screenPos = Camera.main.WorldToScreenPoint(rectTransform.position);
-            cardUI.SelectCard(screenPos.y < 50f || screenPos.y > Screen.height - 50f);
+            cardUI.SelectCard(screenPos.y < 100f || screenPos.y > Screen.height - 100f);
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(rectTransform.position);
-        bool toRemove = screenPos.y < 50f || screenPos.y > Screen.height - 50f;
+        bool toRemove = screenPos.y < 100f || screenPos.y > Screen.height - 100f;
         ResetDrag();
 
         if (toRemove && FightManager.singleton.IsAbleToMessage())
