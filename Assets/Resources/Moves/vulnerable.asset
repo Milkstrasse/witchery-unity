@@ -20,7 +20,7 @@ MonoBehaviour:
   effect:
     name: vulnerable
     icon: f7a9
-    multiplier: 1
+    multiplier: 3
     value: -2
     statusType: 2
     isNew: 0
