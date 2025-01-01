@@ -87,7 +87,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 340570659
+  m_TextStyleHashCode: -1913486897
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 340570659
+  m_TextStyleHashCode: -1925182705
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -709,7 +709,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 340570659
+  m_TextStyleHashCode: -1913486897
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -2237,7 +2237,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1961220799
+  m_TextStyleHashCode: -1913486897
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -2384,6 +2384,10 @@ PrefabInstance:
       propertyPath: info
       value: 
       objectReference: {fileID: 7455130677209217465}
+    - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2494,6 +2498,10 @@ PrefabInstance:
       propertyPath: info
       value: 
       objectReference: {fileID: 7455130677209217465}
+    - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2604,6 +2612,10 @@ PrefabInstance:
       propertyPath: info
       value: 
       objectReference: {fileID: 7455130677209217465}
+    - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3402,6 +3414,10 @@ PrefabInstance:
       propertyPath: info
       value: 
       objectReference: {fileID: 7455130677209217465}
+    - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3512,6 +3528,10 @@ PrefabInstance:
       propertyPath: info
       value: 
       objectReference: {fileID: 7455130677209217465}
+    - target: {fileID: 6335951844435992948, guid: 9fcd6ed825c754ede90f007c325a1f98, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

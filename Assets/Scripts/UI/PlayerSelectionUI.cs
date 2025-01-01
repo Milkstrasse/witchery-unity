@@ -358,6 +358,8 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             isEditing = false;
             modeButton.GetComponent<Image>().material = neutral;
+            modeButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnButton");
+
             actionButton.GetComponentInChildren<TextMeshProUGUI>().text = "\uf128";
             actionButton.interactable = false;
         }
@@ -365,6 +367,8 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             isEditing = true;
             modeButton.GetComponent<Image>().material = highlighted;
+            modeButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnCard");
+
             actionButton.GetComponentInChildren<TextMeshProUGUI>().text = "\uf074";
             actionButton.interactable = true;
         }
@@ -450,6 +454,8 @@ public class PlayerSelectionUI : MonoBehaviour
         if (!isShowingInfo)
         {
             actionButton.GetComponent<Image>().material = neutral;
+            actionButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnButton");
+
             optionText.StringReference.SetReference("StringTable", filters[currFilter]);
 
             LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
@@ -458,6 +464,7 @@ public class PlayerSelectionUI : MonoBehaviour
         else
         {
             actionButton.GetComponent<Image>().material = highlighted;
+            actionButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnCard");
 
             Fighter fighter = GlobalData.fighters[currCard];
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
@@ -496,10 +503,12 @@ public class PlayerSelectionUI : MonoBehaviour
         if (selectionUI.ToggleCPU())
         {
             cpuButton.GetComponent<Image>().material = highlighted;
+            cpuButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnCard");
         }
         else
         {
             cpuButton.GetComponent<Image>().material = neutral;
+            cpuButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnButton");
         }
     }
 
