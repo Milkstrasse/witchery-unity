@@ -40,11 +40,11 @@ public class PlayerFightUI : MonoBehaviour
 
     private void InitUI()
     {
-        float cardSpacer = (Screen.width/canvas.scaleFactor - 5 * 234 - 40)/4 * -1;
+        float cardSpacer = (Screen.width/(canvas.scaleFactor/GlobalData.uiScale) - 5 * 235 - 40)/4 * -1;
         for (int i = 0; i < 5; i++)
         {
             CardUI card = cardParent.transform.GetChild(i).GetComponent<CardUI>();
-            card.transform.localPosition = new Vector3(i * (234 - cardSpacer), -160f, 0);
+            card.transform.localPosition = new Vector3(i * (235 - cardSpacer), -160f, 0);
             card.GetComponent<DragDrop>().SetInit();
 
             cards[i] = card;
@@ -197,8 +197,8 @@ public class PlayerFightUI : MonoBehaviour
         cardUI.FlipCard(false, 0f);
         cardUI.transform.SetParent(canvas.transform);
         
-        //234/2 = 117
-        LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 117f * canvas.transform.localScale.x, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
+        //235/2 = 117.5
+        LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 117.5f * canvas.transform.localScale.x, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
         
         yield return new WaitForSeconds(0.5f);
 

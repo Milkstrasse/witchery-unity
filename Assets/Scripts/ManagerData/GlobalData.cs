@@ -9,6 +9,8 @@ public static class GlobalData
     public static bool highlightPlayable = true;
     public static bool animateImpact = true;
 
+    public static float uiScale = 1f;
+
     public static int themeIndex;
     public static Theme[] themes;
 }

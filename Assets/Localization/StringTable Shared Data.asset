@@ -295,6 +295,14 @@ MonoBehaviour:
     m_Key: stealNothing
     m_Metadata:
       m_Items: []
+  - m_Id: 49284850262204416
+    m_Key: uiScale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49323919750979584
+    m_Key: returnToMenu
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

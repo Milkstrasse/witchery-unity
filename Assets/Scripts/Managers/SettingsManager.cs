@@ -3,9 +3,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
+    [SerializeField] private CanvasUI canvas;
     [SerializeField] private GameObject[] objectsToUpdate;
 
     private bool applying;
@@ -60,6 +62,17 @@ public class SettingsManager : MonoBehaviour
         }
         
         StartCoroutine(SetLocale(langIndex));
+    }
+    
+    IEnumerator SetLocale(int localID)
+    {
+        applying = true;
+
+        yield return LocalizationSettings.InitializationOperation;
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localID];
+        OnLanguageUpdated?.Invoke(LocalizationSettings.SelectedLocale.Identifier.Code);
+
+        applying = false;
     }
 
     public void DecreaseTheme()
@@ -118,15 +131,10 @@ public class SettingsManager : MonoBehaviour
         applying = false;
     }
 
-    IEnumerator SetLocale(int localID)
+    public void ChangeUIScale(float sliderValue)
     {
-        applying = true;
-
-        yield return LocalizationSettings.InitializationOperation;
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localID];
-        OnLanguageUpdated?.Invoke(LocalizationSettings.SelectedLocale.Identifier.Code);
-
-        applying = false;
+        GlobalData.uiScale = sliderValue;
+        canvas.UpdateScale();
     }
 
     public void ResetSettings()
@@ -161,6 +169,7 @@ public class SettingsManager : MonoBehaviour
 
         GlobalData.highlightPlayable = true;
         GlobalData.animateImpact = true;
+        ChangeUIScale(1f);
 
         OnSettingsReset?.Invoke();
 
@@ -193,6 +202,7 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("highlightPlayable", GlobalData.highlightPlayable ? 1 : 0);
         PlayerPrefs.SetInt("animateImpact", GlobalData.animateImpact ? 1 : 0);
         PlayerPrefs.SetInt("theme", GlobalData.themeIndex);
+        PlayerPrefs.SetFloat("uiScale", GlobalData.uiScale);
         PlayerPrefs.Save();
 
         return true;
