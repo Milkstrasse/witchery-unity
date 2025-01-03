@@ -5,7 +5,7 @@
 ## Starting the Game
 Choose your leader & and your supporting fighters.
 Combine all move cards of your leader & add only the signature moves of your supports to create your deck & then shuffle it to create your draw pile.
-Each player starts with the health points of their leader (can't be exceeded).
+Each player starts with the hit points of their leader (can't be exceeded).
 
 ## Playing the Game
 
