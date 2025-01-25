@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class FightLogic
 {
@@ -405,7 +406,7 @@ public class FightLogic
                         players[turn].health = Math.Clamp(players[turn].health + health, 0, players[turn].maxHealth);
                     }
 
-                    int energy = lastCard.card.move.health;
+                    int energy = lastCard.card.move.energy;
 
                     if (energy != 0)
                     {
@@ -415,7 +416,7 @@ public class FightLogic
                         }
 
                         energy = Math.Max(energy + players[1 - turn].GetPowerBonus(), 0);
-                        players[turn].energy = players[turn].energy + energy;
+                        players[turn].energy += energy;
                     }
 
                     if (lastCard.card.move.effect.multiplier > 0)
