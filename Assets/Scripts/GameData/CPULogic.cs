@@ -174,8 +174,15 @@ public struct CPULogic
                             prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                             break;
                         default:
-                            prioritizedCards.Add((i, move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
-                            break;
+                            if (move.moveType == MoveType.Special && (!logic.lastCard.card.hasMove || logic.lastCard.card.move.cost == 0))
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                prioritizedCards.Add((i, move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
+                                break;
+                            }
                     }
                 }
             }
