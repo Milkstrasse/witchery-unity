@@ -14,7 +14,7 @@ public class ImpactUI : MonoBehaviour
 
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter + "-" + outfit);
 
-        transform.localPosition = new Vector3(0, rotated ? -160f : 160f, 0);
+        //transform.localPosition = new Vector3(0, rotated ? -160f : 160f, 0);
         impact.eulerAngles = rotated ? new Vector3(180f, 180f, 0f) : Vector3.zero;
 
         Time.timeScale = 0; //make sure turn doesn't end when playing animation

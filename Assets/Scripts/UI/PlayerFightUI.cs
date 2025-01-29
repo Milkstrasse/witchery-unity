@@ -185,11 +185,11 @@ public class PlayerFightUI : MonoBehaviour
 
         if (card.isSpecial && GlobalData.animateImpact)
         {
-            FightManager.singleton.timeToMakeMove = 1.6f;
+            FightManager.singleton.timeToMakeMove = 1.7f;
         }
         else
         {
-            FightManager.singleton.timeToMakeMove = 0.8f;
+            FightManager.singleton.timeToMakeMove = 0.9f;
         }
 
         yield return new WaitForSeconds(0.3f);
@@ -200,7 +200,7 @@ public class PlayerFightUI : MonoBehaviour
         //235/2 = 117.5
         LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 117.5f * canvas.transform.localScale.x, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
         
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
         if (card.isSpecial && GlobalData.animateImpact)
         {
@@ -228,17 +228,17 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator RemoveCard(int cardIndex)
     {
-        FightManager.singleton.timeToMakeMove = 0.2f;
+        FightManager.singleton.timeToMakeMove = 0.3f;
 
         cards[cardIndex].transform.SetParent(canvas.transform);
 
         Vector3 screenPos = Camera.main.WorldToScreenPoint(cards[cardIndex].transform.position);
-        Vector3 targetPositon = new Vector3(screenPos.x, screenPos.y + 250f, screenPos.z);
+        Vector3 targetPositon = new Vector3(screenPos.x, screenPos.y + 350f, screenPos.z);
         targetPositon = Camera.main.ScreenToWorldPoint(targetPositon);
         
-        LeanTween.move(cards[cardIndex].gameObject, targetPositon, 0.2f);
+        LeanTween.move(cards[cardIndex].gameObject, targetPositon, 0.3f);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
 
         cards[cardIndex].GetComponent<DragDrop>().ResetDrag();
         player.cardHand.RemoveAt(cardIndex);
