@@ -117,6 +117,11 @@ public class SaveManager
                     savedData.fighters[player.fighterIDs[i].fighterID].timesWonSecondary++;
                 }
 
+                if (playerData.startedFirst)
+                {
+                    savedData.timesWonFirst++;
+                }
+
                 savedData.timesWon++;
             }
         }
