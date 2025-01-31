@@ -16,7 +16,7 @@ public class FighterStat : MonoBehaviour
         {
             if (category == 0)
             {
-                float percent = fighterData.timesWonPrimary/(float) SaveManager.savedData.timesFought;
+                float percent = fighterData.timesWonPrimary/(float) SaveManager.savedData.timesWon;
                 percent = Mathf.Min(percent, 1f);
 
                 LeanTween.value(statBar.gameObject, statBar.fillAmount, percent, 0.3f).setOnUpdate( (float val) => { statBar.fillAmount = val; } );
@@ -25,9 +25,9 @@ public class FighterStat : MonoBehaviour
             }
             else
             {
-                float percent = fighterData.timesWonSecondary/(float) SaveManager.savedData.timesFought;
+                float percent = fighterData.timesWonSecondary/(float) SaveManager.savedData.timesWon;
                 percent = Mathf.Min(percent, 1f);
-                
+
                 LeanTween.value(statBar.gameObject, statBar.fillAmount, percent, 0.3f).setOnUpdate( (float val) => { statBar.fillAmount = val; } );
 
                 stat.text = $"{Mathf.RoundToInt(percent * 100f)}%";
