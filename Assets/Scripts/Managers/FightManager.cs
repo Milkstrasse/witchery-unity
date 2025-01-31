@@ -262,7 +262,7 @@ public class FightManager : MonoBehaviour
 
                     if ((NetworkServer.activeHost && i == 0) || (!NetworkServer.activeHost && i == 1))
                     {
-                        SaveManager.UpdateStats(player, players[0].hasWon || players[1].hasWon, players[i].hasWon);
+                        SaveManager.UpdateStats(player, players[0].hasWon || players[1].hasWon, players[i]);
                     }
                 }
 

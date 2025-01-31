@@ -35,7 +35,7 @@ public class CardUI : MonoBehaviour
 
     public void SetupCard(Fighter fighter)
     {
-        bool isUnlocked = SaveManager.savedData.unlocked[fighter.fighterID, 0];
+        bool isUnlocked = SaveManager.savedData.fighters[fighter.fighterID].IsUnlocked();
 
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-standard");
 

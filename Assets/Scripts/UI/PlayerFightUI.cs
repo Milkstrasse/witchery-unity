@@ -228,7 +228,7 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator RemoveCard(int cardIndex)
     {
-        FightManager.singleton.timeToMakeMove = 0.3f;
+        FightManager.singleton.timeToMakeMove = 0.25f;
 
         cards[cardIndex].transform.SetParent(canvas.transform);
 
@@ -236,9 +236,9 @@ public class PlayerFightUI : MonoBehaviour
         Vector3 targetPositon = new Vector3(screenPos.x, screenPos.y + 350f, screenPos.z);
         targetPositon = Camera.main.ScreenToWorldPoint(targetPositon);
         
-        LeanTween.move(cards[cardIndex].gameObject, targetPositon, 0.3f);
+        LeanTween.move(cards[cardIndex].gameObject, targetPositon, 0.25f);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.25f);
 
         cards[cardIndex].GetComponent<DragDrop>().ResetDrag();
         player.cardHand.RemoveAt(cardIndex);

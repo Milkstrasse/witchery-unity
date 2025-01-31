@@ -337,6 +337,18 @@ MonoBehaviour:
     m_Localized: "\u30E1\u30CB\u30E5\u30FC \u306B \u3082\u3069\u308B"
     m_Metadata:
       m_Items: []
+  - m_Id: 60459230732214272
+    m_Localized: Primary Win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60459252731338752
+    m_Localized: Secondary Win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60479159741177856
+    m_Localized: "\u305B\u3063\u3066\u3044 \u306E \u30EA\u30BB\u30C3\u30C8"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

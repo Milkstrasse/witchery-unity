@@ -26,7 +26,7 @@ public class Mission : ScriptableObject
         if (isClaimable && !SaveManager.savedData.missions[index] && category == Category.Fighter && !SaveManager.savedData.missions[index])
         {
             SaveManager.savedData.missions[index] = true;
-            SaveManager.savedData.unlocked[reward, 0] = true;
+            SaveManager.savedData.fighters[reward].UnlockFighter();
 
             SaveManager.SaveData();
 

@@ -66,4 +66,19 @@ public class GameOverManager : MonoBehaviour
         GlobalManager.singleton.mode = GameMode.Offline;
         GlobalManager.singleton.LoadScene("SelectionScene");
     }
+
+    public void GoToStatistics()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        GlobalManager.QuitAnyConnection();
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            Destroy(players[i].gameObject);
+        }
+        
+        GlobalManager.singleton.mode = GameMode.Offline;
+        GlobalManager.singleton.LoadScene("StatisticsScene");
+    }
 }

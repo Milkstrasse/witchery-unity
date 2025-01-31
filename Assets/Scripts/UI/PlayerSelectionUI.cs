@@ -263,7 +263,7 @@ public class PlayerSelectionUI : MonoBehaviour
                     outfits[currCard] = arrayLength;
                 }
 
-                outfitFound = SaveManager.savedData.unlocked[currCard, outfits[currCard]];
+                outfitFound = SaveManager.savedData.fighters[currCard].IsUnlocked(outfits[currCard]);
             }
 
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
@@ -331,7 +331,7 @@ public class PlayerSelectionUI : MonoBehaviour
                     outfits[currCard] = 0;
                 }
 
-                outfitFound = SaveManager.savedData.unlocked[currCard, outfits[currCard]];
+                outfitFound = SaveManager.savedData.fighters[currCard].IsUnlocked(outfits[currCard]);
             }
 
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);

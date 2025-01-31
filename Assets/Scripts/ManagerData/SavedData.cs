@@ -3,9 +3,8 @@ using System;
 [Serializable]
 public struct SavedData
 {
-    public bool[,] unlocked;
+    public FighterData[] fighters;
     public bool[] missions;
-    public SelectedFighter[] shopFighters;
 
     public int timesFought;
     public int timesWon;

@@ -336,6 +336,18 @@ MonoBehaviour:
     m_Localized: Return to Menu
     m_Metadata:
       m_Items: []
+  - m_Id: 60459230732214272
+    m_Localized: Primary Win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60459252731338752
+    m_Localized: Secondary Win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60479159741177856
+    m_Localized: Reset Settings
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

@@ -237,7 +237,7 @@ public class SelectionManager : MonoBehaviour
 
       for (int i = 0; i < GlobalData.fighters.Length; i++)
       {
-         SaveManager.savedData.unlocked[i, 0] = true;
+         SaveManager.savedData.fighters[i].UnlockFighter();
       }
 
       SaveManager.SaveData();

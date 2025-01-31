@@ -99,10 +99,6 @@ MonoBehaviour:
     m_Key: en
     m_Metadata:
       m_Items: []
-  - m_Id: 8229765759623168
-    m_Key: healOpponent
-    m_Metadata:
-      m_Items: []
   - m_Id: 27441377439637504
     m_Key: fighterDescr
     m_Metadata:
@@ -129,6 +125,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8223760501956608
     m_Key: healing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8229765759623168
+    m_Key: healOpponent
     m_Metadata:
       m_Items: []
   - m_Id: 11805233679163392
@@ -163,6 +163,10 @@ MonoBehaviour:
     m_Key: music
     m_Metadata:
       m_Items: []
+  - m_Id: 60479159741177856
+    m_Key: resetSettings
+    m_Metadata:
+      m_Items: []
   - m_Id: 42265206460506112
     m_Key: obtainCostEffect
     m_Metadata:
@@ -177,6 +181,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8223787123204096
     m_Key: power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60459230732214272
+    m_Key: primaryWin
     m_Metadata:
       m_Items: []
   - m_Id: 2538625827856384
@@ -211,8 +219,20 @@ MonoBehaviour:
     m_Key: replayCard
     m_Metadata:
       m_Items: []
+  - m_Id: 49323919750979584
+    m_Key: returnToMenu
+    m_Metadata:
+      m_Items: []
   - m_Id: 46628124241158144
     m_Key: roundsPlayed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60459252731338752
+    m_Key: secondaryWin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46667486177779712
+    m_Key: selfKOd
     m_Metadata:
       m_Items: []
   - m_Id: 15212672940236800
@@ -243,12 +263,20 @@ MonoBehaviour:
     m_Key: stealCostHP
     m_Metadata:
       m_Items: []
+  - m_Id: 46714514295480320
+    m_Key: stealEffects
+    m_Metadata:
+      m_Items: []
   - m_Id: 7920018510569472
     m_Key: stealEnergy
     m_Metadata:
       m_Items: []
   - m_Id: 7992895737946112
     m_Key: stealHP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46759368538972160
+    m_Key: stealNothing
     m_Metadata:
       m_Items: []
   - m_Id: 7622866769010688
@@ -261,6 +289,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 46473553028046848
     m_Key: team
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49284850262204416
+    m_Key: uiScale
     m_Metadata:
       m_Items: []
   - m_Id: 12959305933250560
@@ -281,26 +313,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 34668335646892032
     m_Key: winTimes
-    m_Metadata:
-      m_Items: []
-  - m_Id: 46667486177779712
-    m_Key: selfKOd
-    m_Metadata:
-      m_Items: []
-  - m_Id: 46714514295480320
-    m_Key: stealEffects
-    m_Metadata:
-      m_Items: []
-  - m_Id: 46759368538972160
-    m_Key: stealNothing
-    m_Metadata:
-      m_Items: []
-  - m_Id: 49284850262204416
-    m_Key: uiScale
-    m_Metadata:
-      m_Items: []
-  - m_Id: 49323919750979584
-    m_Key: returnToMenu
     m_Metadata:
       m_Items: []
   m_Metadata:

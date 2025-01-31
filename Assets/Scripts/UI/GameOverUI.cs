@@ -28,11 +28,6 @@ public class GameOverUI : MonoBehaviour
         }
     }
 
-    public void ReturnToSelection()
-    {
-        manager.ReturnToSelection();
-    }
-
     private void OnDestroy()
     {
         manager.OnSetupComplete -= SetupUI;
