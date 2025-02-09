@@ -111,9 +111,12 @@ public class SaveManager
 
             if (player.hasWon)
             {
+                savedData.fighters[player.fighterIDs[0].fighterID].timesUsedPrimary++;
                 savedData.fighters[player.fighterIDs[0].fighterID].timesWonPrimary++;
+
                 for (int i = 1; i < player.fighterIDs.Length; i++)
                 {
+                    savedData.fighters[player.fighterIDs[i].fighterID].timesUsedSecondary++;
                     savedData.fighters[player.fighterIDs[i].fighterID].timesWonSecondary++;
                 }
 
@@ -123,6 +126,14 @@ public class SaveManager
                 }
 
                 savedData.timesWon++;
+            }
+            else
+            {
+                savedData.fighters[player.fighterIDs[0].fighterID].timesUsedPrimary++;
+                for (int i = 1; i < player.fighterIDs.Length; i++)
+                {
+                    savedData.fighters[player.fighterIDs[i].fighterID].timesUsedSecondary++;
+                }
             }
         }
     }

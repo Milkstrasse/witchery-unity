@@ -3,6 +3,8 @@ public class FighterData
 {
     private bool[] outfits;
 
+    public int timesUsedPrimary;
+    public int timesUsedSecondary;
     public int timesWonPrimary;
     public int timesWonSecondary;
 

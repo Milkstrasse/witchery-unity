@@ -649,7 +649,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:4d5f43fceb1874d3fb84d5259516bec7
     m_TableEntryReference:
-      m_KeyId: 60459230732214272
+      m_KeyId: 63748839511678976
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -693,7 +693,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Primary Wins
+  m_text: Use Rate
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e8a02252f4ec47748da2becdd6cc899, type: 2}
   m_sharedMaterial: {fileID: 6011306716087563926, guid: 6e8a02252f4ec47748da2becdd6cc899, type: 2}

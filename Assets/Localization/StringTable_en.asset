@@ -348,6 +348,10 @@ MonoBehaviour:
     m_Localized: Reset Settings
     m_Metadata:
       m_Items: []
+  - m_Id: 63748839511678976
+    m_Localized: Use Rate
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

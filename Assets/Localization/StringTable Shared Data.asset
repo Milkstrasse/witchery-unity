@@ -315,6 +315,10 @@ MonoBehaviour:
     m_Key: winTimes
     m_Metadata:
       m_Items: []
+  - m_Id: 63748839511678976
+    m_Key: useRate
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

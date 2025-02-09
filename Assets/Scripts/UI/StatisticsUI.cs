@@ -12,7 +12,7 @@ public class StatisticsUI : MonoBehaviour
 
     private FighterStat[] fighters;
 
-    private string[] categories = new string[] {"primaryWin", "secondaryWin"};
+    private string[] categories = new string[] {"useRate", "primaryWin", "secondaryWin"};
     private int currCategory;
 
     public void Start()
