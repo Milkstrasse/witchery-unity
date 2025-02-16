@@ -32,7 +32,7 @@ public class FighterStat : MonoBehaviour
 
                 stat.text = $"{Mathf.RoundToInt(percent * 100f)}%";
             }
-            else if (category == 2 && fighterData.timesUsedPrimary > 0)
+            else if (category == 2 && fighterData.timesUsedSecondary > 0)
             {
                 float percent = fighterData.timesWonSecondary / (float)fighterData.timesUsedSecondary;
                 percent = Mathf.Min(percent, 1f);

@@ -152,7 +152,7 @@ public struct CPULogic
                                 goto default;
                             }
                         case 16: //steal effects
-                            if (logic.players[0].CheckEffectBalance() < 0)
+                            if (logic.players[0].CheckEffectBalance() <= 0)
                             {
                                 goto case 0;
                             }
