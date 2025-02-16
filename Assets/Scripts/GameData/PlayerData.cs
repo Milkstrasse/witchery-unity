@@ -113,6 +113,7 @@ public class PlayerData
     public void RemoveCard(int cardIndex)
     {
         int card = cardHand[cardIndex];
+        
         cardHand.RemoveAt(cardIndex);
         playedCards.Add(card);
     }

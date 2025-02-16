@@ -72,7 +72,7 @@ public class FightManager : MonoBehaviour
         {
             conn.Send(new MoveMessage(-1, 0, false));
             conn.Send(new TurnMessage(message.playerIndex, new PlayerData[] { logic.players[message.playerIndex] }, true));
-            
+
             return;
         }
 
@@ -83,7 +83,7 @@ public class FightManager : MonoBehaviour
 
         if (message.cardIndex < 0) //player gave up, winner - 2
         {
-            NetworkServer.SendToAll(new TurnMessage(-1 - message.playerIndex, new PlayerData[]{logic.players[message.playerIndex]}));
+            NetworkServer.SendToAll(new TurnMessage(-1 - message.playerIndex, new PlayerData[] { logic.players[message.playerIndex] }));
             return;
         }
 
@@ -92,7 +92,7 @@ public class FightManager : MonoBehaviour
         {
             NetworkServer.SendToAll(new MoveMessage(message.playCard ? logic.playerTurn - 5 : logic.playerTurn + 5, 0, true, true));
             NetworkServer.SendToAll(new TurnMessage(logic.playerTurn - 5, logic.players.ToArray()));
-            
+
             sendDelay = 1.5f;
         }
 
@@ -151,7 +151,7 @@ public class FightManager : MonoBehaviour
             players[message.playerTurn + 2].hasWon = true;
 
             TimeSpan ts = stopwatch.Elapsed;
-            string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}";
+            string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds / 10:00}";
 
             UnityEngine.Debug.Log("Fight ended after " + elapsedTime);
             if (logic.players.Count > 0)
@@ -160,10 +160,8 @@ public class FightManager : MonoBehaviour
                 UnityEngine.Debug.Log($"First player has won ? {(logic.players[0].startedFirst && players[0].hasWon) || (logic.players[1].startedFirst && players[1].hasWon)}");
             }
 
-            if (messages.AddToQueue(message, false))
-            {
-                StartCoroutine(InvokeQueue());
-            }
+            messages.AddToQueue(message, false);
+            StartCoroutine(InvokeQueue());
 
             StartCoroutine(EndFight());
         }
@@ -186,7 +184,7 @@ public class FightManager : MonoBehaviour
         OnSetupComplete?.Invoke(logic.playerTurn);
 
         yield return GlobalManager.singleton.UnloadScene("SelectionScene");
-        
+
         fightCamera.SetActive(true);
         fightEvents.SetActive(true);
 
@@ -220,7 +218,7 @@ public class FightManager : MonoBehaviour
             players[logic.playerTurn].cardHand.RemoveAt(cardIndex);
             players[logic.playerTurn].OnPlayerChanged?.Invoke();
         }
-        
+
         NetworkClient.Send(new MoveMessage(logic.playerTurn, cardIndex, playCard));
     }
 
@@ -228,7 +226,7 @@ public class FightManager : MonoBehaviour
     public void SendMove(int playerIndex)
     {
         sendingMessage = true;
-        
+
         NetworkClient.Send(new MoveMessage(playerIndex, -1, false));
     }
 
@@ -260,7 +258,7 @@ public class FightManager : MonoBehaviour
                     PlayerData player = message.players[i];
                     players[i].UpdatePlayer(player, message.playerTurn >= 0);
 
-                    if ((NetworkServer.activeHost && i == 0) || (!NetworkServer.activeHost && i == 1))
+                    if ((NetworkServer.activeHost && players[i].playerID == 0) || (!NetworkServer.activeHost && players[i].playerID == 1))
                     {
                         SaveManager.UpdateStats(player, players[0].hasWon || players[1].hasWon, players[i]);
                     }

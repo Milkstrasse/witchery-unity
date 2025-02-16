@@ -92,7 +92,7 @@ public class FightLogic
                     int cardAmount = players[1 - playerTurn].cardHand.Count;
                     if (cardAmount > 0)
                     {
-                        players[1 - playerTurn].cardHand.RemoveAt(UnityEngine.Random.Range(0, cardAmount));
+                        players[1 - playerTurn].RemoveCard(UnityEngine.Random.Range(0, cardAmount));
                     }
 
                     break;
