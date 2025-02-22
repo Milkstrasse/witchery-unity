@@ -128,7 +128,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
             if (card.hasMove)
             {
-                if (card.move.moveType == MoveType.Standard)
+                if (card.move.moveType != MoveType.Response)
                 {
                     if (card.move.effect.multiplier > 0)
                     {

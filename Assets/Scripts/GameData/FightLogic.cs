@@ -421,7 +421,7 @@ public class FightLogic
 
                     if (lastCard.card.move.effect.multiplier > 0)
                     {
-                        players[turn].AddEffect(lastCard.card.move.effect);
+                        players[turn].AddEffect(new StatusEffect(lastCard.card.move.effect, lastCard.card.move.effect.multiplier));
                     }
                 }
             }
