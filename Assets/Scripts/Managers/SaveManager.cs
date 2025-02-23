@@ -109,6 +109,11 @@ public class SaveManager
         {
             savedData.timesFought++;
 
+            if (playerData.startedFirst)
+            {
+                savedData.timesFoughtFirst++;
+            }
+
             if (player.hasWon)
             {
                 savedData.fighters[player.fighterIDs[0].fighterID].timesUsedPrimary++;

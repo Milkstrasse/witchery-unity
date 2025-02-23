@@ -8,6 +8,7 @@ public struct SavedData
 
     public int timesFought;
     public int timesWon;
+    public int timesFoughtFirst;
     public int timesWonFirst;
     public int damageDone;
     public int healingDone;

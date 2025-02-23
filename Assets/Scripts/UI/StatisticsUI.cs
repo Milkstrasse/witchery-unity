@@ -25,7 +25,7 @@ public class StatisticsUI : MonoBehaviour
             fighters[i].SetupUI(SaveManager.savedData.fighters[i], i, 0);
         }
 
-        playerText.text = $"times fought: {SaveManager.savedData.timesFought}\ntimes won: {SaveManager.savedData.timesWon}\ntimes won as first: {SaveManager.savedData.timesWonFirst}";
+        playerText.text = $"times fought: {SaveManager.savedData.timesFought}\ntimes won: {SaveManager.savedData.timesWon}\ntimes fought as first: {SaveManager.savedData.timesFoughtFirst}\ntimes won as first: {SaveManager.savedData.timesWonFirst}";
     }
 
     public void DecreaseCategory()
