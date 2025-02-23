@@ -319,6 +319,14 @@ MonoBehaviour:
     m_Key: useRate
     m_Metadata:
       m_Items: []
+  - m_Id: 68849652563173376
+    m_Key: primaryRate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 68849662809858048
+    m_Key: secondaryRate
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

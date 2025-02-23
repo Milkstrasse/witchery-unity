@@ -352,6 +352,14 @@ MonoBehaviour:
     m_Localized: Use Rate
     m_Metadata:
       m_Items: []
+  - m_Id: 68849652563173376
+    m_Localized: Primary Rate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 68849662809858048
+    m_Localized: Secondary Rate
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

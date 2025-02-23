@@ -14,37 +14,93 @@ public class FighterStat : MonoBehaviour
 
         if (SaveManager.savedData.timesFought > 0)
         {
-            if (category == 0)
+            float percent;
+
+            switch (category)
             {
-                float percent = (fighterData.timesUsedPrimary + fighterData.timesUsedSecondary) / (float)SaveManager.savedData.timesFought;
-                percent = Mathf.Min(percent, 1f);
+                case 0: //used
+                    percent = (fighterData.timesUsedPrimary + fighterData.timesUsedSecondary) / (float)SaveManager.savedData.timesFought;
+                    percent = Mathf.Min(percent, 1f);
 
-                LeanTween.value(statBar.gameObject, statBar.fillAmount, percent, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
+                    LeanTween.value(statBar.gameObject, statBar.fillAmount, percent, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
 
-                stat.text = $"{Mathf.RoundToInt(percent * 100f)}%";
-            }
-            else if (category == 1 && fighterData.timesUsedPrimary > 0)
-            {
-                float percent = fighterData.timesWonPrimary / (float)fighterData.timesUsedPrimary;
-                percent = Mathf.Min(percent, 1f);
+                    stat.text = $"{Mathf.RoundToInt(percent * 100f)}%";
 
-                LeanTween.value(statBar.gameObject, statBar.fillAmount, percent, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
+                    break;
+                case 1: //used primary
+                    int timesUsed1 = fighterData.timesUsedPrimary + fighterData.timesUsedSecondary;
 
-                stat.text = $"{Mathf.RoundToInt(percent * 100f)}%";
-            }
-            else if (category == 2 && fighterData.timesUsedSecondary > 0)
-            {
-                float percent = fighterData.timesWonSecondary / (float)fighterData.timesUsedSecondary;
-                percent = Mathf.Min(percent, 1f);
+                    if (timesUsed1 > 0)
+                    {
+                        percent = fighterData.timesUsedPrimary / (float)timesUsed1;
+                        percent = Mathf.Min(percent, 1f);
 
-                LeanTween.value(statBar.gameObject, statBar.fillAmount, percent, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
+                        LeanTween.value(statBar.gameObject, statBar.fillAmount, percent, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
 
-                stat.text = $"{Mathf.RoundToInt(percent * 100f)}%";
-            }
-            else
-            {
-                stat.text = "0%";
-                LeanTween.value(statBar.gameObject, statBar.fillAmount, 0f, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
+                        stat.text = $"{Mathf.RoundToInt(percent * 100f)}%";
+
+                        break;
+                    }
+                    else
+                    {
+                        goto default;
+                    }
+                case 2: //used secondary
+                    int timesUsed2 = fighterData.timesUsedPrimary + fighterData.timesUsedSecondary;
+
+                    if (timesUsed2 > 0)
+                    {
+                        percent = fighterData.timesUsedSecondary / (float)timesUsed2;
+                        percent = Mathf.Min(percent, 1f);
+
+                        LeanTween.value(statBar.gameObject, statBar.fillAmount, percent, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
+
+                        stat.text = $"{Mathf.RoundToInt(percent * 100f)}%";
+
+                        break;
+                    }
+                    else
+                    {
+                        goto default;
+                    }
+                case 3: //won primary
+                    if (fighterData.timesUsedPrimary > 0)
+                    {
+                        percent = fighterData.timesWonPrimary / (float)fighterData.timesUsedPrimary;
+                        percent = Mathf.Min(percent, 1f);
+
+                        LeanTween.value(statBar.gameObject, statBar.fillAmount, percent, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
+
+                        stat.text = $"{Mathf.RoundToInt(percent * 100f)}%";
+
+                        break;
+                    }
+                    else
+                    {
+                        goto default;
+                    }
+                case 4: //won secondary
+                    if (fighterData.timesUsedSecondary > 0)
+                    {
+                        percent = fighterData.timesWonSecondary / (float)fighterData.timesUsedSecondary;
+                        percent = Mathf.Min(percent, 1f);
+
+                        LeanTween.value(statBar.gameObject, statBar.fillAmount, percent, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
+
+                        stat.text = $"{Mathf.RoundToInt(percent * 100f)}%";
+
+                        break;
+                    }
+                    else
+                    {
+                        goto default;
+                    }
+                default:
+                    stat.text = "0%";
+                    LeanTween.value(statBar.gameObject, statBar.fillAmount, 0f, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
+
+                    break;
+
             }
         }
         else
