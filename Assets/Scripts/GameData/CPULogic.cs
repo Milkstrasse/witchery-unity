@@ -130,7 +130,11 @@ public struct CPULogic
                             {
                                 goto case 0;
                             }
-                            else if (logic.players[0].effects.Count == 5 && logic.players[0].GetEffect(move.effect.name, false) == 0)
+                            else if (logic.players[0].GetEffect(move.effect.name, false)/move.effect.value >= GlobalData.stackLimit)
+                            {
+                                goto case 0;
+                            }
+                            else if (logic.players[0].effects.Count == GlobalData.effectLimit && logic.players[0].GetEffect(move.effect.name, false) == 0)
                             {
                                 goto case 0;
                             }
@@ -143,7 +147,7 @@ public struct CPULogic
                             {
                                 goto case 0;
                             }
-                            else if (logic.players[1].effects.Count == 5 && logic.players[1].GetEffect(move.effect.name, false) == 0)
+                            else if (logic.players[1].effects.Count == GlobalData.effectLimit && logic.players[1].GetEffect(move.effect.name, false) == 0)
                             {
                                 goto case 0;
                             }
@@ -153,6 +157,15 @@ public struct CPULogic
                             }
                         case 16: //steal effects
                             if (logic.players[0].CheckEffectBalance() <= 0)
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                goto default;
+                            }
+                        case 19: //add blank
+                            if (logic.players[0].blanks >= GlobalData.blankLimit)
                             {
                                 goto case 0;
                             }

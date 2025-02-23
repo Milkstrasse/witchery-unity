@@ -132,10 +132,15 @@ public class PlayerData
 
         if (index >= 0)
         {
-            effects[index].multiplier += effect.multiplier;
-            effects[index].isNew = true;
+            int multiplier = effects[index].multiplier + effect.multiplier;
+
+            if (multiplier <= GlobalData.stackLimit)
+            {
+                effects[index].multiplier = multiplier;
+                effects[index].isNew = true;
+            }
         }
-        else if (index < 0 && effects.Count < 5)
+        else if (index < 0 && effects.Count < GlobalData.effectLimit)
         {
             effects.Add(effect);
 
@@ -246,10 +251,20 @@ public class PlayerData
 
     public void AddBlanks(int amount)
     {
-        blanks += amount;
+        int initBlanks = blanks;
+        blanks = Math.Min(blanks + amount, GlobalData.blankLimit);
 
-        cardStack.Add(-1);
-        ShuffleStack();
+        int added = blanks - initBlanks;
+
+        for (int i = 0; i < added; i++)
+        {
+            cardStack.Add(-1);
+        }
+
+        if (added > 0)
+        {
+            ShuffleStack();
+        }
     }
 
     public void RemoveBlanks()
