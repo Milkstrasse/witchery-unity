@@ -117,7 +117,7 @@ public struct CPULogic
                             {
                                 goto case 0;
                             }
-                            else if (move.target == 1 && logic.players[0].CheckEffectBalance() < 0) //clear opponent's effects
+                            else if (move.target == 1 && logic.players[0].CheckEffectBalance() <= 0) //clear opponent's effects
                             {
                                 goto case 0;
                             }
