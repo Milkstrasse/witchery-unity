@@ -85,6 +85,15 @@ public struct CPULogic
                 {
                     switch (move.moveID)
                     {
+                        case 1: //replay card
+                            if (!logic.lastCard.card.hasMove || logic.lastCard.card.move.moveID == 1)
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                goto default;
+                            }
                         case 5: //redistribute health
                             if (player.currHealth >= logic.players[0].health)
                             {
