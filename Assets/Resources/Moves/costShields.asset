@@ -21,7 +21,7 @@ MonoBehaviour:
     name: shields
     icon: f3ed
     multiplier: 3
-    value: 2
+    value: 1
     statusType: 2
     isNew: 0
   moveType: 2
