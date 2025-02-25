@@ -103,15 +103,6 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 7: //remove random card
-                            if (logic.players[0].cardHand.Count == 0)
-                            {
-                                goto case 0;
-                            }
-                            else
-                            {
-                                goto default;
-                            }
                         case 11: //swap effects
                             if (logic.players[1].CheckEffectBalance() >= logic.players[0].CheckEffectBalance())
                             {
@@ -175,6 +166,15 @@ public struct CPULogic
                             }
                         case 19: //add blank
                             if (logic.players[0].blanks >= GlobalData.blankLimit)
+                            {
+                                goto case 0;
+                            }
+                            else
+                            {
+                                goto default;
+                            }
+                        case 20: //remove random card
+                            if (logic.players[0].cardHand.Count == 0)
                             {
                                 goto case 0;
                             }

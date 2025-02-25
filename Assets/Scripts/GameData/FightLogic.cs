@@ -88,7 +88,7 @@ public class FightLogic
         {
             switch (lastCard.card.move.moveID)
             {
-                case 7: //remove random card
+                case 20: //remove random card
                     int cardAmount = players[1 - playerTurn].cardHand.Count;
                     if (cardAmount > 0)
                     {
