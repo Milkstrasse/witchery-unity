@@ -53,7 +53,7 @@ public struct CPULogic
                     }
                     else
                     {
-                        if (move.moveID == 10 && player.currHealth + health <= 0) //special damage
+                        if ((move.moveID == 10 && player.currHealth + health <= 0) || logic.players[0].GetEffect("spice") >= player.currHealth) //prevent self k.o.
                         {
                             prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                         }

@@ -128,7 +128,7 @@ public class FightLogic
 
         if (move.moveType != MoveType.Response)
         {
-            if (blockable && FightManager.singleton.players[1 - turn].HasResponseTo(move))
+            if (blockable && FightManager.singleton.players[1 - turn].HasResponseTo(card.move))
             {
                 return false;
             }
@@ -224,7 +224,7 @@ public class FightLogic
                     int damageA = Math.Min(damage - players[turn].GetPowerBonus() + players[1 - turn].GetDamageModifier(), 0);
                     int damageB = Math.Min(damage - players[turn].GetPowerBonus() + players[turn].GetDamageModifier(), 0);
 
-                    players[1 - turn].health = Math.Clamp(players[1 - turn].health + damageA, 0, players[turn].maxHealth);
+                    players[1 - turn].health = Math.Clamp(players[1 - turn].health + damageA, 0, players[1 - turn].maxHealth);
                     if (winner < 0 && players[1 - turn].health == 0)
                     {
                         players[0].playedUntilEnd = true;
@@ -370,7 +370,7 @@ public class FightLogic
                         
                         if (move.moveType == MoveType.Special)
                         {
-                            effectAmount *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
+                            effectAmount = lastCard.card.hasMove ? lastCard.card.move.cost : 0;
                         }
 
                         effectAmount = Math.Max(effectAmount + players[turn].GetPowerBonus(), 0);

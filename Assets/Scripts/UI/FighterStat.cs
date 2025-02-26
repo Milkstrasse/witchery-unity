@@ -96,7 +96,7 @@ public class FighterStat : MonoBehaviour
                         goto default;
                     }
                 default:
-                    stat.text = "0%";
+                    stat.text = "-";
                     LeanTween.value(statBar.gameObject, statBar.fillAmount, 0f, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
 
                     break;
@@ -105,7 +105,7 @@ public class FighterStat : MonoBehaviour
         }
         else
         {
-            stat.text = "0%";
+            stat.text = "-";
             LeanTween.value(statBar.gameObject, statBar.fillAmount, 0f, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
         }
     }
