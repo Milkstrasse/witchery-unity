@@ -88,14 +88,6 @@ public class FightLogic
         {
             switch (lastCard.card.move.moveID)
             {
-                case 20: //remove random card
-                    int cardAmount = players[1 - playerTurn].cardHand.Count;
-                    if (cardAmount > 0)
-                    {
-                        players[1 - playerTurn].RemoveCard(UnityEngine.Random.Range(0, cardAmount));
-                    }
-
-                    break;
                 case 23: //clear blanks
                 case 25: //clear blanks after handover
                     players[playerTurn].RemoveBlanks();
@@ -296,6 +288,14 @@ public class FightLogic
                 case 19: //add blank
                     players[(move.target + turn) % 2].AddBlanks(1);
                     break;
+                case 20: //remove random card
+                    int cardAmount = players[(move.target + turn) % 2].cardHand.Count;
+                    if (cardAmount > 0)
+                    {
+                        players[(move.target + turn) % 2].RemoveCard(UnityEngine.Random.Range(0, cardAmount));
+                    }
+
+                    break;
                 case 21: //heal to health
                     players[(move.target + turn) % 2].health = Math.Max(players[(move.target + turn) % 2].health, move.health + players[turn].GetPowerBonus());
                     break;
@@ -370,7 +370,7 @@ public class FightLogic
                         
                         if (move.moveType == MoveType.Special)
                         {
-                            effectAmount = lastCard.card.hasMove ? lastCard.card.move.cost : 0;
+                            effectAmount *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
                         }
 
                         effectAmount = Math.Max(effectAmount + players[turn].GetPowerBonus(), 0);
@@ -456,6 +456,7 @@ public class FightLogic
         }
 
         PlayCard(lastCard.card, lastCard.player, false);
+        //---------
         lastCard.played = true;
 
         return true;
