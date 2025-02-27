@@ -130,19 +130,23 @@ public class PlayerData
             }
         }
 
-        if (index >= 0)
+        if (index >= 0 && effects[index].multiplier < GlobalData.stackLimit)
         {
             int multiplier = effects[index].multiplier + effect.multiplier;
 
-            if (multiplier <= GlobalData.stackLimit)
-            {
-                effects[index].multiplier = multiplier;
-                effects[index].isNew = true;
-            }
+            effects[index].multiplier = Math.Min(multiplier, GlobalData.stackLimit);
+            effects[index].isNew = true;
         }
         else if (index < 0 && effects.Count < GlobalData.effectLimit)
         {
-            effects.Add(effect);
+            if (effect.multiplier > GlobalData.stackLimit)
+            {
+                effects.Add(new StatusEffect(effect, GlobalData.stackLimit));
+            }
+            else
+            {
+                effects.Add(effect);
+            }
 
             maxEffects = Math.Max(effects.Count, maxEffects);
         }
