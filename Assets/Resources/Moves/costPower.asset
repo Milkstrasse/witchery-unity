@@ -20,7 +20,7 @@ MonoBehaviour:
   effect:
     name: power
     icon: f102
-    multiplier: 3
+    multiplier: 2
     value: 1
     statusType: 1
     isNew: 0

@@ -20,7 +20,7 @@ MonoBehaviour:
   effect:
     name: spice
     icon: f816
-    multiplier: 3
+    multiplier: 2
     value: 2
     statusType: 3
     isNew: 0

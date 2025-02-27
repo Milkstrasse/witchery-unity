@@ -20,7 +20,7 @@ MonoBehaviour:
   effect:
     name: bleed
     icon: f043
-    multiplier: 3
+    multiplier: 2
     value: -2
     statusType: 0
     isNew: 0
