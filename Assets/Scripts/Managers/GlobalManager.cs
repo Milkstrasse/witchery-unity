@@ -25,6 +25,8 @@ public class GlobalManager : MonoBehaviour
     public int maxPlayers;
     public string lastScene;
 
+    public FightLog fightLog;
+
     public event Action<string> OnCodeCreated;
     
     private async void Awake()

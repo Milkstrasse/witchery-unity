@@ -45,6 +45,8 @@ public class FightManager : MonoBehaviour
         NetworkClient.ReplaceHandler<TurnMessage>(OnTurnStart);
         NetworkClient.ReplaceHandler<MoveMessage>(OnMoveReceived);
         NetworkServer.ReplaceHandler<MoveMessage>(OnMoveMade);
+
+        GlobalManager.singleton.fightLog = new FightLog();
     }
 
     [Server]

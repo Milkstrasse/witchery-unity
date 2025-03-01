@@ -6,6 +6,7 @@ using Utp;
 public class GameOverManager : MonoBehaviour
 {
     [SerializeField] private GameObject credits;
+    [SerializeField] private FightLogUI fightLog;
 
     private PlayerObject[] players;
     public event Action<PlayerObject[]> OnSetupComplete;
@@ -50,6 +51,13 @@ public class GameOverManager : MonoBehaviour
         AudioManager.singleton.PlayStandardSound();
 
         credits.SetActive(enable);
+    }
+
+    public void ToggleLog(bool enable)
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        fightLog.gameObject.SetActive(enable);
     }
 
     public void ReturnToSelection()
