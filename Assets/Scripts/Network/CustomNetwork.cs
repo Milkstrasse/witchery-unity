@@ -25,6 +25,9 @@ public class CustomNetwork : RelayNetworkManager
     {
         base.OnClientConnect();
 
+        playersReady = 0;
+        players = new PlayerMessage[2];
+
         NetworkClient.RegisterHandler<PlayerMessage>(OnClientReceivePlayer);
     }
 
@@ -113,6 +116,7 @@ public class CustomNetwork : RelayNetworkManager
         if (GlobalManager.singleton.GetCurrentScene() == "FightScene")
         {
             StopServer();
+
             GlobalManager.singleton.LoadScene("SelectionScene");
         }
         else

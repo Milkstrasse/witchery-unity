@@ -3194,7 +3194,7 @@ GameObject:
   - component: {fileID: 5034713026928944200}
   - component: {fileID: 2375438514970021797}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: host
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3247,7 +3247,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ready
+  m_text: Host
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e8a02252f4ec47748da2becdd6cc899, type: 2}
   m_sharedMaterial: {fileID: 6011306716087563926, guid: 6e8a02252f4ec47748da2becdd6cc899, type: 2}
@@ -3332,7 +3332,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:4d5f43fceb1874d3fb84d5259516bec7
     m_TableEntryReference:
-      m_KeyId: 2538625827856384
+      m_KeyId: 58463346688
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

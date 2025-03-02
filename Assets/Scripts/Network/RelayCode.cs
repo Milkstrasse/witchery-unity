@@ -4,8 +4,10 @@ using UnityEngine.Localization.Components;
 
 public class RelayCode : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI codeText;
+    [SerializeField] private TMP_InputField codeText;
     [SerializeField] private LocalizeStringEvent readyText;
+
+    private string hostCode;
 
     private void Start()
     {
@@ -22,20 +24,31 @@ public class RelayCode : MonoBehaviour
 
     public void SetJoincode(string joincode)
     {
-        GlobalManager.singleton.joincode = joincode;
-
-        if (joincode.Length > 0)
+        if (joincode.Length > 0 && hostCode != joincode)
         {
+            GlobalManager.singleton.joincode = joincode;
+
             readyText.StringReference.SetReference("StringTable", "join");
+            readyText.gameObject.name = "join";
+        }
+        else if (joincode.Length == 0)
+        {
+            readyText.StringReference.SetReference("StringTable", "host");
+            readyText.gameObject.name = "host";
+
+            GlobalManager.singleton.joincode = "";
+            hostCode = "";
         }
         else
         {
-            readyText.StringReference.SetReference("StringTable", "host");
+            GlobalManager.singleton.joincode = "";
+            hostCode = "";
         }
     }
 
     private void ShowCode(string code)
     {
+        hostCode = code;
         codeText.text = code;
     }
 }

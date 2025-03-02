@@ -85,8 +85,12 @@ public class GameOverManager : MonoBehaviour
         {
             Destroy(players[i].gameObject);
         }
+
+        if (GlobalManager.singleton.mode != GameMode.Online)
+        {
+            GlobalManager.singleton.mode = GameMode.Offline;
+        }
         
-        GlobalManager.singleton.mode = GameMode.Offline;
         GlobalManager.singleton.LoadScene("StatisticsScene");
     }
 }

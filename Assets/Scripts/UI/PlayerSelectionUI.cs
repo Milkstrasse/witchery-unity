@@ -51,6 +51,7 @@ public class PlayerSelectionUI : MonoBehaviour
         if (!GlobalManager.singleton.isConnected)
         {
             readyText.StringReference.SetReference("StringTable", "ready");
+            readyText.gameObject.name = "ready";
         }
 
         filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};
@@ -158,13 +159,15 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             LeanTween.cancel(timer.gameObject);
             timer.fillAmount = 1.0f;
-            
-            readyText.StringReference.SetReference("StringTable", "ready");
+
+            readyText.StringReference.SetReference("StringTable", readyText.gameObject.name);
+
             cpuButton.interactable = true;
         }
         else
         {
             readyText.StringReference.SetReference("StringTable", "cancel");
+
             cpuButton.interactable = false;
         }
 

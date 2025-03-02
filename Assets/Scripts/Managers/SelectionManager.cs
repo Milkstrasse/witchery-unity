@@ -49,7 +49,9 @@ public class SelectionManager : MonoBehaviour
          if (GlobalManager.singleton.mode == GameMode.Online)
          {
             StopAllCoroutines();
+
             GlobalManager.QuitAnyConnection();
+            NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
          }
 
          return false;

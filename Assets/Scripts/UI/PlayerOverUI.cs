@@ -23,7 +23,8 @@ public class PlayerOverUI : MonoBehaviour
         background.material = player.hasWon ? victory : defeat;
         triangle.material = player.hasWon ? victory : defeat;
 
-        (description.StringReference["amount"] as IntVariable).Value = player.energy;
+        //(description.StringReference["amount"] as IntVariable).Value = player.energy;
+        (description.StringReference["amount"] as IntVariable).Value = -1;
         description.RefreshString();
     }
 }
