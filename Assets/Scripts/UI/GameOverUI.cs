@@ -18,13 +18,13 @@ public class GameOverUI : MonoBehaviour
     {
         if (NetworkClient.activeHost)
         {
-            topPlayer.UpdateUI(players[1]);
-            bottomPlayer.UpdateUI(players[0]);
+            topPlayer.UpdateUI(players[1], players[0].energy);
+            bottomPlayer.UpdateUI(players[0], players[0].energy);
         }
         else
         {
-            topPlayer.UpdateUI(players[0]);
-            bottomPlayer.UpdateUI(players[1]);
+            topPlayer.UpdateUI(players[0], players[1].energy);
+            bottomPlayer.UpdateUI(players[1], players[1].energy);
         }
     }
 
