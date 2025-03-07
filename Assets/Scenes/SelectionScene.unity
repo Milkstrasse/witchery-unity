@@ -7494,6 +7494,10 @@ PrefabInstance:
       propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2375438514970021797, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 2538625827856384
+      objectReference: {fileID: 0}
     - target: {fileID: 2570704479232679380, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -7570,6 +7574,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5034713026928944200, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
+      propertyPath: m_text
+      value: Ready
+      objectReference: {fileID: 0}
     - target: {fileID: 5311449031281040652, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7633,6 +7641,10 @@ PrefabInstance:
     - target: {fileID: 8242940014531712411, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
       propertyPath: m_text
       value: PLAYER
+      objectReference: {fileID: 0}
+    - target: {fileID: 8971433441827927460, guid: 14678e54efde241f685e6dcaf000f9df, type: 3}
+      propertyPath: m_Name
+      value: ready
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

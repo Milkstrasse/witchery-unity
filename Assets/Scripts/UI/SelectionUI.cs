@@ -60,9 +60,14 @@ public class SelectionUI : MonoBehaviour
         else
         {
             AudioManager.singleton.PlayNegativeSound();
+
+            if (GlobalManager.singleton.mode == GameMode.Online)
+            {
+                playerTop.SetLeader(GlobalData.fighters[0], 0);
+            }
         }
         
-        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Training)
+        if (GlobalManager.singleton.mode == GameMode.Offline)
         {
             playerTop.ToggleUI(isReady);
 
