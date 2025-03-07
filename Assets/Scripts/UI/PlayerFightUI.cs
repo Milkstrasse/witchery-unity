@@ -104,7 +104,7 @@ public class PlayerFightUI : MonoBehaviour
         {
             StartCoroutine(UpdateTimer());
         }
-        else if ((GlobalManager.singleton.mode == GameMode.Training || GlobalManager.singleton.mode == GameMode.Testing) && isInteractable && !canBePlayable)
+        else if (GlobalManager.singleton.mode == GameMode.Training && isInteractable && !canBePlayable)
         {
             StartCoroutine(MakeCPUMove());
         }
@@ -256,7 +256,7 @@ public class PlayerFightUI : MonoBehaviour
         {
             StartCoroutine("UpdateTimer");
         }
-        else if (isInteractable && !canBePlayable && (GlobalManager.singleton.mode == GameMode.Training || GlobalManager.singleton.mode == GameMode.Testing))
+        else if (isInteractable && !canBePlayable && GlobalManager.singleton.mode == GameMode.Training)
         {
             StartCoroutine(MakeCPUMove());
         }

@@ -720,10 +720,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b900fbcfaeab54351ba7cc2693452de6, type: 2}
   - {fileID: 2100000, guid: 128f62befdd034365adb34aa8f8769bb, type: 2}
   - {fileID: 2100000, guid: 10842f26f0d6b4e258345c28bfe1eabe, type: 2}
-  isConnected: 0
   mode: 0
   joincode: 
-  relayEnabled: 0
+  relayEnabled: 1
   maxPlayers: 0
   lastScene: 
 --- !u!82 &1766523638

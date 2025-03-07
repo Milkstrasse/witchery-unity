@@ -18,7 +18,6 @@ public class GlobalManager : MonoBehaviour
 
     [SerializeField] private Material[] materials;
 
-    public bool isConnected;
     public GameMode mode;
     public string joincode;
     public bool relayEnabled;
@@ -39,27 +38,33 @@ public class GlobalManager : MonoBehaviour
         GlobalData.missions = Resources.LoadAll<Mission>("Missions/");
         GlobalData.themes = Resources.LoadAll<Theme>("Themes/");
 
-        mode = GameMode.Offline;
-        maxPlayers = 1;
-
-        #if !UNITY_EDITOR
+        if (mode == GameMode.Online)
+        {
             try
             {
                 await UnityServices.InitializeAsync();
                 AuthenticationService.Instance.SwitchProfile(Random.Range(0, 1000000).ToString());
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-                isConnected = true;
-                relayEnabled = true;
-
-                mode = GameMode.Online;
                 maxPlayers = 2;
             }
             catch (Exception exception)
             {
+                mode = GameMode.Offline;
+                maxPlayers = 1;
+
+                relayEnabled = false;
+
                 Debug.LogError(exception);
             }
-        #endif
+        }
+        else
+        {
+            mode = GameMode.Offline;
+            maxPlayers = 1;
+
+            relayEnabled = false;
+        }
 
         AsyncOperationHandle handle = LocalizationSettings.InitializationOperation;
         await handle.Task;
@@ -72,10 +77,6 @@ public class GlobalManager : MonoBehaviour
         GlobalData.themeIndex = PlayerPrefs.GetInt("theme", 1);
 
         ApplyTheme();
-
-        #if UNITY_EDITOR
-            relayEnabled = false;
-        #endif
 
         if (!SaveManager.LoadData())
         {
@@ -198,5 +199,5 @@ public class GlobalManager : MonoBehaviour
 
 public enum GameMode
 {
-    Online, Offline, Training, Testing
+    Online, Offline, Training
 }

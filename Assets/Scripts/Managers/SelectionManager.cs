@@ -107,7 +107,7 @@ public class SelectionManager : MonoBehaviour
    {
       if (GlobalManager.singleton.mode == GameMode.Offline)
       {
-         GlobalManager.singleton.mode = GameMode.Testing;
+         GlobalManager.singleton.mode = GameMode.Training;
          return true;
       }
       else

@@ -62,7 +62,7 @@ public class SelectionUI : MonoBehaviour
             AudioManager.singleton.PlayNegativeSound();
         }
         
-        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Testing)
+        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Training)
         {
             playerTop.ToggleUI(isReady);
 

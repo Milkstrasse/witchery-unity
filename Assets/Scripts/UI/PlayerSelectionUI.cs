@@ -48,7 +48,7 @@ public class PlayerSelectionUI : MonoBehaviour
         SetLeader(GlobalData.fighters[0], 0);
         leader = -1;
 
-        if (!GlobalManager.singleton.isConnected)
+        if (GlobalManager.singleton.mode != GameMode.Online)
         {
             readyText.StringReference.SetReference("StringTable", "ready");
             readyText.gameObject.name = "ready";
@@ -171,7 +171,7 @@ public class PlayerSelectionUI : MonoBehaviour
             cpuButton.interactable = false;
         }
 
-        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Testing)
+        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Training)
         {
             readyButton.interactable = false;
             LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 120f), 0.3f);

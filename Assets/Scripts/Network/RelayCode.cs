@@ -11,7 +11,7 @@ public class RelayCode : MonoBehaviour
 
     private void Start()
     {
-        if (GlobalManager.singleton.isConnected)
+        if (GlobalManager.singleton.mode == GameMode.Online)
         {
             codeText.text = "";
             GlobalManager.singleton.OnCodeCreated += ShowCode;
