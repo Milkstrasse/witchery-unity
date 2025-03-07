@@ -9,7 +9,7 @@ using Utp;
 public class SelectionManager : MonoBehaviour
 {
    [SerializeField] private SettingsManager settings;
-   [SerializeField] private TMP_InputField relayCode;
+   [SerializeField] private RelayCode relayCode;
 
    private RelayNetworkManager networkManager;
    private bool[] isReady;
@@ -32,6 +32,11 @@ public class SelectionManager : MonoBehaviour
       CheckMissions();
    }
 
+   public void SetAsRematch()
+   {
+      relayCode.ToggleRematch(true);
+   }
+
    public bool SetReady(int index)
    {
       if (fighterIDs.Count == 0)
@@ -39,7 +44,7 @@ public class SelectionManager : MonoBehaviour
 
       if (index == 1)
       {
-         relayCode.interactable = isReady[index];
+         relayCode.SetInteractable(isReady[index]);
       }
 
       isReady[index] = !isReady[index];
@@ -53,6 +58,8 @@ public class SelectionManager : MonoBehaviour
             GlobalManager.QuitAnyConnection();
             NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
          }
+
+         relayCode.ToggleRematch(false);
 
          return false;
       }

@@ -19,7 +19,7 @@ public class SelectionUI : MonoBehaviour
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
         players = new PlayerObject[gameObjects.Length];
 
-        if (players.Length > 0)
+        if (players.Length > 0) //rematch
         {
             for (int i = 0; i < gameObjects.Length; i++)
             {
@@ -44,6 +44,8 @@ public class SelectionUI : MonoBehaviour
                     playerBottom.SelectCard(players[1].fighterIDs[j], true);
                 }
             }
+
+            manager.SetAsRematch();
         }
     }
 

@@ -25,8 +25,13 @@ public class CustomNetwork : RelayNetworkManager
     {
         base.OnClientConnect();
 
-        playersReady = 0;
-        players = new PlayerMessage[2];
+        if (GlobalManager.singleton.mode == GameMode.Online)
+        {
+            //reset scene so new server can start correctly
+            networkSceneName = "";
+            playersReady = 0;
+            players = new PlayerMessage[2];
+        }
 
         NetworkClient.RegisterHandler<PlayerMessage>(OnClientReceivePlayer);
     }
@@ -117,6 +122,12 @@ public class CustomNetwork : RelayNetworkManager
         {
             StopServer();
 
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < gameObjects.Length; i++)
+            {
+                Destroy(gameObjects[i]);
+            }
+
             GlobalManager.singleton.LoadScene("SelectionScene");
         }
         else
@@ -131,6 +142,12 @@ public class CustomNetwork : RelayNetworkManager
 
         if (GlobalManager.singleton.GetCurrentScene() == "FightScene")
         {
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < gameObjects.Length; i++)
+            {
+                Destroy(gameObjects[i]);
+            }
+
             GlobalManager.singleton.LoadScene("SelectionScene");
         }
     }

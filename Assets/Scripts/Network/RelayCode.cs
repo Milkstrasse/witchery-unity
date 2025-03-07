@@ -22,6 +22,29 @@ public class RelayCode : MonoBehaviour
         }
     }
 
+    public void ToggleRematch(bool isRematch)
+    {
+        if (isRematch)
+        {
+            readyText.StringReference.SetReference("StringTable", "ready");
+            readyText.gameObject.name = "ready";
+
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            readyText.StringReference.SetReference("StringTable", "host");
+            readyText.gameObject.name = "host";
+
+            gameObject.SetActive(true);
+        }
+    }
+
+    public void SetInteractable(bool active)
+    {
+        codeText.interactable = active;
+    }
+
     public void SetJoincode(string joincode)
     {
         if (joincode.Length > 0 && hostCode != joincode)

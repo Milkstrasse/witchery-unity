@@ -28,7 +28,12 @@ public class GameOverManager : MonoBehaviour
 
     public void Rematch()
     {
-        if (NetworkServer.connections.Count == GlobalManager.singleton.maxPlayers)
+        if (NetworkClient.activeHost && NetworkServer.connections.Count == GlobalManager.singleton.maxPlayers)
+        {
+            AudioManager.singleton.PlayPositiveSound();
+            NetworkClient.Send(new TurnMessage());
+        }
+        else if (!NetworkClient.activeHost && NetworkClient.isConnected)
         {
             AudioManager.singleton.PlayPositiveSound();
             NetworkClient.Send(new TurnMessage());
@@ -36,6 +41,7 @@ public class GameOverManager : MonoBehaviour
         else
         {
             AudioManager.singleton.PlayNegativeSound();
+            GlobalManager.QuitAnyConnection();
             GlobalManager.singleton.LoadScene("SelectionScene");
         }
     }
@@ -65,13 +71,12 @@ public class GameOverManager : MonoBehaviour
         AudioManager.singleton.PlayStandardSound();
 
         GlobalManager.QuitAnyConnection();
-
-        for (int i = 0; i < players.Length; i++)
-        {
-            Destroy(players[i].gameObject);
-        }
         
-        GlobalManager.singleton.mode = GameMode.Offline;
+        if (GlobalManager.singleton.mode != GameMode.Online)
+        {
+            GlobalManager.singleton.mode = GameMode.Offline;
+        }
+
         GlobalManager.singleton.LoadScene("SelectionScene");
     }
 
@@ -80,11 +85,6 @@ public class GameOverManager : MonoBehaviour
         AudioManager.singleton.PlayStandardSound();
 
         GlobalManager.QuitAnyConnection();
-
-        for (int i = 0; i < players.Length; i++)
-        {
-            Destroy(players[i].gameObject);
-        }
 
         if (GlobalManager.singleton.mode != GameMode.Online)
         {
