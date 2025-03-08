@@ -8,6 +8,11 @@ public class ImpactUI : MonoBehaviour
 
     private int target;
 
+    private void Awake()
+    {
+        LeanTween.moveLocal(portrait.gameObject, new Vector3(-750f, -50f, 0f), 0.1f);
+    }
+
     public void SetupUI(int target, string fighter, string outfit, bool rotated)
     {
         this.target = target;
@@ -36,8 +41,16 @@ public class ImpactUI : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    private void OnDisable()
+    public void ToggleVisibility(bool isVisible)
     {
-        portrait.transform.localPosition = new Vector3(-750f, -50f, 0);
+        if (isVisible)
+        {
+            transform.localScale = Vector3.one;
+        }
+        else
+        {
+            portrait.transform.localPosition = new Vector3(-750f, -50f, 0f);
+            transform.localScale = Vector3.zero;
+        }
     }
 }

@@ -205,12 +205,12 @@ public class PlayerFightUI : MonoBehaviour
         if (card.isSpecial && GlobalData.animateImpact)
         {
             cardSlot.impactFrame.transform.SetAsLastSibling();
-            cardSlot.impactFrame.gameObject.SetActive(true);
+            cardSlot.impactFrame.ToggleVisibility(true);
             cardSlot.impactFrame.SetupUI(card.move.target, card.fighter.name, card.fighter.outfits[card.outfit].name, true);
 
             yield return new WaitForSecondsRealtime(0.8f);
 
-            cardSlot.impactFrame.gameObject.SetActive(false);
+            cardSlot.impactFrame.ToggleVisibility(false);
         }
 
         cardUI.GetComponent<DragDrop>().ResetDrag();

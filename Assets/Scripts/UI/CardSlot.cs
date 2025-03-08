@@ -81,7 +81,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         if (card.isSpecial && GlobalData.animateImpact)
         {
             impactFrame.transform.SetAsLastSibling();
-            impactFrame.gameObject.SetActive(true);
+            impactFrame.ToggleVisibility(true);
             impactFrame.SetupUI(card.move.target, card.fighter.name, card.fighter.outfits[card.outfit].name, transform.eulerAngles.z == 180f);
 
             eventCardUI.player.cardHand.RemoveAt(cardIndex);
@@ -89,7 +89,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
             yield return new WaitForSecondsRealtime(0.8f);
 
-            impactFrame.gameObject.SetActive(false);
+            impactFrame.ToggleVisibility(false);
         }
 
         SetupCard(card, eventCardUI.transform.eulerAngles.z == 180f);
