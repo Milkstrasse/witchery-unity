@@ -16,6 +16,9 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public bool cardWasPlayed;
 
+    [SerializeField] private StatusInfoUI topInfo;
+    [SerializeField] private StatusInfoUI bottomInfo;
+
     private void Start()
     {
         FightManager.singleton.OnMoveFailed += ResetCard;
@@ -29,6 +32,20 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             eventCardUI.HighlightCard(true);
             eventCardUI.UpdateMoveText(true, cardUI.card.hasMove ? cardUI.card.move.cost : 0);
+
+            if (eventCardUI.card.hasMove && eventCardUI.card.move.effect.multiplier > 0)
+            {
+                if (eventCardUI.transform.eulerAngles.z == 180f)
+                {
+                    topInfo.gameObject.SetActive(true);
+                    topInfo.SetupInfo(new StatusEffect(eventCardUI.card.move.effect, 1));
+                }
+                else
+                {
+                    bottomInfo.gameObject.SetActive(true);
+                    bottomInfo.SetupInfo(new StatusEffect(eventCardUI.card.move.effect, 1));
+                }
+            }
         }
     }
 
@@ -39,6 +56,15 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             eventCardUI.HighlightCard(false);
             eventCardUI.UpdateMoveText(false, 1);
+
+            if (eventCardUI.transform.eulerAngles.z == 180f)
+            {
+                topInfo.gameObject.SetActive(false);
+            }
+            else
+            {
+                bottomInfo.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -48,6 +74,15 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;
+
+            if (eventCardUI.transform.eulerAngles.z == 180f)
+            {
+                topInfo.gameObject.SetActive(false);
+            }
+            else
+            {
+                bottomInfo.gameObject.SetActive(false);
+            }
 
             if (eventCardUI.card.hasMove)
             {

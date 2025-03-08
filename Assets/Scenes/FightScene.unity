@@ -184,6 +184,8 @@ MonoBehaviour:
   cardUI: {fileID: 671183433}
   lastCardUI: {fileID: 656335046}
   cardWasPlayed: 0
+  topInfo: {fileID: 4661144982924234325}
+  bottomInfo: {fileID: 1380463267}
 --- !u!1 &103234845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1823,6 +1825,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6a689c4ec6c4455a7cab4dfcff4c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1380463267 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7455130677209217465, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
+  m_PrefabInstance: {fileID: 1380463264}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd537aec32226459ea13b440ed2e4dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1467331010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3091,6 +3104,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd6a689c4ec6c4455a7cab4dfcff4c36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4661144982924234325 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7455130677209217465, guid: 2d31c4c1e069c48a3a10fdfebc9faf1c, type: 3}
+  m_PrefabInstance: {fileID: 4661144982924234323}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd537aec32226459ea13b440ed2e4dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &4786632926973647364

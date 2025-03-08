@@ -214,7 +214,7 @@ public class CardUI : MonoBehaviour
 
     IEnumerator Flip(int side, float delay)
     {
-        if (cardSides[1 - side].transform.eulerAngles.y == 90 || cardSides[side].transform.eulerAngles.y == 0)
+        if (cardSides[1 - side].transform.eulerAngles.y == 90f || cardSides[side].transform.eulerAngles.y == 0f)
         {
             yield break;
         }
