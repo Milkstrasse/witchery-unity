@@ -86,18 +86,6 @@ public class SelectionManager : MonoBehaviour
 
          int fighterAmount = fighterIDs.Count;
          fighterIDs = new List<SelectedFighter>();
-
-         if (GlobalManager.singleton.mode == GameMode.Training)
-         {
-            int[] numbers = GlobalManager.singleton.GetRandomNumbers(fighterAmount, GlobalData.fighters.Length);
-            for (int i = 0; i < fighterAmount; i++)
-            {
-               fighterIDs.Add(new SelectedFighter(numbers[i], 0));
-            }
-
-            NetworkClient.Send(new PlayerMessage(fighterIDs.ToArray()));
-            fighterIDs = new List<SelectedFighter>();
-         }
       }
 
       return isReady[index];

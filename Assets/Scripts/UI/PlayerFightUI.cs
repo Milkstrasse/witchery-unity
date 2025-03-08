@@ -306,7 +306,7 @@ public class PlayerFightUI : MonoBehaviour
         MoveMessage message = FightManager.singleton.GetMove();
         MakeMove(message);
 
-        yield return new WaitForSeconds(message.playCard ? 0.8f : 0.2f);
+        yield return new WaitForSeconds(message.playCard ? 0.9f : 0.25f);
 
         if (message.playCard && player.cardHand[message.cardIndex].isSpecial && GlobalData.animateImpact)
         {
