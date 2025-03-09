@@ -11,6 +11,7 @@ public class PlayerFightUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Image healthBar;
     [SerializeField] private TextMeshProUGUI energyText;
+    [SerializeField] private TextMeshProUGUI blanksText;
     [SerializeField] private Image timer;
     [SerializeField] private Image portrait;
     [SerializeField] private Button exitButton;
@@ -62,6 +63,7 @@ public class PlayerFightUI : MonoBehaviour
         nameText.text = GlobalData.fighters[player.fighterIDs[0].fighterID].name;
         healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
         energyText.text = player.energy.ToString();
+        blanksText.text = player.blanks.ToString();
 
         rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 120f);
 
@@ -122,6 +124,12 @@ public class PlayerFightUI : MonoBehaviour
         {
             energyText.text = player.energy.ToString();
             LeanTween.scale(energyText.gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
+        }
+
+        if (blanksText.text != player.blanks.ToString())
+        {
+            blanksText.text = player.blanks.ToString();
+            LeanTween.scale(blanksText.gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
         }
 
         for (int i = 0; i < 5; i++)

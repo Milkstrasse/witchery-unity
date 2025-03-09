@@ -57,7 +57,7 @@ public struct CPULogic
                         {
                             prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                         }
-                        else if (health == 0 && move.cost > 0)
+                        else if (health == 0 && player.cardHand[i].move.cost > 0)
                         {
                             prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                         }
@@ -95,7 +95,7 @@ public struct CPULogic
                                     health = player.fullHealth - player.currHealth;
                                 }
 
-                                if (health == 0 && move.cost > 0)
+                                if (health == 0 && player.cardHand[i].move.cost > 0)
                                 {
                                     prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
                                 }
@@ -139,12 +139,12 @@ public struct CPULogic
 
                                 if (checkEnergy >= 0)
                                 {
-                                    prioritizedCards.Add((i, move.cost * -1 + stealEnergy * -40)); //prioritize energy & cheap cards
+                                    prioritizedCards.Add((i, player.cardHand[i].move.cost * -1 + stealEnergy * -40)); //prioritize energy & cheap cards
                                 }
                                 else
                                 {
                                     stealEnergy -= checkEnergy;
-                                    prioritizedCards.Add((i, move.cost * -1 + stealEnergy * -40)); //prioritize energy & cheap cards
+                                    prioritizedCards.Add((i, player.cardHand[i].move.cost * -1 + stealEnergy * -40)); //prioritize energy & cheap cards
                                 }
                             }
 
@@ -154,9 +154,9 @@ public struct CPULogic
                             {
                                 int energy = move.energy * logic.lastCard.card.move.cost + logic.players[1].GetPowerBonus();
 
-                                if (energy >= move.cost)
+                                if (energy >= player.cardHand[i].move.cost)
                                 {
-                                    prioritizedCards.Add((i, move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
+                                    prioritizedCards.Add((i, player.cardHand[i].move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
                                     break;
                                 }
                                 else
@@ -269,13 +269,13 @@ public struct CPULogic
                             {
                                 goto case 0;
                             }
-                            else if (move.moveType == MoveType.Special && move.energy * logic.lastCard.card.move.cost <= move.cost)
+                            else if (move.moveType == MoveType.Special && move.energy * logic.lastCard.card.move.cost <= player.cardHand[i].move.cost)
                             {
                                 goto case 0;
                             }
                             else
                             {
-                                prioritizedCards.Add((i, move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
+                                prioritizedCards.Add((i, player.cardHand[i].move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
                                 break;
                             }
 
