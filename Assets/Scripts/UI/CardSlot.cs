@@ -117,7 +117,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             impactFrame.transform.SetAsLastSibling();
             impactFrame.ToggleVisibility(true);
-            impactFrame.SetupUI(card.move.target, card.fighter.name, card.fighter.outfits[card.outfit].name, transform.eulerAngles.z == 180f);
+            impactFrame.SetupUI(card.move.target, card.fighter.name, card.fighter.outfits[card.outfit].name, eventCardUI.transform.eulerAngles.z == 180f);
 
             eventCardUI.player.cardHand.RemoveAt(cardIndex);
             eventCardUI.player.OnPlayerChanged?.Invoke();
