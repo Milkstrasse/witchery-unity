@@ -260,13 +260,13 @@ public class PlayerData
 
         int added = blanks - initBlanks;
 
-        for (int i = 0; i < added; i++)
-        {
-            cardStack.Add(-1);
-        }
-
         if (added > 0)
         {
+            for (int i = 0; i < added; i++)
+            {
+                cardStack.Add(-1);
+            }
+
             ShuffleStack();
         }
     }

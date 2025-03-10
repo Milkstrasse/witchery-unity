@@ -302,7 +302,7 @@ public class FightLogic
                 case 23: //clear blanks
                     break;
                 case 25: //hand over blanks
-                    players[(move.target + turn) % 2].AddBlanks(players[playerTurn].blanks);
+                    players[1 - turn].AddBlanks(players[turn].blanks);
                     break;
                 default:
                     int health = move.health;
