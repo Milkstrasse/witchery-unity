@@ -107,8 +107,6 @@ public class SaveManager
 
         if (playerData.playedUntilEnd || (gameHasEnded && playerData.roundsPlayed >= 3))
         {
-            player.energy = playerData.roundsPlayed;
-
             savedData.timesFought++;
 
             if (playerData.startedFirst)

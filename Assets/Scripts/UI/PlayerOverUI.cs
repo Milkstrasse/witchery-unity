@@ -14,7 +14,7 @@ public class PlayerOverUI : MonoBehaviour
     [SerializeField] private Material victory;
     [SerializeField] private Material defeat;
 
-    public void UpdateUI(PlayerObject player, int roundsPlayed)
+    public void UpdateUI(PlayerObject player)
     {
         title.StringReference.SetReference("StringTable", player.hasWon ? "victory" : "defeat");
 
@@ -23,7 +23,7 @@ public class PlayerOverUI : MonoBehaviour
         background.material = player.hasWon ? victory : defeat;
         triangle.material = player.hasWon ? victory : defeat;
 
-        (description.StringReference["amount"] as IntVariable).Value = roundsPlayed;
+        (description.StringReference["amount"] as IntVariable).Value = player.roundsPlayed;
         description.RefreshString();
     }
 }

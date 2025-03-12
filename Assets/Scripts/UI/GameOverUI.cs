@@ -1,6 +1,5 @@
 using Mirror;
 using UnityEngine;
-using UnityEngine.Localization.Components;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -18,13 +17,13 @@ public class GameOverUI : MonoBehaviour
     {
         if (NetworkClient.activeHost)
         {
-            topPlayer.UpdateUI(players[1], players[0].energy);
-            bottomPlayer.UpdateUI(players[0], players[0].energy);
+            topPlayer.UpdateUI(players[1]);
+            bottomPlayer.UpdateUI(players[0]);
         }
         else
         {
-            topPlayer.UpdateUI(players[0], players[1].energy);
-            bottomPlayer.UpdateUI(players[1], players[1].energy);
+            topPlayer.UpdateUI(players[0]);
+            bottomPlayer.UpdateUI(players[1]);
         }
     }
 

@@ -12,6 +12,7 @@ public class PlayerObject : MonoBehaviour
     public int currHealth;
     public int energy;
     public int blanks;
+    public int roundsPlayed;
     public SelectedFighter[] fighterIDs;
 
     public List<Card> cards;
@@ -37,6 +38,7 @@ public class PlayerObject : MonoBehaviour
 
         energy = 0;
         blanks = 0;
+        roundsPlayed = 0;
 
         cards = new List<Card>();
         cardHand = new List<Card>();
@@ -71,6 +73,8 @@ public class PlayerObject : MonoBehaviour
         currHealth = playerData.health;
         energy = playerData.energy;
         blanks = playerData.blanks;
+        roundsPlayed = playerData.roundsPlayed;
+
         effects = playerData.effects;
 
         if (updateCards)
