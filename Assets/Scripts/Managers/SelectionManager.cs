@@ -30,6 +30,11 @@ public class SelectionManager : MonoBehaviour
       NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
 
       CheckMissions();
+
+      if (GlobalManager.singleton.mode != GameMode.Online)
+      {
+         GlobalManager.singleton.mode = GameMode.Offline;
+      }
    }
 
    public void SetAsRematch()

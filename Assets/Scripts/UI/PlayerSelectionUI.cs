@@ -171,7 +171,7 @@ public class PlayerSelectionUI : MonoBehaviour
             cpuButton.interactable = false;
         }
 
-        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Training)
+        if (GlobalManager.singleton.mode != GameMode.Online)
         {
             readyButton.interactable = false;
             LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 120f), 0.3f);

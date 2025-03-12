@@ -71,11 +71,6 @@ public class GameOverManager : MonoBehaviour
         AudioManager.singleton.PlayStandardSound();
 
         GlobalManager.QuitAnyConnection();
-        
-        if (GlobalManager.singleton.mode != GameMode.Online)
-        {
-            GlobalManager.singleton.mode = GameMode.Offline;
-        }
 
         GlobalManager.singleton.LoadScene("SelectionScene");
     }
@@ -85,11 +80,6 @@ public class GameOverManager : MonoBehaviour
         AudioManager.singleton.PlayStandardSound();
 
         GlobalManager.QuitAnyConnection();
-
-        if (GlobalManager.singleton.mode != GameMode.Online)
-        {
-            GlobalManager.singleton.mode = GameMode.Offline;
-        }
         
         GlobalManager.singleton.LoadScene("StatisticsScene");
     }

@@ -67,7 +67,7 @@ public class SelectionUI : MonoBehaviour
             }
         }
         
-        if (GlobalManager.singleton.mode == GameMode.Offline)
+        if (GlobalManager.singleton.mode != GameMode.Online)
         {
             playerTop.ToggleUI(isReady);
 
