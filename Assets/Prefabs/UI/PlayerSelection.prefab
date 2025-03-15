@@ -975,7 +975,7 @@ MonoBehaviour:
   readyText: {fileID: 2375438514970021797}
   portrait: {fileID: 2108096082149886536}
   nameText: {fileID: 8242940014531712411}
-  healthText: {fileID: 7731613226998374781}
+  healthText: {fileID: 5760120231444547857}
   modeButton: {fileID: 8689038964162385286}
   actionButton: {fileID: 5830670813190114372}
   cpuButton: {fileID: 2570704479232679380}
@@ -2673,6 +2673,7 @@ GameObject:
   - component: {fileID: 1162748746981429778}
   - component: {fileID: 8181287716380947810}
   - component: {fileID: 7731613226998374781}
+  - component: {fileID: 5760120231444547857}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -2796,6 +2797,60 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5760120231444547857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8238538949243018570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:4d5f43fceb1874d3fb84d5259516bec7
+    m_TableEntryReference:
+      m_KeyId: 76029378901827584
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables:
+    - name: currHealth
+      variable:
+        rid: 6015138192688152764
+    - name: fullHealth
+      variable:
+        rid: 6015138192688152765
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7731613226998374781}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 6015138192688152764
+      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 75
+    - rid: 6015138192688152765
+      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 75
 --- !u!1 &8373951076993894595
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class FightUI : MonoBehaviour
     private void Start()
     {
         manager.OnSetupComplete += SetupPlayers;
-        manager.OnTurnChanged += ChangePlayers;
+        manager.OnTurnChange += ChangePlayers;
         manager.OnMoveReceive += MakeMove;
     }
 
@@ -88,7 +88,7 @@ public class FightUI : MonoBehaviour
     private void OnDestroy()
     {
         manager.OnSetupComplete -= SetupPlayers;
-        manager.OnTurnChanged -= ChangePlayers;
+        manager.OnTurnChange -= ChangePlayers;
         manager.OnMoveReceive -= MakeMove;
     }
 }

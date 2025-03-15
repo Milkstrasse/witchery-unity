@@ -1,6 +1,8 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 public class PlayerFightUI : MonoBehaviour
@@ -8,7 +10,7 @@ public class PlayerFightUI : MonoBehaviour
     public PlayerObject player;
 
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private LocalizeStringEvent healthText;
     [SerializeField] private Image healthBar;
     [SerializeField] private TextMeshProUGUI energyText;
     [SerializeField] private TextMeshProUGUI blanksText;
@@ -61,7 +63,8 @@ public class PlayerFightUI : MonoBehaviour
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
 
         nameText.text = GlobalData.fighters[player.fighterIDs[0].fighterID].name;
-        healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
+        (healthText.StringReference["currHealth"] as IntVariable).Value = player.currHealth;
+        (healthText.StringReference["fullHealth"] as IntVariable).Value = player.fullHealth;
         energyText.text = player.energy.ToString();
         blanksText.text = player.blanks.ToString();
 
@@ -116,8 +119,7 @@ public class PlayerFightUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        string health = healthText.text.Split('/')[0];
-        LeanTween.value(healthText.gameObject, float.Parse(health), player.currHealth, 0.5f).setOnUpdate((float val) => { healthText.text = $"{Mathf.RoundToInt(val)}/{player.fullHealth}HP"; });
+        LeanTween.value(healthText.gameObject, (healthText.StringReference["currHealth"] as IntVariable).Value * 1f, player.currHealth, 0.5f).setOnUpdate((float val) => { (healthText.StringReference["currHealth"] as IntVariable).Value = Mathf.RoundToInt(val); });
         LeanTween.value(healthBar.gameObject, healthBar.fillAmount, player.currHealth/(float)player.fullHealth, 0.5f).setOnUpdate((float val) => { healthBar.fillAmount = val; });
 
         if (energyText.text != player.energy.ToString())

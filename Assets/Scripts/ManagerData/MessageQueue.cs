@@ -12,7 +12,7 @@ public class MessageQueue
         messages = new List<NetworkMessage>();
     }
 
-    public bool AddToQueue(NetworkMessage message, bool isPriority)
+    public bool Push(NetworkMessage message, bool isPriority)
     {
         if (isPriority)
         {
@@ -23,23 +23,21 @@ public class MessageQueue
             messages.Add(message);
         }
 
-        priorityIndex = messages.Count;
-
         return messages.Count == 2;
     }
 
-    public NetworkMessage PopFromQueue()
+    public NetworkMessage Pop()
     {
         NetworkMessage message = messages[0];
         messages.RemoveAt(0);
 
-        if (messages.Count < 2)
+        if (messages.Count == 0)
         {
             priorityIndex = 0;
         }
         else
         {
-            priorityIndex = messages.Count;
+            priorityIndex = messages.Count - 1;
         }
 
         return message;

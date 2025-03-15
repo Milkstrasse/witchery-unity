@@ -12,10 +12,11 @@ public class FightManager : MonoBehaviour
     private FightLogic logic;
 
     public event Action<int> OnSetupComplete;
-    public event Action<int> OnTurnChanged;
+    public event Action<int> OnTurnChange;
     public event Action<MoveMessage> OnMoveReceive;
     public event Action OnMoveFailed;
 
+    private bool isQueueRunning;
     private bool sendingMessage;
     public float timeToMakeMove;
 
@@ -133,7 +134,7 @@ public class FightManager : MonoBehaviour
             }
             else
             {
-                if (messages.AddToQueue(message, false))
+                if (messages.Push(message, false) && !isQueueRunning)
                 {
                     StartCoroutine(InvokeQueue());
                 }
@@ -141,7 +142,7 @@ public class FightManager : MonoBehaviour
         }
         else if (message.playerTurn < -2) //last card is being played
         {
-            if (messages.AddToQueue(message, false))
+            if (messages.Push(message, false) && !isQueueRunning)
             {
                 StartCoroutine(InvokeQueue());
             }
@@ -162,7 +163,7 @@ public class FightManager : MonoBehaviour
                 UnityEngine.Debug.Log($"First player has won ? {(logic.players[0].startedFirst && players[0].hasWon) || (logic.players[1].startedFirst && players[1].hasWon)}");
             }
 
-            messages.AddToQueue(message, false);
+            messages.Push(message, false);
             StartCoroutine(InvokeQueue());
 
             StartCoroutine(EndFight());
@@ -230,7 +231,7 @@ public class FightManager : MonoBehaviour
     [Client]
     private void OnMoveReceived(MoveMessage message)
     {
-        if (messages.AddToQueue(message, true))
+        if (messages.Push(message, true) && !isQueueRunning)
         {
             StartCoroutine(InvokeQueue());
         }
@@ -238,9 +239,11 @@ public class FightManager : MonoBehaviour
 
     IEnumerator InvokeQueue()
     {
+        isQueueRunning = true;
+
         while (messages.GetLength() > 0)
         {
-            NetworkMessage queueMessage = messages.PopFromQueue();
+            NetworkMessage queueMessage = messages.Pop();
 
             if (queueMessage is TurnMessage message)
             {
@@ -266,7 +269,7 @@ public class FightManager : MonoBehaviour
                     OnMoveFailed?.Invoke();
                 }
 
-                OnTurnChanged?.Invoke(message.playerTurn);
+                OnTurnChange?.Invoke(message.playerTurn);
             }
             else
             {
@@ -282,6 +285,8 @@ public class FightManager : MonoBehaviour
                 yield return null;
             }
         }
+
+        isQueueRunning = false;
     }
 
     public bool IsAbleToMessage()

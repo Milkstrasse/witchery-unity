@@ -327,6 +327,10 @@ MonoBehaviour:
     m_Key: secondaryRate
     m_Metadata:
       m_Items: []
+  - m_Id: 76029378901827584
+    m_Key: playerHealth
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

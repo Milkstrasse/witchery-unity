@@ -2,6 +2,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 public class PlayerSelectionUI : MonoBehaviour
@@ -18,7 +19,7 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private LocalizeStringEvent readyText;
     [SerializeField] private Image portrait;
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private LocalizeStringEvent healthText;
 
     [SerializeField] private Button modeButton;
     [SerializeField] private Button actionButton;
@@ -83,7 +84,8 @@ public class PlayerSelectionUI : MonoBehaviour
     public void SetLeader(Fighter leader, int outfit)
     {
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + leader.name + "-" + leader.outfits[outfit].name);
-        healthText.text = $"{leader.health}/{leader.health}HP";
+        (healthText.StringReference["currHealth"] as IntVariable).Value = leader.health;
+        (healthText.StringReference["fullHealth"] as IntVariable).Value = leader.health;
         nameText.text = leader.name;
     }
 

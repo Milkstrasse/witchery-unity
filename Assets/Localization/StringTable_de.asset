@@ -37,7 +37,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 7210210211913728
-    m_Localized: Erhalte {health} HP
+    m_Localized: Erhalte {health} KP
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -73,7 +73,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7829019750817792
-    m_Localized: Verteile HP um
+    m_Localized: Verteile KP um
     m_Metadata:
       m_Items: []
   - m_Id: 7837084361416704
@@ -100,7 +100,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 7992895737946112
-    m_Localized: Stehle {health} HP
+    m_Localized: Stehle {health} KP
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -118,7 +118,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 8223760501956608
-    m_Localized: Erhalte {value} HP
+    m_Localized: Erhalte {value} KP
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -150,7 +150,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 11805233679163392
-    m_Localized: Heile auf {health} HP
+    m_Localized: Heile auf {health} KP
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -210,7 +210,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 19427698743959552
     m_Localized: Stehle {health} <style="IconOutline"><style="Highlighted">\uf00d</style></style>
-      HP
+      KP
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -245,7 +245,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 27441377439637504
-    m_Localized: <size=+6>{effect}</size>\n{health}HP
+    m_Localized: <size=+6>{effect}</size>\n{health}KP
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
@@ -360,6 +360,11 @@ MonoBehaviour:
     m_Localized: Secondary Rate
     m_Metadata:
       m_Items: []
+  - m_Id: 76029378901827584
+    m_Localized: '{currHealth}/{fullHealth}KP'
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357012
   references:
     version: 2
     RefIds:
@@ -397,3 +402,4 @@ MonoBehaviour:
         - id: 42265179151392768
         - id: 42265206460506112
         - id: 46628124241158144
+        - id: 76029378901827584

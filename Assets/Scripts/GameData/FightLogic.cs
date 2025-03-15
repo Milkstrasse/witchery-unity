@@ -320,7 +320,7 @@ public class FightLogic
                         health = Math.Max(health + players[turn].GetPowerBonus(), 0);
                     }
 
-                    players[(move.target + turn) % 2].health = Math.Clamp(players[(move.target + turn) % 2].health + health, 0, players[turn].maxHealth);
+                    players[(move.target + turn) % 2].health = Math.Clamp(players[(move.target + turn) % 2].health + health, 0, players[(move.target + turn) % 2].maxHealth);
 
                     if (winner < 0 && players[(move.target + turn) % 2].health == 0)
                     {

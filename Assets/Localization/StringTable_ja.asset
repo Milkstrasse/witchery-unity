@@ -361,6 +361,11 @@ MonoBehaviour:
     m_Localized: Secondary Rate
     m_Metadata:
       m_Items: []
+  - m_Id: 76029378901827584
+    m_Localized: '{currHealth}/{fullHealth}HP'
+    m_Metadata:
+      m_Items:
+      - rid: 6175659975647952932
   references:
     version: 2
     RefIds:
@@ -398,3 +403,4 @@ MonoBehaviour:
         - id: 42265179151392768
         - id: 42265206460506112
         - id: 46628124241158144
+        - id: 76029378901827584
