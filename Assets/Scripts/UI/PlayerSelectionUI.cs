@@ -91,8 +91,6 @@ public class PlayerSelectionUI : MonoBehaviour
 
     private void SelectCard(int cardIndex, bool editing)
     {
-        AudioManager.singleton.PlayStandardSound();
-
         SelectCard(new SelectedFighter(cardIndex, outfits[cardIndex]), editing);
     }
 
@@ -106,7 +104,17 @@ public class PlayerSelectionUI : MonoBehaviour
 
             fighterCards[fighter.fighterID].UpdateOutfit(GlobalData.fighters[fighter.fighterID], fighter.outfit);
             outfits[fighter.fighterID] = fighter.outfit;
-            fighterCards[fighter.fighterID].FocusCard(result.wasAdded);
+
+            if (result.wasAdded)
+            {
+                AudioManager.singleton.PlayPositiveSound();
+                fighterCards[fighter.fighterID].FocusCard(true);
+            }
+            else
+            {
+                AudioManager.singleton.PlayNegativeSound();
+                fighterCards[fighter.fighterID].FocusCard(false);
+            }
 
             if (result.hasTeam)
             {
@@ -131,6 +139,8 @@ public class PlayerSelectionUI : MonoBehaviour
         }
         else
         {
+            AudioManager.singleton.PlayStandardSound();
+
             if (currCard >= 0)
             {
                 fighterCards[currCard].HighlightCard(false);
@@ -357,10 +367,10 @@ public class PlayerSelectionUI : MonoBehaviour
 
     public void ToggleMode()
     {
-        AudioManager.singleton.PlayStandardSound();
-
         if (isEditing)
         {
+            AudioManager.singleton.PlayStandardSound();
+
             isEditing = false;
             modeButton.GetComponent<Image>().material = neutral;
             modeButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnButton");
@@ -370,6 +380,8 @@ public class PlayerSelectionUI : MonoBehaviour
         }
         else if (currCard == -1)
         {
+            AudioManager.singleton.PlayStandardSound();
+
             isEditing = true;
             modeButton.GetComponent<Image>().material = highlighted;
             modeButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnCard");
