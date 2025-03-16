@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
-using TMPro;
 using UnityEngine;
 using Utp;
 
@@ -211,6 +210,8 @@ public class SelectionManager : MonoBehaviour
    {
       OnPlayersReady?.Invoke();
       NetworkClient.UnregisterHandler<TurnMessage>();
+
+      LeanTween.moveLocalY(relayCode.gameObject, 0f, 0.3f);
    }
 
    public void CheckMissions()
