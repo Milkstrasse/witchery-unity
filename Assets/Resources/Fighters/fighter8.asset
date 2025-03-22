@@ -13,11 +13,16 @@ MonoBehaviour:
   m_Name: fighter8
   m_EditorClassIdentifier: 
   fighterID: 8
-  role: 62569
+  health: 65
+  role: 63198
   moves:
-  - {fileID: 11400000, guid: 739c506e8c34947729938b734775cbc7, type: 2}
-  - {fileID: 11400000, guid: 010c3021a6fc64e65a0f70533488067e, type: 2}
-  - {fileID: 11400000, guid: 010c3021a6fc64e65a0f70533488067e, type: 2}
+  - {fileID: 11400000, guid: 120ad528ec64d4bf29959be3f4bb8fec, type: 2}
+  - {fileID: 11400000, guid: 4cdc2d9cf3e834b64b1d364c026149a8, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
+  - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}
+  - {fileID: 11400000, guid: 3c671a4ce445a46dbaaf50b6c89482f5, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}
   outfits:
@@ -25,3 +30,4 @@ MonoBehaviour:
     cost: 300
   - name: magicgirl
     cost: 200
+  unlockMission: {fileID: 11400000, guid: 34c794fbc75e74ae0a297a272721e987, type: 2}

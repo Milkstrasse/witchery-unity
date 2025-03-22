@@ -3,18 +3,14 @@ using Mirror;
 
 public struct PlayerMessage : NetworkMessage
 {
-    public string name;
-    public int icon;
     public int health;
     public int energy;
     public SelectedFighter[] fighterIDs;
     public int[] cardHand;
     public StatusEffect[] effects;
 
-    public PlayerMessage(string name, int icon, SelectedFighter[] fighterIDs)
+    public PlayerMessage(SelectedFighter[] fighterIDs)
     {
-        this.name = name;
-        this.icon = icon;
         this.fighterIDs = fighterIDs;
         
         health = 0;

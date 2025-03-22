@@ -12,7 +12,7 @@ public class Mission : ScriptableObject
     public bool isClaimable;
     public Category category;
 
-    public void CheckStatus()
+    public int CheckStatus(int index)
     {
         if (goalValue > 0)
         {
@@ -22,10 +22,24 @@ public class Mission : ScriptableObject
         {
             isClaimable = (bool) SaveManager.savedData.GetType().GetField(checkVariable).GetValue(SaveManager.savedData);
         }
+
+        if (isClaimable && !SaveManager.savedData.missions[index] && category == Category.Fighter && !SaveManager.savedData.missions[index])
+        {
+            SaveManager.savedData.missions[index] = true;
+            SaveManager.savedData.fighters[reward].UnlockFighter();
+
+            SaveManager.SaveData();
+
+            return 3;
+        }
+        else
+        {
+            return isClaimable && !SaveManager.savedData.missions[index] ? 4 : 0;
+        }
     }
 
     public enum Category
     {
-        One, Two
+        Mission, Fighter
     }
 }

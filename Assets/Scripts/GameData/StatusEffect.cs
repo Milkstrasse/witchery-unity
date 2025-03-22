@@ -13,7 +13,7 @@ public class StatusEffect
 
     public enum StatusType
     {
-        Health, Energy, Power, Special
+        Health, Power, Damage, Special
     }
 
     public StatusEffect()
@@ -24,11 +24,11 @@ public class StatusEffect
         statusType = StatusType.Health;
     }
 
-    public StatusEffect(StatusEffect initEffect)
+    public StatusEffect(StatusEffect initEffect, int amount)
     {
         name = initEffect.name;
         icon = initEffect.icon;
-        multiplier = initEffect.multiplier;
+        multiplier = amount;
         value = initEffect.value;
         statusType = initEffect.statusType;
 
@@ -39,23 +39,14 @@ public class StatusEffect
     {
         switch (statusType)
         {
-            case StatusType.Energy:
-                player.energy += value * multiplier;
-
-                isNew = true;
-                multiplier -= 1;
-
-                break;
-            case StatusType.Power:
-                break;
             case StatusType.Health:
-                player.health = Math.Clamp(player.health + value * multiplier, 0, GlobalData.health);
+                player.health = Math.Clamp(player.health + value * multiplier, 0, player.maxHealth);
                 
                 isNew = true;
                 multiplier -= 1;
 
                 break;
-            default: //StatusType.Special
+            default:
                 break;
         }
     }

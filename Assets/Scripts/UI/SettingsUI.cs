@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class SettingsUI : MonoBehaviour
@@ -10,6 +11,7 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Slider soundSlider;
     [SerializeField] private LocalizeStringEvent currLang;
     [SerializeField] private LocalizeStringEvent currTheme;
+    [SerializeField] private Slider scaleSlider;
     [SerializeField] private Toggle animate;
     [SerializeField] private Toggle highlight;
 
@@ -17,19 +19,30 @@ public class SettingsUI : MonoBehaviour
     {
         manager.OnLanguageUpdated += UpdateLanguage;
         manager.OnThemeUpdated += UpdateTheme;
+        manager.OnSettingsReset += UpdateSettings;
 
+        UpdateSettings();
+
+        highlight.enabled = true;
+        animate.enabled = true;
+    }
+
+    private void UpdateSettings()
+    {
         musicSlider.value = AudioManager.singleton.GetMusicVolume();
         soundSlider.value = AudioManager.singleton.GetSoundVolume();
 
         musicSlider.enabled = true;
         soundSlider.enabled = true;
 
+        currLang.StringReference.SetReference("StringTable", LocalizationSettings.SelectedLocale.Identifier.Code);
         currTheme.StringReference.SetReference("StringTable", GlobalData.themes[GlobalData.themeIndex].name);
+
+        scaleSlider.value = GlobalData.uiScale;
+        scaleSlider.enabled = true;
 
         highlight.isOn = GlobalData.highlightPlayable;
         animate.isOn = GlobalData.animateImpact;
-        highlight.enabled = true;
-        animate.enabled = true;
     }
 
     private void UpdateLanguage(string lang)

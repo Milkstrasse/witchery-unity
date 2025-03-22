@@ -15,4 +15,13 @@ public struct Card
 
         isSpecial = moveIndex == 0;
     }
+
+    public Card(Card card)
+    {
+        fighter = card.fighter;
+        outfit = card.outfit;
+        move = card.move;
+        hasMove = card.hasMove;
+        isSpecial = card.isSpecial;
+    }
 }

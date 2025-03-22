@@ -16,6 +16,9 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public bool cardWasPlayed;
 
+    [SerializeField] private StatusInfoUI topInfo;
+    [SerializeField] private StatusInfoUI bottomInfo;
+
     private void Start()
     {
         FightManager.singleton.OnMoveFailed += ResetCard;
@@ -29,6 +32,20 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             eventCardUI.HighlightCard(true);
             eventCardUI.UpdateMoveText(true, cardUI.card.hasMove ? cardUI.card.move.cost : 0);
+
+            if (eventCardUI.card.hasMove && eventCardUI.card.move.effect.multiplier > 0)
+            {
+                if (eventCardUI.transform.eulerAngles.z == 180f)
+                {
+                    topInfo.gameObject.SetActive(true);
+                    topInfo.SetupInfo(new StatusEffect(eventCardUI.card.move.effect, 1));
+                }
+                else
+                {
+                    bottomInfo.gameObject.SetActive(true);
+                    bottomInfo.SetupInfo(new StatusEffect(eventCardUI.card.move.effect, 1));
+                }
+            }
         }
     }
 
@@ -39,6 +56,15 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             eventCardUI.HighlightCard(false);
             eventCardUI.UpdateMoveText(false, 1);
+
+            if (eventCardUI.transform.eulerAngles.z == 180f)
+            {
+                topInfo.gameObject.SetActive(false);
+            }
+            else
+            {
+                bottomInfo.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -48,6 +74,15 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             CardUI eventCardUI = eventData.pointerDrag.GetComponent<CardUI>();
             int cardIndex = eventData.pointerDrag.GetComponent<DragDrop>().cardIndex;
+
+            if (eventCardUI.transform.eulerAngles.z == 180f)
+            {
+                topInfo.gameObject.SetActive(false);
+            }
+            else
+            {
+                bottomInfo.gameObject.SetActive(false);
+            }
 
             if (eventCardUI.card.hasMove)
             {
@@ -77,22 +112,23 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     IEnumerator PlayCard(CardUI eventCardUI, int cardIndex)
     {
-        if (eventCardUI.card.isSpecial && GlobalData.animateImpact)
+        Card card = new Card(eventCardUI.card);
+        if (card.isSpecial && GlobalData.animateImpact)
         {
+            impactFrame.transform.SetAsLastSibling();
+            impactFrame.ToggleVisibility(true);
+            impactFrame.SetupUI(card.move.target, card.fighter.name, card.fighter.outfits[card.outfit].name, eventCardUI.transform.eulerAngles.z == 180f);
+
             eventCardUI.player.cardHand.RemoveAt(cardIndex);
             eventCardUI.player.OnPlayerChanged?.Invoke();
 
-            impactFrame.transform.SetAsLastSibling();
-            impactFrame.gameObject.SetActive(true);
-            impactFrame.SetupUI(eventCardUI.card.fighter.name, eventCardUI.card.fighter.outfits[eventCardUI.card.outfit].name, eventCardUI.transform.eulerAngles.z == 180f);
-
             yield return new WaitForSecondsRealtime(0.8f);
 
-            impactFrame.gameObject.SetActive(false);
+            impactFrame.ToggleVisibility(false);
         }
 
-        SetupCard(eventCardUI.card, eventCardUI.transform.eulerAngles.z == 180f);
-        FightManager.singleton.SendMove(cardIndex, true, !eventCardUI.card.isSpecial || !GlobalData.animateImpact);
+        SetupCard(card, eventCardUI.transform.eulerAngles.z == 180f);
+        FightManager.singleton.SendMove(cardIndex, true, !card.isSpecial || !GlobalData.animateImpact);
     }
 
     public void SetupCard(Card card, bool isFlipped)
@@ -105,6 +141,8 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
         cardUI.transform.eulerAngles = new Vector3(0, 0, isFlipped ? 180 : 0);
         cardUI.SetupCard(card);
+
+        GlobalManager.singleton.fightLog.AddToLog(card, isFlipped);
     }
 
     public void ResetCard()
@@ -127,7 +165,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
             if (card.hasMove)
             {
-                if (card.move.moveType == MoveType.Standard)
+                if (card.move.moveType != MoveType.Response)
                 {
                     if (card.move.effect.multiplier > 0)
                     {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: stealEnergy
   m_EditorClassIdentifier: 
   moveID: 8
-  cost: 2
+  cost: 1
   target: 2
   health: 0
   energy: -2

@@ -8,10 +8,11 @@ public class PlayerObject : MonoBehaviour
     public int playerID;
     public int icon;
 
-    public string playerName;
     public int fullHealth;
     public int currHealth;
     public int energy;
+    public int blanks;
+    public int roundsPlayed;
     public SelectedFighter[] fighterIDs;
 
     public List<Card> cards;
@@ -32,12 +33,12 @@ public class PlayerObject : MonoBehaviour
     {
         this.playerID = playerID;
         
-        icon = message.icon;
-        playerName = message.name;
         fullHealth = message.health;
         currHealth = message.health;
 
         energy = 0;
+        blanks = 0;
+        roundsPlayed = 0;
 
         cards = new List<Card>();
         cardHand = new List<Card>();
@@ -45,17 +46,19 @@ public class PlayerObject : MonoBehaviour
 
         fighterIDs = message.fighterIDs;
 
-        for (int i = 0; i < 5; i++) //blank cards
-        {
-            cards.Add(new Card());
-        }
-
         for (int i = 0; i < fighterIDs.Length; i++)
         {
             Fighter fighter = GlobalData.fighters[fighterIDs[i].fighterID];
-            for (int j = 0; j < fighter.moves.Length; j++)
+            if (i == 0)
             {
-                cards.Add(new Card(fighter, fighterIDs[i].outfit, j));
+                for (int j = 0; j < fighter.moves.Length; j++)
+                {
+                    cards.Add(new Card(fighter, fighterIDs[i].outfit, j));
+                }
+            }
+            else
+            {
+                cards.Add(new Card(fighter, fighterIDs[i].outfit, 0));
             }
         }
 
@@ -69,6 +72,9 @@ public class PlayerObject : MonoBehaviour
     {
         currHealth = playerData.health;
         energy = playerData.energy;
+        blanks = playerData.blanks;
+        roundsPlayed = playerData.roundsPlayed;
+
         effects = playerData.effects;
 
         if (updateCards)
@@ -76,7 +82,14 @@ public class PlayerObject : MonoBehaviour
             cardHand = new List<Card>();
             for (int i = 0; i < playerData.cardHand.Count; i++)
             {
-                cardHand.Add(cards[playerData.cardHand[i]]);
+                if (playerData.cardHand[i] < 0)
+                {
+                    cardHand.Add(new Card());
+                }
+                else
+                {
+                    cardHand.Add(cards[playerData.cardHand[i]]);
+                }
             }
         }
 
@@ -109,7 +122,6 @@ public class PlayerObject : MonoBehaviour
         {
             if (effects[i].statusType == StatusEffect.StatusType.Power)
             {
-                effects[i].isNew = true;
                 power += effects[i].value * effects[i].multiplier;
             }
         }
@@ -137,9 +149,8 @@ public class PlayerObject : MonoBehaviour
 
         for (int i = 0; i < effects.Count; i++)
         {
-            if (effects[i].name == "shields" || effects[i].name == "vulnerable" )
+            if (effects[i].statusType == StatusEffect.StatusType.Damage)
             {
-                effects[i].isNew = true;
                 modifier += effects[i].value * effects[i].multiplier;
             }
         }

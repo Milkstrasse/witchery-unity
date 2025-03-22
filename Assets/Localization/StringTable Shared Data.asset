@@ -19,6 +19,10 @@ MonoBehaviour:
     m_Key: addBlank
     m_Metadata:
       m_Items: []
+  - m_Id: 42265179151392768
+    m_Key: applyCostEffect
+    m_Metadata:
+      m_Items: []
   - m_Id: 7210015948529664
     m_Key: applyEffect
     m_Metadata:
@@ -35,10 +39,6 @@ MonoBehaviour:
     m_Key: cancel
     m_Metadata:
       m_Items: []
-  - m_Id: 31440676506820608
-    m_Key: claim
-    m_Metadata:
-      m_Items: []
   - m_Id: 7622870518718464
     m_Key: clearAllEffects
     m_Metadata:
@@ -53,14 +53,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13275175423303680
     m_Key: clearOppEffects
-    m_Metadata:
-      m_Items: []
-  - m_Id: 26341001055428608
-    m_Key: onlineDescr
-    m_Metadata:
-      m_Items: []
-  - m_Id: 30839589168996352
-    m_Key: contacts
     m_Metadata:
       m_Items: []
   - m_Id: 19529877668487168
@@ -103,32 +95,16 @@ MonoBehaviour:
     m_Key: doSpecialDamage
     m_Metadata:
       m_Items: []
-  - m_Id: 25237386391707648
-    m_Key: duel
-    m_Metadata:
-      m_Items: []
-  - m_Id: 26339046027419648
-    m_Key: duelDescr
-    m_Metadata:
-      m_Items: []
   - m_Id: 12180127193489408
     m_Key: en
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8229765759623168
-    m_Key: energise
-    m_Metadata:
-      m_Items: []
-  - m_Id: 25370911526871040
-    m_Key: fight
     m_Metadata:
       m_Items: []
   - m_Id: 27441377439637504
     m_Key: fighterDescr
     m_Metadata:
       m_Items: []
-  - m_Id: 31058970465525760
-    m_Key: fighters
+  - m_Id: 34667935183134720
+    m_Key: fightTimes
     m_Metadata:
       m_Items: []
   - m_Id: 7842569093373952
@@ -143,8 +119,16 @@ MonoBehaviour:
     m_Key: handoverBlanks
     m_Metadata:
       m_Items: []
+  - m_Id: 34677428671471616
+    m_Key: haveEffects
+    m_Metadata:
+      m_Items: []
   - m_Id: 8223760501956608
     m_Key: healing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8229765759623168
+    m_Key: healOpponent
     m_Metadata:
       m_Items: []
   - m_Id: 11805233679163392
@@ -159,12 +143,12 @@ MonoBehaviour:
     m_Key: ja
     m_Metadata:
       m_Items: []
-  - m_Id: 25374387497590784
-    m_Key: joincode
+  - m_Id: 46251278500618240
+    m_Key: join
     m_Metadata:
       m_Items: []
-  - m_Id: 31438435200786432
-    m_Key: journal
+  - m_Id: 25374387497590784
+    m_Key: joincode
     m_Metadata:
       m_Items: []
   - m_Id: 12166931850190848
@@ -175,40 +159,32 @@ MonoBehaviour:
     m_Key: magicgirl
     m_Metadata:
       m_Items: []
-  - m_Id: 31438245853126656
-    m_Key: missions
-    m_Metadata:
-      m_Items: []
   - m_Id: 12166901554733056
     m_Key: music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60479159741177856
+    m_Key: resetSettings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42265206460506112
+    m_Key: obtainCostEffect
     m_Metadata:
       m_Items: []
   - m_Id: 7210153374900224
     m_Key: obtainEffect
     m_Metadata:
       m_Items: []
-  - m_Id: 31058953466011648
-    m_Key: outfits
-    m_Metadata:
-      m_Items: []
-  - m_Id: 30839593145196544
-    m_Key: overview
-    m_Metadata:
-      m_Items: []
   - m_Id: 27476618044760064
     m_Key: palette
-    m_Metadata:
-      m_Items: []
-  - m_Id: 26400137377996800
-    m_Key: player
     m_Metadata:
       m_Items: []
   - m_Id: 8223787123204096
     m_Key: power
     m_Metadata:
       m_Items: []
-  - m_Id: 31044054782304256
-    m_Key: purchase
+  - m_Id: 60459230732214272
+    m_Key: primaryWin
     m_Metadata:
       m_Items: []
   - m_Id: 2538625827856384
@@ -243,28 +219,32 @@ MonoBehaviour:
     m_Key: replayCard
     m_Metadata:
       m_Items: []
-  - m_Id: 25373394303180800
-    m_Key: server
+  - m_Id: 49323919750979584
+    m_Key: returnToMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46628124241158144
+    m_Key: roundsPlayed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60459252731338752
+    m_Key: secondaryWin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46667486177779712
+    m_Key: selfKOd
     m_Metadata:
       m_Items: []
   - m_Id: 15212672940236800
     m_Key: shields
     m_Metadata:
       m_Items: []
-  - m_Id: 25237366556844032
-    m_Key: shop
-    m_Metadata:
-      m_Items: []
-  - m_Id: 26339049693241344
-    m_Key: shopDescr
-    m_Metadata:
-      m_Items: []
   - m_Id: 12166916067024896
     m_Key: sound
     m_Metadata:
       m_Items: []
-  - m_Id: 26344951418707968
-    m_Key: sparring
+  - m_Id: 34668589179985920
+    m_Key: spendMoney
     m_Metadata:
       m_Items: []
   - m_Id: 8223827040395264
@@ -283,12 +263,20 @@ MonoBehaviour:
     m_Key: stealCostHP
     m_Metadata:
       m_Items: []
+  - m_Id: 46714514295480320
+    m_Key: stealEffects
+    m_Metadata:
+      m_Items: []
   - m_Id: 7920018510569472
     m_Key: stealEnergy
     m_Metadata:
       m_Items: []
   - m_Id: 7992895737946112
     m_Key: stealHP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46759368538972160
+    m_Key: stealNothing
     m_Metadata:
       m_Items: []
   - m_Id: 7622866769010688
@@ -299,12 +287,12 @@ MonoBehaviour:
     m_Key: takeCard
     m_Metadata:
       m_Items: []
-  - m_Id: 12963192530526208
+  - m_Id: 46473553028046848
     m_Key: team
     m_Metadata:
       m_Items: []
-  - m_Id: 12210038784385024
-    m_Key: training
+  - m_Id: 49284850262204416
+    m_Key: uiScale
     m_Metadata:
       m_Items: []
   - m_Id: 12959305933250560
@@ -315,10 +303,6 @@ MonoBehaviour:
     m_Key: victory
     m_Metadata:
       m_Items: []
-  - m_Id: 25240888039956480
-    m_Key: visit
-    m_Metadata:
-      m_Items: []
   - m_Id: 17290912945135616
     m_Key: vulnerable
     m_Metadata:
@@ -327,56 +311,24 @@ MonoBehaviour:
     m_Key: weaken
     m_Metadata:
       m_Items: []
-  - m_Id: 31442481177419776
-    m_Key: claimAll
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31570974661926912
-    m_Key: claimed
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31755230017216512
-    m_Key: cat1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31755241757073408
-    m_Key: cat2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 32474440544542720
-    m_Key: tutorial
-    m_Metadata:
-      m_Items: []
-  - m_Id: 32480461346299904
-    m_Key: profile
-    m_Metadata:
-      m_Items: []
-  - m_Id: 33362073927802880
-    m_Key: online
-    m_Metadata:
-      m_Items: []
-  - m_Id: 33362076356304896
-    m_Key: offline
-    m_Metadata:
-      m_Items: []
-  - m_Id: 34667935183134720
-    m_Key: fightTimes
-    m_Metadata:
-      m_Items: []
   - m_Id: 34668335646892032
     m_Key: winTimes
     m_Metadata:
       m_Items: []
-  - m_Id: 34668589179985920
-    m_Key: spendMoney
+  - m_Id: 63748839511678976
+    m_Key: useRate
     m_Metadata:
       m_Items: []
-  - m_Id: 34677428671471616
-    m_Key: haveEffects
+  - m_Id: 68849652563173376
+    m_Key: primaryRate
     m_Metadata:
       m_Items: []
-  - m_Id: 35036214569459712
-    m_Key: journalDescr
+  - m_Id: 68849662809858048
+    m_Key: secondaryRate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 76029378901827584
+    m_Key: playerHealth
     m_Metadata:
       m_Items: []
   m_Metadata:

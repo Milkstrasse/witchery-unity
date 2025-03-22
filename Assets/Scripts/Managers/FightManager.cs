@@ -12,10 +12,11 @@ public class FightManager : MonoBehaviour
     private FightLogic logic;
 
     public event Action<int> OnSetupComplete;
-    public event Action<int> OnTurnChanged;
+    public event Action<int> OnTurnChange;
     public event Action<MoveMessage> OnMoveReceive;
     public event Action OnMoveFailed;
 
+    private bool isQueueRunning;
     private bool sendingMessage;
     public float timeToMakeMove;
 
@@ -45,12 +46,14 @@ public class FightManager : MonoBehaviour
         NetworkClient.ReplaceHandler<TurnMessage>(OnTurnStart);
         NetworkClient.ReplaceHandler<MoveMessage>(OnMoveReceived);
         NetworkServer.ReplaceHandler<MoveMessage>(OnMoveMade);
+
+        GlobalManager.singleton.fightLog = new FightLog();
     }
 
     [Server]
     public PlayerMessage SetupPlayer(PlayerMessage message)
     {
-        PlayerMessage msg = new PlayerMessage(message.name, message.icon, message.fighterIDs);
+        PlayerMessage msg = new PlayerMessage(message.fighterIDs);
         msg.health = message.health;
 
         PlayerData playerData = new PlayerData(message);
@@ -72,7 +75,7 @@ public class FightManager : MonoBehaviour
         {
             conn.Send(new MoveMessage(-1, 0, false));
             conn.Send(new TurnMessage(message.playerIndex, new PlayerData[] { logic.players[message.playerIndex] }, true));
-            
+
             return;
         }
 
@@ -83,7 +86,7 @@ public class FightManager : MonoBehaviour
 
         if (message.cardIndex < 0) //player gave up, winner - 2
         {
-            NetworkServer.SendToAll(new TurnMessage(-1 - message.playerIndex, new PlayerData[]{logic.players[message.playerIndex]}));
+            NetworkServer.SendToAll(new TurnMessage(-1 - message.playerIndex, new PlayerData[] { logic.players[message.playerIndex] }));
             return;
         }
 
@@ -92,7 +95,7 @@ public class FightManager : MonoBehaviour
         {
             NetworkServer.SendToAll(new MoveMessage(message.playCard ? logic.playerTurn - 5 : logic.playerTurn + 5, 0, true, true));
             NetworkServer.SendToAll(new TurnMessage(logic.playerTurn - 5, logic.players.ToArray()));
-            
+
             sendDelay = 1.5f;
         }
 
@@ -127,11 +130,11 @@ public class FightManager : MonoBehaviour
             {
                 logic.playerTurn = message.playerTurn;
 
-                StartCoroutine("SetupFight");
+                StartCoroutine(SetupFight());
             }
             else
             {
-                if (messages.AddToQueue(message, false))
+                if (messages.Push(message, false) && !isQueueRunning)
                 {
                     StartCoroutine(InvokeQueue());
                 }
@@ -139,7 +142,7 @@ public class FightManager : MonoBehaviour
         }
         else if (message.playerTurn < -2) //last card is being played
         {
-            if (messages.AddToQueue(message, false))
+            if (messages.Push(message, false) && !isQueueRunning)
             {
                 StartCoroutine(InvokeQueue());
             }
@@ -151,7 +154,7 @@ public class FightManager : MonoBehaviour
             players[message.playerTurn + 2].hasWon = true;
 
             TimeSpan ts = stopwatch.Elapsed;
-            string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}";
+            string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds / 10:00}";
 
             UnityEngine.Debug.Log("Fight ended after " + elapsedTime);
             if (logic.players.Count > 0)
@@ -160,12 +163,10 @@ public class FightManager : MonoBehaviour
                 UnityEngine.Debug.Log($"First player has won ? {(logic.players[0].startedFirst && players[0].hasWon) || (logic.players[1].startedFirst && players[1].hasWon)}");
             }
 
-            if (messages.AddToQueue(message, false))
-            {
-                StartCoroutine(InvokeQueue());
-            }
+            messages.Push(message, false);
+            StartCoroutine(InvokeQueue());
 
-            StartCoroutine("EndFight");
+            StartCoroutine(EndFight());
         }
     }
 
@@ -186,7 +187,7 @@ public class FightManager : MonoBehaviour
         OnSetupComplete?.Invoke(logic.playerTurn);
 
         yield return GlobalManager.singleton.UnloadScene("SelectionScene");
-        
+
         fightCamera.SetActive(true);
         fightEvents.SetActive(true);
 
@@ -215,7 +216,7 @@ public class FightManager : MonoBehaviour
             players[logic.playerTurn].cardHand.RemoveAt(cardIndex);
             players[logic.playerTurn].OnPlayerChanged?.Invoke();
         }
-        
+
         NetworkClient.Send(new MoveMessage(logic.playerTurn, cardIndex, playCard));
     }
 
@@ -223,14 +224,14 @@ public class FightManager : MonoBehaviour
     public void SendMove(int playerIndex)
     {
         sendingMessage = true;
-        
+
         NetworkClient.Send(new MoveMessage(playerIndex, -1, false));
     }
 
     [Client]
     private void OnMoveReceived(MoveMessage message)
     {
-        if (messages.AddToQueue(message, true))
+        if (messages.Push(message, true) && !isQueueRunning)
         {
             StartCoroutine(InvokeQueue());
         }
@@ -238,9 +239,11 @@ public class FightManager : MonoBehaviour
 
     IEnumerator InvokeQueue()
     {
+        isQueueRunning = true;
+
         while (messages.GetLength() > 0)
         {
-            NetworkMessage queueMessage = messages.PopFromQueue();
+            NetworkMessage queueMessage = messages.Pop();
 
             if (queueMessage is TurnMessage message)
             {
@@ -255,9 +258,9 @@ public class FightManager : MonoBehaviour
                     PlayerData player = message.players[i];
                     players[i].UpdatePlayer(player, message.playerTurn >= 0);
 
-                    if ((NetworkServer.activeHost && i == 0) || (!NetworkServer.activeHost && i == 1))
+                    if ((NetworkServer.activeHost && players[i].playerID == 0) || (!NetworkServer.activeHost && players[i].playerID == 1))
                     {
-                        SaveManager.UpdateStats(player, players[0].hasWon || players[1].hasWon, players[i].hasWon);
+                        SaveManager.UpdateStats(player, players[0].hasWon || players[1].hasWon, players[i]);
                     }
                 }
 
@@ -266,7 +269,7 @@ public class FightManager : MonoBehaviour
                     OnMoveFailed?.Invoke();
                 }
 
-                OnTurnChanged?.Invoke(message.playerTurn);
+                OnTurnChange?.Invoke(message.playerTurn);
             }
             else
             {
@@ -282,6 +285,8 @@ public class FightManager : MonoBehaviour
                 yield return null;
             }
         }
+
+        isQueueRunning = false;
     }
 
     public bool IsAbleToMessage()

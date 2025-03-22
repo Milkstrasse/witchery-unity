@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Utp;
 
 public class CustomNetwork : RelayNetworkManager
@@ -26,6 +24,14 @@ public class CustomNetwork : RelayNetworkManager
     public override void OnClientConnect()
     {
         base.OnClientConnect();
+
+        if (GlobalManager.singleton.mode == GameMode.Online)
+        {
+            //reset scene so new server can start correctly
+            networkSceneName = "";
+            playersReady = 0;
+            players = new PlayerMessage[2];
+        }
 
         NetworkClient.RegisterHandler<PlayerMessage>(OnClientReceivePlayer);
     }
@@ -60,7 +66,7 @@ public class CustomNetwork : RelayNetworkManager
     {
         for (int i = 0; i < 2; i++)
         {
-            players[i].health = GlobalData.health;
+            players[i].health = GlobalData.fighters[players[i].fighterIDs[0].fighterID].health;
             players[i] = FightManager.singleton.SetupPlayer(players[i]);
             NetworkServer.SendToAll(players[i]);
         }
@@ -115,8 +121,16 @@ public class CustomNetwork : RelayNetworkManager
         if (GlobalManager.singleton.GetCurrentScene() == "FightScene")
         {
             StopServer();
-            GlobalManager.singleton.LoadScene("MenuScene");
-        } else
+
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < gameObjects.Length; i++)
+            {
+                Destroy(gameObjects[i]);
+            }
+
+            GlobalManager.singleton.LoadScene("SelectionScene");
+        }
+        else
         {
             playersReady = Math.Max(playersReady - 1, 0);
         }
@@ -128,7 +142,13 @@ public class CustomNetwork : RelayNetworkManager
 
         if (GlobalManager.singleton.GetCurrentScene() == "FightScene")
         {
-            GlobalManager.singleton.LoadScene("MenuScene");
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < gameObjects.Length; i++)
+            {
+                Destroy(gameObjects[i]);
+            }
+
+            GlobalManager.singleton.LoadScene("SelectionScene");
         }
     }
 }

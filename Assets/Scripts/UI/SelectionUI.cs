@@ -19,7 +19,7 @@ public class SelectionUI : MonoBehaviour
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
         players = new PlayerObject[gameObjects.Length];
 
-        if (players.Length > 0)
+        if (players.Length > 0) //rematch
         {
             for (int i = 0; i < gameObjects.Length; i++)
             {
@@ -28,7 +28,7 @@ public class SelectionUI : MonoBehaviour
 
             if (GlobalManager.singleton.mode != GameMode.Online || NetworkClient.activeHost)
             {
-                playerTop.SetName(players[1].playerName);
+                playerTop.SetLeader(GlobalData.fighters[players[1].fighterIDs[0].fighterID], players[1].fighterIDs[0].outfit);
 
                 for (int j = 0; j < players[0].fighterIDs.Length; j++)
                 {
@@ -37,13 +37,15 @@ public class SelectionUI : MonoBehaviour
             }
             else
             {
-                playerTop.SetName(players[0].playerName);
+                playerTop.SetLeader(GlobalData.fighters[players[0].fighterIDs[0].fighterID], players[0].fighterIDs[0].outfit);
 
                 for (int j = 0; j < players[1].fighterIDs.Length; j++)
                 {
                     playerBottom.SelectCard(players[1].fighterIDs[j], true);
                 }
             }
+
+            manager.SetAsRematch();
         }
     }
 
@@ -58,9 +60,14 @@ public class SelectionUI : MonoBehaviour
         else
         {
             AudioManager.singleton.PlayNegativeSound();
+
+            if (GlobalManager.singleton.mode == GameMode.Online)
+            {
+                playerTop.SetLeader(GlobalData.fighters[0], 0);
+            }
         }
         
-        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Testing)
+        if (GlobalManager.singleton.mode != GameMode.Online)
         {
             playerTop.ToggleUI(isReady);
 
@@ -81,9 +88,14 @@ public class SelectionUI : MonoBehaviour
         return manager.EditTeam(fighter);
     }
 
-    public void EditTeam(int fighter, int outfit)
+    public SelectionResult EditTeam(int fighter, int outfit)
     {
-        manager.EditTeam(fighter, outfit);
+        return manager.EditTeam(fighter, outfit);
+    }
+
+    public bool ToggleCPU()
+    {
+        return manager.ToggleCPU();
     }
 
     private void StartFight()
@@ -97,16 +109,6 @@ public class SelectionUI : MonoBehaviour
         playerBottom.ToggleUI(false, true);
 
         GlobalManager.singleton.LoadScene("FightScene", LoadSceneMode.Additive);
-    }
-
-    public void StopSelection()
-    {
-        for (int i = 0; i < players.Length; i++)
-        {
-            Destroy(players[i].gameObject);
-        }
-        
-        manager.ReturnToMenu();
     }
 
     private void OnDestroy()

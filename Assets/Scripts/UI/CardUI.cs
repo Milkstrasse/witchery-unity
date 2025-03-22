@@ -3,7 +3,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
-using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
@@ -22,9 +21,12 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Material neutralFront;
     [SerializeField] private Material highlighted;
     [SerializeField] private Material selected;
+    [SerializeField] private Material focused;
     [SerializeField] private Material neutralBack;
-    public bool isSelected;
+
     public bool isHighlighted;
+    public bool isSelected;
+    public bool isFocused;
 
     public Card card;
     public PlayerObject player;
@@ -33,14 +35,35 @@ public class CardUI : MonoBehaviour
 
     public void SetupCard(Fighter fighter)
     {
+        bool isUnlocked = SaveManager.savedData.fighters[fighter.fighterID].IsUnlocked();
+
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-standard");
 
-        icon.text = $"<style=IconShadow>{Convert.ToChar((uint) fighter.role)}</style>";
+        if (isUnlocked)
+        {
+            icon.text = $"<style=IconShadow>{Convert.ToChar((uint)fighter.role)}</style>";
 
-        (infoText.StringReference["name"] as StringVariable).Value = fighter.name;
-        (infoText.StringReference["role"] as StringVariable).Value = LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", fighter.role.ToString());
-        
-        infoText.StringReference.SetReference("StringTable", "fighterDescr");
+            (infoText.StringReference["effect"] as StringVariable).Value = fighter.name;
+            (infoText.StringReference["health"] as IntVariable).Value = fighter.health;
+
+            infoText.StringReference.SetReference("StringTable", "fighterDescr");
+        }
+        else
+        {
+            icon.text = "<style=IconShadow>\uf005</style>";
+            if (fighter.unlockMission != null)
+            {
+                if (fighter.unlockMission.goalValue > 0)
+                {
+                    (infoText.StringReference["amount"] as IntVariable).Value = (int)SaveManager.savedData.GetType().GetField(fighter.unlockMission.checkVariable).GetValue(SaveManager.savedData);
+                }
+
+                (infoText.StringReference["health"] as IntVariable).Value = fighter.unlockMission.goalValue;
+                infoText.StringReference.SetReference("StringTable", fighter.unlockMission.descrKey);
+            }
+        }
+
+        GetComponent<Button>().interactable = isUnlocked;
     }
 
     public void SetupCard(Fighter fighter, int outfit, Move move)
@@ -51,7 +74,7 @@ public class CardUI : MonoBehaviour
 
         (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(move.health) + GetPowerBonus(move.moveType == MoveType.Special), 0);
         (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(move.energy) + GetPowerBonus(move.moveType == MoveType.Special), 0);
-        (infoText.StringReference["multiplier"] as IntVariable).Value = move.effect.multiplier;
+        (infoText.StringReference["amount"] as IntVariable).Value = Math.Max(move.effect.multiplier + GetPowerBonus(move.moveType == MoveType.Special), 0);
 
         if (move.effect.multiplier != 0)
         {
@@ -89,7 +112,7 @@ public class CardUI : MonoBehaviour
 
             (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
             (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy) + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
-            (infoText.StringReference["multiplier"] as IntVariable).Value = card.move.effect.multiplier;
+            (infoText.StringReference["amount"] as IntVariable).Value = Math.Max(card.move.effect.multiplier + GetPowerBonus(card.move.moveType == MoveType.Special), 0);
 
             if (card.move.effect.multiplier != 0)
             {
@@ -118,17 +141,47 @@ public class CardUI : MonoBehaviour
     public void HighlightCard(bool isHighlighted)
     {
         this.isHighlighted = isHighlighted;
-        frontBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        gradient.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        backBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
+        SetMaterial();
     }
 
     public void SelectCard(bool isSelected)
     {
         this.isSelected = isSelected;
-        frontBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        gradient.material = isHighlighted ? highlighted : isSelected ? selected : neutralFront;
-        backBackground.material = isHighlighted ? highlighted : isSelected ? selected : neutralBack;
+        SetMaterial();
+    }
+
+    public void FocusCard(bool isFocused)
+    {
+        this.isFocused = isFocused;
+        SetMaterial();
+    }
+
+    private void SetMaterial()
+    {
+        if (isHighlighted)
+        {
+            frontBackground.material = highlighted;
+            gradient.material = highlighted;
+            backBackground.material = highlighted;
+        }
+        else if (isSelected)
+        {
+            frontBackground.material = selected;
+            gradient.material = selected;
+            backBackground.material = selected;
+        }
+        else if (isFocused)
+        {
+            frontBackground.material = focused;
+            gradient.material = focused;
+            backBackground.material = focused;
+        }
+        else
+        {
+            frontBackground.material = neutralFront;
+            gradient.material = neutralFront;
+            backBackground.material = neutralBack;
+        }
     }
 
     public void FlipCard(bool isFlipped, float delay)
@@ -161,22 +214,22 @@ public class CardUI : MonoBehaviour
 
     IEnumerator Flip(int side, float delay)
     {
-        if (cardSides[1 - side].transform.eulerAngles.y == 90 || cardSides[side].transform.eulerAngles.y == 0)
+        if (cardSides[1 - side].transform.eulerAngles.y == 90f || cardSides[side].transform.eulerAngles.y == 0f)
         {
             yield break;
         }
 
         yield return new WaitForSeconds(delay);
         
-        LeanTween.rotateY(cardSides[1 - side], 90, 0.1f);
+        LeanTween.rotateY(cardSides[1 - side], 90f, 0.1f);
         yield return new WaitForSeconds(0.1f);
-        LeanTween.rotateY(cardSides[side], 0, 0.1f);
+        LeanTween.rotateY(cardSides[side], 0f, 0.1f);
     }
 
     public void ShowCard(bool showCard)
     {
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.alpha = showCard ? 1f: 0;
+        canvasGroup.alpha = showCard ? 1f: 0f;
         canvasGroup.blocksRaycasts = showCard;
     }
 
@@ -197,6 +250,7 @@ public class CardUI : MonoBehaviour
             }
 
             (infoText.StringReference["energy"] as IntVariable).Value = Math.Max(Math.Abs(card.move.energy * cardCost) + GetPowerBonus(!update), 0);
+            (infoText.StringReference["amount"] as IntVariable).Value = Math.Max(card.move.effect.multiplier * cardCost + GetPowerBonus(!update), 0);
             infoText.StringReference.SetReference("StringTable", card.move.GetDescription(update));
 
             infoText.RefreshString();

@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScene.unity
     guid: 08cbcd8b860ed4474a878a48c9fa1687
   - enabled: 1
-    path: Assets/Scenes/MenuScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/SelectionScene.unity
     guid: 704295354c32d4c049380c027ce97a27
   - enabled: 1
@@ -21,14 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/GameOverScene.unity
     guid: 6a1ccfddd3728416380b4eac9a6a8b07
   - enabled: 1
-    path: Assets/Scenes/SettingsScene.unity
-    guid: ce81e08f6db3446c39c9770b5ced67dc
-  - enabled: 1
-    path: Assets/Scenes/CreditsScene.unity
-    guid: a6eed6901463040aa9f29adcdb181479
-  - enabled: 1
-    path: Assets/Scenes/DebugScene.unity
-    guid: 1862bdd178e044e23899ae24ff283521
+    path: Assets/Scenes/StatisticsScene.unity
+    guid: 9294542cbb2d847b294c363adc4bb391
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 13dd23b9f038d4cfda1298992ac86aa4, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 56259042c327f4b718fb3793c5091492, type: 2}

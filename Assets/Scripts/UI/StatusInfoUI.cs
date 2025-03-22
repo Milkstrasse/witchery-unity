@@ -1,9 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
-using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
 public class StatusInfoUI : MonoBehaviour

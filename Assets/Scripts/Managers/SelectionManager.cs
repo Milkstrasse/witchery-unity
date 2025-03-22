@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 using Utp;
 
 public class SelectionManager : MonoBehaviour
 {
+   [SerializeField] private SettingsManager settings;
+   [SerializeField] private RelayCode relayCode;
+
    private RelayNetworkManager networkManager;
    private bool[] isReady;
 
    public event Action<int> OnTimerChanged;
    private List<SelectedFighter> fighterIDs;
-   private string[] playerNames;
 
    public event Action OnPlayersReady;
-   //private bool readyToFight;
 
    private void Awake()
    {
@@ -24,16 +24,32 @@ public class SelectionManager : MonoBehaviour
       networkManager.maxConnections = GlobalManager.singleton.maxPlayers;
 
       fighterIDs = new List<SelectedFighter>();
-      playerNames = new string[2]{LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", "player"), SaveManager.savedData.name};
       isReady = new bool[2];
 
       NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
+
+      CheckMissions();
+
+      if (GlobalManager.singleton.mode != GameMode.Online)
+      {
+         GlobalManager.singleton.mode = GameMode.Offline;
+      }
+   }
+
+   public void SetAsRematch()
+   {
+      relayCode.ToggleRematch(true);
    }
 
    public bool SetReady(int index)
    {
       if (fighterIDs.Count == 0)
          return index == 0;
+
+      if (index == 1)
+      {
+         relayCode.SetInteractable(isReady[index]);
+      }
 
       isReady[index] = !isReady[index];
 
@@ -42,19 +58,26 @@ public class SelectionManager : MonoBehaviour
          if (GlobalManager.singleton.mode == GameMode.Online)
          {
             StopAllCoroutines();
+
             GlobalManager.QuitAnyConnection();
+            NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
          }
+
+         relayCode.ToggleRematch(false);
 
          return false;
       }
 
-      if (GlobalManager.singleton.mode == GameMode.Online && !NetworkClient.active)
+      if (GlobalManager.singleton.mode == GameMode.Online)
       {
-         StartCoroutine(StartConnection());
-      }
-      else if (GlobalManager.singleton.mode == GameMode.Online)
-      {
-         NetworkClient.Send(new PlayerMessage(SaveManager.savedData.name, SaveManager.savedData.icon, fighterIDs.ToArray()));
+         if (!NetworkClient.active)
+         {
+            StartCoroutine(StartConnection());
+         }
+         else
+         {
+            NetworkClient.Send(new PlayerMessage(fighterIDs.ToArray()));
+         }
       }
       else
       {
@@ -63,25 +86,27 @@ public class SelectionManager : MonoBehaviour
             networkManager.StartStandardHost();
          }
 
-         NetworkClient.Send(new PlayerMessage(playerNames[index], SaveManager.savedData.icon, fighterIDs.ToArray()));
+         NetworkClient.Send(new PlayerMessage(fighterIDs.ToArray()));
 
          int fighterAmount = fighterIDs.Count;
          fighterIDs = new List<SelectedFighter>();
-
-         if (GlobalManager.singleton.mode == GameMode.Training)
-         {
-            int[] numbers = GlobalManager.singleton.GetRandomNumbers(fighterAmount, GlobalData.fighters.Length);
-            for (int i = 0; i < fighterAmount; i++)
-            {
-               fighterIDs.Add(new SelectedFighter(numbers[i], 0));
-            }
-
-            NetworkClient.Send(new PlayerMessage(playerNames[1 - index], fighterIDs[0].fighterID, fighterIDs.ToArray()));
-            fighterIDs = new List<SelectedFighter>();
-         }
       }
 
       return isReady[index];
+   }
+
+   public bool ToggleCPU()
+   {
+      if (GlobalManager.singleton.mode == GameMode.Offline)
+      {
+         GlobalManager.singleton.mode = GameMode.Training;
+         return true;
+      }
+      else
+      {
+         GlobalManager.singleton.mode = GameMode.Offline;
+         return false;
+      }
    }
 
    IEnumerator StartConnection()
@@ -120,7 +145,7 @@ public class SelectionManager : MonoBehaviour
 
          if (NetworkClient.isConnected && !sentMessage)
          {
-            NetworkClient.Send(new PlayerMessage(SaveManager.savedData.name, SaveManager.savedData.icon, fighterIDs.ToArray()));
+            NetworkClient.Send(new PlayerMessage(fighterIDs.ToArray()));
             sentMessage = true;
          }
          
@@ -128,7 +153,6 @@ public class SelectionManager : MonoBehaviour
       }
 
       GlobalManager.QuitAnyConnection();
-      ReturnToMenu();
    }
 
    public SelectionResult EditTeam(SelectedFighter fighter)
@@ -148,21 +172,21 @@ public class SelectionManager : MonoBehaviour
          fighterIDs.RemoveAt(index);
          bool hasTeam = fighterIDs.Count > 0;
 
-         return new SelectionResult(false, hasTeam);
+         return new SelectionResult(false, hasTeam, hasTeam ? fighterIDs[0] : new SelectedFighter(0, 0));
       }
       else if (fighterIDs.Count < 6)
       {
          fighterIDs.Add(fighter);
          
-         return new SelectionResult(true, true);
+         return new SelectionResult(true, true, fighterIDs[0]);
       }
       else
       {
-         return new SelectionResult(false, true);
+         return new SelectionResult(false, true, fighterIDs[0]);
       }
    }
 
-   public void EditTeam(int fighter, int outfit)
+   public SelectionResult EditTeam(int fighter, int outfit)
    {
       int index = -1;
       for (int i = 0; i < fighterIDs.Count; i++)
@@ -178,21 +202,68 @@ public class SelectionManager : MonoBehaviour
       {
          fighterIDs[index] = new SelectedFighter(fighter, outfit);
       }
+
+      return new SelectionResult(false, true, fighterIDs[0]);
    }
 
    private void PlayersReady(TurnMessage message)
    {
-      /*if (readyToFight)
-         return;*/
-      
       OnPlayersReady?.Invoke();
       NetworkClient.UnregisterHandler<TurnMessage>();
-      //readyToFight = true;
+
+      LeanTween.moveLocalY(relayCode.gameObject, 0f, 0.3f);
    }
 
-   public void ReturnToMenu()
+   public void CheckMissions()
+   {
+      for (int i = 0; i < GlobalData.missions.Length; i++)
+      {
+         GlobalData.missions[i].CheckStatus(i);
+      }
+   }
+
+   public void DeleteData()
+   {
+      AudioManager.singleton.PlayNegativeSound();
+
+      SaveManager.DeleteData();
+      SaveManager.CreateNewData(GlobalData.fighters, GlobalData.missions);
+
+      CheckMissions();
+
+      GlobalManager.singleton.LoadScene("SelectionScene");
+   }
+
+   public void UnlockFighters()
+   {
+      AudioManager.singleton.PlayPositiveSound();
+
+      for (int i = 0; i < GlobalData.fighters.Length; i++)
+      {
+         SaveManager.savedData.fighters[i].UnlockFighter();
+      }
+
+      SaveManager.SaveData();
+
+      CheckMissions();
+
+      GlobalManager.singleton.LoadScene("SelectionScene");
+   }
+
+   public void ToggleSettings(bool enable)
    {
       AudioManager.singleton.PlayStandardSound();
-      GlobalManager.singleton.LoadScene("MenuScene");
+
+      if (!enable)
+      {
+         if (settings.SavingSettings())
+         {
+            settings.gameObject.SetActive(false);
+         }
+      }
+      else
+      {
+         settings.gameObject.SetActive(true);
+      }
    }
 }

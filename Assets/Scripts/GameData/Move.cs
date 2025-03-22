@@ -69,9 +69,23 @@ public class Move : ScriptableObject
             case 10:
                 return "doSpecialDamage";
             case 14:
-                return "applyEffect";
+                if (!ignoreType && moveType == MoveType.Special)
+                {
+                    return "applyCostEffect";
+                }
+                else
+                {
+                    return "applyEffect";
+                }
             case 15:
-                return "obtainEffect";
+                if (!ignoreType && moveType == MoveType.Special)
+                {
+                    return "obtainCostEffect";
+                }
+                else
+                {
+                    return "obtainEffect";
+                }
             case 21:
                 return "healToHP";
             default:
@@ -81,15 +95,10 @@ public class Move : ScriptableObject
 
     public bool IsResponseTo(Move move, int playerEnergy)
     {
-        if (moveType != MoveType.Response)
+        if (move == null || moveType != MoveType.Response || cost > playerEnergy)
         {
             return false;
         }
-        else if (cost > playerEnergy)
-        {
-            return false;
-        }
-
 
         return move.moveID%moveID == 0;
     }

@@ -37,12 +37,12 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210015948529664
-    m_Localized: Apply {multiplier} <style="IconOutline">{effect}</style>
+    m_Localized: Apply {amount} <style="IconOutline">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210153374900224
-    m_Localized: Obtain {multiplier} <style="IconOutline">{effect}</style>
+    m_Localized: Obtain {amount} <style="IconOutline">{effect}</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
@@ -138,10 +138,9 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 8229765759623168
-    m_Localized: Receive {value} energy
+    m_Localized: Heal opponent
     m_Metadata:
-      m_Items:
-      - rid: 296817732614357011
+      m_Items: []
   - m_Id: 8910918694985728
     m_Localized: <style="Highlighted">Take</style> effect of card
     m_Metadata:
@@ -171,10 +170,6 @@ MonoBehaviour:
     m_Localized: English
     m_Metadata:
       m_Items: []
-  - m_Id: 12210038784385024
-    m_Localized: TRAINING
-    m_Metadata:
-      m_Items: []
   - m_Id: 12959317832491008
     m_Localized: Damage
     m_Metadata:
@@ -185,10 +180,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 12959305933250560
     m_Localized: All
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12963192530526208
-    m_Localized: Team
     m_Metadata:
       m_Items: []
   - m_Id: 13275175423303680
@@ -233,26 +224,6 @@ MonoBehaviour:
     m_Localized: Control
     m_Metadata:
       m_Items: []
-  - m_Id: 25237366556844032
-    m_Localized: SHOP
-    m_Metadata:
-      m_Items: []
-  - m_Id: 25237386391707648
-    m_Localized: DUEL
-    m_Metadata:
-      m_Items: []
-  - m_Id: 25240888039956480
-    m_Localized: Visit
-    m_Metadata:
-      m_Items: []
-  - m_Id: 25370911526871040
-    m_Localized: Fight
-    m_Metadata:
-      m_Items: []
-  - m_Id: 25373394303180800
-    m_Localized: SERVER
-    m_Metadata:
-      m_Items: []
   - m_Id: 25374387497590784
     m_Localized: Join code
     m_Metadata:
@@ -269,32 +240,12 @@ MonoBehaviour:
     m_Localized: VICTORY
     m_Metadata:
       m_Items: []
-  - m_Id: 26339046027419648
-    m_Localized: Fight against others and earn rewards
-    m_Metadata:
-      m_Items: []
-  - m_Id: 26339049693241344
-    m_Localized: Unlock new outfits and fighters
-    m_Metadata:
-      m_Items: []
-  - m_Id: 26341001055428608
-    m_Localized: Fight online against others and earn rewards
-    m_Metadata:
-      m_Items: []
-  - m_Id: 33362076356304896
-    m_Localized: Offline
-    m_Metadata:
-      m_Items: []
-  - m_Id: 26344951418707968
-    m_Localized: SPARRING
-    m_Metadata:
-      m_Items: []
-  - m_Id: 26400137377996800
-    m_Localized: PLAYER
+  - m_Id: 46251278500618240
+    m_Localized: Join
     m_Metadata:
       m_Items: []
   - m_Id: 27441377439637504
-    m_Localized: <size=+6>{name}</size>\n{role}
+    m_Localized: <size=+6>{effect}</size>\n{health}HP
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
@@ -324,73 +275,13 @@ MonoBehaviour:
     m_Localized: Palette
     m_Metadata:
       m_Items: []
-  - m_Id: 30839589168996352
-    m_Localized: CONTACTS
-    m_Metadata:
-      m_Items: []
-  - m_Id: 30839593145196544
-    m_Localized: Overview
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31044054782304256
-    m_Localized: Purchase
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31058970465525760
-    m_Localized: Fighters
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31058953466011648
-    m_Localized: Outfits
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31438245853126656
-    m_Localized: Missions
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31438435200786432
-    m_Localized: JOURNAL
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31440676506820608
-    m_Localized: Claim
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31442481177419776
-    m_Localized: Claim All
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31570974661926912
-    m_Localized: Claimed
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31755230017216512
-    m_Localized: Category 1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 31755241757073408
-    m_Localized: Category 2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 32474440544542720
-    m_Localized: Tutorial
-    m_Metadata:
-      m_Items: []
-  - m_Id: 32480461346299904
-    m_Localized: Profile
-    m_Metadata:
-      m_Items: []
-  - m_Id: 33362073927802880
-    m_Localized: ONLINE
-    m_Metadata:
-      m_Items: []
   - m_Id: 34667935183134720
-    m_Localized: Fight {amount} times
+    m_Localized: Fight {amount}/{health} times
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 34668335646892032
-    m_Localized: Win {amount} times
+    m_Localized: Win {amount}/{health} times
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
@@ -400,14 +291,80 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 34677428671471616
-    m_Localized: Have {amount} effects at once
+    m_Localized: Have {amount}/{health} effects
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
-  - m_Id: 35036214569459712
-    m_Localized: Fulfill missions to earn rewards
+  - m_Id: 42265179151392768
+    m_Localized: Apply {amount} <style="IconOutline"><style="Highlighted">\uf00d</style></style>
+      <style="IconOutline">{effect}</style>
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
+  - m_Id: 42265206460506112
+    m_Localized: Obtain {amount} <style="IconOutline"><style="Highlighted">\uf00d</style></style>
+      <style="IconOutline">{effect}</style>
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
+  - m_Id: 46473553028046848
+    m_Localized: Team
     m_Metadata:
       m_Items: []
+  - m_Id: 46628124241158144
+    m_Localized: Played for {amount} round(s)
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
+  - m_Id: 46667486177779712
+    m_Localized: Knock yourself out
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46714514295480320
+    m_Localized: Steal status effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46759368538972160
+    m_Localized: Steal nothing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49284850262204416
+    m_Localized: UI Scale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49323919750979584
+    m_Localized: Return to Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60459230732214272
+    m_Localized: Primary Win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60459252731338752
+    m_Localized: Secondary Win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60479159741177856
+    m_Localized: Reset Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63748839511678976
+    m_Localized: Use Rate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 68849652563173376
+    m_Localized: Primary Rate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 68849662809858048
+    m_Localized: Secondary Rate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 76029378901827584
+    m_Localized: '{currHealth}/{fullHealth}HP'
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
   references:
     version: 2
     RefIds:
@@ -432,7 +389,6 @@ MonoBehaviour:
         - id: 27441377439637504
         - id: 27457199604228096
         - id: 8223596102017024
-        - id: 8229765759623168
         - id: 8223760501956608
         - id: 8223787123204096
         - id: 8223807327166464
@@ -443,3 +399,7 @@ MonoBehaviour:
         - id: 34668335646892032
         - id: 34668589179985920
         - id: 34677428671471616
+        - id: 42265179151392768
+        - id: 42265206460506112
+        - id: 46628124241158144
+        - id: 76029378901827584

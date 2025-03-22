@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 235, y: 320}
+  m_SizeDelta: {x: 234, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6923224953780964602
 CanvasRenderer:
@@ -72,11 +72,13 @@ MonoBehaviour:
   infoText: {fileID: 5971420663573507704}
   animatedIcon: {fileID: 6288278715520255835}
   neutralFront: {fileID: 2100000, guid: 2bfa174f672b6464ea31d71e1d1032a0, type: 2}
-  highlighted: {fileID: 2100000, guid: 128f62befdd034365adb34aa8f8769bb, type: 2}
+  highlighted: {fileID: 2100000, guid: b900fbcfaeab54351ba7cc2693452de6, type: 2}
   selected: {fileID: 2100000, guid: 10842f26f0d6b4e258345c28bfe1eabe, type: 2}
+  focused: {fileID: 2100000, guid: 128f62befdd034365adb34aa8f8769bb, type: 2}
   neutralBack: {fileID: 2100000, guid: a9d0349a83e274f7587fc5ab57c8836c, type: 2}
-  isSelected: 0
   isHighlighted: 0
+  isSelected: 0
+  isFocused: 0
   player: {fileID: 0}
 --- !u!114 &1349281736941416210
 MonoBehaviour:
@@ -457,15 +459,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5638347227620208868, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
       propertyPath: m_TextStyleHashCode
-      value: 32347484
+      value: 2024376927
       objectReference: {fileID: 0}
     - target: {fileID: 6188175047575546077, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
       propertyPath: m_TextStyleHashCode
-      value: 32347484
+      value: 2024376927
       objectReference: {fileID: 0}
     - target: {fileID: 7334021194915312793, guid: f11de7605a02d4fce940820d384cb6eb, type: 3}
       propertyPath: m_TextStyleHashCode
-      value: 32347484
+      value: 2024376927
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

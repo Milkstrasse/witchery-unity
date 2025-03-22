@@ -2,7 +2,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
-using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 public class PlayerSelectionUI : MonoBehaviour
@@ -18,10 +18,12 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private Button readyButton;
     [SerializeField] private LocalizeStringEvent readyText;
     [SerializeField] private Image portrait;
-    [SerializeField] private TextMeshProUGUI playerName;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private LocalizeStringEvent healthText;
 
     [SerializeField] private Button modeButton;
     [SerializeField] private Button actionButton;
+    [SerializeField] private Button cpuButton;
     [SerializeField] private Material neutral;
     [SerializeField] private Material highlighted;
     private int currCard;
@@ -37,20 +39,20 @@ public class PlayerSelectionUI : MonoBehaviour
     private bool isEditing;
     private bool isShowingInfo;
 
+    private int leader;
+
     private void Awake()
     {
         canvasGroup = fighterParent.parent.GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
 
-        if (rectTransform.eulerAngles.z == 180f)
+        SetLeader(GlobalData.fighters[0], 0);
+        leader = -1;
+
+        if (GlobalManager.singleton.mode != GameMode.Online)
         {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
-            SetName(LocalizationSettings.StringDatabase.GetLocalizedString("StringTable", "player"));
-        }
-        else
-        {
-            portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[SaveManager.savedData.icon].name + "-standard");
-            SetName(SaveManager.savedData.name);
+            readyText.StringReference.SetReference("StringTable", "ready");
+            readyText.gameObject.name = "ready";
         }
 
         filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};
@@ -69,7 +71,6 @@ public class PlayerSelectionUI : MonoBehaviour
             int iCopy = i;
             Button cardButton = card.GetComponent<Button>();
             cardButton.onClick.AddListener(() => SelectCard(iCopy, false));
-            cardButton.interactable = SaveManager.savedData.unlocked[i, 0];
 
             fighterCards[i] = card;
         }
@@ -80,15 +81,16 @@ public class PlayerSelectionUI : MonoBehaviour
         moveCards = new CardUI[0];
     }
 
-    public void SetName(string name)
+    public void SetLeader(Fighter leader, int outfit)
     {
-        playerName.text = name;
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + leader.name + "-" + leader.outfits[outfit].name);
+        (healthText.StringReference["currHealth"] as IntVariable).Value = leader.health;
+        (healthText.StringReference["fullHealth"] as IntVariable).Value = leader.health;
+        nameText.text = leader.name;
     }
 
     private void SelectCard(int cardIndex, bool editing)
     {
-        AudioManager.singleton.PlayStandardSound();
-
         SelectCard(new SelectedFighter(cardIndex, outfits[cardIndex]), editing);
     }
 
@@ -98,9 +100,30 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             SelectionResult result = selectionUI.EditTeam(fighter);
 
+            SetLeader(GlobalData.fighters[result.leader.fighterID], result.leader.outfit);
+
             fighterCards[fighter.fighterID].UpdateOutfit(GlobalData.fighters[fighter.fighterID], fighter.outfit);
             outfits[fighter.fighterID] = fighter.outfit;
-            fighterCards[fighter.fighterID].SelectCard(result.wasAdded);
+
+            if (result.wasAdded)
+            {
+                AudioManager.singleton.PlayPositiveSound();
+                fighterCards[fighter.fighterID].FocusCard(true);
+            }
+            else
+            {
+                AudioManager.singleton.PlayNegativeSound();
+                fighterCards[fighter.fighterID].FocusCard(false);
+            }
+
+            if (result.hasTeam)
+            {
+                leader = result.leader.fighterID;
+            }
+            else
+            {
+                leader = -1;
+            }
 
             if (fighterCards[fighter.fighterID].isHighlighted)
             {
@@ -116,6 +139,8 @@ public class PlayerSelectionUI : MonoBehaviour
         }
         else
         {
+            AudioManager.singleton.PlayStandardSound();
+
             if (currCard >= 0)
             {
                 fighterCards[currCard].HighlightCard(false);
@@ -133,7 +158,7 @@ public class PlayerSelectionUI : MonoBehaviour
                 fighterCards[currCard].HighlightCard(true);
 
                 actionButton.interactable = true;
-                modeButton.GetComponentInChildren<TextMeshProUGUI>().text = fighterCards[currCard].isSelected ? "\uf068" : "\uf067";
+                modeButton.GetComponentInChildren<TextMeshProUGUI>().text = fighterCards[currCard].isFocused ? "\uf068" : "\uf067";
             }
         }
     }
@@ -146,15 +171,19 @@ public class PlayerSelectionUI : MonoBehaviour
         {
             LeanTween.cancel(timer.gameObject);
             timer.fillAmount = 1.0f;
-            
-            readyText.StringReference.SetReference("StringTable", "ready");
+
+            readyText.StringReference.SetReference("StringTable", readyText.gameObject.name);
+
+            cpuButton.interactable = true;
         }
         else
         {
             readyText.StringReference.SetReference("StringTable", "cancel");
+
+            cpuButton.interactable = false;
         }
 
-        if (GlobalManager.singleton.mode == GameMode.Offline || GlobalManager.singleton.mode == GameMode.Testing)
+        if (GlobalManager.singleton.mode != GameMode.Online)
         {
             readyButton.interactable = false;
             LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isActive ? 520f : 120f), 0.3f);
@@ -191,7 +220,7 @@ public class PlayerSelectionUI : MonoBehaviour
             }
             else if (showTeam)
             {
-                fighterCards[i].gameObject.SetActive(fighterCards[i].isSelected);
+                fighterCards[i].gameObject.SetActive(fighterCards[i].isFocused);
             }
             else
             {
@@ -249,7 +278,7 @@ public class PlayerSelectionUI : MonoBehaviour
                     outfits[currCard] = arrayLength;
                 }
 
-                outfitFound = SaveManager.savedData.unlocked[currCard, outfits[currCard]];
+                outfitFound = SaveManager.savedData.fighters[currCard].IsUnlocked(outfits[currCard]);
             }
 
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
@@ -260,9 +289,10 @@ public class PlayerSelectionUI : MonoBehaviour
                 moveCards[i].UpdateOutfit(fighter, outfits[currCard]);
             }
 
-            if (fighterCards[currCard].isSelected)
+            if (fighterCards[currCard].isFocused)
             {
-                selectionUI.EditTeam(currCard, outfits[currCard]);
+                SelectionResult result = selectionUI.EditTeam(currCard, outfits[currCard]);
+                portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
             }
         }
     }
@@ -316,7 +346,7 @@ public class PlayerSelectionUI : MonoBehaviour
                     outfits[currCard] = 0;
                 }
 
-                outfitFound = SaveManager.savedData.unlocked[currCard, outfits[currCard]];
+                outfitFound = SaveManager.savedData.fighters[currCard].IsUnlocked(outfits[currCard]);
             }
 
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
@@ -327,28 +357,35 @@ public class PlayerSelectionUI : MonoBehaviour
                 moveCards[i].UpdateOutfit(fighter, outfits[currCard]);
             }
 
-            if (fighterCards[currCard].isSelected)
+            if (fighterCards[currCard].isFocused)
             {
-                selectionUI.EditTeam(currCard, outfits[currCard]);
+                SelectionResult result = selectionUI.EditTeam(currCard, outfits[currCard]);
+                portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
             }
         }
     }
 
     public void ToggleMode()
     {
-        AudioManager.singleton.PlayStandardSound();
-
         if (isEditing)
         {
+            AudioManager.singleton.PlayStandardSound();
+
             isEditing = false;
             modeButton.GetComponent<Image>().material = neutral;
+            modeButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnButton");
+
             actionButton.GetComponentInChildren<TextMeshProUGUI>().text = "\uf128";
             actionButton.interactable = false;
         }
         else if (currCard == -1)
         {
+            AudioManager.singleton.PlayStandardSound();
+
             isEditing = true;
             modeButton.GetComponent<Image>().material = highlighted;
+            modeButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnCard");
+
             actionButton.GetComponentInChildren<TextMeshProUGUI>().text = "\uf074";
             actionButton.interactable = true;
         }
@@ -381,7 +418,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
         for (int i = 0; i < cardAmount; i++)
         {
-            if (!fighterCards[indices[i]].isSelected)
+            if (!fighterCards[indices[i]].isFocused)
             {
                 if (fighterCards[indices[i]].gameObject.activeSelf && fighterCards[indices[i]].GetComponent<Button>().interactable)
                 {
@@ -389,6 +426,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
                     if (result.wasAdded)
                     {
+                        SetLeader(GlobalData.fighters[result.leader.fighterID], result.leader.outfit);
                         AudioManager.singleton.PlayPositiveSound();
                     }
                     else
@@ -396,7 +434,16 @@ public class PlayerSelectionUI : MonoBehaviour
                         AudioManager.singleton.PlayNegativeSound();
                     }
 
-                    fighterCards[indices[i]].SelectCard(result.wasAdded);
+                    if (result.hasTeam)
+                    {
+                        leader = result.leader.fighterID;
+                    }
+                    else
+                    {
+                        leader = -1;
+                    }
+
+                    fighterCards[indices[i]].FocusCard(result.wasAdded);
 
                     readyButton.interactable = result.hasTeam;
 
@@ -424,6 +471,8 @@ public class PlayerSelectionUI : MonoBehaviour
         if (!isShowingInfo)
         {
             actionButton.GetComponent<Image>().material = neutral;
+            actionButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnButton");
+
             optionText.StringReference.SetReference("StringTable", filters[currFilter]);
 
             LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 0.5f, 0.3f);
@@ -432,6 +481,7 @@ public class PlayerSelectionUI : MonoBehaviour
         else
         {
             actionButton.GetComponent<Image>().material = highlighted;
+            actionButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnCard");
 
             Fighter fighter = GlobalData.fighters[currCard];
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
@@ -443,6 +493,11 @@ public class PlayerSelectionUI : MonoBehaviour
                 GameObject card = Instantiate(cardPrefab, cardParent);
                 moveCards[i] = card.GetComponent<CardUI>();
                 moveCards[i].SetupCard(fighter, outfits[currCard], fighter.moves[i]);
+
+                if (leader >= 0 && leader != currCard && i != 0)
+                {
+                    moveCards[i].FlipCard(true, 0f);
+                }
             }
 
             LeanTween.moveLocalX(fighterParent.parent.gameObject, -fighterRect.sizeDelta.x * 1.5f - 20f, 0.3f);
@@ -458,15 +513,19 @@ public class PlayerSelectionUI : MonoBehaviour
         }
     }
 
-    public void StopSelection()
+    public void ToggleCPU()
     {
-        if (isShowingInfo)
+        AudioManager.singleton.PlayStandardSound();
+        
+        if (selectionUI.ToggleCPU())
         {
-            SwitchMode();
+            cpuButton.GetComponent<Image>().material = highlighted;
+            cpuButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnCard");
         }
         else
         {
-            selectionUI.StopSelection();
+            cpuButton.GetComponent<Image>().material = neutral;
+            cpuButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnButton");
         }
     }
 

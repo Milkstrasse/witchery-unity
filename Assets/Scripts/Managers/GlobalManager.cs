@@ -18,12 +18,13 @@ public class GlobalManager : MonoBehaviour
 
     [SerializeField] private Material[] materials;
 
-    public bool isConnected;
     public GameMode mode;
     public string joincode;
     public bool relayEnabled;
     public int maxPlayers;
     public string lastScene;
+
+    public FightLog fightLog;
 
     public event Action<string> OnCodeCreated;
     
@@ -37,18 +38,32 @@ public class GlobalManager : MonoBehaviour
         GlobalData.missions = Resources.LoadAll<Mission>("Missions/");
         GlobalData.themes = Resources.LoadAll<Theme>("Themes/");
 
-        try
+        if (mode == GameMode.Online)
         {
-            await UnityServices.InitializeAsync();
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            try
+            {
+                await UnityServices.InitializeAsync();
+                AuthenticationService.Instance.SwitchProfile(Random.Range(0, 1000000).ToString());
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-            isConnected = true;
-            relayEnabled = true;
+                maxPlayers = 2;
+            }
+            catch (Exception exception)
+            {
+                mode = GameMode.Offline;
+                maxPlayers = 1;
+
+                relayEnabled = false;
+
+                Debug.LogError(exception);
+            }
         }
-        catch (Exception exception)
+        else
         {
-            isConnected = AuthenticationService.Instance.IsSignedIn;
-            Debug.LogError(exception);
+            mode = GameMode.Offline;
+            maxPlayers = 1;
+
+            relayEnabled = false;
         }
 
         AsyncOperationHandle handle = LocalizationSettings.InitializationOperation;
@@ -58,24 +73,17 @@ public class GlobalManager : MonoBehaviour
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("langCode", langIndex)];
         GlobalData.highlightPlayable = PlayerPrefs.GetInt("highlightPlayable", 1) != 0;
         GlobalData.animateImpact = PlayerPrefs.GetInt("animateImpact", 1) != 0;
+        GlobalData.uiScale = PlayerPrefs.GetFloat("uiScale", 1f);
         GlobalData.themeIndex = PlayerPrefs.GetInt("theme", 1);
 
         ApplyTheme();
 
-        #if UNITY_EDITOR
-            relayEnabled = false;
-        #endif
+        if (!SaveManager.LoadData())
+        {
+            SaveManager.CreateNewData(GlobalData.fighters, GlobalData.missions);
+        }
 
-        if (SaveManager.LoadData())
-        {
-            Debug.Log("Welcome " + SaveManager.savedData.name);
-            LoadScene("MenuScene");
-        }
-        else
-        {
-            StartManager startManager = GameObject.Find("Canvas").GetComponent<StartManager>();
-            startManager.ShowUI();
-        }
+        LoadScene("SelectionScene");
     }
 
     public void StoreRelayCode(string code)
@@ -137,13 +145,6 @@ public class GlobalManager : MonoBehaviour
         TMP_Settings.defaultStyleSheet.RefreshStyles();
     }
 
-    public void GoToMenu()
-    {
-        SaveManager.CreateNewData(GlobalData.fighters, GlobalData.missions, Random.Range(0, GlobalData.fighters.Length));
-        
-        LoadScene("MenuScene");
-    }
-
     public string GetCurrentScene() => SceneManager.GetActiveScene().name;
 
     public void LoadScene(string scene, LoadSceneMode sceneMode = LoadSceneMode.Single)
@@ -187,10 +188,16 @@ public class GlobalManager : MonoBehaviour
     {
         NetworkClient.Shutdown();
         NetworkServer.Shutdown();
+
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            Destroy(gameObjects[i]);
+        }
     }
 }
 
 public enum GameMode
 {
-    Online, Offline, Training, Testing
+    Online, Offline, Training
 }

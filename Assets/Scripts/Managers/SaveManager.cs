@@ -20,23 +20,57 @@ public class SaveManager
         savedData = (SavedData)binary.Deserialize(file);
         file.Close();
 
+        int deltaFighters = GlobalData.fighters.Length - savedData.fighters.Length;
+        if (deltaFighters > 0)
+        {
+            FighterData[] fighters = new FighterData[GlobalData.fighters.Length];
+            for (int i = 0; i < savedData.fighters.Length; i++)
+            {
+                fighters[i] = savedData.fighters[i];
+            }
+
+            savedData.fighters = fighters;
+        }
+
+        int deltaMissions = GlobalData.missions.Length - savedData.missions.Length;
+        if (deltaMissions > 0)
+        {
+            bool[] missions = new bool[GlobalData.missions.Length];
+            for (int i = 0; i < savedData.missions.Length; i++)
+            {
+                missions[i] = savedData.missions[i];
+            }
+
+            savedData.missions = missions;
+        }
+
+        if (deltaFighters > 0 || deltaMissions > 0)
+        {
+            SaveData();
+        }
+
         return true;
     }
 
-    public static void CreateNewData(Fighter[] fighters, Mission[] missions, int icon)
+    public static void CreateNewData(Fighter[] fighters, Mission[] missions)
     {
-        savedData.icon = icon;
+        savedData = new SavedData();
 
         int fighterAmount = fighters.Length;
-        savedData.unlocked = new bool[fighterAmount, fighters[0].outfits.Length];
-        for (int i = 0; i < Math.Min(fighterAmount, 8); i++)
+        savedData.fighters = new FighterData[fighterAmount];
+
+        for (int i = 0; i < fighterAmount; i++)
         {
-            savedData.unlocked[i, 0] = true;
+            savedData.fighters[i] = new FighterData(fighters[i]);
+
+            if (i < Math.Min(fighterAmount, 4))
+            {
+                savedData.fighters[i].UnlockFighter();
+                savedData.fighters[i].SetOutfit(1, i < 2);
+            }
         }
 
         savedData.missions = new bool[missions.Length];
-        
-        savedData.shopFighters = new SelectedFighter[0];
 
         SaveData();
     }
@@ -50,7 +84,7 @@ public class SaveManager
 		file.Close();
     }
 
-    public static void UpdateStats(PlayerData playerData, bool gameHasEnded, bool hasWon)
+    public static void UpdateStats(PlayerData playerData, bool gameHasEnded, PlayerObject player)
     {
         if (!savedData.healedOpponent)
         {
@@ -75,14 +109,36 @@ public class SaveManager
         {
             savedData.timesFought++;
 
-            if (hasWon)
+            if (playerData.startedFirst)
             {
+                savedData.timesFoughtFirst++;
+            }
+
+            if (player.hasWon)
+            {
+                savedData.fighters[player.fighterIDs[0].fighterID].timesUsedPrimary++;
+                savedData.fighters[player.fighterIDs[0].fighterID].timesWonPrimary++;
+
+                for (int i = 1; i < player.fighterIDs.Length; i++)
+                {
+                    savedData.fighters[player.fighterIDs[i].fighterID].timesUsedSecondary++;
+                    savedData.fighters[player.fighterIDs[i].fighterID].timesWonSecondary++;
+                }
+
+                if (playerData.startedFirst)
+                {
+                    savedData.timesWonFirst++;
+                }
+
                 savedData.timesWon++;
-                savedData.money = Math.Min(savedData.money + 25, 999999);
             }
             else
             {
-                savedData.money = Math.Min(savedData.money + 5, 999999);
+                savedData.fighters[player.fighterIDs[0].fighterID].timesUsedPrimary++;
+                for (int i = 1; i < player.fighterIDs.Length; i++)
+                {
+                    savedData.fighters[player.fighterIDs[i].fighterID].timesUsedSecondary++;
+                }
             }
         }
     }

@@ -3,20 +3,23 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
-    private bool changingLang;
+    [SerializeField] private CanvasUI canvas;
+    [SerializeField] private GameObject[] objectsToUpdate;
+
+    private bool applying;
     private int langIndex;
-    private bool changingTheme;
 
     public event Action<string> OnLanguageUpdated;
     public event Action<string> OnThemeUpdated;
+    public event Action OnSettingsReset;
 
     private void Start()
     {
         langIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
-        OnLanguageUpdated?.Invoke(LocalizationSettings.SelectedLocale.Identifier.Code);
     }
 
     public void ChangeMusicVolume(float sliderValue) => AudioManager.singleton.ChangeMusicVolume(sliderValue);
@@ -25,7 +28,7 @@ public class SettingsManager : MonoBehaviour
 
     public void DecreaseLang()
     {
-        if (changingLang)
+        if (applying)
             return;
 
         AudioManager.singleton.PlayStandardSound();
@@ -44,7 +47,7 @@ public class SettingsManager : MonoBehaviour
 
     public void IncreaseLang()
     {
-        if (changingLang)
+        if (applying)
             return;
 
         AudioManager.singleton.PlayStandardSound();
@@ -60,10 +63,21 @@ public class SettingsManager : MonoBehaviour
         
         StartCoroutine(SetLocale(langIndex));
     }
+    
+    IEnumerator SetLocale(int localID)
+    {
+        applying = true;
+
+        yield return LocalizationSettings.InitializationOperation;
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localID];
+        OnLanguageUpdated?.Invoke(LocalizationSettings.SelectedLocale.Identifier.Code);
+
+        applying = false;
+    }
 
     public void DecreaseTheme()
     {
-        if (changingTheme)
+        if (applying)
             return;
 
         AudioManager.singleton.PlayStandardSound();
@@ -82,7 +96,7 @@ public class SettingsManager : MonoBehaviour
 
     public void IncreaseTheme()
     {
-        if (changingTheme)
+        if (applying)
             return;
 
         AudioManager.singleton.PlayStandardSound();
@@ -101,30 +115,31 @@ public class SettingsManager : MonoBehaviour
 
     IEnumerator ChangeTheme()
     {
-        changingTheme = true;
+        applying = true;
 
         GlobalManager.singleton.ApplyTheme();
         yield return null;
 
+        for (int i = 0; i < objectsToUpdate.Length; i++)
+        {
+            objectsToUpdate[i].SetActive(false);
+            objectsToUpdate[i].SetActive(true);
+        }
+
         OnThemeUpdated?.Invoke(GlobalData.themes[GlobalData.themeIndex].name);
 
-        changingTheme = false;
+        applying = false;
     }
 
-    IEnumerator SetLocale(int localID)
+    public void ChangeUIScale(float sliderValue)
     {
-        changingLang = true;
-
-        yield return LocalizationSettings.InitializationOperation;
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localID];
-        OnLanguageUpdated?.Invoke(LocalizationSettings.SelectedLocale.Identifier.Code);
-
-        changingLang = false;
+        GlobalData.uiScale = sliderValue;
+        canvas.UpdateScale();
     }
 
     public void ResetSettings()
     {
-        if (changingLang || changingTheme)
+        if (applying)
             return;
 
         ChangeMusicVolume(1f);
@@ -154,8 +169,9 @@ public class SettingsManager : MonoBehaviour
 
         GlobalData.highlightPlayable = true;
         GlobalData.animateImpact = true;
+        ChangeUIScale(1f);
 
-        GlobalManager.singleton.LoadScene("SettingsScene");
+        OnSettingsReset?.Invoke();
 
         StartCoroutine(ChangeTheme());
     }
@@ -175,12 +191,10 @@ public class SettingsManager : MonoBehaviour
         GlobalData.animateImpact = enable;
     }
 
-    public void ReturnToScene()
+    public bool SavingSettings()
     {
-        if (changingLang || changingTheme)
-            return;
-
-        AudioManager.singleton.PlayStandardSound();
+        if (applying)
+            return false;
 
         PlayerPrefs.SetFloat("music", AudioManager.singleton.GetMusicVolume());
         PlayerPrefs.SetFloat("sound", AudioManager.singleton.GetSoundVolume());
@@ -188,8 +202,9 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("highlightPlayable", GlobalData.highlightPlayable ? 1 : 0);
         PlayerPrefs.SetInt("animateImpact", GlobalData.animateImpact ? 1 : 0);
         PlayerPrefs.SetInt("theme", GlobalData.themeIndex);
+        PlayerPrefs.SetFloat("uiScale", GlobalData.uiScale);
         PlayerPrefs.Save();
 
-        GlobalManager.singleton.LoadScene(GlobalManager.singleton.lastScene);
+        return true;
     }
 }

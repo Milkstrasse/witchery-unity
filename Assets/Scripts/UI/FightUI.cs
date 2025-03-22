@@ -14,7 +14,7 @@ public class FightUI : MonoBehaviour
     private void Start()
     {
         manager.OnSetupComplete += SetupPlayers;
-        manager.OnTurnChanged += ChangePlayers;
+        manager.OnTurnChange += ChangePlayers;
         manager.OnMoveReceive += MakeMove;
     }
 
@@ -38,8 +38,8 @@ public class FightUI : MonoBehaviour
 
     private void ChangePlayers(int playerTurn)
     {
-        playerTop.MakeInteractable(playerTurn == playerTop.player.playerID, GlobalManager.singleton.mode == GameMode.Offline, cardSlot);
-        playerBottom.MakeInteractable(playerTurn == playerBottom.player.playerID, true, cardSlot);
+        playerTop.MakeInteractable(playerTurn == playerTop.player.playerID, GlobalManager.singleton.mode == GameMode.Offline);
+        playerBottom.MakeInteractable(playerTurn == playerBottom.player.playerID, true);
         cardSlot.MoveUp(playerTurn == playerBottom.player.playerID, playerTurn == playerTop.player.playerID || playerTurn == playerBottom.player.playerID);
     }
 
@@ -88,7 +88,7 @@ public class FightUI : MonoBehaviour
     private void OnDestroy()
     {
         manager.OnSetupComplete -= SetupPlayers;
-        manager.OnTurnChanged -= ChangePlayers;
+        manager.OnTurnChange -= ChangePlayers;
         manager.OnMoveReceive -= MakeMove;
     }
 }

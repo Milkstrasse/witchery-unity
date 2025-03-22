@@ -1,6 +1,8 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 public class PlayerFightUI : MonoBehaviour
@@ -8,9 +10,10 @@ public class PlayerFightUI : MonoBehaviour
     public PlayerObject player;
 
     [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private LocalizeStringEvent healthText;
     [SerializeField] private Image healthBar;
     [SerializeField] private TextMeshProUGUI energyText;
+    [SerializeField] private TextMeshProUGUI blanksText;
     [SerializeField] private Image timer;
     [SerializeField] private Image portrait;
     [SerializeField] private Button exitButton;
@@ -40,7 +43,7 @@ public class PlayerFightUI : MonoBehaviour
 
     private void InitUI()
     {
-        float cardSpacer = (Screen.width / canvas.scaleFactor - 5 * 235 - 40) / 4 * -1;
+        float cardSpacer = (Screen.width/(canvas.scaleFactor/GlobalData.uiScale) - 5 * 235 - 40)/4 * -1;
         for (int i = 0; i < 5; i++)
         {
             CardUI card = cardParent.transform.GetChild(i).GetComponent<CardUI>();
@@ -57,11 +60,13 @@ public class PlayerFightUI : MonoBehaviour
         this.player = player;
         player.OnPlayerChanged += UpdateUI;
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.icon].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
+        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
 
-        nameText.text = player.playerName;
-        healthText.text = $"{player.currHealth}/{player.fullHealth}HP";
+        nameText.text = GlobalData.fighters[player.fighterIDs[0].fighterID].name;
+        (healthText.StringReference["currHealth"] as IntVariable).Value = player.currHealth;
+        (healthText.StringReference["fullHealth"] as IntVariable).Value = player.fullHealth;
         energyText.text = player.energy.ToString();
+        blanksText.text = player.blanks.ToString();
 
         rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 120f);
 
@@ -102,11 +107,11 @@ public class PlayerFightUI : MonoBehaviour
 
         if (isInteractable && canBePlayable)
         {
-            StartCoroutine("UpdateTimer");
+            StartCoroutine(UpdateTimer());
         }
-        else if ((GlobalManager.singleton.mode == GameMode.Training || GlobalManager.singleton.mode == GameMode.Testing) && isInteractable && !canBePlayable)
+        else if (GlobalManager.singleton.mode == GameMode.Training && isInteractable && !canBePlayable)
         {
-            StartCoroutine("MakeCPUMove");
+            StartCoroutine(MakeCPUMove());
         }
 
         LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isInteractable ? 450f :  120f), 0.3f);
@@ -114,14 +119,19 @@ public class PlayerFightUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        string health = healthText.text.Split('/')[0];
-        LeanTween.value(healthText.gameObject, float.Parse(health), player.currHealth, 0.5f).setOnUpdate((float val) => { healthText.text = $"{Mathf.RoundToInt(val)}/{player.fullHealth}HP"; });
+        LeanTween.value(healthText.gameObject, (healthText.StringReference["currHealth"] as IntVariable).Value * 1f, player.currHealth, 0.5f).setOnUpdate((float val) => { (healthText.StringReference["currHealth"] as IntVariable).Value = Mathf.RoundToInt(val); });
         LeanTween.value(healthBar.gameObject, healthBar.fillAmount, player.currHealth/(float)player.fullHealth, 0.5f).setOnUpdate((float val) => { healthBar.fillAmount = val; });
 
         if (energyText.text != player.energy.ToString())
         {
             energyText.text = player.energy.ToString();
             LeanTween.scale(energyText.gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
+        }
+
+        if (blanksText.text != player.blanks.ToString())
+        {
+            blanksText.text = player.blanks.ToString();
+            LeanTween.scale(blanksText.gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
         }
 
         for (int i = 0; i < 5; i++)
@@ -135,11 +145,11 @@ public class PlayerFightUI : MonoBehaviour
                 {
                     if (!cardSlot.cardWasPlayed && player.cardHand[i].hasMove && player.cardHand[i].move.IsResponseTo(cardSlot.cardUI.card.move, player.energy))
                     {
-                        cards[i].SelectCard(true);
+                        cards[i].FocusCard(true);
                     }
                     else
                     {
-                        cards[i].SelectCard(false);
+                        cards[i].FocusCard(false);
                     }
                 }
             }
@@ -185,11 +195,11 @@ public class PlayerFightUI : MonoBehaviour
 
         if (card.isSpecial && GlobalData.animateImpact)
         {
-            FightManager.singleton.timeToMakeMove = 1.6f;
+            FightManager.singleton.timeToMakeMove = 1.7f;
         }
         else
         {
-            FightManager.singleton.timeToMakeMove = 0.8f;
+            FightManager.singleton.timeToMakeMove = 0.9f;
         }
 
         yield return new WaitForSeconds(0.3f);
@@ -197,19 +207,20 @@ public class PlayerFightUI : MonoBehaviour
         cardUI.FlipCard(false, 0f);
         cardUI.transform.SetParent(canvas.transform);
         
-        LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 172.5f, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
+        //235/2 = 117.5
+        LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 117.5f * canvas.transform.localScale.x, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
         
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
         if (card.isSpecial && GlobalData.animateImpact)
         {
             cardSlot.impactFrame.transform.SetAsLastSibling();
-            cardSlot.impactFrame.gameObject.SetActive(true);
-            cardSlot.impactFrame.SetupUI(card.fighter.name, card.fighter.outfits[card.outfit].name, true);
+            cardSlot.impactFrame.ToggleVisibility(true);
+            cardSlot.impactFrame.SetupUI(card.move.target, card.fighter.name, card.fighter.outfits[card.outfit].name, true);
 
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSecondsRealtime(0.8f);
 
-            cardSlot.impactFrame.gameObject.SetActive(false);
+            cardSlot.impactFrame.ToggleVisibility(false);
         }
 
         cardUI.GetComponent<DragDrop>().ResetDrag();
@@ -227,13 +238,17 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator RemoveCard(int cardIndex)
     {
-        FightManager.singleton.timeToMakeMove = 0.2f;
+        FightManager.singleton.timeToMakeMove = 0.25f;
 
-        Vector3 targetPositon = new Vector3(cards[cardIndex].transform.position.x, cards[cardIndex].transform.position.y + 200f, cards[cardIndex].transform.position.z);
         cards[cardIndex].transform.SetParent(canvas.transform);
-        LeanTween.move(cards[cardIndex].gameObject, targetPositon, 0.2f);
 
-        yield return new WaitForSeconds(0.2f);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(cards[cardIndex].transform.position);
+        Vector3 targetPositon = new Vector3(screenPos.x, screenPos.y + 350f, screenPos.z);
+        targetPositon = Camera.main.ScreenToWorldPoint(targetPositon);
+        
+        LeanTween.move(cards[cardIndex].gameObject, targetPositon, 0.25f);
+
+        yield return new WaitForSeconds(0.25f);
 
         cards[cardIndex].GetComponent<DragDrop>().ResetDrag();
         player.cardHand.RemoveAt(cardIndex);
@@ -245,19 +260,19 @@ public class PlayerFightUI : MonoBehaviour
         FightManager.singleton.timeToMakeMove = 0f;
     }
 
-    public void MakeInteractable(bool isInteractable, bool canBePlayable, CardSlot cardSlot = null)
+    public void MakeInteractable(bool isInteractable, bool canBePlayable)
     {
         if (isInteractable && canBePlayable && !cardGroup.interactable)
         {
             StartCoroutine("UpdateTimer");
         }
-        else if ((GlobalManager.singleton.mode == GameMode.Training || GlobalManager.singleton.mode == GameMode.Testing) && isInteractable && !canBePlayable)
+        else if (isInteractable && !canBePlayable && GlobalManager.singleton.mode == GameMode.Training)
         {
-            StartCoroutine("MakeCPUMove");
+            StartCoroutine(MakeCPUMove());
         }
         else if (!isInteractable)
         {
-            StopCoroutine("UpdateTimer");
+            StopAllCoroutines();
             LeanTween.cancel(timer.gameObject);
             timer.fillAmount = 1.0f;
         }
@@ -279,13 +294,13 @@ public class PlayerFightUI : MonoBehaviour
         while (time >= 0)
         {
             time--;
-            if (timer.fillAmount > time / (float)GlobalData.turnTime)
+            if (timer.fillAmount > time/(float)GlobalData.turnTime)
             {
-                LeanTween.value(timer.gameObject, timer.fillAmount, time / (float)GlobalData.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
+                LeanTween.value(timer.gameObject, timer.fillAmount, time/(float)GlobalData.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
             }
             else
             {
-                timer.fillAmount = time / (float)GlobalData.turnTime;
+                timer.fillAmount = time/(float)GlobalData.turnTime;
             }
 
             yield return new WaitForSeconds(1.0f);
@@ -297,10 +312,11 @@ public class PlayerFightUI : MonoBehaviour
     IEnumerator MakeCPUMove()
     {
         yield return new WaitForSeconds(0.4f);
+
         MoveMessage message = FightManager.singleton.GetMove();
         MakeMove(message);
 
-        yield return new WaitForSeconds(message.playCard ? 0.8f : 0.2f);
+        yield return new WaitForSeconds(message.playCard ? 0.9f : 0.25f);
 
         if (message.playCard && player.cardHand[message.cardIndex].isSpecial && GlobalData.animateImpact)
         {

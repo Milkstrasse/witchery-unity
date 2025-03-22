@@ -6,13 +6,14 @@ public class PlayerData
 {
     public string name;
     public int health;
+    public int maxHealth;
     public int energy;
     public List<int> cardStack;
     public List<int> playedCards;
     public List<int> cardHand;
     public List<StatusEffect> effects;
 
-    public int startIndex;
+    public int blanks;
 
     public bool startedFirst;
     public int roundsPlayed;
@@ -28,6 +29,7 @@ public class PlayerData
         name = "";
         
         health = 0;
+        maxHealth = 0;
         energy = 0;
 
         cardStack = new List<int>();
@@ -35,33 +37,37 @@ public class PlayerData
         cardHand = new List<int>();
         effects = new List<StatusEffect>();
 
-        startIndex = 0;
+        blanks = 0;
     }
 
     public PlayerData(PlayerMessage message)
     {
-        name = message.name;
-
         health = message.health;
+        maxHealth = message.health;
         energy = 0;
 
         cardStack = new List<int>();
         for (int i = 0; i < message.fighterIDs.Length; i++)
         {
-            int currCount = cardStack.Count + 5;
+            int currCount = cardStack.Count;
 
             Fighter fighter = GlobalData.fighters[message.fighterIDs[i].fighterID];
-            for (int j = 0; j < fighter.moves.Length; j++)
+            if (i == 0)
             {
-                cardStack.Add(currCount + j);
+                for (int j = 0; j < fighter.moves.Length; j++)
+                {
+                    cardStack.Add(currCount + j);
+                }
+            }
+            else
+            {
+                cardStack.Add(currCount);
             }
         }
 
         playedCards = new List<int>();
         cardHand = new List<int>();
         effects = message.effects.ToList();
-
-        startIndex = 5;
 
         ShuffleStack();
 
@@ -107,6 +113,7 @@ public class PlayerData
     public void RemoveCard(int cardIndex)
     {
         int card = cardHand[cardIndex];
+        
         cardHand.RemoveAt(cardIndex);
         playedCards.Add(card);
     }
@@ -123,14 +130,23 @@ public class PlayerData
             }
         }
 
-        if (index >= 0 && effects[index].multiplier < GlobalData.effectLimit)
+        if (index >= 0 && effects[index].multiplier < GlobalData.stackLimit)
         {
-            effects[index].multiplier += effect.multiplier;
+            int multiplier = effects[index].multiplier + effect.multiplier;
+
+            effects[index].multiplier = Math.Min(multiplier, GlobalData.stackLimit);
             effects[index].isNew = true;
         }
-        else if (index < 0 && effects.Count < 5)
+        else if (index < 0 && effects.Count < GlobalData.effectLimit)
         {
-            effects.Add(effect);
+            if (effect.multiplier > GlobalData.stackLimit)
+            {
+                effects.Add(new StatusEffect(effect, GlobalData.stackLimit));
+            }
+            else
+            {
+                effects.Add(effect);
+            }
 
             maxEffects = Math.Max(effects.Count, maxEffects);
         }
@@ -178,7 +194,7 @@ public class PlayerData
 
         for (int i = 0; i < effects.Count; i++)
         {
-            if (effects[i].name == "shields" || effects[i].name == "vulnerable" )
+            if (effects[i].statusType == StatusEffect.StatusType.Damage)
             {
                 effects[i].isNew = true;
                 modifier += effects[i].value * effects[i].multiplier;
@@ -239,37 +255,35 @@ public class PlayerData
 
     public void AddBlanks(int amount)
     {
-        int prevIndex = startIndex;
-        startIndex = Math.Max(startIndex - amount, 0);
+        int initBlanks = blanks;
+        blanks = Math.Min(blanks + amount, GlobalData.blankLimit);
 
-        if (prevIndex != startIndex)
+        int added = blanks - initBlanks;
+
+        if (added > 0)
         {
-            while (amount > 0)
+            for (int i = 0; i < added; i++)
             {
-                cardStack.Add(startIndex);
-                amount--;
+                cardStack.Add(-1);
             }
-            
+
             ShuffleStack();
         }
     }
 
     public void RemoveBlanks()
     {
-        int toRemove = 5 - startIndex;
-
         for (int i = 0; i < cardHand.Count; i++)
         {
-            if (toRemove == 0)
+            if (blanks == 0)
             {
                 return;
             }
 
-            if (cardHand[i] < startIndex)
+            if (cardHand[i] < 0)
             {
                 cardHand.RemoveAt(i);
-
-                toRemove--;
+                blanks--;
             }
         }
 
@@ -277,16 +291,16 @@ public class PlayerData
 
         for (int i = 0; i < cardStack.Count; i++)
         {
-            if (toRemove == 0)
+            if (blanks == 0)
             {
                 return;
             }
 
-            if (cardStack[i] < startIndex)
+            if (cardStack[i] < 0)
             {
                 cardStack.RemoveAt(i);
                 shuffle = true;
-                toRemove--;
+                blanks--;
             }
         }
 
@@ -297,15 +311,15 @@ public class PlayerData
 
         for (int i = 0; i < playedCards.Count; i++)
         {
-            if (toRemove == 0)
+            if (blanks == 0)
             {
                 return;
             }
 
-            if (playedCards[i] < startIndex)
+            if (playedCards[i] < 0)
             {
                 playedCards.RemoveAt(i);
-                toRemove--;
+                blanks--;
             }
         }
     }

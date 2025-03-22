@@ -5,6 +5,9 @@ using Utp;
 
 public class GameOverManager : MonoBehaviour
 {
+    [SerializeField] private GameObject credits;
+    [SerializeField] private FightLogUI fightLog;
+
     private PlayerObject[] players;
     public event Action<PlayerObject[]> OnSetupComplete;
 
@@ -25,8 +28,22 @@ public class GameOverManager : MonoBehaviour
 
     public void Rematch()
     {
-        AudioManager.singleton.PlayStandardSound();
-        NetworkClient.Send(new TurnMessage());
+        if (NetworkClient.activeHost && NetworkServer.connections.Count == GlobalManager.singleton.maxPlayers)
+        {
+            AudioManager.singleton.PlayPositiveSound();
+            NetworkClient.Send(new TurnMessage());
+        }
+        else if (!NetworkClient.activeHost && NetworkClient.isConnected)
+        {
+            AudioManager.singleton.PlayPositiveSound();
+            NetworkClient.Send(new TurnMessage());
+        }
+        else
+        {
+            AudioManager.singleton.PlayNegativeSound();
+            GlobalManager.QuitAnyConnection();
+            GlobalManager.singleton.LoadScene("SelectionScene");
+        }
     }
 
     [Server]
@@ -35,21 +52,35 @@ public class GameOverManager : MonoBehaviour
         GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>().ServerChangeScene("SelectionScene");
     }
 
-    public void GoToSettings()
+    public void ToggleCredits(bool enable)
     {
         AudioManager.singleton.PlayStandardSound();
-        GlobalManager.singleton.LoadScene("SettingsScene");
+
+        credits.SetActive(enable);
     }
 
-    public void ReturnToMenu()
+    public void ToggleLog(bool enable)
     {
         AudioManager.singleton.PlayStandardSound();
 
-        for (int i = 0; i < players.Length; i++)
-        {
-            Destroy(players[i].gameObject);
-        }
+        fightLog.gameObject.SetActive(enable);
+    }
+
+    public void ReturnToSelection()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        GlobalManager.QuitAnyConnection();
+
+        GlobalManager.singleton.LoadScene("SelectionScene");
+    }
+
+    public void GoToStatistics()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        GlobalManager.QuitAnyConnection();
         
-        GlobalManager.singleton.LoadScene("MenuScene");
+        GlobalManager.singleton.LoadScene("StatisticsScene");
     }
 }
