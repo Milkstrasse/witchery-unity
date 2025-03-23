@@ -3,8 +3,8 @@ public class FighterData
 {
     private bool[] outfits;
 
-    public int timesUsedPrimary;
-    public int timesUsedSecondary;
+    public int timesUsedPrimary { get; private set; }
+    public int timesUsedSecondary { get; private set; }
     public int timesWonPrimary;
     public int timesWonSecondary;
 
@@ -12,15 +12,35 @@ public class FighterData
     {
         outfits = new bool[fighter.outfits.Length];
     }
+    
+    public void IncreasePrimaryUse()
+    {
+        timesUsedPrimary++;
+
+        if (timesUsedPrimary + timesUsedSecondary >= 3 && !outfits[1])
+        {
+            UnlockOutfit(1);
+        }
+    }
+
+    public void IncreaseSecondaryUse()
+    {
+        timesUsedSecondary++;
+
+        if (timesUsedPrimary + timesUsedSecondary >= 3 && !outfits[1])
+        {
+            UnlockOutfit(1);
+        }
+    }
 
     public void UnlockFighter()
     {
         outfits[0] = true;
     }
 
-    public void SetOutfit(int index, bool unlocked)
+    public void UnlockOutfit(int index)
     {
-        outfits[index] = unlocked;
+        outfits[index] = true;
     }
 
     public bool IsUnlocked(int index = 0)

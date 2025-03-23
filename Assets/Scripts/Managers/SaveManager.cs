@@ -66,7 +66,7 @@ public class SaveManager
             if (i < Math.Min(fighterAmount, 4))
             {
                 savedData.fighters[i].UnlockFighter();
-                savedData.fighters[i].SetOutfit(1, i < 2);
+                //savedData.fighters[i].SetOutfit(1, i < 2);
             }
         }
 
@@ -116,12 +116,12 @@ public class SaveManager
 
             if (player.hasWon)
             {
-                savedData.fighters[player.fighterIDs[0].fighterID].timesUsedPrimary++;
+                savedData.fighters[player.fighterIDs[0].fighterID].IncreasePrimaryUse();
                 savedData.fighters[player.fighterIDs[0].fighterID].timesWonPrimary++;
 
                 for (int i = 1; i < player.fighterIDs.Length; i++)
                 {
-                    savedData.fighters[player.fighterIDs[i].fighterID].timesUsedSecondary++;
+                    savedData.fighters[player.fighterIDs[i].fighterID].IncreaseSecondaryUse();
                     savedData.fighters[player.fighterIDs[i].fighterID].timesWonSecondary++;
                 }
 
@@ -134,10 +134,10 @@ public class SaveManager
             }
             else
             {
-                savedData.fighters[player.fighterIDs[0].fighterID].timesUsedPrimary++;
+                savedData.fighters[player.fighterIDs[0].fighterID].IncreasePrimaryUse();
                 for (int i = 1; i < player.fighterIDs.Length; i++)
                 {
-                    savedData.fighters[player.fighterIDs[i].fighterID].timesUsedSecondary++;
+                    savedData.fighters[player.fighterIDs[i].fighterID].IncreaseSecondaryUse();
                 }
             }
         }

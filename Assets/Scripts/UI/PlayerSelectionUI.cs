@@ -94,7 +94,7 @@ public class PlayerSelectionUI : MonoBehaviour
         SelectCard(new SelectedFighter(cardIndex, outfits[cardIndex]), editing);
     }
 
-    public void SelectCard(SelectedFighter fighter, bool editing)
+    public void SelectCard(SelectedFighter fighter, bool editing, bool playSound = true)
     {
         if (isEditing || editing)
         {
@@ -107,12 +107,20 @@ public class PlayerSelectionUI : MonoBehaviour
 
             if (result.wasAdded)
             {
-                AudioManager.singleton.PlayPositiveSound();
+                if (playSound)
+                {
+                    AudioManager.singleton.PlayPositiveSound();
+                }
+
                 fighterCards[fighter.fighterID].FocusCard(true);
             }
             else
             {
-                AudioManager.singleton.PlayNegativeSound();
+                if (playSound)
+                {
+                    AudioManager.singleton.PlayNegativeSound();
+                }
+
                 fighterCards[fighter.fighterID].FocusCard(false);
             }
 
@@ -263,11 +271,28 @@ public class PlayerSelectionUI : MonoBehaviour
         else
         {
             Fighter fighter = GlobalData.fighters[currCard];
+            bool isPartofTeam = fighterCards[currCard].isFocused;
 
             int arrayLength = GlobalData.fighters[currCard].outfits.Length - 1;
             bool outfitFound = false;
 
-            while (!outfitFound)
+            if (isPartofTeam)
+            {
+                while (!outfitFound)
+                {
+                    if (outfits[currCard] > 0)
+                    {
+                        outfits[currCard]--;
+                    }
+                    else
+                    {
+                        outfits[currCard] = arrayLength;
+                    }
+
+                    outfitFound = SaveManager.savedData.fighters[currCard].IsUnlocked(outfits[currCard]);
+                }
+            }
+            else
             {
                 if (outfits[currCard] > 0)
                 {
@@ -279,6 +304,9 @@ public class PlayerSelectionUI : MonoBehaviour
                 }
 
                 outfitFound = SaveManager.savedData.fighters[currCard].IsUnlocked(outfits[currCard]);
+
+                modeButton.interactable = outfitFound;
+                actionButton.interactable = outfitFound;
             }
 
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
@@ -289,7 +317,7 @@ public class PlayerSelectionUI : MonoBehaviour
                 moveCards[i].UpdateOutfit(fighter, outfits[currCard]);
             }
 
-            if (fighterCards[currCard].isFocused)
+            if (isPartofTeam)
             {
                 SelectionResult result = selectionUI.EditTeam(currCard, outfits[currCard]);
                 portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
@@ -331,11 +359,28 @@ public class PlayerSelectionUI : MonoBehaviour
         else
         {
             Fighter fighter = GlobalData.fighters[currCard];
+            bool isPartofTeam = fighterCards[currCard].isFocused;
 
-            int arrayLength = fighter.outfits.Length - 1;
+            int arrayLength = GlobalData.fighters[currCard].outfits.Length - 1;
             bool outfitFound = false;
 
-            while (!outfitFound)
+            if (isPartofTeam)
+            {
+                while (!outfitFound)
+                {
+                    if (outfits[currCard] < arrayLength)
+                    {
+                        outfits[currCard]++;
+                    }
+                    else
+                    {
+                        outfits[currCard] = 0;
+                    }
+
+                    outfitFound = SaveManager.savedData.fighters[currCard].IsUnlocked(outfits[currCard]);
+                }
+            }
+            else
             {
                 if (outfits[currCard] < arrayLength)
                 {
@@ -347,6 +392,9 @@ public class PlayerSelectionUI : MonoBehaviour
                 }
 
                 outfitFound = SaveManager.savedData.fighters[currCard].IsUnlocked(outfits[currCard]);
+
+                modeButton.interactable = outfitFound;
+                actionButton.interactable = outfitFound;
             }
 
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
@@ -357,7 +405,7 @@ public class PlayerSelectionUI : MonoBehaviour
                 moveCards[i].UpdateOutfit(fighter, outfits[currCard]);
             }
 
-            if (fighterCards[currCard].isFocused)
+            if (isPartofTeam)
             {
                 SelectionResult result = selectionUI.EditTeam(currCard, outfits[currCard]);
                 portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
@@ -470,6 +518,9 @@ public class PlayerSelectionUI : MonoBehaviour
 
         if (!isShowingInfo)
         {
+            modeButton.interactable = true;
+            actionButton.interactable = true;
+
             actionButton.GetComponent<Image>().material = neutral;
             actionButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnButton");
 

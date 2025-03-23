@@ -32,7 +32,7 @@ public class SelectionUI : MonoBehaviour
 
                 for (int j = 0; j < players[0].fighterIDs.Length; j++)
                 {
-                    playerBottom.SelectCard(players[0].fighterIDs[j], true);
+                    playerBottom.SelectCard(players[0].fighterIDs[j], true, false);
                 }
             }
             else
@@ -41,7 +41,7 @@ public class SelectionUI : MonoBehaviour
 
                 for (int j = 0; j < players[1].fighterIDs.Length; j++)
                 {
-                    playerBottom.SelectCard(players[1].fighterIDs[j], true);
+                    playerBottom.SelectCard(players[1].fighterIDs[j], true, false);
                 }
             }
 
@@ -75,7 +75,7 @@ public class SelectionUI : MonoBehaviour
             {
                 for (int j = 0; j < players[1].fighterIDs.Length; j++)
                 {
-                    playerTop.SelectCard(players[1].fighterIDs[j], true);
+                    playerTop.SelectCard(players[1].fighterIDs[j], true, false);
                 }
             }
         }
