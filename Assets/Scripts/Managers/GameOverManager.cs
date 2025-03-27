@@ -7,6 +7,8 @@ public class GameOverManager : MonoBehaviour
 {
     [SerializeField] private GameObject credits;
     [SerializeField] private FightLogUI fightLog;
+    [SerializeField] private GameObject statistics;
+    private Canvas canvas;
 
     private PlayerObject[] players;
     public event Action<PlayerObject[]> OnSetupComplete;
@@ -24,6 +26,8 @@ public class GameOverManager : MonoBehaviour
         NetworkServer.ReplaceHandler<TurnMessage>(OnRematch);
 
         SaveManager.SaveData();
+
+        canvas = GetComponent<Canvas>();
     }
 
     public void Rematch()
@@ -59,11 +63,11 @@ public class GameOverManager : MonoBehaviour
         credits.SetActive(enable);
     }
 
-    public void ToggleLog(bool enable)
+    public void ToggleLog()
     {
         AudioManager.singleton.PlayStandardSound();
 
-        fightLog.gameObject.SetActive(enable);
+        fightLog.gameObject.SetActive(!fightLog.gameObject.activeSelf);
     }
 
     public void ReturnToSelection()
@@ -75,12 +79,11 @@ public class GameOverManager : MonoBehaviour
         GlobalManager.singleton.LoadScene("SelectionScene");
     }
 
-    public void GoToStatistics()
+    public void ToggleStatistics()
     {
         AudioManager.singleton.PlayStandardSound();
 
-        GlobalManager.QuitAnyConnection();
-        
-        GlobalManager.singleton.LoadScene("StatisticsScene");
+        statistics.SetActive(!statistics.activeSelf);
+        canvas.enabled = !statistics.activeSelf;
     }
 }

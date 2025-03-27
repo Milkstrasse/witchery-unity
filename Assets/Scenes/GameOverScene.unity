@@ -609,7 +609,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1356084581}
         m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
         m_MethodName: ToggleLog
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -741,7 +741,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1356084581}
         m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
-        m_MethodName: GoToStatistics
+        m_MethodName: ToggleStatistics
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -934,6 +934,136 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210483461}
   m_CullTransparentMesh: 1
+--- !u!1001 &543809613
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1021630017744418251, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1356084581}
+    - target: {fileID: 1021630017744418251, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleStatistics
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021630017744418251, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameOverManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021630017744418251, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406714745965976975, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_Name
+      value: Statistics
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406714745965976975, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6709561439750994909, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 103234847}
+    - target: {fileID: 7610948667502442102, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884231179091171270, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+--- !u!1 &543809614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6406714745965976975, guid: 5015f992327a64528a67bd78d6b223fa, type: 3}
+  m_PrefabInstance: {fileID: 543809613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &619429332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2896,6 +3026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   credits: {fileID: 1185925050}
   fightLog: {fileID: 1491091401}
+  statistics: {fileID: 543809614}
 --- !u!114 &1356084582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2995,7 +3126,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1356084581}
         m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
-        m_MethodName: GoToStatistics
+        m_MethodName: ToggleStatistics
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3727,7 +3858,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1356084581}
         m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
         m_MethodName: ToggleLog
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3994,7 +4125,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1356084581}
         m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
         m_MethodName: ToggleLog
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4943,5 +5074,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 103234848}
   - {fileID: 1356084577}
+  - {fileID: 543809613}
   - {fileID: 1481563457}
   - {fileID: 1485006797}
