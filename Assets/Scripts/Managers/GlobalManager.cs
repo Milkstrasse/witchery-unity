@@ -69,8 +69,6 @@ public class GlobalManager : MonoBehaviour
         AsyncOperationHandle handle = LocalizationSettings.InitializationOperation;
         await handle.Task;
 
-        int langIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("langCode", langIndex)];
         GlobalData.highlightPlayable = PlayerPrefs.GetInt("highlightPlayable", 1) != 0;
         GlobalData.animateImpact = PlayerPrefs.GetInt("animateImpact", 1) != 0;
         GlobalData.uiScale = PlayerPrefs.GetFloat("uiScale", 1f);
