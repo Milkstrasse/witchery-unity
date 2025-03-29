@@ -66,9 +66,6 @@ public class GlobalManager : MonoBehaviour
             relayEnabled = false;
         }
 
-        AsyncOperationHandle handle = LocalizationSettings.InitializationOperation;
-        await handle.Task;
-
         GlobalData.highlightPlayable = PlayerPrefs.GetInt("highlightPlayable", 1) != 0;
         GlobalData.animateImpact = PlayerPrefs.GetInt("animateImpact", 1) != 0;
         GlobalData.uiScale = PlayerPrefs.GetFloat("uiScale", 1f);

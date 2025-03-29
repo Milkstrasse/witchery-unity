@@ -15,6 +15,7 @@ MonoBehaviour:
   m_StartupSelectors:
   - rid: 925420855585144832
   - rid: 6015138496889225216
+  - rid: 6015138497636597760
   - rid: 925420855585144833
   - rid: 925420855585144834
   m_AvailableLocales:
@@ -210,3 +211,6 @@ MonoBehaviour:
       type: {class: PlayerPrefLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
       data:
         m_PlayerPreferenceKey: langCode
+    - rid: 6015138497636597760
+      type: {class: CustomLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Assembly-CSharp}
+      data: 
