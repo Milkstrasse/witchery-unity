@@ -157,11 +157,6 @@ public class FightManager : MonoBehaviour
             string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds / 10:00}";
 
             UnityEngine.Debug.Log("Fight ended after " + elapsedTime);
-            if (logic.players.Count > 0)
-            {
-                UnityEngine.Debug.Log($"{logic.players[0].roundsPlayed} round(s) were played");
-                UnityEngine.Debug.Log($"First player has won ? {(logic.players[0].startedFirst && players[0].hasWon) || (logic.players[1].startedFirst && players[1].hasWon)}");
-            }
 
             messages.Push(message, false);
             StartCoroutine(InvokeQueue());

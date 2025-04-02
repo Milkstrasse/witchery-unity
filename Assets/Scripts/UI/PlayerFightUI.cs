@@ -29,6 +29,8 @@ public class PlayerFightUI : MonoBehaviour
 
     private CardUI[] cards;
 
+    private int roundsPlayed;
+
     private void Start()
     {
         cardGroup = cardParent.GetComponent<CanvasGroup>();
@@ -173,6 +175,12 @@ public class PlayerFightUI : MonoBehaviour
                     effects[i].gameObject.SetActive(false);
                 }
             }
+        }
+
+        if (player.playerID > 0 && player.roundsPlayed > roundsPlayed)
+        {
+            GlobalManager.singleton.fightLog.EndRound(player.roundsPlayed);
+            roundsPlayed = player.roundsPlayed;
         }
     }
 

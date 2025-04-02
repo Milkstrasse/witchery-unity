@@ -5,10 +5,10 @@ using Utp;
 
 public class GameOverManager : MonoBehaviour
 {
+    [SerializeField] private GameObject gameOver;
     [SerializeField] private GameObject credits;
     [SerializeField] private FightLogUI fightLog;
     [SerializeField] private GameObject statistics;
-    private Canvas canvas;
 
     private PlayerObject[] players;
     public event Action<PlayerObject[]> OnSetupComplete;
@@ -26,8 +26,6 @@ public class GameOverManager : MonoBehaviour
         NetworkServer.ReplaceHandler<TurnMessage>(OnRematch);
 
         SaveManager.SaveData();
-
-        canvas = GetComponent<Canvas>();
     }
 
     public void Rematch()
@@ -56,18 +54,29 @@ public class GameOverManager : MonoBehaviour
         GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>().ServerChangeScene("SelectionScene");
     }
 
-    public void ToggleCredits(bool enable)
+    public void ToggleCredits(bool isFlipped)
     {
         AudioManager.singleton.PlayStandardSound();
 
-        credits.SetActive(enable);
+        credits.transform.eulerAngles = new Vector3(0f, 0f, isFlipped ? 180f : 0f);
+        credits.SetActive(!credits.activeSelf);
     }
 
-    public void ToggleLog()
+    public void ToggleLog(bool isFlipped)
     {
         AudioManager.singleton.PlayStandardSound();
 
+        fightLog.transform.eulerAngles = new Vector3(0f, 0f, isFlipped ? 180f : 0f);
         fightLog.gameObject.SetActive(!fightLog.gameObject.activeSelf);
+    }
+
+    public void ToggleStatistics(bool isFlipped)
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        statistics.transform.eulerAngles = new Vector3(0f, 0f, isFlipped ? 180f : 0f);
+        statistics.SetActive(!statistics.activeSelf);
+        gameOver.SetActive(!statistics.activeSelf);
     }
 
     public void ReturnToSelection()
@@ -77,13 +86,5 @@ public class GameOverManager : MonoBehaviour
         GlobalManager.QuitAnyConnection();
 
         GlobalManager.singleton.LoadScene("SelectionScene");
-    }
-
-    public void ToggleStatistics()
-    {
-        AudioManager.singleton.PlayStandardSound();
-
-        statistics.SetActive(!statistics.activeSelf);
-        canvas.enabled = !statistics.activeSelf;
     }
 }

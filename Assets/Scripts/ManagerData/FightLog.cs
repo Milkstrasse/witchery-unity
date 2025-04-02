@@ -7,7 +7,7 @@ public class FightLog
 
     public FightLog()
     {
-        log = new StringBuilder();
+        log = new StringBuilder("Round 1 -----------------------------\n");
     }
 
     public void AddToLog(Card card, bool isFlipped)
@@ -20,6 +20,11 @@ public class FightLog
         {
             log.Append(isFlipped ? "Flipped player played played blank card\n" : "Nonflipped player played blank card\n");
         }
+    }
+
+    public void EndRound(int round)
+    {
+        log.Append($"Round {round + 1} -----------------------------\n");
     }
 
     public string GetLog()
