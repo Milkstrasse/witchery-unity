@@ -127,12 +127,14 @@ public class PlayerFightUI : MonoBehaviour
         if (energyText.text != player.energy.ToString())
         {
             energyText.text = player.energy.ToString();
+            energyText.transform.localScale = Vector3.one;
             LeanTween.scale(energyText.gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
         }
 
         if (blanksText.text != player.blanks.ToString())
         {
             blanksText.text = player.blanks.ToString();
+            blanksText.transform.localScale = Vector3.one;
             LeanTween.scale(blanksText.gameObject, new Vector3(1.3f, 1.3f, 1.3f), 0.2f).setLoopPingPong(1);
         }
 

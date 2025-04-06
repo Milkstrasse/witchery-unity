@@ -38,7 +38,11 @@ public struct CPULogic
                 }
 
                 int health = move.health;
-                if (move.moveID >= 2 && move.moveID <= 4 && move.moveType == MoveType.Special) //special moves
+                if (logic.lastCard.card.hasMove && logic.lastCard.card.move.moveID == 7)
+                {
+                    health = 0;
+                }
+                else if (move.moveID >= 2 && move.moveID <= 4 && move.moveType == MoveType.Special) //special moves
                 {
                     health *= logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0;
                 }

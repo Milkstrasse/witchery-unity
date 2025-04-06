@@ -365,6 +365,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357012
+  - m_Id: 84067404521398272
+    m_Localized: Verhindere Schaden
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84105283083689984
+    m_Localized: Gewinne dank Statuseffekts
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

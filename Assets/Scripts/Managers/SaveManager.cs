@@ -28,6 +28,10 @@ public class SaveManager
             {
                 fighters[i] = savedData.fighters[i];
             }
+            for (int j = 0; j < deltaFighters; j++)
+            {
+                fighters[savedData.fighters.Length + j] = new FighterData(GlobalData.fighters[savedData.fighters.Length + j]);
+            }
 
             savedData.fighters = fighters;
         }
@@ -39,6 +43,10 @@ public class SaveManager
             for (int i = 0; i < savedData.missions.Length; i++)
             {
                 missions[i] = savedData.missions[i];
+            }
+            for (int j = 0; j < deltaFighters; j++)
+            {
+                missions[savedData.missions.Length + j] = GlobalData.missions[savedData.fighters.Length + j];
             }
 
             savedData.missions = missions;
