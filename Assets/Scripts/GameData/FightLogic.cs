@@ -285,9 +285,6 @@ public class FightLogic
                     }
 
                     break;
-                case 19: //add blank
-                    players[(move.target + turn) % 2].AddBlanks(1);
-                    break;
                 case 20: //remove random card
                     int cardAmount = players[(move.target + turn) % 2].cardHand.Count;
                     if (cardAmount > 0)
@@ -298,6 +295,9 @@ public class FightLogic
                     break;
                 case 21: //heal to health
                     players[(move.target + turn) % 2].health = Math.Max(players[(move.target + turn) % 2].health, move.health + players[turn].GetPowerBonus());
+                    break;
+                case 22: //add blank
+                    players[(move.target + turn) % 2].AddBlanks(1);
                     break;
                 case 23: //clear blanks
                     break;

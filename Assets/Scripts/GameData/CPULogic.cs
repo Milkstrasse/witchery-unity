@@ -233,8 +233,8 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 19: //add blank
-                            if (logic.players[0].blanks >= GlobalData.blankLimit)
+                        case 20: //remove random card
+                            if (logic.players[0].cardHand.Count == 0)
                             {
                                 goto case 0;
                             }
@@ -242,8 +242,8 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 20: //remove random card
-                            if (logic.players[0].cardHand.Count == 0)
+                        case 22: //add blank
+                            if (logic.players[0].blanks >= GlobalData.blankLimit)
                             {
                                 goto case 0;
                             }
