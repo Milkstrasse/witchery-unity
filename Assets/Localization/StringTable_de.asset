@@ -312,7 +312,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46628124241158144
-    m_Localized: Spielte {amount} Runde(n) lang
+    m_Localized: Spielte {amount:plural:1 Runde|{} Runden} lang
     m_Metadata:
       m_Items:
       - rid: 296817732614357012

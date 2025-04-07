@@ -312,7 +312,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46628124241158144
-    m_Localized: Played for {amount} round(s)
+    m_Localized: Played for {amount:plural:1 round|{} rounds}
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
