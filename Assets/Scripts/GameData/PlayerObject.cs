@@ -143,8 +143,13 @@ public class PlayerObject : MonoBehaviour
         return counter;
     }
 
-    public int GetDamageModifier()
+    public int GetDamageModifier(bool ignore)
     {
+        if (ignore)
+        {
+            return 0;
+        }
+
         int modifier = 0;
 
         for (int i = 0; i < effects.Count; i++)

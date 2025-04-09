@@ -242,7 +242,7 @@ public class CardUI : MonoBehaviour
         {
             if (card.move.target > 0)
             {
-                (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(!update) - FightManager.singleton.players[1 - player.playerID].GetDamageModifier(), 0);
+                (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health * cardCost) + GetPowerBonus(!update) - FightManager.singleton.players[1 - player.playerID].GetDamageModifier(!update), 0);
             }
             else
             {
@@ -257,7 +257,7 @@ public class CardUI : MonoBehaviour
         }
         else if (update && card.move.target > 0)
         {
-            (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveType == MoveType.Special) - FightManager.singleton.players[1 - player.playerID].GetDamageModifier(), 0);
+            (infoText.StringReference["health"] as IntVariable).Value = Math.Max(Math.Abs(card.move.health) + GetPowerBonus(card.move.moveType == MoveType.Special) - FightManager.singleton.players[1 - player.playerID].GetDamageModifier(!update), 0);
         }
         else
         {

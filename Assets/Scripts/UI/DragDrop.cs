@@ -47,8 +47,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(rectTransform.position);
-        bool toRemove = screenPos.y < 100f || screenPos.y > Screen.height - 100f;
+        bool toRemove = cardUI.isSelected;
         ResetDrag();
 
         if (toRemove && FightManager.singleton.IsAbleToMessage())
