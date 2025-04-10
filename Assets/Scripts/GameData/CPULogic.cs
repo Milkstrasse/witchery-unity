@@ -86,7 +86,7 @@ public struct CPULogic
 
                         return new MoveMessage(1, i, true);
                     }
-                    else if ((move.moveID == 10 && player.currHealth + health <= 0) || logic.players[0].GetEffect("spice") >= player.currHealth) //prevent self k.o.
+                    else if ((move.moveID == 10 && player.currHealth + health <= 0) || logic.players[0].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
                     {
                         GetMostResourcesBack(player, i);
                     }
