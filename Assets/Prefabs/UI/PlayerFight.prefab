@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4282422271
-  m_fontColor: {r: 1, g: 0.5772458, b: 0.25, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1032,7 +1032,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 32347484
+  m_TextStyleHashCode: 2024376927
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
