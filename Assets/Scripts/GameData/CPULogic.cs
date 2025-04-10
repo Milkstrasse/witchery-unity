@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 public struct CPULogic
 {
+    private static List<(int, int)> prioritizedCards;
+
     public static MoveMessage GetMove(PlayerObject player, FightLogic logic)
     {
-        List<(int, int)> prioritizedCards = new List<(int, int)>();
+        prioritizedCards = new List<(int, int)>();
         float missingHP = 1 - player.currHealth / player.fullHealth;
 
         for (int i = 0; i < player.cardHand.Count; i++)
@@ -14,7 +16,7 @@ public struct CPULogic
             {
                 prioritizedCards.Add((i, 0));
             }
-            else if (player.cardHand[i].hasMove && player.cardHand[i].move.cost <= player.energy)
+            else
             {
                 Move move = player.cardHand[i].move;
                 if (move.moveID == 1 && logic.lastCard.card.hasMove) //replay card
@@ -33,7 +35,7 @@ public struct CPULogic
 
                 if (move.moveType == MoveType.Response)
                 {
-                    prioritizedCards.Add((i, -10));
+                    prioritizedCards.Add((i, -20));
                     continue;
                 }
 
@@ -47,33 +49,61 @@ public struct CPULogic
                 {
                     if (logic.lastCard.card.hasMove && logic.lastCard.card.move.moveID == 7)
                     {
-                        prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
+                        GetMostResourcesBack(player, i);
                         continue;
                     }
 
                     health = Math.Min(health - logic.players[1].GetPowerBonus() + logic.players[0].GetDamageModifier(), 0);
 
-                    if (logic.players[0].health + health <= 0) //opponent defeated
+                    if (logic.players[0].health + health <= 0) //opponent could be defeated
                     {
+                        if (player.cardHand[i].move.cost > player.energy) //check if card could be played if there's enough energy
+                        {
+                            List<(int, int)> potentialCards = new List<(int, int)>();
+
+                            int potential = 0;
+                            for (int j = 0; j < player.cardHand.Count; j++)
+                            {
+                                if (i != j)
+                                {
+                                    potential += player.cardHand[j].move.cost; //prevent opponent's reaction by creating energy through discard
+                                    potentialCards.Add((j, player.cardHand[j].move.cost));
+                                }
+                            }
+
+                            if (potential >= player.cardHand[i].move.cost)
+                            {
+                                (int, int)[] potentials = potentialCards.ToArray();
+                                Array.Sort(potentials, (a, b) => { return b.Item2.CompareTo(a.Item2); });
+                                return new MoveMessage(1, potentials[0].Item1, false);
+                            }
+                            else
+                            {
+                                GetMostResourcesBack(player, i);
+                                continue;
+                            }
+                        }
+
                         return new MoveMessage(1, i, true);
+                    }
+                    else if ((move.moveID == 10 && player.currHealth + health <= 0) || logic.players[0].GetEffect("spice") >= player.currHealth) //prevent self k.o.
+                    {
+                        GetMostResourcesBack(player, i);
+                    }
+                    else if (health == 0 && player.cardHand[i].move.cost > 0)
+                    {
+                        GetMostResourcesBack(player, i);
+                    }
+                    else if (player.cardHand[i].move.cost > player.energy)
+                    {
+                        GetMostResourcesBack(player, i);
                     }
                     else
                     {
-                        if ((move.moveID == 10 && player.currHealth + health <= 0) || logic.players[0].GetEffect("spice") >= player.currHealth) //prevent self k.o.
-                        {
-                            prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
-                        }
-                        else if (health == 0 && player.cardHand[i].move.cost > 0)
-                        {
-                            prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
-                        }
-                        else
-                        {
-                            prioritizedCards.Add((i, health * -1));
-                        }
+                        prioritizedCards.Add((i, health * -1));
                     }
                 }
-                else
+                else if (player.cardHand[i].move.cost <= player.energy)
                 {
                     switch (move.moveID)
                     {
@@ -103,7 +133,7 @@ public struct CPULogic
 
                                 if (health == 0 && player.cardHand[i].move.cost > 0)
                                 {
-                                    prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
+                                    GetMostResourcesBack(player, i);
                                 }
                                 else
                                 {
@@ -114,7 +144,7 @@ public struct CPULogic
                             }
                             else if (missingHP < 0.1f) //excessive healing
                             {
-                                prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
+                                GetMostResourcesBack(player, i);
                                 break;
                             }
                             else
@@ -150,12 +180,12 @@ public struct CPULogic
 
                                 if (checkEnergy >= 0)
                                 {
-                                    prioritizedCards.Add((i, player.cardHand[i].move.cost * -1 + stealEnergy * -40)); //prioritize energy & cheap cards
+                                    PrioritizeEnergyOrCheap(player, i, stealEnergy);
                                 }
                                 else
                                 {
                                     stealEnergy -= checkEnergy;
-                                    prioritizedCards.Add((i, player.cardHand[i].move.cost * -1 + stealEnergy * -40)); //prioritize energy & cheap cards
+                                    PrioritizeEnergyOrCheap(player, i, stealEnergy);
                                 }
                             }
 
@@ -167,7 +197,7 @@ public struct CPULogic
 
                                 if (energy >= player.cardHand[i].move.cost)
                                 {
-                                    prioritizedCards.Add((i, player.cardHand[i].move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
+                                    PrioritizeEnergyOrCheap(player, i, move.energy);
                                     break;
                                 }
                                 else
@@ -273,7 +303,7 @@ public struct CPULogic
                                 goto default;
                             }
                         case 0:
-                            prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
+                            GetMostResourcesBack(player, i);
                             break;
                         default:
                             if (move.moveType == MoveType.Special && (!logic.lastCard.card.hasMove || logic.lastCard.card.move.cost == 0))
@@ -286,17 +316,15 @@ public struct CPULogic
                             }
                             else
                             {
-                                prioritizedCards.Add((i, player.cardHand[i].move.cost * -1 + move.energy * 40)); //prioritize energy & cheap cards
+                                PrioritizeEnergyOrCheap(player, i, move.energy);
                                 break;
                             }
-
-
                     }
                 }
-            }
-            else //unplayable cards
-            {
-                prioritizedCards.Add((i, -15 + player.cardHand[i].move.cost)); //get biggest amount of resources back
+                else //unplayable cards
+                {
+                    GetMostResourcesBack(player, i);
+                }
             }
         }
 
@@ -304,5 +332,15 @@ public struct CPULogic
         Array.Sort(cards, (a, b) => { return b.Item2.CompareTo(a.Item2); });
 
         return new MoveMessage(1, cards[0].Item1, cards[0].Item2 > -10);
+    }
+
+    private static void GetMostResourcesBack(PlayerObject player, int cardIndex)
+    {
+        prioritizedCards.Add((cardIndex, -15 + player.cardHand[cardIndex].move.cost)); //get biggest amount of resources back
+    }
+
+    private static void PrioritizeEnergyOrCheap(PlayerObject player, int cardIndex, int energy)
+    {
+        prioritizedCards.Add((cardIndex, player.cardHand[cardIndex].move.cost * -1 + energy * -40)); //prioritize energy & cheap cards
     }
 }
