@@ -178,9 +178,9 @@ public class PlayerData
         {
             if (effects[i].statusType == StatusEffect.StatusType.Power)
             {
-                effects[i].isNew = true;
                 power += effects[i].value * effects[i].multiplier;
 
+                effects[i].isNew = true;
                 ConsumeEffect(i);
             }
         }
@@ -188,7 +188,7 @@ public class PlayerData
         return power;
     }
 
-    public int GetDamageModifier()
+    public int GetDamageModifier(bool setNew = true)
     {
         int modifier = 0;
 
@@ -196,10 +196,13 @@ public class PlayerData
         {
             if (effects[i].statusType == StatusEffect.StatusType.Damage)
             {
-                effects[i].isNew = true;
                 modifier += effects[i].value * effects[i].multiplier;
 
-                ConsumeEffect(i);
+                if (setNew)
+                {
+                    effects[i].isNew = true;
+                    ConsumeEffect(i);
+                }
             }
         }
         

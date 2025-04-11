@@ -53,7 +53,7 @@ public struct CPULogic
                         continue;
                     }
 
-                    health = Math.Min(health - logic.players[1].GetPowerBonus() + logic.players[0].GetDamageModifier(), 0);
+                    health = Math.Min(health - player.GetPowerBonus() + logic.players[0].GetDamageModifier(false), 0);
 
                     if (logic.players[0].health + health <= 0) //opponent could be defeated
                     {
@@ -86,7 +86,7 @@ public struct CPULogic
 
                         return new MoveMessage(1, i, true);
                     }
-                    else if ((move.moveID == 10 && player.currHealth + health <= 0) || logic.players[0].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
+                    else if ((move.moveID == 10 && player.currHealth + health + logic.players[1].GetDamageModifier(false) <= 0) || logic.players[0].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
                     {
                         GetMostResourcesBack(player, i);
                     }
@@ -119,7 +119,7 @@ public struct CPULogic
                         case 3: // heal
                             if (health > 0 && missingHP > 0.6f)
                             {
-                                health = Math.Max(health + logic.players[1].GetPowerBonus(), 0);
+                                health = Math.Max(health + player.GetPowerBonus(), 0);
 
                                 if (move.moveID == 21) //heal to health
                                 {
@@ -193,7 +193,7 @@ public struct CPULogic
                         case 9: //energy
                             if (move.moveType == MoveType.Special && logic.lastCard.card.hasMove)
                             {
-                                int energy = move.energy * logic.lastCard.card.move.cost + logic.players[1].GetPowerBonus();
+                                int energy = move.energy * logic.lastCard.card.move.cost + player.GetPowerBonus();
 
                                 if (energy >= player.cardHand[i].move.cost)
                                 {
@@ -294,7 +294,7 @@ public struct CPULogic
                             }
                         case 23: //clear blanks
                         case 25: //hand over blanks
-                            if (logic.players[1].blanks == 0)
+                            if (player.blanks == 0)
                             {
                                 goto case 0;
                             }
