@@ -203,16 +203,23 @@ public struct CPULogic
 
                                 stealEnergy -= player.GetPowerBonus();
 
-                                int checkEnergy = logic.players[opponentIndex].energy + stealEnergy;
-
-                                if (checkEnergy >= 0)
+                                if (stealEnergy > 0)
                                 {
-                                    PrioritizeEnergyOrCheap(player, i, -stealEnergy);
+                                    int checkEnergy = logic.players[opponentIndex].energy + stealEnergy;
+
+                                    if (checkEnergy >= 0)
+                                    {
+                                        PrioritizeEnergyOrCheap(player, i, -stealEnergy);
+                                    }
+                                    else
+                                    {
+                                        stealEnergy -= checkEnergy;
+                                        PrioritizeEnergyOrCheap(player, i, -stealEnergy);
+                                    }
                                 }
                                 else
                                 {
-                                    stealEnergy -= checkEnergy;
-                                    PrioritizeEnergyOrCheap(player, i, -stealEnergy);
+                                    goto case 0;
                                 }
                             }
 

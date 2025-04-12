@@ -20,7 +20,6 @@ public class GlobalManager : MonoBehaviour
     public string joincode;
     public bool relayEnabled;
     public int maxPlayers;
-    public string lastScene;
 
     public FightLog fightLog;
 
@@ -142,12 +141,6 @@ public class GlobalManager : MonoBehaviour
 
     public void LoadScene(string scene, LoadSceneMode sceneMode = LoadSceneMode.Single)
     {
-        string temp = GetCurrentScene();
-        if (temp != scene)
-        {
-            lastScene = temp;
-        }
-
         SceneManager.LoadScene(scene, new LoadSceneParameters
         {
             loadSceneMode = sceneMode,
