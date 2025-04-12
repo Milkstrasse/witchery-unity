@@ -16,8 +16,9 @@ public class PlayerFightUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI blanksText;
     [SerializeField] private Image timer;
     [SerializeField] private Image portrait;
+    [SerializeField] private Material fullHealth;
+    [SerializeField] private Material lowHealth;
     [SerializeField] private Button exitButton;
-
     [SerializeField] private Transform statusParent;
     private StatusUI[] effects;
     [SerializeField] private Transform cardParent;
@@ -126,6 +127,8 @@ public class PlayerFightUI : MonoBehaviour
     {
         LeanTween.value(healthText.gameObject, (healthText.StringReference["currHealth"] as IntVariable).Value * 1f, player.currHealth, 0.5f).setOnUpdate((float val) => { (healthText.StringReference["currHealth"] as IntVariable).Value = Mathf.RoundToInt(val); });
         LeanTween.value(healthBar.gameObject, healthBar.fillAmount, player.currHealth/(float)player.fullHealth, 0.5f).setOnUpdate((float val) => { healthBar.fillAmount = val; });
+
+        healthBar.material = player.currHealth/(float)player.fullHealth <= 0.2f ? lowHealth : fullHealth;
 
         if (energyText.text != player.energy.ToString())
         {

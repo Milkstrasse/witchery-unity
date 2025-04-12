@@ -19,15 +19,16 @@ public struct CPULogic
     public MoveMessage GetMove(PlayerObject player, FightLogic logic)
     {
         prioritizedCards = new List<(int, int)>();
-        float missingHP = 1 - player.currHealth / player.fullHealth;
+        float missingHP = 1 - player.currHealth / (float)player.fullHealth;
 
-        //Debug.Log($"CPU has {player.energy} energy & is missing {missingHP} HP");
+        Debug.Log($"CPU has {player.energy} energy & is missing {missingHP} HP");
+        Debug.Log(logic.lastCard.card.hasMove ? $"Last card costs {logic.lastCard.card.move.cost} energy, moveID is {logic.lastCard.card.move.moveID}" : $"Last card costs 0 energy, moveID is 0");
 
         for (int i = 0; i < player.cardHand.Count; i++)
         {
             if (!player.cardHand[i].hasMove)
             {
-                //Debug.Log("No move");
+                Debug.Log("No move");
                 prioritizedCards.Add((i, 0));
             }
             else
@@ -38,7 +39,7 @@ public struct CPULogic
                     move = logic.lastCard.card.move;
                 }
 
-                //Debug.Log(move.name);
+                Debug.Log(move.name);
 
                 if (logic.lastCard.card.hasMove && !logic.lastCard.played)
                 {
@@ -91,9 +92,9 @@ public struct CPULogic
                             {
                                 (int, int)[] potentials = potentialCards.ToArray();
                                 Array.Sort(potentials, (a, b) => { return b.Item2.CompareTo(a.Item2); });
-                                /*Debug.Log("-----------------");
+                                Debug.Log("-----------------");
                                 Debug.Log("Could defeat opponent");
-                                Debug.Log("-----------------");*/
+                                Debug.Log("-----------------");
                                 return new MoveMessage(1, potentials[0].Item1, false);
                             }
                             else
@@ -103,12 +104,12 @@ public struct CPULogic
                             }
                         }
 
-                        /*Debug.Log("-----------------");
+                        Debug.Log("-----------------");
                         Debug.Log("Defeat opponent");
-                        Debug.Log("-----------------");*/
+                        Debug.Log("-----------------");
                         return new MoveMessage(1, i, true);
                     }
-                    else if ((move.moveID == 10 && player.currHealth + finalhealth + logic.players[playerIndex].GetDamageModifier(false) <= 0) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
+                    else if (move.moveID == 10 && player.currHealth + finalhealth + logic.players[playerIndex].GetDamageModifier(false) <= 0 - logic.players[opponentIndex].GetEffect("spice", false)) //prevent self k.o.
                     {
                         GetMostResourcesBack(player, i);
                     }
@@ -155,7 +156,7 @@ public struct CPULogic
                                 }
                                 else
                                 {
-                                    prioritizedCards.Add((i, health * 10));
+                                    prioritizedCards.Add((i, health * 5));
                                     break;
                                 }
                             }
@@ -276,7 +277,8 @@ public struct CPULogic
                             }
                             else
                             {
-                                goto default;
+                                PrioritizeEnergyOrCheap(player, i, move.energy);
+                                break;
                             }
                         case 15: //gain effect
                             if (move.moveType == MoveType.Special && (!logic.lastCard.card.hasMove || logic.lastCard.card.move.cost == 0))
@@ -289,7 +291,8 @@ public struct CPULogic
                             }
                             else
                             {
-                                goto default;
+                                PrioritizeEnergyOrCheap(player, i, move.energy);
+                                break;
                             }
                         case 16: //steal effects
                             if (logic.players[opponentIndex].CheckEffectBalance() <= 0)
@@ -357,13 +360,13 @@ public struct CPULogic
         (int, int)[] cards = prioritizedCards.ToArray();
         Array.Sort(cards, (a, b) => { return b.Item2.CompareTo(a.Item2); });
 
-        /*Debug.Log("-----------------");
+        Debug.Log("-----------------");
         for (int i = 0; i < cards.Length; i++)
         {
             Debug.Log(player.cardHand[cards[i].Item1].hasMove ? player.cardHand[cards[i].Item1].move.name : "No move");
             Debug.Log(cards[i].Item2);
         }
-        Debug.Log("-----------------");*/
+        Debug.Log("-----------------");
 
         return new MoveMessage(1, cards[0].Item1, cards[0].Item2 > -10);
     }

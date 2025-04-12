@@ -1532,6 +1532,8 @@ MonoBehaviour:
   blanksText: {fileID: 7714064937606492000}
   timer: {fileID: 8552740641901104175}
   portrait: {fileID: 4204229585897281424}
+  fullHealth: {fileID: 2100000, guid: 128f62befdd034365adb34aa8f8769bb, type: 2}
+  lowHealth: {fileID: 2100000, guid: 10842f26f0d6b4e258345c28bfe1eabe, type: 2}
   exitButton: {fileID: 4376961096478150116}
   statusParent: {fileID: 8194149064693334505}
   cardParent: {fileID: 8372298097285678186}
