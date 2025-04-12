@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0de20dfe1a448b9bb7c1ac16200675, type: 3}
   m_Name: Unlock3
   m_EditorClassIdentifier: 
-  descrKey: selfKOd
+  descrKey: fightTimes
   reward: 6
-  goalValue: -1
-  checkVariable: selfKO
+  goalValue: 10
+  checkVariable: timesFought
   isClaimable: 0
   category: 1

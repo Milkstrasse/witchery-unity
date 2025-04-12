@@ -50,6 +50,11 @@ public class FightManager : MonoBehaviour
         GlobalManager.singleton.fightLog = new FightLog();
     }
 
+    public FightLogic GetLogic()
+    {
+        return logic;
+    }
+
     [Server]
     public PlayerMessage SetupPlayer(PlayerMessage message)
     {
@@ -287,10 +292,5 @@ public class FightManager : MonoBehaviour
     public bool IsAbleToMessage()
     {
         return !sendingMessage;
-    }
-
-    public MoveMessage GetMove()
-    {
-        return CPULogic.GetMove(players[1], logic);
     }
 }

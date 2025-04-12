@@ -4,9 +4,19 @@ using UnityEngine;
 
 public struct CPULogic
 {
-    private static List<(int, int)> prioritizedCards;
+    private List<(int, int)> prioritizedCards;
+    private int playerIndex;
+    private int opponentIndex;
 
-    public static MoveMessage GetMove(PlayerObject player, FightLogic logic)
+    public CPULogic(int playerIndex, int opponentIndex)
+    {
+        this.playerIndex = playerIndex;
+        this.opponentIndex = opponentIndex;
+
+        prioritizedCards = new List<(int, int)>();
+    }
+
+    public MoveMessage GetMove(PlayerObject player, FightLogic logic)
     {
         prioritizedCards = new List<(int, int)>();
         float missingHP = 1 - player.currHealth / player.fullHealth;
@@ -59,9 +69,9 @@ public struct CPULogic
                         continue;
                     }
 
-                    health = Math.Min(health - player.GetPowerBonus() + logic.players[0].GetDamageModifier(false), 0);
+                    int finalhealth = Math.Min(health - player.GetPowerBonus() + logic.players[opponentIndex].GetDamageModifier(false), 0);
 
-                    if (logic.players[0].health + health <= 0) //opponent could be defeated
+                    if (logic.players[opponentIndex].health + finalhealth <= 0) //opponent could be defeated
                     {
                         if (player.cardHand[i].move.cost > player.energy) //check if card could be played if there's enough energy
                         {
@@ -98,11 +108,7 @@ public struct CPULogic
                         Debug.Log("-----------------");*/
                         return new MoveMessage(1, i, true);
                     }
-                    else if ((move.moveID == 10 && player.currHealth + health + logic.players[1].GetDamageModifier(false) <= 0) || logic.players[0].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
-                    {
-                        GetMostResourcesBack(player, i);
-                    }
-                    else if (health == 0 && player.cardHand[i].move.cost > 0)
+                    else if ((move.moveID == 10 && player.currHealth + finalhealth + logic.players[playerIndex].GetDamageModifier(false) <= 0) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
                     {
                         GetMostResourcesBack(player, i);
                     }
@@ -162,7 +168,7 @@ public struct CPULogic
                                 goto default;
                             }
                         case 5: //redistribute health
-                            if (player.currHealth >= logic.players[0].health)
+                            if (player.currHealth >= logic.players[opponentIndex].health)
                             {
                                 goto case 0;
                             }
@@ -171,7 +177,7 @@ public struct CPULogic
                                 goto default;
                             }
                         case 7: //prevent damage
-                            if (logic.players[0].cardHand.Count > 0)
+                            if (logic.players[opponentIndex].cardHand.Count == 0)
                             {
                                 goto case 0;
                             }
@@ -182,7 +188,7 @@ public struct CPULogic
                         case 8: //steal energy
                             int stealEnergy = move.energy;
 
-                            if (logic.players[0].energy == 0)
+                            if (logic.players[opponentIndex].energy == 0)
                             {
                                 PrioritizeEnergyOrCheap(player, i, 0);
                                 break;
@@ -196,7 +202,7 @@ public struct CPULogic
 
                                 stealEnergy -= player.GetPowerBonus();
 
-                                int checkEnergy = logic.players[0].energy + stealEnergy;
+                                int checkEnergy = logic.players[opponentIndex].energy + stealEnergy;
 
                                 if (checkEnergy >= 0)
                                 {
@@ -234,7 +240,7 @@ public struct CPULogic
                                 goto default;
                             }
                         case 11: //swap effects
-                            if (logic.players[1].CheckEffectBalance() >= logic.players[0].CheckEffectBalance())
+                            if (logic.players[playerIndex].CheckEffectBalance() >= logic.players[opponentIndex].CheckEffectBalance())
                             {
                                 goto case 0;
                             }
@@ -243,11 +249,11 @@ public struct CPULogic
                                 goto default;
                             }
                         case 13: //clear effects
-                            if (move.target != 1 && logic.players[1].CheckEffectBalance() >= 0) //clear own effects
+                            if (move.target != 1 && logic.players[playerIndex].CheckEffectBalance() >= 0) //clear own effects
                             {
                                 goto case 0;
                             }
-                            else if (move.target == 1 && logic.players[0].CheckEffectBalance() <= 0) //clear opponent's effects
+                            else if (move.target == 1 && logic.players[opponentIndex].CheckEffectBalance() <= 0) //clear opponent's effects
                             {
                                 goto case 0;
                             }
@@ -260,11 +266,11 @@ public struct CPULogic
                             {
                                 goto case 0;
                             }
-                            else if (logic.players[0].GetEffect(move.effect.name, false) / move.effect.value >= GlobalData.stackLimit)
+                            else if (logic.players[opponentIndex].GetEffect(move.effect.name, false) / move.effect.value >= GlobalData.stackLimit)
                             {
                                 goto case 0;
                             }
-                            else if (logic.players[0].effects.Count == GlobalData.effectLimit && logic.players[0].GetEffect(move.effect.name, false) == 0)
+                            else if (logic.players[opponentIndex].effects.Count == GlobalData.effectLimit && logic.players[opponentIndex].GetEffect(move.effect.name, false) == 0)
                             {
                                 goto case 0;
                             }
@@ -277,7 +283,7 @@ public struct CPULogic
                             {
                                 goto case 0;
                             }
-                            else if (logic.players[1].effects.Count == GlobalData.effectLimit && logic.players[1].GetEffect(move.effect.name, false) == 0)
+                            else if (logic.players[playerIndex].effects.Count == GlobalData.effectLimit && logic.players[playerIndex].GetEffect(move.effect.name, false) == 0)
                             {
                                 goto case 0;
                             }
@@ -286,7 +292,7 @@ public struct CPULogic
                                 goto default;
                             }
                         case 16: //steal effects
-                            if (logic.players[0].CheckEffectBalance() <= 0)
+                            if (logic.players[opponentIndex].CheckEffectBalance() <= 0)
                             {
                                 goto case 0;
                             }
@@ -295,7 +301,7 @@ public struct CPULogic
                                 goto default;
                             }
                         case 20: //remove random card
-                            if (logic.players[0].cardHand.Count == 0)
+                            if (logic.players[opponentIndex].cardHand.Count == 0)
                             {
                                 goto case 0;
                             }
@@ -304,7 +310,7 @@ public struct CPULogic
                                 goto default;
                             }
                         case 22: //add blank
-                            if (logic.players[0].blanks >= GlobalData.blankLimit)
+                            if (logic.players[opponentIndex].blanks >= GlobalData.blankLimit)
                             {
                                 goto case 0;
                             }
@@ -362,12 +368,12 @@ public struct CPULogic
         return new MoveMessage(1, cards[0].Item1, cards[0].Item2 > -10);
     }
 
-    private static void GetMostResourcesBack(PlayerObject player, int cardIndex)
+    private void GetMostResourcesBack(PlayerObject player, int cardIndex)
     {
         prioritizedCards.Add((cardIndex, -15 + player.cardHand[cardIndex].move.cost)); //get biggest amount of resources back
     }
 
-    private static void PrioritizeEnergyOrCheap(PlayerObject player, int cardIndex, int energy)
+    private void PrioritizeEnergyOrCheap(PlayerObject player, int cardIndex, int energy)
     {
         prioritizedCards.Add((cardIndex, player.cardHand[cardIndex].move.cost * -1 + energy * 10)); //prioritize energy & cheap cards
     }

@@ -26,5 +26,4 @@ public struct SavedData
     public int maxHealingDone;
     public int wonWithMinHealth;
     public bool wonWithEffect;
-    public bool selfKO;
 }

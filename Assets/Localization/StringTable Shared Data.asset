@@ -231,10 +231,6 @@ MonoBehaviour:
     m_Key: secondaryWin
     m_Metadata:
       m_Items: []
-  - m_Id: 46667486177779712
-    m_Key: selfKOd
-    m_Metadata:
-      m_Items: []
   - m_Id: 15212672940236800
     m_Key: shields
     m_Metadata:

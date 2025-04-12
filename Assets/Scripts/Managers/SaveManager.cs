@@ -102,10 +102,6 @@ public class SaveManager
         {
             savedData.nothingStolen = playerData.stoleNothing;
         }
-        if (!savedData.selfKO)
-        {
-            savedData.selfKO = playerData.selfKO;
-        }
         if (!savedData.wonWithEffect)
         {
             savedData.wonWithEffect = playerData.wonWithEffect;

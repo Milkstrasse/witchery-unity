@@ -22,14 +22,14 @@ public class FightUI : MonoBehaviour
     {
         if (NetworkClient.activeHost)
         {
-            playerTop.SetupUI(manager.players[1], playerTurn == 1, GlobalManager.singleton.mode == GameMode.Offline);
-            playerBottom.SetupUI(manager.players[0], playerTurn == 0, true);
+            playerTop.SetupUI(1, playerTurn == 1, GlobalManager.singleton.mode == GameMode.Offline);
+            playerBottom.SetupUI(0, playerTurn == 0, true);
             cardSlot.MoveUp(playerTurn == 0);
         }
         else
         {
-            playerTop.SetupUI(manager.players[0], playerTurn == 0, false);
-            playerBottom.SetupUI(manager.players[1], playerTurn == 1, true);
+            playerTop.SetupUI(0, playerTurn == 0, false);
+            playerBottom.SetupUI(1, playerTurn == 1, true);
             cardSlot.MoveUp(playerTurn == 1);
         }
 

@@ -94,7 +94,7 @@ public class CardUI : MonoBehaviour
     {
         this.card = card;
         this.player = player;
-
+       
         if (GlobalData.highlightPlayable && !isSubscribed && player != null)
         {
             player.OnPlayerChanged += CheckStatus;

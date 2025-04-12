@@ -316,10 +316,6 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
-  - m_Id: 46667486177779712
-    m_Localized: Knock yourself out
-    m_Metadata:
-      m_Items: []
   - m_Id: 46714514295480320
     m_Localized: Steal status effects
     m_Metadata:

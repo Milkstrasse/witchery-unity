@@ -30,6 +30,7 @@ public class PlayerFightUI : MonoBehaviour
     private CardUI[] cards;
 
     private int roundsPlayed;
+    private CPULogic logic;
 
     private void Start()
     {
@@ -57,9 +58,9 @@ public class PlayerFightUI : MonoBehaviour
         }
     }
 
-    public void SetupUI(PlayerObject player, bool isInteractable, bool canBePlayable)
+    public void SetupUI(int index, bool isInteractable, bool canBePlayable)
     {
-        this.player = player;
+        this.player = FightManager.singleton.players[index];
         player.OnPlayerChanged += UpdateUI;
 
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
@@ -76,6 +77,8 @@ public class PlayerFightUI : MonoBehaviour
         {
             InitUI();
         }
+
+        logic = new CPULogic(index, 1 - index);
 
         for (int i = 0; i < 5; i++)
         {
@@ -323,7 +326,7 @@ public class PlayerFightUI : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
 
-        MoveMessage message = FightManager.singleton.GetMove();
+        MoveMessage message = logic.GetMove(player, FightManager.singleton.GetLogic());
         MakeMove(message);
 
         yield return new WaitForSeconds(message.playCard ? 0.9f : 0.25f);

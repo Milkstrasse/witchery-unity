@@ -255,7 +255,6 @@ public class FightLogic
                         players[0].playedUntilEnd = true;
                         players[1].playedUntilEnd = true;
 
-                        players[turn].selfKO = true;
                         winner = 1 - turn;
                     }
 

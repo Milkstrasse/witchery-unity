@@ -22,7 +22,6 @@ public class PlayerData
     public bool healedOpponent;
     public bool stoleNothing;
     public bool wonWithEffect;
-    public bool selfKO;
 
     public PlayerData()
     {
