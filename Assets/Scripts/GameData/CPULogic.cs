@@ -202,7 +202,7 @@ public struct CPULogic
 
                                 stealEnergy -= player.GetPowerBonus();
 
-                                if (stealEnergy > 0)
+                                if (stealEnergy != 0)
                                 {
                                     int checkEnergy = logic.players[opponentIndex].energy + stealEnergy;
 
