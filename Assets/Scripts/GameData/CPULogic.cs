@@ -109,7 +109,7 @@ public struct CPULogic
                         Debug.Log("-----------------");
                         return new MoveMessage(1, i, true);
                     }
-                    else if (move.moveID == 10 && player.currHealth + finalhealth + logic.players[playerIndex].GetDamageModifier(false) <= 0 - logic.players[opponentIndex].GetEffect("spice", false)) //prevent self k.o.
+                    else if ((move.moveID == 10 && player.currHealth + finalhealth + logic.players[playerIndex].GetDamageModifier(false) <= 0 - logic.players[opponentIndex].GetEffect("spice", false)) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
                     {
                         GetMostResourcesBack(player, i);
                     }

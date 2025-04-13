@@ -242,14 +242,7 @@ public class PlayerData
 
         for (int i = 0; i < effects.Count; i++)
         {
-            if (effects[i].value >= 0)
-            {
-                balance += effects[i].multiplier;
-            }
-            else
-            {
-                balance -= effects[i].multiplier;
-            }
+            balance += effects[i].multiplier;
         }
 
         return balance;
