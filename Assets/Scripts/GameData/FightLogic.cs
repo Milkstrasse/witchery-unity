@@ -313,6 +313,18 @@ public class FightLogic
                 case 25: //hand over blanks
                     players[1 - turn].AddBlanks(players[turn].blanks);
                     break;
+                case 26: //trigger bomb
+                    players[(move.target + turn) % 2].health = Math.Max(players[(move.target + turn) % 2].health + players[(move.target + turn) % 2].GetEffect("bomb"), 0);
+                    
+                    if (winner < 0 && players[(move.target + turn) % 2].health == 0)
+                    {
+                        players[0].playedUntilEnd = true;
+                        players[1].playedUntilEnd = true;
+
+                        winner = 1 - (move.target + turn) % 2;
+                    }
+
+                    break;
                 default:
                     int health = move.health;
                     if (move.moveType == MoveType.Special)

@@ -127,11 +127,6 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
-  - m_Id: 8223807327166464
-    m_Localized: Adds -{value} to the card's value
-    m_Metadata:
-      m_Items:
-      - rid: 296817732614357011
   - m_Id: 8223827040395264
     m_Localized: Attacker receives {value} damage
     m_Metadata:
@@ -149,8 +144,8 @@ MonoBehaviour:
     m_Localized: Clear own effects
     m_Metadata:
       m_Items: []
-  - m_Id: 11805233679163392
-    m_Localized: Heal to {health} HP
+  - m_Id: 86588812786917376
+    m_Localized: Trigger <style="IconOutline">\uf1e2</style>
     m_Metadata:
       m_Items:
       - rid: 296817732614357011
@@ -369,6 +364,11 @@ MonoBehaviour:
     m_Localized: Win thanks to status effect
     m_Metadata:
       m_Items: []
+  - m_Id: 86592455216979968
+    m_Localized: Receive {value} damage when triggered
+    m_Metadata:
+      m_Items:
+      - rid: 296817732614357011
   references:
     version: 2
     RefIds:
@@ -387,7 +387,6 @@ MonoBehaviour:
         - id: 7920018510569472
         - id: 7992895737946112
         - id: 7210210211913728
-        - id: 11805233679163392
         - id: 19427698743959552
         - id: 19427704657928192
         - id: 27441377439637504
@@ -395,7 +394,6 @@ MonoBehaviour:
         - id: 8223596102017024
         - id: 8223760501956608
         - id: 8223787123204096
-        - id: 8223807327166464
         - id: 17290912945135616
         - id: 15212672940236800
         - id: 8223827040395264
@@ -407,3 +405,5 @@ MonoBehaviour:
         - id: 42265206460506112
         - id: 46628124241158144
         - id: 76029378901827584
+        - id: 86588812786917376
+        - id: 86592455216979968

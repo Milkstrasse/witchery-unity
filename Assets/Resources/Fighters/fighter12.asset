@@ -17,8 +17,8 @@ MonoBehaviour:
   role: 61475
   moves:
   - {fileID: 11400000, guid: e7c62c4e5be2d418e825cd02200cc2ac, type: 2}
-  - {fileID: 11400000, guid: e515c2965bfb649218a338b0f5df6752, type: 2}
-  - {fileID: 11400000, guid: 14c7fd46d6d9d407aa04123940b24421, type: 2}
+  - {fileID: 11400000, guid: 4d54fcba235384adb80b74c23ccc70c3, type: 2}
+  - {fileID: 11400000, guid: 9da418dac1b6b4b94af8263d98950cdb, type: 2}
   - {fileID: 11400000, guid: 4cdc2d9cf3e834b64b1d364c026149a8, type: 2}
   - {fileID: 11400000, guid: 4cdc2d9cf3e834b64b1d364c026149a8, type: 2}
   - {fileID: 11400000, guid: 2300c06bcf3e04ceaa18562a431bd12d, type: 2}

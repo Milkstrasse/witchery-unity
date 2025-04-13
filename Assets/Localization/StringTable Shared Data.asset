@@ -131,10 +131,6 @@ MonoBehaviour:
     m_Key: healOpponent
     m_Metadata:
       m_Items: []
-  - m_Id: 11805233679163392
-    m_Key: healToHP
-    m_Metadata:
-      m_Items: []
   - m_Id: 58463346688
     m_Key: host
     m_Metadata:
@@ -303,10 +299,6 @@ MonoBehaviour:
     m_Key: vulnerable
     m_Metadata:
       m_Items: []
-  - m_Id: 8223807327166464
-    m_Key: weaken
-    m_Metadata:
-      m_Items: []
   - m_Id: 34668335646892032
     m_Key: winTimes
     m_Metadata:
@@ -333,6 +325,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 84105283083689984
     m_Key: winWithEffect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86588812786917376
+    m_Key: triggerBomb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86592455216979968
+    m_Key: bomb
     m_Metadata:
       m_Items: []
   m_Metadata:

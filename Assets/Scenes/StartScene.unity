@@ -724,7 +724,6 @@ MonoBehaviour:
   joincode: 
   relayEnabled: 1
   maxPlayers: 0
-  lastScene: 
 --- !u!82 &1766523638
 AudioSource:
   m_ObjectHideFlags: 0

@@ -137,6 +137,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             lastCardUI.SetupCard(cardUI.card);
             lastCardUI.transform.eulerAngles = cardUI.transform.eulerAngles;
+            LeanTween.rotateZ(lastCardUI.gameObject, cardUI.transform.eulerAngles.z + (isFlipped ? -15f : 15f), 0.1f).setDelay(0.2f);
         }
 
         cardUI.transform.eulerAngles = new Vector3(0, 0, isFlipped ? 180 : 0);

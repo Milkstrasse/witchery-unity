@@ -167,8 +167,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
-  - m_Id: 11805233679163392
-    m_Localized: "HP {health} \u307E\u3067 \u304B\u3044\u3075\u304F"
+  - m_Id: 86588812786917376
+    m_Localized: "\u30C8\u30EA\u30AC\u30FC <style=\"IconOutline\">\\uf1e2</style>"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
@@ -220,11 +220,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 17290912945135616
     m_Localized: "\u30C0\u30E1\u30FC\u30B8 \u3092 +{value} \u3059\u308B"
-    m_Metadata:
-      m_Items:
-      - rid: 6175659975647952932
-  - m_Id: 8223807327166464
-    m_Localized: "\u30AB\u30FC\u30C9 \u306E \u304B\u3061 \u306B {value} \u3059\u308B"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932
@@ -371,6 +366,12 @@ MonoBehaviour:
       \u308A\u3048\u304D"
     m_Metadata:
       m_Items: []
+  - m_Id: 86592455216979968
+    m_Localized: "\u306F\u3064\u3069\u3046\u3058 \u306B {value} \u30C0\u30E1\u30FC\u30B8
+      \u3092 \u3046\u3051\u308B"
+    m_Metadata:
+      m_Items:
+      - rid: 6175659975647952932
   references:
     version: 2
     RefIds:
@@ -386,7 +387,6 @@ MonoBehaviour:
         - id: 7210015948529664
         - id: 7210184622465024
         - id: 7842569093373952
-        - id: 11805233679163392
         - id: 7210210211913728
         - id: 19427704657928192
         - id: 19427698743959552
@@ -397,7 +397,6 @@ MonoBehaviour:
         - id: 8223596102017024
         - id: 8223760501956608
         - id: 8223787123204096
-        - id: 8223807327166464
         - id: 17290912945135616
         - id: 15212672940236800
         - id: 8223827040395264
@@ -409,3 +408,5 @@ MonoBehaviour:
         - id: 42265206460506112
         - id: 46628124241158144
         - id: 76029378901827584
+        - id: 86588812786917376
+        - id: 86592455216979968
