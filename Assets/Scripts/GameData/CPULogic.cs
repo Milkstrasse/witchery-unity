@@ -66,7 +66,7 @@ public struct CPULogic
                 {
                     if (logic.lastCard.card.hasMove && logic.lastCard.card.move.moveID == 7)
                     {
-                        GetMostResourcesBack(player, i);
+                        GetMostResourcesBack(player, i, logic.lastCard.card.move.cost);
                         continue;
                     }
 
@@ -99,7 +99,7 @@ public struct CPULogic
                             }
                             else
                             {
-                                GetMostResourcesBack(player, i);
+                                GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
                                 continue;
                             }
                         }
@@ -109,13 +109,13 @@ public struct CPULogic
                         Debug.Log("-----------------");
                         return new MoveMessage(playerIndex, i, true);
                     }
-                    else if ((move.moveID == 10 && player.currHealth + finalhealth + logic.players[playerIndex].GetDamageModifier(false) <= 0 - logic.players[opponentIndex].GetEffect("spice", false)) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
+                    else if ((move.moveID == 10 && player.currHealth + finalhealth + logic.players[playerIndex].GetDamageModifier(false) - logic.players[opponentIndex].GetEffect("spice", false) <= 0 ) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
                     {
-                        GetMostResourcesBack(player, i);
+                        GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
                     }
                     else if (player.cardHand[i].move.cost > player.energy)
                     {
-                        GetMostResourcesBack(player, i);
+                        GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
                     }
                     else
                     {
@@ -354,7 +354,7 @@ public struct CPULogic
                                 goto default;
                             }
                         case 0:
-                            GetMostResourcesBack(player, i);
+                            GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
                             break;
                         default:
                             if (move.moveType == MoveType.Special && (!logic.lastCard.card.hasMove || logic.lastCard.card.move.cost == 0))
@@ -374,7 +374,7 @@ public struct CPULogic
                 }
                 else //unplayable cards
                 {
-                    GetMostResourcesBack(player, i);
+                    GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
                 }
             }
         }
@@ -393,9 +393,16 @@ public struct CPULogic
         return new MoveMessage(playerIndex, cards[0].Item1, cards[0].Item2 > -10);
     }
 
-    private void GetMostResourcesBack(PlayerObject player, int cardIndex)
+    private void GetMostResourcesBack(PlayerObject player, int cardIndex, int lastCost)
     {
-        prioritizedCards.Add((cardIndex, -15 + player.cardHand[cardIndex].move.cost)); //get biggest amount of resources back
+        if (lastCost < 2)
+        {
+            prioritizedCards.Add((cardIndex, -15 + player.cardHand[cardIndex].move.cost - (player.cardHand[cardIndex].move.moveType == MoveType.Special ? 0 : 1))); //prioritize discarding special cards
+        }
+        else
+        {
+            prioritizedCards.Add((cardIndex, -15 + player.cardHand[cardIndex].move.cost - (player.cardHand[cardIndex].move.moveType == MoveType.Special ? 1 : 0))); //prioritize discarding normal cards
+        }
     }
 
     private void PrioritizeEnergyOrCheap(PlayerObject player, int cardIndex, int energy)
