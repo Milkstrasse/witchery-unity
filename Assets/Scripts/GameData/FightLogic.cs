@@ -332,7 +332,7 @@ public class FightLogic
                         health *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
                     }
 
-                    if (health < 0)
+                    if (move.health < 0)
                     {
                         if (!lastCard.card.hasMove || lastCard.card.move.moveID != 7)
                         {
@@ -343,7 +343,7 @@ public class FightLogic
                             health = 0;
                         }
                     }
-                    else if (health > 0)
+                    else if (move.health > 0)
                     {
                         health = Math.Max(health + players[turn].GetPowerBonus(), 0);
                     }
@@ -381,11 +381,11 @@ public class FightLogic
                         energy *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
                     }
 
-                    if (energy < 0)
+                    if (move.energy < 0)
                     {
                         energy = Math.Min(energy - players[turn].GetPowerBonus(), 0);
                     }
-                    else if (energy > 0)
+                    else if (move.energy > 0)
                     {
                         energy = Math.Max(energy + players[turn].GetPowerBonus(), 0);
                     }

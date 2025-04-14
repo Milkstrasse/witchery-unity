@@ -122,6 +122,60 @@ public struct CPULogic
                         prioritizedCards.Add((i, health * -10));
                     }
                 }
+                else if (move.moveID == 26)
+                {
+                    int bomb = logic.players[opponentIndex].GetEffect("bomb", false);
+
+                    if (bomb == 0)
+                    {
+                        GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
+                    }
+                    else if (bomb >= logic.players[opponentIndex].health)
+                    {
+                        if (player.cardHand[i].move.cost > player.energy)
+                        {
+                            List<(int, int)> potentialCards = new List<(int, int)>();
+
+                            int potential = 0;
+                            for (int j = 0; j < player.cardHand.Count; j++)
+                            {
+                                if (i != j)
+                                {
+                                    potential += player.cardHand[j].move.cost; //prevent opponent's reaction by creating energy through discard
+                                    potentialCards.Add((j, player.cardHand[j].move.cost));
+                                }
+                            }
+
+                            if (potential >= player.cardHand[i].move.cost)
+                            {
+                                (int, int)[] potentials = potentialCards.ToArray();
+                                Array.Sort(potentials, (a, b) => { return b.Item2.CompareTo(a.Item2); });
+                                Debug.Log("-----------------");
+                                Debug.Log("Could defeat opponent");
+                                Debug.Log("-----------------");
+                                return new MoveMessage(playerIndex, potentials[0].Item1, false);
+                            }
+                            else
+                            {
+                                GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
+                                continue;
+                            }
+                        }
+
+                        Debug.Log("-----------------");
+                        Debug.Log("Defeat opponent");
+                        Debug.Log("-----------------");
+                        return new MoveMessage(playerIndex, i, true);
+                    }
+                    else if (player.cardHand[i].move.cost <= player.energy)
+                    {
+                        prioritizedCards.Add((i, bomb * -10));
+                    }
+                    else
+                    {
+                        GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
+                    }
+                }
                 else if (player.cardHand[i].move.cost <= player.energy)
                 {
                     switch (move.moveID)
@@ -335,22 +389,6 @@ public struct CPULogic
                             }
                             else
                             {
-                                goto default;
-                            }
-                        case 26: //trigger bomb
-                            int bomb = logic.players[opponentIndex].GetEffect("bomb", false);
-                            
-                            if (bomb == 0)
-                            {
-                                goto case 0;
-                            }
-                            else if (bomb >= logic.players[opponentIndex].health) 
-                            {
-                                return new MoveMessage(playerIndex, i, true);
-                            }
-                            else
-                            {
-                                prioritizedCards.Add((i, bomb * -10));
                                 goto default;
                             }
                         case 0:
