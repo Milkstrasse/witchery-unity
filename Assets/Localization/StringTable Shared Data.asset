@@ -64,7 +64,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 27041812098048000
-    m_Key: custom
+    m_Key: custom1
     m_Metadata:
       m_Items: []
   - m_Id: 12959317832491008
@@ -333,6 +333,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 86592455216979968
     m_Key: bomb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 86915489144496128
+    m_Key: custom2
     m_Metadata:
       m_Items: []
   m_Metadata:
