@@ -327,7 +327,7 @@ public class PlayerFightUI : MonoBehaviour
 
     IEnumerator MakeCPUMove()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.5f);
 
         MoveMessage message = logic.GetMove(player, FightManager.singleton.GetLogic());
         MakeMove(message);

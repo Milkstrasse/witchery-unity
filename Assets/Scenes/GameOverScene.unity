@@ -1472,7 +1472,7 @@ MonoBehaviour:
 
     Voices - Cici Fyre
 
-    <color=#F93C69>Portraits
+    <style="Highlighted">Portraits
     - @ri_osa_mu</color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e5d77af622c634d9b8d3c8a64d0927a2, type: 2}
