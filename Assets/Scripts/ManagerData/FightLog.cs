@@ -10,11 +10,12 @@ public class FightLog
         log = new StringBuilder("Round 1 -----------------------------\n");
     }
 
-    public void AddToLog(Card card, bool isFlipped)
+    public void AddToLog(CardUI cardUI, bool isFlipped)
     {
-        if (card.hasMove)
+        log.Append($"{GlobalData.fighters[cardUI.player.fighterIDs[0].fighterID].name} has {cardUI.player.energy} energy & {cardUI.player.currHealth}/{cardUI.player.fullHealth}HP\n");
+        if (cardUI.card.hasMove)
         {
-            log.Append((isFlipped ? "Flipped player played: " : "Nonflipped player played: ") + card.move.name + "\n");
+            log.Append((isFlipped ? "Flipped player played: " : "Nonflipped player played: ") + cardUI.card.move.name + "\n");
         }
         else
         {

@@ -128,6 +128,8 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         }
 
         SetupCard(card, eventCardUI.transform.eulerAngles.z == 180f);
+        GlobalManager.singleton.fightLog.AddToLog(eventCardUI, eventCardUI.transform.eulerAngles.z == 180f);
+
         FightManager.singleton.SendMove(cardIndex, true, !card.isSpecial || !GlobalData.animateImpact);
     }
 
@@ -142,8 +144,6 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
         cardUI.transform.eulerAngles = new Vector3(0, 0, isFlipped ? 180 : 0);
         cardUI.SetupCard(card);
-
-        GlobalManager.singleton.fightLog.AddToLog(card, isFlipped);
     }
 
     public void ResetCard()

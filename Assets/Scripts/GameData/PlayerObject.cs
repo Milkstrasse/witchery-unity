@@ -70,7 +70,7 @@ public class PlayerObject : MonoBehaviour
 
     public void UpdatePlayer(PlayerData playerData, bool updateCards)
     {
-        currHealth = playerData.health;
+        currHealth = playerData.currHealth;
         energy = playerData.energy;
         blanks = playerData.blanks;
         roundsPlayed = playerData.roundsPlayed;

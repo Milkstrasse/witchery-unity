@@ -40,7 +40,7 @@ public class StatusEffect
         switch (statusType)
         {
             case StatusType.Health:
-                player.health = Math.Clamp(player.health + value * multiplier, 0, player.maxHealth);
+                player.currHealth = Math.Clamp(player.currHealth + value * multiplier, 0, player.fullHealth);
                 
                 isNew = true;
                 multiplier -= 1;

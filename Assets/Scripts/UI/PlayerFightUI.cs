@@ -61,7 +61,7 @@ public class PlayerFightUI : MonoBehaviour
 
     public void SetupUI(int index, bool isInteractable, bool canBePlayable)
     {
-        this.player = FightManager.singleton.players[index];
+        player = FightManager.singleton.players[index];
         player.OnPlayerChanged += UpdateUI;
 
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
@@ -240,7 +240,9 @@ public class PlayerFightUI : MonoBehaviour
         }
 
         cardUI.GetComponent<DragDrop>().ResetDrag();
+        
         cardSlot.SetupCard(card, true);
+        GlobalManager.singleton.fightLog.AddToLog(cardUI, true);
 
         cardSlot.PlayAnimation(false, message.cardPlayed, true);
 

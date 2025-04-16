@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class FightLogic
 {
@@ -141,10 +140,10 @@ public class FightLogic
                         hpToSteal *= lastCard.card.hasMove ? lastCard.card.move.cost : 0;
                     }
 
-                    int tempHealth = players[1 - turn].health;
-                    players[1 - turn].health = Math.Max(players[1 - turn].health + hpToSteal - players[turn].GetPowerBonus() + players[1 - turn].GetDamageModifier(), 0);
+                    int tempHealth = players[1 - turn].currHealth;
+                    players[1 - turn].currHealth = Math.Max(players[1 - turn].currHealth + Math.Min(hpToSteal - players[turn].GetPowerBonus() + players[1 - turn].GetDamageModifier(), 0), 0);
 
-                    if (winner < 0 && players[1 - turn].health == 0)
+                    if (winner < 0 && players[1 - turn].currHealth == 0)
                     {
                         players[0].playedUntilEnd = true;
                         players[1].playedUntilEnd = true;
@@ -155,8 +154,8 @@ public class FightLogic
                     int stealSpice = players[1 - turn].GetEffect("spice");
                     if (stealSpice != 0)
                     {
-                        players[turn].health = Math.Max(players[turn].health - stealSpice, 0);
-                        if (winner < 0 && players[turn].health == 0)
+                        players[turn].currHealth = Math.Max(players[turn].currHealth - stealSpice, 0);
+                        if (winner < 0 && players[turn].currHealth == 0)
                         {
                             players[0].playedUntilEnd = true;
                             players[1].playedUntilEnd = true;
@@ -165,36 +164,36 @@ public class FightLogic
                         }
                         else
                         {
-                            tempHealth -= players[1 - turn].health;
+                            tempHealth -= players[1 - turn].currHealth;
                             if (tempHealth == 0)
                             {
                                 players[turn].stoleNothing = true;
                             }
 
-                            players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, players[turn].maxHealth);
+                            players[turn].currHealth = Math.Clamp(players[turn].currHealth + tempHealth, 0, players[turn].fullHealth);
                         }
                     }
                     else
                     {
-                        tempHealth -= players[1 - turn].health;
+                        tempHealth -= players[1 - turn].currHealth;
                         if (tempHealth == 0)
                         {
                             players[turn].stoleNothing = true;
                         }
 
-                        players[turn].health = Math.Clamp(players[turn].health + tempHealth, 0, players[turn].maxHealth);
+                        players[turn].currHealth = Math.Clamp(players[turn].currHealth + tempHealth, 0, players[turn].fullHealth);
                     }
 
                     break;
                 case 5: //redistribute HP
-                    if (players[1 - turn].health < players[turn].health)
+                    if (players[1 - turn].currHealth < players[turn].currHealth)
                     {
                         players[turn].healedOpponent = true;
                     }
 
-                    int allHealth = players[0].health + players[1].health;
-                    players[0].health = Math.Clamp(allHealth/2, 0, players[0].maxHealth);
-                    players[1].health = Math.Clamp(allHealth/2, 0, players[1].maxHealth);
+                    int allHealth = players[0].currHealth + players[1].currHealth;
+                    players[0].currHealth = Math.Clamp(allHealth/2, 0, players[0].fullHealth);
+                    players[1].currHealth = Math.Clamp(allHealth/2, 0, players[1].fullHealth);
 
                     break;
                 case 8: //steal energy
@@ -223,8 +222,8 @@ public class FightLogic
                     {
                         int damageA = Math.Min(damage - players[turn].GetPowerBonus() + players[1 - turn].GetDamageModifier(), 0);
 
-                        players[1 - turn].health = Math.Clamp(players[1 - turn].health + damageA, 0, players[1 - turn].maxHealth);
-                        if (winner < 0 && players[1 - turn].health == 0)
+                        players[1 - turn].currHealth = Math.Clamp(players[1 - turn].currHealth + damageA, 0, players[1 - turn].fullHealth);
+                        if (winner < 0 && players[1 - turn].currHealth == 0)
                         {
                             players[0].playedUntilEnd = true;
                             players[1].playedUntilEnd = true;
@@ -235,8 +234,8 @@ public class FightLogic
                         int exSpice = players[1 - turn].GetEffect("spice");
                         if (exSpice != 0)
                         {
-                            players[turn].health = Math.Max(players[turn].health - exSpice, 0);
-                            if (winner < 0 && players[turn].health == 0)
+                            players[turn].currHealth = Math.Max(players[turn].currHealth - exSpice, 0);
+                            if (winner < 0 && players[turn].currHealth == 0)
                             {
                                 players[0].playedUntilEnd = true;
                                 players[1].playedUntilEnd = true;
@@ -249,8 +248,8 @@ public class FightLogic
 
                     int damageB = Math.Min(damage - players[turn].GetPowerBonus() + players[turn].GetDamageModifier(), 0);
 
-                    players[turn].health = Math.Clamp(players[turn].health + damageB, 0, players[turn].maxHealth);
-                    if (winner < 0 && players[turn].health == 0)
+                    players[turn].currHealth = Math.Clamp(players[turn].currHealth + damageB, 0, players[turn].fullHealth);
+                    if (winner < 0 && players[turn].currHealth == 0)
                     {
                         players[0].playedUntilEnd = true;
                         players[1].playedUntilEnd = true;
@@ -302,9 +301,6 @@ public class FightLogic
                     }
 
                     break;
-                case 21: //heal to health
-                    players[(move.target + turn) % 2].health = Math.Max(players[(move.target + turn) % 2].health, move.health + players[turn].GetPowerBonus());
-                    break;
                 case 22: //add blank
                     players[(move.target + turn) % 2].AddBlanks(1);
                     break;
@@ -314,9 +310,9 @@ public class FightLogic
                     players[1 - turn].AddBlanks(players[turn].blanks);
                     break;
                 case 26: //trigger bomb
-                    players[(move.target + turn) % 2].health = Math.Max(players[(move.target + turn) % 2].health + players[(move.target + turn) % 2].GetEffect("bomb"), 0);
+                    players[(move.target + turn) % 2].currHealth = Math.Max(players[(move.target + turn) % 2].currHealth + players[(move.target + turn) % 2].GetEffect("bomb"), 0);
                     
-                    if (winner < 0 && players[(move.target + turn) % 2].health == 0)
+                    if (winner < 0 && players[(move.target + turn) % 2].currHealth == 0)
                     {
                         players[0].playedUntilEnd = true;
                         players[1].playedUntilEnd = true;
@@ -348,9 +344,9 @@ public class FightLogic
                         health = Math.Max(health + players[turn].GetPowerBonus(), 0);
                     }
 
-                    players[(move.target + turn) % 2].health = Math.Clamp(players[(move.target + turn) % 2].health + health, 0, players[(move.target + turn) % 2].maxHealth);
+                    players[(move.target + turn) % 2].currHealth = Math.Clamp(players[(move.target + turn) % 2].currHealth + health, 0, players[(move.target + turn) % 2].fullHealth);
 
-                    if (winner < 0 && players[(move.target + turn) % 2].health == 0)
+                    if (winner < 0 && players[(move.target + turn) % 2].currHealth == 0)
                     {
                         players[0].playedUntilEnd = true;
                         players[1].playedUntilEnd = true;
@@ -363,8 +359,8 @@ public class FightLogic
                         int spice = players[(move.target + turn) % 2].GetEffect("spice");
                         if (spice != 0)
                         {
-                            players[turn].health = Math.Max(players[turn].health - spice, 0);
-                            if (winner < 0 && players[turn].health == 0)
+                            players[turn].currHealth = Math.Max(players[turn].currHealth - spice, 0);
+                            if (winner < 0 && players[turn].currHealth == 0)
                             {
                                 players[0].playedUntilEnd = true;
                                 players[1].playedUntilEnd = true;
@@ -424,14 +420,9 @@ public class FightLogic
                         {
                             health *= lastCard.lastCost;
                         }
-                        else if (lastCard.card.move.moveID == 21) //heal to health
-                        {
-                            players[turn].health = Math.Max(players[turn].health, health + players[1 - turn].GetPowerBonus());
-                            return true;
-                        }
 
                         health = Math.Max(health + players[1 - turn].GetPowerBonus(), 0);
-                        players[turn].health = Math.Clamp(players[turn].health + health, 0, players[turn].maxHealth);
+                        players[turn].currHealth = Math.Clamp(players[turn].currHealth + health, 0, players[turn].fullHealth);
                     }
 
                     int energy = lastCard.card.move.energy;
@@ -531,7 +522,7 @@ public class FightLogic
                 players[i].effects[j].TriggerEffect(players[i]);
                 j++;
 
-                if (winner < 0 && players[i].health == 0)
+                if (winner < 0 && players[i].currHealth == 0)
                 {
                     players[0].playedUntilEnd = true;
                     players[1].playedUntilEnd = true;

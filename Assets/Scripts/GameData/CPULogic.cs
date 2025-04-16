@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public struct CPULogic
 {
@@ -21,14 +20,10 @@ public struct CPULogic
         prioritizedCards = new List<(int, int)>();
         float missingHP = 1 - player.currHealth / (float)player.fullHealth;
 
-        Debug.Log($"CPU has {player.energy} energy & is missing {missingHP} HP");
-        Debug.Log(logic.lastCard.card.hasMove ? $"Last card costs {logic.lastCard.card.move.cost} energy, moveID is {logic.lastCard.card.move.moveID}" : $"Last card costs 0 energy, moveID is 0");
-
         for (int i = 0; i < player.cardHand.Count; i++)
         {
             if (!player.cardHand[i].hasMove)
             {
-                Debug.Log("No move");
                 prioritizedCards.Add((i, 0));
             }
             else
@@ -38,8 +33,6 @@ public struct CPULogic
                 {
                     move = logic.lastCard.card.move;
                 }
-
-                Debug.Log(move.name);
 
                 if (logic.lastCard.card.hasMove && !logic.lastCard.played)
                 {
@@ -72,7 +65,7 @@ public struct CPULogic
 
                     int finalhealth = Math.Min(health - player.GetPowerBonus() + logic.players[opponentIndex].GetDamageModifier(false), 0);
 
-                    if (logic.players[opponentIndex].health + finalhealth <= 0) //opponent could be defeated
+                    if (logic.players[opponentIndex].currHealth + finalhealth <= 0) //opponent could be defeated
                     {
                         if (player.cardHand[i].move.cost > player.energy) //check if card could be played if there's enough energy
                         {
@@ -92,9 +85,7 @@ public struct CPULogic
                             {
                                 (int, int)[] potentials = potentialCards.ToArray();
                                 Array.Sort(potentials, (a, b) => { return b.Item2.CompareTo(a.Item2); });
-                                Debug.Log("-----------------");
-                                Debug.Log("Could defeat opponent");
-                                Debug.Log("-----------------");
+
                                 return new MoveMessage(playerIndex, potentials[0].Item1, false);
                             }
                             else
@@ -104,9 +95,6 @@ public struct CPULogic
                             }
                         }
 
-                        Debug.Log("-----------------");
-                        Debug.Log("Defeat opponent");
-                        Debug.Log("-----------------");
                         return new MoveMessage(playerIndex, i, true);
                     }
                     else if ((move.moveID == 10 && player.currHealth + finalhealth + logic.players[playerIndex].GetDamageModifier(false) - logic.players[opponentIndex].GetEffect("spice", false) <= 0 ) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
@@ -130,7 +118,7 @@ public struct CPULogic
                     {
                         GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
                     }
-                    else if (bomb >= logic.players[opponentIndex].health)
+                    else if (bomb >= logic.players[opponentIndex].currHealth)
                     {
                         if (player.cardHand[i].move.cost > player.energy)
                         {
@@ -150,9 +138,7 @@ public struct CPULogic
                             {
                                 (int, int)[] potentials = potentialCards.ToArray();
                                 Array.Sort(potentials, (a, b) => { return b.Item2.CompareTo(a.Item2); });
-                                Debug.Log("-----------------");
-                                Debug.Log("Could defeat opponent");
-                                Debug.Log("-----------------");
+
                                 return new MoveMessage(playerIndex, potentials[0].Item1, false);
                             }
                             else
@@ -162,9 +148,6 @@ public struct CPULogic
                             }
                         }
 
-                        Debug.Log("-----------------");
-                        Debug.Log("Defeat opponent");
-                        Debug.Log("-----------------");
                         return new MoveMessage(playerIndex, i, true);
                     }
                     else if (player.cardHand[i].move.cost <= player.energy)
@@ -223,7 +206,7 @@ public struct CPULogic
                                 goto default;
                             }
                         case 5: //redistribute health
-                            if (player.currHealth >= logic.players[opponentIndex].health)
+                            if (player.currHealth >= logic.players[opponentIndex].currHealth)
                             {
                                 goto case 0;
                             }
@@ -419,14 +402,6 @@ public struct CPULogic
 
         (int, int)[] cards = prioritizedCards.ToArray();
         Array.Sort(cards, (a, b) => { return b.Item2.CompareTo(a.Item2); });
-
-        Debug.Log("-----------------");
-        for (int i = 0; i < cards.Length; i++)
-        {
-            Debug.Log(player.cardHand[cards[i].Item1].hasMove ? player.cardHand[cards[i].Item1].move.name : "No move");
-            Debug.Log(cards[i].Item2);
-        }
-        Debug.Log("-----------------");
 
         return new MoveMessage(playerIndex, cards[0].Item1, cards[0].Item2 > -10);
     }
