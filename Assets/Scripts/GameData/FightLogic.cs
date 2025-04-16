@@ -17,6 +17,7 @@ public class FightLogic
         lastCard = new PlayedCard();
     }
 
+    //process move made by player
     public bool MakeMove(MoveMessage message)
     {
         if (!message.playCard)

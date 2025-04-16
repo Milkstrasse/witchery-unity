@@ -76,13 +76,13 @@ public class FightManager : MonoBehaviour
         logic.players[0].UnmarkEffects();
         logic.players[1].UnmarkEffects();
 
-        if (conn.connectionId != NetworkClient.connection.connectionId && message.playerIndex != 1)
+        /*if (conn.connectionId != NetworkClient.connection.connectionId && message.playerIndex != 1)
         {
             conn.Send(new MoveMessage(-1, 0, false));
             conn.Send(new TurnMessage(message.playerIndex, new PlayerData[] { logic.players[message.playerIndex] }, true));
 
             return;
-        }
+        }*/
 
         if (!logic.players[0].startedFirst && !logic.players[1].startedFirst)
         {

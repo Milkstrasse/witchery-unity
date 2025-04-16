@@ -15,6 +15,7 @@ public struct CPULogic
         prioritizedCards = new List<(int, int)>();
     }
 
+    //evaluate all cards in cardhand to determine best suitable move
     public MoveMessage GetMove(PlayerObject player, FightLogic logic)
     {
         prioritizedCards = new List<(int, int)>();
@@ -63,7 +64,7 @@ public struct CPULogic
                         continue;
                     }
 
-                    int finalhealth = Math.Min(health - player.GetPowerBonus() + logic.players[opponentIndex].GetDamageModifier(false), 0);
+                    int finalhealth = Math.Max(health - Math.Min(player.GetPowerBonus() + logic.players[opponentIndex].GetDamageModifier(false), 0), 0);
 
                     if (logic.players[opponentIndex].currHealth + finalhealth <= 0) //opponent could be defeated
                     {
@@ -97,7 +98,7 @@ public struct CPULogic
 
                         return new MoveMessage(playerIndex, i, true);
                     }
-                    else if ((move.moveID == 10 && player.currHealth + finalhealth + logic.players[playerIndex].GetDamageModifier(false) - logic.players[opponentIndex].GetEffect("spice", false) <= 0 ) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
+                    else if ((move.moveID == 10 && player.currHealth + Math.Min(finalhealth + logic.players[playerIndex].GetDamageModifier(false), 0) - logic.players[opponentIndex].GetEffect("spice", false) <= 0 ) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
                     {
                         GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
                     }

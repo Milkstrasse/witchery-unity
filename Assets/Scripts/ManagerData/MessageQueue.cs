@@ -14,11 +14,11 @@ public class MessageQueue
 
     public bool Push(NetworkMessage message, bool isPriority)
     {
-        if (isPriority)
+        if (isPriority) //MoveMessage
         {
             messages.Insert(priorityIndex, message);
         }
-        else
+        else //TurnMessage
         {
             messages.Add(message);
         }
