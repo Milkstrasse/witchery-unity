@@ -32,7 +32,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7210099683614720
-    m_Key: blockCard
+    m_Key: blockAttack
     m_Metadata:
       m_Items: []
   - m_Id: 2538677614927872
@@ -320,7 +320,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 84067404521398272
-    m_Key: preventDMG
+    m_Key: preventAttack
     m_Metadata:
       m_Items: []
   - m_Id: 84105283083689984

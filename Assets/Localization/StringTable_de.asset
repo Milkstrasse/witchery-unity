@@ -47,7 +47,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 7210099683614720
-    m_Localized: <style="Highlighted">Blockiere</style> Karteneffekt
+    m_Localized: <style="Highlighted">Blockiere</style> Angriff
     m_Metadata:
       m_Items: []
   - m_Id: 7210153374900224
@@ -357,7 +357,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357012
   - m_Id: 84067404521398272
-    m_Localized: Verhindere Schaden
+    m_Localized: <style="Highlighted">Verhindere</style> Angriff
     m_Metadata:
       m_Items: []
   - m_Id: 84105283083689984

@@ -201,7 +201,7 @@ public class FightManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.6f);
 
         GlobalManager.singleton.LoadScene("GameOverScene");
     }

@@ -35,11 +35,16 @@ public struct CPULogic
                     move = logic.lastCard.card.move;
                 }
 
-                if (logic.lastCard.card.hasMove && !logic.lastCard.played)
+                if (logic.lastCard.card.hasMove)
                 {
-                    if (move.IsResponseTo(logic.lastCard.card.move, player.energy))
+                    if (!logic.lastCard.played && move.IsResponseTo(logic.lastCard.card.move, player.energy))
                     {
                         prioritizedCards.Add((i, 999));
+                        continue;
+                    }
+                    else if (logic.lastCard.card.move.moveID == 7 && move.moveID%2 == 0)
+                    {
+                        GetMostResourcesBack(player, i, logic.lastCard.card.move.cost);
                         continue;
                     }
                 }
@@ -58,12 +63,6 @@ public struct CPULogic
 
                 if (health < 0) //all attacks
                 {
-                    if (logic.lastCard.card.hasMove && logic.lastCard.card.move.moveID == 7)
-                    {
-                        GetMostResourcesBack(player, i, logic.lastCard.card.move.cost);
-                        continue;
-                    }
-
                     int finalhealth = Math.Max(health - Math.Min(player.GetPowerBonus() + logic.players[opponentIndex].GetDamageModifier(false), 0), 0);
 
                     if (logic.players[opponentIndex].currHealth + finalhealth <= 0) //opponent could be defeated
@@ -164,15 +163,6 @@ public struct CPULogic
                 {
                     switch (move.moveID)
                     {
-                        case 1: //replay card
-                            if (!logic.lastCard.card.hasMove || logic.lastCard.card.move.moveID == 1)
-                            {
-                                goto case 0;
-                            }
-                            else
-                            {
-                                goto default;
-                            }
                         case 3: // heal
                             if (health > 0 && missingHP > 0.6f)
                             {
@@ -215,8 +205,8 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 7: //prevent damage
-                            if (logic.players[opponentIndex].cardHand.Count == 0)
+                        case 7: //prevent attack
+                            if (logic.players[opponentIndex].cardHand.Count == 0 && player.cardHand.Count > 0)
                             {
                                 goto case 0;
                             }

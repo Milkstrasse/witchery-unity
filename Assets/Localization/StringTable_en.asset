@@ -57,7 +57,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 7210099683614720
-    m_Localized: <style="Highlighted">Block</style> effect of card
+    m_Localized: <style="Highlighted">Block</style> attack
     m_Metadata:
       m_Items: []
   - m_Id: 7622866769010688
@@ -357,7 +357,7 @@ MonoBehaviour:
       m_Items:
       - rid: 296817732614357011
   - m_Id: 84067404521398272
-    m_Localized: Prevent damage
+    m_Localized: <style="Highlighted">Prevent</style> attack
     m_Metadata:
       m_Items: []
   - m_Id: 84105283083689984
