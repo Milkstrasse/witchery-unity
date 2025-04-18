@@ -127,7 +127,7 @@ public class FightLogic
 
             if (lastCard.card.hasMove && lastCard.card.move.moveID == 7 && move.moveID % 2 == 0)
             {
-                return false;
+                return true;
             }
 
             switch (move.moveID)
