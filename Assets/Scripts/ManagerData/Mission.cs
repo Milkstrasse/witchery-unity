@@ -4,7 +4,7 @@ using UnityEngine;
 public class Mission : ScriptableObject
 {
     public string descrKey;
-    
+
     public int reward;
     public int goalValue;
     public string checkVariable;
@@ -16,11 +16,11 @@ public class Mission : ScriptableObject
     {
         if (goalValue > 0)
         {
-            isClaimable = (int) SaveManager.savedData.GetType().GetField(checkVariable).GetValue(SaveManager.savedData) >= goalValue;
+            isClaimable = (int)SaveManager.savedData.GetType().GetField(checkVariable).GetValue(SaveManager.savedData) >= goalValue;
         }
         else
         {
-            isClaimable = (bool) SaveManager.savedData.GetType().GetField(checkVariable).GetValue(SaveManager.savedData);
+            isClaimable = (bool)SaveManager.savedData.GetType().GetField(checkVariable).GetValue(SaveManager.savedData);
         }
 
         if (isClaimable && !SaveManager.savedData.missions[index] && category == Category.Fighter && !SaveManager.savedData.missions[index])

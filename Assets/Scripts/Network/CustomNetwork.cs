@@ -95,7 +95,7 @@ public class CustomNetwork : RelayNetworkManager
     private void OnClientIsReady(NetworkConnectionToClient conn, TurnMessage message)
     {
         playersReady++;
-        
+
         if (playersReady == maxConnections)
         {
             playersReady = 0;

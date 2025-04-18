@@ -12,7 +12,7 @@ public class FighterData
     {
         outfits = new bool[fighter.outfits.Length];
     }
-    
+
     public void IncreasePrimaryUse()
     {
         timesUsedPrimary++;

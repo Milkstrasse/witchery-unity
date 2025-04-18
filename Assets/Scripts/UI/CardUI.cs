@@ -94,7 +94,7 @@ public class CardUI : MonoBehaviour
     {
         this.card = card;
         this.player = player;
-       
+
         if (GlobalData.highlightPlayable && !isSubscribed && player != null)
         {
             player.OnPlayerChanged += CheckStatus;
@@ -220,7 +220,7 @@ public class CardUI : MonoBehaviour
         }
 
         yield return new WaitForSeconds(delay);
-        
+
         LeanTween.rotateY(cardSides[1 - side], 90f, 0.1f);
         yield return new WaitForSeconds(0.1f);
         LeanTween.rotateY(cardSides[side], 0f, 0.1f);
@@ -229,7 +229,7 @@ public class CardUI : MonoBehaviour
     public void ShowCard(bool showCard)
     {
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.alpha = showCard ? 1f: 0f;
+        canvasGroup.alpha = showCard ? 1f : 0f;
         canvasGroup.blocksRaycasts = showCard;
     }
 

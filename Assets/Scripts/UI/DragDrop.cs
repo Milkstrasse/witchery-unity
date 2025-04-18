@@ -7,7 +7,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public int cardIndex;
 
     [SerializeField] private Canvas canvas;
-    
+
     public PlayerFightUI playerFightUI;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -36,7 +36,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
         if (eventData.pointerDrag != null)
         {

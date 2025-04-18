@@ -339,6 +339,10 @@ MonoBehaviour:
     m_Key: custom2
     m_Metadata:
       m_Items: []
+  - m_Id: 88119923627253760
+    m_Key: focus
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

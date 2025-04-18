@@ -86,10 +86,10 @@ public class SaveManager
     public static void SaveData()
     {
         BinaryFormatter binary = new BinaryFormatter();
-		FileStream file = File.Create(saveFilePath);                     
+        FileStream file = File.Create(saveFilePath);
 
-		binary.Serialize(file, savedData);
-		file.Close();
+        binary.Serialize(file, savedData);
+        file.Close();
     }
 
     public static void UpdateStats(PlayerData playerData, bool gameHasEnded, PlayerObject player)

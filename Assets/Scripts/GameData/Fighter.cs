@@ -13,7 +13,7 @@ public class Fighter : ScriptableObject
     public Mission unlockMission;
 }
 
-public enum Role: uint //use decimal from hexadecimal to decimal converter
+public enum Role : uint //use decimal from hexadecimal to decimal converter
 {
     control = 61475,
     damage = 63198,

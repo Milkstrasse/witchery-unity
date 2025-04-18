@@ -24,14 +24,14 @@ public class GlobalManager : MonoBehaviour
     public FightLog fightLog;
 
     public event Action<string> OnCodeCreated;
-    
+
     private async void Awake()
     {
         DontDestroyOnLoad(this);
         singleton = this;
 
         GlobalData.fighters = Resources.LoadAll<Fighter>("Fighters/");
-        Array.Sort(GlobalData.fighters, (a,b) => { return a.fighterID.CompareTo(b.fighterID); });
+        Array.Sort(GlobalData.fighters, (a, b) => { return a.fighterID.CompareTo(b.fighterID); });
         GlobalData.missions = Resources.LoadAll<Mission>("Missions/");
         GlobalData.themes = Resources.LoadAll<Theme>("Themes/");
 

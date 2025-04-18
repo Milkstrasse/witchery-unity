@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class SelectionUI : MonoBehaviour
 {
     [SerializeField] private SelectionManager manager;
-    
+
     [SerializeField] private PlayerSelectionUI playerTop;
     [SerializeField] private PlayerSelectionUI playerBottom;
 
@@ -66,7 +66,7 @@ public class SelectionUI : MonoBehaviour
                 playerTop.SetLeader(GlobalData.fighters[0], 0);
             }
         }
-        
+
         if (GlobalManager.singleton.mode != GameMode.Online)
         {
             playerTop.ToggleUI(isReady);

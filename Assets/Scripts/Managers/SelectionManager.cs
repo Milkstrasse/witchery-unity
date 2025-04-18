@@ -148,7 +148,7 @@ public class SelectionManager : MonoBehaviour
             NetworkClient.Send(new PlayerMessage(fighterIDs.ToArray()));
             sentMessage = true;
          }
-         
+
          yield return new WaitForSeconds(1.0f);
       }
 
@@ -177,7 +177,7 @@ public class SelectionManager : MonoBehaviour
       else if (fighterIDs.Count < 6)
       {
          fighterIDs.Add(fighter);
-         
+
          return new SelectionResult(true, true, fighterIDs[0]);
       }
       else

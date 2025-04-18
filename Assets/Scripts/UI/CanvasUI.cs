@@ -13,6 +13,6 @@ public class CanvasUI : MonoBehaviour
 
     public void UpdateScale()
     {
-        canvas.scaleFactor = Screen.width/scaler.referenceResolution.x * GlobalData.uiScale;
+        canvas.scaleFactor = Screen.width / scaler.referenceResolution.x * GlobalData.uiScale;
     }
 }

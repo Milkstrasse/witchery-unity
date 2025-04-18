@@ -373,6 +373,10 @@ MonoBehaviour:
     m_Localized: Custom 2
     m_Metadata:
       m_Items: []
+  - m_Id: 88119923627253760
+    m_Localized: Karteneffekt wird nicht fehlschlagen
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

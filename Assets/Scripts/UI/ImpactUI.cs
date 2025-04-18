@@ -37,7 +37,7 @@ public class ImpactUI : MonoBehaviour
         {
             AudioManager.singleton.PlayAttackSound();
         }
-        
+
         Time.timeScale = 1;
     }
 

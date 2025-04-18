@@ -41,7 +41,7 @@ public class StatusEffect
         {
             case StatusType.Health:
                 player.currHealth = Math.Clamp(player.currHealth + value * multiplier, 0, player.fullHealth);
-                
+
                 isNew = true;
                 multiplier -= 1;
 

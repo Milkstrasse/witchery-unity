@@ -59,10 +59,10 @@ public class SettingsManager : MonoBehaviour
         {
             langIndex = 0;
         }
-        
+
         StartCoroutine(SetLocale(langIndex));
     }
-    
+
     IEnumerator SetLocale(int localID)
     {
         applying = true;
@@ -108,7 +108,7 @@ public class SettingsManager : MonoBehaviour
         {
             GlobalData.themeIndex = 0;
         }
-        
+
         StartCoroutine(ChangeTheme());
     }
 
@@ -164,7 +164,7 @@ public class SettingsManager : MonoBehaviour
         }
 
         StartCoroutine(SetLocale(langIndex));
-        
+
         GlobalData.themeIndex = 1;
 
         GlobalData.highlightPlayable = true;

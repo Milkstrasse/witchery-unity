@@ -47,7 +47,7 @@ public class PlayerFightUI : MonoBehaviour
 
     private void InitUI()
     {
-        float cardSpacer = (Screen.width/(canvas.scaleFactor/GlobalData.uiScale) - 5 * 235 - 40)/4 * -1;
+        float cardSpacer = (Screen.width / (canvas.scaleFactor / GlobalData.uiScale) - 5 * 235 - 40) / 4 * -1;
         for (int i = 0; i < 5; i++)
         {
             CardUI card = cardParent.transform.GetChild(i).GetComponent<CardUI>();
@@ -120,15 +120,15 @@ public class PlayerFightUI : MonoBehaviour
             StartCoroutine(MakeCPUMove());
         }
 
-        LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isInteractable ? 450f :  120f), 0.3f);
+        LeanTween.size(rectTransform, new Vector2(rectTransform.sizeDelta.x, isInteractable ? 450f : 120f), 0.3f);
     }
 
     private void UpdateUI()
     {
         LeanTween.value(healthText.gameObject, (healthText.StringReference["currHealth"] as IntVariable).Value * 1f, player.currHealth, 0.5f).setOnUpdate((float val) => { (healthText.StringReference["currHealth"] as IntVariable).Value = Mathf.RoundToInt(val); });
-        LeanTween.value(healthBar.gameObject, healthBar.fillAmount, player.currHealth/(float)player.fullHealth, 0.5f).setOnUpdate((float val) => { healthBar.fillAmount = val; });
+        LeanTween.value(healthBar.gameObject, healthBar.fillAmount, player.currHealth / (float)player.fullHealth, 0.5f).setOnUpdate((float val) => { healthBar.fillAmount = val; });
 
-        healthBar.material = player.currHealth/(float)player.fullHealth <= 0.2f ? lowHealth : fullHealth;
+        healthBar.material = player.currHealth / (float)player.fullHealth <= 0.2f ? lowHealth : fullHealth;
 
         if (energyText.text != player.energy.ToString())
         {
@@ -222,10 +222,10 @@ public class PlayerFightUI : MonoBehaviour
 
         cardUI.FlipCard(false, 0f);
         cardUI.transform.SetParent(canvas.transform);
-        
+
         //235/2 = 117.5
         LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 117.5f * canvas.transform.localScale.x, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
-        
+
         yield return new WaitForSeconds(0.6f);
 
         if (card.isSpecial && GlobalData.animateImpact)
@@ -240,7 +240,7 @@ public class PlayerFightUI : MonoBehaviour
         }
 
         cardUI.GetComponent<DragDrop>().ResetDrag();
-        
+
         cardSlot.SetupCard(card, true);
         GlobalManager.singleton.fightLog.AddToLog(cardUI, true);
 
@@ -263,14 +263,14 @@ public class PlayerFightUI : MonoBehaviour
         Vector3 screenPos = Camera.main.WorldToScreenPoint(cards[cardIndex].transform.position);
         Vector3 targetPositon = new Vector3(screenPos.x, screenPos.y + 350f, screenPos.z);
         targetPositon = Camera.main.ScreenToWorldPoint(targetPositon);
-        
+
         LeanTween.move(cards[cardIndex].gameObject, targetPositon, 0.25f);
 
         yield return new WaitForSeconds(0.25f);
 
         cards[cardIndex].GetComponent<DragDrop>().ResetDrag();
         player.cardHand.RemoveAt(cardIndex);
-        
+
         AudioManager.singleton.PlayStandardSound();
 
         UpdateUI();
@@ -312,13 +312,13 @@ public class PlayerFightUI : MonoBehaviour
         while (time >= 0)
         {
             time--;
-            if (timer.fillAmount > time/(float)GlobalData.turnTime)
+            if (timer.fillAmount > time / (float)GlobalData.turnTime)
             {
-                LeanTween.value(timer.gameObject, timer.fillAmount, time/(float)GlobalData.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
+                LeanTween.value(timer.gameObject, timer.fillAmount, time / (float)GlobalData.turnTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
             }
             else
             {
-                timer.fillAmount = time/(float)GlobalData.turnTime;
+                timer.fillAmount = time / (float)GlobalData.turnTime;
             }
 
             yield return new WaitForSeconds(1.0f);

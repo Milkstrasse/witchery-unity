@@ -55,7 +55,7 @@ public class PlayerSelectionUI : MonoBehaviour
             readyText.gameObject.name = "ready";
         }
 
-        filters = new string[] {"unfiltered", "damage", "control", "recovery", "team"};
+        filters = new string[] { "unfiltered", "damage", "control", "recovery", "team" };
 
         int fighterAmount = GlobalData.fighters.Length;
         fighters = GlobalManager.singleton.GetFighters(0);
@@ -204,13 +204,13 @@ public class PlayerSelectionUI : MonoBehaviour
 
     public void SetTimer(int time)
     {
-        if (timer.fillAmount > time/(float)GlobalData.waitTime)
+        if (timer.fillAmount > time / (float)GlobalData.waitTime)
         {
-            LeanTween.value(timer.gameObject, timer.fillAmount, time/(float)GlobalData.waitTime, 1f ).setOnUpdate( (float val) => { timer.fillAmount = val; } );
+            LeanTween.value(timer.gameObject, timer.fillAmount, time / (float)GlobalData.waitTime, 1f).setOnUpdate((float val) => { timer.fillAmount = val; });
         }
         else
         {
-            timer.fillAmount = time/(float)GlobalData.waitTime;
+            timer.fillAmount = time / (float)GlobalData.waitTime;
         }
     }
 
@@ -512,7 +512,7 @@ public class PlayerSelectionUI : MonoBehaviour
         }
 
         AudioManager.singleton.PlayStandardSound();
-        
+
         RectTransform fighterRect = fighterParent.parent.GetComponent<RectTransform>();
         isShowingInfo = !isShowingInfo;
 
@@ -536,7 +536,7 @@ public class PlayerSelectionUI : MonoBehaviour
 
             Fighter fighter = GlobalData.fighters[currCard];
             optionText.StringReference.SetReference("StringTable", fighter.outfits[outfits[currCard]].name);
-            
+
             moveCards = new CardUI[fighter.moves.Length];
 
             for (int i = 0; i < fighter.moves.Length; i++)
@@ -567,7 +567,7 @@ public class PlayerSelectionUI : MonoBehaviour
     public void ToggleCPU()
     {
         AudioManager.singleton.PlayStandardSound();
-        
+
         if (selectionUI.ToggleCPU())
         {
             cpuButton.GetComponent<Image>().material = highlighted;

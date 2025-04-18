@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class Drag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [SerializeField] private Canvas canvas;
-    
+
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
@@ -27,14 +27,14 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     public void OnBeginDrag(PointerEventData eventData)
     {
         SetInit();
-        
+
         canvasGroup.blocksRaycasts = false;
         transform.SetParent(canvas.gameObject.transform);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)

@@ -26,7 +26,7 @@ public class PlayerData
     public PlayerData()
     {
         name = "";
-        
+
         currHealth = 0;
         fullHealth = 0;
         energy = 0;
@@ -112,7 +112,7 @@ public class PlayerData
     public void RemoveCard(int cardIndex)
     {
         int card = cardHand[cardIndex];
-        
+
         cardHand.RemoveAt(cardIndex);
         playedCards.Add(card);
     }
@@ -157,7 +157,7 @@ public class PlayerData
         while (i < effects.Count)
         {
             effects[i].isNew = false;
-            
+
             if (effects[i].multiplier <= 0)
             {
                 effects.RemoveAt(i);
@@ -204,7 +204,7 @@ public class PlayerData
                 }
             }
         }
-        
+
         return modifier;
     }
 

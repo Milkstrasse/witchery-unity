@@ -12,7 +12,7 @@ public struct PlayerMessage : NetworkMessage
     public PlayerMessage(SelectedFighter[] fighterIDs)
     {
         this.fighterIDs = fighterIDs;
-        
+
         health = 0;
         energy = 0;
         cardHand = new int[0];

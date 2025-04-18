@@ -18,7 +18,7 @@ public class Move : ScriptableObject
         {
             return name;
         }
-        
+
         switch (moveID)
         {
             case 2:
@@ -100,7 +100,7 @@ public class Move : ScriptableObject
             return false;
         }
 
-        return move.moveID%moveID == 0;
+        return move.moveID % moveID == 0;
     }
 }
 

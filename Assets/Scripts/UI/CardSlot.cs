@@ -9,10 +9,10 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     public CardUI cardUI;
     [SerializeField] private CardUI lastCardUI;
 
-    private readonly float[] startX = new float[] {0, 29, 41, 29, 0, -29, -41, -29};
-    private readonly float[] startY = new float[] {41, 29, 0, -29, -41, -29, 0, 29};
-    private readonly float[] endX = new float[] {0, 152, 215, 152, 0, -152, -215, -152};
-    private readonly float[] endY = new float[] {215, 152, 0, -152, -215, -152, 0, 152};
+    private readonly float[] startX = new float[] { 0, 29, 41, 29, 0, -29, -41, -29 };
+    private readonly float[] startY = new float[] { 41, 29, 0, -29, -41, -29, 0, 29 };
+    private readonly float[] endX = new float[] { 0, 152, 215, 152, 0, -152, -215, -152 };
+    private readonly float[] endY = new float[] { 215, 152, 0, -152, -215, -152, 0, 152 };
 
     public bool cardWasPlayed;
 

@@ -32,7 +32,7 @@ public class PlayerObject : MonoBehaviour
     public void SetupPlayer(PlayerMessage message, int playerID)
     {
         this.playerID = playerID;
-        
+
         fullHealth = message.health;
         currHealth = message.health;
 
@@ -65,7 +65,7 @@ public class PlayerObject : MonoBehaviour
         for (int i = 0; i < message.cardHand.Length; i++)
         {
             cardHand.Add(cards[message.cardHand[i]]);
-        }      
+        }
     }
 
     public void UpdatePlayer(PlayerData playerData, bool updateCards)
@@ -159,7 +159,7 @@ public class PlayerObject : MonoBehaviour
                 modifier += effects[i].value * effects[i].multiplier;
             }
         }
-        
+
         return modifier;
     }
 }

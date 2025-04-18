@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public struct CPULogic
 {
@@ -20,6 +21,21 @@ public struct CPULogic
     {
         prioritizedCards = new List<(int, int)>();
         float missingHP = 1 - player.currHealth / (float)player.fullHealth;
+
+        Debug.Log($"CPU has {player.energy} energy & is missing {missingHP} HP");
+        Debug.Log(logic.lastCard.card.hasMove ? $"Last card costs {logic.lastCard.card.move.cost} energy, moveID is {logic.lastCard.card.move.moveID}" : $"Last card costs 0 energy, moveID is 0");
+
+        for (int i = 0; i < player.cardHand.Count; i++)
+        {
+            if (!player.cardHand[i].hasMove)
+            {
+                Debug.Log("No move");
+            }
+            else
+            {
+                Debug.Log(player.cardHand[i].move.name);
+            }
+        }
 
         for (int i = 0; i < player.cardHand.Count; i++)
         {
@@ -42,7 +58,7 @@ public struct CPULogic
                         prioritizedCards.Add((i, 999));
                         continue;
                     }
-                    else if (logic.lastCard.card.move.moveID == 7 && move.moveID%2 == 0)
+                    else if (logic.lastCard.card.move.moveID == 7 && move.moveID % 2 == 0)
                     {
                         GetMostResourcesBack(player, i, logic.lastCard.card.move.cost);
                         continue;
@@ -63,7 +79,7 @@ public struct CPULogic
 
                 if (health < 0) //all attacks
                 {
-                    int finalhealth = Math.Max(health - Math.Min(player.GetPowerBonus() + logic.players[opponentIndex].GetDamageModifier(false), 0), 0);
+                    int finalhealth = Math.Min(health - player.GetPowerBonus() + logic.players[opponentIndex].GetDamageModifier(false), 0);
 
                     if (logic.players[opponentIndex].currHealth + finalhealth <= 0) //opponent could be defeated
                     {
@@ -86,6 +102,10 @@ public struct CPULogic
                                 (int, int)[] potentials = potentialCards.ToArray();
                                 Array.Sort(potentials, (a, b) => { return b.Item2.CompareTo(a.Item2); });
 
+                                Debug.Log("-----------------");
+                                Debug.Log("Could defeat opponent");
+                                Debug.Log("-----------------");
+
                                 return new MoveMessage(playerIndex, potentials[0].Item1, false);
                             }
                             else
@@ -95,9 +115,12 @@ public struct CPULogic
                             }
                         }
 
+                        Debug.Log("-----------------");
+                        Debug.Log("Defeat opponent");
+                        Debug.Log("-----------------");
                         return new MoveMessage(playerIndex, i, true);
                     }
-                    else if ((move.moveID == 10 && player.currHealth + Math.Min(finalhealth + logic.players[playerIndex].GetDamageModifier(false), 0) - logic.players[opponentIndex].GetEffect("spice", false) <= 0 ) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
+                    else if ((move.moveID == 10 && player.currHealth + health - Math.Min(player.GetPowerBonus() + logic.players[playerIndex].GetDamageModifier(false), 0) - logic.players[opponentIndex].GetEffect("spice", false) <= 0) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
                     {
                         GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
                     }
@@ -139,6 +162,9 @@ public struct CPULogic
                                 (int, int)[] potentials = potentialCards.ToArray();
                                 Array.Sort(potentials, (a, b) => { return b.Item2.CompareTo(a.Item2); });
 
+                                Debug.Log("-----------------");
+                                Debug.Log("Could defeat opponent");
+                                Debug.Log("-----------------");
                                 return new MoveMessage(playerIndex, potentials[0].Item1, false);
                             }
                             else
@@ -148,6 +174,9 @@ public struct CPULogic
                             }
                         }
 
+                        Debug.Log("-----------------");
+                        Debug.Log("Defeat opponent");
+                        Debug.Log("-----------------");
                         return new MoveMessage(playerIndex, i, true);
                     }
                     else if (player.cardHand[i].move.cost <= player.energy)
@@ -222,7 +251,7 @@ public struct CPULogic
                             else
                             {
                                 int stealEnergy = move.energy;
-                                
+
                                 if (move.moveType == MoveType.Special)
                                 {
                                     stealEnergy *= logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0;
@@ -393,6 +422,14 @@ public struct CPULogic
 
         (int, int)[] cards = prioritizedCards.ToArray();
         Array.Sort(cards, (a, b) => { return b.Item2.CompareTo(a.Item2); });
+
+        Debug.Log("-----------------");
+        for (int i = 0; i < cards.Length; i++)
+        {
+            Debug.Log(player.cardHand[cards[i].Item1].hasMove ? player.cardHand[cards[i].Item1].move.name : "No move");
+            Debug.Log(cards[i].Item2);
+        }
+        Debug.Log("-----------------");
 
         return new MoveMessage(playerIndex, cards[0].Item1, cards[0].Item2 > -10);
     }
