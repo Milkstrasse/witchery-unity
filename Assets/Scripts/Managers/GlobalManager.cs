@@ -66,7 +66,7 @@ public class GlobalManager : MonoBehaviour
         GlobalData.highlightPlayable = PlayerPrefs.GetInt("highlightPlayable", 1) != 0;
         GlobalData.animateImpact = PlayerPrefs.GetInt("animateImpact", 1) != 0;
         GlobalData.uiScale = PlayerPrefs.GetFloat("uiScale", 1f);
-        GlobalData.themeIndex = PlayerPrefs.GetInt("theme", 1);
+        GlobalData.themeIndex = PlayerPrefs.GetInt("theme", 2);
 
         ApplyTheme();
 
@@ -172,8 +172,17 @@ public class GlobalManager : MonoBehaviour
 
     public static void QuitAnyConnection()
     {
-        NetworkClient.Shutdown();
-        NetworkServer.Shutdown();
+        if (NetworkClient.activeHost)
+        {
+            NetworkManager.singleton.StopHost();
+        }
+        else
+        {
+            NetworkManager.singleton.StopClient();
+        }
+        
+        /*NetworkClient.Shutdown();
+        NetworkServer.Shutdown();*/
 
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < gameObjects.Length; i++)

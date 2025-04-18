@@ -21,9 +21,9 @@ public class SettingsManager : MonoBehaviour
         langIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
     }
 
-    public void ChangeMusicVolume(float sliderValue) => AudioManager.singleton.ChangeMusicVolume(sliderValue);
+    public void ChangeMusicVolume(float sliderValue) => AudioManager.singleton.ChangeMusicVolume(sliderValue / 10f);
 
-    public void ChangeSoundVolume(float sliderValue) => AudioManager.singleton.ChangeSoundVolume(sliderValue);
+    public void ChangeSoundVolume(float sliderValue) => AudioManager.singleton.ChangeSoundVolume(sliderValue / 10f);
 
     public void DecreaseLang()
     {
@@ -132,7 +132,7 @@ public class SettingsManager : MonoBehaviour
 
     public void ChangeUIScale(float sliderValue)
     {
-        GlobalData.uiScale = sliderValue;
+        GlobalData.uiScale = sliderValue / 100f;
         canvas.UpdateScale();
     }
 
@@ -141,8 +141,8 @@ public class SettingsManager : MonoBehaviour
         if (applying)
             return;
 
-        ChangeMusicVolume(1f);
-        ChangeSoundVolume(1f);
+        ChangeMusicVolume(10f);
+        ChangeSoundVolume(10f);
 
         AudioManager.singleton.PlayStandardSound();
 
@@ -165,11 +165,11 @@ public class SettingsManager : MonoBehaviour
 
         StartCoroutine(SetLocale(langIndex));
 
-        GlobalData.themeIndex = 1;
+        GlobalData.themeIndex = 2;
 
         GlobalData.highlightPlayable = true;
         GlobalData.animateImpact = true;
-        ChangeUIScale(1f);
+        ChangeUIScale(100f);
 
         OnSettingsReset?.Invoke();
 

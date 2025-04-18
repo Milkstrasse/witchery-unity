@@ -29,8 +29,8 @@ public class SettingsUI : MonoBehaviour
 
     private void UpdateSettings()
     {
-        musicSlider.value = AudioManager.singleton.GetMusicVolume();
-        soundSlider.value = AudioManager.singleton.GetSoundVolume();
+        musicSlider.value = AudioManager.singleton.GetMusicVolume() * 10f;
+        soundSlider.value = AudioManager.singleton.GetSoundVolume() * 10f;
 
         musicSlider.enabled = true;
         soundSlider.enabled = true;
@@ -38,7 +38,7 @@ public class SettingsUI : MonoBehaviour
         currLang.StringReference.SetReference("StringTable", LocalizationSettings.SelectedLocale.Identifier.Code);
         currTheme.StringReference.SetReference("StringTable", GlobalData.themes[GlobalData.themeIndex].name);
 
-        scaleSlider.value = GlobalData.uiScale;
+        scaleSlider.value = GlobalData.uiScale * 100f;
         scaleSlider.enabled = true;
 
         highlight.isOn = GlobalData.highlightPlayable;
