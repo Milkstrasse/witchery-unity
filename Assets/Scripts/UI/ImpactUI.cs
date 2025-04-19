@@ -13,14 +13,14 @@ public class ImpactUI : MonoBehaviour
         LeanTween.moveLocal(portrait.gameObject, new Vector3(-750f, -50f, 0f), 0.1f);
     }
 
-    public void SetupUI(int target, string fighter, string outfit, bool rotated)
+    public void SetupUI(int target, string fighter, string outfit, bool isRotated)
     {
         this.target = target;
 
         portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter + "-" + outfit);
 
         //transform.localPosition = new Vector3(0, rotated ? -160f : 160f, 0);
-        impact.eulerAngles = rotated ? new Vector3(180f, 180f, 0f) : Vector3.zero;
+        impact.eulerAngles = isRotated ? new Vector3(180f, 180f, 0f) : Vector3.zero;
 
         Time.timeScale = 0; //make sure turn doesn't end when playing animation
 

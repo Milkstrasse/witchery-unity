@@ -44,7 +44,7 @@ public class GameOverManager : MonoBehaviour
         {
             AudioManager.singleton.PlayNegativeSound();
             GlobalManager.QuitAnyConnection();
-            GlobalManager.singleton.LoadScene("SelectionScene");
+            GlobalManager.singleton.LoadScene("MenuScene");
         }
     }
 
@@ -54,27 +54,27 @@ public class GameOverManager : MonoBehaviour
         GameObject.Find("NetworkManager").GetComponent<RelayNetworkManager>().ServerChangeScene("SelectionScene");
     }
 
-    public void ToggleCredits(bool isFlipped)
+    public void ToggleCredits(bool isRotated)
     {
         AudioManager.singleton.PlayStandardSound();
 
-        credits.transform.eulerAngles = new Vector3(0f, 0f, isFlipped ? 180f : 0f);
+        credits.transform.eulerAngles = new Vector3(0f, 0f, isRotated ? 180f : 0f);
         credits.SetActive(!credits.activeSelf);
     }
 
-    public void ToggleLog(bool isFlipped)
+    public void ToggleLog(bool isRotated)
     {
         AudioManager.singleton.PlayStandardSound();
 
-        fightLog.transform.eulerAngles = new Vector3(0f, 0f, isFlipped ? 180f : 0f);
+        fightLog.transform.eulerAngles = new Vector3(0f, 0f, isRotated ? 180f : 0f);
         fightLog.gameObject.SetActive(!fightLog.gameObject.activeSelf);
     }
 
-    public void ToggleStatistics(bool isFlipped)
+    public void ToggleStatistics(bool isRotated)
     {
         AudioManager.singleton.PlayStandardSound();
 
-        statistics.transform.eulerAngles = new Vector3(0f, 0f, isFlipped ? 180f : 0f);
+        statistics.transform.eulerAngles = new Vector3(0f, 0f, isRotated ? 180f : 0f);
         statistics.SetActive(!statistics.activeSelf);
         gameOver.SetActive(!statistics.activeSelf);
     }
@@ -85,6 +85,6 @@ public class GameOverManager : MonoBehaviour
 
         GlobalManager.QuitAnyConnection();
 
-        GlobalManager.singleton.LoadScene("SelectionScene");
+        GlobalManager.singleton.LoadScene("MenuScene");
     }
 }

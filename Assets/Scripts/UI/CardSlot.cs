@@ -133,16 +133,16 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         FightManager.singleton.SendMove(cardIndex, true, !card.isSpecial || !GlobalData.animateImpact);
     }
 
-    public void SetupCard(Card card, bool isFlipped)
+    public void SetupCard(Card card, bool isRotated)
     {
         if (cardUI.card.hasMove)
         {
             lastCardUI.SetupCard(cardUI.card);
             lastCardUI.transform.eulerAngles = cardUI.transform.eulerAngles;
-            LeanTween.rotateZ(lastCardUI.gameObject, cardUI.transform.eulerAngles.z + (isFlipped ? -15f : 15f), 0.1f).setDelay(0.2f);
+            LeanTween.rotateZ(lastCardUI.gameObject, cardUI.transform.eulerAngles.z + (isRotated ? -15f : 15f), 0.1f).setDelay(0.2f);
         }
 
-        cardUI.transform.eulerAngles = new Vector3(0, 0, isFlipped ? 180 : 0);
+        cardUI.transform.eulerAngles = new Vector3(0, 0, isRotated ? 180 : 0);
         cardUI.SetupCard(card);
     }
 

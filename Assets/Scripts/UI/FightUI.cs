@@ -23,7 +23,7 @@ public class FightUI : MonoBehaviour
         if (NetworkClient.activeHost)
         {
             playerTop.SetupUI(1, playerTurn == 1, GlobalManager.singleton.mode == GameMode.Offline);
-            playerBottom.SetupUI(0, playerTurn == 0, true);
+            playerBottom.SetupUI(0, playerTurn == 0, GlobalManager.singleton.mode != GameMode.Testing);
             cardSlot.MoveUp(playerTurn == 0);
         }
         else
@@ -39,7 +39,7 @@ public class FightUI : MonoBehaviour
     private void ChangePlayers(int playerTurn)
     {
         playerTop.MakeInteractable(playerTurn == playerTop.player.playerID, GlobalManager.singleton.mode == GameMode.Offline);
-        playerBottom.MakeInteractable(playerTurn == playerBottom.player.playerID, true);
+        playerBottom.MakeInteractable(playerTurn == playerBottom.player.playerID, GlobalManager.singleton.mode != GameMode.Testing);
         cardSlot.MoveUp(playerTurn == playerBottom.player.playerID, playerTurn == playerTop.player.playerID || playerTurn == playerBottom.player.playerID);
     }
 

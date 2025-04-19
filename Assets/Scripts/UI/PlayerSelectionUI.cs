@@ -18,6 +18,7 @@ public class PlayerSelectionUI : MonoBehaviour
     [SerializeField] private Button readyButton;
     [SerializeField] private LocalizeStringEvent readyText;
     [SerializeField] private Image portrait;
+    [SerializeField] private TextMeshProUGUI icon;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private LocalizeStringEvent healthText;
 
@@ -575,8 +576,7 @@ public class PlayerSelectionUI : MonoBehaviour
         }
         else
         {
-            cpuButton.GetComponent<Image>().material = neutral;
-            cpuButton.GetComponentInChildren<TextMeshProUGUI>().textStyle = TMP_Settings.defaultStyleSheet.GetStyle("OnButton");
+            icon.text = "";
         }
     }
 

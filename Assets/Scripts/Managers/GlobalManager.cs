@@ -35,32 +35,15 @@ public class GlobalManager : MonoBehaviour
         GlobalData.missions = Resources.LoadAll<Mission>("Missions/");
         GlobalData.themes = Resources.LoadAll<Theme>("Themes/");
 
-        if (mode == GameMode.Online)
+        try
         {
-            try
-            {
-                await UnityServices.InitializeAsync();
-                AuthenticationService.Instance.SwitchProfile(Random.Range(0, 1000000).ToString());
-                await AuthenticationService.Instance.SignInAnonymouslyAsync();
-
-                maxPlayers = 2;
-            }
-            catch (Exception exception)
-            {
-                mode = GameMode.Offline;
-                maxPlayers = 1;
-
-                relayEnabled = false;
-
-                Debug.LogError(exception);
-            }
+            await UnityServices.InitializeAsync();
+            AuthenticationService.Instance.SwitchProfile(Random.Range(0, 1000000).ToString());
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
         }
-        else
+        catch (Exception exception)
         {
-            mode = GameMode.Offline;
-            maxPlayers = 1;
-
-            relayEnabled = false;
+            Debug.LogError(exception);
         }
 
         GlobalData.highlightPlayable = PlayerPrefs.GetInt("highlightPlayable", 1) != 0;
@@ -75,7 +58,7 @@ public class GlobalManager : MonoBehaviour
             SaveManager.CreateNewData(GlobalData.fighters, GlobalData.missions);
         }
 
-        LoadScene("SelectionScene");
+        LoadScene("MenuScene");
     }
 
     public void StoreRelayCode(string code)
@@ -194,5 +177,5 @@ public class GlobalManager : MonoBehaviour
 
 public enum GameMode
 {
-    Online, Offline, Training
+    Online, Offline, Training, Testing
 }

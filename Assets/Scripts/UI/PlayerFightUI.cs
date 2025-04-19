@@ -47,11 +47,11 @@ public class PlayerFightUI : MonoBehaviour
 
     private void InitUI()
     {
-        float cardSpacer = (Screen.width / (canvas.scaleFactor / GlobalData.uiScale) - 5 * 235 - 40) / 4 * -1;
+        float cardSpacer = (Screen.width / (canvas.scaleFactor / GlobalData.uiScale) - 5f * 235f - 40f) / 4f * -1f;
         for (int i = 0; i < 5; i++)
         {
             CardUI card = cardParent.transform.GetChild(i).GetComponent<CardUI>();
-            card.transform.localPosition = new Vector3(i * (235 - cardSpacer), -160f, 0);
+            card.transform.localPosition = new Vector3(i * (235f - cardSpacer), -160f, 0);
             card.GetComponent<DragDrop>().SetInit();
 
             cards[i] = card;
@@ -106,7 +106,7 @@ public class PlayerFightUI : MonoBehaviour
             }
         }
 
-        exitButton.interactable = canBePlayable;
+        exitButton.interactable = canBePlayable || GlobalManager.singleton.mode == GameMode.Testing;
 
         cardGroup.interactable = isInteractable && canBePlayable;
         cardGroup.blocksRaycasts = isInteractable && canBePlayable;
@@ -115,7 +115,7 @@ public class PlayerFightUI : MonoBehaviour
         {
             StartCoroutine(UpdateTimer());
         }
-        else if (GlobalManager.singleton.mode == GameMode.Training && isInteractable && !canBePlayable)
+        else if ((GlobalManager.singleton.mode == GameMode.Training || GlobalManager.singleton.mode == GameMode.Testing) && isInteractable && !canBePlayable)
         {
             StartCoroutine(MakeCPUMove());
         }
@@ -223,8 +223,17 @@ public class PlayerFightUI : MonoBehaviour
         cardUI.FlipCard(false, 0f);
         cardUI.transform.SetParent(canvas.transform);
 
+        bool isRotated = cardUI.transform.eulerAngles.z == 180f;
+
         //235/2 = 117.5
-        LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 117.5f * canvas.transform.localScale.x, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
+        if (isRotated)
+        {
+            LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x + 117.5f * canvas.transform.localScale.x, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
+        }
+        else
+        {
+            LeanTween.move(cardUI.gameObject, new Vector3(cardSlot.transform.position.x - 117.5f * canvas.transform.localScale.x, cardSlot.transform.position.y, cardSlot.transform.position.z), 0.5f);
+        }
 
         yield return new WaitForSeconds(0.6f);
 
@@ -232,7 +241,7 @@ public class PlayerFightUI : MonoBehaviour
         {
             cardSlot.impactFrame.transform.SetAsLastSibling();
             cardSlot.impactFrame.ToggleVisibility(true);
-            cardSlot.impactFrame.SetupUI(card.move.target, card.fighter.name, card.fighter.outfits[card.outfit].name, true);
+            cardSlot.impactFrame.SetupUI(card.move.target, card.fighter.name, card.fighter.outfits[card.outfit].name, isRotated);
 
             yield return new WaitForSecondsRealtime(0.8f);
 
@@ -241,8 +250,8 @@ public class PlayerFightUI : MonoBehaviour
 
         cardUI.GetComponent<DragDrop>().ResetDrag();
 
-        cardSlot.SetupCard(card, true);
-        GlobalManager.singleton.fightLog.AddToLog(cardUI, true);
+        cardSlot.SetupCard(card, isRotated);
+        GlobalManager.singleton.fightLog.AddToLog(cardUI, isRotated);
 
         cardSlot.PlayAnimation(false, message.cardPlayed, true);
 
@@ -261,7 +270,16 @@ public class PlayerFightUI : MonoBehaviour
         cards[cardIndex].transform.SetParent(canvas.transform);
 
         Vector3 screenPos = Camera.main.WorldToScreenPoint(cards[cardIndex].transform.position);
-        Vector3 targetPositon = new Vector3(screenPos.x, screenPos.y + 350f, screenPos.z);
+        
+        Vector3 targetPositon;
+        if (cards[cardIndex].transform.eulerAngles.z == 180f)
+        {
+            targetPositon = new Vector3(screenPos.x, screenPos.y + 350f, screenPos.z);
+        }
+        else
+        {
+            targetPositon = new Vector3(screenPos.x, screenPos.y - 350f, screenPos.z);
+        }
         targetPositon = Camera.main.ScreenToWorldPoint(targetPositon);
 
         LeanTween.move(cards[cardIndex].gameObject, targetPositon, 0.25f);
@@ -284,7 +302,7 @@ public class PlayerFightUI : MonoBehaviour
         {
             StartCoroutine("UpdateTimer");
         }
-        else if (isInteractable && !canBePlayable && GlobalManager.singleton.mode == GameMode.Training)
+        else if (isInteractable && !canBePlayable && (GlobalManager.singleton.mode == GameMode.Training || GlobalManager.singleton.mode == GameMode.Testing))
         {
             StartCoroutine(MakeCPUMove());
         }

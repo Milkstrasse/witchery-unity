@@ -128,7 +128,7 @@ public class CustomNetwork : RelayNetworkManager
                 Destroy(gameObjects[i]);
             }
 
-            GlobalManager.singleton.LoadScene("SelectionScene");
+            GlobalManager.singleton.LoadScene("MenuScene");
         }
         else
         {
@@ -148,7 +148,7 @@ public class CustomNetwork : RelayNetworkManager
                 Destroy(gameObjects[i]);
             }
 
-            GlobalManager.singleton.LoadScene("SelectionScene");
+            GlobalManager.singleton.LoadScene("MenuScene");
         }
     }
 }

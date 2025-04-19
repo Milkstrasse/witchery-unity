@@ -7,7 +7,7 @@ using Utp;
 
 public class SelectionManager : MonoBehaviour
 {
-   [SerializeField] private SettingsManager settings;
+   //[SerializeField] private SettingsManager settings;
    [SerializeField] private RelayCode relayCode;
 
    private RelayNetworkManager networkManager;
@@ -28,12 +28,7 @@ public class SelectionManager : MonoBehaviour
 
       NetworkClient.ReplaceHandler<TurnMessage>(PlayersReady);
 
-      CheckMissions();
-
-      if (GlobalManager.singleton.mode != GameMode.Online)
-      {
-         GlobalManager.singleton.mode = GameMode.Offline;
-      }
+      //CheckMissions();
    }
 
    public void SetAsRematch()
@@ -214,56 +209,12 @@ public class SelectionManager : MonoBehaviour
       LeanTween.moveLocalY(relayCode.gameObject, 0f, 0.3f);
    }
 
-   public void CheckMissions()
-   {
-      for (int i = 0; i < GlobalData.missions.Length; i++)
-      {
-         GlobalData.missions[i].CheckStatus(i);
-      }
-   }
-
-   public void DeleteData()
-   {
-      AudioManager.singleton.PlayNegativeSound();
-
-      SaveManager.DeleteData();
-      SaveManager.CreateNewData(GlobalData.fighters, GlobalData.missions);
-
-      CheckMissions();
-
-      GlobalManager.singleton.LoadScene("SelectionScene");
-   }
-
-   public void UnlockFighters()
-   {
-      AudioManager.singleton.PlayPositiveSound();
-
-      for (int i = 0; i < GlobalData.fighters.Length; i++)
-      {
-         SaveManager.savedData.fighters[i].UnlockFighter();
-      }
-
-      SaveManager.SaveData();
-
-      CheckMissions();
-
-      GlobalManager.singleton.LoadScene("SelectionScene");
-   }
-
-   public void ToggleSettings(bool enable)
+   public void ReturnToMenu()
    {
       AudioManager.singleton.PlayStandardSound();
 
-      if (!enable)
-      {
-         if (settings.SavingSettings())
-         {
-            settings.gameObject.SetActive(false);
-         }
-      }
-      else
-      {
-         settings.gameObject.SetActive(true);
-      }
+        GlobalManager.QuitAnyConnection();
+
+        GlobalManager.singleton.LoadScene("MenuScene");
    }
 }
