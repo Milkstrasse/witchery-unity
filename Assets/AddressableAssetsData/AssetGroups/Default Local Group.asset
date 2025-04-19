@@ -317,6 +317,211 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7fdbd2725e0d24881b45fcc821234b30
+    m_Address: Moves/costHeal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7fa469c9d802e457b91ba9f9957e7fbb
+    m_Address: Moves/heavyAttack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8967d129bff39440eaeb90c04dfcdd22
+    m_Address: Moves/costHealing
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 120ad528ec64d4bf29959be3f4bb8fec
+    m_Address: Moves/costBleed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d8e655f1fd3e493bb5166bf1495a5dd
+    m_Address: Moves/costVulnerable
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9da418dac1b6b4b94af8263d98950cdb
+    m_Address: Moves/triggerBomb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2300c06bcf3e04ceaa18562a431bd12d
+    m_Address: Moves/lightAttack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0679131e1c92941308535cb2fcf25d6f
+    m_Address: Moves/costShields
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d54fcba235384adb80b74c23ccc70c3
+    m_Address: Moves/bomb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8eab6db481797471293cb0d43c9d1319
+    m_Address: Moves/clearAllEffects
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 33f39622a31c94285b78c5108dfea649
+    m_Address: Moves/removeCard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0021add68e7be44a68f3ffa576f2f763
+    m_Address: Moves/addBlank
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0d4e7ea06f80453abaaefca61b36a38
+    m_Address: Moves/blockAttack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5dda212c64884b2a87e0a8c22a3d1f1
+    m_Address: Moves/clearOppEffects
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ac7f2c711c16424fa11f475b083c023
+    m_Address: Moves/redistribute
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1fe97fa2bf70f4b49a4504ac56778835
+    m_Address: Moves/costSpice
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e515c2965bfb649218a338b0f5df6752
+    m_Address: Moves/mediumAttack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9cf718dd776f480c87549cacf425acf
+    m_Address: Moves/healing
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c22551b66da744b293d982aafd399f1
+    m_Address: Moves/swapEffects
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e428eab7482d24a74b7708919b33fae8
+    m_Address: Moves/stealHP
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 71c20d86684774b96a8dd635367afdd1
+    m_Address: Moves/takeCard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89074006eecd144d1a13775d83c42318
+    m_Address: Moves/bleed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c4e93dbb98ec42c0be3e5ba99d22152
+    m_Address: Moves/replayCard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5455d4333982948cc983dd8d2d5c94a0
+    m_Address: Moves/costEnergy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9165c48fdd6644a52924f42400ba38a7
+    m_Address: Moves/copyEffects
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7c62c4e5be2d418e825cd02200cc2ac
+    m_Address: Moves/preventAttack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9242c60e4253a4345af74c9b37e08d29
+    m_Address: Moves/handoverBlanks
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b4094e717a4a479ea8cbdc710c37c52
+    m_Address: Moves/costPower
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c671a4ce445a46dbaaf50b6c89482f5
+    m_Address: Moves/energy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e0f577f8160e4c3dbd7e289e1b0cf88
+    m_Address: Moves/specialAttack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 941a01699d8f44fbd95b702e62934afc
+    m_Address: Moves/vulnerable
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 739c506e8c34947729938b734775cbc7
+    m_Address: Moves/stealEffects
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4cdc2d9cf3e834b64b1d364c026149a8
+    m_Address: Moves/stealEnergy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 182a3421fa5e44f929e53b9d89975220
+    m_Address: Moves/stealCostEnergy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14c7fd46d6d9d407aa04123940b24421
+    m_Address: Moves/spice
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7422fa89322c44bfaa18f0298492a68e
+    m_Address: Moves/clearEffects
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe642b13aa3a74a10a574a4cfd4c5b1b
+    m_Address: Moves/stealCostHP
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 010c3021a6fc64e65a0f70533488067e
+    m_Address: Moves/lightHeal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cbcd1f94fec434e5f98ffaa6c4767865
+    m_Address: Moves/clearBlanks
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62685afb6290948738ae8f884794c7f7
+    m_Address: Moves/costAttack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb71bd96f340249dab47e522012e76bd
+    m_Address: Moves/focus
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9c5e3b65d79b440b19981d9598cb259b, type: 2}
   m_SchemaSet:
