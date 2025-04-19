@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour
@@ -37,7 +39,8 @@ public class CardUI : MonoBehaviour
     {
         bool isUnlocked = SaveManager.savedData.fighters[fighter.fighterID].IsUnlocked();
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-standard");
+        AsyncOperationHandle<Sprite> AssetHandle = Addressables.LoadAssetAsync<Sprite>(fighter.name + "-standard");
+        AssetHandle.Completed += Sprite_Completed;
 
         if (isUnlocked)
         {
@@ -299,7 +302,16 @@ public class CardUI : MonoBehaviour
 
     public void UpdateOutfit(Fighter fighter, int outfit)
     {
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter.name + "-" + fighter.outfits[outfit].name);
+        AsyncOperationHandle<Sprite> AssetHandle = Addressables.LoadAssetAsync<Sprite>(fighter.name + "-" + fighter.outfits[outfit].name);
+        AssetHandle.Completed += Sprite_Completed;
+    }
+
+    private void Sprite_Completed(AsyncOperationHandle<Sprite> handle)
+    {
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            portrait.sprite = handle.Result;
+        }
     }
 
     private void OnDestroy()

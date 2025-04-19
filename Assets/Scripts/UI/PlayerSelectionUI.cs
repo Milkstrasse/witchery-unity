@@ -1,8 +1,10 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 public class PlayerSelectionUI : MonoBehaviour
@@ -84,7 +86,9 @@ public class PlayerSelectionUI : MonoBehaviour
 
     public void SetLeader(Fighter leader, int outfit)
     {
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + leader.name + "-" + leader.outfits[outfit].name);
+        AsyncOperationHandle<Sprite> AssetHandle = Addressables.LoadAssetAsync<Sprite>(leader.name + "-" + leader.outfits[outfit].name);
+        AssetHandle.Completed += Sprite_Completed;
+
         (healthText.StringReference["currHealth"] as IntVariable).Value = leader.health;
         (healthText.StringReference["fullHealth"] as IntVariable).Value = leader.health;
         nameText.text = leader.name;
@@ -321,7 +325,8 @@ public class PlayerSelectionUI : MonoBehaviour
             if (isPartofTeam)
             {
                 SelectionResult result = selectionUI.EditTeam(currCard, outfits[currCard]);
-                portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
+                AsyncOperationHandle<Sprite> AssetHandle = Addressables.LoadAssetAsync<Sprite>(GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
+                AssetHandle.Completed += Sprite_Completed;
             }
         }
     }
@@ -409,7 +414,8 @@ public class PlayerSelectionUI : MonoBehaviour
             if (isPartofTeam)
             {
                 SelectionResult result = selectionUI.EditTeam(currCard, outfits[currCard]);
-                portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
+                AsyncOperationHandle<Sprite> AssetHandle = Addressables.LoadAssetAsync<Sprite>(GlobalData.fighters[result.leader.fighterID].name + "-" + GlobalData.fighters[result.leader.fighterID].outfits[result.leader.outfit].name);
+                AssetHandle.Completed += Sprite_Completed;
             }
         }
     }
@@ -577,6 +583,14 @@ public class PlayerSelectionUI : MonoBehaviour
         else
         {
             icon.text = "";
+        }
+    }
+
+    private void Sprite_Completed(AsyncOperationHandle<Sprite> handle)
+    {
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            portrait.sprite = handle.Result;
         }
     }
 

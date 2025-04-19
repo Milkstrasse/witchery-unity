@@ -16,7 +16,307 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 5c9982d68222a46a4a01f3784d5cbd43
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 86588ccc52d86472699e7b8b12ae8833
+    m_Address: fighter2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4dd75f9cb220e4a00b7db6218d20b8d0
+    m_Address: fighter4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f2eb500971774d5bb19096321e60aa1
+    m_Address: fighter5
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b96c7547daf0948778de5b34b380d5f3
+    m_Address: fighter3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebf647b708e584404be10020acec167b
+    m_Address: fighter10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f7a2461e4c3b4778ac2b76fbe2106ec
+    m_Address: fighter7
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3b2579076a5445aca5b12d8b12054d4
+    m_Address: fighter9
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 098ea15998a3a40469eea3f68dfb5b9c
+    m_Address: fighter6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c8bd2c77485c41bbbcc8e6f7aa3707d
+    m_Address: fighter12
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7be666f6ca68149f0babe25cdbee2679
+    m_Address: fighter1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8122b4a2d035a48cdb8d2fe07b3406fb
+    m_Address: fighter11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5321166142d941b0911caea159f93dc
+    m_Address: fighter0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16cd7eab2c0d54765ba99dff63dc0370
+    m_Address: fighter8
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Fighter
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5eb40b985c1e14418a8ede27de5d489c
+    m_Address: default
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Theme
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25fb998e06051476ea91212bd580d4a5
+    m_Address: custom2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Theme
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd522045f7f8041d985ff38f21ddc78e
+    m_Address: custom1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Theme
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34c794fbc75e74ae0a297a272721e987
+    m_Address: Unlock5
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Mission
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 010692791c2f448e09f4567d66a19ac4
+    m_Address: Unlock3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Mission
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 331a8aaa19ab143bb898db5ce4cba38d
+    m_Address: Unlock1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Mission
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6fa8d15d7340b454b9ca281b85718466
+    m_Address: Unlock4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Mission
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3660ae9e9d2a84f119925d420ad834bd
+    m_Address: Unlock2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Mission
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3b0165f1f3d04078b8727491888964c
+    m_Address: Unlock6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Mission
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eae3015da361747d298570bfe2890c81
+    m_Address: Unlock8
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Mission
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e2972b3d5b5454490b993264c7059e8f
+    m_Address: Unlock9
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Mission
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf6d5a848e16c44de920b3696775ef79
+    m_Address: Unlock7
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Mission
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28e83617d8fae4bc18c94cf0e1f08444
+    m_Address: fighter6-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb2679149636a4886ae47af00fd9df41
+    m_Address: fighter8-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 627cfe3f476ea4030bdac88f7a3972f8
+    m_Address: fighter5-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7611d8f629a18468dbfd927603c3f747
+    m_Address: fighter2-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eff68ac4287514bf79dcd7ab51c03724
+    m_Address: fighter9-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2455c0396f0534c4d9438e783e5a0e5c
+    m_Address: fighter7-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a0706c13ae2b4efcadb7e2fa6033107
+    m_Address: fighter10-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 370e635a2646f402bb0fd4f868288eff
+    m_Address: fighter4-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 321b29bece31e43409cd7edff79dc117
+    m_Address: fighter0-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 78a79d7ccd50b45478b1af38e527e6d9
+    m_Address: fighter6-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e379e3b11ab924de68d64e37c9c0d83f
+    m_Address: fighter3-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e537a92a4b5b24b798f28d06be6727ef
+    m_Address: fighter11-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0c7a4091f6b74c94a6f3c3343aec0ee
+    m_Address: fighter1-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd70e709550f445b4ae26f406eb486ab
+    m_Address: fighter4-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee7bdcea9e0ad44c0bb32d2511d1c2c4
+    m_Address: fighter8-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28103f00f81f84984835d5a5dd6ff438
+    m_Address: fighter1-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca65e6037ab9f483889a6bdfcac222af
+    m_Address: fighter12-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f496cbbaef7446b1841eb1560d4945a
+    m_Address: fighter10-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a7b6063a8dc7f405aa5731b61e503460
+    m_Address: fighter9-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 22f54be15e23646f8bb423fe35be7b3c
+    m_Address: fighter0-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53026287a77d44318aa379482804023c
+    m_Address: fighter5-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1520cb8fdbebb4d1c8a878a67ba2ab4a
+    m_Address: fighter7-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f2310f73a1343406c80f9cc8e49a2dea
+    m_Address: fighter11-magicgirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 248e698ae517c46f48bcfd41d157bdae
+    m_Address: fighter2-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ede6b0d5037444558b9f9c204c0cbc4a
+    m_Address: fighter3-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0c9889381319440094297496c0d6f2d
+    m_Address: fighter12-standard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b3098d5998d34bf7b7507274da2e3bd
+    m_Address: FightScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a1ccfddd3728416380b4eac9a6a8b07
+    m_Address: GameOverScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 704295354c32d4c049380c027ce97a27
+    m_Address: SelectionScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f44e46d98604b4dacb84018b13f290f8
+    m_Address: MenuScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9c5e3b65d79b440b19981d9598cb259b, type: 2}
   m_SchemaSet:

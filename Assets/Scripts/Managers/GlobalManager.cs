@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mirror;
 using TMPro;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 
 using Random = UnityEngine.Random;
@@ -30,10 +32,26 @@ public class GlobalManager : MonoBehaviour
         DontDestroyOnLoad(this);
         singleton = this;
 
-        GlobalData.fighters = Resources.LoadAll<Fighter>("Fighters/");
-        Array.Sort(GlobalData.fighters, (a, b) => { return a.fighterID.CompareTo(b.fighterID); });
-        GlobalData.missions = Resources.LoadAll<Mission>("Missions/");
-        GlobalData.themes = Resources.LoadAll<Theme>("Themes/");
+        GlobalData.highlightPlayable = PlayerPrefs.GetInt("highlightPlayable", 1) != 0;
+        GlobalData.animateImpact = PlayerPrefs.GetInt("animateImpact", 1) != 0;
+        GlobalData.uiScale = PlayerPrefs.GetFloat("uiScale", 1f);
+        GlobalData.themeIndex = PlayerPrefs.GetInt("theme", 2);
+
+        Addressables.LoadAssetsAsync<Fighter>("Fighter", null).Completed += objects =>
+        {
+            GlobalData.fighters = objects.Result.ToArray();
+            Array.Sort(GlobalData.fighters, (a, b) => { return a.fighterID.CompareTo(b.fighterID); });
+        };
+
+        Addressables.LoadAssetsAsync<Mission>("Mission", null).Completed += objects =>
+        {
+            GlobalData.missions = objects.Result.ToArray();
+        };
+        Addressables.LoadAssetsAsync<Theme>("Theme", null).Completed += objects =>
+        {
+            GlobalData.themes = objects.Result.ToArray();
+            ApplyTheme();
+        };
 
         try
         {
@@ -46,12 +64,12 @@ public class GlobalManager : MonoBehaviour
             Debug.LogError(exception);
         }
 
-        GlobalData.highlightPlayable = PlayerPrefs.GetInt("highlightPlayable", 1) != 0;
-        GlobalData.animateImpact = PlayerPrefs.GetInt("animateImpact", 1) != 0;
-        GlobalData.uiScale = PlayerPrefs.GetFloat("uiScale", 1f);
-        GlobalData.themeIndex = PlayerPrefs.GetInt("theme", 2);
+        await YourTask();
+    }
 
-        ApplyTheme();
+    public async Task YourTask()
+    {
+        await TaskUtils.WaitUntil(() => GlobalData.fighters != null && GlobalData.missions != null && GlobalData.themes != null);
 
         if (!SaveManager.LoadData())
         {
@@ -124,11 +142,12 @@ public class GlobalManager : MonoBehaviour
 
     public void LoadScene(string scene, LoadSceneMode sceneMode = LoadSceneMode.Single)
     {
-        SceneManager.LoadScene(scene, new LoadSceneParameters
+        Addressables.LoadSceneAsync(scene, sceneMode);
+        /*SceneManager.LoadScene(scene, new LoadSceneParameters
         {
             loadSceneMode = sceneMode,
             localPhysicsMode = LocalPhysicsMode.Physics3D
-        });
+        });*/
     }
 
     public AsyncOperation UnloadScene(string scene)
@@ -178,4 +197,15 @@ public class GlobalManager : MonoBehaviour
 public enum GameMode
 {
     Online, Offline, Training, Testing
+}
+
+public static class TaskUtils
+{
+    public static async Task WaitUntil(Func<bool> predicate, int sleep = 50)
+    {
+        while (!predicate())
+        {
+            await Task.Delay(sleep);
+        }
+    }
 }

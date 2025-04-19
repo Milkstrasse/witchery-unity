@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 public class ImpactUI : MonoBehaviour
@@ -17,7 +19,8 @@ public class ImpactUI : MonoBehaviour
     {
         this.target = target;
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + fighter + "-" + outfit);
+        AsyncOperationHandle<Sprite> AssetHandle = Addressables.LoadAssetAsync<Sprite>(fighter + "-" + outfit);
+        AssetHandle.Completed += Sprite_Completed;
 
         //transform.localPosition = new Vector3(0, rotated ? -160f : 160f, 0);
         impact.eulerAngles = isRotated ? new Vector3(180f, 180f, 0f) : Vector3.zero;
@@ -51,6 +54,14 @@ public class ImpactUI : MonoBehaviour
         {
             portrait.transform.localPosition = new Vector3(-750f, -50f, 0f);
             transform.localScale = Vector3.zero;
+        }
+    }
+
+    private void Sprite_Completed(AsyncOperationHandle<Sprite> handle)
+    {
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            portrait.sprite = handle.Result;
         }
     }
 }

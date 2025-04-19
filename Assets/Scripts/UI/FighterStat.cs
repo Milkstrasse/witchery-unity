@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 public class FighterStat : MonoBehaviour
@@ -10,7 +12,8 @@ public class FighterStat : MonoBehaviour
 
     public void SetupUI(FighterData fighterData, int fighterID, int category)
     {
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[fighterID].name + "-" + GlobalData.fighters[fighterID].outfits[0].name);
+        AsyncOperationHandle<Sprite> AssetHandle = Addressables.LoadAssetAsync<Sprite>(GlobalData.fighters[fighterID].name + "-" + GlobalData.fighters[fighterID].outfits[0].name);
+        AssetHandle.Completed += Sprite_Completed;
 
         if (SaveManager.savedData.timesFought > 0)
         {
@@ -107,6 +110,14 @@ public class FighterStat : MonoBehaviour
         {
             stat.text = "-";
             LeanTween.value(statBar.gameObject, statBar.fillAmount, 0f, 0.3f).setOnUpdate((float val) => { statBar.fillAmount = val; });
+        }
+    }
+
+    private void Sprite_Completed(AsyncOperationHandle<Sprite> handle)
+    {
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            portrait.sprite = handle.Result;
         }
     }
 }

@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 public class PlayerOverUI : MonoBehaviour
@@ -18,12 +20,21 @@ public class PlayerOverUI : MonoBehaviour
     {
         title.StringReference.SetReference("StringTable", player.hasWon ? "victory" : "defeat");
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
+        AsyncOperationHandle<Sprite> AssetHandle = Addressables.LoadAssetAsync<Sprite>(GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
+        AssetHandle.Completed += Sprite_Completed;
 
         background.material = player.hasWon ? victory : defeat;
         triangle.material = player.hasWon ? victory : defeat;
 
         (description.StringReference["amount"] as IntVariable).Value = player.roundsPlayed + 1;
         description.RefreshString();
+    }
+
+    private void Sprite_Completed(AsyncOperationHandle<Sprite> handle)
+    {
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            portrait.sprite = handle.Result;
+        }
     }
 }

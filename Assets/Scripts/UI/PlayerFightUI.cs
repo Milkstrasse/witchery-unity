@@ -1,8 +1,10 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 public class PlayerFightUI : MonoBehaviour
@@ -64,7 +66,8 @@ public class PlayerFightUI : MonoBehaviour
         player = FightManager.singleton.players[index];
         player.OnPlayerChanged += UpdateUI;
 
-        portrait.sprite = Resources.Load<Sprite>("Sprites/" + GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
+        AsyncOperationHandle<Sprite> AssetHandle = Addressables.LoadAssetAsync<Sprite>(GlobalData.fighters[player.fighterIDs[0].fighterID].name + "-" + GlobalData.fighters[player.fighterIDs[0].fighterID].outfits[player.fighterIDs[0].outfit].name);
+        AssetHandle.Completed += Sprite_Completed;
 
         nameText.text = GlobalData.fighters[player.fighterIDs[0].fighterID].name;
         (healthText.StringReference["currHealth"] as IntVariable).Value = player.currHealth;
@@ -365,6 +368,14 @@ public class PlayerFightUI : MonoBehaviour
     public bool IsActive()
     {
         return rectTransform.sizeDelta.y > 200f;
+    }
+
+    private void Sprite_Completed(AsyncOperationHandle<Sprite> handle)
+    {
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            portrait.sprite = handle.Result;
+        }
     }
 
     private void OnDestroy()

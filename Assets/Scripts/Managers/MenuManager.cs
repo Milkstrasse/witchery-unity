@@ -26,7 +26,6 @@ public class MenuManager : MonoBehaviour
 
     public void ChangeToSelection(string mode)
     {
-        Debug.Log(mode);
         if (Enum.TryParse(mode, out GameMode gameMode))
         {
             GlobalManager.singleton.mode = gameMode;
