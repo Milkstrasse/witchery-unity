@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] private GameObject tutorial;
     [SerializeField] private SettingsManager settings;
     [SerializeField] private Button onlineButton;
 
@@ -71,6 +72,12 @@ public class MenuManager : MonoBehaviour
         CheckMissions();
 
         //GlobalManager.singleton.LoadScene("SelectionScene");
+    }
+
+    public void ToggleTutorial()
+    {
+        AudioManager.singleton.PlayStandardSound();
+        tutorial.SetActive(!tutorial.activeSelf);
     }
 
     public void ToggleSettings(bool isRotated)
