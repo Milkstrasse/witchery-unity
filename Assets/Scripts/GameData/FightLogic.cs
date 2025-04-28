@@ -345,7 +345,7 @@ public class FightLogic
                         winner = 1 - (move.target + turn) % 2;
                     }
 
-                    if (health < 0)
+                    if (move.health < 0)
                     {
                         int spice = players[(move.target + turn) % 2].GetEffect("spice");
                         if (spice != 0)

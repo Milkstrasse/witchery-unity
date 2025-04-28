@@ -21,7 +21,7 @@ MonoBehaviour:
     name: spice
     icon: f816
     multiplier: 3
-    value: 2
+    value: 1
     statusType: 3
     isNew: 0
   moveType: 0
