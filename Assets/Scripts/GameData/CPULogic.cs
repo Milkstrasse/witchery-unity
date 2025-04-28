@@ -330,7 +330,7 @@ public struct CPULogic
                             {
                                 goto case 0;
                             }
-                            else if (logic.players[opponentIndex].GetEffect(move.effect.name, false) / move.effect.value >= GlobalData.stackLimit)
+                            else if (logic.players[opponentIndex].GetEffect(move.effect.name, false) / move.effect.value >= GlobalData.customStackLimit)
                             {
                                 goto case 0;
                             }
@@ -376,7 +376,7 @@ public struct CPULogic
                                 goto default;
                             }
                         case 22: //add blank
-                            if (logic.players[opponentIndex].blanks >= GlobalData.blankLimit)
+                            if (logic.players[opponentIndex].blanks >= GlobalData.customBlankLimit)
                             {
                                 goto case 0;
                             }

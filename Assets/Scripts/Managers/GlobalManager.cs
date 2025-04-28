@@ -50,6 +50,8 @@ public class GlobalManager : MonoBehaviour
         GlobalData.animateImpact = PlayerPrefs.GetInt("animateImpact", 1) != 0;
         GlobalData.uiScale = PlayerPrefs.GetFloat("uiScale", 1f);
         GlobalData.themeIndex = PlayerPrefs.GetInt("theme", 2);
+        GlobalData.customStackLimit = PlayerPrefs.GetInt("stackLimit", 5);
+        GlobalData.customBlankLimit = PlayerPrefs.GetInt("blankLimit", 5);
 
         ApplyTheme();
 

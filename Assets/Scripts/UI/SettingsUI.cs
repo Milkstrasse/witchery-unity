@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
@@ -11,6 +12,8 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Slider soundSlider;
     [SerializeField] private LocalizeStringEvent currLang;
     [SerializeField] private LocalizeStringEvent currTheme;
+    [SerializeField] private TextMeshProUGUI currStack;
+    [SerializeField] private TextMeshProUGUI currBlank;
     [SerializeField] private Slider scaleSlider;
     [SerializeField] private Toggle animate;
     [SerializeField] private Toggle highlight;
@@ -20,6 +23,8 @@ public class SettingsUI : MonoBehaviour
         manager.OnLanguageUpdated += UpdateLanguage;
         manager.OnThemeUpdated += UpdateTheme;
         manager.OnSettingsReset += UpdateSettings;
+        manager.OnStackUpdated += UpdateStack;
+        manager.OnBlanksUpdated += UpdateBlanks;
 
         UpdateSettings();
 
@@ -43,6 +48,9 @@ public class SettingsUI : MonoBehaviour
 
         highlight.isOn = GlobalData.highlightPlayable;
         animate.isOn = GlobalData.animateImpact;
+
+        currStack.text = GlobalData.customStackLimit.ToString();
+        currBlank.text = GlobalData.customBlankLimit.ToString();
     }
 
     private void UpdateLanguage(string lang)
@@ -55,9 +63,22 @@ public class SettingsUI : MonoBehaviour
         currTheme.StringReference.SetReference("StringTable", theme);
     }
 
+    private void UpdateStack(int stack)
+    {
+        currStack.text = stack.ToString();
+    }
+
+    private void UpdateBlanks(int blanks)
+    {
+        currBlank.text = blanks.ToString();
+    }
+
     private void OnDestroy()
     {
         manager.OnLanguageUpdated -= UpdateLanguage;
         manager.OnThemeUpdated -= UpdateTheme;
+        manager.OnSettingsReset -= UpdateSettings;
+        manager.OnStackUpdated -= UpdateStack;
+        manager.OnBlanksUpdated -= UpdateBlanks;
     }
 }

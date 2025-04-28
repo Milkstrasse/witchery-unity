@@ -129,18 +129,20 @@ public class PlayerData
             }
         }
 
-        if (index >= 0 && effects[index].multiplier < GlobalData.stackLimit)
+        int stackLimit = GlobalManager.singleton.mode == GameMode.Online ? GlobalData.stackLimit : GlobalData.customStackLimit;
+
+        if (index >= 0 && effects[index].multiplier < stackLimit)
         {
             int multiplier = effects[index].multiplier + effect.multiplier;
 
-            effects[index].multiplier = Math.Min(multiplier, GlobalData.stackLimit);
+            effects[index].multiplier = Math.Min(multiplier, stackLimit);
             effects[index].isNew = true;
         }
         else if (index < 0 && effects.Count < GlobalData.effectLimit)
         {
-            if (effect.multiplier > GlobalData.stackLimit)
+            if (effect.multiplier > stackLimit)
             {
-                effects.Add(new StatusEffect(effect, GlobalData.stackLimit));
+                effects.Add(new StatusEffect(effect, stackLimit));
             }
             else
             {
@@ -251,7 +253,15 @@ public class PlayerData
     public void AddBlanks(int amount)
     {
         int initBlanks = blanks;
-        blanks = Math.Min(blanks + amount, GlobalData.blankLimit);
+        
+        if (GlobalManager.singleton.mode == GameMode.Online)
+        {
+            blanks = Math.Min(blanks + amount, GlobalData.blankLimit);
+        }
+        else
+        {
+            blanks = Math.Min(blanks + amount, GlobalData.customBlankLimit);
+        }
 
         int added = blanks - initBlanks;
 

@@ -8,6 +8,8 @@ public static class GlobalData
     public static readonly int effectLimit = 5;
     public static readonly int stackLimit = 7;
     public static readonly int blankLimit = 7;
+    public static int customStackLimit = 5;
+    public static int customBlankLimit = 5;
 
     public static bool highlightPlayable = true;
     public static bool animateImpact = true;

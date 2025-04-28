@@ -14,6 +14,8 @@ public class SettingsManager : MonoBehaviour
 
     public event Action<string> OnLanguageUpdated;
     public event Action<string> OnThemeUpdated;
+    public event Action<int> OnStackUpdated;
+    public event Action<int> OnBlanksUpdated;
     public event Action OnSettingsReset;
 
     private void Start()
@@ -136,6 +138,70 @@ public class SettingsManager : MonoBehaviour
         canvas.UpdateScale();
     }
 
+    public void DecreaseStack()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        if (GlobalData.customStackLimit > 3)
+        {
+            GlobalData.customStackLimit--;
+        }
+        else
+        {
+            GlobalData.customStackLimit = 15;
+        }
+
+        OnStackUpdated?.Invoke(GlobalData.customStackLimit);
+    }
+
+    public void IncreaseStack()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        if (GlobalData.customStackLimit < 15)
+        {
+            GlobalData.customStackLimit++;
+        }
+        else
+        {
+            GlobalData.customStackLimit = 3;
+        }
+
+        OnStackUpdated?.Invoke(GlobalData.customStackLimit);
+    }
+
+    public void DecreaseBlanks()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        if (GlobalData.customBlankLimit > 3)
+        {
+            GlobalData.customBlankLimit--;
+        }
+        else
+        {
+            GlobalData.customBlankLimit = 15;
+        }
+
+        OnBlanksUpdated?.Invoke(GlobalData.customBlankLimit);
+    }
+
+    public void IncreaseBlanks()
+    {
+        AudioManager.singleton.PlayStandardSound();
+
+        if (GlobalData.customBlankLimit < 15)
+        {
+            GlobalData.customBlankLimit++;
+        }
+        else
+        {
+            GlobalData.customBlankLimit = 3;
+        }
+
+        OnBlanksUpdated?.Invoke(GlobalData.customBlankLimit);
+    }
+
     public void ResetSettings()
     {
         if (applying)
@@ -169,6 +235,9 @@ public class SettingsManager : MonoBehaviour
 
         GlobalData.highlightPlayable = true;
         GlobalData.animateImpact = true;
+        GlobalData.customStackLimit = GlobalData.stackLimit;
+        GlobalData.customBlankLimit = GlobalData.blankLimit;
+
         ChangeUIScale(100f);
 
         OnSettingsReset?.Invoke();
@@ -202,6 +271,8 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("animateImpact", GlobalData.animateImpact ? 1 : 0);
         PlayerPrefs.SetInt("theme", GlobalData.themeIndex);
         PlayerPrefs.SetFloat("uiScale", GlobalData.uiScale);
+        PlayerPrefs.SetInt("stackLimit", GlobalData.customStackLimit);
+        PlayerPrefs.SetInt("blankLimit", GlobalData.customBlankLimit);
         PlayerPrefs.Save();
 
         return true;
