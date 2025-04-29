@@ -460,9 +460,7 @@ public class FightLogic
         if (message.playCard)
         {
             if (card.hasMove && card.move.IsResponseTo(lastCard.card.move, players[message.playerIndex].energy))
-            {
                 return false;
-            }
         }
 
         PlayCard(lastCard.card, lastCard.player, false);

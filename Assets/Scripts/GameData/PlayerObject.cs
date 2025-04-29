@@ -105,7 +105,7 @@ public class PlayerObject : MonoBehaviour
                 continue;
             }
 
-            if (cardHand[i].move.IsResponseTo(move, energy))
+            if (cardHand[i].move.IsResponseTo(move))
             {
                 return true;
             }

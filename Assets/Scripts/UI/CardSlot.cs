@@ -96,7 +96,7 @@ public class CardSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                     {
                         return;
                     }
-                    else if (cardUI.card.hasMove && !eventCardUI.card.move.IsResponseTo(cardUI.card.move, eventCardUI.player.energy))
+                    else if (cardUI.card.hasMove && !eventCardUI.card.move.IsResponseTo(cardUI.card.move))
                     {
                         return;
                     }

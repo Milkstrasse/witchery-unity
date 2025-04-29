@@ -93,7 +93,7 @@ public class Move : ScriptableObject
         }
     }
 
-    public bool IsResponseTo(Move move, int playerEnergy)
+    public bool IsResponseTo(Move move, int playerEnergy = 99)
     {
         if (move == null || moveType != MoveType.Response || cost > playerEnergy)
         {

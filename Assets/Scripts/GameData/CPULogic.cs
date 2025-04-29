@@ -53,7 +53,7 @@ public struct CPULogic
 
                 if (logic.lastCard.card.hasMove)
                 {
-                    if (!logic.lastCard.played && move.IsResponseTo(logic.lastCard.card.move, player.energy))
+                    if (!logic.lastCard.played && move.IsResponseTo(logic.lastCard.card.move))
                     {
                         prioritizedCards.Add((i, 999));
                         continue;

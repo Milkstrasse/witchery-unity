@@ -153,7 +153,7 @@ public class PlayerFightUI : MonoBehaviour
 
                 if (GlobalData.highlightPlayable)
                 {
-                    if (!cardSlot.cardWasPlayed && player.cardHand[i].hasMove && player.cardHand[i].move.IsResponseTo(cardSlot.cardUI.card.move, player.energy))
+                    if (!cardSlot.cardWasPlayed && player.cardHand[i].hasMove && player.cardHand[i].move.IsResponseTo(cardSlot.cardUI.card.move))
                     {
                         cards[i].FocusCard(true);
                     }
