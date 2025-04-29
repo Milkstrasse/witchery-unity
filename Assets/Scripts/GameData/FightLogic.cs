@@ -442,7 +442,7 @@ public class FightLogic
 
     public bool PlayLastCard(MoveMessage message)
     {
-        if (!lastCard.card.hasMove || lastCard.played)
+        if (!message.playCard || !lastCard.card.hasMove || lastCard.played)
             return false;
 
         int cardIndex = players[message.playerIndex].cardHand[message.cardIndex];

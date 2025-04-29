@@ -13,16 +13,15 @@ MonoBehaviour:
   m_Name: takeCard
   m_EditorClassIdentifier: 
   moveID: 3
-  cost: 0
+  cost: 1
   target: 2
   health: 0
   energy: 0
   effect:
     name: 
     icon: 
-    duration: 0
+    multiplier: 0
     value: 0
     statusType: 0
-    isDelayed: 0
     isNew: 0
   moveType: 1
