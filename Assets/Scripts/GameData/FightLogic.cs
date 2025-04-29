@@ -120,7 +120,7 @@ public class FightLogic
 
         if (move.moveType != MoveType.Response)
         {
-            if (blockable && players[turn].GetEffect("focus") == 0 && FightManager.singleton.players[1 - turn].HasResponseTo(card.move))
+            if (blockable && FightManager.singleton.players[1 - turn].HasResponseTo(card.move))
             {
                 return false;
             }
@@ -307,8 +307,8 @@ public class FightLogic
                 case 25: //hand over blanks
                     players[1 - turn].AddBlanks(players[turn].blanks);
                     break;
-                case 26: //trigger bomb
-                    players[(move.target + turn) % 2].currHealth = Math.Max(players[(move.target + turn) % 2].currHealth + players[(move.target + turn) % 2].GetEffect("bomb"), 0);
+                case 26: //trigger curse
+                    players[(move.target + turn) % 2].currHealth = Math.Max(players[(move.target + turn) % 2].currHealth + players[(move.target + turn) % 2].GetEffect("curse"), 0);
 
                     if (winner < 0 && players[(move.target + turn) % 2].currHealth == 0)
                     {

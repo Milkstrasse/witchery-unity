@@ -133,15 +133,15 @@ public struct CPULogic
                         prioritizedCards.Add((i, health * -10));
                     }
                 }
-                else if (move.moveID == 26)
+                else if (move.moveID == 26) //trigger curse
                 {
-                    int bomb = logic.players[opponentIndex].GetEffect("bomb", false);
+                    int curse = logic.players[opponentIndex].GetEffect("curse", false);
 
-                    if (bomb == 0)
+                    if (curse == 0)
                     {
                         GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
                     }
-                    else if (bomb >= logic.players[opponentIndex].currHealth)
+                    else if (curse >= logic.players[opponentIndex].currHealth)
                     {
                         if (player.cardHand[i].move.cost > player.energy)
                         {
@@ -181,7 +181,7 @@ public struct CPULogic
                     }
                     else if (player.cardHand[i].move.cost <= player.energy)
                     {
-                        prioritizedCards.Add((i, bomb * -10));
+                        prioritizedCards.Add((i, curse * -10));
                     }
                     else
                     {
