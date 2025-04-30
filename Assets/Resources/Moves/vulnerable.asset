@@ -21,7 +21,7 @@ MonoBehaviour:
     name: vulnerable
     icon: f7a9
     multiplier: 3
-    value: -2
+    value: -1
     statusType: 2
     isNew: 0
   moveType: 0

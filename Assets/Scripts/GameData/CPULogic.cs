@@ -53,7 +53,7 @@ public struct CPULogic
 
                 if (logic.lastCard.card.hasMove)
                 {
-                    if (!logic.lastCard.played && move.IsResponseTo(logic.lastCard.card.move))
+                    if (!logic.lastCard.played && move.IsResponseTo(logic.lastCard.card.move) && player.cardHand[i].move.cost <= player.energy)
                     {
                         prioritizedCards.Add((i, 999));
                         continue;
@@ -120,7 +120,7 @@ public struct CPULogic
                         Debug.Log("-----------------");
                         return new MoveMessage(playerIndex, i, true);
                     }
-                    else if ((move.moveID == 10 && player.currHealth + health - Math.Min(player.GetPowerBonus() + logic.players[playerIndex].GetDamageModifier(false), 0) - logic.players[opponentIndex].GetEffect("spice", false) <= 0) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
+                    else if ((move.moveID == 10 && player.currHealth + health - player.GetPowerBonus() + logic.players[playerIndex].GetDamageModifier(false) - logic.players[opponentIndex].GetEffect("spice", false) <= 0) || logic.players[opponentIndex].GetEffect("spice", false) >= player.currHealth) //prevent self k.o.
                     {
                         GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
                     }
