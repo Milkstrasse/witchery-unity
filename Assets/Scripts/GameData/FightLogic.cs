@@ -442,7 +442,7 @@ public class FightLogic
 
     public bool PlayLastCard(MoveMessage message)
     {
-        if (!message.playCard || !lastCard.card.hasMove || lastCard.played)
+        if ((!message.playCard && players[message.playerIndex].cardHand.Count > 1) || !lastCard.card.hasMove || lastCard.played)
             return false;
 
         int cardIndex = players[message.playerIndex].cardHand[message.cardIndex];
@@ -518,6 +518,8 @@ public class FightLogic
 
                     players[1 - i].wonWithEffect = true;
                     winner = 1 - i;
+
+                    return;
                 }
             }
         }
