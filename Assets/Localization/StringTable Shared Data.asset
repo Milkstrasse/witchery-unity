@@ -328,11 +328,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 86588812786917376
-    m_Key: triggerBomb
+    m_Key: triggerCurse
     m_Metadata:
       m_Items: []
   - m_Id: 86592455216979968
-    m_Key: bomb
+    m_Key: curse
     m_Metadata:
       m_Items: []
   - m_Id: 86915489144496128
