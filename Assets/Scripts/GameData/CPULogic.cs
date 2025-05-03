@@ -431,7 +431,16 @@ public struct CPULogic
         }
         Debug.Log("-----------------");
 
-        return new MoveMessage(playerIndex, cards[0].Item1, cards[0].Item2 > -10);
+        if (cards.Length > 0)
+        {
+            if (cards[0].Item2 > -10 && player.cardHand[cards[0].Item1].move.cost <= player.energy)
+            {
+                return new MoveMessage(playerIndex, cards[0].Item1, cards[0].Item2 > -10);
+            }
+        }
+        
+        Debug.Log("Something went wrong");
+        return new MoveMessage(playerIndex, 0, false);
     }
 
     private void GetMostResourcesBack(PlayerObject player, int cardIndex, int lastCost)
