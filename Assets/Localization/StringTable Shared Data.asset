@@ -328,7 +328,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 86588812786917376
-    m_Key: triggerCurse
+    m_Key: triggerEffect
     m_Metadata:
       m_Items: []
   - m_Id: 86592455216979968

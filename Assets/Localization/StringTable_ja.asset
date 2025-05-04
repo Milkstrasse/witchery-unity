@@ -167,7 +167,8 @@ MonoBehaviour:
       m_Items:
       - rid: 6175659975647952932
   - m_Id: 86588812786917376
-    m_Localized: "\u30C8\u30EA\u30AC\u30FC <style=\"IconOutline\">\\uf54c</style>"
+    m_Localized: "\u3059\u3079\u3066 \u306E <style=\"IconOutline\">{effect}</style>
+      \u306F\u3064\u3069\u3046"
     m_Metadata:
       m_Items:
       - rid: 6175659975647952932

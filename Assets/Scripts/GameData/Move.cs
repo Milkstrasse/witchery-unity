@@ -88,6 +88,9 @@ public class Move : ScriptableObject
                 }
             case 21:
                 return "healToHP";
+            case 29:
+            case 31:
+                return "triggerEffect";
             default:
                 return name;
         }

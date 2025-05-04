@@ -307,7 +307,7 @@ public class FightLogic
                 case 25: //hand over blanks
                     players[1 - turn].AddBlanks(players[turn].blanks);
                     break;
-                case 26: //trigger curse
+                case 29: //trigger curse
                     players[(move.target + turn) % 2].currHealth = Math.Max(players[(move.target + turn) % 2].currHealth + players[(move.target + turn) % 2].GetEffect("curse"), 0);
 
                     if (winner < 0 && players[(move.target + turn) % 2].currHealth == 0)
@@ -317,6 +317,21 @@ public class FightLogic
 
                         winner = 1 - (move.target + turn) % 2;
                     }
+
+                    players[1 - (move.target + turn) % 2].currHealth = Math.Max(players[1 - (move.target + turn) % 2].currHealth + players[1 - (move.target + turn) % 2].GetEffect("curse"), 0);
+
+                    if (winner < 0 && players[1 - (move.target + turn) % 2].currHealth == 0)
+                    {
+                        players[0].playedUntilEnd = true;
+                        players[1].playedUntilEnd = true;
+
+                        winner = (move.target + turn) % 2;
+                    }
+
+                    break;
+                case 31: //trigger energy
+                    players[0].energy += players[0].GetEffect("energy");
+                    players[1].energy += players[1].GetEffect("energy");
 
                     break;
                 default:

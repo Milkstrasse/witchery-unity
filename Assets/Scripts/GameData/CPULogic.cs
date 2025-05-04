@@ -133,7 +133,7 @@ public struct CPULogic
                         prioritizedCards.Add((i, health * -10));
                     }
                 }
-                else if (move.moveID == 26) //trigger curse
+                else if (move.moveID == 29) //trigger curse
                 {
                     int curse = logic.players[opponentIndex].GetEffect("curse", false);
 
@@ -394,6 +394,9 @@ public struct CPULogic
                             {
                                 goto default;
                             }
+                        case 31:
+                            PrioritizeEnergyOrCheap(player, i, logic.players[playerIndex].GetEffect("energy", false));
+                            break;
                         case 0:
                             GetMostResourcesBack(player, i, logic.lastCard.card.hasMove ? logic.lastCard.card.move.cost : 0);
                             break;
