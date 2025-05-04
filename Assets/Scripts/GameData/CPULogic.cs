@@ -435,7 +435,11 @@ public struct CPULogic
         {
             if (cards[0].Item2 > -10 && player.cardHand[cards[0].Item1].move.cost <= player.energy)
             {
-                return new MoveMessage(playerIndex, cards[0].Item1, cards[0].Item2 > -10);
+                return new MoveMessage(playerIndex, cards[0].Item1, true);
+            }
+            else
+            {
+                return new MoveMessage(playerIndex, cards[0].Item1, false);
             }
         }
         
