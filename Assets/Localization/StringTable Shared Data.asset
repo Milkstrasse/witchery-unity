@@ -343,6 +343,10 @@ MonoBehaviour:
     m_Key: focus
     m_Metadata:
       m_Items: []
+  - m_Id: 94230875980423168
+    m_Key: energy
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
