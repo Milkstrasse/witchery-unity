@@ -244,7 +244,7 @@ public class PlayerData
 
         for (int i = 0; i < effects.Count; i++)
         {
-            balance += effects[i].multiplier;
+            balance += effects[i].value * effects[i].multiplier;
         }
 
         return balance;
