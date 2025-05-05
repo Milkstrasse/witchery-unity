@@ -515,9 +515,9 @@ public class FightLogic
 
     private void NewRound()
     {
-         players[0].roundsPlayed += 1;
-          players[1].roundsPlayed += 1;
-          
+        players[0].roundsPlayed += 1;
+        players[1].roundsPlayed += 1;
+
         for (int i = 0; i < players.Count; i++)
         {
             players[i].FillHand(5);
