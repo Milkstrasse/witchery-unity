@@ -295,7 +295,9 @@ public class FightLogic
                     int cardAmount = players[(move.target + turn) % 2].cardHand.Count;
                     if (cardAmount > 0)
                     {
-                        players[(move.target + turn) % 2].RemoveCard(UnityEngine.Random.Range(0, cardAmount));
+                        int random = UnityEngine.Random.Range(0, cardAmount);
+                        players[(move.target + turn) % 2].energy += FightManager.singleton.players[(move.target + turn) % 2].cards[random].move.cost;
+                        players[(move.target + turn) % 2].RemoveCard(random);
                     }
 
                     break;
@@ -416,6 +418,8 @@ public class FightLogic
         {
             if (lastCard.card.hasMove && !lastCard.played)
             {
+                players[1 - playerTurn].energy += lastCard.card.move.cost; //repay card cost because last card couldn't be played
+
                 if (move.moveID == 3) //take positive card effect
                 {
                     int health = lastCard.card.move.health;
