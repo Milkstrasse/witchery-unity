@@ -46,7 +46,7 @@ public struct CPULogic
             else
             {
                 Move move = player.cardHand[i].move;
-                if (move.moveID == 1 && logic.lastCard.card.hasMove) //replay card
+                if (move.moveID == 1 && logic.lastCard.card.hasMove && logic.lastCard.card.move.moveID != 7) //replay card
                 {
                     move = logic.lastCard.card.move;
                 }
@@ -192,6 +192,8 @@ public struct CPULogic
                 {
                     switch (move.moveID)
                     {
+                        case 1: //replay card without good move
+                            goto case 0;
                         case 3: // heal
                             if (health > 0 && missingHP > 0.6f)
                             {
