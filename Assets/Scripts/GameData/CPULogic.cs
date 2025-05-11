@@ -396,7 +396,7 @@ public struct CPULogic
                             {
                                 goto default;
                             }
-                        case 31:
+                        case 31: //trigger energy
                             PrioritizeEnergyOrCheap(player, i, logic.players[playerIndex].GetEffect("energy", false));
                             break;
                         case 0:
@@ -464,8 +464,16 @@ public struct CPULogic
         }
     }
 
+    //prioritize energy & cheap cards
     private void PrioritizeEnergyOrCheap(PlayerObject player, int cardIndex, int energy)
     {
-        prioritizedCards.Add((cardIndex, player.cardHand[cardIndex].move.cost * -1 + energy * 10)); //prioritize energy & cheap cards
+        if (energy > 0 && player.cardHand[cardIndex].move.cost > energy)
+        {
+            prioritizedCards.Add((cardIndex, -10));
+        }
+        else
+        {
+            prioritizedCards.Add((cardIndex, player.cardHand[cardIndex].move.cost * -1 + energy * 10));
+        }
     }
 }
