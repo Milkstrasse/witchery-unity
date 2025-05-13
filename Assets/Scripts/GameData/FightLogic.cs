@@ -28,6 +28,7 @@ public class FightLogic
 
         if (message.cardIndex >= players[playerTurn].cardHand.Count)
         {
+            RemoveCard(message);
             return true;
         }
 
@@ -67,6 +68,12 @@ public class FightLogic
 
     public void RemoveCard(MoveMessage message)
     {
+        if (message.cardIndex >= players[playerTurn].cardHand.Count)
+        {
+            NextTurn(message.playCard);
+            return;
+        }
+
         if (!message.playCard)
         {
             int cardIndex = players[playerTurn].cardHand[message.cardIndex];
