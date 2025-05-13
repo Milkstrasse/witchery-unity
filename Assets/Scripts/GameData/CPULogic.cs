@@ -397,6 +397,15 @@ public struct CPULogic
                                 goto default;
                             }
                         case 31: //trigger energy
+                        int moveEnergy = logic.players[playerIndex].GetEffect("energy", false);
+                            if (moveEnergy > 0)
+                            {
+                                PrioritizeEnergyOrCheap(player, i, logic.players[playerIndex].GetEffect("energy", false));
+                            }
+                            else
+                            {
+                                goto case 0;
+                            }
                             PrioritizeEnergyOrCheap(player, i, logic.players[playerIndex].GetEffect("energy", false));
                             break;
                         case 0:

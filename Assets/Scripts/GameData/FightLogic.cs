@@ -26,6 +26,11 @@ public class FightLogic
             return true;
         }
 
+        if (message.cardIndex >= players[playerTurn].cardHand.Count)
+        {
+            return true;
+        }
+
         int cardIndex = players[playerTurn].cardHand[message.cardIndex];
 
         Card card;
